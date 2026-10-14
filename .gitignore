@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
 lib64/
 parts/
 sdist/
@@ -218,3 +218,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Next.js (apps/web)
+node_modules/
+.next/
+
+# Local env files, keep only the example
+.env.*
+!.env.example
+
+# Model weights and checkpoints downloaded during runs
+checkpoints/
+*.safetensors
