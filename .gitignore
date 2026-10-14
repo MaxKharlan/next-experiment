@@ -235,4 +235,7 @@ node_modules/
 
 # Model weights and checkpoints downloaded during runs
 checkpoints/
-*.safetensorsartifacts/
+*.safetensors
+
+# Local artifacts and SQLite database
+artifacts/

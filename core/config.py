@@ -1,4 +1,5 @@
 from functools import lru_cache
+from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -14,9 +15,15 @@ class Settings(BaseSettings):
 
     hf_token: str = ""
 
-    storage_backend: str = "local"
+    storage_backend: Literal["local", "s3"] = "local"
     artifacts_dir: str = "./artifacts"
     database_url: str = "sqlite:///./artifacts/next_experiment.db"
+
+    s3_endpoint_url: str = "https://storage.eu-north1.nebius.cloud"
+    s3_region: str = "eu-north1"
+    s3_bucket: str = ""
+    s3_access_key_id: str = ""
+    s3_secret_access_key: str = ""
 
     tavily_api_key: str = ""
 
