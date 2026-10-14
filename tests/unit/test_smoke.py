@@ -1,6 +1,7 @@
-def test_settings_defaults():
-    from core.config import get_settings
+from core.config import Settings
 
-    s = get_settings()
+
+def test_settings_defaults():
+    s = Settings(_env_file=None)
     assert s.token_factory_base_url.startswith("https://")
     assert s.storage_backend == "local"
