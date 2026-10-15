@@ -2,25 +2,16 @@
 
 Each run goes to <out>/<run>-s<seed>/ with the files that train_lora.py writes.
 Runs with a summary.json are skipped, so an interrupted sweep resumes where it stopped.
-Seeds are the outer loop: a partial sweep still has every fault for the first seeds.
 """
 
 from __future__ import annotations
 
 import argparse
-from collections.abc import Iterator
+import json
 from pathlib import Path
 
-from bench.faults.recipe import STRENGTHS
+from bench.faults.recipe import STRENGTHS, grid
 from jobs.kaggle.train_lora import train
-
-
-def grid(seeds: list[int]) -> Iterator[tuple[str, str | None, float | None, int]]:
-    for seed in seeds:
-        yield "healthy", None, None, seed
-        for fault, levels in STRENGTHS.items():
-            for level, strength in levels.items():
-                yield f"{fault}-{level}", fault, strength, seed
 
 
 def main() -> None:
@@ -29,6 +20,10 @@ def main() -> None:
     parser.add_argument("--valid", required=True)
     parser.add_argument("--out", required=True)
     parser.add_argument("--model", default="Qwen/Qwen3-0.6B")
+    parser.add_argument("--hp", default="{}", help="JSON overrides of the healthy run")
+    parser.add_argument(
+        "--faults", nargs="*", choices=sorted(STRENGTHS), help="default: all"
+    )
     parser.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     parser.add_argument(
         "--lr-schedule", choices=["linear", "constant"], default="linear"
@@ -36,7 +31,7 @@ def main() -> None:
     parser.add_argument("--generate", action="store_true", help="exact match on valid")
     args = parser.parse_args()
 
-    for name, fault, strength, seed in grid(args.seeds):
+    for name, fault, strength, seed in grid(args.seeds, args.faults):
         run_dir = Path(args.out) / f"{name}-s{seed}"
         if (run_dir / "summary.json").exists():
             print(f"{run_dir.name}: done before, skipped", flush=True)
@@ -46,6 +41,7 @@ def main() -> None:
             args.valid,
             run_dir,
             model_id=args.model,
+            hp=json.loads(args.hp),
             fault=fault,
             strength=strength,
             seed=seed,
