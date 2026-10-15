@@ -23,21 +23,8 @@ import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from bench.faults.recipe import STRENGTHS, inject
+from bench.faults.recipe import HEALTHY_HP, STRENGTHS, inject
 
-# Token Factory defaults for a LoRA job, as the API returned them for the B6 job
-DEFAULT_HP: dict[str, Any] = {
-    "n_epochs": 1,
-    "batch_size": 8,
-    "learning_rate": 1e-4,
-    "warmup_ratio": 0.0,
-    "weight_decay": 0.0,
-    "max_grad_norm": 1.0,
-    "lora_r": 16,
-    "lora_alpha": 16,
-    "lora_dropout": 0.05,
-    "context_length": 8192,
-}
 # Batch width is rounded up to this: every new width grows the MPS cache
 PAD_MULTIPLE = 16
 
@@ -172,7 +159,7 @@ def train(
     device: str = "auto",
 ) -> dict[str, Any]:
     started = time.monotonic()
-    hp = {**DEFAULT_HP, **(hp or {})}
+    hp = {**HEALTHY_HP, **(hp or {})}
     if fault:
         hp = inject(hp, fault, strength)
     device = pick_device(device)
