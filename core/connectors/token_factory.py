@@ -239,10 +239,10 @@ class TokenFactory:
             sleep(poll_s)
 
     def events(self, job_id: str) -> list[Any]:
-        return list(self.client.fine_tuning.jobs.list_events(job_id).data)
+        return list(self.client.fine_tuning.jobs.list_events(job_id))
 
     def checkpoints(self, job_id: str) -> list[Any]:
-        return list(self.client.fine_tuning.jobs.checkpoints.list(job_id).data)
+        return list(self.client.fine_tuning.jobs.checkpoints.list(job_id))
 
     def download_checkpoint(
         self, checkpoint: Any, storage: Storage, prefix: str
