@@ -15,7 +15,9 @@ from pathlib import Path
 from core.agent.context import InvestigationContext
 from core.agent.loop import investigate
 from core.agent.router import Router
+from core.config import get_settings
 from core.connectors.storage import LocalStorage
+from core.connectors.tavily import Tavily
 from core.connectors.token_factory import TokenFactory
 from core.interventions.pairs import Intervention
 from core.interventions.tf_runner import TokenFactoryPairRunner
@@ -68,9 +70,19 @@ def main() -> None:
             seeds=args.seeds,
         )(target, control)
 
-    result = investigate(ctx, CASE, router, run_pair, intervention_cost_usd=pair_cost)
+    tavily = Tavily.from_settings(storage) if get_settings().tavily_api_key else None
+    if tavily is None:
+        print("TAVILY_API_KEY is not set: no known-issues step")
+    result = investigate(
+        ctx, CASE, router, run_pair, intervention_cost_usd=pair_cost, tavily=tavily
+    )
     for step in result.steps:
-        if step["kind"] == "probe":
+        if step["kind"] == "known_issues":
+            for source in step.get("sources", []):
+                print(f"known issue: {source['title']} — {source['url']}")
+            if "error" in step:
+                print(f"known issues failed: {step['error']}")
+        elif step["kind"] == "probe":
             print(f"probe {step['probe']} -> {step['outcome']}: {step['probs']}")
         elif step["kind"] == "intervention":
             r = step["result"]

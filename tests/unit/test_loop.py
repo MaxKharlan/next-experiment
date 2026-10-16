@@ -116,3 +116,26 @@ def test_stops_when_nothing_is_testable():
     assert result.status == "inconclusive"
     assert calls == []
     assert result.steps[-1]["kind"] == "stop"
+
+
+class FakeTavily:
+    def __init__(self):
+        self.spent = {}
+
+    def search(self, query, *, investigation_id):
+        self.spent[investigation_id] = self.spent.get(investigation_id, 0) + 1
+        hit = {"title": "t", "url": "https://a.example/lr", "content": "c", "score": 1}
+        return {"results": [hit]}
+
+
+def test_known_issues_go_into_the_case_and_the_report():
+    router = FakeRouter([_hyp("h1", "lr_too_low", 0.6)])
+    run_pair, _ = _runner({"h1": ([0.16, 0.20], [0.02, 0.02])})
+    result = investigate(
+        _ctx(), {"symptom": "base-like"}, router, run_pair, tavily=FakeTavily()
+    )
+    known = result.steps[0]
+    assert known["kind"] == "known_issues"
+    assert known["sources"][0]["url"] == "https://a.example/lr"
+    assert known["credits"] == 2
+    assert result.steps[1]["kind"] == "hypotheses"

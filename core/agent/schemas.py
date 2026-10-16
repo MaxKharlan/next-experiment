@@ -29,6 +29,9 @@ class Hypothesis(BaseModel):
     )
     prior: float = Field(ge=0.0, le=1.0)
     rationale: str
+    sources: list[str] = Field(
+        default_factory=list, description="URLs from known_issues that support it"
+    )
 
 
 class HypothesisList(BaseModel):

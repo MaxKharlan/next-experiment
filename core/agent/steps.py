@@ -9,10 +9,12 @@ for the mode are dropped.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from string import Template
 from typing import Any
+from urllib.parse import urlsplit
 
 from core.agent.catalog import allowed_classes, catalog_text
 from core.agent.router import Router
@@ -51,21 +53,46 @@ def _user(title: str, payload: Any) -> dict[str, str]:
     return {"role": "user", "content": f"{title}:\n{json.dumps(payload, indent=2)}"}
 
 
-def clean_hypotheses(found: list[Hypothesis], mode: str) -> list[Hypothesis]:
-    """Drop classes the mode cannot have, number the rest h1.. and cap priors at 1."""
+def url_key(url: str) -> str:
+    """Host and path without scheme, query, fragment or trailing slash.
+
+    Anything before http(s):// is dropped: Super has cited "/https://..."."""
+    found = re.search(r"https?://\S+", url)
+    parts = urlsplit(found.group(0) if found else url.strip())
+    return f"{parts.netloc.lower().removeprefix('www.')}{parts.path.rstrip('/')}"
+
+
+def clean_hypotheses(
+    found: list[Hypothesis], mode: str, known_urls: set[str] | None = None
+) -> list[Hypothesis]:
+    """Drop classes the mode cannot have and sources the search did not return,
+    number the rest h1.. and cap priors at 1. A cited URL counts when it matches a
+    known one up to query, fragment and trailing slash; the known URL is kept."""
     kept = [h for h in found if h.fault_class in allowed_classes(mode) | {"other"}]
     total = sum(h.prior for h in kept)
     scale = 1 / total if total > 1 else 1.0
+    known = {url_key(u): u for u in known_urls or set()}
     return [
-        h.model_copy(update={"id": f"h{i}", "prior": h.prior * scale})
+        h.model_copy(
+            update={
+                "id": f"h{i}",
+                "prior": h.prior * scale,
+                "sources": list(
+                    dict.fromkeys(
+                        known[url_key(u)] for u in h.sources if url_key(u) in known
+                    )
+                ),
+            }
+        )
         for i, h in enumerate(kept, start=1)
     ]
 
 
 def propose_hypotheses(
-    router: Router, case: dict[str, Any], mode: str = "A", version: str = "v1"
+    router: Router, case: dict[str, Any], mode: str = "A", version: str = "v2"
 ) -> list[Hypothesis]:
-    """Super lists hypotheses for a case: symptom, job config, metrics, findings."""
+    """Super lists hypotheses for a case: symptom, job config, metrics, findings
+    and known issues found by Tavily."""
     prompt = load_prompt("hypotheses", version)
     messages = [
         {"role": "system", "content": prompt.render(catalog=catalog_text(mode))},
@@ -74,7 +101,8 @@ def propose_hypotheses(
     found = router.structured(
         "hypotheses", messages, HypothesisList, prompt_version=prompt.id
     )
-    return clean_hypotheses(found.hypotheses, mode)
+    known = {s["url"] for s in case.get("known_issues", [])}
+    return clean_hypotheses(found.hypotheses, mode, known)
 
 
 def interpret_probe(
