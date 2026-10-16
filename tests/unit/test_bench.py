@@ -10,6 +10,7 @@ from bench.fixes import (
     fixed_hyperparameters,
     reference_metric,
     seed_fixes,
+    seed_reference,
 )
 from bench.pair_cache import PairCache
 from bench.run_bench import run_case
@@ -211,3 +212,31 @@ def test_checklist_runs_on_every_case_and_is_scored(tmp_path):
         pair_cost_usd=0.06,
     )
     assert skipped == []
+
+
+def test_a_fix_with_the_reference_recipe_needs_no_training(tmp_path):
+    reference_hp = {**JOB_HP, "learning_rate": 2e-4, "n_epochs": 6}
+    (tmp_path / "banking77.json").write_text(
+        json.dumps(
+            {
+                "Qwen/Qwen3-0.6B": {
+                    "train_examples": 2,
+                    "hyperparameters": reference_hp,
+                    "heldout_exact_match": 0.535,
+                    "job_id": "ftjob-ref",
+                }
+            }
+        )
+    )
+    case = _case(tmp_path, learning_rate=2e-5, n_epochs=6)
+    fixes = FixCache(LocalStorage(tmp_path), "fixes.json")
+    assert seed_reference(fixes, case, tmp_path) == 1
+    assert fixes(fixed_hyperparameters(case, "lr_too_low")) == 0.535
+
+    (tmp_path / "other").mkdir()
+    bigger = _case(tmp_path / "other", learning_rate=2e-5, n_epochs=6)
+    (tmp_path / "other" / "train.jsonl").write_text('{"i": 1}\n' * 5)
+    assert (
+        seed_reference(FixCache(LocalStorage(tmp_path), "f2.json"), bigger, tmp_path)
+        == 0
+    )

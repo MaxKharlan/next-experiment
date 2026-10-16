@@ -25,7 +25,30 @@ PRICES_USD_PER_M: dict[str, tuple[float, float]] = {
     "nvidia/Nemotron-3-Ultra-550b-a55b": (1.00, 3.00),
 }
 TERMINAL_STATUSES = {"succeeded", "failed", "cancelled"}
+# Post-training ranges from docs.tokenfactory.nebius.com/post-training/how-to-fine-tune;
+# a job outside them is rejected with HTTP 422 when it is created
+HP_LIMITS: dict[str, tuple[float | None, float | None]] = {
+    "n_epochs": (1, 20),
+    "lora_r": (8, 128),
+    "lora_alpha": (8, None),
+    "learning_rate": (0, None),
+    "warmup_ratio": (0, 1),
+    "lora_dropout": (0, 1),
+}
 JSON_FORMATS = ["json_schema", "json_object", "plain text"]
+
+
+def hyperparameter_problem(hp: dict[str, Any]) -> str | None:
+    """Why Token Factory would reject these hyperparameters, or None."""
+    for key, (low, high) in HP_LIMITS.items():
+        value = hp.get(key)
+        if value is None:
+            continue
+        if low is not None and value < low:
+            return f"{key} {value} is below Token Factory's minimum of {low}"
+        if high is not None and value > high:
+            return f"{key} {value} is over Token Factory's limit of {high}"
+    return None
 
 
 @dataclass
@@ -209,6 +232,9 @@ class TokenFactory:
         seed: int | None = None,
         suffix: str | None = None,
     ) -> str:
+        problem = hyperparameter_problem(hyperparameters or {})
+        if problem:
+            raise ValueError(f"Token Factory would reject the job: {problem}")
         optional = {
             "validation_file": validation_file,
             "hyperparameters": hyperparameters,

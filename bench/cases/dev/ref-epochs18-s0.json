@@ -1,0 +1,171 @@
+{
+  "id": "ref-epochs18-s0",
+  "split": "dev",
+  "task": "banking77",
+  "model": "Qwen/Qwen3-0.6B",
+  "truth": [],
+  "hyperparameters": {
+    "batch_size": 8,
+    "n_epochs": 18,
+    "learning_rate": 0.0002,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "context_length": 8192,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05
+  },
+  "case": {
+    "symptom": "After fine-tuning the model gives the right label for 56% of 200 held-out queries. We expected much better. 5 of the wrong answers are attached.",
+    "task": "classify banking queries into 77 intent labels, answer with the label",
+    "job": {
+      "model": "Qwen/Qwen3-0.6B",
+      "status": "succeeded",
+      "train_examples": 200,
+      "validation_examples": 50,
+      "hyperparameters": {
+        "batch_size": 8,
+        "n_epochs": 18,
+        "learning_rate": 0.0002,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "context_length": 8192,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05
+      }
+    },
+    "checkpoints": [
+      {
+        "epoch": 1,
+        "train_loss": 1.2122,
+        "valid_loss": 0.603
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.3801,
+        "valid_loss": 1.0419
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.1697,
+        "valid_loss": 1.3309
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.1074,
+        "valid_loss": 1.5169
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.0352,
+        "valid_loss": 1.4312
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.0459,
+        "valid_loss": 0.0009
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.0145,
+        "valid_loss": 0.2815
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.016,
+        "valid_loss": 0.301
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.0021,
+        "valid_loss": 1.429
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.0015,
+        "valid_loss": 0.2032
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.0003,
+        "valid_loss": 0.1066
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.0001,
+        "valid_loss": 0.0561
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.0001,
+        "valid_loss": 0.6058
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.0001,
+        "valid_loss": 0.0535
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.0001,
+        "valid_loss": 0.2114
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.0,
+        "valid_loss": 0.0146
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.0,
+        "valid_loss": 1.2819
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.0,
+        "valid_loss": 2.1933
+      }
+    ],
+    "findings": [
+      "examples are 45 to 103 tokens long, far below context_length",
+      "no duplicates between train and validation"
+    ],
+    "wrong_answers": [
+      {
+        "query": "My PIN is not working and I need assistance.",
+        "expected": "pin_blocked",
+        "answer": "unable_to_verify_identity"
+      },
+      {
+        "query": "IM still waiting for my account to update from a cash deposit?",
+        "expected": "balance_not_updated_after_cheque_or_cash_deposit",
+        "answer": "cash_withdrawal_not_updated_after_bank_transfer"
+      },
+      {
+        "query": "Why am I being charged twice fro a restaurant?",
+        "expected": "transaction_charged_twice",
+        "answer": "restaurant_charge"
+      },
+      {
+        "query": "The card I've got seems to be broken.",
+        "expected": "card_not_working",
+        "answer": "broken_card"
+      },
+      {
+        "query": "Where are my funds coming from? I need to know.",
+        "expected": "verify_source_of_funds",
+        "answer": "source_of_funds"
+      }
+    ]
+  },
+  "train": "artifacts/b6/train.jsonl",
+  "valid": "artifacts/b6/valid.jsonl",
+  "heldout": "artifacts/b18/heldout.jsonl",
+  "job_id": "ftjob-b05b722ed12642ab858e076f2a156ac2",
+  "heldout_metric": 0.56,
+  "tokens_per_example": 57,
+  "reports": []
+}

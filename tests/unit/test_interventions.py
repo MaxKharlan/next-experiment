@@ -3,6 +3,7 @@ import pytest
 from bench.faults.recipe import HEALTHY_HP, inject
 from core.agent.context import InvestigationContext
 from core.agent.schemas import Hypothesis
+from core.connectors.token_factory import hyperparameter_problem
 from core.interventions.pairs import make_pair, take_fraction
 
 
@@ -54,12 +55,39 @@ def test_epochs_control_is_the_failed_recipe():
     assert control.data_fraction == 1.0
 
 
-def test_rank_control_matches_the_lora_scale():
-    failed = inject(HEALTHY_HP, "lora_rank_too_small", 2)
+def test_rank_target_keeps_the_lora_scale():
+    # Token Factory's defaults: r 8, alpha 8
+    failed = {**HEALTHY_HP, "lora_r": 8, "lora_alpha": 8}
     target, control = make_pair(_hyp("lora_rank_too_small"), _ctx(failed))
-    t, c = target.hyperparameters(failed), control.hyperparameters(failed)
-    assert (t["lora_r"], t["lora_alpha"]) == (16, 16)
-    assert (c["lora_r"], c["lora_alpha"]) == (2, 2)
+    t = target.hyperparameters(failed)
+    assert (t["lora_r"], t["lora_alpha"]) == (32, 32)
+    assert control.hyperparameters(failed) == failed
+
+
+@pytest.mark.parametrize(
+    "recipe",
+    [
+        HEALTHY_HP,
+        {
+            **HEALTHY_HP,
+            "learning_rate": 1e-5,
+            "n_epochs": 3,
+            "lora_r": 8,
+            "lora_alpha": 8,
+        },
+        {**HEALTHY_HP, "learning_rate": 2e-5, "n_epochs": 18},
+    ],
+)
+@pytest.mark.parametrize(
+    "fault", ["lr_too_low", "too_many_epochs", "lora_rank_too_small"]
+)
+def test_every_arm_stays_inside_token_factory_ranges(recipe, fault):
+    try:
+        arms = make_pair(_hyp(fault), _ctx(recipe))
+    except ValueError:  # e.g. one epoch cannot be too many
+        return
+    for arm in arms:
+        assert hyperparameter_problem(arm.hyperparameters(recipe)) is None
 
 
 def test_impossible_pairs_raise():

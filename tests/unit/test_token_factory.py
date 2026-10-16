@@ -112,3 +112,11 @@ def test_download_checkpoint_to_storage(tmp_path):
     )
     assert keys == ["inv-1/checkpoints/ckpt-1/adapter_config.json"]
     assert storage.get_bytes(keys[0]) == b"{}"
+
+
+def test_create_job_stops_a_job_token_factory_would_reject():
+    jobs = SimpleNamespace(create=lambda **kw: pytest.fail("the API was called"))
+    with pytest.raises(ValueError, match="lora_r 4 is below Token Factory's minimum"):
+        _tf(jobs=jobs).create_job(
+            "Qwen/Qwen3-0.6B", "file-1", hyperparameters={"lora_r": 4, "lora": True}
+        )

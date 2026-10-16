@@ -6,7 +6,9 @@ trained on the whole training file. Methods that confirm the same cause on the s
 case get the same fix, so the retrained metric is cached by the fixed
 hyperparameters and trained once. A fix succeeds when its held-out metric reaches
 the reference of the task and model (bench/references, B5) within TOLERANCE, which
-is set here, before any run (section 10 of the project doc).
+is set here, before any run (section 10 of the project doc). Token Factory training
+is deterministic, so a fix whose recipe is the reference's own scores exactly the
+reference: seed_reference adds it without a new job.
 """
 
 from __future__ import annotations
@@ -95,4 +97,19 @@ def seed_fixes(cache: FixCache, report_path: Path) -> int:
         return 0
     fixed = next(m for m in steps["comparison"]["models"] if m["name"] == "fixed")
     cache.add(steps["retrain"]["hyperparameters"], fixed["score"], fixed["job_id"])
+    return 1
+
+
+def seed_reference(
+    cache: FixCache, case: BenchCase, root: Path = REFERENCES_DIR
+) -> int:
+    """Add the reference job of the case's task and model, if it trained on as many
+    examples as the case."""
+    path = root / f"{case.task}.json"
+    if not path.exists():
+        return 0
+    found = json.loads(path.read_text(encoding="utf-8")).get(case.model)
+    if not found or found.get("train_examples") != case.train_examples:
+        return 0
+    cache.add(found["hyperparameters"], found["heldout_exact_match"], found["job_id"])
     return 1
