@@ -1,0 +1,41 @@
+{
+  "Qwen/Qwen3-0.6B": {
+    "train_examples": 200,
+    "model": "Qwen/Qwen3-0.6B",
+    "recipe": "lr2e-4-e6",
+    "hyperparameters": {
+      "n_epochs": 6,
+      "batch_size": 8,
+      "learning_rate": 0.0002,
+      "warmup_ratio": 0.0,
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "lora_r": 16,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05,
+      "context_length": 8192
+    },
+    "job_id": "ftjob-95515a66baef4f83a815c85bd5946859",
+    "valid_exact_match": 0.52,
+    "heldout_exact_match": 0.535,
+    "heldout_examples": 200,
+    "grid": {
+      "lr1e-4-e3": {
+        "job_id": "ftjob-783f4fee00c24d42967272fdbe26e495",
+        "valid_exact_match": 0.5
+      },
+      "lr2e-4-e3": {
+        "job_id": "ftjob-8aa851963b8848518b452356a2906641",
+        "valid_exact_match": 0.38
+      },
+      "lr1e-4-e6": {
+        "job_id": "ftjob-a5c31a25ac544cdc956ef0b634269b2a",
+        "valid_exact_match": 0.46
+      },
+      "lr2e-4-e6": {
+        "job_id": "ftjob-95515a66baef4f83a815c85bd5946859",
+        "valid_exact_match": 0.52
+      }
+    }
+  }
+}
