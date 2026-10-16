@@ -10,7 +10,7 @@ from bench.baselines.single_ultra import (
     diagnose_single,
 )
 from bench.diagnosis import from_investigation
-from bench.pair_cache import PairCache, PairNotCached
+from bench.pair_cache import PairCache, PairNotCached, seed_cache
 from core.agent.context import InvestigationContext
 from core.agent.loop import InvestigationResult
 from core.agent.schemas import Hypothesis, Verdict
@@ -18,7 +18,6 @@ from core.connectors.storage import LocalStorage
 from core.connectors.token_factory import CallResult
 from core.interventions.pairs import Intervention
 from core.telemetry.calls import CallLog
-from scripts.run_baselines import seed_cache
 
 JOB_HP = {
     "learning_rate": 1e-5,
