@@ -48,3 +48,4 @@ class Verdict(BaseModel):
     patch: str = Field(
         description="Unified diff for data prep, config or training code"
     )
+    summary: str = Field("", description="Two or three sentences for the report")
