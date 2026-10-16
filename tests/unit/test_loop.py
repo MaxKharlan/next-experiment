@@ -79,7 +79,7 @@ def test_fault6_is_found_and_confirmed(tmp_path):
     assert result.status == "confirmed"
     assert calls == [{"learning_rate": 1e-4}]
     kinds = [s["kind"] for s in result.steps]
-    assert kinds[0] == "hypotheses" and kinds[-1] == "intervention"
+    assert kinds[0] == "hypotheses" and kinds[-2:] == ["intervention", "verdict"]
     assert "probe" in kinds
     assert result.verdict.status == "confirmed"
     assert result.verdict.hypothesis_id == "h1"
@@ -139,3 +139,14 @@ def test_known_issues_go_into_the_case_and_the_report():
     assert known["sources"][0]["url"] == "https://a.example/lr"
     assert known["credits"] == 2
     assert result.steps[1]["kind"] == "hypotheses"
+
+
+def test_steps_are_streamed_as_they_happen():
+    router = FakeRouter([_hyp("h1", "lr_too_low", 0.6)])
+    run_pair, _ = _runner({"h1": ([0.16, 0.20], [0.02, 0.02])})
+    seen = []
+    result = investigate(
+        _ctx(), {}, router, run_pair, explain=False, on_step=seen.append
+    )
+    assert seen == result.steps
+    assert seen[0]["hypotheses"][0]["fault_class"] == "lr_too_low"
