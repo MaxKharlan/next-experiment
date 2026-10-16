@@ -41,6 +41,10 @@ class CallResult:
 class StructuredOutputError(RuntimeError):
     """The model did not return JSON that matches the schema after all attempts."""
 
+    def __init__(self, message: str, calls: list[CallResult] | None = None):
+        super().__init__(message)
+        self.calls = calls or []  # every attempt, so the cost still gets logged
+
 
 def extract_json(text: str) -> str:
     """Pull the JSON out of a reply: drop reasoning tags, code fences, leading prose."""
@@ -149,7 +153,7 @@ class TokenFactory:
                     },
                 ]
         raise StructuredOutputError(
-            f"{schema.__name__}: no valid JSON after {attempts} attempts"
+            f"{schema.__name__}: no valid JSON after {attempts} attempts", calls
         )
 
     def _chat_json(
