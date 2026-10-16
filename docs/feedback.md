@@ -37,3 +37,13 @@ Fine-tuning prices per 1M tokens are only on the Billing > Prices page after log
 ## 2026-10-15 · Token Factory · what a finished LoRA job returns
 
 A job that got a GPU right away finished in 7 to 17 minutes and was easy to inspect. `result_files` hold an adapter in the standard PEFT format (`adapter_model.safetensors`, `adapter_config.json`) with the tokenizer and chat template, and the adapter config shows the exact LoRA setup. The job overview shows seed 0 as "—".
+
+
+## 2026-10-16 · Token Factory · LoRA checkpoints do not load with PeftModel.from_pretrained
+
+`adapter_model.safetensors` from a Token Factory checkpoint names its weights `model.layers.0.mlp.down_proj.lora_A.weight`, without the `base_model.model.` prefix that PEFT writes and expects. `PeftModel.from_pretrained` only warns about missing adapter keys and loads none of them. Because `adapter_config.json` sets `init_lora_weights: false`, the LoRA layers then hold random weights: a Qwen3-0.6B checkpoint answered with strings like "结结结结". After adding the prefix and loading the weights with `set_peft_model_state_dict`, the same checkpoint scored 0.10 exact match. We expected the files to load with the standard PEFT call, or the docs to show how to load them.
+
+
+## 2026-10-16 · Token Factory · the job seed has no effect
+
+Two Qwen3-0.6B LoRA jobs with the same data and hyperparameters and `seed` 0 and 1 (ftjob-5aa5f03e…, ftjob-abe4e163…) produced identical checkpoints: train_loss 1.1466, 0.3383, 0.1066 and valid_loss 0.677, 0.5472, 1.0787 in both, and the same exact match. The same held for the pair at learning rate 1e-5. The API stores and returns the seed, so it looks applied. We expected different data order or initialization per seed; to get independent repeats we now shuffle the training file ourselves.
