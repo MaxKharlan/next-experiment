@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     s3_secret_access_key: str = ""
 
     tavily_api_key: str = ""
+    tavily_max_credits_per_investigation: float = 10
+    tavily_credit_budget: float = 200
+    tavily_cache_prefix: str = "tavily-cache"
 
     default_budget_usd: float = 5.0
     approval_threshold_usd: float = 1.0

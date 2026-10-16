@@ -1,5 +1,7 @@
 """B17: the investigation loop, first version.
 
+0. With a Tavily connector, the known-issues step searches for the model, recipe
+   and symptom, and the sources go into the case.
 1. Super proposes hypotheses for the case.
 2. While the leader is below the threshold, the planner picks the probe with the
    highest information gain per dollar, the code runs it and updates the
@@ -17,11 +19,15 @@ from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
+import httpx
+
 from core.agent.context import InvestigationContext
+from core.agent.known_issues import find_known_issues
 from core.agent.router import Router
 from core.agent.schemas import Hypothesis, Verdict
 from core.agent.steps import interpret_probe, propose_hypotheses, write_verdict
 from core.connectors.storage import Storage
+from core.connectors.tavily import Tavily, TavilyBudgetError
 from core.interventions.pairs import BUILDERS, Intervention, make_pair
 from core.interventions.stats import causal_check
 from core.planner.eig import best_probe, expected_gain, update
@@ -77,7 +83,27 @@ def investigate(
     noise_sd: float | None = 0.0146,
     intervention_cost_usd: float = 0.0,
     explain: bool = True,
+    tavily: Tavily | None = None,
 ) -> InvestigationResult:
+    known_step = None
+    if tavily is not None:
+        job = case.get(
+            "job", {"hyperparameters": ctx.job_config.get("hyperparameters")}
+        )
+        try:
+            found = find_known_issues(
+                tavily, ctx.investigation_id, job, case.get("symptom", "")
+            )
+            case = {
+                **case,
+                "known_issues": [
+                    {k: s[k] for k in ("title", "url", "snippet")}
+                    for s in found["sources"]
+                ],
+            }
+            known_step = {"kind": "known_issues", **found}
+        except (TavilyBudgetError, httpx.HTTPError) as err:
+            known_step = {"kind": "known_issues", "error": str(err)}
     hypotheses = propose_hypotheses(router, case, mode=ctx.mode)
     by_id = {h.id: h for h in hypotheses}
     classes = {h.id: h.fault_class for h in hypotheses}
@@ -90,6 +116,8 @@ def investigate(
     base_hp = dict(ctx.job_config.get("hyperparameters", {}))
     evidence: list[str] = []
     result = InvestigationResult(ctx.investigation_id, "inconclusive", hypotheses)
+    if known_step is not None:
+        result.steps.append(known_step)
     result.steps.append({"kind": "hypotheses", "probs": _rounded(probs)})
     interventions = 0
 

@@ -16,7 +16,9 @@ from pathlib import Path
 from core.agent.context import InvestigationContext
 from core.agent.loop import investigate
 from core.agent.router import Router
+from core.config import get_settings
 from core.connectors.storage import LocalStorage
+from core.connectors.tavily import Tavily
 from core.connectors.token_factory import TokenFactory
 from core.interventions.pairs import Intervention
 from core.telemetry.calls import CallLog
@@ -47,11 +49,20 @@ def main() -> None:
         for arm in (target, control):
             train_arm(arm, JOB_HP, args.train, args.valid, out, args.seeds)
 
-    result = investigate(ctx, CASE, router, run_pair)
+    storage = LocalStorage("artifacts")
+    tavily = Tavily.from_settings(storage) if get_settings().tavily_api_key else None
+    if tavily is None:
+        print("TAVILY_API_KEY is not set: no known-issues step")
+    result = investigate(ctx, CASE, router, run_pair, tavily=tavily)
 
     print("\nTrace:")
     for step in result.steps:
-        if step["kind"] == "hypotheses":
+        if step["kind"] == "known_issues":
+            for source in step.get("sources", []):
+                print(f"  known issue: {source['title']} — {source['url']}")
+            if "error" in step:
+                print(f"  known issues failed: {step['error']}")
+        elif step["kind"] == "hypotheses":
             for h in result.hypotheses:
                 print(f"  {h.id} {h.fault_class} prior {h.prior:.2f}")
         elif step["kind"] == "probe":
@@ -71,7 +82,7 @@ def main() -> None:
         print(f"Verdict: {result.verdict.summary}")
         print(result.verdict.patch)
     print(f"LLM cost ${result.llm_cost_usd:.4f}")
-    print(f"Report: {result.save(LocalStorage('artifacts'))}")
+    print(f"Report: {result.save(storage)}")
 
 
 if __name__ == "__main__":
