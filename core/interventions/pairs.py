@@ -11,6 +11,8 @@ control there would also cut the number of distinct examples. Builders for fault
 
 from __future__ import annotations
 
+import difflib
+import json
 import math
 import random
 from collections.abc import Callable
@@ -43,6 +45,19 @@ class Intervention:
     def relative_cost(self, base: dict[str, Any]) -> float:
         """Trained tokens relative to one epoch over the whole training file."""
         return self.data_fraction * self.hyperparameters(base)["n_epochs"]
+
+    def diff(self, base: dict[str, Any]) -> str:
+        """Unified diff of the job's hyperparameters, as a patch for the verdict."""
+        before = json.dumps(base, indent=2, sort_keys=True).splitlines()
+        after = json.dumps(self.hyperparameters(base), indent=2, sort_keys=True)
+        lines = difflib.unified_diff(
+            before,
+            after.splitlines(),
+            "hyperparameters",
+            "hyperparameters",
+            lineterm="",
+        )
+        return "\n".join(lines)
 
 
 # hyperparameters of the failed job -> (target patch, its description,

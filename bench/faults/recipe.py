@@ -9,7 +9,8 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Any
 
-# Token Factory defaults for a LoRA job, as the API returned them for the B6 job
+# The recipe of the B6 jobs. Token Factory's own defaults differ: learning_rate 1e-5,
+# 3 epochs, lora_r 8, lora_alpha 8, dropout 0, packing on (post-training docs)
 HEALTHY_HP: dict[str, Any] = {
     "n_epochs": 1,
     "batch_size": 8,
