@@ -68,12 +68,22 @@ def test_plan_and_suffix():
     ]
 
 
+def test_runs_outside_token_factory_limits_are_left_out(capsys):
+    healthy = {**HEALTHY_HP, "n_epochs": 6}
+    runs = plan_runs(LLAMA, healthy, [0], ["too_many_epochs", "lora_rank_too_small"])
+    assert [r["run"] for r in runs] == ["healthy-s0", "too_many_epochs-mild-s0"]
+    out = capsys.readouterr().out
+    assert "too_many_epochs-strong-s0: n_epochs 36 is over" in out
+    assert "lora_rank_too_small-mild-s0: lora_r 4 is below" in out
+    assert "lora_rank_too_small-strong-s0: lora_r 2 is below" in out
+
+
 def test_run_grid_keeps_the_parallel_limit_and_resumes(tmp_path):
     runs = plan_runs(LLAMA, HEALTHY_HP, [0], None)
     tf = FakeTF()
     results = run_grid(tf, runs, tmp_path, "t", "v", parallel=2, sleep=lambda s: None)
 
-    assert len(results) == 7
+    assert len(results) == 5  # rank 4 and 2 are below Token Factory's minimum
     assert tf.uploads == 2
     assert tf.max_running == 2
     assert tf.hp["ftjob-0"]["lora"] is True
@@ -86,7 +96,7 @@ def test_run_grid_keeps_the_parallel_limit_and_resumes(tmp_path):
         "finished": 300,
     }
     assert six["cost_usd"] == pytest.approx(0.0004)
-    assert (tmp_path / "results.jsonl").read_text().count("\n") == 7
+    assert (tmp_path / "results.jsonl").read_text().count("\n") == 5
 
     again = FakeTF()
     run_grid(again, runs, tmp_path, "t", "v", sleep=lambda s: None)

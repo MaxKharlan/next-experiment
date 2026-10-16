@@ -24,14 +24,40 @@ from core.planner.job_cost import price_per_m
 
 # Token Factory needs these on top of the shared recipe
 TF_ONLY_HP = {"lora": True, "packing": False}
+# Token Factory rejects a job outside these ranges with HTTP 422 (seen 2026-10-16)
+LIMITS: dict[str, tuple[int | None, int | None]] = {
+    "n_epochs": (1, 20),
+    "lora_r": (8, None),
+}
+
+
+def outside_limits(hp: dict[str, Any]) -> str | None:
+    """Why Token Factory would reject these hyperparameters, or None."""
+    for key, (low, high) in LIMITS.items():
+        value = hp.get(key)
+        if value is None:
+            continue
+        if low is not None and value < low:
+            return f"{key} {value} is below Token Factory's minimum of {low}"
+        if high is not None and value > high:
+            return f"{key} {value} is over Token Factory's limit of {high}"
+    return None
+
+
 SHORT = {"lr_too_low": "lr", "too_many_epochs": "ep", "lora_rank_too_small": "rank"}
 
 
 def plan_runs(
     model: str, healthy: dict[str, Any], seeds: list[int], faults: list[str] | None
 ) -> list[dict[str, Any]]:
+    """Runs of the grid; one that Token Factory would reject is printed and left out."""
     runs = []
     for name, fault, strength, seed in grid(seeds, faults):
+        hp = inject(healthy, fault, strength) if fault else dict(healthy)
+        why = outside_limits(hp)
+        if why:
+            print(f"{name}-s{seed}: {why}, skipped", flush=True)
+            continue
         runs.append(
             {
                 "run": f"{name}-s{seed}",
@@ -39,9 +65,7 @@ def plan_runs(
                 "strength": strength,
                 "seed": seed,
                 "model": model,
-                "hyperparameters": inject(healthy, fault, strength)
-                if fault
-                else dict(healthy),
+                "hyperparameters": hp,
             }
         )
     return runs
