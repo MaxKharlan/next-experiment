@@ -100,6 +100,8 @@ def causal_check(
     noise-floor SDs. With noise_sd from noise_floor() the interval uses it; without,
     it uses the pooled SD of these runs and Student's t.
     confirmed: effect >= min_effect, the interval is above zero and p <= alpha.
+    The permutation test is skipped when it cannot reach alpha at all, as with
+    2 seeds per arm (smallest p 1/6); the interval then decides alone.
     rejected: the whole interval is below min_effect.
     inconclusive: anything else; more seeds may decide it.
     """
@@ -118,8 +120,9 @@ def causal_check(
         half = (T975[dof - 1] if dof <= 30 else Z(0.975)) * pooled * scale
     low, high = effect - half, effect + half
     p = permutation_p(fix, control)
+    can_reach_alpha = math.comb(len(fix) + len(control), len(fix)) * alpha >= 1
 
-    if effect >= min_effect and low > 0 and p <= alpha:
+    if effect >= min_effect and low > 0 and (p <= alpha or not can_reach_alpha):
         status, reason = "confirmed", "the fix beats the control beyond the noise"
     elif high < min_effect:
         status, reason = "rejected", "the fix gains less than the minimum effect"

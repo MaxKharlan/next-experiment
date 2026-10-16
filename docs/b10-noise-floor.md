@@ -38,7 +38,7 @@ The learning-rate fault costs 0.37 of exact match, so 2 seeds per arm are enough
 - `rejected` means the whole interval lies below `min_effect`, so the fix gains less than it has to.
 - `inconclusive` covers everything else. The planner can add seeds or drop the hypothesis.
 
-The interval uses the noise-floor SD when one is given, and otherwise the pooled SD of the runs with Student's t. With 3 seeds per arm the permutation test cannot go below p = 1/20, so a confirmation needs every fix run above every control run.
+The interval uses the noise-floor SD when one is given, and otherwise the pooled SD of the runs with Student's t. With 3 seeds per arm the permutation test cannot go below p = 1/20, so a confirmation needs every fix run above every control run. With 2 seeds per arm its smallest p is 1/6, above α, so the test is skipped and the interval from the noise floor decides alone.
 
 The local sweep gives a check of the rule. It compares the healthy recipe, taken as the fix, against each fault, taken as the run where the cause stays, with `min_effect` set to two noise-floor SDs:
 

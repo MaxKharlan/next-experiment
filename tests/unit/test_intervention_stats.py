@@ -89,3 +89,10 @@ def test_noisy_arms_are_inconclusive():
 def test_needs_two_seeds_per_arm():
     with pytest.raises(ValueError):
         causal_check([0.4], [0.1, 0.2], min_effect=0.05)
+
+
+def test_two_seeds_rely_on_the_noise_floor():
+    sd = noise_floor(EXACT_MATCH).sd
+    r = causal_check([0.43, 0.41], [0.05, 0.05], min_effect=2 * sd, noise_sd=sd)
+    assert r.p_value > 0.05
+    assert r.status == "confirmed"
