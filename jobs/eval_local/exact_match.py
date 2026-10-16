@@ -65,6 +65,7 @@ def evaluate_adapter(
     valid_path: str | Path,
     base_model: str | None = None,
     device: str = "auto",
+    wrong: list[dict[str, str]] | None = None,
 ) -> float:
     adapter_dir = Path(adapter_dir)
     config = json.loads((adapter_dir / "adapter_config.json").read_text())
@@ -72,7 +73,7 @@ def evaluate_adapter(
     device = pick_device(device)
     tok = load_tokenizer(base_model, adapter_dir)
     model = load_adapter(adapter_dir, base_model).to(device)
-    score = exact_match(model, tok, read_jsonl(valid_path), device)
+    score = exact_match(model, tok, read_jsonl(valid_path), device, wrong)
     del model
     free_cache(device)
     return score

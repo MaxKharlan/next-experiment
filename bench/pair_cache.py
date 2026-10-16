@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from core.agent.loop import RunPair
@@ -50,7 +51,8 @@ class PairCache:
         if found is None:
             if self.run_pair is None:
                 raise PairNotCached(
-                    f"no pair {target.description!r} / {control.description!r}"
+                    f"the pair {target.description!r} / {control.description!r} "
+                    "is not cached"
                 )
             self.run_pair(target, control)
             self.add(target, control)
@@ -58,3 +60,21 @@ class PairCache:
         for arm in (target, control):
             arm.metrics = list(found[arm.kind]["metrics"])
             arm.ft_job_ids = list(found[arm.kind]["ft_job_ids"])
+
+
+def seed_cache(cache: PairCache, report_path: Path) -> int:
+    """Add the pairs of a saved investigation that the cache does not have."""
+    if not report_path.exists():
+        return 0
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    known = cache.load()
+    added = 0
+    for step in report["steps"]:
+        if step["kind"] != "intervention":
+            continue
+        target = Intervention(**step["target"])
+        control = Intervention(**step["control"])
+        if pair_key(target.patch, control.patch) not in known:
+            cache.add(target, control)
+            added += 1
+    return added

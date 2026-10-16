@@ -101,8 +101,17 @@ def evaluate(model: Any, rows: list[dict], pad_id: int, device: str, bs: int) ->
 
 
 @torch.no_grad()
-def exact_match(model: Any, tok: Any, chats: list[dict], device: str) -> float:
-    """Share of greedy answers equal to the reference. Stand-in until core/eval (A13)."""
+def exact_match(
+    model: Any,
+    tok: Any,
+    chats: list[dict],
+    device: str,
+    wrong: list[dict[str, str]] | None = None,
+) -> float:
+    """Share of greedy answers equal to the reference. Stand-in until core/eval (A13).
+
+    With a list in wrong, every miss is added to it as query, expected and answer.
+    """
     model.eval()
     hits = 0
     for chat in chats:
@@ -117,7 +126,11 @@ def exact_match(model: Any, tok: Any, chats: list[dict], device: str) -> float:
         answer = tok.decode(
             out[0, ids["input_ids"].shape[1] :], skip_special_tokens=True
         )
-        hits += answer.strip() == chat["messages"][-1]["content"].strip()
+        expected = chat["messages"][-1]["content"].strip()
+        hits += answer.strip() == expected
+        if wrong is not None and answer.strip() != expected:
+            query = chat["messages"][-2]["content"]
+            wrong.append({"query": query, "expected": expected, "answer": answer})
     free_cache(device)
     model.train()
     return hits / len(chats)
