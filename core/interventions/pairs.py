@@ -3,10 +3,11 @@
 make_pair() turns a hypothesis about the failed job into two mini-job recipes. The
 target changes only the factor the hypothesis blames. The control leaves that factor
 alone and trains at least as many tokens as the target, so a win of the target can't
-come from more training. It is the same cost for faults 6 and 8. For fault 7 the
-target is cheaper: the control is the failed recipe itself, because any equal-cost
-control there would also cut the number of distinct examples. Builders for faults
-6–8 are here; data faults (A7) add theirs to BUILDERS.
+come from more training. For faults 6–8 the control is the failed recipe again with
+new seeds: the same cost for faults 6 and 8, and more than the target for fault 7,
+where any equal-cost control would also cut the number of distinct examples. Every
+recipe stays inside Token Factory's ranges (HP_LIMITS). Builders for faults 6–8 are
+here; data faults (A7) add theirs to BUILDERS.
 """
 
 from __future__ import annotations
@@ -94,17 +95,19 @@ def _lora_rank_too_small(hp: dict[str, Any]) -> tuple[dict, str, dict, str]:
     target = min(max(16, r * 4), 64)
     if target <= r:
         raise ValueError(f"rank {r} is already at the top of the range")
-    # the same alpha / r as the target, so only the extra rank differs
-    same_scale = max(1, round(alpha * r / target))
-    control = (
-        f"lora_r stays {r}, lora_alpha {alpha:g} -> {same_scale} for the same "
-        "alpha / r as the target"
+    # alpha grows with the rank, so the LoRA scale alpha / r stays and only the
+    # capacity changes; a control with a smaller alpha could fall below Token
+    # Factory's minimum alpha of 8
+    target_alpha = round(alpha * target / r)
+    description = (
+        f"lora_r {r} -> {target} with lora_alpha {alpha:g} -> {target_alpha}, "
+        "the same alpha / r"
     )
     return (
-        {"lora_r": target},
-        f"lora_r {r} -> {target}",
-        {"lora_alpha": same_scale},
-        control,
+        {"lora_r": target, "lora_alpha": target_alpha},
+        description,
+        {},
+        "the failed recipe again with new seeds",
     )
 
 

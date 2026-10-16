@@ -27,6 +27,7 @@ from bench.fixes import (
     fixed_hyperparameters,
     reference_metric,
     seed_fixes,
+    seed_reference,
 )
 from bench.methods import METHODS, pair_cost, run_method, tf_pair_runner
 from bench.pair_cache import PairCache, PairNotCached, seed_cache
@@ -145,6 +146,7 @@ def main() -> None:
         for report in case.reports:
             seed_cache(pairs, Path(report))
             seed_fixes(fixes, Path(report))
+        seed_reference(fixes, case)
         rows += run_case(
             case,
             args.methods,
