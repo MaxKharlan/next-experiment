@@ -33,6 +33,9 @@ STEP_ROLES: dict[str, str] = {
     # final decisions
     "verdict": "ultra",
     "patch": "ultra",
+    # comparison methods of the benchmark (bench/baselines)
+    "single_shot": "ultra",
+    "react": "super",
 }
 # loop steps that move to Ultra after repeated mismatches
 ESCALATING = {"hypotheses", "interpret_probe"}
