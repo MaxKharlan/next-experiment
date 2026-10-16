@@ -84,8 +84,16 @@ def investigate(
     intervention_cost_usd: float = 0.0,
     explain: bool = True,
     tavily: Tavily | None = None,
+    on_step: Callable[[dict[str, Any]], None] | None = None,
 ) -> InvestigationResult:
-    known_step = None
+    """Run the loop; on_step gets every step as soon as it is recorded."""
+    steps: list[dict[str, Any]] = []
+
+    def add(step: dict[str, Any]) -> None:
+        steps.append(step)
+        if on_step is not None:
+            on_step(step)
+
     if tavily is not None:
         job = case.get(
             "job", {"hyperparameters": ctx.job_config.get("hyperparameters")}
@@ -101,9 +109,9 @@ def investigate(
                     for s in found["sources"]
                 ],
             }
-            known_step = {"kind": "known_issues", **found}
+            add({"kind": "known_issues", **found})
         except (TavilyBudgetError, httpx.HTTPError) as err:
-            known_step = {"kind": "known_issues", "error": str(err)}
+            add({"kind": "known_issues", "error": str(err)})
     hypotheses = propose_hypotheses(router, case, mode=ctx.mode)
     by_id = {h.id: h for h in hypotheses}
     classes = {h.id: h.fault_class for h in hypotheses}
@@ -115,10 +123,16 @@ def investigate(
     remaining = {p.name: p for p in probes}
     base_hp = dict(ctx.job_config.get("hyperparameters", {}))
     evidence: list[str] = []
-    result = InvestigationResult(ctx.investigation_id, "inconclusive", hypotheses)
-    if known_step is not None:
-        result.steps.append(known_step)
-    result.steps.append({"kind": "hypotheses", "probs": _rounded(probs)})
+    result = InvestigationResult(
+        ctx.investigation_id, "inconclusive", hypotheses, steps=steps
+    )
+    add(
+        {
+            "kind": "hypotheses",
+            "hypotheses": [h.model_dump() for h in hypotheses],
+            "probs": _rounded(probs),
+        }
+    )
     interventions = 0
 
     while True:
@@ -135,7 +149,7 @@ def investigate(
             testable=testable,
         )
         if action == "stop":
-            result.steps.append({"kind": "stop", "reason": why})
+            add({"kind": "stop", "reason": why})
             break
 
         if action == "probe":
@@ -155,7 +169,7 @@ def investigate(
                     router, hypotheses, probe_name, run.outcome, step["raw"]
                 )
                 step["card"] = card.explanation
-            result.steps.append(step)
+            add(step)
             evidence.append(f"probe:{probe_name}")
             continue
 
@@ -168,7 +182,7 @@ def investigate(
         interventions += 1
         ctx.budget_left_usd -= intervention_cost_usd
         evidence.append(f"intervention:{leader.id}")
-        result.steps.append(
+        add(
             {
                 "kind": "intervention",
                 "hypothesis": leader.id,
@@ -183,6 +197,7 @@ def investigate(
                 router, leader, target, control, check, base_hp, list(evidence)
             )
             result.status = "confirmed"
+            add({"kind": "verdict", **result.verdict.model_dump()})
             break
         # not confirmed: drop the leader and spread its mass over the rest
         testable.discard(leader.id)
@@ -190,7 +205,7 @@ def investigate(
         total = sum(probs.values())
         probs = {h: p / total for h, p in probs.items()} if total else probs
         if interventions >= max_interventions:
-            result.steps.append({"kind": "stop", "reason": "intervention limit"})
+            add({"kind": "stop", "reason": "intervention limit"})
             break
 
     result.llm_cost_usd = router.log.cost_usd

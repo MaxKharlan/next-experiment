@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next Experiment</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1d2330; --muted: #5d6677;
+    --line: #e2e5ea; --accent: #3b5bdb; --good: #2b8a3e; --bad: #c92a2a;
+    --warn: #b7791f; --bar: #dbe4ff; --code: #f1f3f5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12151b; --panel: #1b1f27; --ink: #e6e9ef; --muted: #9aa3b2;
+      --line: #2c323d; --accent: #7c95f5; --good: #51cf66; --bad: #ff6b6b;
+      --warn: #fcc419; --bar: #2b3554; --code: #232833;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 16px 20px; border-bottom: 1px solid var(--line); background: var(--panel);
+           display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  h1 { font-size: 20px; margin: 0; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  select, button { font: inherit; padding: 6px 10px; border: 1px solid var(--line); max-width: 100%;
+                   border-radius: 8px; background: var(--panel); color: var(--ink); }
+  button { background: var(--accent); color: #fff; border: none; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  main { display: grid; grid-template-columns: minmax(260px, 360px) 1fr; gap: 16px;
+         padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 820px) { main { grid-template-columns: 1fr; padding: 12px 16px; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 10px; }
+  .stack { display: grid; gap: 16px; align-content: start; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 13px; }
+  .kv span:nth-child(odd) { color: var(--muted); }
+  .hyp { margin: 10px 0; }
+  .hyp-head { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
+  .hyp-head b { font-weight: 600; }
+  .barwrap { height: 8px; background: var(--code); border-radius: 4px; overflow: hidden; margin: 4px 0; }
+  .bar { height: 100%; background: var(--accent); width: 0; transition: width .6s ease; }
+  .hyp.lead .bar { background: var(--good); }
+  .hyp.out { opacity: .45; }
+  .why { font-size: 12px; color: var(--muted); }
+  .sources a { font-size: 12px; color: var(--accent); word-break: break-all; display: block; }
+  .feed { display: grid; gap: 12px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px;
+          animation: in .35s ease; }
+  @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .card .tag { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .card h3 { margin: 2px 0 6px; font-size: 16px; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .confirmed { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+  .rejected { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
+  .inconclusive { background: color-mix(in srgb, var(--warn) 22%, transparent); color: var(--warn); }
+  pre { background: var(--code); padding: 10px; border-radius: 8px; overflow-x: auto; font-size: 12px; margin: 8px 0 0; }
+  .add { color: var(--good); } .del { color: var(--bad); }
+  .arms { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; margin: 6px 0; }
+  .arms > div { background: var(--code); border-radius: 8px; padding: 8px; }
+  .muted { color: var(--muted); font-size: 13px; }
+  .job { color: var(--muted); font-size: 11px; word-break: break-all; font-family: ui-monospace, monospace; }
+  svg text { fill: var(--muted); font-size: 11px; }
+  .empty { color: var(--muted); text-align: center; padding: 40px 0; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Next Experiment</h1>
+    <div class="sub">Finds out why a fine-tune on Nebius Token Factory failed and proves it with an experiment</div>
+  </div>
+  <div class="controls">
+    <select id="demo" aria-label="Saved investigation"></select>
+    <button id="start">Replay</button>
+    <select id="past" aria-label="Past investigations"><option value="">Past runs…</option></select>
+  </div>
+</header>
+<main>
+  <div class="stack">
+    <section class="panel" id="case"><h2>Case</h2><div class="muted">Start a replay to see an investigation.</div></section>
+    <section class="panel"><h2>Hypotheses</h2><div id="board" class="muted">No hypotheses yet.</div></section>
+    <section class="panel" id="cost" hidden><h2>Cost</h2><div id="costbody"></div></section>
+  </div>
+  <section class="feed" id="feed"><div class="empty">The investigation will appear here step by step.</div></section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const pct = (p) => `${Math.round(p * 100)}%`;
+let hyps = {}, probs = {}, out = new Set(), source = null;
+
+async function init() {
+  const cases = await (await fetch("/api/demo-cases")).json();
+  $("demo").innerHTML = cases.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("");
+  const past = await (await fetch("/api/investigations")).json();
+  $("past").innerHTML = '<option value="">Past runs…</option>' + past.map(p =>
+    `<option value="${esc(p.id)}">${esc(p.title || p.id)} · ${esc(p.status)}</option>`).join("");
+  const id = new URLSearchParams(location.search).get("id");
+  if (id) watch(id);
+}
+
+$("start").onclick = async () => {
+  $("start").disabled = true;
+  const res = await fetch("/api/investigations", {method: "POST", headers: {"Content-Type": "application/json"},
+                                                  body: JSON.stringify({backend: "replay", demo: $("demo").value})});
+  const {id} = await res.json();
+  history.replaceState(null, "", `?id=${id}`);
+  watch(id);
+};
+$("past").onchange = (e) => { if (e.target.value) { history.replaceState(null, "", `?id=${e.target.value}`); watch(e.target.value); } };
+
+function reset() {
+  hyps = {}; probs = {}; out = new Set();
+  $("feed").innerHTML = ""; $("board").innerHTML = '<div class="muted">No hypotheses yet.</div>';
+  $("cost").hidden = true;
+}
+
+function watch(id) {
+  if (source) source.close();
+  reset();
+  source = new EventSource(`/api/investigations/${id}/events`);
+  source.addEventListener("started", e => showCase(JSON.parse(e.data).case));
+  source.addEventListener("step", e => showStep(JSON.parse(e.data)));
+  source.addEventListener("finished", e => { showCost(JSON.parse(e.data)); done(); });
+  source.addEventListener("failed", e => { card("Error", "The investigation stopped", `<pre>${esc(JSON.parse(e.data).error)}</pre>`); done(); });
+}
+function done() { source.close(); $("start").disabled = false; }
+
+function showCase(c) {
+  if (!c || !c.job) return;
+  const hp = c.job.hyperparameters || {};
+  const pts = (c.checkpoints || []).map((p, i) => `<span>epoch ${p.epoch ?? i + 1}</span><span>train ${p.train_loss} · valid ${p.valid_loss}</span>`).join("");
+  $("case").innerHTML = `<h2>Case</h2><p style="margin:0 0 8px">${esc(c.symptom)}</p>
+    <div class="kv"><span>Model</span><span>${esc(c.job.model)}</span>
+    <span>Data</span><span>${c.job.train_examples} train · ${c.job.validation_examples} validation</span>
+    <span>Learning rate</span><span>${hp.learning_rate}</span><span>Epochs</span><span>${hp.n_epochs}</span>
+    <span>LoRA</span><span>r ${hp.lora_r} · alpha ${hp.lora_alpha}</span>${pts}</div>`;
+}
+
+function drawBoard() {
+  const ids = Object.keys(probs).filter(h => h !== "unlisted" || probs[h] > 0);
+  const lead = ids.filter(h => !out.has(h) && h !== "unlisted").sort((a, b) => probs[b] - probs[a])[0];
+  $("board").innerHTML = ids.map(h => {
+    const x = hyps[h] || {fault_class: "causes outside the list", rationale: "", sources: []};
+    const src = (x.sources || []).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join("");
+    return `<div class="hyp ${h === lead ? "lead" : ""} ${out.has(h) ? "out" : ""}">
+      <div class="hyp-head"><b>${esc(x.fault_class)}</b><span>${pct(probs[h])}</span></div>
+      <div class="barwrap"><div class="bar" style="width:${pct(probs[h])}"></div></div>
+      ${x.rationale ? `<div class="why">${esc(x.rationale)}</div>` : ""}<div class="sources">${src}</div></div>`;
+  }).join("");
+}
+
+function card(tag, title, body) {
+  const el = document.createElement("article");
+  el.className = "card";
+  el.innerHTML = `<div class="tag">${esc(tag)}</div><h3>${title}</h3>${body}`;
+  $("feed").appendChild(el);
+  el.scrollIntoView({behavior: "smooth", block: "nearest"});
+}
+
+function showStep(s) {
+  if (s.kind === "known_issues") {
+    const list = (s.sources || []).map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></li>`).join("");
+    card("Tavily", "Known issues", s.error ? `<p class="muted">${esc(s.error)}</p>`
+      : `<p class="muted">${(s.queries || []).map(esc).join("<br>")}</p><ul>${list}</ul><p class="muted">${s.credits} credits</p>`);
+  } else if (s.kind === "hypotheses") {
+    (s.hypotheses || []).forEach(h => hyps[h.id] = h);
+    probs = s.probs; drawBoard();
+    card("Nemotron Super", "Hypotheses", `<p class="muted">${Object.values(hyps).map(h => `${esc(h.fault_class)} ${pct(h.prior)}`).join(" · ")}</p>`);
+  } else if (s.kind === "probe") {
+    probs = s.probs; drawBoard();
+    card(`Check · ${Number(s.gain_bits).toFixed(2)} bits expected`, `${esc(s.probe)} → ${esc(s.outcome)}`,
+         `${s.card ? `<p>${esc(s.card)}</p>` : ""}<p class="muted">Raw: ${esc(JSON.stringify(s.raw))}</p>`);
+  } else if (s.kind === "intervention") {
+    const r = s.result, t = s.target, c = s.control;
+    const jobs = (a) => (a.ft_job_ids || []).map(j => `<div class="job">${esc(j)}</div>`).join("");
+    const name = hyps[s.hypothesis] ? hyps[s.hypothesis].fault_class : s.hypothesis;
+    card("Causal check", `${esc(name)} · <span class="badge ${r.status}">${r.status}</span>`,
+      `<div class="arms"><div><b>Target</b><br>${esc(t.description)}<br>exact match ${t.metrics.join(", ")}${jobs(t)}</div>
+       <div><b>Control</b><br>${esc(c.description)}<br>exact match ${c.metrics.join(", ")}${jobs(c)}</div></div>
+       ${effectChart(r)}<p class="muted">Effect ${r.effect.toFixed(3)}, 95% interval ${r.ci_low.toFixed(3)} to ${r.ci_high.toFixed(3)}; needed at least ${r.min_effect}. ${esc(r.reason.charAt(0).toUpperCase() + r.reason.slice(1))}.</p>`);
+    if (r.status !== "confirmed") { out.add(s.hypothesis); drawBoard(); }
+  } else if (s.kind === "verdict") {
+    const patch = (s.patch || "").split("\n").map(l => `<span class="${l.startsWith("+") && !l.startsWith("+++") ? "add" : l.startsWith("-") && !l.startsWith("---") ? "del" : ""}">${esc(l)}</span>`).join("\n");
+    card("Nemotron Ultra", `Verdict · <span class="badge ${s.status}">${s.status}</span>`,
+         `<p>${esc(s.summary)}</p>${s.patch ? `<pre>${patch}</pre>` : ""}<p class="muted">Evidence: ${(s.evidence || []).map(esc).join(", ")}</p>`);
+  } else if (s.kind === "stop") {
+    card("Planner", "Stopped", `<p class="muted">${esc(s.reason)}</p>`);
+  }
+}
+
+function effectChart(r) {
+  const lo = Math.min(-0.05, r.ci_low - 0.05), hi = Math.max(r.ci_high, r.min_effect) + 0.05;
+  const x = (v) => 20 + (v - lo) / (hi - lo) * 460;
+  return `<svg viewBox="0 0 500 60" width="100%" role="img" aria-label="effect with 95% interval">
+    <line x1="${x(0)}" x2="${x(0)}" y1="8" y2="44" stroke="currentColor" opacity=".4"/>
+    <line x1="${x(r.min_effect)}" x2="${x(r.min_effect)}" y1="8" y2="44" stroke="currentColor" stroke-dasharray="3 3" opacity=".6"/>
+    <line x1="${x(r.ci_low)}" x2="${x(r.ci_high)}" y1="26" y2="26" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="${x(r.effect)}" cy="26" r="6" fill="var(--accent)"/>
+    <text x="${x(0)}" y="57" text-anchor="middle">0</text>
+    <text x="${x(r.min_effect) + 4}" y="12">min effect ${r.min_effect}</text>
+    <text x="${x(r.effect)}" y="57" text-anchor="middle">${r.effect >= 0 ? "+" : ""}${r.effect.toFixed(2)}</text></svg>`;
+}
+
+function showCost(f) {
+  const rows = Object.entries(f.llm_calls || {}).map(([m, v]) =>
+    `<span>${esc(m.split("/").pop())}</span><span>${v.calls} calls · ${v.tokens_in + v.tokens_out} tokens · $${v.cost_usd.toFixed(4)}</span>`).join("");
+  $("costbody").innerHTML = `<div class="kv">${rows}<span>Nemotron total</span><span>$${(f.llm_cost_usd || 0).toFixed(4)}</span></div>`;
+  $("cost").hidden = false;
+}
+
+init();
+</script>
+</body>
+</html>

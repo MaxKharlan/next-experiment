@@ -1,0 +1,183 @@
+{
+  "title": "Fault 6 on Token Factory: learning rate too low",
+  "note": "Saved run of 2026-10-16: Qwen3-0.6B, causal check as 4 Post-training jobs, adapters scored on a MacBook.",
+  "case": {
+    "symptom": "After fine-tuning the model still answers like the base model: it writes free-form descriptions instead of the intent labels from the training data. Exact match on 50 held-out queries is 2%.",
+    "task": "classify banking queries into 77 intent labels, answer with the label",
+    "job": {
+      "model": "Qwen/Qwen3-0.6B",
+      "status": "succeeded",
+      "train_examples": 200,
+      "validation_examples": 50,
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 1e-05,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "epoch": 1,
+        "train_loss": 3.25,
+        "valid_loss": 2.79
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.66,
+        "valid_loss": 2.51
+      },
+      {
+        "epoch": 3,
+        "train_loss": 2.46,
+        "valid_loss": 2.45
+      }
+    ],
+    "findings": [
+      "valid_loss of the base model before training: 3.82",
+      "examples are 45 to 103 tokens long, far below context_length",
+      "no duplicates between train and validation"
+    ]
+  },
+  "report": {
+    "investigation_id": "tf-fault6",
+    "status": "confirmed",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "lr_too_low",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.4,
+        "rationale": "The job used the default learning_rate of 1e-5, which is below the typical ~1e-4 needed for LoRA adaptation. Although train loss decreased, the update magnitude may be too small to shift the model's output distribution toward the exact intent labels, leaving behavior close to the base model."
+      },
+      {
+        "id": "h2",
+        "fault_class": "chat_template_mismatch",
+        "location": "training data format (missing chat template)",
+        "prior": 0.3,
+        "rationale": "Qwen models expect a specific chat template during inference. If the fine‑tuning data were plain prompt‑label pairs without that template, the model learns to associate the raw prompt with the label but at inference the template adds extra tokens, causing it to ignore the label and generate free‑form text instead."
+      },
+      {
+        "id": "h3",
+        "fault_class": "contradictory_labels",
+        "location": "training examples (label column)",
+        "prior": 0.15,
+        "rationale": "If similar banking queries map to different intent labels in the data, the model receives conflicting supervision. This can prevent it from converging to a deterministic label output, resulting in vague or descriptive answers despite low loss."
+      },
+      {
+        "id": "h4",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.1,
+        "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for 77 distinct intents in a 0.6B model, causing the adapted weights to have limited expressive power and the model to retain base‑like behavior."
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "h3": 0.15,
+          "h4": 0.1,
+          "unlisted": 0.05
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lr_range",
+        "outcome": "low",
+        "gain_bits": 0.3463,
+        "raw": {
+          "learning_rate": 1e-05,
+          "low_below": 5e-05
+        },
+        "probs": {
+          "h1": 0.6786,
+          "h2": 0.1607,
+          "h3": 0.0804,
+          "h4": 0.0536,
+          "unlisted": 0.0268
+        },
+        "card": "The lr_range probe measured whether the configured learning rate lies within an effective range for LoRA fine‑tuning, comparing the actual value (1e-05) to a lower bound of a reasonable range (5e-05). It found the learning rate to be low, indicating it is below the threshold where noticeable weight updates occur. This result strengthens the lr_too_low hypothesis (h1) and weakens alternatives such as chat_template_mismatch (h2), contradictory_labels (h3), and lora_rank_too_small (h4), which do not predict a systematically low learning rate."
+      },
+      {
+        "kind": "intervention",
+        "hypothesis": "h1",
+        "reason": "h1 at 0.68",
+        "target": {
+          "hypothesis_id": "h1",
+          "kind": "target",
+          "patch": {
+            "learning_rate": 0.0001
+          },
+          "description": "learning_rate 1e-05 -> 0.0001",
+          "ft_job_ids": [
+            "ftjob-5aa5f03e1f884f4aaa7675df11d2395a",
+            "ftjob-abe4e163fe2447f392183d3bd54ec715"
+          ],
+          "metrics": [
+            0.5,
+            0.5
+          ]
+        },
+        "control": {
+          "hypothesis_id": "h1",
+          "kind": "control",
+          "patch": {},
+          "description": "the failed recipe again with new seeds",
+          "ft_job_ids": [
+            "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+            "ftjob-89ad5c411b944bb8a8c91fc0deea288b"
+          ],
+          "metrics": [
+            0.12,
+            0.12
+          ]
+        },
+        "result": {
+          "status": "confirmed",
+          "effect": 0.38,
+          "ci_low": 0.3513845258257152,
+          "ci_high": 0.4086154741742848,
+          "p_value": 0.16666666666666666,
+          "min_effect": 0.03,
+          "reason": "the fix beats the control beyond the noise"
+        }
+      }
+    ],
+    "verdict": {
+      "hypothesis_id": "h1",
+      "status": "confirmed",
+      "evidence": [
+        "probe:lr_range",
+        "intervention:h1"
+      ],
+      "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 1e-05,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+      "summary": "The learning rate was too low (1e-5) for LoRA adaptation. The causal check showed that increasing it to 1e-4 improved exact match by 0.38 (95% CI [0.35, 0.41]) over the control. Apply the patch to raise learning_rate to 0.0001."
+    },
+    "llm_cost_usd": 0.006953300000000001,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 2,
+        "tokens_in": 2028,
+        "tokens_out": 1521,
+        "cost_usd": 0.0019773,
+        "latency_ms": 10593
+      },
+      "nvidia/Nemotron-3-Ultra-550b-a55b": {
+        "calls": 1,
+        "tokens_in": 908,
+        "tokens_out": 1356,
+        "cost_usd": 0.004976,
+        "latency_ms": 3985
+      }
+    }
+  }
+}
