@@ -7,6 +7,7 @@ GET  /api/investigations              list investigations
 GET  /api/investigations/{id}         status, backend and case
 GET  /api/investigations/{id}/events  server-sent events: started, step..., finished
 GET  /api/demo-cases                  saved investigations that can be replayed
+POST /api/investigations/{id}/retrain approve or decline the proposed full retrain
 With PUBLIC_DEMO=true only replays are allowed.
 """
 
@@ -40,6 +41,10 @@ class StartRequest(BaseModel):
     delay_s: float = 1.5  # pause between replayed steps
 
 
+class Answer(BaseModel):
+    approve: bool
+
+
 @app.get("/")
 def screen() -> FileResponse:
     return FileResponse(STATIC / "index.html")
@@ -70,6 +75,24 @@ def start(req: StartRequest) -> dict:
         target, args = runners.live, (store, inv_id, req.backend)
     threading.Thread(target=target, args=args, daemon=True).start()
     return {"id": inv_id}
+
+
+@app.post("/api/investigations/{inv_id}/retrain")
+def answer_retrain(inv_id: str, answer: Answer) -> dict:
+    """The user's answer to the full retrain, the only level-3 step."""
+    if get_settings().public_demo:
+        raise HTTPException(403, "the public demo does not train models")
+    get_investigation(inv_id)
+    try:
+        waiting = store.resume(inv_id, answer.approve)
+    except ValueError as err:
+        raise HTTPException(409, str(err)) from None
+    threading.Thread(
+        target=runners.retrain,
+        args=(store, inv_id, waiting, answer.approve),
+        daemon=True,
+    ).start()
+    return {"id": inv_id, "approved": answer.approve}
 
 
 @app.get("/api/investigations")

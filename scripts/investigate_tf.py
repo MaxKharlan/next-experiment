@@ -4,12 +4,14 @@ Same case and loop as scripts/investigate_local.py, but each arm of a causal che
 trains as a Post-training job on Token Factory. The adapter of the last checkpoint
 is downloaded to artifacts/ and scored by exact match on this MacBook. For
 Qwen3-0.6B with 200 examples and 3 epochs a pair with 2 seeds is 4 jobs, about $0.06
-and 10 to 20 minutes when Token Factory has free capacity.
+and 10 to 20 minutes when Token Factory has free capacity. A confirmed fix ends with
+the proposal of the full retrain; scripts/retrain_tf.py runs it after approval.
 """
 
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 from pathlib import Path
 
 from core.agent.context import InvestigationContext
@@ -20,10 +22,12 @@ from core.connectors.storage import LocalStorage
 from core.connectors.tavily import Tavily
 from core.connectors.token_factory import TokenFactory
 from core.interventions.pairs import Intervention
+from core.interventions.retrain import RetrainPlan
 from core.interventions.tf_runner import TokenFactoryPairRunner
 from core.planner.job_cost import estimate_job
 from core.telemetry.calls import CallLog
 from jobs.eval_local.exact_match import evaluate_adapter
+from scripts.retrain_tf import describe, propose
 from scripts.smoke_agent_steps import CASE, JOB_HP
 
 
@@ -74,7 +78,15 @@ def main() -> None:
     if tavily is None:
         print("TAVILY_API_KEY is not set: no known-issues step")
     result = investigate(
-        ctx, CASE, router, run_pair, intervention_cost_usd=pair_cost, tavily=tavily
+        ctx,
+        CASE,
+        router,
+        run_pair,
+        intervention_cost_usd=pair_cost,
+        tavily=tavily,
+        propose_retrain=lambda target, control: asdict(
+            propose(target, control, model=args.model, train=Path(args.train))
+        ),
     )
     for step in result.steps:
         if step["kind"] == "known_issues":
@@ -99,7 +111,13 @@ def main() -> None:
     print(
         f"LLM cost ${result.llm_cost_usd:.4f}, training about ${pair_cost:.3f} a pair"
     )
-    print(f"Report: {result.save(storage)}")
+    report = result.save(storage)
+    print(f"Report: {report}")
+    if result.retrain_plan:
+        print(describe(RetrainPlan(**result.retrain_plan)))
+        print(
+            f"Approve and run it: python -m scripts.retrain_tf --report artifacts/{report}"
+        )
 
 
 if __name__ == "__main__":

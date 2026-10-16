@@ -47,3 +47,7 @@ A job that got a GPU right away finished in 7 to 17 minutes and was easy to insp
 ## 2026-10-16 · Token Factory · the job seed has no effect
 
 Two Qwen3-0.6B LoRA jobs with the same data and hyperparameters and `seed` 0 and 1 (ftjob-5aa5f03e…, ftjob-abe4e163…) produced identical checkpoints: train_loss 1.1466, 0.3383, 0.1066 and valid_loss 0.677, 0.5472, 1.0787 in both, and the same exact match. The same held for the pair at learning rate 1e-5. The API stores and returns the seed, so it looks applied. We expected different data order or initialization per seed; to get independent repeats we now shuffle the training file ourselves.
+
+## 2026-10-16 · Token Factory · training is reproducible to the bit
+
+A Qwen3-0.6B LoRA job submitted in the evening (ftjob-ee9302e1…) used the same training file bytes and hyperparameters as a job from the morning (ftjob-5aa5f03e…). Its `adapter_model.safetensors` has the same SHA-256, so its exact match on a 200-query held-out set is the same too, 0.425. This is useful: a saved run can be reproduced exactly, and a benchmark rerun gives the same numbers. Together with the ignored `seed`, it also means repeats of a job differ only if their data does. We have not yet checked whether Token Factory keeps the order of the lines in the training file, which our per-seed shuffling relies on. We expected a working `seed` for repeats.

@@ -120,3 +120,22 @@ def test_data_fraction_uploads_a_subset(tmp_path):
 def test_failed_job_stops_the_check(tmp_path):
     with pytest.raises(RuntimeError, match="ftjob-1 ended failed"):
         _runner(FakeTF(fail="ftjob-1"), tmp_path, SCORES)(*_pair())
+
+
+class SameWeightsTF(FakeTF):
+    """Every checkpoint of an arm has the same weights, as with an unshuffled file."""
+
+    def download_checkpoint(self, checkpoint, storage, prefix):
+        keys = super().download_checkpoint(checkpoint, storage, prefix)
+        arm = self.created[checkpoint.id.removeprefix("ck-")]["suffix"].split("-")[2]
+        weights = keys[0].rsplit("/", 1)[0] + "/adapter_model.safetensors"
+        storage.put_bytes(weights, arm.encode())
+        return keys
+
+
+def test_identical_weights_across_seeds_are_reported(tmp_path, capsys):
+    target, control = _pair()
+    _runner(SameWeightsTF(), tmp_path, SCORES)(target, control)
+    out = capsys.readouterr().out
+    assert "target seeds 0 and 1 trained identical weights" in out
+    assert "control seeds 0 and 1 trained identical weights" in out

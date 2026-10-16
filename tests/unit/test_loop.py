@@ -150,3 +150,30 @@ def test_steps_are_streamed_as_they_happen():
     )
     assert seen == result.steps
     assert seen[0]["hypotheses"][0]["fault_class"] == "lr_too_low"
+
+
+def test_confirmed_fix_ends_with_the_retrain_proposal():
+    router = FakeRouter([_hyp("h1", "lr_too_low", 0.6)])
+    run_pair, _ = _runner({"h1": ([0.16, 0.20], [0.02, 0.02])})
+    asked = []
+
+    def propose(target, control):
+        asked.append((target.patch, control.patch))
+        return {"cost_usd": 0.014}
+
+    result = investigate(
+        _ctx(), {}, router, run_pair, explain=False, propose_retrain=propose
+    )
+    assert asked == [({"learning_rate": 1e-4}, {})]
+    assert result.steps[-1] == {"kind": "retrain_proposal", "cost_usd": 0.014}
+    assert json.loads(result.to_json())["retrain_plan"] == {"cost_usd": 0.014}
+
+
+def test_no_proposal_without_a_confirmed_fix():
+    router = FakeRouter([_hyp("h1", "chat_template_mismatch", 0.8)])
+    run_pair, _ = _runner({})
+    result = investigate(
+        _ctx(), {}, router, run_pair, explain=False, propose_retrain=lambda t, c: {}
+    )
+    assert result.retrain_plan is None
+    assert "retrain_proposal" not in [s["kind"] for s in result.steps]

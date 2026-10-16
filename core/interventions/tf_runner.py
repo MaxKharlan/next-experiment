@@ -8,10 +8,15 @@ successful job the last checkpoint is downloaded into local storage and scored b
 is injected (jobs/eval_local/exact_match.py on a MacBook), so this module needs no
 torch. Job IDs are saved under <prefix>/jobs.json as they are created, so a rerun
 waits for the same jobs instead of paying for new ones.
+
+Training on Token Factory is deterministic: the same file and hyperparameters give a
+byte-identical adapter. If two seeds of an arm still train identical weights, the
+seeds add no variance, and the runner says so.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import random
 import time
@@ -76,14 +81,29 @@ class TokenFactoryPairRunner:
                 runs.append((arm, seed, state[name]))
         self.storage.put_text(state_key, json.dumps(state, indent=2))
 
-        finished = self._wait({job_id for _, _, job_id in runs})
+        finished = wait_for_jobs(
+            self.tf,
+            {job_id for _, _, job_id in runs},
+            poll_s=self.poll_s,
+            timeout_s=self.timeout_s,
+            sleep=self.sleep,
+        )
+        weights: dict[tuple[str, str], int] = {}  # (arm, sha256) -> first seed
         for arm, seed, job_id in runs:
             job = finished[job_id]
             if job.status != "succeeded":
                 raise RuntimeError(f"{job_id} ended {job.status}: {job.error}")
-            last = max(self.tf.checkpoints(job_id), key=lambda c: c.step_number)
-            keys = self.tf.download_checkpoint(last, self.storage, self.prefix)
-            adapter_dir = self.storage.root / Path(keys[0]).parent
+            adapter_dir = download_last_checkpoint(
+                self.tf, self.storage, job_id, self.prefix
+            )
+            digest = weights_digest(adapter_dir)
+            if digest and (arm.kind, digest) in weights:
+                print(
+                    f"warning: {arm.kind} seeds {weights[arm.kind, digest]} and {seed} "
+                    "trained identical weights, so they add no variance",
+                    flush=True,
+                )
+            weights.setdefault((arm.kind, digest), seed)
             arm.metrics.append(self.evaluate(adapter_dir))
             arm.ft_job_ids.append(job_id)
             print(
@@ -99,21 +119,45 @@ class TokenFactoryPairRunner:
         self.storage.put_text(key, "\n".join(rows) + "\n")
         return self.storage.root / key
 
-    def _wait(self, job_ids: set[str]) -> dict[str, Any]:
-        deadline = time.monotonic() + self.timeout_s
-        finished: dict[str, Any] = {}
-        seen: dict[str, tuple] = {}
-        while len(finished) < len(job_ids):
-            for job_id in sorted(job_ids - set(finished)):
-                job = self.tf.job(job_id)
-                now = (job.status, job.trained_steps, job.total_steps)
-                if seen.get(job_id) != now:
-                    print(f"{job_id}: {job.status} steps {now[1]}/{now[2]}", flush=True)
-                    seen[job_id] = now
-                if job.status in TERMINAL_STATUSES:
-                    finished[job_id] = job
-            if len(finished) < len(job_ids):
-                if time.monotonic() > deadline:
-                    raise TimeoutError(f"jobs still running: {job_ids - set(finished)}")
-                self.sleep(self.poll_s)
-        return finished
+
+def wait_for_jobs(
+    tf: TokenFactory,
+    job_ids: set[str],
+    *,
+    poll_s: float = 30,
+    timeout_s: float = 3 * 3600,
+    sleep: Callable[[float], None] = time.sleep,
+) -> dict[str, Any]:
+    """Poll the jobs until each has ended; prints every change of status or steps."""
+    deadline = time.monotonic() + timeout_s
+    finished: dict[str, Any] = {}
+    seen: dict[str, tuple] = {}
+    while len(finished) < len(job_ids):
+        for job_id in sorted(job_ids - set(finished)):
+            job = tf.job(job_id)
+            now = (job.status, job.trained_steps, job.total_steps)
+            if seen.get(job_id) != now:
+                print(f"{job_id}: {job.status} steps {now[1]}/{now[2]}", flush=True)
+                seen[job_id] = now
+            if job.status in TERMINAL_STATUSES:
+                finished[job_id] = job
+        if len(finished) < len(job_ids):
+            if time.monotonic() > deadline:
+                raise TimeoutError(f"jobs still running: {job_ids - set(finished)}")
+            sleep(poll_s)
+    return finished
+
+
+def weights_digest(adapter_dir: Path) -> str:
+    """SHA-256 of the adapter weights, or "" when the checkpoint has none."""
+    path = adapter_dir / "adapter_model.safetensors"
+    return hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else ""
+
+
+def download_last_checkpoint(
+    tf: TokenFactory, storage: LocalStorage, job_id: str, prefix: str
+) -> Path:
+    """The job's last checkpoint in local storage; returns its directory."""
+    last = max(tf.checkpoints(job_id), key=lambda c: c.step_number)
+    keys = tf.download_checkpoint(last, storage, prefix)
+    return storage.root / Path(keys[0]).parent
