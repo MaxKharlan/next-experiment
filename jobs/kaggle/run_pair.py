@@ -13,13 +13,56 @@ import argparse
 import json
 from dataclasses import asdict
 from pathlib import Path
+from typing import Any
 
 from bench.faults.recipe import HEALTHY_HP, STRENGTHS
 from core.agent.context import InvestigationContext
 from core.agent.schemas import Hypothesis
-from core.interventions.pairs import make_pair, take_fraction
+from core.interventions.pairs import Intervention, make_pair, take_fraction
 from core.interventions.stats import causal_check
 from jobs.kaggle.train_lora import read_jsonl, train
+
+
+def train_arm(
+    arm: Intervention,
+    base: dict[str, Any],
+    train_path: str | Path,
+    valid_path: str | Path,
+    out: Path,
+    seeds: list[int],
+    model: str = "Qwen/Qwen3-0.6B",
+) -> None:
+    """Train one arm per seed and append each exact match to arm.metrics.
+
+    Runs with a summary.json under out/<kind>-s<seed>/ are reused, not retrained.
+    """
+    print(f"{arm.kind}: {arm.description}", flush=True)
+    train_path = Path(train_path)
+    if arm.data_fraction < 1:
+        subset = take_fraction(read_jsonl(train_path), arm.data_fraction)
+        train_path = out / f"{arm.kind}-train.jsonl"
+        train_path.parent.mkdir(parents=True, exist_ok=True)
+        train_path.write_text(
+            "".join(json.dumps(r) + "\n" for r in subset), encoding="utf-8"
+        )
+    for seed in seeds:
+        run_dir = out / f"{arm.kind}-s{seed}"
+        summary_path = run_dir / "summary.json"
+        if summary_path.exists():
+            summary = json.loads(summary_path.read_text())
+        else:
+            summary = train(
+                train_path,
+                valid_path,
+                run_dir,
+                model_id=model,
+                hp=arm.hyperparameters(base),
+                seed=seed,
+                generate=True,
+            )
+        arm.metrics.append(summary["final"]["exact_match"])
+        arm.ft_job_ids.append(f"local:{run_dir}")
+        print(f"  seed {seed}: exact match {arm.metrics[-1]:.2f}", flush=True)
 
 
 def main() -> None:
@@ -53,37 +96,10 @@ def main() -> None:
         prior=0.5,
         rationale="set from the command line",
     )
-    arms = make_pair(hypothesis, ctx)
-    rows = read_jsonl(args.train)
-    for arm in arms:
-        print(f"{arm.kind}: {arm.description}", flush=True)
-        train_path = Path(args.train)
-        if arm.data_fraction < 1:
-            train_path = out / f"{arm.kind}-train.jsonl"
-            train_path.parent.mkdir(parents=True, exist_ok=True)
-            subset = take_fraction(rows, arm.data_fraction)
-            train_path.write_text(
-                "".join(json.dumps(r) + "\n" for r in subset), encoding="utf-8"
-            )
-        for seed in args.seeds:
-            run_dir = out / f"{arm.kind}-s{seed}"
-            summary_path = run_dir / "summary.json"
-            if summary_path.exists():
-                summary = json.loads(summary_path.read_text())
-            else:
-                summary = train(
-                    train_path,
-                    args.valid,
-                    run_dir,
-                    model_id=args.model,
-                    hp=arm.hyperparameters(base),
-                    seed=seed,
-                    generate=True,
-                )
-            arm.metrics.append(summary["final"]["exact_match"])
-            print(f"  seed {seed}: exact match {arm.metrics[-1]:.2f}", flush=True)
+    target, control = make_pair(hypothesis, ctx)
+    for arm in (target, control):
+        train_arm(arm, base, args.train, args.valid, out, args.seeds, args.model)
 
-    target, control = arms
     result = causal_check(
         target.metrics,
         control.metrics,

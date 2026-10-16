@@ -1,0 +1,30 @@
+# Signature table: P(probe outcome | fault class) for each probe.
+# A class missing under a probe uses that probe's "default" row; "unlisted" stands
+# for causes outside the hypothesis list. The numbers are first guesses, to be
+# calibrated on dev cases (O3). Rows add up to 1.
+
+lr_range:
+  # learning_rate below 5e-5. Token Factory's default is 1e-5, so a low rate also
+  # shows up in jobs that failed for other reasons.
+  lr_too_low: {low: 0.95, ok: 0.05}
+  default: {low: 0.30, ok: 0.70}
+
+epoch_count:
+  # n_epochs of 5 or more
+  too_many_epochs: {high: 0.85, ok: 0.15}
+  default: {high: 0.20, ok: 0.80}
+
+lora_rank:
+  # lora_r of 4 or less
+  lora_rank_too_small: {low: 0.85, ok: 0.15}
+  default: {low: 0.10, ok: 0.90}
+
+loss_curve:
+  # barely_moved: train_loss fell by less than half from the first checkpoint
+  # overfit: train_loss fell by more than half and valid_loss ends 20% above its minimum
+  lr_too_low: {barely_moved: 0.80, overfit: 0.02, normal: 0.18}
+  too_many_epochs: {barely_moved: 0.05, overfit: 0.60, normal: 0.35}
+  lora_rank_too_small: {barely_moved: 0.30, overfit: 0.10, normal: 0.60}
+  contradictory_labels: {barely_moved: 0.40, overfit: 0.10, normal: 0.50}
+  train_val_overlap: {barely_moved: 0.05, overfit: 0.05, normal: 0.90}
+  default: {barely_moved: 0.20, overfit: 0.10, normal: 0.70}
