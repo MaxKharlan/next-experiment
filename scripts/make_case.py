@@ -1,20 +1,30 @@
-"""Turn a finished Token Factory job into a benchmark case.
+"""Turn finished Token Factory jobs into benchmark cases.
 
-Reads the job's hyperparameters and the train_loss and valid_loss of each checkpoint,
+Reads a job's hyperparameters and the train_loss and valid_loss of each checkpoint,
 scores the last checkpoint on the held-out set on this MacBook and writes
-bench/cases/<split>/<id>.json. --truth names the injected faults; leave it out for a
-healthy job. The symptom quotes the measured exact match and a few wrong answers,
-so a healthy job comes with a complaint too: the methods have to tell a fault from
-a hard task.
+bench/cases/<split>/<id>.json. The symptom quotes the measured exact match and a few
+wrong answers, so a healthy job comes with a complaint too: the methods have to tell
+a fault from a hard task.
+
+One job: make_case <job id> --id <case id> [--truth <fault class>...]; leave out
+--truth for a healthy job. A whole fault sweep: make_case --from-sweep
+<dir>/results.jsonl (scripts/tf_fault_sweep.py), which names the cases after the
+fault number and strength. A fault that leaves the held-out metric within the
+tolerance of the task's reference does not hurt on this task, so it is reported and
+not saved: such a job is not a failure to diagnose.
 """
 
 from __future__ import annotations
 
 import argparse
+import json
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any, get_args
 
 from bench.cases import BenchCase
+from bench.fixes import TOLERANCE, reference_metric
+from core.agent.catalog import FAULTS
 from core.agent.schemas import FaultClass
 from core.connectors.storage import LocalStorage
 from core.connectors.token_factory import TokenFactory
@@ -53,11 +63,90 @@ def symptom(metric: float, examples: int, wrong: list[dict[str, str]]) -> str:
     )
 
 
+# (adapter directory, data file, list for wrong answers) -> exact match
+Score = Callable[[Path, str, list[dict[str, str]]], float]
+
+
+def build_case(
+    tf: TokenFactory,
+    storage: LocalStorage,
+    score: Score,
+    job_id: str,
+    case_id: str,
+    truth: list[str],
+    args: argparse.Namespace,
+) -> BenchCase:
+    job = tf.job(job_id)
+    if job.status != "succeeded":
+        raise ValueError(f"{job_id} is {job.status}")
+    hp = job.hyperparameters.model_dump(exclude_none=True)
+    hp = {k: v for k, v in hp.items() if k not in TF_LORA}
+    adapter = download_last_checkpoint(tf, storage, job_id, f"bench/cases/{case_id}")
+    wrong: list[dict[str, str]] = []
+    metric = score(adapter, args.heldout, wrong)
+    shown = wrong[: args.errors]
+    return BenchCase(
+        id=case_id,
+        split=args.split,
+        task=args.task,
+        model=job.model,
+        truth=truth,
+        hyperparameters=hp,
+        case={
+            "symptom": symptom(metric, count_rows(Path(args.heldout)), shown),
+            "task": TASKS[args.task]["task"],
+            "job": {
+                "model": job.model,
+                "status": job.status,
+                "train_examples": count_rows(Path(args.train)),
+                "validation_examples": count_rows(Path(args.valid)),
+                "hyperparameters": hp,
+            },
+            "checkpoints": checkpoints(tf, job_id),
+            "findings": TASKS[args.task]["findings"],
+            "wrong_answers": shown,
+        },
+        train=args.train,
+        valid=args.valid,
+        heldout=args.heldout,
+        job_id=job_id,
+        heldout_metric=metric,
+        reports=args.report,
+    )
+
+
+def sweep_cases(
+    rows: list[dict[str, Any]], prefix: str = ""
+) -> list[tuple[str, str, list[str]]]:
+    """(case ID, job ID, truth) for each finished run of tf_fault_sweep.py."""
+    numbers = {f.fault_class: f.number for f in FAULTS}
+    out = []
+    for r in rows:
+        if r["status"] != "succeeded":
+            continue
+        if r["fault"] is None:
+            name, truth = "healthy", []
+        else:
+            level = r["run"].split("-")[1]  # e.g. lr_too_low-mild-s0
+            name, truth = f"fault{numbers[r['fault']]}-{level}", [r["fault"]]
+        out.append((f"{prefix}{name}-s{r['seed']}", r["job_id"], truth))
+    return out
+
+
+def hurts(case: BenchCase, reference: float | None) -> bool:
+    """A fault case must fall below the reference by more than the tolerance."""
+    if case.healthy or reference is None:
+        return True
+    return case.heldout_metric < reference - TOLERANCE
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("job_id")
-    parser.add_argument("--id", required=True, help="e.g. fault6-lr1e-5")
+    parser.add_argument("job_id", nargs="?")
+    parser.add_argument("--id", help="case ID for one job, e.g. fault6-lr1e-5")
     parser.add_argument("--truth", nargs="*", default=[], choices=FAULT_CLASSES)
+    parser.add_argument("--from-sweep", help="results.jsonl of tf_fault_sweep.py")
+    parser.add_argument("--prefix", default="", help="for sweep case IDs, e.g. ref-")
     parser.add_argument("--split", default="dev", choices=["dev", "heldout"])
     parser.add_argument("--task", default="banking77", choices=TASKS)
     parser.add_argument("--train", default="artifacts/b6/train.jsonl")
@@ -66,54 +155,30 @@ def main() -> None:
     parser.add_argument("--errors", type=int, default=5, help="wrong answers to show")
     parser.add_argument("--report", action="append", default=[])
     args = parser.parse_args()
+    if args.from_sweep:
+        lines = Path(args.from_sweep).read_text(encoding="utf-8").splitlines()
+        todo = sweep_cases([json.loads(x) for x in lines if x], args.prefix)
+    elif args.job_id and args.id:
+        todo = [(args.id, args.job_id, args.truth)]
+    else:
+        parser.error("give a job ID with --id, or --from-sweep")
 
     from jobs.eval_local.exact_match import evaluate_adapter
 
+    def score(adapter: Path, data: str, wrong: list[dict[str, str]]) -> float:
+        return evaluate_adapter(adapter, data, wrong=wrong)
+
     tf, storage = TokenFactory.from_settings(), LocalStorage("artifacts")
-    job = tf.job(args.job_id)
-    if job.status != "succeeded":
-        raise SystemExit(f"{args.job_id} is {job.status}")
-    hp = job.hyperparameters.model_dump(exclude_none=True)
-    hp = {k: v for k, v in hp.items() if k not in TF_LORA}
-    adapter = download_last_checkpoint(
-        tf, storage, args.job_id, f"bench/cases/{args.id}"
-    )
-    wrong: list[dict[str, str]] = []
-    metric = evaluate_adapter(adapter, args.heldout, wrong=wrong)
-    examples = count_rows(Path(args.heldout))
-    train_examples = count_rows(Path(args.train))
-    valid_examples = count_rows(Path(args.valid))
-    shown = wrong[: args.errors]
-    case = BenchCase(
-        id=args.id,
-        split=args.split,
-        task=args.task,
-        model=job.model,
-        truth=args.truth,
-        hyperparameters=hp,
-        case={
-            "symptom": symptom(metric, examples, shown),
-            "task": TASKS[args.task]["task"],
-            "job": {
-                "model": job.model,
-                "status": job.status,
-                "train_examples": train_examples,
-                "validation_examples": valid_examples,
-                "hyperparameters": hp,
-            },
-            "checkpoints": checkpoints(tf, args.job_id),
-            "findings": TASKS[args.task]["findings"],
-            "wrong_answers": shown,
-        },
-        train=args.train,
-        valid=args.valid,
-        heldout=args.heldout,
-        job_id=args.job_id,
-        heldout_metric=metric,
-        reports=args.report,
-    )
-    print(f"{args.id}: exact match {metric:.3f} on {examples} held-out queries")
-    print(f"Case: {case.save()}")
+    for case_id, job_id, truth in todo:
+        case = build_case(tf, storage, score, job_id, case_id, truth, args)
+        reference = reference_metric(case.task, case.model)
+        line = f"{case_id}: exact match {case.heldout_metric:.3f}"
+        if reference is not None:
+            line += f", reference {reference:.3f}"
+        if not hurts(case, reference):
+            print(f"{line}: the fault does not hurt on this task, not saved")
+            continue
+        print(f"{line}. Case: {case.save()}")
 
 
 if __name__ == "__main__":

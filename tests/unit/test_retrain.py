@@ -187,5 +187,5 @@ def test_validation_file_stands_in_for_a_missing_heldout_set(tmp_path):
 
 
 def test_yes_on_a_russian_layout_counts_too():
-    assert all(approved(a) for a in ["y", "Yes ", "\u0443", "да"])
+    assert all(approved(a) for a in ["y", "Yes ", "\u0443", "да", "\udcd0y"])
     assert not any(approved(a) for a in ["", "n", "нет", "\u043d"])

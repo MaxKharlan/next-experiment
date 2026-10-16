@@ -103,7 +103,10 @@ def make_retrainer(
 
 
 def approved(answer: str) -> bool:
-    return answer.strip().lower() in YES
+    # a terminal can send a stray byte with the answer, e.g. "\udcd0y" when the
+    # keyboard layout was switched; drop what is not text
+    text = answer.encode("utf-8", "ignore").decode("utf-8")
+    return text.strip().lower() in YES
 
 
 def describe(plan: RetrainPlan) -> str:
