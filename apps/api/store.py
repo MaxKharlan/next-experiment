@@ -4,6 +4,10 @@ Each investigation has investigations/<id>/meta.json (status, backend, case) and
 investigations/<id>/events.jsonl. Runners in background threads call emit(); the
 SSE endpoint reads events_since(). Storage can be local or the bucket, so finished
 investigations survive a restart of the app.
+
+An investigation that proposes the full retrain waits in "awaiting_approval" until
+the user answers; resume() takes the answer once and returns the plan. A restart
+keeps it waiting, because nothing was running.
 """
 
 from __future__ import annotations
@@ -17,6 +21,7 @@ from typing import Any
 from core.connectors.storage import Storage
 
 TERMINAL = {"finished", "failed"}
+WAITING = "awaiting_approval"
 
 
 class InvestigationStore:
@@ -46,9 +51,9 @@ class InvestigationStore:
         with self.lock:
             events = self.events[inv_id]
             events.append({"seq": len(events), "type": kind, "data": data})
-            if kind == "started":
+            if kind in ("started", "resumed"):
                 self.meta[inv_id]["status"] = "running"
-            elif kind in TERMINAL:
+            elif kind in TERMINAL or kind == WAITING:
                 self.meta[inv_id]["status"] = kind
         self._save(inv_id)
 
@@ -56,6 +61,19 @@ class InvestigationStore:
         self._load(inv_id)
         with self.lock:
             return list(self.events[inv_id][seq:])
+
+    def resume(self, inv_id: str, approved: bool) -> dict[str, Any]:
+        """Take the user's answer to a waiting proposal; returns what was waiting."""
+        self._load(inv_id)
+        with self.lock:
+            if self.meta[inv_id]["status"] != WAITING:
+                raise ValueError(f"{inv_id} is not waiting for approval")
+            self.meta[inv_id]["status"] = "running"  # a second answer finds it taken
+            waiting = next(
+                e["data"] for e in reversed(self.events[inv_id]) if e["type"] == WAITING
+            )
+        self.emit(inv_id, "resumed", {"approved": approved})
+        return waiting
 
     def is_done(self, inv_id: str) -> bool:
         return self.get(inv_id)["status"] in TERMINAL
@@ -89,7 +107,7 @@ class InvestigationStore:
         if not self.storage.exists(key):
             raise KeyError(inv_id)
         meta = json.loads(self.storage.get_text(key))
-        if meta["status"] not in TERMINAL:
+        if meta["status"] not in TERMINAL and meta["status"] != WAITING:
             # it was running in an app process that has stopped since
             meta["status"] = "failed"
         lines = self.storage.get_text(f"investigations/{inv_id}/events.jsonl")

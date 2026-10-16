@@ -4,7 +4,8 @@ A stand-in for core/eval (A13). Loads the base model named in adapter_config.jso
 applies the LoRA weights from a directory (a Token Factory checkpoint or a
 train_lora.py run) and compares greedy answers with the reference. If the
 checkpoint has a chat_template.jinja, that template is used, so prompts match
-training.
+training. evaluate_base scores the base model without an adapter, prompted with
+the same template, for the comparison of three models (B18).
 
 Token Factory saves weight names without PEFT's "base_model.model." prefix, so
 PeftModel.from_pretrained would skip them all. Its configs also set
@@ -24,7 +25,7 @@ from peft import LoraConfig, get_peft_model, set_peft_model_state_dict
 from safetensors.torch import load_file
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from jobs.kaggle.train_lora import exact_match, pick_device, read_jsonl
+from jobs.kaggle.train_lora import exact_match, free_cache, pick_device, read_jsonl
 
 PREFIX = "base_model.model."
 
@@ -50,6 +51,15 @@ def load_adapter(adapter_dir: Path, base_model: str) -> Any:
     return model
 
 
+def load_tokenizer(base_model: str, template_dir: Path | None = None) -> Any:
+    """The base model's tokenizer, with the chat template of a checkpoint if it has one."""
+    tok = AutoTokenizer.from_pretrained(base_model)
+    template = template_dir / "chat_template.jinja" if template_dir else None
+    if template is not None and template.exists():
+        tok.chat_template = template.read_text(encoding="utf-8")
+    return tok
+
+
 def evaluate_adapter(
     adapter_dir: str | Path,
     valid_path: str | Path,
@@ -60,12 +70,29 @@ def evaluate_adapter(
     config = json.loads((adapter_dir / "adapter_config.json").read_text())
     base_model = base_model or config["base_model_name_or_path"]
     device = pick_device(device)
-    tok = AutoTokenizer.from_pretrained(base_model)
-    template = adapter_dir / "chat_template.jinja"
-    if template.exists():
-        tok.chat_template = template.read_text(encoding="utf-8")
+    tok = load_tokenizer(base_model, adapter_dir)
     model = load_adapter(adapter_dir, base_model).to(device)
-    return exact_match(model, tok, read_jsonl(valid_path), device)
+    score = exact_match(model, tok, read_jsonl(valid_path), device)
+    del model
+    free_cache(device)
+    return score
+
+
+def evaluate_base(
+    base_model: str,
+    valid_path: str | Path,
+    template_dir: str | Path | None = None,
+    device: str = "auto",
+) -> float:
+    """The base model without an adapter, prompted like the adapters it is compared to."""
+    device = pick_device(device)
+    tok = load_tokenizer(base_model, Path(template_dir) if template_dir else None)
+    model = AutoModelForCausalLM.from_pretrained(base_model, dtype=torch.float32)
+    model = model.to(device)
+    score = exact_match(model, tok, read_jsonl(valid_path), device)
+    del model
+    free_cache(device)
+    return score
 
 
 def main() -> None:

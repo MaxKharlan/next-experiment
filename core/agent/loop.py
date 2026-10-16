@@ -10,6 +10,9 @@
    Factory), causal_check. A leader that is not confirmed leaves the list and the
    loop goes on.
 4. Ultra writes the verdict for a confirmed hypothesis.
+5. With propose_retrain, the confirmed fix comes with a proposal of the full retrain
+   and its price. The loop stops there: the retrain is a level-3 step and starts
+   only after the user approves it (core/interventions/retrain.py).
 """
 
 from __future__ import annotations
@@ -37,6 +40,8 @@ from core.probes.level0.recipe import LEVEL0
 
 # trains both arms of a pair and fills their metrics, one value per seed
 RunPair = Callable[[Intervention, Intervention], None]
+# (target, control) of the confirmed check -> the retrain plan to propose, or None
+ProposeRetrain = Callable[[Intervention, Intervention], dict[str, Any] | None]
 
 
 @dataclass
@@ -48,6 +53,7 @@ class InvestigationResult:
     verdict: Verdict | None = None
     llm_cost_usd: float = 0.0
     llm_calls: dict[str, dict[str, Any]] = field(default_factory=dict)
+    retrain_plan: dict[str, Any] | None = None
 
     def to_json(self) -> str:
         data = {
@@ -58,6 +64,7 @@ class InvestigationResult:
             "verdict": self.verdict.model_dump() if self.verdict else None,
             "llm_cost_usd": self.llm_cost_usd,
             "llm_calls": self.llm_calls,
+            "retrain_plan": self.retrain_plan,
         }
         return json.dumps(data, indent=2)
 
@@ -85,6 +92,7 @@ def investigate(
     explain: bool = True,
     tavily: Tavily | None = None,
     on_step: Callable[[dict[str, Any]], None] | None = None,
+    propose_retrain: ProposeRetrain | None = None,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
     steps: list[dict[str, Any]] = []
@@ -190,6 +198,7 @@ def investigate(
                 "target": asdict(target),
                 "control": asdict(control),
                 "result": asdict(check),
+                "cost_usd": intervention_cost_usd,
             }
         )
         if check.status == "confirmed":
@@ -198,6 +207,10 @@ def investigate(
             )
             result.status = "confirmed"
             add({"kind": "verdict", **result.verdict.model_dump()})
+            plan = propose_retrain(target, control) if propose_retrain else None
+            if plan is not None:
+                result.retrain_plan = plan
+                add({"kind": "retrain_proposal", **plan})
             break
         # not confirmed: drop the leader and spread its mass over the rest
         testable.discard(leader.id)

@@ -64,6 +64,12 @@
   .job { color: var(--muted); font-size: 11px; word-break: break-all; font-family: ui-monospace, monospace; }
   svg text { fill: var(--muted); font-size: 11px; }
   .empty { color: var(--muted); text-align: center; padding: 40px 0; }
+  .approval { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+  button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .model { margin: 8px 0; }
+  .model.base .bar { background: var(--muted); }
+  .model.failed .bar { background: var(--bad); }
+  .model.fixed .bar { background: var(--good); }
 </style>
 </head>
 <body>
@@ -90,7 +96,7 @@
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 const pct = (p) => `${Math.round(p * 100)}%`;
-let hyps = {}, probs = {}, out = new Set(), source = null;
+let hyps = {}, probs = {}, out = new Set(), source = null, current = null, trainingUsd = 0;
 
 async function init() {
   const cases = await (await fetch("/api/demo-cases")).json();
@@ -113,7 +119,7 @@ $("start").onclick = async () => {
 $("past").onchange = (e) => { if (e.target.value) { history.replaceState(null, "", `?id=${e.target.value}`); watch(e.target.value); } };
 
 function reset() {
-  hyps = {}; probs = {}; out = new Set();
+  hyps = {}; probs = {}; out = new Set(); trainingUsd = 0;
   $("feed").innerHTML = ""; $("board").innerHTML = '<div class="muted">No hypotheses yet.</div>';
   $("cost").hidden = true;
 }
@@ -121,10 +127,13 @@ function reset() {
 function watch(id) {
   if (source) source.close();
   reset();
+  current = id;
   source = new EventSource(`/api/investigations/${id}/events`);
   source.addEventListener("started", e => showCase(JSON.parse(e.data).case));
   source.addEventListener("step", e => showStep(JSON.parse(e.data)));
   source.addEventListener("finished", e => { showCost(JSON.parse(e.data)); done(); });
+  source.addEventListener("awaiting_approval", e => { const d = JSON.parse(e.data); showCost(d.summary); askApproval(d.plan); });
+  source.addEventListener("resumed", e => setApproval(JSON.parse(e.data).approved ? "Approved" : "Declined"));
   source.addEventListener("failed", e => { card("Error", "The investigation stopped", `<pre>${esc(JSON.parse(e.data).error)}</pre>`); done(); });
 }
 function done() { source.close(); $("start").disabled = false; }
@@ -175,6 +184,7 @@ function showStep(s) {
     card(`Check · ${Number(s.gain_bits).toFixed(2)} bits expected`, `${esc(s.probe)} → ${esc(s.outcome)}`,
          `${s.card ? `<p>${esc(s.card)}</p>` : ""}<p class="muted">Raw: ${esc(JSON.stringify(s.raw))}</p>`);
   } else if (s.kind === "intervention") {
+    trainingUsd += s.cost_usd || 0;
     const r = s.result, t = s.target, c = s.control;
     const jobs = (a) => (a.ft_job_ids || []).map(j => `<div class="job">${esc(j)}</div>`).join("");
     const name = hyps[s.hypothesis] ? hyps[s.hypothesis].fault_class : s.hypothesis;
@@ -184,12 +194,62 @@ function showStep(s) {
        ${effectChart(r)}<p class="muted">Effect ${r.effect.toFixed(3)}, 95% interval ${r.ci_low.toFixed(3)} to ${r.ci_high.toFixed(3)}; needed at least ${r.min_effect}. ${esc(r.reason.charAt(0).toUpperCase() + r.reason.slice(1))}.</p>`);
     if (r.status !== "confirmed") { out.add(s.hypothesis); drawBoard(); }
   } else if (s.kind === "verdict") {
-    const patch = (s.patch || "").split("\n").map(l => `<span class="${l.startsWith("+") && !l.startsWith("+++") ? "add" : l.startsWith("-") && !l.startsWith("---") ? "del" : ""}">${esc(l)}</span>`).join("\n");
     card("Nemotron Ultra", `Verdict · <span class="badge ${s.status}">${s.status}</span>`,
-         `<p>${esc(s.summary)}</p>${s.patch ? `<pre>${patch}</pre>` : ""}<p class="muted">Evidence: ${(s.evidence || []).map(esc).join(", ")}</p>`);
+         `<p>${esc(s.summary)}</p>${s.patch ? `<pre>${diffHtml(s.patch)}</pre>` : ""}<p class="muted">Evidence: ${(s.evidence || []).map(esc).join(", ")}</p>`);
+  } else if (s.kind === "retrain_proposal") {
+    const jobs = s.jobs.length > 1 ? `${s.jobs.length} jobs` : "1 job";
+    const failed = s.failed_job_id ? `The failed model in the comparison is job ${esc(s.failed_job_id)}.`
+      : "The failed recipe trains again as a second job for the comparison.";
+    card("Level 3 · needs approval", `Full retrain of ${esc(s.model.split("/").pop())} with the fix`,
+         `<pre>${diffHtml(s.diff)}</pre><p class="muted">${s.train_examples} examples · ${jobs} · about ${Number(s.tokens).toLocaleString("en")} tokens,
+          $${s.cost_usd.toFixed(3)} and ${Math.max(1, Math.round(s.seconds / 60))} min once a GPU is free. ${failed}</p><div class="approval" id="approval"></div>`);
+  } else if (s.kind === "retrain") {
+    trainingUsd += s.cost_usd || 0;
+    setApproval("Approved");
+    card("Token Factory", "Retraining with the fix",
+         Object.entries(s.jobs).map(([name, j]) => `<div class="job">${esc(name)}: ${esc(j)}</div>`).join(""));
+  } else if (s.kind === "comparison") {
+    const gain = (s.gain * 100).toFixed(1);
+    card(`Held-out set · ${s.heldout_examples} queries`, "Three models", `${modelBars(s.models)}
+         <p class="muted">Exact match. The fix adds ${s.gain >= 0 ? "+" : ""}${gain} points over the failed job.</p>
+         ${s.heldout_note ? `<p class="muted">${esc(s.heldout_note)}</p>` : ""}`);
+  } else if (s.kind === "retrain_declined") {
+    setApproval("Declined");
+    card("Planner", "Retrain skipped", `<p class="muted">The models were not retrained; the patch is in the verdict.</p>`);
   } else if (s.kind === "stop") {
     card("Planner", "Stopped", `<p class="muted">${esc(s.reason)}</p>`);
   }
+}
+
+function diffHtml(text) {
+  return (text || "").split("\n").map(l => `<span class="${l.startsWith("+") && !l.startsWith("+++") ? "add" : l.startsWith("-") && !l.startsWith("---") ? "del" : ""}">${esc(l)}</span>`).join("\n");
+}
+
+function askApproval(plan) {
+  const box = $("approval");
+  if (!box) return;
+  box.innerHTML = `<button id="yes">Retrain for $${plan.cost_usd.toFixed(3)}</button><button id="no" class="ghost">Not now</button>`;
+  const answer = async (approve) => {
+    $("yes").disabled = $("no").disabled = true;
+    const res = await fetch(`/api/investigations/${current}/retrain`, {method: "POST",
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
+    if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted">${esc((await res.json()).detail)}</span>`);
+  };
+  $("yes").onclick = () => answer(true);
+  $("no").onclick = () => answer(false);
+}
+
+function setApproval(text) {
+  const box = $("approval");
+  if (box) box.innerHTML = `<span class="badge ${text === "Approved" ? "confirmed" : "inconclusive"}">${text}</span>`;
+}
+
+function modelBars(models) {
+  const names = {base: "Base model", failed: "Failed job", fixed: "Retrained with the fix"};
+  return models.map(m => `<div class="model ${esc(m.name)}">
+    <div class="hyp-head"><b>${names[m.name] || esc(m.label)}</b><span>${pct(m.score)}</span></div>
+    <div class="barwrap"><div class="bar" style="width:${pct(m.score)}"></div></div>
+    <div class="job">${esc(m.job_id || m.label)}</div></div>`).join("");
 }
 
 function effectChart(r) {
@@ -208,7 +268,10 @@ function effectChart(r) {
 function showCost(f) {
   const rows = Object.entries(f.llm_calls || {}).map(([m, v]) =>
     `<span>${esc(m.split("/").pop())}</span><span>${v.calls} calls · ${v.tokens_in + v.tokens_out} tokens · $${v.cost_usd.toFixed(4)}</span>`).join("");
-  $("costbody").innerHTML = `<div class="kv">${rows}<span>Nemotron total</span><span>$${(f.llm_cost_usd || 0).toFixed(4)}</span></div>`;
+  const llm = f.llm_cost_usd || 0;
+  const training = trainingUsd ? `<span>Token Factory training</span><span>about $${trainingUsd.toFixed(3)}</span>
+    <span>Total</span><span>about $${(llm + trainingUsd).toFixed(3)}</span>` : "";
+  $("costbody").innerHTML = `<div class="kv">${rows}<span>Nemotron total</span><span>$${llm.toFixed(4)}</span>${training}</div>`;
   $("cost").hidden = false;
 }
 

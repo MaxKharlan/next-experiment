@@ -149,7 +149,85 @@
           "p_value": 0.16666666666666666,
           "min_effect": 0.03,
           "reason": "the fix beats the control beyond the noise"
-        }
+        },
+        "cost_usd": 0.05472
+      },
+      {
+        "kind": "retrain_proposal",
+        "hypothesis_id": "h1",
+        "model": "Qwen/Qwen3-0.6B",
+        "base_hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 1e-05,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "patch": {
+          "learning_rate": 0.0001
+        },
+        "diff": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 1e-05,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+        "train_examples": 200,
+        "tokens": 34200,
+        "cost_usd": 0.01368,
+        "seconds": 569.5740000000001,
+        "failed_job_id": "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+        "jobs": [
+          "fixed"
+        ]
+      },
+      {
+        "kind": "retrain",
+        "jobs": {
+          "fixed": "ftjob-ee9302e148074a2ca94a660fade26137",
+          "failed": "ftjob-6b929c0c770f416f8efd2e46bbd76646"
+        },
+        "hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 0.0001,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "cost_usd": 0.01368
+      },
+      {
+        "kind": "comparison",
+        "metric": "exact_match",
+        "heldout": "artifacts/b18/heldout.jsonl",
+        "heldout_examples": 200,
+        "heldout_note": "",
+        "models": [
+          {
+            "name": "base",
+            "label": "Qwen/Qwen3-0.6B",
+            "score": 0.0
+          },
+          {
+            "name": "failed",
+            "label": "failed job",
+            "job_id": "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+            "score": 0.14
+          },
+          {
+            "name": "fixed",
+            "label": "retrained with the fix",
+            "job_id": "ftjob-ee9302e148074a2ca94a660fade26137",
+            "score": 0.425
+          }
+        ],
+        "gain": 0.285,
+        "cost_usd": 0.01368
       }
     ],
     "verdict": {
@@ -178,6 +256,62 @@
         "cost_usd": 0.004976,
         "latency_ms": 3985
       }
+    },
+    "retrain_plan": {
+      "hypothesis_id": "h1",
+      "model": "Qwen/Qwen3-0.6B",
+      "base_hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 1e-05,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "patch": {
+        "learning_rate": 0.0001
+      },
+      "diff": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 1e-05,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+      "train_examples": 200,
+      "tokens": 34200,
+      "cost_usd": 0.01368,
+      "seconds": 569.5740000000001,
+      "failed_job_id": "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+      "jobs": [
+        "fixed"
+      ]
+    },
+    "comparison": {
+      "kind": "comparison",
+      "metric": "exact_match",
+      "heldout": "artifacts/b18/heldout.jsonl",
+      "heldout_examples": 200,
+      "heldout_note": "",
+      "models": [
+        {
+          "name": "base",
+          "label": "Qwen/Qwen3-0.6B",
+          "score": 0.0
+        },
+        {
+          "name": "failed",
+          "label": "failed job",
+          "job_id": "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+          "score": 0.14
+        },
+        {
+          "name": "fixed",
+          "label": "retrained with the fix",
+          "job_id": "ftjob-ee9302e148074a2ca94a660fade26137",
+          "score": 0.425
+        }
+      ],
+      "gain": 0.285,
+      "cost_usd": 0.01368
     }
   }
 }
