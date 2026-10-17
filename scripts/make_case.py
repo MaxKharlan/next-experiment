@@ -9,9 +9,13 @@ a fault from a hard task.
 One job: make_case <job id> --id <case id> [--truth <fault class>...]; leave out
 --truth for a healthy job. A whole fault sweep: make_case --from-sweep
 <dir>/results.jsonl (scripts/tf_fault_sweep.py), which names the cases after the
-fault number and strength. A fault that leaves the held-out metric within the
-tolerance of the task's reference does not hurt on this task, so it is reported and
-not saved: such a job is not a failure to diagnose.
+fault number and strength. A case must be clean on either side of the task's
+reference, or it is reported and not saved:
+- a fault that leaves the held-out metric within the tolerance of the reference does
+  not hurt on this task, so the job is not a failure to diagnose;
+- a healthy job that falls below the reference by more than the tolerance is held
+  back by something the catalog does not name, so calling it healthy would count a
+  real improvement as a false alarm.
 """
 
 from __future__ import annotations
@@ -133,11 +137,17 @@ def sweep_cases(
     return out
 
 
-def hurts(case: BenchCase, reference: float | None) -> bool:
-    """A fault case must fall below the reference by more than the tolerance."""
-    if case.healthy or reference is None:
-        return True
-    return case.heldout_metric < reference - TOLERANCE
+def case_problem(case: BenchCase, reference: float | None) -> str | None:
+    """Why the case is not clean, or None: a fault must fall below the reference by
+    more than the tolerance, and a healthy job must not."""
+    if reference is None:
+        return None
+    below = case.heldout_metric < reference - TOLERANCE
+    if not case.healthy and not below:
+        return "the fault does not hurt on this task"
+    if case.healthy and below:
+        return "the healthy job is well below the reference, so it is not clean"
+    return None
 
 
 def main() -> None:
@@ -175,8 +185,9 @@ def main() -> None:
         line = f"{case_id}: exact match {case.heldout_metric:.3f}"
         if reference is not None:
             line += f", reference {reference:.3f}"
-        if not hurts(case, reference):
-            print(f"{line}: the fault does not hurt on this task, not saved")
+        problem = case_problem(case, reference)
+        if problem:
+            print(f"{line}: {problem}, not saved")
             continue
         print(f"{line}. Case: {case.save()}")
 

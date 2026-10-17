@@ -2,7 +2,7 @@ import argparse
 from types import SimpleNamespace as NS
 
 from core.connectors.storage import LocalStorage
-from scripts.make_case import build_case, hurts, sweep_cases
+from scripts.make_case import build_case, case_problem, sweep_cases
 
 HP = {"n_epochs": 6, "learning_rate": 2e-5, "lora_r": 16, "lora_alpha": 16}
 
@@ -87,9 +87,11 @@ def test_sweep_runs_become_named_cases():
     ]
 
 
-def test_a_fault_case_must_fall_below_the_reference():
-    fault = NS(healthy=False, heldout_metric=0.50)
-    assert not hurts(fault, 0.535)  # within the tolerance of 0.05
-    assert hurts(NS(healthy=False, heldout_metric=0.40), 0.535)
-    assert hurts(NS(healthy=True, heldout_metric=0.535), 0.535)
-    assert hurts(fault, None)
+def test_cases_must_be_clean_on_either_side_of_the_reference():
+    harmless = NS(healthy=False, heldout_metric=0.50)  # within the tolerance of 0.05
+    assert case_problem(harmless, 0.535) == "the fault does not hurt on this task"
+    assert case_problem(NS(healthy=False, heldout_metric=0.40), 0.535) is None
+    assert case_problem(NS(healthy=True, heldout_metric=0.50), 0.535) is None
+    weak = NS(healthy=True, heldout_metric=0.42)
+    assert "not clean" in case_problem(weak, 0.535)
+    assert case_problem(harmless, None) is None
