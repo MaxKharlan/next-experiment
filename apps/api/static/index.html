@@ -4,106 +4,364 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Next Experiment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Unbounded:wght@600&display=swap" rel="stylesheet">
 <style>
+  /* tokens from the Figma file "Next Experiment, investigation screen" */
   :root {
-    --bg: #f6f7f9; --panel: #ffffff; --ink: #1d2330; --muted: #5d6677;
-    --line: #e2e5ea; --accent: #3b5bdb; --good: #2b8a3e; --bad: #c92a2a;
-    --warn: #b7791f; --bar: #dbe4ff; --code: #f1f3f5;
+    --bg: #F2F5F4; --surface: #FFFFFF; --tile: #F4F7F6; --ink: #152120; --muted: #5A6866;
+    --line: #D6DEDB; --line-strong: #849390; --accent: #1E6B57; --accent-soft: #E1F0EB; --on-accent: #FFFFFF;
+    --warn: #8A5208; --warn-soft: #FBF0DD; --bad: #A33A2B; --bad-soft: #F8E4E0;
+    --code-bg: #14201E; --code-ink: #DDE7E4; --code-muted: #8FA39E; --diff-add: #7FD1B0; --diff-del: #F0A49A;
+    --track: #E3E9E7; --neutral-bar: #6F7E7B;
+    --font-display: "Unbounded", "Onest", system-ui, sans-serif;
+    --font-body: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+    --g: 52px; /* log gutter: entry number and node */
+    color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #12151b; --panel: #1b1f27; --ink: #e6e9ef; --muted: #9aa3b2;
-      --line: #2c323d; --accent: #7c95f5; --good: #51cf66; --bad: #ff6b6b;
-      --warn: #fcc419; --bar: #2b3554; --code: #232833;
+      --bg: #0E1413; --surface: #151E1C; --tile: #1B2623; --ink: #E4EBE9; --muted: #97A6A2;
+      --line: #25322F; --line-strong: #62736F; --accent: #5DBF9F; --accent-soft: #16302A; --on-accent: #0E1413;
+      --warn: #E3A84F; --warn-soft: #2E2414; --bad: #E8857A; --bad-soft: #33201D;
+      --code-bg: #0A0F0E; --code-ink: #D5E1DD; --code-muted: #7D918C; --track: #22302C; --neutral-bar: #738681;
+      color-scheme: dark;
     }
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink);
-         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  header { padding: 16px 20px; border-bottom: 1px solid var(--line); background: var(--panel);
-           display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
-  h1 { font-size: 20px; margin: 0; }
-  .sub { color: var(--muted); font-size: 13px; }
-  .controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  select, button { font: inherit; padding: 6px 10px; border: 1px solid var(--line); max-width: 100%;
-                   border-radius: 8px; background: var(--panel); color: var(--ink); }
-  button { background: var(--accent); color: #fff; border: none; cursor: pointer; }
-  button:disabled { opacity: .5; cursor: default; }
-  main { display: grid; grid-template-columns: minmax(260px, 360px) 1fr; gap: 16px;
-         padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
-  @media (max-width: 820px) { main { grid-template-columns: 1fr; padding: 12px 16px; } }
-  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-  .panel h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 10px; }
-  .stack { display: grid; gap: 16px; align-content: start; }
-  .kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 13px; }
-  .kv span:nth-child(odd) { color: var(--muted); }
-  .hyp { margin: 10px 0; }
-  .hyp-head { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
-  .hyp-head b { font-weight: 600; }
-  .barwrap { height: 8px; background: var(--code); border-radius: 4px; overflow: hidden; margin: 4px 0; }
-  .bar { height: 100%; background: var(--accent); width: 0; transition: width .6s ease; }
-  .hyp.lead .bar { background: var(--good); }
-  .hyp.out { opacity: .45; }
-  .why { font-size: 12px; color: var(--muted); }
-  .sources a { font-size: 12px; color: var(--accent); word-break: break-all; display: block; }
-  .feed { display: grid; gap: 12px; }
-  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px;
-          animation: in .35s ease; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--font-body); -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .mono { font-family: var(--font-mono); }
+  .muted { color: var(--muted); }
+  .small { font-size: 12.5px; line-height: 18px; }
+  .label { margin: 0; font: 600 13px/18px var(--font-body); color: var(--ink); }
+
+  /* top bar */
+  .topbar { display: flex; align-items: center; gap: 16px; padding: 16px 32px; background: var(--surface);
+            border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .mark { width: 32px; height: 32px; border-radius: var(--r-md); background: var(--accent); color: var(--on-accent);
+          display: grid; place-items: center; flex: none; }
+  .mark svg { width: 20px; height: 20px; }
+  .brand h1 { margin: 0; font: 600 18px/24px var(--font-display); }
+  .tagline { font-size: 12.5px; line-height: 18px; color: var(--muted); }
+  .controls { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  select { appearance: none; -webkit-appearance: none; font: 14px/21px var(--font-body); color: var(--ink);
+           background: var(--tile) no-repeat right 12px center / 10px 6px; border: 1px solid var(--line-strong);
+           border-radius: var(--r-md); padding: 8px 32px 8px 12px; max-width: 100%; cursor: pointer;
+           text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%237d8c89' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  #demo { width: 380px; } #past { width: 150px; }
+  .btn { font: 500 14px/21px var(--font-body); border-radius: var(--r-md); padding: 8px 16px; border: 1px solid transparent; cursor: pointer; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .btn:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* layout */
+  .content { max-width: 1440px; margin: 0 auto; padding: 28px 32px 48px; display: grid; gap: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; display: grid; gap: 16px; align-content: start; }
+  .main { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 24px; align-items: start; }
+  .side { display: grid; gap: 16px; }
+  body.idle .main { grid-template-columns: minmax(0, 1fr); }
+  body.idle .side, body.idle .metrics, body.idle #statusBadge { display: none; }
+
+  /* verdict: the answer first */
+  .verdict { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 40px; align-items: end;
+             padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .kicker { font-size: 13px; line-height: 18px; color: var(--muted); }
+  .kicker:empty { display: none; }
+  .verdict h2 { margin: 6px 0 10px; font: 600 26px/34px var(--font-display); letter-spacing: -.01em; overflow-wrap: anywhere; }
+  .proof { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .metrics { display: flex; gap: 24px; }
+  .metric:not([hidden]) ~ .metric:not([hidden]) { padding-left: 24px; border-left: 1px solid var(--line); }
+  .metric b { display: block; font: 600 20px/26px var(--font-body); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .metric span { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+
+  /* status: a word on a tint; the dot only pulses while running */
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px;
+           font: 600 12px/16px var(--font-body); white-space: nowrap; background: var(--accent-soft); color: var(--accent); }
+  .badge.rejected, .badge.failed { background: var(--bad-soft); color: var(--bad); }
+  .badge.inconclusive, .badge.waiting, .badge.declined { background: var(--warn-soft); color: var(--warn); }
+  .badge.approved { background: var(--accent); color: var(--on-accent); }
+  .badge.running, .badge.idle { background: var(--tile); color: var(--muted); }
+  .badge.running::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .25; } }
+
+  /* case */
+  .quote { margin: 0; border-left: 3px solid var(--line-strong); padding-left: 12px; }
+  .kv { display: grid; grid-template-columns: 104px 1fr; gap: 8px 12px; margin: 0; font-size: 12.5px; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; font: 12px/18px var(--font-mono); }
+  .fix { color: var(--accent); font-weight: 500; }
+  .was { color: var(--muted); font-weight: 400; }
+  .spark { display: grid; gap: 8px; }
+  .spark-legend { display: flex; gap: 14px; align-items: center; font-size: 12.5px; }
+  .spark-legend .sw { display: inline-flex; align-items: center; gap: 6px; }
+  .spark svg { width: 100%; height: 76px; display: block; overflow: visible; }
+  .spark-legend svg { width: 18px; height: 8px; }
+  .spark-axis { display: flex; justify-content: space-between; font: 12px/17px var(--font-mono); color: var(--muted); }
+  .spark-axis span { display: grid; }
+  .spark-axis span:nth-child(n+2):not(:last-child) { text-align: center; }
+  .spark-axis span:last-child:not(:first-child) { text-align: right; }
+  .spark-axis b { font-weight: 500; color: var(--ink); }
+
+  /* hypotheses */
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .key { display: flex; gap: 16px; font-size: 12px; color: var(--muted); align-items: center; }
+  .key span { display: inline-flex; gap: 6px; align-items: center; }
+  .key i { display: inline-block; }
+  .key .k-prior { width: 2px; height: 12px; background: var(--ink); border-radius: 1px; }
+  .key .k-now { width: 18px; height: 8px; background: var(--neutral-bar); border-radius: 999px; }
+  .hyp { display: grid; gap: 6px; }
+  .hyp-head { display: flex; align-items: baseline; gap: 8px; }
+  .hyp-head b { font-weight: 500; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .hyp.out .hyp-head b { color: var(--muted); text-decoration: line-through; }
+  .tag { font: 500 12px/16px var(--font-body); color: var(--accent); white-space: nowrap; }
+  .tag.lead { color: var(--ink); }
+  .tag.out { color: var(--bad); }
+  .tag.open { color: var(--warn); }
+  .delta { font: 12px/16px var(--font-mono); color: var(--muted); }
+  .pct { font: 500 13px/16px var(--font-mono); min-width: 3ch; text-align: right; }
+  .track { position: relative; height: 8px; background: var(--track); border-radius: 999px; }
+  .track .fill { height: 100%; width: 0; background: var(--neutral-bar); border-radius: 999px; transition: width .6s ease; }
+  .hyp.lead .fill { background: var(--ink); }
+  .hyp.proved .fill { background: var(--accent); }
+  .track .prior { position: absolute; top: -3px; width: 2px; height: 14px; margin-left: -1px; background: var(--ink);
+                  border-radius: 1px; box-shadow: 0 0 0 1.5px var(--surface); }
+  details.why summary { cursor: pointer; list-style: none; display: inline-block; font-size: 12.5px; color: var(--muted);
+                        text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+  details.why summary::-webkit-details-marker { display: none; }
+  details.why summary:hover { color: var(--ink); }
+  details.why p { margin: 6px 0 0; font-size: 12.5px; line-height: 18px; color: var(--muted); }
+  details.why .mono { font-size: 12px; color: var(--ink); }
+  .sources a { display: block; font-size: 12px; word-break: break-all; }
+  .outside { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+
+  /* cost */
+  .cost-row { display: flex; align-items: center; gap: 8px; }
+  .cost-row > div { flex: 1; min-width: 0; }
+  .cost-row .mono { font: 500 13px/16px var(--font-mono); }
+  .cost-row.total { border-top: 1px solid var(--line); padding-top: 12px; font-weight: 500; }
+
+  /* experiment log: one sheet, numbered entries on a line; the node says what the entry spent */
+  .log { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 0 24px 4px 8px; min-width: 0; }
+  .log-head { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap;
+              padding: 14px 0 14px calc(var(--g) + 4px); border-bottom: 1px solid var(--line); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .node { position: static; display: inline-block; }
+  .entry { display: grid; grid-template-columns: var(--g) minmax(0, 1fr); animation: in .35s ease; }
+  .gutter { position: relative; }
+  .gutter::before { content: ""; position: absolute; left: calc(var(--g) - 11px); top: 0; bottom: 0; border-left: 1px solid var(--line-strong); }
+  .entry:first-child .gutter::before { top: 31px; }
+  .entry:last-child .gutter::before { bottom: auto; height: 31px; }
+  .entry:only-child .gutter::before { display: none; }
+  .n { position: absolute; left: 0; top: 20px; width: calc(var(--g) - 24px); text-align: right; font: 500 12px/22px var(--font-mono); color: var(--muted); }
+  .node { position: absolute; left: calc(var(--g) - 17px); top: 25px; width: 13px; height: 13px; border-radius: 50%;
+          border: 2px solid var(--line-strong); background: var(--surface); flex: none; }
+  .node.paid, .entry.paid .node { background: var(--ink); border-color: var(--ink); }
+  .node.ask, .entry.ask .node { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .entry.error .node { border-color: var(--bad); }
+  .entry.preview .node { border-style: dashed; }
+  .entry-main { padding: 20px 0 22px; border-top: 1px solid var(--line); display: grid; gap: 12px; min-width: 0; }
+  .entry:first-child .entry-main { border-top: 0; }
+  .entry.ask .entry-main { border: 1px solid var(--accent); border-radius: var(--r-md); padding: 20px 16px; margin: 10px 0; }
+  .entry.ask + .entry .entry-main { border-top: 0; }
+  .entry.ask .n { top: 31px; } .entry.ask .node { top: 36px; }
+  .entry.ask:last-child .gutter::before { height: 42px; }
+  .entry.preview.ask .entry-main { border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 20px 0 22px; margin: 0; }
+  .entry.preview.ask .n { top: 20px; } .entry.preview.ask .node { top: 25px; }
+  .entry-head { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+  .entry-head .t { flex: 1; min-width: 0; display: grid; gap: 2px; }
+  .entry-head h3 { margin: 0; font: 600 16px/22px var(--font-body); overflow-wrap: anywhere; }
+  .entry-head h3 code { font: 500 15px/22px var(--font-mono); }
+  .who { font-size: 12.5px; line-height: 18px; color: var(--muted); }
+  .who:empty { display: none; }
+  .meta { font: 12px/22px var(--font-mono); color: var(--muted); white-space: nowrap; }
+  .entry-main p { margin: 0; max-width: 72ch; }
   @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .card .tag { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
-  .card h3 { margin: 2px 0 6px; font-size: 16px; }
-  .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-  .confirmed { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
-  .rejected { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
-  .inconclusive { background: color-mix(in srgb, var(--warn) 22%, transparent); color: var(--warn); }
-  pre { background: var(--code); padding: 10px; border-radius: 8px; overflow-x: auto; font-size: 12px; margin: 8px 0 0; }
-  .add { color: var(--good); } .del { color: var(--bad); }
-  .arms { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; margin: 6px 0; }
-  .arms > div { background: var(--code); border-radius: 8px; padding: 8px; }
-  .muted { color: var(--muted); font-size: 13px; }
-  .job { color: var(--muted); font-size: 11px; word-break: break-all; font-family: ui-monospace, monospace; }
-  svg text { fill: var(--muted); font-size: 11px; }
-  .empty { color: var(--muted); text-align: center; padding: 40px 0; }
-  .approval { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
-  button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-  .model { margin: 8px 0; }
-  .model.base .bar { background: var(--muted); }
-  .model.failed .bar { background: var(--bad); }
-  .model.fixed .bar { background: var(--good); }
+  @media (prefers-reduced-motion: reduce) {
+    .entry, .badge.running::before { animation: none; }
+    .track .fill { transition: none; }
+  }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .ranked { display: grid; grid-template-columns: max-content auto; gap: 4px 32px; }
+  .ranked .mono { font: 500 13px/21px var(--font-mono); text-align: right; }
+  .source { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .source .mono { font-size: 12px; color: var(--muted); }
+  .raw { font: 12px/17px var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+  .arms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .arm { background: var(--tile); border-radius: var(--r-md); padding: 12px 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+  .arm .lbl { font: 600 13px/18px var(--font-body); color: var(--ink); }
+  .arm.control .lbl { color: var(--muted); }
+  .arm .change { font-weight: 500; }
+  .seeds { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+  .seed { font: 500 13px/16px var(--font-mono); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 4px 8px; }
+  .jobs { font: 12px/17px var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+  .effect { position: relative; height: 82px; margin: 4px 8px 0; }
+  .effect .axis { position: absolute; left: -8px; right: -8px; top: 40px; height: 1px; background: var(--line-strong); }
+  .effect .zero, .effect .min { position: absolute; top: 20px; height: 40px; width: 0; border-left: 1px solid var(--muted); }
+  .effect .min { border-left-style: dashed; }
+  .effect .ci { position: absolute; top: 37px; height: 7px; border-radius: 4px; background: var(--accent); }
+  .effect .dot { position: absolute; top: 33px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--accent); }
+  .effect.rejected .ci, .effect.rejected .dot { background: var(--bad); }
+  .effect.inconclusive .ci, .effect.inconclusive .dot { background: var(--warn); }
+  .effect .lab { position: absolute; top: 0; font: 12px/16px var(--font-mono); color: var(--muted); white-space: nowrap; }
+  .effect .lab.ctl { transform: translateX(-50%); }
+  .effect .lab.thr { margin-left: 6px; }
+  .effect .lab.thr.end { margin-left: -6px; transform: translateX(-100%); }
+  .effect .lab.value { top: 64px; transform: translateX(-50%); font-weight: 500; color: var(--accent); }
+  .effect .lab.value.end { transform: translateX(-100%); }
+  .effect .lab.value.start { transform: translateX(-12px); }
+  .effect.rejected .lab.value { color: var(--bad); }
+  .effect.inconclusive .lab.value { color: var(--warn); }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); border-radius: var(--r-md); padding: 12px 16px;
+        font: 12px/17px var(--font-mono); overflow-x: auto; }
+  pre .add { color: var(--diff-add); } pre .del { color: var(--diff-del); } pre .hdr { color: var(--code-muted); }
+  .changes { background: var(--tile); border-radius: var(--r-md); padding: 10px 14px; display: grid; gap: 6px; }
+  .change-row { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; font: 13px/18px var(--font-mono); }
+  .facts { display: flex; gap: 24px; flex-wrap: wrap; }
+  .fact b { display: block; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .fact span { font-size: 12.5px; color: var(--muted); }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .model { display: grid; gap: 4px; }
+  .model .hyp-head b { font-weight: 500; }
+  .model .track { height: 10px; overflow: hidden; }
+  .model .track .fill { background: var(--accent); }
+  .model.base .track .fill { background: var(--neutral-bar); }
+  .model.failed .track .fill { background: var(--bad); }
+  .gain { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; padding-top: 4px; }
+  .gain b { font: 600 20px/26px var(--font-body); color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 1100px) {
+    .verdict { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  }
+  @media (max-width: 900px) {
+    :root { --g: 40px; }
+    .topbar { padding: 12px 16px; }
+    .tagline { display: none; }
+    .controls { margin-left: 0; width: 100%; }
+    #demo { flex: 1 1 0; width: auto; min-width: 0; }
+    #past { flex: 1 1 100%; width: auto; min-width: 0; }
+    .content { padding: 20px 16px 32px; gap: 16px; }
+    .verdict { padding-bottom: 20px; }
+    .verdict h2 { font-size: 21px; line-height: 28px; }
+    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+    .metrics .metric:not([hidden]) ~ .metric:not([hidden]) { padding: 0; border: 0; }
+    .main { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .side { display: contents; }
+    #hypCard { order: 1; } .log { order: 2; } #caseCard { order: 3; } #costCard { order: 4; }
+    .log { padding: 0 16px 4px 0; }
+    .log-head { padding-left: 16px; }
+    .n { font-size: 11px; }
+    .arms { grid-template-columns: 1fr; }
+    .entry.ask .entry-main { padding: 16px 12px; }
+    .entry.ask .n { top: 27px; } .entry.ask .node { top: 32px; }
+    .entry.ask:last-child .gutter::before { height: 38px; }
+    .entry-head { flex-direction: column; gap: 2px; }
+    .entry-head .meta { white-space: normal; line-height: 18px; }
+  }
 </style>
 </head>
-<body>
-<header>
-  <div>
-    <h1>Next Experiment</h1>
-    <div class="sub">Finds out why a fine-tune on Nebius Token Factory failed and proves it with an experiment</div>
+<body class="idle">
+<header class="topbar">
+  <div class="brand">
+    <div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.6a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4l-5.1-10.2a2 2 0 0 1-.2-.9V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg></div>
+    <div>
+      <h1>Next Experiment</h1>
+      <div class="tagline">Finds out why a fine-tune on Nebius Token Factory failed and proves it with an experiment</div>
+    </div>
   </div>
   <div class="controls">
     <select id="demo" aria-label="Saved investigation"></select>
-    <button id="start">Replay</button>
-    <select id="past" aria-label="Past investigations"><option value="">Past runs…</option></select>
+    <button id="start" class="btn btn-primary">Replay</button>
+    <select id="past" aria-label="Past investigations"><option value="">Past runs</option></select>
   </div>
 </header>
-<main>
-  <div class="stack">
-    <section class="panel" id="case"><h2>Case</h2><div class="muted">Start a replay to see an investigation.</div></section>
-    <section class="panel"><h2>Hypotheses</h2><div id="board" class="muted">No hypotheses yet.</div></section>
-    <section class="panel" id="cost" hidden><h2>Cost</h2><div id="costbody"></div></section>
+
+<main class="content">
+  <section class="verdict" aria-live="polite">
+    <div>
+      <div class="kicker" id="statusEyebrow"></div>
+      <h2 id="statusTitle">Pick a saved investigation and press Replay</h2>
+      <div class="proof"><span class="badge idle" id="statusBadge">idle</span><span id="statusProof" class="muted"></span></div>
+    </div>
+    <div class="metrics">
+      <div class="metric" hidden><b id="mEffect"></b><span>effect of the fix</span></div>
+      <div class="metric" hidden><b id="mHeldout"></b><span>held-out exact match</span></div>
+      <div class="metric" hidden><b id="mJobs"></b><span>Post-training jobs</span></div>
+      <div class="metric" hidden><b id="mCost"></b><span>total cost</span></div>
+    </div>
+  </section>
+
+  <div class="main">
+    <div class="side">
+      <section class="card" id="caseCard"></section>
+      <section class="card" id="hypCard">
+        <div class="card-head"><h2 class="label">Hypotheses</h2><span class="muted small" id="checks"></span></div>
+        <div class="key"><span><i class="k-prior"></i>before any check</span><span><i class="k-now"></i>now</span></div>
+        <div id="board"></div>
+      </section>
+      <section class="card" id="costCard" hidden><h2 class="label">Cost</h2><div id="costbody"></div></section>
+    </div>
+    <section class="log" aria-label="Experiment log">
+      <div class="log-head">
+        <h2 class="label" id="logTitle">How a run goes</h2>
+        <div class="legend">
+          <span><i class="node"></i>no training cost</span>
+          <span><i class="node paid"></i>Token Factory jobs</span>
+          <span><i class="node ask"></i>needs you</span>
+        </div>
+      </div>
+      <div id="feed" aria-live="polite"></div>
+    </section>
   </div>
-  <section class="feed" id="feed"><div class="empty">The investigation will appear here step by step.</div></section>
 </main>
+
 <script>
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
 const pct = (p) => `${Math.round(p * 100)}%`;
-let hyps = {}, probs = {}, out = new Set(), source = null, current = null, trainingUsd = 0;
+const pct1 = (p) => `${(p * 100).toFixed(1)}%`;
+const money = (v, digits = 3) => `$${Number(v || 0).toFixed(digits)}`;
+const signed = (v) => `${v >= 0 ? "+" : "−"}${Math.abs(v).toFixed(2)}`;
+const fx = (v, d = 2) => Number(v).toFixed(d).replace("-", "−");
+const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+const stepsText = (ns) => ns.length === 1 ? `step ${ns[0]}` : `steps ${ns.slice(0, -1).join(", ")} and ${ns[ns.length - 1]}`;
+const CAUSES = {
+  lr_too_low: "Learning rate too low", too_many_epochs: "Too many epochs", lora_rank_too_small: "LoRA rank too small",
+  truncation: "Examples truncated", chat_template_mismatch: "Chat template mismatch", contradictory_labels: "Contradictory labels",
+  train_val_overlap: "Train and validation overlap", distribution_shift: "Distribution shift",
+};
+const cause = (c) => CAUSES[c] || String(c || "").replace(/_/g, " ").replace(/^./, s => s.toUpperCase());
+const BACKENDS = {tf: "Token Factory", local: "local mini-jobs"};
+const STATUSES = {finished: "Finished", awaiting_approval: "Waiting for approval", running: "Running", failed: "Failed"};
+const METHOD = [
+  ["Ranks the likely causes", "Nemotron Super", "It reads the failed job and gives each cause a probability."],
+  ["Moves the probabilities", "Free checks", "Each check reads the recipe or the data. The next one is the check expected to tell the causes apart best."],
+  ["Proves the cause", "Causal check on Token Factory", "The fix and a same-cost control train side by side. The cause counts as proved only if the fix beats the control beyond the noise.", "paid"],
+  ["Retrains with the fix", "Your decision", "After you approve, the model is retrained, and the base, failed and retrained models answer the same held-out queries.", "ask"],
+];
+
+let hyps = {}, probs = {}, prevProbs = {}, priors = {}, out = new Set(), proved = {}, ruled = {}, open = {};
+let source = null, current = null, entries = 0, stepOf = {}, lastCheck = null, verdictStep = null, caseHp = {};
+let trainingUsd = 0, jobs = 0, checks = 0, llmUsd = 0, model = "", proof = null;
 
 async function init() {
+  showMethod();
   const cases = await (await fetch("/api/demo-cases")).json();
   $("demo").innerHTML = cases.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("");
   const past = await (await fetch("/api/investigations")).json();
-  $("past").innerHTML = '<option value="">Past runs…</option>' + past.map(p =>
-    `<option value="${esc(p.id)}">${esc(p.title || p.id)} · ${esc(p.status)}</option>`).join("");
+  const groups = {};
+  for (const p of past) (groups[STATUSES[p.status] || String(p.status).replace(/_/g, " ")] ||= []).push(p);
+  $("past").innerHTML = '<option value="">Past runs</option>' + Object.entries(groups).map(([label, runs]) =>
+    `<optgroup label="${esc(label)}">${runs.map(p => `<option value="${esc(p.id)}">${esc(p.title || p.id)}</option>`).join("")}</optgroup>`).join("");
   const id = new URLSearchParams(location.search).get("id");
   if (id) watch(id);
 }
@@ -118,10 +376,41 @@ $("start").onclick = async () => {
 };
 $("past").onchange = (e) => { if (e.target.value) { history.replaceState(null, "", `?id=${e.target.value}`); watch(e.target.value); } };
 
+function showMethod() {
+  $("feed").innerHTML = METHOD.map(([title, who, text, node], i) => `<article class="entry preview ${node || ""}">
+      <div class="gutter"><span class="n">${i + 1}</span><span class="node"></span></div>
+      <div class="entry-main"><div class="entry-head"><div class="t"><h3>${title}</h3><div class="who">${who}</div></div></div><p class="muted">${text}</p></div>
+    </article>`).join("");
+}
+
 function reset() {
-  hyps = {}; probs = {}; out = new Set(); trainingUsd = 0;
-  $("feed").innerHTML = ""; $("board").innerHTML = '<div class="muted">No hypotheses yet.</div>';
-  $("cost").hidden = true;
+  hyps = {}; probs = {}; prevProbs = {}; priors = {}; out = new Set(); proved = {}; ruled = {}; open = {};
+  trainingUsd = 0; jobs = 0; checks = 0; llmUsd = 0; model = ""; proof = null; entries = 0;
+  stepOf = {}; lastCheck = null; verdictStep = null; caseHp = {};
+  document.body.classList.remove("idle");
+  $("logTitle").textContent = "Experiment log";
+  $("feed").innerHTML = ""; $("board").innerHTML = '<div class="muted small">No hypotheses yet.</div>'; $("checks").textContent = "";
+  $("caseCard").innerHTML = '<h2 class="label">Case</h2><div class="muted small" id="case">Loading the case.</div>';
+  $("costCard").hidden = true;
+  for (const m of ["mEffect", "mHeldout", "mJobs", "mCost"]) metric(m, "");
+  $("statusProof").textContent = "";
+  setStatus("Connecting", "Loading the investigation", "running", "running");
+}
+
+function setStatus(kicker, title, badgeClass, badgeText) {
+  if (kicker !== null) $("statusEyebrow").textContent = kicker;
+  if (title !== null) $("statusTitle").textContent = title;
+  const b = $("statusBadge"); b.className = `badge ${badgeClass}`; b.textContent = badgeText;
+}
+/* a number appears only once it exists */
+function metric(id, value, label) {
+  const b = $(id); b.textContent = value; b.parentElement.hidden = !value;
+  if (label) b.nextElementSibling.textContent = label;
+}
+function setMetrics() {
+  metric("mJobs", jobs ? String(jobs) : "", jobs === 1 ? "Post-training job" : "Post-training jobs");
+  const total = llmUsd + trainingUsd;
+  metric("mCost", total ? money(total) : "", trainingUsd ? "total cost, estimated" : "total cost");
 }
 
 function watch(id) {
@@ -129,111 +418,280 @@ function watch(id) {
   reset();
   current = id;
   source = new EventSource(`/api/investigations/${id}/events`);
-  source.addEventListener("started", e => showCase(JSON.parse(e.data).case));
+  source.addEventListener("started", e => { const d = JSON.parse(e.data); showCase(d.case);
+    setStatus(d.replay_of ? "Replay of a saved investigation" : `Live run on ${BACKENDS[d.backend] || d.backend || "the server"}`, "Looking for the cause", "running", "running"); });
   source.addEventListener("step", e => showStep(JSON.parse(e.data)));
-  source.addEventListener("finished", e => { showCost(JSON.parse(e.data)); done(); });
-  source.addEventListener("awaiting_approval", e => { const d = JSON.parse(e.data); showCost(d.summary); askApproval(d.plan); });
-  source.addEventListener("resumed", e => setApproval(JSON.parse(e.data).approved ? "Approved" : "Declined"));
-  source.addEventListener("failed", e => { card("Error", "The investigation stopped", `<pre>${esc(JSON.parse(e.data).error)}</pre>`); done(); });
+  source.addEventListener("finished", e => { finish(JSON.parse(e.data)); done(); });
+  source.addEventListener("awaiting_approval", e => { const d = JSON.parse(e.data); showCost(d.summary); askApproval(d.plan);
+    setStatus(null, null, "waiting", "needs your approval"); });
+  source.addEventListener("resumed", e => { const ok = JSON.parse(e.data).approved; setApproval(ok ? "Approved" : "Declined");
+    setStatus(null, null, "running", ok ? "retraining" : "running"); });
+  source.addEventListener("failed", e => { step("The investigation stopped", "Error", "", `<pre>${esc(JSON.parse(e.data).error)}</pre>`, "error");
+    setStatus(null, "The investigation stopped", "failed", "failed"); done(); });
 }
 function done() { source.close(); $("start").disabled = false; }
+
+function finish(summary) {
+  showCost(summary);
+  if (proof) setStatus(null, null, "confirmed", "confirmed");
+  else {
+    setStatus(null, "No cause proved", "inconclusive", summary.status || "inconclusive");
+    $("statusProof").textContent = "No fix beat its same-cost control beyond the noise.";
+  }
+}
 
 function showCase(c) {
   if (!c || !c.job) return;
   const hp = c.job.hyperparameters || {};
-  const pts = (c.checkpoints || []).map((p, i) => `<span>epoch ${p.epoch ?? i + 1}</span><span>train ${p.train_loss} · valid ${p.valid_loss}</span>`).join("");
-  $("case").innerHTML = `<h2>Case</h2><p style="margin:0 0 8px">${esc(c.symptom)}</p>
-    <div class="kv"><span>Model</span><span>${esc(c.job.model)}</span>
-    <span>Data</span><span>${c.job.train_examples} train · ${c.job.validation_examples} validation</span>
-    <span>Learning rate</span><span>${hp.learning_rate}</span><span>Epochs</span><span>${hp.n_epochs}</span>
-    <span>LoRA</span><span>r ${hp.lora_r} · alpha ${hp.lora_alpha}</span>${pts}</div>`;
+  caseHp = hp; model = c.job.model || "";
+  const pts = c.checkpoints || [];
+  $("case").outerHTML = `<div id="case" style="display:grid;gap:16px">
+    <p class="quote">${esc(c.symptom)}</p>
+    <dl class="kv">
+      <dt>Model</dt><dd>${esc(c.job.model)}</dd>
+      <dt>Data</dt><dd>${esc(c.job.train_examples)} train, ${esc(c.job.validation_examples)} validation</dd>
+      <dt>Learning rate</dt><dd data-hp="lr">${esc(hp.learning_rate)}</dd>
+      <dt>Epochs</dt><dd data-hp="epochs">${esc(hp.n_epochs)}</dd>
+      <dt>LoRA</dt><dd data-hp="lora">rank ${esc(hp.lora_r)}, alpha ${esc(hp.lora_alpha)}</dd>
+    </dl>
+    ${pts.length > 1 ? sparkline(pts) : ""}
+  </div>`;
 }
 
-function drawBoard() {
-  const ids = Object.keys(probs).filter(h => h !== "unlisted" || probs[h] > 0);
-  const lead = ids.filter(h => !out.has(h) && h !== "unlisted").sort((a, b) => probs[b] - probs[a])[0];
-  $("board").innerHTML = ids.map(h => {
-    const x = hyps[h] || {fault_class: "causes outside the list", rationale: "", sources: []};
-    const src = (x.sources || []).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join("");
-    return `<div class="hyp ${h === lead ? "lead" : ""} ${out.has(h) ? "out" : ""}">
-      <div class="hyp-head"><b>${esc(x.fault_class)}</b><span>${pct(probs[h])}</span></div>
-      <div class="barwrap"><div class="bar" style="width:${pct(probs[h])}"></div></div>
-      ${x.rationale ? `<div class="why">${esc(x.rationale)}</div>` : ""}<div class="sources">${src}</div></div>`;
-  }).join("");
-}
-
-function card(tag, title, body) {
-  const el = document.createElement("article");
-  el.className = "card";
-  el.innerHTML = `<div class="tag">${esc(tag)}</div><h3>${title}</h3>${body}`;
-  $("feed").appendChild(el);
-  el.scrollIntoView({behavior: "smooth", block: "nearest"});
-}
-
-function showStep(s) {
-  if (s.kind === "known_issues") {
-    const list = (s.sources || []).map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></li>`).join("");
-    card("Tavily", "Known issues", s.error ? `<p class="muted">${esc(s.error)}</p>`
-      : `<p class="muted">${(s.queries || []).map(esc).join("<br>")}</p><ul>${list}</ul><p class="muted">${s.credits} credits</p>`);
-  } else if (s.kind === "hypotheses") {
-    (s.hypotheses || []).forEach(h => hyps[h.id] = h);
-    probs = s.probs; drawBoard();
-    card("Nemotron Super", "Hypotheses", `<p class="muted">${Object.values(hyps).map(h => `${esc(h.fault_class)} ${pct(h.prior)}`).join(" · ")}</p>`);
-  } else if (s.kind === "probe") {
-    probs = s.probs; drawBoard();
-    card(`Check · ${Number(s.gain_bits).toFixed(2)} bits expected`, `${esc(s.probe)} → ${esc(s.outcome)}`,
-         `${s.card ? `<p>${esc(s.card)}</p>` : ""}<p class="muted">Raw: ${esc(JSON.stringify(s.raw))}</p>`);
-  } else if (s.kind === "intervention") {
-    trainingUsd += s.cost_usd || 0;
-    const r = s.result, t = s.target, c = s.control;
-    const jobs = (a) => (a.ft_job_ids || []).map(j => `<div class="job">${esc(j)}</div>`).join("");
-    const name = hyps[s.hypothesis] ? hyps[s.hypothesis].fault_class : s.hypothesis;
-    card("Causal check", `${esc(name)} · <span class="badge ${r.status}">${r.status}</span>`,
-      `<div class="arms"><div><b>Target</b><br>${esc(t.description)}<br>exact match ${t.metrics.join(", ")}${jobs(t)}</div>
-       <div><b>Control</b><br>${esc(c.description)}<br>exact match ${c.metrics.join(", ")}${jobs(c)}</div></div>
-       ${effectChart(r)}<p class="muted">Effect ${r.effect.toFixed(3)}, 95% interval ${r.ci_low.toFixed(3)} to ${r.ci_high.toFixed(3)}; needed at least ${r.min_effect}. ${esc(r.reason.charAt(0).toUpperCase() + r.reason.slice(1))}.</p>`);
-    if (r.status !== "confirmed") { out.add(s.hypothesis); drawBoard(); }
-  } else if (s.kind === "verdict") {
-    card("Nemotron Ultra", `Verdict · <span class="badge ${s.status}">${s.status}</span>`,
-         `<p>${esc(s.summary)}</p>${s.patch ? `<pre>${diffHtml(s.patch)}</pre>` : ""}<p class="muted">Evidence: ${(s.evidence || []).map(esc).join(", ")}</p>`);
-  } else if (s.kind === "retrain_proposal") {
-    const jobs = s.jobs.length > 1 ? `${s.jobs.length} jobs` : "1 job";
-    const failed = s.failed_job_id ? `The failed model in the comparison is job ${esc(s.failed_job_id)}.`
-      : "The failed recipe trains again as a second job for the comparison.";
-    card("Level 3 · needs approval", `Full retrain of ${esc(s.model.split("/").pop())} with the fix`,
-         `<pre>${diffHtml(s.diff)}</pre><p class="muted">${s.train_examples} examples · ${jobs} · about ${Number(s.tokens).toLocaleString("en")} tokens,
-          $${s.cost_usd.toFixed(3)} and ${Math.max(1, Math.round(s.seconds / 60))} min once a GPU is free. ${failed}</p><div class="approval" id="approval"></div>`);
-  } else if (s.kind === "retrain") {
-    trainingUsd += s.cost_usd || 0;
-    setApproval("Approved");
-    card("Token Factory", "Retraining with the fix",
-         Object.entries(s.jobs).map(([name, j]) => `<div class="job">${esc(name)}: ${esc(j)}</div>`).join(""));
-  } else if (s.kind === "comparison") {
-    const gain = (s.gain * 100).toFixed(1);
-    card(`Held-out set · ${s.heldout_examples} queries`, "Three models", `${modelBars(s.models)}
-         <p class="muted">Exact match. The fix adds ${s.gain >= 0 ? "+" : ""}${gain} points over the failed job.</p>
-         ${s.heldout_note ? `<p class="muted">${esc(s.heldout_note)}</p>` : ""}`);
-  } else if (s.kind === "retrain_declined") {
-    setApproval("Declined");
-    card("Planner", "Retrain skipped", `<p class="muted">The models were not retrained; the patch is in the verdict.</p>`);
-  } else if (s.kind === "stop") {
-    card("Planner", "Stopped", `<p class="muted">${esc(s.reason)}</p>`);
+/* the proved fix shows in the recipe it changes */
+function showFix(patch) {
+  const p = patch || {};
+  const fields = {
+    lr: "learning_rate" in p ? [p.learning_rate] : null,
+    epochs: "n_epochs" in p ? [p.n_epochs] : null,
+    lora: "lora_r" in p || "lora_alpha" in p ? [`rank ${p.lora_r ?? caseHp.lora_r}, alpha ${p.lora_alpha ?? caseHp.lora_alpha}`] : null,
+  };
+  for (const [field, now] of Object.entries(fields)) {
+    const dd = document.querySelector(`#case dd[data-hp="${field}"]`);
+    if (!now || !dd || dd.dataset.fixed) continue;
+    dd.dataset.fixed = "1";
+    dd.innerHTML = `<span class="fix">${esc(now[0])}</span>, <span class="was">was ${dd.innerHTML}</span>`;
   }
 }
 
+function sparkline(points) {
+  const train = points.map(p => Number(p.train_loss)), valid = points.map(p => Number(p.valid_loss));
+  const all = [...train, ...valid].filter(Number.isFinite);
+  const lo = Math.min(...all), hi = Math.max(...all), span = hi - lo || 1;
+  const x = (i) => 6 + i * (288 / Math.max(1, points.length - 1));
+  const y = (v) => 6 + (1 - (v - lo) / span) * 62;
+  const line = (vals) => vals.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  return `<div class="spark">
+    <div class="spark-legend"><span class="label">Loss per epoch</span>
+      <span class="sw"><svg viewBox="0 0 18 8" aria-hidden="true"><line x1="1" y1="4" x2="17" y2="4" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/></svg>train</span>
+      <span class="sw muted"><svg viewBox="0 0 18 8" aria-hidden="true"><line x1="1" y1="4" x2="17" y2="4" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4 3"/></svg>validation</span></div>
+    <svg viewBox="0 0 300 76" preserveAspectRatio="none" role="img" aria-label="train and validation loss per epoch">
+      <line x1="0" y1="75" x2="300" y2="75" stroke="var(--line)" vector-effect="non-scaling-stroke"/>
+      <polyline points="${line(valid)}" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <polyline points="${line(train)}" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <div class="spark-axis">${points.map((p, i) => `<span><b>${Number(p.train_loss).toFixed(2)}</b>epoch ${p.epoch ?? i + 1}</span>`).join("")}</div>
+  </div>`;
+}
+
+function drawBoard() {
+  const ids = Object.keys(probs).filter(h => h !== "unlisted");
+  const lead = ids.filter(h => !out.has(h)).sort((a, b) => probs[b] - probs[a])[0];
+  const rows = ids.map(h => {
+    const x = hyps[h] || {fault_class: h, rationale: "", sources: []};
+    const d = h in prevProbs ? Math.round((probs[h] - prevProbs[h]) * 100) : 0;
+    const prior = priors[h] ?? probs[h];
+    const tag = proved[h] ? `<span class="tag">proved in step ${proved[h]}</span>`
+              : ruled[h] ? `<span class="tag out">ruled out in step ${ruled[h]}</span>`
+              : open[h] ? `<span class="tag open">inconclusive in step ${open[h]}</span>`
+              : h === lead && checks ? `<span class="tag lead">leading</span>` : "";
+    const src = (x.sources || []).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join("");
+    const why = x.rationale || x.location || src
+      ? `<details class="why"><summary>Why it was suggested</summary>
+           ${x.location ? `<p>Where to look: <span class="mono">${esc(x.location)}</span></p>` : ""}
+           ${x.rationale ? `<p>${esc(x.rationale)}</p>` : ""}${src ? `<p class="sources">${src}</p>` : ""}</details>` : "";
+    return `<div class="hyp ${h === lead ? "lead" : ""} ${proved[h] ? "proved" : ""} ${out.has(h) ? "out" : ""}">
+      <div class="hyp-head"><b title="${esc(x.fault_class)}">${esc(cause(x.fault_class))}</b>${tag}
+        ${d ? `<span class="delta">${d > 0 ? "+" : "−"}${Math.abs(d)}</span>` : ""}<span class="pct">${pct(probs[h])}</span></div>
+      <div class="track" role="img" aria-label="${esc(cause(x.fault_class))}: ${pct(prior)} before any check, ${pct(probs[h])} now">
+        <div class="fill" style="width:${pct(probs[h])}"></div><i class="prior" style="left:${pct(prior)}"></i></div>
+      ${why}</div>`;
+  });
+  if ((probs.unlisted || 0) > 0) rows.push(`<div class="outside"><span>causes outside the list</span><span class="mono">${pct(probs.unlisted)}</span></div>`);
+  $("board").style.cssText = "display:grid;gap:18px";
+  $("board").innerHTML = rows.join("");
+  $("checks").textContent = checks ? `after ${plural(checks, "check")}` : "before any check";
+}
+function setProbs(next) {
+  prevProbs = probs; probs = next || {};
+  for (const [h, p] of Object.entries(probs)) if (!(h in priors)) priors[h] = hyps[h]?.prior ?? p;
+  drawBoard();
+}
+
+/* one numbered entry in the log; node: "" no training cost, "paid", "ask" or "error" */
+function step(title, who, meta, body, node = "") {
+  entries += 1;
+  const el = document.createElement("article");
+  el.className = `entry ${node}`;
+  el.innerHTML = `<div class="gutter"><span class="n">${entries}</span><span class="node"></span></div>
+    <div class="entry-main">
+      <div class="entry-head"><div class="t"><h3>${title}</h3><div class="who">${esc(who)}</div></div>${meta ? `<div class="meta">${esc(meta)}</div>` : ""}</div>
+      ${body}
+    </div>`;
+  $("feed").appendChild(el);
+  el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest"});
+  return entries;
+}
+const badge = (status, text) => `<span class="badge ${esc(status)}">${esc(text || status)}</span>`;
+const host = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch { return ""; } };
+/* "learning_rate from 0.00001 to 0.0001" from the patch, so no backend arrows reach the screen */
+const changeText = (a) => {
+  const p = Object.entries(a.patch || {});
+  return p.length ? p.map(([k, v]) => `${k} from ${caseHp[k] ?? "the old value"} to ${v}`).join("; ") : a.description;
+};
+
+function showStep(s) {
+  if (s.kind === "known_issues") {
+    const list = (s.sources || []).map(x => `<div class="source"><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a><span class="mono">${esc(host(x.url))}</span></div>`).join("");
+    step(s.error ? "Search failed" : `${plural((s.sources || []).length, "source")} found`, `Tavily search for known issues${s.credits ? `, ${plural(s.credits, "credit")}` : ""}`, "",
+         s.error ? `<p class="muted">${esc(s.error)}</p>` : `${list}${(s.queries || []).length ? `<div class="raw">Searched for: ${(s.queries || []).map(esc).join("; ")}</div>` : ""}`);
+  } else if (s.kind === "hypotheses") {
+    (s.hypotheses || []).forEach(h => hyps[h.id] = h);
+    setProbs(s.probs);
+    step(`${Object.keys(hyps).length} possible causes, ranked`, "Nemotron Super", "",
+         `<div class="ranked">${Object.values(hyps).map(h => `<span>${esc(cause(h.fault_class))}</span><span class="mono">${pct(h.prior)}</span>`).join("")}</div>`);
+  } else if (s.kind === "probe") {
+    checks += 1; setProbs(s.probs);
+    const n = step(`<code>${esc(s.probe)}</code> returned “${esc(s.outcome)}”`, `Free check, chosen for an expected gain of ${Number(s.gain_bits).toFixed(2)} bits`, "free",
+         `${s.card ? `<p>${esc(s.card)}</p>` : ""}<div class="raw">${esc(Object.entries(s.raw || {}).map(([k, v]) => `${k} ${v}`).join(", "))}</div>`);
+    stepOf[`probe:${s.probe}`] = n;
+  } else if (s.kind === "intervention") {
+    checks += 1;
+    const r = s.result, t = s.target, c = s.control;
+    const n = (t.metrics || []).length + (c.metrics || []).length;
+    jobs += n; trainingUsd += s.cost_usd || 0; setMetrics();
+    const onTF = (t.ft_job_ids || []).length > 0;
+    const name = hyps[s.hypothesis] ? hyps[s.hypothesis].fault_class : s.hypothesis;
+    const arm = (a, label, cls) => `<div class="arm ${cls}"><div class="lbl">${label}</div><div class="change">${esc(changeText(a))}</div>
+      <div class="seeds">exact match per seed ${(a.metrics || []).map(v => `<span class="seed">${Number(v).toFixed(2)}</span>`).join("")}</div>
+      ${(a.ft_job_ids || []).length ? `<div class="jobs">${a.ft_job_ids.map(j => esc(j.slice(0, 14))).join(", ")}</div>` : ""}</div>`;
+    const notes = {confirmed: "the fix beats a same-cost control", rejected: "the fix does not beat a same-cost control", inconclusive: "more seeds may decide it"};
+    const side = r.effect >= 0 ? "above" : "below";
+    const entry = step(`${esc(cause(name))}?`, `Causal check on ${onTF ? "Token Factory" : "local mini-jobs"}, ${plural(n, "job")}`, s.cost_usd ? money(s.cost_usd) : "",
+         `<div class="row">${badge(r.status)}<span class="muted small">${notes[r.status] || ""}</span></div>
+          <div class="arms">${arm(t, "Fix", "")}${arm(c, "Control", "control")}</div>
+          ${effectChart(r)}
+          <p class="muted small">The fix scored ${Math.abs(r.effect).toFixed(2)} ${side} the control (95% interval ${fx(r.ci_low)} to ${fx(r.ci_high)}). The threshold for a cause is ${r.min_effect}.</p>`,
+         onTF ? "paid" : "");
+    stepOf[`intervention:${s.hypothesis}`] = entry; lastCheck = entry;
+    untangle($("feed").lastElementChild.querySelector(".effect"));
+    if (r.status === "confirmed") {
+      proved[s.hypothesis] = entry; proof = r;
+      metric("mEffect", signed(r.effect));
+      showFix(t.patch);
+    } else if (r.status === "rejected") { ruled[s.hypothesis] = entry; out.add(s.hypothesis); }
+    else open[s.hypothesis] = entry;
+    drawBoard();
+  } else if (s.kind === "verdict") {
+    const name = hyps[s.hypothesis_id] ? hyps[s.hypothesis_id].fault_class : "";
+    if (s.status === "confirmed" && proof) {
+      setStatus(null, cause(name), "confirmed", "confirmed");
+      $("statusProof").textContent = `${signed(proof.effect)} exact match over a same-cost control, 95% interval ${fx(proof.ci_low)} to ${fx(proof.ci_high)}`;
+    }
+    const known = (s.evidence || []).map(e => stepOf[e]).filter(Boolean);
+    const unknown = (s.evidence || []).filter(e => !stepOf[e]);
+    const basis = known.length || unknown.length
+      ? `<p class="muted small">Based on ${[known.length ? stepsText(known) : "", ...unknown.map(esc)].filter(Boolean).join(" and ")}.</p>` : "";
+    verdictStep = step("Verdict", "Nemotron Ultra", "",
+         `<div class="row">${badge(s.status)}<span class="muted small">${lastCheck ? `The status and the patch come from the causal check in step ${lastCheck}.` : "The status comes from the checks above."}</span></div>
+          <p>${esc(s.summary)}</p>${s.patch ? `<pre>${diffHtml(s.patch)}</pre>` : ""}${basis}`);
+  } else if (s.kind === "retrain_proposal") {
+    const failed = s.failed_job_id ? `the failed job ${esc(s.failed_job_id.slice(0, 14))}` : "the failed recipe, trained again";
+    const base = s.base_hyperparameters || {}, patch = Object.entries(s.patch || {});
+    const change = patch.length
+      ? `<div class="changes">${patch.map(([k, v]) => `<div class="change-row"><span>${esc(k)}</span><span class="fix">${esc(v)}</span><span class="was">was ${esc(base[k])}</span></div>`).join("")}</div>`
+      : s.diff ? `<pre>${diffHtml(s.diff)}</pre>` : "";
+    step(`Retrain ${esc((s.model || model).split("/").pop())} with the fix?`, "Needs your decision", `about ${money(s.cost_usd)}`,
+         `${change}
+          <div class="facts">
+            <div class="fact"><b>${esc(s.train_examples)}</b><span>examples</span></div>
+            <div class="fact"><b>${plural(s.jobs.length, "job")}</b><span>Post-training</span></div>
+            <div class="fact"><b>${Number(s.tokens).toLocaleString("en")}</b><span>tokens</span></div>
+            <div class="fact"><b>${Math.max(1, Math.round(s.seconds / 60))} min</b><span>estimated, once a GPU is free</span></div>
+          </div>
+          <p class="muted small">Then the base model, ${failed} and the retrained one answer the same held-out queries.</p>
+          <div class="actions" id="approval"></div>`, "ask");
+  } else if (s.kind === "retrain") {
+    trainingUsd += s.cost_usd || 0; jobs += 1; setMetrics();
+    setApproval("Approved");
+    const names = {fixed: "Retrained", failed: "Failed"};
+    step("Retraining with the fix", "Token Factory, 1 job", s.cost_usd ? `about ${money(s.cost_usd)}` : "",
+         `<div class="jobs">${Object.entries(s.jobs || {}).map(([k, j]) => `${esc(names[k] || k)}: ${esc(j)}`).join("<br>")}</div>`, "paid");
+  } else if (s.kind === "comparison") {
+    const by = Object.fromEntries((s.models || []).map(m => [m.name, m.score]));
+    if ("failed" in by && "fixed" in by) metric("mHeldout", pct1(by.fixed), `held-out exact match, ${by.fixed >= by.failed ? "up" : "down"} from ${pct1(by.failed)}`);
+    const names = {base: "Base model", failed: "Failed job", fixed: "Retrained with the fix"};
+    const bars = (s.models || []).map(m => `<div class="model ${esc(m.name)}">
+        <div class="hyp-head"><b>${names[m.name] || esc(m.label)}</b><span class="pct">${pct1(m.score)}</span></div>
+        <div class="track"><div class="fill" style="width:${Math.max(0.6, m.score * 100)}%"></div></div>
+        <div class="jobs">${esc(m.job_id || m.label)}</div></div>`).join("");
+    const gain = (s.gain * 100).toFixed(1);
+    step(`Exact match on ${s.heldout_examples} held-out queries`, "", "",
+         `${bars}<div class="gain"><b>${s.gain >= 0 ? "+" : "−"}${Math.abs(gain)} points</b><span class="muted">over the failed job</span></div>
+          ${s.heldout_note ? `<p class="muted small">${esc(s.heldout_note)}</p>` : ""}`);
+  } else if (s.kind === "retrain_declined") {
+    setApproval("Declined");
+    step("Retrain skipped", "Planner", "", `<p class="muted">The models were not retrained.${verdictStep ? ` The patch from step ${verdictStep} was not applied.` : ""}</p>`);
+  } else if (s.kind === "stop") {
+    step("Stopped", "Planner", "", `<p class="muted">${esc(s.reason)}</p>`);
+  }
+}
+
+function effectChart(r) {
+  const lo = Math.min(-0.05, r.ci_low - 0.05), hi = Math.max(r.ci_high, r.min_effect) + 0.05;
+  const x = (v) => ((v - lo) / (hi - lo) * 100).toFixed(2);
+  const at = Number(x(r.effect)), edge = at > 82 ? "end" : at < 18 ? "start" : "";
+  return `<div class="effect ${esc(r.status)}" role="img" aria-label="effect ${signed(r.effect)}, 95% interval ${fx(r.ci_low)} to ${fx(r.ci_high)}">
+    <div class="axis"></div>
+    <div class="zero" style="left:${x(0)}%"></div>
+    <div class="min" style="left:${x(r.min_effect)}%"></div>
+    <div class="ci" style="left:${x(r.ci_low)}%;width:${(x(r.ci_high) - x(r.ci_low)).toFixed(2)}%"></div>
+    <div class="dot" style="left:${x(r.effect)}%"></div>
+    <span class="lab ctl" style="left:${x(0)}%">0</span>
+    <span class="lab thr ${Number(x(r.min_effect)) > 70 ? "end" : ""}" data-end="${Number(x(r.min_effect)) > 70 ? 1 : 0}" style="left:${x(r.min_effect)}%">threshold ${r.min_effect}</span>
+    <span class="lab value ${edge}" style="left:${x(r.effect)}%">${signed(r.effect)}</span>
+  </div>`;
+}
+
+/* labels that collide move to the free row under the axis */
+const overlaps = (a, b) => { const r = a.getBoundingClientRect(), q = b.getBoundingClientRect();
+  return r.left < q.right + 6 && q.left < r.right + 6 && r.top < q.bottom && q.top < r.bottom; };
+function untangle(chart) {
+  const labs = [...chart.querySelectorAll(".lab")], [zero, thr] = labs, box = chart.parentElement.getBoundingClientRect();
+  const fits = () => !labs.some((a, i) => labs.some((b, j) => i < j && overlaps(a, b)))
+    && labs.every(l => { const r = l.getBoundingClientRect(); return r.left >= box.left - 1 && r.right <= box.right + 1; });
+  const end = thr.dataset.end === "1";
+  for (const [zeroTop, thrTop, thrEnd] of [[0, 0, end], [0, 0, !end], [64, 0, end], [64, 0, !end], [0, 64, end], [0, 64, !end], [0, 0, end]]) {
+    zero.style.top = zeroTop ? `${zeroTop}px` : ""; thr.style.top = thrTop ? `${thrTop}px` : ""; thr.classList.toggle("end", thrEnd);
+    if (fits()) return;
+  }
+}
+let resizeTimer;
+addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => document.querySelectorAll(".effect").forEach(untangle), 100); });
+
 function diffHtml(text) {
-  return (text || "").split("\n").map(l => `<span class="${l.startsWith("+") && !l.startsWith("+++") ? "add" : l.startsWith("-") && !l.startsWith("---") ? "del" : ""}">${esc(l)}</span>`).join("\n");
+  return (text || "").split("\n").map(l => `<span class="${l.startsWith("+++") || l.startsWith("---") || l.startsWith("@@") ? "hdr" : l.startsWith("+") ? "add" : l.startsWith("-") ? "del" : ""}">${esc(l)}</span>`).join("\n");
 }
 
 function askApproval(plan) {
   const box = $("approval");
   if (!box) return;
-  box.innerHTML = `<button id="yes">Retrain for $${plan.cost_usd.toFixed(3)}</button><button id="no" class="ghost">Not now</button>`;
+  box.innerHTML = `<button id="yes" class="btn btn-primary">Retrain for ${money(plan.cost_usd)}</button><button id="no" class="btn btn-ghost">Not now</button>`;
   const answer = async (approve) => {
     $("yes").disabled = $("no").disabled = true;
     const res = await fetch(`/api/investigations/${current}/retrain`, {method: "POST",
       headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
-    if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted">${esc((await res.json()).detail)}</span>`);
+    if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted small">${esc((await res.json()).detail)}</span>`);
   };
   $("yes").onclick = () => answer(true);
   $("no").onclick = () => answer(false);
@@ -241,38 +699,24 @@ function askApproval(plan) {
 
 function setApproval(text) {
   const box = $("approval");
-  if (box) box.innerHTML = `<span class="badge ${text === "Approved" ? "confirmed" : "inconclusive"}">${text}</span>`;
-}
-
-function modelBars(models) {
-  const names = {base: "Base model", failed: "Failed job", fixed: "Retrained with the fix"};
-  return models.map(m => `<div class="model ${esc(m.name)}">
-    <div class="hyp-head"><b>${names[m.name] || esc(m.label)}</b><span>${pct(m.score)}</span></div>
-    <div class="barwrap"><div class="bar" style="width:${pct(m.score)}"></div></div>
-    <div class="job">${esc(m.job_id || m.label)}</div></div>`).join("");
-}
-
-function effectChart(r) {
-  const lo = Math.min(-0.05, r.ci_low - 0.05), hi = Math.max(r.ci_high, r.min_effect) + 0.05;
-  const x = (v) => 20 + (v - lo) / (hi - lo) * 460;
-  return `<svg viewBox="0 0 500 60" width="100%" role="img" aria-label="effect with 95% interval">
-    <line x1="${x(0)}" x2="${x(0)}" y1="8" y2="44" stroke="currentColor" opacity=".4"/>
-    <line x1="${x(r.min_effect)}" x2="${x(r.min_effect)}" y1="8" y2="44" stroke="currentColor" stroke-dasharray="3 3" opacity=".6"/>
-    <line x1="${x(r.ci_low)}" x2="${x(r.ci_high)}" y1="26" y2="26" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="${x(r.effect)}" cy="26" r="6" fill="var(--accent)"/>
-    <text x="${x(0)}" y="57" text-anchor="middle">0</text>
-    <text x="${x(r.min_effect) + 4}" y="12">min effect ${r.min_effect}</text>
-    <text x="${x(r.effect)}" y="57" text-anchor="middle">${r.effect >= 0 ? "+" : ""}${r.effect.toFixed(2)}</text></svg>`;
+  if (!box) return;
+  box.innerHTML = badge(text === "Approved" ? "approved" : "declined", text.toLowerCase());
+  const entry = box.closest(".entry");
+  entry.classList.remove("ask");
+  entry.querySelector(".who").textContent = text === "Approved" ? "Approved by you" : "Declined by you";
+  const h3 = entry.querySelector("h3"); h3.textContent = h3.textContent.replace(/\?$/, "");
 }
 
 function showCost(f) {
+  llmUsd = f.llm_cost_usd || 0;
   const rows = Object.entries(f.llm_calls || {}).map(([m, v]) =>
-    `<span>${esc(m.split("/").pop())}</span><span>${v.calls} calls · ${v.tokens_in + v.tokens_out} tokens · $${v.cost_usd.toFixed(4)}</span>`).join("");
-  const llm = f.llm_cost_usd || 0;
-  const training = trainingUsd ? `<span>Token Factory training</span><span>about $${trainingUsd.toFixed(3)}</span>
-    <span>Total</span><span>about $${(llm + trainingUsd).toFixed(3)}</span>` : "";
-  $("costbody").innerHTML = `<div class="kv">${rows}<span>Nemotron total</span><span>$${llm.toFixed(4)}</span>${training}</div>`;
-  $("cost").hidden = false;
+    `<div class="cost-row"><div><div>${esc(m.split("/").pop())}</div><div class="muted small">${plural(v.calls, "call")}, ${(v.tokens_in + v.tokens_out).toLocaleString("en")} tokens</div></div><span class="mono">${money(v.cost_usd, 4)}</span></div>`).join("");
+  const training = trainingUsd ? `<div class="cost-row"><div><div>Token Factory training</div><div class="muted small">${plural(jobs, "job")}, estimated</div></div><span class="mono">${money(trainingUsd)}</span></div>` : "";
+  const total = `<div class="cost-row total"><div>${trainingUsd ? "Total, estimated" : "Total"}</div><span class="mono">${money(llmUsd + trainingUsd)}</span></div>`;
+  $("costbody").innerHTML = rows + training + total;
+  $("costbody").style.cssText = "display:grid;gap:12px";
+  $("costCard").hidden = false;
+  setMetrics();
 }
 
 init();
