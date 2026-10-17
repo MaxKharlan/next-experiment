@@ -1,4 +1,5 @@
 import json
+from dataclasses import asdict
 
 import pytest
 
@@ -13,7 +14,7 @@ from bench.fixes import (
     seed_reference,
 )
 from bench.pair_cache import PairCache
-from bench.run_bench import run_case
+from bench.run_bench import run_case, saved_diagnosis
 from bench.score import score, summarize, table
 from core.connectors.storage import LocalStorage
 
@@ -287,3 +288,41 @@ def test_noise_floor_and_minimum_effect_reach_every_check(tmp_path):
 
     assert checklist(min_effect=0.03).false_alarm is True
     assert checklist(min_effect=0.06).false_alarm is False
+
+
+def test_resume_scores_a_saved_diagnosis_without_running_the_method(tmp_path):
+    storage = LocalStorage(tmp_path)
+    d = Diagnosis(
+        method="react_super",
+        ranking=[("lora_rank_too_small", 0.2), ("lr_too_low", 0.7)],
+        status="confirmed",
+        cause="lr_too_low",
+        mini_jobs=4,
+        training_cost_usd=0.05,
+    )
+    storage.put_text("case/react_super.json", json.dumps(asdict(d)))
+    assert saved_diagnosis(storage, "case", "react") == d
+    assert saved_diagnosis(storage, "case", "checklist") is None
+
+    def must_not_train(target, control):
+        raise AssertionError("a saved diagnosis needs no pair")
+
+    seen = []
+    (row,) = run_case(
+        _case(tmp_path),
+        ["react"],
+        router_for=lambda m: None,
+        pairs=PairCache(storage, "pairs.json", must_not_train),
+        fixes=FixCache(storage, "fixes.json", lambda hp: (0.44, "ftjob-fix")),
+        reference=REFERENCE,
+        pair_cost_usd=0.06,
+        on_diagnosis=seen.append,
+        saved=lambda m: saved_diagnosis(storage, "case", m),
+    )
+    assert (row.cause, row.top1, row.fix_success, row.mini_jobs) == (
+        "lr_too_low",
+        True,
+        True,
+        4,
+    )
+    assert seen == []  # the saved file is not written again
