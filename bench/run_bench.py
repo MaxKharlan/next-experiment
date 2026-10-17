@@ -12,6 +12,10 @@ sets the noise floor of every causal check, measured by that script, and
 Token Factory, unless --no-train: then a method that needs a missing pair skips the
 case, and a missing fix leaves fix success unknown. Diagnoses go next to the caches,
 the rows to artifacts/bench/<split>/rows.jsonl and the table to summary.md.
+
+--resume continues a run that stopped: a method whose diagnosis is already saved for
+a case is scored from that file instead of running again, so the model is not asked
+twice and the finished cases keep the answers they gave.
 """
 
 from __future__ import annotations
@@ -59,25 +63,28 @@ def run_case(
     on_diagnosis: Callable[[Diagnosis], None] | None = None,
     noise_sd: float | None = None,
     min_effect: float | None = None,
+    saved: Callable[[str], Diagnosis | None] | None = None,
 ) -> list[Row]:
     rows = []
     for method in methods:
-        try:
-            d = run_method(
-                method,
-                case,
-                router_for(method),
-                pairs,
-                pair_cost_usd=pair_cost_usd,
-                tavily=tavily,
-                noise_sd=noise_sd,
-                min_effect=min_effect,
-            )
-        except PairNotCached as err:
-            print(f"{case.id} {method}: skipped, {err}", flush=True)
-            continue
-        if on_diagnosis is not None:
-            on_diagnosis(d)
+        d = saved(method) if saved is not None else None
+        if d is None:
+            try:
+                d = run_method(
+                    method,
+                    case,
+                    router_for(method),
+                    pairs,
+                    pair_cost_usd=pair_cost_usd,
+                    tavily=tavily,
+                    noise_sd=noise_sd,
+                    min_effect=min_effect,
+                )
+            except PairNotCached as err:
+                print(f"{case.id} {method}: skipped, {err}", flush=True)
+                continue
+            if on_diagnosis is not None:
+                on_diagnosis(d)
         fixed_hp = None
         if d.status == "confirmed" and not case.healthy:
             fixed_hp = fixed_hyperparameters(case, d.cause)
@@ -95,6 +102,22 @@ def run_case(
             flush=True,
         )
     return rows
+
+
+# a method's diagnosis is saved under the name it gives itself
+SAVED_AS = {"react": "react_super"}
+
+
+def saved_diagnosis(
+    storage: LocalStorage, prefix: str, method: str
+) -> Diagnosis | None:
+    """The diagnosis a method already gave on a case, if it was saved."""
+    key = f"{prefix}/{SAVED_AS.get(method, method)}.json"
+    if not storage.exists(key):
+        return None
+    data = json.loads(storage.get_text(key))
+    data["ranking"] = [tuple(pair) for pair in data["ranking"]]
+    return Diagnosis(**data)
 
 
 def fix_trainer(
@@ -132,6 +155,9 @@ def main() -> None:
     parser.add_argument("--check-set", help="score pairs on this file, not validation")
     parser.add_argument("--noise-sd", type=float, help="noise floor of the checks")
     parser.add_argument("--min-effect", type=float, help="smallest effect of a cause")
+    parser.add_argument(
+        "--resume", action="store_true", help="score saved diagnoses again"
+    )
     args = parser.parse_args()
     pairs_name = f"pairs-{Path(args.check_set).stem}" if args.check_set else "pairs"
 
@@ -176,6 +202,9 @@ def main() -> None:
             on_diagnosis=lambda d, p=prefix: storage.put_text(
                 f"{p}/{d.method}.json", json.dumps(asdict(d), indent=2)
             ),
+            saved=(lambda m, p=prefix: saved_diagnosis(storage, p, m))
+            if args.resume
+            else None,
         )
 
     out = f"bench/{args.split}"
