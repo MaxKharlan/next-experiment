@@ -1,0 +1,98 @@
+{
+  "id": "ho-def-fault6-mild-s0",
+  "split": "heldout",
+  "task": "banking77",
+  "model": "Qwen/Qwen3-0.6B",
+  "truth": [
+    "lr_too_low"
+  ],
+  "hyperparameters": {
+    "batch_size": 8,
+    "n_epochs": 3,
+    "learning_rate": 1e-05,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "context_length": 8192,
+    "lora_r": 8,
+    "lora_alpha": 8,
+    "lora_dropout": 0.05
+  },
+  "case": {
+    "symptom": "After fine-tuning the model gives the right label for 8% of 200 held-out queries. We expected much better. 5 of the wrong answers are attached.",
+    "task": "classify banking queries into 77 intent labels, answer with the label",
+    "job": {
+      "model": "Qwen/Qwen3-0.6B",
+      "status": "succeeded",
+      "train_examples": 200,
+      "validation_examples": 50,
+      "hyperparameters": {
+        "batch_size": 8,
+        "n_epochs": 3,
+        "learning_rate": 1e-05,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "context_length": 8192,
+        "lora_r": 8,
+        "lora_alpha": 8,
+        "lora_dropout": 0.05
+      }
+    },
+    "checkpoints": [
+      {
+        "epoch": 1,
+        "train_loss": 1.6409,
+        "valid_loss": 1.7601
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.9884,
+        "valid_loss": 1.1344
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.8178,
+        "valid_loss": 1.1385
+      }
+    ],
+    "findings": [
+      "examples are 45 to 103 tokens long, far below context_length",
+      "no duplicates between train and validation"
+    ],
+    "wrong_answers": [
+      {
+        "query": "My PIN is not working and I need assistance.",
+        "expected": "pin_blocked",
+        "answer": "pin_not_working"
+      },
+      {
+        "query": "Why do I have to verify the top-up that I started?",
+        "expected": "verify_top_up",
+        "answer": "top_up_verification_required"
+      },
+      {
+        "query": "Can you tell me what currency I can have?",
+        "expected": "fiat_currency_support",
+        "answer": "asking_for_currency_information"
+      },
+      {
+        "query": "IM still waiting for my account to update from a cash deposit?",
+        "expected": "balance_not_updated_after_cheque_or_cash_deposit",
+        "answer": "waiting_for_account_update"
+      },
+      {
+        "query": "How long is my Europe transfer wait?",
+        "expected": "transfer_timing",
+        "answer": "transfer_wait_for_processing"
+      }
+    ]
+  },
+  "train": "artifacts/b6/train.jsonl",
+  "valid": "artifacts/b6/valid.jsonl",
+  "heldout": "artifacts/b18/heldout.jsonl",
+  "job_id": "ftjob-41aa10b718d543a38c5755bebb2949b8",
+  "heldout_metric": 0.08,
+  "tokens_per_example": 57,
+  "reports": []
+}

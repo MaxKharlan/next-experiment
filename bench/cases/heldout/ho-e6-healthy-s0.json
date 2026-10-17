@@ -1,0 +1,111 @@
+{
+  "id": "ho-e6-healthy-s0",
+  "split": "heldout",
+  "task": "banking77",
+  "model": "Qwen/Qwen3-0.6B",
+  "truth": [],
+  "hyperparameters": {
+    "batch_size": 8,
+    "n_epochs": 6,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "context_length": 8192,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05
+  },
+  "case": {
+    "symptom": "After fine-tuning the model gives the right label for 50% of 200 held-out queries. We expected much better. 5 of the wrong answers are attached.",
+    "task": "classify banking queries into 77 intent labels, answer with the label",
+    "job": {
+      "model": "Qwen/Qwen3-0.6B",
+      "status": "succeeded",
+      "train_examples": 200,
+      "validation_examples": 50,
+      "hyperparameters": {
+        "batch_size": 8,
+        "n_epochs": 6,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "context_length": 8192,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05
+      }
+    },
+    "checkpoints": [
+      {
+        "epoch": 1,
+        "train_loss": 1.1444,
+        "valid_loss": 0.6595
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.3486,
+        "valid_loss": 0.562
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.1325,
+        "valid_loss": 1.1615
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.048,
+        "valid_loss": 1.6048
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.0132,
+        "valid_loss": 1.6404
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.0019,
+        "valid_loss": 0.0043
+      }
+    ],
+    "findings": [
+      "examples are 45 to 103 tokens long, far below context_length",
+      "no duplicates between train and validation"
+    ],
+    "wrong_answers": [
+      {
+        "query": "My PIN is not working and I need assistance.",
+        "expected": "pin_blocked",
+        "answer": "unable_to_verify_pin"
+      },
+      {
+        "query": "IM still waiting for my account to update from a cash deposit?",
+        "expected": "balance_not_updated_after_cheque_or_cash_deposit",
+        "answer": "cash_withdrawal_not_updated"
+      },
+      {
+        "query": "Why am I being charged twice fro a restaurant?",
+        "expected": "transaction_charged_twice",
+        "answer": "order_chearged_twice"
+      },
+      {
+        "query": "I sent some money and the receiver can't access it.",
+        "expected": "transfer_not_received_by_recipient",
+        "answer": "transfer_not_working"
+      },
+      {
+        "query": "How long will it take to get my refund",
+        "expected": "Refund_not_showing_up",
+        "answer": "Refund_not_working"
+      }
+    ]
+  },
+  "train": "artifacts/b6/train.jsonl",
+  "valid": "artifacts/b6/valid.jsonl",
+  "heldout": "artifacts/b18/heldout.jsonl",
+  "job_id": "ftjob-7d4e1f4358ec4cb3bb7344cb95818d75",
+  "heldout_metric": 0.5,
+  "tokens_per_example": 57,
+  "reports": []
+}
