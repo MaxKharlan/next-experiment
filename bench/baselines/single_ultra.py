@@ -63,4 +63,5 @@ def diagnose_single(
         llm_cost_usd=sum(c.cost_usd for c in calls),
         llm_tokens=sum(c.tokens_in + c.tokens_out for c in calls),
         steps=[{"kind": "single_shot", **answer.model_dump()}],
+        confirmed=[ranking[0][0]] if confirmed else [],
     )

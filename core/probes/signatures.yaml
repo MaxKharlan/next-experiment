@@ -10,7 +10,7 @@ lr_range:
   default: {low: 0.30, ok: 0.70}
 
 epoch_count:
-  # n_epochs of 5 or more
+  # n_epochs of 10 or more
   too_many_epochs: {high: 0.85, ok: 0.15}
   default: {high: 0.20, ok: 0.80}
 

@@ -46,9 +46,13 @@ def tf_pair_runner(
     case: BenchCase,
     seeds: list[int],
     prefix: str,
+    eval_path: str | None = None,
 ) -> RunPair:
-    """Pairs as Token Factory jobs on the case's files, scored on its validation file."""
+    """Pairs as Token Factory jobs on the case's files, scored on eval_path, the
+    case's validation file by default."""
     from jobs.eval_local.exact_match import evaluate_adapter
+
+    scored_on = eval_path or case.valid
 
     def run_pair(target: Intervention, control: Intervention) -> None:
         digest = hashlib.sha1(pair_key(target.patch, control.patch).encode())
@@ -59,7 +63,7 @@ def tf_pair_runner(
             train_path=Path(case.train),
             valid_path=Path(case.valid),
             base_hp=case.hyperparameters,
-            evaluate=lambda adapter: evaluate_adapter(adapter, case.valid),
+            evaluate=lambda adapter: evaluate_adapter(adapter, scored_on),
             prefix=f"{prefix}/{digest.hexdigest()[:10]}",
             seeds=seeds,
         )(target, control)
@@ -75,7 +79,15 @@ def run_method(
     *,
     pair_cost_usd: float,
     tavily: Tavily | None = None,
+    noise_sd: float | None = None,
+    min_effect: float | None = None,
 ) -> Diagnosis:
+    """noise_sd and min_effect replace the methods' defaults in every causal check."""
+    checks = {
+        k: v
+        for k, v in (("noise_sd", noise_sd), ("min_effect", min_effect))
+        if v is not None
+    }
     ctx = InvestigationContext(
         investigation_id=f"bench-{case.id}-{method}",
         mode="A",
@@ -87,10 +99,10 @@ def run_method(
         return diagnose_single(router, case.case)
     if method == "react":
         return diagnose_react(
-            ctx, case.case, router, run_pair, pair_cost_usd=pair_cost_usd
+            ctx, case.case, router, run_pair, pair_cost_usd=pair_cost_usd, **checks
         )
     if method == "checklist":
-        return diagnose_checklist(ctx, run_pair, pair_cost_usd=pair_cost_usd)
+        return diagnose_checklist(ctx, run_pair, pair_cost_usd=pair_cost_usd, **checks)
     if method == "next_experiment":
         result = investigate(
             ctx,
@@ -99,6 +111,7 @@ def run_method(
             run_pair,
             intervention_cost_usd=pair_cost_usd,
             tavily=tavily,
+            **checks,
         )
         return from_investigation(result)
     raise ValueError(f"unknown method {method!r}")

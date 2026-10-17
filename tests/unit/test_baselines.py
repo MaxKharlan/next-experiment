@@ -142,7 +142,11 @@ def test_react_runs_the_tools_it_picks_and_the_code_decides_the_status():
     assert results[1]["outcome"] == "low"
     assert results[2]["result"]["status"] == "confirmed"
     assert "checked already" in results[3]["error"]
-    assert (d.status, d.cause) == ("confirmed", "lr_too_low")
+    assert (d.status, d.cause, d.confirmed) == (
+        "confirmed",
+        "lr_too_low",
+        ["lr_too_low"],
+    )
     assert d.top[:2] == ["lr_too_low", "lora_rank_too_small"]
     assert '+  "learning_rate": 0.0001' in d.patch
     assert (d.mini_jobs, d.training_cost_usd) == (4, 0.06)
@@ -172,7 +176,11 @@ def test_checklist_runs_every_check_in_catalog_order():
     assert calls == ["learning_rate", "n_epochs", "lora_r"]
     probes = [s["probe"] for s in d.steps if s["kind"] == "probe"]
     assert probes == ["lr_range", "epoch_count", "lora_rank", "loss_curve"]
-    assert (d.status, d.cause) == ("confirmed", "lr_too_low")
+    assert (d.status, d.cause, d.confirmed) == (
+        "confirmed",
+        "lr_too_low",
+        ["lr_too_low"],
+    )
     assert "too_many_epochs" not in d.top  # rejected
     assert (d.mini_jobs, d.training_cost_usd, d.llm_cost_usd) == (12, 0.18, 0.0)
 
@@ -216,6 +224,7 @@ def test_agent_report_reads_as_a_diagnosis():
     assert d.ranking[0][1] == pytest.approx(0.3 / 0.5)
     assert d.ranking[1][1] == 0.0
     assert (d.status, d.cause, d.patch) == ("confirmed", "lr_too_low", "p")
+    assert d.confirmed == ["lr_too_low"]
     assert (d.mini_jobs, d.training_cost_usd, d.llm_tokens) == (8, 0.12, 150)
 
 

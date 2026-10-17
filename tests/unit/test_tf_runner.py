@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from types import SimpleNamespace as NS
 
@@ -94,6 +95,11 @@ def test_pair_trains_on_token_factory_and_scores_the_last_checkpoint(tmp_path):
     orders = [Path(u).read_text() for u in tf.uploads[1:3]]
     assert orders[0] != orders[1]
     assert sorted(orders[0].splitlines()) == sorted(orders[1].splitlines())
+    # each job's adapter is on record, to score it again later
+    state = json.loads(
+        (tmp_path / "artifacts/investigations/inv-1/tf/h1/jobs.json").read_text()
+    )
+    assert state["_adapters"]["ftjob-3"] == "investigations/inv-1/tf/h1/ck-ftjob-3-75"
 
 
 def test_rerun_reuses_the_saved_jobs(tmp_path):

@@ -4,7 +4,11 @@
 
 For each case, pairs and fixes are cached under artifacts/bench/<split>/<case id>/,
 so a rerun and the other methods reuse them; the investigations listed in the
-case's "reports" seed both caches. A pair or a fix that is not cached trains on
+case's "reports" seed both caches. Pairs are scored on the case's validation file,
+or on --check-set: then their cache is pairs-<set name>.json, which
+scripts/rescore_pairs.py fills from the saved adapters without training. --noise-sd
+sets the noise floor of every causal check, measured by that script, and
+--min-effect the smallest effect that counts as a cause, about 3 noise SDs. A pair or a fix that is not cached trains on
 Token Factory, unless --no-train: then a method that needs a missing pair skips the
 case, and a missing fix leaves fix success unknown. Diagnoses go next to the caches,
 the rows to artifacts/bench/<split>/rows.jsonl and the table to summary.md.
@@ -53,6 +57,8 @@ def run_case(
     pair_cost_usd: float,
     tavily: Tavily | None = None,
     on_diagnosis: Callable[[Diagnosis], None] | None = None,
+    noise_sd: float | None = None,
+    min_effect: float | None = None,
 ) -> list[Row]:
     rows = []
     for method in methods:
@@ -64,6 +70,8 @@ def run_case(
                 pairs,
                 pair_cost_usd=pair_cost_usd,
                 tavily=tavily,
+                noise_sd=noise_sd,
+                min_effect=min_effect,
             )
         except PairNotCached as err:
             print(f"{case.id} {method}: skipped, {err}", flush=True)
@@ -121,7 +129,11 @@ def main() -> None:
     parser.add_argument("--cases", nargs="+", help="only these case IDs")
     parser.add_argument("--seeds", type=int, nargs="+", default=[0, 1])
     parser.add_argument("--no-train", action="store_true")
+    parser.add_argument("--check-set", help="score pairs on this file, not validation")
+    parser.add_argument("--noise-sd", type=float, help="noise floor of the checks")
+    parser.add_argument("--min-effect", type=float, help="smallest effect of a cause")
     args = parser.parse_args()
+    pairs_name = f"pairs-{Path(args.check_set).stem}" if args.check_set else "pairs"
 
     storage = LocalStorage("artifacts")
     tf = TokenFactory.from_settings()
@@ -133,10 +145,12 @@ def main() -> None:
         prefix = f"bench/{args.split}/{case.id}"
         pairs = PairCache(
             storage,
-            f"{prefix}/pairs.json",
+            f"{prefix}/{pairs_name}.json",
             None
             if args.no_train
-            else tf_pair_runner(tf, storage, case, args.seeds, f"{prefix}/tf"),
+            else tf_pair_runner(
+                tf, storage, case, args.seeds, f"{prefix}/tf", args.check_set
+            ),
         )
         fixes = FixCache(
             storage,
@@ -144,7 +158,8 @@ def main() -> None:
             None if args.no_train else fix_trainer(tf, storage, case, prefix),
         )
         for report in case.reports:
-            seed_cache(pairs, Path(report))
+            if not args.check_set:  # the reports' pairs were scored on validation
+                seed_cache(pairs, Path(report))
             seed_fixes(fixes, Path(report))
         seed_reference(fixes, case)
         rows += run_case(
@@ -156,6 +171,8 @@ def main() -> None:
             reference=reference_metric(case.task, case.model),
             pair_cost_usd=pair_cost(case, len(args.seeds)),
             tavily=tavily,
+            noise_sd=args.noise_sd,
+            min_effect=args.min_effect,
             on_diagnosis=lambda d, p=prefix: storage.put_text(
                 f"{p}/{d.method}.json", json.dumps(asdict(d), indent=2)
             ),

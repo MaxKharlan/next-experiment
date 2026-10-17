@@ -9,6 +9,9 @@
   No confirmed cause, or a cause without a fix, is a failure. An untrained fix or a
   missing reference leaves it unknown.
 - P(true cause): the probability the method gave the true cause when it stopped.
+- Wrong confirmations: causes the method declared proven that are not in the truth.
+  One-factor checks can prove a second cause on an undertrained job: a larger
+  LoRA rank also helps a model that a low learning rate held back.
 
 Rates are counts, such as 2/3, because the mini-benchmark has a handful of cases.
 """
@@ -41,6 +44,7 @@ class Row:
     fixed_metric: float | None = None
     reference: float | None = None
     fix_success: bool | None = None
+    wrong_confirmations: int = 0
 
 
 def fix_outcome(
@@ -84,6 +88,7 @@ def score(
         fixed_metric=fixed_metric,
         reference=reference,
         fix_success=fix_outcome(d, has_fix, fixed_metric, reference) if fault else None,
+        wrong_confirmations=sum(1 for c in d.confirmed if c not in case.truth),
     )
 
 
@@ -108,6 +113,7 @@ def summarize(rows: Sequence[Row]) -> dict[str, dict]:
             "top3": count([r.top3 for r in mine]),
             "false_alarms": count([r.false_alarm for r in mine]),
             "fix_success": count([r.fix_success for r in mine]),
+            "wrong_confirmations": sum(r.wrong_confirmations for r in mine),
             "p_true": mean([r.p_true for r in mine]),
             "cost_usd": mean([r.cost_usd for r in mine]),
             "llm_tokens": mean([r.llm_tokens for r in mine]),
@@ -129,15 +135,16 @@ def table(summary: dict[str, dict]) -> str:
     """Markdown table per method, for the README and Devpost."""
     lines = [
         (
-            "| method | cases | top-1 | top-3 | false alarms | fix success "
-            "| P(true cause) | $ per case | mini-jobs per case |"
+            "| method | cases | top-1 | top-3 | false alarms | wrong confirmations "
+            "| fix success | P(true cause) | $ per case | mini-jobs per case |"
         ),
-        "|---|---|---|---|---|---|---|---|---|",
+        "|---|---|---|---|---|---|---|---|---|---|",
     ]
     for method, s in summary.items():
         lines.append(
             f"| {method} | {s['cases']} | {_rate(s['top1'])} | {_rate(s['top3'])} "
-            f"| {_rate(s['false_alarms'])} | {_rate(s['fix_success'])} "
+            f"| {_rate(s['false_alarms'])} | {s['wrong_confirmations']} "
+            f"| {_rate(s['fix_success'])} "
             f"| {_num(s['p_true'], '.2f')} | {_num(s['cost_usd'], '.3f')} "
             f"| {_num(s['mini_jobs'], '.1f')} |"
         )

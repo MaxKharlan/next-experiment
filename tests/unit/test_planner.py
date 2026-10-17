@@ -50,12 +50,22 @@ def test_next_action():
     assert next_action(high, threshold=0.6, testable={"h1"}, **poor)[0] == "stop"
 
 
+def test_no_check_for_an_unlikely_leader_once_probes_run_out():
+    kw = {"gain_bits": 0.0, "budget_left_usd": 1.0, "intervention_cost_usd": 0.0}
+    middling = {"h1": 0.45, "h2": 0.45, "unlisted": 0.1}
+    assert next_action(middling, threshold=0.6, testable={"h1"}, **kw)[0] == "intervene"
+    unlikely = {"h1": 0.04, "h2": 0.86, "unlisted": 0.1}
+    action, why = next_action(unlikely, threshold=0.6, testable={"h1"}, **kw)
+    assert action == "stop" and "h1 at 0.04" in why
+
+
 @pytest.mark.parametrize(
     ("hp", "probe", "outcome"),
     [
         ({"learning_rate": 1e-5}, "lr_range", "low"),
         ({"learning_rate": 1e-4}, "lr_range", "ok"),
-        ({"n_epochs": 6}, "epoch_count", "high"),
+        ({"n_epochs": 12}, "epoch_count", "high"),
+        ({"n_epochs": 6}, "epoch_count", "ok"),
         ({"lora_r": 2}, "lora_rank", "low"),
     ],
 )
