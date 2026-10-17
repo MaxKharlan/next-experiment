@@ -72,4 +72,5 @@ def diagnose_checklist(
         mini_jobs=sum(pair_jobs(c) for c in checks),
         training_cost_usd=pair_cost_usd * len(checks),
         steps=steps,
+        confirmed=[c["hypothesis"] for c in confirmed],
     )

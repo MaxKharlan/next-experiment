@@ -96,12 +96,13 @@ def test_rejected_leader_hands_over_to_the_next():
     run_pair, calls = _runner(
         {"h1": ([0.12, 0.12], [0.46, 0.42]), "h2": ([0.16, 0.20], [0.02, 0.02])}
     )
-    # config and curve point at epochs, so they are tested first and rejected
+    # config and curve point at epochs, so they are tested first and rejected; the
+    # low rate keeps h2 likely enough to be tested next
     overfit = [
         {"train_loss": t, "valid_loss": v}
         for t, v in [(1.17, 0.45), (0.33, 1.03), (0.08, 2.03)]
     ]
-    ctx = _ctx(overfit, n_epochs=6, learning_rate=1e-4)
+    ctx = _ctx(overfit, n_epochs=12, learning_rate=2e-5)
     result = investigate(ctx, {}, router, run_pair, explain=False)
     assert [list(c) for c in calls] == [["n_epochs"], ["learning_rate"]]
     assert result.status == "confirmed"

@@ -46,7 +46,9 @@ class EpochCount(Probe):
     name = "epoch_count"
     level = 0
     outcomes = ("high", "ok")
-    HIGH = 5
+    # calibrated on the dev set: with 200 BANKING77 examples the best recipe trains
+    # 6 epochs and 18 did not hurt, so 5 flagged healthy jobs (it was 5 before)
+    HIGH = 10
 
     def estimate_cost(self, ctx: InvestigationContext) -> float:
         return 0.0

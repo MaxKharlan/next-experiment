@@ -110,7 +110,7 @@ def test_summary_counts_known_values_and_prints_a_table(tmp_path):
         (1, 2),
     )
     assert s["p_true"] == pytest.approx(0.4)
-    assert "| m | 3 | 1/2 | 1/2 | 0/1 | 1/2 | 0.40 |" in table(summarize(rows))
+    assert "| m | 3 | 1/2 | 1/2 | 0/1 | 0 | 1/2 | 0.40 |" in table(summarize(rows))
 
 
 def test_standard_fix_is_the_target_of_the_causal_check(tmp_path):
@@ -240,3 +240,50 @@ def test_a_fix_with_the_reference_recipe_needs_no_training(tmp_path):
         seed_reference(FixCache(LocalStorage(tmp_path), "f2.json"), bigger, tmp_path)
         == 0
     )
+
+
+def test_causes_proven_outside_the_truth_are_wrong_confirmations(tmp_path):
+    fault, healthy = _case(tmp_path), _case(tmp_path, "healthy", truth=())
+    both = _d(
+        [("lr_too_low", 0.6)],
+        "confirmed",
+        "lr_too_low",
+        confirmed=["lr_too_low", "lora_rank_too_small"],
+    )
+    alarm = _d([("too_many_epochs", 0.5)], "confirmed", "too_many_epochs")
+    alarm.confirmed = ["too_many_epochs"]
+    rows = [score(fault, both), score(healthy, alarm)]
+    assert [r.wrong_confirmations for r in rows] == [1, 1]
+    assert summarize(rows)["m"]["wrong_confirmations"] == 2
+
+
+def test_noise_floor_and_minimum_effect_reach_every_check(tmp_path):
+    # a small gain like lr 3e-4 on the healthy reference, scored on the check set
+    pairs = {
+        "learning_rate": ([0.52, 0.56], [0.495, 0.51]),
+        "n_epochs": ([0.41, 0.39], [0.495, 0.51]),
+        "lora_r": ([0.50, 0.50], [0.495, 0.51]),
+    }
+
+    def run_pair(target, control):
+        target.metrics, control.metrics = pairs[next(iter(target.patch))]
+
+    storage = LocalStorage(tmp_path)
+    healthy = _case(tmp_path, "healthy", truth=(), learning_rate=2e-5)
+
+    def checklist(**limits):
+        (row,) = run_case(
+            healthy,
+            ["checklist"],
+            router_for=lambda m: None,
+            pairs=PairCache(storage, "pairs.json", run_pair),
+            fixes=FixCache(storage, "fixes.json"),
+            reference=REFERENCE,
+            pair_cost_usd=0.06,
+            noise_sd=0.019,
+            **limits,
+        )
+        return row
+
+    assert checklist(min_effect=0.03).false_alarm is True
+    assert checklist(min_effect=0.06).false_alarm is False

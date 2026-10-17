@@ -1,8 +1,10 @@
 """What every method in the benchmark returns for a case (section 10 of the project doc).
 
 The metrics read only this record: the ranking gives top-1, top-3 and the probability
-of the true cause; status "confirmed" on a healthy case is a false alarm; the cost
-fields and the number of mini-jobs give the price of the diagnosis.
+of the true cause; status "confirmed" on a healthy case is a false alarm; "confirmed"
+lists every cause the method declared proven, so a confirmed cause outside the
+truth counts as a wrong confirmation; the cost fields and the number of mini-jobs
+give the price of the diagnosis.
 """
 
 from __future__ import annotations
@@ -27,6 +29,8 @@ class Diagnosis:
     mini_jobs: int = 0  # Post-training jobs or local runs, one per arm and seed
     training_cost_usd: float = 0.0
     steps: list[dict[str, Any]] = field(default_factory=list)
+    # every cause the method declared proven, the chosen one included
+    confirmed: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         # a confirmed cause is the method's answer, whatever the ranking said
@@ -69,6 +73,7 @@ def from_investigation(result: InvestigationResult) -> Diagnosis:
             total = sum(probs.values())
             probs = {h: p / total for h, p in probs.items()} if total else probs
     checks = [s for s in result.steps if s["kind"] == "intervention"]
+    proven = [s for s in checks if s["result"]["status"] == "confirmed"]
     return Diagnosis(
         method="next_experiment",
         ranking=ranked((classes[h], p) for h, p in probs.items() if h in classes),
@@ -80,4 +85,5 @@ def from_investigation(result: InvestigationResult) -> Diagnosis:
         mini_jobs=sum(pair_jobs(s) for s in checks),
         training_cost_usd=sum(s.get("cost_usd", 0.0) for s in checks),
         steps=result.steps,
+        confirmed=[classes[s["hypothesis"]] for s in proven],
     )

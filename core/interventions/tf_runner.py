@@ -7,7 +7,8 @@ successful job the last checkpoint is downloaded into local storage and scored b
 `evaluate`, which gets the adapter directory and returns the metric. The evaluator
 is injected (jobs/eval_local/exact_match.py on a MacBook), so this module needs no
 torch. Job IDs are saved under <prefix>/jobs.json as they are created, so a rerun
-waits for the same jobs instead of paying for new ones.
+waits for the same jobs instead of paying for new ones; "_adapters" there maps each
+job to its downloaded adapter, so the adapters can be scored again on another set.
 
 Training on Token Factory is deterministic: the same file and hyperparameters give a
 byte-identical adapter. If two seeds of an arm still train identical weights, the
@@ -104,6 +105,10 @@ class TokenFactoryPairRunner:
                     flush=True,
                 )
             weights.setdefault((arm.kind, digest), seed)
+            state.setdefault("_adapters", {})[job_id] = str(
+                adapter_dir.relative_to(self.storage.root)
+            )
+            self.storage.put_text(state_key, json.dumps(state, indent=2))
             arm.metrics.append(self.evaluate(adapter_dir))
             arm.ft_job_ids.append(job_id)
             print(
