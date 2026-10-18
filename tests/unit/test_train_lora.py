@@ -1,6 +1,6 @@
 import pytest
 
-pytest.importorskip("torch")
+torch = pytest.importorskip("torch")
 pytest.importorskip("peft")
 
 from jobs.kaggle.train_lora import PAD_MULTIPLE, collate, encode, lr_factor
@@ -47,3 +47,138 @@ def test_lr_factor():
     assert lr_factor(5, total=10, warmup=0, schedule="linear") == 0.5
     assert lr_factor(0, total=10, warmup=2, schedule="constant") == 0.5
     assert lr_factor(9, total=10, warmup=2, schedule="constant") == 1.0
+
+
+class _TinyLM(torch.nn.Module):
+    """Deterministic CPU next-token model; no downloads or dropout."""
+
+    def __init__(self):
+        super().__init__()
+        self.projection = torch.nn.Linear(8, 8, bias=False)
+
+    def forward(self, input_ids, attention_mask):
+        from types import SimpleNamespace
+
+        from torch.nn import functional
+
+        inputs = functional.one_hot(input_ids % 8, num_classes=8).float()
+        return SimpleNamespace(logits=self.projection(inputs))
+
+
+def _gradients(rows, *, faulty=False):
+    from jobs.kaggle.train_lora import backward_microbatches
+
+    torch.manual_seed(42)
+    model = _TinyLM()
+    batches = [collate(group, 0, "cpu") for group in rows]
+    loss, correct, tokens = backward_microbatches(
+        model, batches, microbatch_mean=faulty
+    )
+    return model.projection.weight.grad.clone(), loss, correct, tokens
+
+
+@pytest.mark.parametrize("sizes", [(1, 5, 2), (3, 3, 3), (1, 4), (2,)])
+def test_accumulation_matches_full_batch(sizes):
+    rows = [
+        {"input_ids": [0] + [i + 1] * n, "labels": [-100] + [i + 1] * n}
+        for i, n in enumerate(sizes)
+    ]
+    full = _gradients([rows])
+    accumulated = _gradients([[row] for row in rows])
+    torch.testing.assert_close(full[0], accumulated[0])
+    assert full[1] == pytest.approx(accumulated[1])
+    assert full[2:] == accumulated[2:]
+    faulty = _gradients([[row] for row in rows], faulty=True)
+    if len(set(sizes)) == 1:
+        torch.testing.assert_close(full[0], faulty[0])
+    else:
+        assert not torch.allclose(full[0], faulty[0], atol=1e-5)
+
+
+def test_accumulation_rejects_empty_targets_before_backward():
+    from jobs.kaggle.train_lora import backward_microbatches
+
+    model = _TinyLM()
+    empty = collate([{"input_ids": [1, 2], "labels": [-100, -100]}], 0, "cpu")
+    valid = collate([{"input_ids": [1, 2], "labels": [-100, 2]}], 0, "cpu")
+    for batches in ([], [valid, empty]):
+        with pytest.raises(ValueError, match="supervised"):
+            backward_microbatches(model, batches)
+        assert all(p.grad is None for p in model.parameters())
+
+
+def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch):
+    import json
+
+    from jobs.kaggle import train_lora as trainer
+
+    class Tokenizer(_Tok):
+        pad_token_id = 0
+
+        def __call__(self, text, add_special_tokens):
+            return {"input_ids": [ord(c) % 8 for c in text]}
+
+    class Model(_TinyLM):
+        def save_pretrained(self, path):
+            pass
+
+    models = []
+
+    def load(*args, **kwargs):
+        model = Model()
+        models.append(model)
+        return model
+
+    monkeypatch.setattr(
+        trainer.AutoTokenizer, "from_pretrained", lambda *_: Tokenizer()
+    )
+    monkeypatch.setattr(trainer.AutoModelForCausalLM, "from_pretrained", load)
+    monkeypatch.setattr(trainer, "get_peft_model", lambda model, _: model)
+    data = tmp_path / "data.jsonl"
+    data.write_text(
+        "\n".join(
+            json.dumps(
+                {"messages": [CHAT[0], {"role": "assistant", "content": "a" * n}]}
+            )
+            for n in [1, 5, 2, 7, 3]
+        )
+    )
+    summaries = []
+    for bs, accumulation in [(3, 1), (1, 3)]:
+        summaries.append(
+            trainer.train(
+                data,
+                data,
+                tmp_path / str(bs),
+                device="cpu",
+                seed=42,
+                hp={"batch_size": bs, "gradient_accumulation_steps": accumulation},
+            )
+        )
+    assert [s["steps"] for s in summaries] == [2, 2]
+    assert summaries[0]["answer_tokens"] == summaries[1]["answer_tokens"]
+    for full, accumulated in zip(models[0].parameters(), models[1].parameters()):
+        torch.testing.assert_close(full, accumulated)
+    assert summaries[1]["gradient_accumulation_steps"] == 3
+    assert summaries[1]["code_fault"] is None
+
+
+@pytest.mark.parametrize("accumulation", [0, -1, True, 1.5])
+def test_invalid_accumulation_fails_before_loading(accumulation):
+    from jobs.kaggle.train_lora import train
+
+    with pytest.raises(ValueError, match="positive integer"):
+        train(
+            "missing",
+            "missing",
+            "unused",
+            hp={"gradient_accumulation_steps": accumulation},
+        )
+
+
+@pytest.mark.parametrize("fault", ["unknown", "microbatch_mean"])
+def test_invalid_code_fault_fails_before_loading(fault):
+    from jobs.kaggle.train_lora import train
+
+    with pytest.raises(ValueError):
+        train("missing", "missing", "unused", code_fault=fault)
