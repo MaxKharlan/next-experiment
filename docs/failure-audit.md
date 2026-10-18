@@ -1,6 +1,6 @@
 # Reproducible benchmark failure inventory
 
-The B21 inventory makes the saved benchmark's failure cases inspectable without
+This benchmark inventory makes the saved benchmark's failure cases inspectable without
 rerunning models or training. It complements the explanations in
 [the benchmark write-up](benchmark.md#error-analysis).
 
@@ -55,3 +55,6 @@ investigation reports for that analysis.
 The historical benchmark contains only low-learning-rate fault cases. This
 inventory does not close evaluation of answer truncation or other fault classes,
 and it does not replace B9 fault coverage or a new heldout experiment.
+
+The external-source collection required by B21 is maintained separately in
+[Public fine-tuning reports](public-finetuning-cases.md).
