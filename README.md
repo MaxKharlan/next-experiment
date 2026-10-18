@@ -2,12 +2,9 @@
 
 An agent that finds out why your LLM fine-tune failed and proves the cause with experiments on Nebius Token Factory.
 
-Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser.
+Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser. The video below is that page, slowed down so that each step can be read.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/media/investigation-dark.png">
-  <img alt="The investigation screen: the cause and its proof at the top, the hypothesis board and the case on the left, the numbered experiment log on the right" src="docs/media/investigation-light.png">
-</picture>
+https://github.com/user-attachments/assets/d46683f9-7c1d-46d0-bf82-f413ff1851ee
 
 ## What it does
 
@@ -112,6 +109,12 @@ uv run python -m scripts.build_pages --out _site
 
 ```bash
 python -m http.server -d _site
+```
+
+The README's video is the same site, recorded at a slower pace so that each step can be read. Recording it needs Google Chrome and ffmpeg:
+
+```bash
+uv run --with playwright python -m scripts.record_demo_video --out demo.mp4
 ```
 
 Investigate the demo case from the command line, with causal checks on Token Factory (about $0.06 and 10 to 20 minutes per check when Token Factory has free capacity). `--job <failed job ID>` also runs the weight probe on that job's adapter:
