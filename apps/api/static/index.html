@@ -275,6 +275,11 @@
     .entry-head { flex-direction: column; gap: 2px; }
     .entry-head .meta { white-space: normal; line-height: 18px; }
   }
+  .case-start { margin-bottom: 24px; }
+  .case-start summary { cursor: pointer; font-weight: 500; }
+  .case-start textarea { display: block; width: 100%; box-sizing: border-box; min-height: 180px; margin: 12px 0; padding: 12px; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; font-family: var(--font-mono); }
+  .case-start .controls { flex-wrap: wrap; }
+  .case-start pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 </style>
 </head>
 <body class="idle">
@@ -295,6 +300,19 @@
 </header>
 
 <main class="content">
+  <details class="card case-start" id="caseStart" hidden>
+    <summary>Investigate your own job</summary>
+    <p class="muted small">Token Factory · BANKING77 · Qwen3-0.6B. Paste a JSON object containing case and experiment, or load it from a file. Dataset paths must exist on the API server; this form does not upload training data.</p>
+    <label for="caseFile">Load case request (JSON)</label>
+    <input id="caseFile" type="file" accept=".json,application/json">
+    <label for="caseRequest">Case and experiment</label>
+    <textarea id="caseRequest" spellcheck="false" placeholder='{"case": {...}, "experiment": {...}}'></textarea>
+    <div class="controls">
+      <button id="validateCase" class="btn btn-ghost" type="button">Validate without training</button>
+      <button id="launchCase" class="btn btn-primary" type="button" disabled>Start paid investigation</button>
+    </div>
+    <pre id="caseFeedback" class="muted small" role="status" aria-live="polite"></pre>
+  </details>
   <section class="verdict" aria-live="polite">
     <div>
       <div class="kicker" id="statusEyebrow"></div>
@@ -376,6 +394,10 @@ async function init() {
   const cases = await (await fetch(STATIC ? "demo-cases.json" : "/api/demo-cases")).json();
   $("demo").innerHTML = cases.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("");
   if (STATIC) return staticMode(cases);
+  try {
+    const response = await fetch("/api/capabilities");
+    if (response.ok) $("caseStart").hidden = !(await response.json()).explicit_cases;
+  } catch { /* Keep paid controls hidden when capabilities are unavailable. */ }
   const past = await (await fetch("/api/investigations")).json();
   const groups = {};
   for (const p of past) (groups[STATUSES[p.status] || String(p.status).replace(/_/g, " ")] ||= []).push(p);
@@ -395,6 +417,68 @@ $("start").onclick = async () => {
   watch(id);
 };
 $("past").onchange = (e) => { if (e.target.value) { history.replaceState(null, "", `?id=${e.target.value}`); watch(e.target.value); } };
+
+let validatedCaseText = null;
+let caseBusy = false;
+function invalidateCase() {
+  validatedCaseText = null;
+  $("launchCase").disabled = true;
+  $("caseFeedback").textContent = "Validate the request before starting.";
+}
+function caseControls(busy) {
+  caseBusy = busy;
+  for (const id of ["caseFile", "caseRequest", "validateCase"]) $(id).disabled = busy;
+  $("launchCase").disabled = busy || validatedCaseText !== $("caseRequest").value;
+}
+async function casePost(route, text) {
+  const payload = JSON.parse(text);
+  const response = await fetch(`/api/investigations/${route}`, {
+    method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload),
+  });
+  const body = await response.json();
+  if (!response.ok) throw new Error(typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail || body));
+  return body;
+}
+$("caseRequest").oninput = invalidateCase;
+$("caseFile").onchange = async () => {
+  if (caseBusy) return;
+  const file = $("caseFile").files[0];
+  if (!file) return;
+  invalidateCase();
+  caseControls(true);
+  try { $("caseRequest").value = await file.text(); }
+  catch (error) { $("caseFeedback").textContent = error.message; }
+  finally { caseControls(false); }
+};
+$("validateCase").onclick = async () => {
+  if (caseBusy) return;
+  invalidateCase();
+  const text = $("caseRequest").value;
+  caseControls(true);
+  $("caseFeedback").textContent = "Checking datasets and settings…";
+  try {
+    const result = await casePost("validate", text);
+    const p = result.protocol;
+    validatedCaseText = text;
+    $("caseFeedback").textContent = `Validated: ${p.job_id}\nModel: ${p.model}\nInvestigation budget: ${money(p.budget_usd)}\nEstimated training cost per causal pair: ${money(p.pair_estimate_usd, 4)}\n${Object.entries(p.datasets).map(([role, data]) => `${role}: ${data.examples} examples`).join("\n")}\nNo training started. Provider job status has not been checked yet. Starting can incur model and training charges; estimates are not a hard spending cap.`;
+  } catch (error) { $("caseFeedback").textContent = error.message; }
+  finally { caseControls(false); }
+};
+$("launchCase").onclick = async () => {
+  if (caseBusy || validatedCaseText === null || validatedCaseText !== $("caseRequest").value) return;
+  const text = validatedCaseText;
+  validatedCaseText = null;
+  caseControls(true);
+  try {
+    const result = await casePost("from-case", text);
+    $("caseFeedback").textContent = `Started ${result.id}.`;
+    $("caseStart").open = false;
+    history.replaceState(null, "", `?id=${encodeURIComponent(result.id)}`);
+    watch(result.id);
+  } catch (error) {
+    $("caseFeedback").textContent = `${error.message} Check Past runs before retrying: a network error can occur after the server has started the investigation.`;
+  } finally { caseControls(false); }
+};
 
 function showMethod() {
   $("feed").innerHTML = METHOD.map(([title, who, text, node], i) => `<article class="entry preview ${node || ""}">
