@@ -28,3 +28,12 @@ loss_curve:
   contradictory_labels: {barely_moved: 0.40, overfit: 0.10, normal: 0.50}
   train_val_overlap: {barely_moved: 0.05, overfit: 0.05, normal: 0.90}
   default: {barely_moved: 0.20, overfit: 0.10, normal: 0.70}
+
+lora_weights:
+  # B25: median |dW| / |W| over the adapted matrices below 0.0195. Of the 13 failed
+  # Token Factory jobs behind the cases, all 8 with a low learning rate were below and
+  # all 5 others above (docs/b25-lora-weights.md); the rows are those counts with one
+  # added to each outcome. Too few epochs also leaves the weights small, and there are
+  # no jobs with other causes to count, so they all use the default row.
+  lr_too_low: {small: 0.90, normal: 0.10}
+  default: {small: 0.14, normal: 0.86}

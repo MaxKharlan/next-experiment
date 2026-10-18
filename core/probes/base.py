@@ -24,6 +24,10 @@ class Probe(ABC):
     level: ClassVar[int]  # 0: CPU and Nano, 1: checkpoint inference, 2: mini fine-tune
     outcomes: ClassVar[tuple[str, ...]]
 
+    def available(self, ctx: InvestigationContext) -> bool:
+        """Whether the probe can run on this job; a probe that needs a file says no without it."""
+        return True
+
     @abstractmethod
     def estimate_cost(self, ctx: InvestigationContext) -> float: ...
 

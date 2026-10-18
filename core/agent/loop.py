@@ -128,7 +128,7 @@ def investigate(
     if rest > 1e-9:  # causes outside the list keep their share of the mass
         probs["unlisted"], classes["unlisted"] = rest, "unlisted"
     testable = {h.id for h in hypotheses if h.fault_class in BUILDERS}
-    remaining = {p.name: p for p in probes}
+    remaining = {p.name: p for p in probes if p.available(ctx)}
     base_hp = dict(ctx.job_config.get("hyperparameters", {}))
     evidence: list[str] = []
     result = InvestigationResult(
