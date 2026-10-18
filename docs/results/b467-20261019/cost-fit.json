@@ -1,0 +1,116 @@
+{
+  "models": [
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "scope": "observed training stage; provider capacity waiting may be included",
+      "features": [
+        "intercept",
+        "trained_tokens/1000",
+        "epochs-1"
+      ],
+      "coefficients": [
+        97.80460150589496,
+        3.1886777412477776,
+        12.200101792117241
+      ],
+      "fixed_stages_seconds": {
+        "datasets_s": 392.0,
+        "startup_s": 146.5,
+        "finalize_s": 75.5
+      },
+      "fit_job_ids": [
+        "ftjob-504114ab32434cc1b65b59e217798f5c",
+        "ftjob-04eedb2155ae43dcb3b1127a6a0ab8b6",
+        "ftjob-a29541368aa44867b5c13edd843eec37",
+        "ftjob-44a218d2747445428fc4fd2442a66eb0"
+      ],
+      "fit_rmse_seconds": 0.26562294494939576,
+      "validation": [
+        {
+          "job_id": "ftjob-9131db95e6a34f6f8063c04fa6224b52",
+          "actual_seconds": 298,
+          "predicted_seconds": 290.6624294061463,
+          "absolute_relative_error": 0.024622720113602965
+        }
+      ],
+      "nonnegative_coefficients": true,
+      "cost_basis": "trained_tokens multiplied by recorded rate; not a billing receipt",
+      "planner_accepted": true
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "scope": "observed training stage; provider capacity waiting may be included",
+      "features": [
+        "intercept",
+        "trained_tokens/1000",
+        "epochs-1"
+      ],
+      "coefficients": [
+        104.03854946503735,
+        3.1787571255602893,
+        12.249258442848724
+      ],
+      "fixed_stages_seconds": {
+        "datasets_s": 73.0,
+        "startup_s": 151.0,
+        "finalize_s": 76.5
+      },
+      "fit_job_ids": [
+        "ftjob-e7f4416ba3df4cdf84a546b6f94ee17a",
+        "ftjob-5e8b2f6f171d43d88f8785ea024a6bce",
+        "ftjob-624cd7ae167348aa9edf985c0f532eed",
+        "ftjob-8546dced4db54638b961ad482b489bde"
+      ],
+      "fit_rmse_seconds": 1.6650506487320982,
+      "validation": [
+        {
+          "job_id": "ftjob-a62728e704b947408a37aec5863ebf95",
+          "actual_seconds": 300,
+          "predicted_seconds": 296.3834716136298,
+          "absolute_relative_error": 0.012055094621233971
+        }
+      ],
+      "nonnegative_coefficients": true,
+      "cost_basis": "trained_tokens multiplied by recorded rate; not a billing receipt",
+      "planner_accepted": true
+    },
+    {
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "scope": "observed training stage; provider capacity waiting may be included",
+      "features": [
+        "intercept",
+        "trained_tokens/1000",
+        "epochs-1"
+      ],
+      "coefficients": [
+        93.43440087572363,
+        2.564999971040886,
+        8.017310186091224
+      ],
+      "fixed_stages_seconds": {
+        "datasets_s": 43.5,
+        "startup_s": 179.5,
+        "finalize_s": 77.0
+      },
+      "fit_job_ids": [
+        "ftjob-820c72abb1814c2da596103bc39c2fa8",
+        "ftjob-da4b4444941f48279847d91b8dfbdca1",
+        "ftjob-1f3245c01b8b4d9db2005a2f44f18f45",
+        "ftjob-f230720f55f7465593f755a8c7898465"
+      ],
+      "fit_rmse_seconds": 0.47571944038678554,
+      "validation": [
+        {
+          "job_id": "ftjob-8755fa669b634a34871ada1db5339614",
+          "actual_seconds": 287,
+          "predicted_seconds": 287.76817895828276,
+          "absolute_relative_error": 0.002676581736176866
+        }
+      ],
+      "nonnegative_coefficients": true,
+      "cost_basis": "trained_tokens multiplied by recorded rate; not a billing receipt",
+      "planner_accepted": true
+    }
+  ],
+  "recorded_cost_usd": 0.21129520000000002
+}

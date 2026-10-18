@@ -1,16 +1,18 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #77
-(`da7ca2f`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #78
+(`618db22`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
 | Plan items | Existing implementation and remaining work |
 | --- | --- |
 | B1–B3 | Provider connectors, model router, call logging and Tavily integration are implemented. PR #69 persists completed structured attempts before retries. |
-| B4 | PR #71 added an opt-in local Docker Python runner. Agent integration and Token Factory Sandbox beta access remain open; see `docker-checks.md`. |
-| B5–B6 | Reference and cost tooling exists. Saved evidence does not cover the full planned three-task, three-model matrix. |
-| B7–B8 | Fault injection and target/control pairs exist. Evidence of task-quality degradation is concentrated on low learning rate; rank and epoch sensitivity need further experiments. |
+| B4 | PR #71 added an opt-in local Docker Python runner. This batch adds generated checks through the Python agent entry point, with a live Super → Docker result. The cloud beta request was submitted; activation is pending; see `generated-checks.md`. |
+| B5 | Reference tooling exists. Approved A2/A3 datasets are absent, so the full three-task, three-model matrix remains open. |
+| B6 | This batch measures three models at five size/epoch conditions each, validates duration fits on a preselected condition, and registers accepted fits in the planner. All 15 jobs succeeded; validation errors are 2.46%, 1.21% and 0.27%. See `model-cost-validation.md`. |
+| B7 | Sensitivity curves now cover both strengths of faults 6–8 across three seeds. Low learning rate degrades quality; rank and epoch changes do not show substantial consistent degradation here. Pre-intervention top-1 recovery is 3/3 at each strength, but all healthy provider cases also rank the epoch fault first; no 80% population guarantee is established. See `recipe-sensitivity.md`. |
+| B8 | Target/control recipe builders and cost matching exist. |
 | B9 | Local LoRA runs and a frozen loss classifier with seed-grouped evaluation were added in PR #67. Hundreds of runs and a validated transfer result are still absent. |
 | B10 | Noise measurements and a decision-power audit exist (PR #68). Empirical coverage across task/model/sample-size combinations remains incomplete. |
 | B11 | Causal statistics and decision rules are implemented; small-sample limitations are documented in the power audit. |
@@ -22,11 +24,13 @@ has measured evidence.
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
 | B23 | Investigation UI, case launch, costs and report downloads exist. |
-| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. PR #77 added a first-backward gradient audit. This change exposes bounded label checks to mode-B hypothesis generation through the Python investigation entry point. REST/UI attachment support, mode-B interventions and downstream quality evidence remain open. |
+| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. PR #77 added a first-backward gradient audit. PR #78 exposes bounded label checks to mode-B hypothesis generation through the Python investigation entry point. REST/UI attachment support, mode-B interventions and downstream quality evidence remain open. |
 | B25 | Weight probes are wired into live runs and the benchmark. Threshold transfer and rank-fault discrimination need more evidence. |
 | B26 | A classifier model publication with validated transfer metrics remains open. |
 
-The selected task is agent-facing label evidence in B24. Mode-B investigations
-can inspect caller-supplied reference and observed labels before hypothesis
-generation and persist aggregate observations. See [Agent label checks](agent-label-checks.md).
-This adds no calibrated likelihoods or causal confirmation. B24 remains partial.
+The current batch covers B4, B6 and B7. B5 is deferred until approved A2/A3
+train, validation and held-out data exists. B4, B6 and B7 now have the requested implementations and saved measurements.
+Cloud Sandbox activation is pending; B7 detection measures pre-intervention
+ranking and does not claim causal confirmation or a statistically supported 80%
+threshold. The protocol and
+budget are recorded in [the batch protocol](results/b467-20261019/protocol.md).

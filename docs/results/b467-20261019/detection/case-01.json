@@ -1,0 +1,329 @@
+{
+  "case_id": "case-01",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 1,
+  "fault": null,
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 1.958001732826233,
+        "valid_loss": 2.009031532394806
+      },
+      {
+        "step": 24,
+        "train_loss": 1.1230528354644775,
+        "valid_loss": 1.6508944488611796
+      },
+      {
+        "step": 36,
+        "train_loss": 2.0178182125091553,
+        "valid_loss": 1.4386015198374755
+      },
+      {
+        "step": 48,
+        "train_loss": 0.6181231141090393,
+        "valid_loss": 1.2100447822337184
+      },
+      {
+        "step": 60,
+        "train_loss": 0.7388001680374146,
+        "valid_loss": 1.0224980280903362
+      },
+      {
+        "step": 63,
+        "train_loss": 0.6858215928077698,
+        "valid_loss": 0.9825107817281813
+      },
+      {
+        "step": 72,
+        "train_loss": 0.46330130100250244,
+        "valid_loss": 0.9268448087793069
+      },
+      {
+        "step": 84,
+        "train_loss": 0.38710319995880127,
+        "valid_loss": 0.820078621674704
+      },
+      {
+        "step": 96,
+        "train_loss": 0.5734688639640808,
+        "valid_loss": 0.7814556899286756
+      },
+      {
+        "step": 108,
+        "train_loss": 0.7551673054695129,
+        "valid_loss": 0.7256038610967214
+      },
+      {
+        "step": 120,
+        "train_loss": 0.6235229969024658,
+        "valid_loss": 0.6371695673305716
+      },
+      {
+        "step": 126,
+        "train_loss": 0.3628792464733124,
+        "valid_loss": 0.6128620186308086
+      },
+      {
+        "step": 132,
+        "train_loss": 0.3037545680999756,
+        "valid_loss": 0.5913980963246134
+      },
+      {
+        "step": 144,
+        "train_loss": 0.19349585473537445,
+        "valid_loss": 0.5629008207345169
+      },
+      {
+        "step": 156,
+        "train_loss": 0.2063303142786026,
+        "valid_loss": 0.5385675262784798
+      },
+      {
+        "step": 168,
+        "train_loss": 0.2765304446220398,
+        "valid_loss": 0.5255009506472805
+      },
+      {
+        "step": 180,
+        "train_loss": 0.2634543478488922,
+        "valid_loss": 0.5217159022420845
+      },
+      {
+        "step": 189,
+        "train_loss": 0.25792983174324036,
+        "valid_loss": 0.5179025515313916
+      }
+    ],
+    "validation_exact_match": 0.41,
+    "reference_validation_exact_match": 0.41,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "chat_template_mismatch",
+      0.7489
+    ],
+    [
+      "lora_rank_too_small",
+      0.0535
+    ],
+    [
+      "lr_too_low",
+      0.0103
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-01",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "chat_template_mismatch",
+        "location": "training data preparation (missing chat template)",
+        "prior": 0.4,
+        "rationale": "The validation exact match equals the reference, indicating the model learned nothing beyond baseline. If the training examples were formatted without the chat template that the model expects at inference, the model would ignore the instruction and produce random outputs, yielding no improvement.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "lr_too_low",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.3,
+        "rationale": "Although 1e-4 is a common LoRA LR, Qwen3-0.6B may require a slightly higher rate to move away from the base model; the steady but slow loss decrease suggests weak updates, consistent with a learning rate that is too low for effective LoRA adaptation.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "lora_rank_too_small",
+        "location": "lora_r",
+        "prior": 0.2,
+        "rationale": "A rank of 16 may be insufficient to capture the nuances of intent classification across 77 classes, causing the model's expressivity to stall and resulting in validation performance that does not improve over the reference.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "chat_template_mismatch",
+            "location": "training data preparation (missing chat template)",
+            "prior": 0.4,
+            "rationale": "The validation exact match equals the reference, indicating the model learned nothing beyond baseline. If the training examples were formatted without the chat template that the model expects at inference, the model would ignore the instruction and produce random outputs, yielding no improvement.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "lr_too_low",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.3,
+            "rationale": "Although 1e-4 is a common LoRA LR, Qwen3-0.6B may require a slightly higher rate to move away from the base model; the steady but slow loss decrease suggests weak updates, consistent with a learning rate that is too low for effective LoRA adaptation.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "lora_rank_too_small",
+            "location": "lora_r",
+            "prior": 0.2,
+            "rationale": "A rank of 16 may be insufficient to capture the nuances of intent classification across 77 classes, causing the model's expressivity to stall and resulting in validation performance that does not improve over the reference.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "h3": 0.2,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.098461,
+        "outcome": "ok",
+        "gain_bits": 0.3141,
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.48,
+          "h2": 0.36,
+          "h3": 0.04,
+          "unlisted": 0.12
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lr_range",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.098461,
+        "outcome": "ok",
+        "gain_bits": 0.3295,
+        "raw": {
+          "learning_rate": 0.0001,
+          "low_below": 5e-05
+        },
+        "probs": {
+          "h1": 0.721,
+          "h2": 0.0386,
+          "h3": 0.0601,
+          "unlisted": 0.1803
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "loss_curve",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.098461,
+        "outcome": "normal",
+        "gain_bits": 0.0452,
+        "raw": {
+          "train_loss": [
+            1.958001732826233,
+            1.1230528354644775,
+            2.0178182125091553,
+            0.6181231141090393,
+            0.7388001680374146,
+            0.6858215928077698,
+            0.46330130100250244,
+            0.38710319995880127,
+            0.5734688639640808,
+            0.7551673054695129,
+            0.6235229969024658,
+            0.3628792464733124,
+            0.3037545680999756,
+            0.19349585473537445,
+            0.2063303142786026,
+            0.2765304446220398,
+            0.2634543478488922,
+            0.25792983174324036
+          ],
+          "valid_loss": [
+            2.009031532394806,
+            1.6508944488611796,
+            1.4386015198374755,
+            1.2100447822337184,
+            1.0224980280903362,
+            0.9825107817281813,
+            0.9268448087793069,
+            0.820078621674704,
+            0.7814556899286756,
+            0.7256038610967214,
+            0.6371695673305716,
+            0.6128620186308086,
+            0.5913980963246134,
+            0.5629008207345169,
+            0.5385675262784798,
+            0.5255009506472805,
+            0.5217159022420845,
+            0.5179025515313916
+          ],
+          "train_drop": 0.8682688439856805
+        },
+        "probs": {
+          "h1": 0.7489,
+          "h2": 0.0103,
+          "h3": 0.0535,
+          "unlisted": 0.1872
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "no probe left and the likeliest testable hypothesis, h3 at 0.05, is too unlikely to pay for a causal check"
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.001539,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2475,
+        "tokens_out": 885,
+        "cost_usd": 0.001539,
+        "latency_ms": 4882
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.001539
+}

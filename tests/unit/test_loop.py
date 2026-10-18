@@ -240,3 +240,46 @@ def test_invalid_mode_b_labels_fail_before_model_calls():
             lambda *_: None,
         )
     assert router.steps == []
+
+
+def test_sandbox_observations_reach_hypothesis_generation(monkeypatch):
+    from core.agent import loop
+
+    report = {
+        "status": "completed",
+        "observations": {"rows": 2},
+        "causal_confirmation": False,
+    }
+    monkeypatch.setattr(loop, "generated_check", lambda *a, **kw: report)
+    captured = []
+    hypotheses = [_hyp("h1", "other", 0.4)]
+
+    def propose(router, case, **kwargs):
+        captured.append(case)
+        return hypotheses
+
+    monkeypatch.setattr(loop, "propose_hypotheses", propose)
+    result = investigate(
+        _ctx(),
+        {},
+        FakeRouter(hypotheses),
+        lambda *_: None,
+        probes=(),
+        causal_checks=False,
+        sandbox_check={"question": "Count rows", "data": {"rows": [1, 2]}},
+    )
+    assert captured[0]["sandbox_check"] == report
+    assert result.steps[0]["kind"] == "sandbox_check"
+    assert result.status == "inconclusive"
+
+
+def test_public_demo_rejects_generated_checks_before_calls(monkeypatch):
+    import pytest
+
+    from core.config import get_settings
+
+    monkeypatch.setattr(get_settings(), "public_demo", True)
+    router = FakeRouter([])
+    with pytest.raises(ValueError, match="public demo"):
+        investigate(_ctx(), {}, router, lambda *_: None, sandbox_check={})
+    assert router.steps == []

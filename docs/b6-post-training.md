@@ -1,6 +1,7 @@
 # B6: price and duration of Token Factory fine-tuning jobs
 
-Measured on 2026-10-15 with `scripts/measure_post_training.py`. The model in `core/planner/job_cost.py` is fitted on these numbers.
+Measured on 2026-10-15 with `scripts/measure_post_training.py`. The Llama-8B fallback in `core/planner/job_cost.py` is fitted on these numbers.
+[Three newer model-specific fits](model-cost-validation.md) are used for Qwen3-0.6B, Qwen3-1.7B and Llama-3.2-1B-Instruct.
 
 ## Setup
 

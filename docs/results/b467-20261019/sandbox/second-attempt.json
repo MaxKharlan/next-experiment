@@ -1,0 +1,33 @@
+{
+  "result": {
+    "question": "Compute total=len(DATA[\"examples\"]) and invalid_json=number of examples whose answer fails json.loads. Print exactly these two integer counts as JSON.",
+    "code": "import json<br>def main():<br>    examples = DATA.get(&#x27;examples&#x27;, [] )<br>    total = len(examples)<br>    invalid = 0<br>    for ex in examples:<br>        ans = ex.get(&#x27;answer&#x27;, &#x27;&#x27;)<br>        try:<br>            json.loads(ans)<br>        except Exception:<br>            invalid += 1<br>    result = {&quot;total&quot;: total, &quot;invalid_json&quot;: invalid}<br>    print(json.dumps(result))<br><br>if __name__ == &#x27;__main__&#x27;:<br>    main()",
+    "input_sha256": "d1c69046df619edb0a7ea8b2a192abe5db84bf54dc8894cbe914f41bd680caa2",
+    "prompt_version": "probe_code-v1",
+    "causal_confirmation": false,
+    "execution": {
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "  File \"<string>\", line 3\n    import json<br>def main():<br>    examples = DATA.get(&#x27;examples&#x27;, [] )<br>    total = len(examples)<br>    invalid = 0<br>    for ex in examples:<br>        ans = ex.get(&#x27;answer&#x27;, &#x27;&#x27;)<br>        try:<br>            json.loads(ans)<br>        except Exception:<br>            invalid += 1<br>    result = {&quot;total&quot;: total, &quot;invalid_json&quot;: invalid}<br>    print(json.dumps(result))<br><br>if __name__ == &#x27;__main__&#x27;:<br>    main()\n               ^\nSyntaxError: invalid syntax\n",
+      "timed_out": false,
+      "output_limited": false
+    },
+    "status": "execution_failed"
+  },
+  "cost_usd": 0.0005214,
+  "calls": [
+    {
+      "id": "1f75f1f08acf",
+      "investigation_id": "b4-live-20261019-retry",
+      "purpose": "probe_code",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 316,
+      "tokens_out": 474,
+      "cost_usd": 0.0005214,
+      "latency_ms": 30100,
+      "prompt_version": "probe_code-v1",
+      "attempt": 1,
+      "created_at": 1792358265.4030988
+    }
+  ]
+}

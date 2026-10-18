@@ -1,0 +1,30 @@
+{
+  "scope": "Local replay of saved generated source on a new explicit synthetic input; no model call",
+  "data": {
+    "examples": [
+      {
+        "answer": "{\"intent\":\"balance\"}"
+      },
+      {
+        "answer": "not-json"
+      },
+      {
+        "answer": "{\"intent\":\"card\"}"
+      }
+    ]
+  },
+  "input_sha256": "062d1dedeec40c8dd352f56898b57a368032eab1b0988900e8c455d85271c342",
+  "code_sha256": "ac567043286c35d22dcad92ce21a36f8d23e6c4678aa5fab00bd8e5ee88d02c9",
+  "execution": {
+    "exit_code": 0,
+    "stdout": "{\"total\": 3, \"invalid_json\": 1}\n",
+    "stderr": "",
+    "timed_out": false,
+    "output_limited": false
+  },
+  "expected": {
+    "total": 3,
+    "invalid_json": 1
+  },
+  "api_cost_usd": 0
+}

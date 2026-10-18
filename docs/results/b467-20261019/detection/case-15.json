@@ -1,0 +1,211 @@
+{
+  "case_id": "case-15",
+  "study": "tokenfactory-banking77-500-dev",
+  "seed": 0,
+  "fault": null,
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "Token Factory",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.3907579183578491,
+        "valid_loss": 0.8380046486854553
+      },
+      {
+        "step": 126,
+        "train_loss": 0.14100448787212372,
+        "valid_loss": 0.008777881041169167
+      },
+      {
+        "step": 189,
+        "train_loss": 0.024205902591347694,
+        "valid_loss": 0.2673508822917938
+      }
+    ],
+    "validation_exact_match": 0.67,
+    "reference_validation_exact_match": 0.67,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.4286
+    ],
+    [
+      "contradictory_labels",
+      0.1905
+    ],
+    [
+      "distribution_shift",
+      0.1905
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-15",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "too_many_epochs",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.4,
+        "rationale": "Validation loss drops sharply after epoch 2 then rises at epoch 3, a classic sign of overfitting when training continues past the point of optimal validation performance.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "contradictory_labels",
+        "location": "training data (BANKING77)",
+        "prior": 0.2,
+        "rationale": "The validation loss shows high\u2011low\u2011high fluctuation across epochs, indicating the model is struggling to fit conflicting labels in the data.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "distribution_shift",
+        "location": "validation set vs. production requests",
+        "prior": 0.2,
+        "rationale": "Exact\u2011match score on validation matches the reference baseline, showing no improvement despite low training loss, suggesting the validation data does not reflect the target distribution.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "too_many_epochs",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.4,
+            "rationale": "Validation loss drops sharply after epoch 2 then rises at epoch 3, a classic sign of overfitting when training continues past the point of optimal validation performance.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "contradictory_labels",
+            "location": "training data (BANKING77)",
+            "prior": 0.2,
+            "rationale": "The validation loss shows high\u2011low\u2011high fluctuation across epochs, indicating the model is struggling to fit conflicting labels in the data.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "distribution_shift",
+            "location": "validation set vs. production requests",
+            "prior": 0.2,
+            "rationale": "Exact\u2011match score on validation matches the reference baseline, showing no improvement despite low training loss, suggesting the validation data does not reflect the target distribution.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.2,
+          "h3": 0.2,
+          "unlisted": 0.2
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "epoch_count",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0986278,
+        "outcome": "ok",
+        "gain_bits": 0.3183,
+        "raw": {
+          "n_epochs": 3,
+          "high_from": 10
+        },
+        "probs": {
+          "h1": 0.1111,
+          "h2": 0.2963,
+          "h3": 0.2963,
+          "unlisted": 0.2963
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "loss_curve",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0986278,
+        "outcome": "overfit",
+        "gain_bits": 0.1334,
+        "raw": {
+          "train_loss": [
+            0.3907579183578491,
+            0.14100448787212372,
+            0.024205902591347694
+          ],
+          "valid_loss": [
+            0.8380046486854553,
+            0.008777881041169167,
+            0.2673508822917938
+          ],
+          "train_drop": 0.9380539678042292
+        },
+        "probs": {
+          "h1": 0.4286,
+          "h2": 0.1905,
+          "h3": 0.1905,
+          "unlisted": 0.1905
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.4286,
+          "h2": 0.1905,
+          "h3": 0.1905,
+          "unlisted": 0.1905
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0013722,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 1538,
+        "tokens_out": 1012,
+        "cost_usd": 0.0013722,
+        "latency_ms": 6329
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0013722
+}

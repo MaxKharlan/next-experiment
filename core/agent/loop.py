@@ -31,6 +31,7 @@ from core.agent.ensemble import sample_hypotheses
 from core.agent.known_issues import find_known_issues
 from core.agent.label_checks import check_training_labels
 from core.agent.router import Router
+from core.agent.sandbox_check import generated_check
 from core.agent.schemas import Hypothesis, Verdict
 from core.agent.steps import interpret_probe, propose_hypotheses, write_verdict
 from core.connectors.storage import Storage
@@ -109,6 +110,7 @@ def investigate(
     initial_evidence: Sequence[str] = (),
     causal_checks: bool = True,
     hypothesis_samples: int = 1,
+    sandbox_check: dict[str, Any] | None = None,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
     if type(hypothesis_samples) is not int or not 1 <= hypothesis_samples <= 5:
@@ -135,6 +137,25 @@ def investigate(
         case = {k: v for k, v in case.items() if k != "training_labels"}
         case["training_label_checks"] = label_checks
         add({"kind": "training_label_checks", "raw": label_checks, "cost_usd": 0.0})
+
+    sandbox_evidence = None
+    if sandbox_check is not None:
+        from core.config import get_settings
+
+        if get_settings().public_demo:
+            raise ValueError("Generated sandbox checks are disabled in public demo")
+        if ctx.budget_left_usd <= router.log.cost_usd:
+            raise ValueError("No remaining budget for check generation")
+        generation_cost_before = router.log.cost_usd
+        sandbox_evidence = generated_check(router, sandbox_check)
+        add(
+            {
+                "kind": "sandbox_check",
+                "raw": sandbox_evidence,
+                "cost_usd": router.log.cost_usd - generation_cost_before,
+            }
+        )
+        case = {**case, "sandbox_check": sandbox_evidence}
 
     if tavily is not None:
         job = case.get(
@@ -180,6 +201,8 @@ def investigate(
     remaining = {p.name: p for p in probes if p.available(ctx)}
     base_hp = dict(ctx.job_config.get("hyperparameters", {}))
     evidence: list[str] = list(initial_evidence)
+    if sandbox_evidence is not None:
+        evidence.append("sandbox_check")
     if label_checks is not None:
         evidence.append("training_label_checks")
     result = InvestigationResult(

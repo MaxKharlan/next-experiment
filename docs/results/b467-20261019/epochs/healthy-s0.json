@@ -1,0 +1,45 @@
+{
+  "run": "healthy-s0",
+  "fault": null,
+  "strength": null,
+  "seed": 0,
+  "model": "Qwen/Qwen3-0.6B",
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "job_id": "ftjob-782cf8ba66bd4f229c7e5c436067dce9",
+  "status": "succeeded",
+  "error": null,
+  "trained_tokens": 84984,
+  "cost_usd": 0.0339936,
+  "steps": [
+    63,
+    126,
+    189
+  ],
+  "train_loss": [
+    0.3907579183578491,
+    0.14100448787212372,
+    0.024205902591347694
+  ],
+  "valid_loss": [
+    0.8380046486854553,
+    0.008777881041169167,
+    0.2673508822917938
+  ],
+  "seconds": {
+    "datasets": 46,
+    "training_started": 239,
+    "training_completed": 645,
+    "finished": 721
+  }
+}

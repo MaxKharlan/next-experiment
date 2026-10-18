@@ -1,0 +1,333 @@
+{
+  "case_id": "case-02",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 2,
+  "fault": null,
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.2644588947296143,
+        "valid_loss": 1.995375225007934
+      },
+      {
+        "step": 24,
+        "train_loss": 1.8450134992599487,
+        "valid_loss": 1.667212664680993
+      },
+      {
+        "step": 36,
+        "train_loss": 1.4626450538635254,
+        "valid_loss": 1.4067029794990615
+      },
+      {
+        "step": 48,
+        "train_loss": 1.125553011894226,
+        "valid_loss": 1.254043644106628
+      },
+      {
+        "step": 60,
+        "train_loss": 0.9080464243888855,
+        "valid_loss": 1.0663791375872274
+      },
+      {
+        "step": 63,
+        "train_loss": 0.3092099130153656,
+        "valid_loss": 1.0039406397798718
+      },
+      {
+        "step": 72,
+        "train_loss": 0.6250240206718445,
+        "valid_loss": 0.9652420028344096
+      },
+      {
+        "step": 84,
+        "train_loss": 0.870146632194519,
+        "valid_loss": 0.8684506560332023
+      },
+      {
+        "step": 96,
+        "train_loss": 0.5085813403129578,
+        "valid_loss": 0.7963639517758516
+      },
+      {
+        "step": 108,
+        "train_loss": 0.7911219000816345,
+        "valid_loss": 0.7078287421456919
+      },
+      {
+        "step": 120,
+        "train_loss": 0.5732225775718689,
+        "valid_loss": 0.6539320540708183
+      },
+      {
+        "step": 126,
+        "train_loss": 0.3040553629398346,
+        "valid_loss": 0.6098443365737096
+      },
+      {
+        "step": 132,
+        "train_loss": 0.3109290301799774,
+        "valid_loss": 0.5890198512965401
+      },
+      {
+        "step": 144,
+        "train_loss": 0.24688218533992767,
+        "valid_loss": 0.5624452244315371
+      },
+      {
+        "step": 156,
+        "train_loss": 0.4954003393650055,
+        "valid_loss": 0.5722973122692748
+      },
+      {
+        "step": 168,
+        "train_loss": 0.15947256982326508,
+        "valid_loss": 0.5256109994229854
+      },
+      {
+        "step": 180,
+        "train_loss": 0.2333339899778366,
+        "valid_loss": 0.5120014863826284
+      },
+      {
+        "step": 189,
+        "train_loss": 0.20441937446594238,
+        "valid_loss": 0.510204335487129
+      }
+    ],
+    "validation_exact_match": 0.42,
+    "reference_validation_exact_match": 0.42,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "train_val_overlap",
+      0.4219
+    ],
+    [
+      "distribution_shift",
+      0.2734
+    ],
+    [
+      "answer_truncation",
+      0.1641
+    ],
+    [
+      "lora_rank_too_small",
+      0.0312
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-02",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "train_val_overlap",
+        "location": "validation file",
+        "prior": 0.3,
+        "rationale": "Validation loss drops steadily while exact match stays flat, indicating the validation set may be leaking training signal, a pattern noted in known issues where overlap yields low val loss but no gain on held-out data.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "distribution_shift",
+        "location": "training data distribution",
+        "prior": 0.25,
+        "rationale": "The model reduces loss on the training distribution but exact match on the evaluation does not improve, suggesting the training examples differ from real\u2011world requests, a symptom described in known issues for distribution shift.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.2,
+        "rationale": "A LoRA rank of 16 may be too low for Qwen3-0.6B to capture the nuances of intent classification, allowing loss to decrease but limiting expressive power, consistent with known issues that low rank stalls quality gains.",
+        "sources": []
+      },
+      {
+        "id": "h4",
+        "fault_class": "answer_truncation",
+        "location": "dataset preparation (assistant answers)",
+        "prior": 0.15,
+        "rationale": "If assistant answers were truncated during preprocessing, the model would learn incomplete labels, leading to little improvement in exact match despite decreasing loss, as reported in known issues linking truncated answers to poor performance.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "train_val_overlap",
+            "location": "validation file",
+            "prior": 0.3,
+            "rationale": "Validation loss drops steadily while exact match stays flat, indicating the validation set may be leaking training signal, a pattern noted in known issues where overlap yields low val loss but no gain on held-out data.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "distribution_shift",
+            "location": "training data distribution",
+            "prior": 0.25,
+            "rationale": "The model reduces loss on the training distribution but exact match on the evaluation does not improve, suggesting the training examples differ from real\u2011world requests, a symptom described in known issues for distribution shift.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.2,
+            "rationale": "A LoRA rank of 16 may be too low for Qwen3-0.6B to capture the nuances of intent classification, allowing loss to decrease but limiting expressive power, consistent with known issues that low rank stalls quality gains.",
+            "sources": []
+          },
+          {
+            "id": "h4",
+            "fault_class": "answer_truncation",
+            "location": "dataset preparation (assistant answers)",
+            "prior": 0.15,
+            "rationale": "If assistant answers were truncated during preprocessing, the model would learn incomplete labels, leading to little improvement in exact match despite decreasing loss, as reported in known issues linking truncated answers to poor performance.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.3,
+          "h2": 0.25,
+          "h3": 0.2,
+          "h4": 0.15,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09778,
+        "outcome": "ok",
+        "gain_bits": 0.3141,
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.36,
+          "h2": 0.3,
+          "h3": 0.04,
+          "h4": 0.18,
+          "unlisted": 0.12
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "loss_curve",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09778,
+        "outcome": "normal",
+        "gain_bits": 0.0482,
+        "raw": {
+          "train_loss": [
+            2.2644588947296143,
+            1.8450134992599487,
+            1.4626450538635254,
+            1.125553011894226,
+            0.9080464243888855,
+            0.3092099130153656,
+            0.6250240206718445,
+            0.870146632194519,
+            0.5085813403129578,
+            0.7911219000816345,
+            0.5732225775718689,
+            0.3040553629398346,
+            0.3109290301799774,
+            0.24688218533992767,
+            0.4954003393650055,
+            0.15947256982326508,
+            0.2333339899778366,
+            0.20441937446594238
+          ],
+          "valid_loss": [
+            1.995375225007934,
+            1.667212664680993,
+            1.4067029794990615,
+            1.254043644106628,
+            1.0663791375872274,
+            1.0039406397798718,
+            0.9652420028344096,
+            0.8684506560332023,
+            0.7963639517758516,
+            0.7078287421456919,
+            0.6539320540708183,
+            0.6098443365737096,
+            0.5890198512965401,
+            0.5624452244315371,
+            0.5722973122692748,
+            0.5256109994229854,
+            0.5120014863826284,
+            0.510204335487129
+          ],
+          "train_drop": 0.9097270544668682
+        },
+        "probs": {
+          "h1": 0.4219,
+          "h2": 0.2734,
+          "h3": 0.0312,
+          "h4": 0.1641,
+          "unlisted": 0.1094
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "no probe left and the likeliest testable hypothesis, h3 at 0.03, is too unlikely to pay for a causal check"
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.00222,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2471,
+        "tokens_out": 1643,
+        "cost_usd": 0.00222,
+        "latency_ms": 9808
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.00222
+}

@@ -1,0 +1,281 @@
+{
+  "case_id": "case-20",
+  "study": "tokenfactory-banking77-500-dev",
+  "seed": 1,
+  "fault": "too_many_epochs",
+  "hyperparameters": {
+    "n_epochs": 18,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "Token Factory",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 18,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.3693486154079437,
+        "valid_loss": 0.4080454409122467
+      },
+      {
+        "step": 126,
+        "train_loss": 0.1640620231628418,
+        "valid_loss": 0.017154060304164886
+      },
+      {
+        "step": 189,
+        "train_loss": 0.048503194004297256,
+        "valid_loss": 0.33927515149116516
+      },
+      {
+        "step": 252,
+        "train_loss": 0.03648347035050392,
+        "valid_loss": 0.4510335922241211
+      },
+      {
+        "step": 315,
+        "train_loss": 0.01858992874622345,
+        "valid_loss": 0.22833098471164703
+      },
+      {
+        "step": 378,
+        "train_loss": 0.006120017729699612,
+        "valid_loss": 0.16266421973705292
+      },
+      {
+        "step": 441,
+        "train_loss": 0.000541320419870317,
+        "valid_loss": 0.1477343738079071
+      },
+      {
+        "step": 504,
+        "train_loss": 0.00010480450873728842,
+        "valid_loss": 0.00021148473024368286
+      },
+      {
+        "step": 567,
+        "train_loss": 5.763398439739831e-05,
+        "valid_loss": 0.32382068037986755
+      },
+      {
+        "step": 630,
+        "train_loss": 4.6801185817457736e-05,
+        "valid_loss": 0.15205545723438263
+      },
+      {
+        "step": 693,
+        "train_loss": 3.581566488719545e-05,
+        "valid_loss": 0.08135460317134857
+      },
+      {
+        "step": 756,
+        "train_loss": 3.6854737118119374e-05,
+        "valid_loss": 0.006609343457967043
+      },
+      {
+        "step": 819,
+        "train_loss": 3.089771780651063e-05,
+        "valid_loss": 0.05144551023840904
+      },
+      {
+        "step": 882,
+        "train_loss": 2.8188995202071965e-05,
+        "valid_loss": 0.2325693964958191
+      },
+      {
+        "step": 945,
+        "train_loss": 2.859167943825014e-05,
+        "valid_loss": 0.3656666874885559
+      },
+      {
+        "step": 1008,
+        "train_loss": 2.5230754545191303e-05,
+        "valid_loss": 0.2910991311073303
+      },
+      {
+        "step": 1071,
+        "train_loss": 2.6383593649370596e-05,
+        "valid_loss": 0.2032153159379959
+      },
+      {
+        "step": 1134,
+        "train_loss": 2.6839765268960036e-05,
+        "valid_loss": 0.4644993245601654
+      }
+    ],
+    "validation_exact_match": 0.68,
+    "reference_validation_exact_match": 0.66,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.7391
+    ],
+    [
+      "contradictory_labels",
+      0.087
+    ],
+    [
+      "distribution_shift",
+      0.087
+    ],
+    [
+      "lora_rank_too_small",
+      0.0435
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-20",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "too_many_epochs",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.4,
+        "rationale": "Training loss continues to drop while validation loss reaches a minimum around step 504 (epoch 8) then rises sharply and remains high, a classic sign of over\u2011training with too many epochs.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "contradictory_labels",
+        "location": "training data file",
+        "prior": 0.2,
+        "rationale": "Validation loss fluctuates wildly even after training loss becomes extremely low, suggesting the model is trying to fit conflicting labels in the data.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "distribution_shift",
+        "location": "validation data file",
+        "prior": 0.2,
+        "rationale": "The model achieves near\u2011zero training loss but validation loss periodically spikes, indicating the validation set may not reflect the true input distribution the model will see in production.",
+        "sources": []
+      },
+      {
+        "id": "h4",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.1,
+        "rationale": "With LoRA rank 16 the model may lack sufficient capacity to capture the nuances of the BANKING77 intent space, leaving performance close to the reference baseline.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "too_many_epochs",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.4,
+            "rationale": "Training loss continues to drop while validation loss reaches a minimum around step 504 (epoch 8) then rises sharply and remains high, a classic sign of over\u2011training with too many epochs.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "contradictory_labels",
+            "location": "training data file",
+            "prior": 0.2,
+            "rationale": "Validation loss fluctuates wildly even after training loss becomes extremely low, suggesting the model is trying to fit conflicting labels in the data.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "distribution_shift",
+            "location": "validation data file",
+            "prior": 0.2,
+            "rationale": "The model achieves near\u2011zero training loss but validation loss periodically spikes, indicating the validation set may not reflect the true input distribution the model will see in production.",
+            "sources": []
+          },
+          {
+            "id": "h4",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.1,
+            "rationale": "With LoRA rank 16 the model may lack sufficient capacity to capture the nuances of the BANKING77 intent space, leaving performance close to the reference baseline.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.2,
+          "h3": 0.2,
+          "h4": 0.1,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "epoch_count",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09796840000000001,
+        "outcome": "high",
+        "gain_bits": 0.3183,
+        "raw": {
+          "n_epochs": 18,
+          "high_from": 10
+        },
+        "probs": {
+          "h1": 0.7391,
+          "h2": 0.087,
+          "h3": 0.087,
+          "h4": 0.0435,
+          "unlisted": 0.0435
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.7391,
+          "h2": 0.087,
+          "h3": 0.087,
+          "h4": 0.0435,
+          "unlisted": 0.0435
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0020316,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2545,
+        "tokens_out": 1409,
+        "cost_usd": 0.0020316,
+        "latency_ms": 8393
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0020316
+}

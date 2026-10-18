@@ -1,8 +1,8 @@
 # Local Python check runner (B4)
 
 `jobs.sandbox.runner.run_python` executes a small Python check in a disposable
-Docker container. This is an opt-in execution primitive. The investigation loop
-still uses library probes and does not generate or execute Python checks.
+Docker container. The investigation loop can explicitly opt into [generated checks](generated-checks.md).
+Library probes remain the default.
 Token Factory Sandbox beta access has not been requested by this implementation.
 
 Start Docker and provision a trusted image explicitly:
@@ -34,7 +34,7 @@ metadata and the local process arguments while running.
 Docker shares the container host's kernel and requires a trusted daemon. These
 settings are defense in depth, not proof against container escapes. Do not expose
 this primitive as a public service for arbitrary code. There is no package
-installation, file upload, persisted output artifact, or agent integration yet.
+installation or file upload. Generated-check results are persisted in investigation reports.
 
 Run the opt-in integration checks with an available daemon and image:
 

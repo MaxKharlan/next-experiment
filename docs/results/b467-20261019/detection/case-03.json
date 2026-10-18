@@ -1,0 +1,281 @@
+{
+  "case_id": "case-03",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 0,
+  "fault": "lora_rank_too_small",
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 4,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 4,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.5543558597564697,
+        "valid_loss": 2.0595165515105998
+      },
+      {
+        "step": 24,
+        "train_loss": 1.7408581972122192,
+        "valid_loss": 1.7087436146384118
+      },
+      {
+        "step": 36,
+        "train_loss": 1.627158284187317,
+        "valid_loss": 1.465051789611778
+      },
+      {
+        "step": 48,
+        "train_loss": 1.3750441074371338,
+        "valid_loss": 1.22388767016014
+      },
+      {
+        "step": 60,
+        "train_loss": 1.075898289680481,
+        "valid_loss": 1.0504053363063992
+      },
+      {
+        "step": 63,
+        "train_loss": 1.049329400062561,
+        "valid_loss": 1.0118569965730577
+      },
+      {
+        "step": 72,
+        "train_loss": 0.8814685940742493,
+        "valid_loss": 0.9454972270951175
+      },
+      {
+        "step": 84,
+        "train_loss": 0.8029627203941345,
+        "valid_loss": 0.8314585035679324
+      },
+      {
+        "step": 96,
+        "train_loss": 0.5859923362731934,
+        "valid_loss": 0.7565820921187433
+      },
+      {
+        "step": 108,
+        "train_loss": 0.1958850622177124,
+        "valid_loss": 0.7107619168174347
+      },
+      {
+        "step": 120,
+        "train_loss": 0.5689391493797302,
+        "valid_loss": 0.6569238900138228
+      },
+      {
+        "step": 126,
+        "train_loss": 1.1624113321304321,
+        "valid_loss": 0.6324912173636008
+      },
+      {
+        "step": 132,
+        "train_loss": 0.3244541585445404,
+        "valid_loss": 0.619383396718326
+      },
+      {
+        "step": 144,
+        "train_loss": 0.2300727367401123,
+        "valid_loss": 0.5943462225614778
+      },
+      {
+        "step": 156,
+        "train_loss": 0.23150774836540222,
+        "valid_loss": 0.5635507043776096
+      },
+      {
+        "step": 168,
+        "train_loss": 0.20646582543849945,
+        "valid_loss": 0.5451442090256903
+      },
+      {
+        "step": 180,
+        "train_loss": 0.34488049149513245,
+        "valid_loss": 0.5378406473854244
+      },
+      {
+        "step": 189,
+        "train_loss": 0.4501126706600189,
+        "valid_loss": 0.5338236646564215
+      }
+    ],
+    "validation_exact_match": 0.44,
+    "reference_validation_exact_match": 0.43,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "lora_rank_too_small",
+      0.7846
+    ],
+    [
+      "contradictory_labels",
+      0.0615
+    ],
+    [
+      "lr_too_low",
+      0.0462
+    ],
+    [
+      "distribution_shift",
+      0.0308
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-03",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.3,
+        "rationale": "LoRA rank of 4 may be too low to capture the intent classification patterns in Qwen3-0.6B, resulting in negligible gain over the base model as seen by validation exact match (0.44) matching the reference (0.43).",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "contradictory_labels",
+        "location": "training data (intent labels)",
+        "prior": 0.2,
+        "rationale": "The training loss shows a sudden increase at step 126 (from 0.23 to 1.16) while validation loss remains stable, suggesting noisy or conflicting labels that destabilize gradient updates.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "lr_too_low",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.15,
+        "rationale": "Although 1e-4 is a common LoRA rate, the optimizer may still be too conservative for this model, leading to slow adaptation and a validation loss that plateaus around 0.53 after many steps.",
+        "sources": []
+      },
+      {
+        "id": "h4",
+        "fault_class": "distribution_shift",
+        "location": "validation set vs production queries",
+        "prior": 0.1,
+        "rationale": "Validation performance mirrors the reference baseline, indicating the model may not have learned task\u2011specific features because the training data does not resemble the actual banking intents encountered in inference.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.3,
+            "rationale": "LoRA rank of 4 may be too low to capture the intent classification patterns in Qwen3-0.6B, resulting in negligible gain over the base model as seen by validation exact match (0.44) matching the reference (0.43).",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "contradictory_labels",
+            "location": "training data (intent labels)",
+            "prior": 0.2,
+            "rationale": "The training loss shows a sudden increase at step 126 (from 0.23 to 1.16) while validation loss remains stable, suggesting noisy or conflicting labels that destabilize gradient updates.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "lr_too_low",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.15,
+            "rationale": "Although 1e-4 is a common LoRA rate, the optimizer may still be too conservative for this model, leading to slow adaptation and a validation loss that plateaus around 0.53 after many steps.",
+            "sources": []
+          },
+          {
+            "id": "h4",
+            "fault_class": "distribution_shift",
+            "location": "validation set vs production queries",
+            "prior": 0.1,
+            "rationale": "Validation performance mirrors the reference baseline, indicating the model may not have learned task\u2011specific features because the training data does not resemble the actual banking intents encountered in inference.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.3,
+          "h2": 0.2,
+          "h3": 0.15,
+          "h4": 0.1,
+          "unlisted": 0.25
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09807220000000001,
+        "outcome": "low",
+        "gain_bits": 0.3985,
+        "raw": {
+          "lora_r": 4,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.7846,
+          "h2": 0.0615,
+          "h3": 0.0462,
+          "h4": 0.0308,
+          "unlisted": 0.0769
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.7846,
+          "h2": 0.0615,
+          "h3": 0.0462,
+          "h4": 0.0308,
+          "unlisted": 0.0769
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0019278000000000001,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2469,
+        "tokens_out": 1319,
+        "cost_usd": 0.0019278000000000001,
+        "latency_ms": 11519
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0019278000000000001
+}

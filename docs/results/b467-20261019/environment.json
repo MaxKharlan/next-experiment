@@ -1,0 +1,16 @@
+{
+  "python": "3.11.15",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "packages": {
+    "numpy": "2.4.6",
+    "torch": "2.14.1",
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "openai": "3.31.0",
+    "pydantic": "2.14.1"
+  },
+  "base_commit": "618db22",
+  "evaluation_device": "mps",
+  "provider_training_environment": "not exposed by the API"
+}

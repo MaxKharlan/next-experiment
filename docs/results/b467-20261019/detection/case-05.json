@@ -1,0 +1,235 @@
+{
+  "case_id": "case-05",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 2,
+  "fault": "lora_rank_too_small",
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 4,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 4,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.2808709144592285,
+        "valid_loss": 2.0076988187412286
+      },
+      {
+        "step": 24,
+        "train_loss": 1.866776943206787,
+        "valid_loss": 1.6814973408343807
+      },
+      {
+        "step": 36,
+        "train_loss": 1.481659173965454,
+        "valid_loss": 1.4227008399547347
+      },
+      {
+        "step": 48,
+        "train_loss": 1.126786470413208,
+        "valid_loss": 1.2743752092723077
+      },
+      {
+        "step": 60,
+        "train_loss": 0.9315157532691956,
+        "valid_loss": 1.0939276036400123
+      },
+      {
+        "step": 63,
+        "train_loss": 0.31325358152389526,
+        "valid_loss": 1.0297830596866224
+      },
+      {
+        "step": 72,
+        "train_loss": 0.6324726343154907,
+        "valid_loss": 0.9893303538528865
+      },
+      {
+        "step": 84,
+        "train_loss": 0.8987715244293213,
+        "valid_loss": 0.888017383697849
+      },
+      {
+        "step": 96,
+        "train_loss": 0.5068328380584717,
+        "valid_loss": 0.8158665321417303
+      },
+      {
+        "step": 108,
+        "train_loss": 0.8089339137077332,
+        "valid_loss": 0.7280477875431112
+      },
+      {
+        "step": 120,
+        "train_loss": 0.5861814022064209,
+        "valid_loss": 0.67133273024287
+      },
+      {
+        "step": 126,
+        "train_loss": 0.304190993309021,
+        "valid_loss": 0.6281109088219252
+      },
+      {
+        "step": 132,
+        "train_loss": 0.31444084644317627,
+        "valid_loss": 0.6065941881013397
+      },
+      {
+        "step": 144,
+        "train_loss": 0.24442559480667114,
+        "valid_loss": 0.5787114416992905
+      },
+      {
+        "step": 156,
+        "train_loss": 0.5450339317321777,
+        "valid_loss": 0.5858743347777616
+      },
+      {
+        "step": 168,
+        "train_loss": 0.17025935649871826,
+        "valid_loss": 0.5428532394486786
+      },
+      {
+        "step": 180,
+        "train_loss": 0.24515394866466522,
+        "valid_loss": 0.5292951199132324
+      },
+      {
+        "step": 189,
+        "train_loss": 0.208078533411026,
+        "valid_loss": 0.5272573002632832
+      }
+    ],
+    "validation_exact_match": 0.4,
+    "reference_validation_exact_match": 0.42,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "lora_rank_too_small",
+      0.85
+    ],
+    [
+      "distribution_shift",
+      0.075
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-05",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.4,
+        "rationale": "LoRA rank set to 4 may be insufficient for adapting Qwen3-0.6B to the BANKING77 intent classification task, limiting expressiveness and causing slightly lower exact match than the reference.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "distribution_shift",
+        "location": "training data file",
+        "prior": 0.3,
+        "rationale": "Validation exact match (0.40) is close but slightly below the reference (0.42) while validation loss steadily decreases, suggesting the model fits the training distribution well but generalizes poorly to the evaluation distribution.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.4,
+            "rationale": "LoRA rank set to 4 may be insufficient for adapting Qwen3-0.6B to the BANKING77 intent classification task, limiting expressiveness and causing slightly lower exact match than the reference.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "distribution_shift",
+            "location": "training data file",
+            "prior": 0.3,
+            "rationale": "Validation exact match (0.40) is close but slightly below the reference (0.42) while validation loss steadily decreases, suggesting the model fits the training distribution well but generalizes poorly to the evaluation distribution.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "unlisted": 0.3
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0985015,
+        "outcome": "low",
+        "gain_bits": 0.4456,
+        "raw": {
+          "lora_r": 4,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.85,
+          "h2": 0.075,
+          "unlisted": 0.075
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.85,
+          "h2": 0.075,
+          "unlisted": 0.075
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0014985,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2469,
+        "tokens_out": 842,
+        "cost_usd": 0.0014985,
+        "latency_ms": 5651
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0014985
+}
