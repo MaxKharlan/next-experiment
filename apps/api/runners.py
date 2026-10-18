@@ -1,7 +1,9 @@
 """B22: what runs an investigation in the background: a replay or the live agent.
 
 replay: streams a saved investigation from demo/ step by step. The public demo uses
-only this, because it has no GPU and spends no money.
+only this, because it has no GPU and spends no money: on the server with
+PUBLIC_DEMO=true, and as a static page on GitHub Pages that plays the same events in
+the browser (scripts/build_pages.py).
 live: runs the agent on the fault-6 case. Causal checks train locally ("local") or
 as Token Factory jobs ("tf"); it needs the keys in .env and the ml and eval groups.
 On Token Factory a confirmed fix ends with the proposal of the full retrain, and the
@@ -23,6 +25,7 @@ from apps.api.store import InvestigationStore
 
 DEMO_DIR = Path(__file__).resolve().parents[2] / "demo"
 RETRAIN_KINDS = {"retrain_proposal", "retrain", "comparison", "retrain_declined"}
+REPLAY_DELAY_S = 1.5  # pause before each replayed step
 
 
 def demo_cases() -> dict[str, dict[str, Any]]:
@@ -32,14 +35,34 @@ def demo_cases() -> dict[str, dict[str, Any]]:
     }
 
 
+def demo_index() -> list[dict[str, str]]:
+    """Name, title and note of each saved investigation, for the case picker."""
+    return [
+        {"name": name, "title": d.get("title", name), "note": d.get("note", "")}
+        for name, d in demo_cases().items()
+    ]
+
+
 def replay(store: InvestigationStore, inv_id: str, name: str, delay_s: float) -> None:
+    for pause, kind, data in replay_events(name, delay_s):
+        time.sleep(pause)
+        store.emit(inv_id, kind, data)
+
+
+def replay_events(
+    name: str, delay_s: float = REPLAY_DELAY_S
+) -> list[tuple[float, str, dict[str, Any]]]:
+    """A replay as (pause before the event, event type, data).
+
+    The server emits these one by one; the static demo plays the same list.
+    """
     saved = demo_cases()[name]
     report = saved["report"]
-    store.emit(inv_id, "started", {"case": saved["case"], "replay_of": name})
-    for step in replay_steps(report):
-        time.sleep(delay_s)
-        store.emit(inv_id, "step", step)
-    store.emit(inv_id, "finished", _summary(report))
+    return [
+        (0.0, "started", {"case": saved["case"], "replay_of": name}),
+        *((delay_s, "step", step) for step in replay_steps(report)),
+        (0.0, "finished", _summary(report)),
+    ]
 
 
 def replay_steps(report: dict[str, Any]) -> list[dict[str, Any]]:

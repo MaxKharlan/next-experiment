@@ -239,3 +239,6 @@ checkpoints/
 
 # Local artifacts and SQLite database
 artifacts/
+
+# Static demo site built by scripts/build_pages.py
+_site/

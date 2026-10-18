@@ -1,9 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-mode="live">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Next Experiment</title>
+<meta name="description" content="Finds out why a fine-tune on Nebius Token Factory failed and proves it with an experiment">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231E6B57'/%3E%3Cg transform='translate(4 4)' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.6a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4l-5.1-10.2a2 2 0 0 1-.2-.9V2'/%3E%3Cpath d='M8.5 2h7'/%3E%3Cpath d='M7 16h10'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Unbounded:wght@600&display=swap" rel="stylesheet">
@@ -51,6 +53,7 @@
   .brand h1 { margin: 0; font: 600 18px/24px var(--font-display); }
   .tagline { font-size: 12.5px; line-height: 18px; color: var(--muted); }
   .controls { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .repo { font: 500 14px/21px var(--font-body); white-space: nowrap; }
   select { appearance: none; -webkit-appearance: none; font: 14px/21px var(--font-body); color: var(--ink);
            background: var(--tile) no-repeat right 12px center / 10px 6px; border: 1px solid var(--line-strong);
            border-radius: var(--r-md); padding: 8px 32px 8px 12px; max-width: 100%; cursor: pointer;
@@ -78,6 +81,8 @@
   .kicker:empty { display: none; }
   .verdict h2 { margin: 6px 0 10px; font: 600 26px/34px var(--font-display); letter-spacing: -.01em; overflow-wrap: anywhere; }
   .proof { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .about { margin: 12px 0 0; max-width: 72ch; font-size: 12.5px; line-height: 18px; color: var(--muted); }
+  .about a { white-space: nowrap; }
   .metrics { display: flex; gap: 24px; }
   .metric:not([hidden]) ~ .metric:not([hidden]) { padding-left: 24px; border-left: 1px solid var(--line); }
   .metric b { display: block; font: 600 20px/26px var(--font-body); white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -246,6 +251,9 @@
     :root { --g: 40px; }
     .topbar { padding: 12px 16px; }
     .tagline { display: none; }
+    .repo { order: 1; margin-left: auto; }
+    .repo .wide { display: none; }
+    .controls { order: 2; }
     .controls { margin-left: 0; width: 100%; }
     #demo { flex: 1 1 0; width: auto; min-width: 0; }
     #past { flex: 1 1 100%; width: auto; min-width: 0; }
@@ -283,6 +291,7 @@
     <button id="start" class="btn btn-primary">Replay</button>
     <select id="past" aria-label="Past investigations"><option value="">Past runs</option></select>
   </div>
+  <a class="repo" id="repo" href="https://github.com/MaxKharlan/next-experiment" hidden><span class="wide">Code on </span>GitHub</a>
 </header>
 
 <main class="content">
@@ -291,6 +300,7 @@
       <div class="kicker" id="statusEyebrow"></div>
       <h2 id="statusTitle">Pick a saved investigation and press Replay</h2>
       <div class="proof"><span class="badge idle" id="statusBadge">idle</span><span id="statusProof" class="muted"></span></div>
+      <p class="about" id="about" hidden></p>
     </div>
     <div class="metrics">
       <div class="metric" hidden><b id="mEffect"></b><span>effect of the fix</span></div>
@@ -350,13 +360,17 @@ const METHOD = [
 ];
 
 let hyps = {}, probs = {}, prevProbs = {}, priors = {}, out = new Set(), proved = {}, ruled = {}, open = {};
-let source = null, current = null, entries = 0, stepOf = {}, lastCheck = null, verdictStep = null, caseHp = {};
+let source = null, current = null, entries = 0, stepOf = {}, lastCheck = null, verdictStep = null, caseHp = {}, replayOf = "";
 let trainingUsd = 0, jobs = 0, checks = 0, llmUsd = 0, model = "", proof = null;
+
+/* GitHub Pages has no server; scripts/build_pages.py switches the page to static mode there */
+const STATIC = document.documentElement.dataset.mode === "static";
 
 async function init() {
   showMethod();
-  const cases = await (await fetch("/api/demo-cases")).json();
+  const cases = await (await fetch(STATIC ? "demo-cases.json" : "/api/demo-cases")).json();
   $("demo").innerHTML = cases.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("");
+  if (STATIC) return staticMode(cases);
   const past = await (await fetch("/api/investigations")).json();
   const groups = {};
   for (const p of past) (groups[STATUSES[p.status] || String(p.status).replace(/_/g, " ")] ||= []).push(p);
@@ -367,6 +381,7 @@ async function init() {
 }
 
 $("start").onclick = async () => {
+  if (STATIC) return queue.length ? skip() : play($("demo").value);
   $("start").disabled = true;
   const res = await fetch("/api/investigations", {method: "POST", headers: {"Content-Type": "application/json"},
                                                   body: JSON.stringify({backend: "replay", demo: $("demo").value})});
@@ -413,23 +428,63 @@ function setMetrics() {
   metric("mCost", total ? money(total) : "", trainingUsd ? "total cost, estimated" : "total cost");
 }
 
+/* what each event of an investigation does to the screen, streamed by the server or played in the browser */
+const HANDLERS = {
+  started: d => { replayOf = d.replay_of || ""; showCase(d.case);
+    setStatus(d.replay_of ? "Replay of a saved investigation" : `Live run on ${BACKENDS[d.backend] || d.backend || "the server"}`, "Looking for the cause", "running", "running"); },
+  step: d => showStep(d),
+  finished: d => { finish(d); done(); },
+  awaiting_approval: d => { showCost(d.summary); askApproval(d.plan);
+    setStatus(null, null, "waiting", "needs your approval"); },
+  resumed: d => { setApproval(d.approved ? "Approved" : "Declined");
+    setStatus(null, null, "running", d.approved ? "retraining" : "running"); },
+  failed: d => { step("The investigation stopped", "Error", "", `<pre>${esc(d.error)}</pre>`, "error");
+    setStatus(null, "The investigation stopped", "failed", "failed"); done(); },
+};
+
 function watch(id) {
-  if (source) source.close();
+  stop();
   reset();
   current = id;
   source = new EventSource(`/api/investigations/${id}/events`);
-  source.addEventListener("started", e => { const d = JSON.parse(e.data); showCase(d.case);
-    setStatus(d.replay_of ? "Replay of a saved investigation" : `Live run on ${BACKENDS[d.backend] || d.backend || "the server"}`, "Looking for the cause", "running", "running"); });
-  source.addEventListener("step", e => showStep(JSON.parse(e.data)));
-  source.addEventListener("finished", e => { finish(JSON.parse(e.data)); done(); });
-  source.addEventListener("awaiting_approval", e => { const d = JSON.parse(e.data); showCost(d.summary); askApproval(d.plan);
-    setStatus(null, null, "waiting", "needs your approval"); });
-  source.addEventListener("resumed", e => { const ok = JSON.parse(e.data).approved; setApproval(ok ? "Approved" : "Declined");
-    setStatus(null, null, "running", ok ? "retraining" : "running"); });
-  source.addEventListener("failed", e => { step("The investigation stopped", "Error", "", `<pre>${esc(JSON.parse(e.data).error)}</pre>`, "error");
-    setStatus(null, "The investigation stopped", "failed", "failed"); done(); });
+  for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data)));
 }
-function done() { source.close(); $("start").disabled = false; }
+function stop() { if (source) source.close(); source = null; clearTimeout(timer); queue = []; }
+function done() { stop(); $("start").disabled = false; $("start").textContent = "Replay"; }
+
+/* static mode: the saved run plays in the browser with the pauses of the server replay */
+let queue = [], timer = 0, quiet = false;
+function staticMode(cases) {
+  $("past").hidden = true; $("repo").hidden = false; $("about").hidden = false;
+  const about = () => {
+    const c = cases.find(x => x.name === $("demo").value) || {};
+    $("about").innerHTML = `${c.note ? `${esc(c.note)} ` : ""}This page plays it back in your browser: nothing trains and no model is called.
+      <a href="demo/${encodeURIComponent(c.name)}.json">Saved report, JSON</a>`;
+  };
+  $("demo").onchange = about;
+  about();
+}
+async function play(name) {
+  stop();
+  reset();
+  $("start").disabled = true;
+  const res = await fetch(`replays/${encodeURIComponent(name)}.json`).catch(() => null);
+  if (!res || !res.ok) return HANDLERS.failed({error: `The saved run did not load${res ? ` (HTTP ${res.status})` : ""}.`});
+  queue = await res.json();
+  $("start").textContent = "Skip to the end"; $("start").disabled = false;
+  next();
+}
+function next() {
+  const e = queue.shift();
+  HANDLERS[e.type](e.data);
+  if (queue.length) timer = setTimeout(next, queue[0].after_s * 1000);
+}
+function skip() {
+  clearTimeout(timer);
+  quiet = true;
+  while (queue.length) { const e = queue.shift(); HANDLERS[e.type](e.data); }
+  quiet = false;
+}
 
 function finish(summary) {
   showCost(summary);
@@ -539,7 +594,7 @@ function step(title, who, meta, body, node = "") {
       ${body}
     </div>`;
   $("feed").appendChild(el);
-  el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest"});
+  if (!quiet) el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest"});
   return entries;
 }
 const badge = (status, text) => `<span class="badge ${esc(status)}">${esc(text || status)}</span>`;
@@ -703,7 +758,7 @@ function setApproval(text) {
   box.innerHTML = badge(text === "Approved" ? "approved" : "declined", text.toLowerCase());
   const entry = box.closest(".entry");
   entry.classList.remove("ask");
-  entry.querySelector(".who").textContent = text === "Approved" ? "Approved by you" : "Declined by you";
+  entry.querySelector(".who").textContent = `${text} ${replayOf ? "in the saved run" : "by you"}`;
   const h3 = entry.querySelector("h3"); h3.textContent = h3.textContent.replace(/\?$/, "");
 }
 
