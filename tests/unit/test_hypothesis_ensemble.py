@@ -31,7 +31,7 @@ class Provider:
     def model(self, role):
         return "test-super"
 
-    def structured(self, model, messages, schema):
+    def structured(self, model, messages, schema, *, on_call=None):
         assert schema is HypothesisList
         self.messages.append(messages)
         return HypothesisList(hypotheses=[_hyp("h1", "lr_too_low", 0.8)]), [
@@ -101,7 +101,7 @@ def test_settings_validate_live_sample_count():
 
 def test_sampling_filters_modes_and_unverified_sources():
     class DirtyProvider(Provider):
-        def structured(self, model, messages, schema):
+        def structured(self, model, messages, schema, *, on_call=None):
             valid = _hyp("a", "lr_too_low", 0.7)
             valid.sources = [
                 "https://trusted.example/issue",
