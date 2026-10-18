@@ -53,6 +53,11 @@ def screen() -> FileResponse:
     return FileResponse(STATIC / "index.html")
 
 
+@app.get("/api/capabilities")
+def capabilities() -> dict:
+    return {"explicit_cases": not get_settings().public_demo}
+
+
 @app.get("/api/demo-cases")
 def demo_cases() -> list[dict]:
     return runners.demo_index()
