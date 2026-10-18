@@ -1,0 +1,47 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.4,
+      "rationale": "Validation loss decreases from epoch 1 to 2 then rises steadily through epoch 5, indicating overfitting after the early optimum; with only 200 training examples, 6 epochs is likely excessive.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "The LoRA rank is set to 16; the known issue \u2018LoRA Learns Less and Forgets Less\u2019 shows that higher ranks (e.g., 64, 256) yield substantially better accuracy on similar tasks, suggesting the rank may be insufficient for the 77\u2011class intent classification.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.2,
+      "rationale": "The job uses a learning rate of 2e-05, below the typical LoRA range (~1e-4); the \u2018Learning Rate Matters\u2019 study shows that for Qwen3-0.6B LoRA r=16, accuracy improves up to ~2e-04 before declining, implying the current rate may be too low to drive sufficient adaptation.",
+      "sources": [
+        "https://arxiv.org/html/2602.04998v2"
+      ]
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "45658ef6ea3f",
+      "investigation_id": "sampling-dev-ref-fault6-mild-s0-3",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3224,
+      "tokens_out": 1679,
+      "cost_usd": 0.0024783,
+      "latency_ms": 10782,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352042.160702
+    }
+  ]
+}

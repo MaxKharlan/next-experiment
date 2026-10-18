@@ -1,0 +1,280 @@
+[
+  {
+    "case": "fault6-lr1e-5",
+    "variant": "one",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.9156626506024096
+      ],
+      [
+        "contradictory_labels",
+        0.04819277108433735
+      ],
+      [
+        "lora_rank_too_small",
+        0.012048192771084335
+      ]
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "llm_cost_usd": 0.001935,
+    "training_cost_usd": 0.05472,
+    "mini_jobs": 4
+  },
+  {
+    "case": "fault6-lr1e-5",
+    "variant": "three",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.7929703452909481
+      ],
+      [
+        "contradictory_labels",
+        0.07377448720144388
+      ],
+      [
+        "lora_rank_too_small",
+        0.02950979488057755
+      ],
+      [
+        "distribution_shift",
+        0.02950979488057755
+      ],
+      [
+        "too_many_epochs",
+        0.015215987985297798
+      ]
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "llm_cost_usd": 0.006540300000000001,
+    "training_cost_usd": 0.05472,
+    "mini_jobs": 4
+  },
+  {
+    "case": "ref-epochs18-s0",
+    "variant": "one",
+    "ranking": [
+      [
+        "too_many_epochs",
+        0.618181818181818
+      ],
+      [
+        "distribution_shift",
+        0.2181818181818182
+      ],
+      [
+        "lora_rank_too_small",
+        0.054545454545454536
+      ]
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "llm_cost_usd": 0.0025128000000000004,
+    "training_cost_usd": 0.32832,
+    "mini_jobs": 4
+  },
+  {
+    "case": "ref-epochs18-s0",
+    "variant": "three",
+    "ranking": [
+      [
+        "too_many_epochs",
+        0.3333333333333333
+      ],
+      [
+        "distribution_shift",
+        0.22222222222222227
+      ],
+      [
+        "lora_rank_too_small",
+        0.11111111111111112
+      ],
+      [
+        "chat_template_mismatch",
+        0.11111111111111112
+      ]
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "llm_cost_usd": 0.0078723,
+    "training_cost_usd": 0.32832,
+    "mini_jobs": 4
+  },
+  {
+    "case": "ref-fault6-mild-s0",
+    "variant": "one",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.6707526354498651
+      ],
+      [
+        "contradictory_labels",
+        0.15690120127482224
+      ],
+      [
+        "lora_rank_too_small",
+        0.04707036038244667
+      ],
+      [
+        "too_many_epochs",
+        0.015444962000490316
+      ]
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "llm_cost_usd": 0.0028572,
+    "training_cost_usd": 0.10944,
+    "mini_jobs": 4
+  },
+  {
+    "case": "ref-fault6-mild-s0",
+    "variant": "three",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.680904014558803
+      ],
+      [
+        "answer_truncation",
+        0.06968315938467283
+      ],
+      [
+        "contradictory_labels",
+        0.049773685274766305
+      ],
+      [
+        "lora_rank_too_small",
+        0.04230763248355136
+      ],
+      [
+        "distribution_shift",
+        0.034841579692336415
+      ],
+      [
+        "too_many_epochs",
+        0.01796518952886096
+      ]
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "llm_cost_usd": 0.007983,
+    "training_cost_usd": 0.10944,
+    "mini_jobs": 4
+  },
+  {
+    "case": "ref-fault6-strong-s0",
+    "variant": "one",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.8926174496644295
+      ],
+      [
+        "contradictory_labels",
+        0.053691275167785255
+      ],
+      [
+        "distribution_shift",
+        0.026845637583892627
+      ],
+      [
+        "lora_rank_too_small",
+        0.013422818791946308
+      ]
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "llm_cost_usd": 0.0021920999999999998,
+    "training_cost_usd": 0.10944,
+    "mini_jobs": 4
+  },
+  {
+    "case": "ref-fault6-strong-s0",
+    "variant": "three",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.8181818181818181
+      ],
+      [
+        "contradictory_labels",
+        0.07070707070707069
+      ],
+      [
+        "distribution_shift",
+        0.040404040404040394
+      ],
+      [
+        "lora_rank_too_small",
+        0.030303030303030293
+      ]
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "llm_cost_usd": 0.0064746,
+    "training_cost_usd": 0.10944,
+    "mini_jobs": 4
+  },
+  {
+    "case": "ref-healthy-s0",
+    "variant": "one",
+    "ranking": [
+      [
+        "distribution_shift",
+        0.4667
+      ],
+      [
+        "contradictory_labels",
+        0.2222
+      ],
+      [
+        "answer_truncation",
+        0.1556
+      ],
+      [
+        "lora_rank_too_small",
+        0.0778
+      ]
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "llm_cost_usd": 0.0025662,
+    "training_cost_usd": 0,
+    "mini_jobs": 0
+  },
+  {
+    "case": "ref-healthy-s0",
+    "variant": "three",
+    "ranking": [
+      [
+        "distribution_shift",
+        0.5411
+      ],
+      [
+        "contradictory_labels",
+        0.1757
+      ],
+      [
+        "lora_rank_too_small",
+        0.0527
+      ],
+      [
+        "answer_truncation",
+        0.0492
+      ],
+      [
+        "too_many_epochs",
+        0.0092
+      ]
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "llm_cost_usd": 0.0074214,
+    "training_cost_usd": 0,
+    "mini_jobs": 0
+  }
+]

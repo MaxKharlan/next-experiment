@@ -1,0 +1,15 @@
+[
+  {
+    "id": "efd1ec2ffdab",
+    "investigation_id": "sampling-dev-fault6-lr1e-5-2",
+    "purpose": "hypotheses",
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "tokens_in": 2952,
+    "tokens_out": 1157,
+    "cost_usd": 0.0019269,
+    "latency_ms": 7676,
+    "prompt_version": "hypotheses-v3",
+    "attempt": 1,
+    "created_at": 1792351881.814649
+  }
+]

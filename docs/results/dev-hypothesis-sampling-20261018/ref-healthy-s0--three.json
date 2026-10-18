@@ -1,0 +1,166 @@
+{
+  "method": "three",
+  "ranking": [
+    [
+      "distribution_shift",
+      0.5411
+    ],
+    [
+      "contradictory_labels",
+      0.1757
+    ],
+    [
+      "lora_rank_too_small",
+      0.0527
+    ],
+    [
+      "answer_truncation",
+      0.0492
+    ],
+    [
+      "too_many_epochs",
+      0.0092
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0074214,
+  "llm_tokens": 14314,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "distribution_shift",
+          "location": "held-out test queries (200 samples) vs training/validation data",
+          "prior": 0.3666666666666667,
+          "rationale": "Training and validation loss drop to very low values (valid_loss 0.0162 at epoch 6) indicating the model fits the training/validation distribution well, yet accuracy on held-out queries is only 54%, suggesting the held-out data differs from the training distribution. The short example lengths (45\u2011103 tokens) vs large context_length also hint that the model may not have seen the full variability of real banking queries.",
+          "sources": [
+            "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558"
+          ]
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.25,
+          "rationale": "The model uses LoRA rank 16. The Unsloth guide notes that rank influences capacity and larger ranks can improve accuracy, and the LoRA vs Full fine\u2011tuning paper shows that accuracy varies with rank when the total learning rate is fixed. With only 200 training examples and 77 intent labels, rank 16 may be insufficient to capture the needed variations, causing underfitting despite low train loss.",
+          "sources": [
+            "https://arxiv.org/html/2410.21228v2",
+            "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "training data (possible similar queries mapped to different intents)",
+          "prior": 0.16666666666666666,
+          "rationale": "The validation loss shows a sharp increase at epoch 3 (from 0.5294 to 1.3384) before decreasing again, a pattern that can arise when the model encounters conflicting labels for similar inputs during training. Several wrong answers are semantically close to the expected label (e.g., 'pin_blocked' vs 'unable_to_verify_pin'), indicating label confusion.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.06666666666666667,
+          "rationale": "Valid loss spikes at epoch 3\u20115 then drops sharply at epoch 6, indicating possible over\u2011fitting to noise or memorization of training samples, which harms generalization to held\u2011out data. Six epochs may be excessive for this small dataset.",
+          "sources": []
+        },
+        {
+          "id": "h5",
+          "fault_class": "answer_truncation",
+          "location": "data (label truncation)",
+          "prior": 0.03333333333333333,
+          "rationale": "Although labels appear intact, user\u2011side truncation could have removed distinguishing suffixes, causing the model to learn incomplete patterns. The absence of obviously truncated JSON or broken labels makes this hypothesis less likely than the others.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.3667,
+        "h2": 0.25,
+        "h3": 0.1667,
+        "h4": 0.0667,
+        "h5": 0.0333,
+        "unlisted": 0.1167
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "outcome": "ok",
+      "gain_bits": 0.3613,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.4632,
+        "h2": 0.0526,
+        "h3": 0.2105,
+        "h4": 0.0842,
+        "h5": 0.0421,
+        "unlisted": 0.1474
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "outcome": "normal",
+      "gain_bits": 0.1063,
+      "raw": {
+        "train_loss": [
+          1.2127,
+          0.3876,
+          0.1094,
+          0.0619,
+          0.0149,
+          0.0018
+        ],
+        "valid_loss": [
+          0.6329,
+          0.5294,
+          1.3384,
+          1.6164,
+          1.3452,
+          0.0162
+        ],
+        "train_drop": 0.9985157087490724
+      },
+      "probs": {
+        "h1": 0.5203,
+        "h2": 0.0507,
+        "h3": 0.1689,
+        "h4": 0.0473,
+        "h5": 0.0473,
+        "unlisted": 0.1655
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "outcome": "ok",
+      "gain_bits": 0.0627,
+      "raw": {
+        "n_epochs": 6,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.5411,
+        "h2": 0.0527,
+        "h3": 0.1757,
+        "h4": 0.0092,
+        "h5": 0.0492,
+        "unlisted": 0.1722
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "no probe left and the likeliest testable hypothesis, h2 at 0.05, is too unlikely to pay for a causal check"
+    }
+  ],
+  "confirmed": []
+}

@@ -1,0 +1,45 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.45,
+      "rationale": "Training loss drops to near zero while validation loss falls to a low point at epoch 6 then rises and fluctuates sharply, indicating overfitting after epoch 6. The model memorizes the 200 training examples but fails to generalize.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "A LoRA rank of 16 may be insufficient to capture the mapping needed for 77\u2011intent classification, leading to poor generalization despite the ability to fit the training set. The LoRA Learns Less and Forget Less paper shows higher ranks improve performance on similar tasks.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "chat_template_mismatch",
+      "location": "data/chat_template",
+      "prior": 0.15,
+      "rationale": "If the chat template used during training differs from the one used at inference, the model may have learned to follow the training format but produces incorrect labels when the inference format changes, explaining the low held\u2011out accuracy.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "db775c0d6b44",
+      "investigation_id": "sampling-dev-ref-epochs18-s0-3",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3675,
+      "tokens_out": 1590,
+      "cost_usd": 0.0025335,
+      "latency_ms": 8596,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792351932.487551
+    }
+  ]
+}

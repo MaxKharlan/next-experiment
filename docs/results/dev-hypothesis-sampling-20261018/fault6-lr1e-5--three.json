@@ -1,0 +1,258 @@
+{
+  "method": "three",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.7929703452909481
+    ],
+    [
+      "contradictory_labels",
+      0.07377448720144388
+    ],
+    [
+      "lora_rank_too_small",
+      0.02950979488057755
+    ],
+    [
+      "distribution_shift",
+      0.02950979488057755
+    ],
+    [
+      "too_many_epochs",
+      0.015215987985297798
+    ]
+  ],
+  "status": "confirmed",
+  "cause": "lr_too_low",
+  "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 1e-05,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+  "llm_cost_usd": 0.006540300000000001,
+  "llm_tokens": 13171,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.05472,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.3666666666666667,
+          "rationale": "The Token Factory default learning rate is 1e-5, but LoRA typically requires around 1e-4 to achieve noticeable updates. With such a low LR the model receives minimal gradient steps, staying close to the base Qwen3-0.6B and yielding poor classification accuracy.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.2333333333333333,
+          "rationale": "The LoRA rank used is r=16. Evidence from a LoRA study shows that higher ranks (e.g., r=256) are needed to match full fine\u2011tuning performance on complex tasks; a rank of 16 may be insufficient for distinguishing 77 banking intents, causing the model\u2019s quality to stall.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+            "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.18333333333333335,
+          "rationale": "Validation loss falls from epoch 1 to 2 then rises at epoch 3 (1.082 \u2192 1.1954), indicating overfitting after the second epoch. Continuing to a third epoch likely hurt generalization, yielding low held-out accuracy.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "contradictory_labels",
+          "location": "training data (unspecified file)",
+          "prior": 0.11666666666666665,
+          "rationale": "Several incorrect predictions are semantically close to the true labels (e.g., 'pin_not_working' vs expected 'pin_blocked'), suggesting label noise or overlapping intents in the training set. Such contradictory labels can destabilize learning and hurt generalization to held\u2011out queries.",
+          "sources": []
+        },
+        {
+          "id": "h5",
+          "fault_class": "distribution_shift",
+          "location": "data",
+          "prior": 0.03333333333333333,
+          "rationale": "Training examples are 45\u2011103 tokens while the model can handle 8192; if production queries differ greatly in length or style, the model may not generalize, leading to low held\u2011out accuracy.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.3667,
+        "h2": 0.2333,
+        "h3": 0.1833,
+        "h4": 0.1167,
+        "h5": 0.0333,
+        "unlisted": 0.0667
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "outcome": "normal",
+      "gain_bits": 0.3824,
+      "raw": {
+        "train_loss": [
+          1.5303,
+          0.8395,
+          0.6533
+        ],
+        "valid_loss": [
+          1.5691,
+          1.082,
+          1.1954
+        ],
+        "train_drop": 0.573090243743057
+      },
+      "probs": {
+        "h1": 0.1656,
+        "h2": 0.3513,
+        "h3": 0.161,
+        "h4": 0.1464,
+        "h5": 0.0586,
+        "unlisted": 0.1171
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "outcome": "ok",
+      "gain_bits": 0.4271,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.2342,
+        "h2": 0.0828,
+        "h3": 0.2277,
+        "h4": 0.207,
+        "h5": 0.0828,
+        "unlisted": 0.1656
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "outcome": "low",
+      "gain_bits": 0.2514,
+      "raw": {
+        "learning_rate": 1e-05,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.492,
+        "h2": 0.0549,
+        "h3": 0.151,
+        "h4": 0.1373,
+        "h5": 0.0549,
+        "unlisted": 0.1098
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "outcome": "ok",
+      "gain_bits": 0.1741,
+      "raw": {
+        "n_epochs": 3,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.5608,
+        "h2": 0.0626,
+        "h3": 0.0323,
+        "h4": 0.1565,
+        "h5": 0.0626,
+        "unlisted": 0.1252
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h1",
+      "reason": "h1 at 0.56",
+      "target": {
+        "hypothesis_id": "h1",
+        "kind": "target",
+        "patch": {
+          "learning_rate": 0.0001
+        },
+        "description": "learning_rate 1e-05 -> 0.0001",
+        "ft_job_ids": [
+          "ftjob-5aa5f03e1f884f4aaa7675df11d2395a",
+          "ftjob-abe4e163fe2447f392183d3bd54ec715"
+        ],
+        "metrics": [
+          0.415,
+          0.415
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h1",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+          "ftjob-89ad5c411b944bb8a8c91fc0deea288b"
+        ],
+        "metrics": [
+          0.1,
+          0.1
+        ]
+      },
+      "result": {
+        "status": "confirmed",
+        "effect": 0.31499999999999995,
+        "ci_low": 0.27776068429373896,
+        "ci_high": 0.35223931570626094,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "prior_probs": {
+        "h1": 0.5607758741161016,
+        "h2": 0.06260655691886302,
+        "h3": 0.03228150591128874,
+        "h4": 0.15651639229715755,
+        "h5": 0.06260655691886302,
+        "unlisted": 0.12521311383772604
+      },
+      "planning_probs": {
+        "h1": 0.5607758741161016,
+        "h2": 0.06260655691886302,
+        "h3": 0.03228150591128874,
+        "h4": 0.15651639229715755,
+        "h5": 0.06260655691886302,
+        "unlisted": 0.12521311383772604
+      },
+      "probs": {
+        "h1": 0.7929703452909481,
+        "h2": 0.02950979488057755,
+        "h3": 0.015215987985297798,
+        "h4": 0.07377448720144388,
+        "h5": 0.02950979488057755,
+        "unlisted": 0.0590195897611551
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.05472
+    },
+    {
+      "kind": "verdict",
+      "hypothesis_id": "h1",
+      "status": "confirmed",
+      "evidence": [
+        "probe:loss_curve",
+        "probe:lora_rank",
+        "probe:lr_range",
+        "probe:epoch_count",
+        "intervention:h1"
+      ],
+      "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 1e-05,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+      "summary": "Narrative generation is disabled for all ablation variants."
+    }
+  ],
+  "confirmed": [
+    "lr_too_low"
+  ]
+}

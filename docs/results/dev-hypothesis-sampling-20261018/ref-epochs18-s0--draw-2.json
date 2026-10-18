@@ -1,0 +1,47 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.5,
+      "rationale": "Validation loss reaches a minimum at epoch 6 (0.0009) then rises sharply, indicating overfitting after that point. Training for 18 epochs likely caused the model to memorize the training set and generalize poorly to held\u2011out queries.",
+      "sources": [
+        "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+      ]
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "With LoRA rank r=16 the model may lack sufficient capacity to capture the 77\u2011intent classification boundaries. The LoRA\u2011Learns\u2011Less paper shows that higher ranks (e.g., r=256) are needed to match full fine\u2011tuning performance, suggesting the current rank is limiting accuracy.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "distribution_shift",
+      "location": "training data (queries)",
+      "prior": 0.1,
+      "rationale": "The held\u2011out queries may differ in phrasing or intent distribution from the 200 training examples, causing the model to predict related but incorrect labels (e.g., 'source_of_funds' instead of 'verify_source_of_funds'). A shift would produce good training loss but poor held\u2011out accuracy as observed.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "31a78ed84705",
+      "investigation_id": "sampling-dev-ref-epochs18-s0-2",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3675,
+      "tokens_out": 1915,
+      "cost_usd": 0.002826,
+      "latency_ms": 9746,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792351923.885629
+    }
+  ]
+}

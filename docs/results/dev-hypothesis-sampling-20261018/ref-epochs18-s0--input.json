@@ -1,0 +1,177 @@
+{
+  "symptom": "After fine-tuning the model gives the right label for 56% of 200 held-out queries. We expected much better. 5 of the wrong answers are attached.",
+  "task": "classify banking queries into 77 intent labels, answer with the label",
+  "job": {
+    "model": "Qwen/Qwen3-0.6B",
+    "status": "succeeded",
+    "train_examples": 200,
+    "validation_examples": 50,
+    "hyperparameters": {
+      "batch_size": 8,
+      "n_epochs": 18,
+      "learning_rate": 0.0002,
+      "warmup_ratio": 0.0,
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "context_length": 8192,
+      "lora_r": 16,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05
+    }
+  },
+  "checkpoints": [
+    {
+      "epoch": 1,
+      "train_loss": 1.2122,
+      "valid_loss": 0.603
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3801,
+      "valid_loss": 1.0419
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.1697,
+      "valid_loss": 1.3309
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.1074,
+      "valid_loss": 1.5169
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0352,
+      "valid_loss": 1.4312
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.0459,
+      "valid_loss": 0.0009
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0145,
+      "valid_loss": 0.2815
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.016,
+      "valid_loss": 0.301
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.0021,
+      "valid_loss": 1.429
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.0015,
+      "valid_loss": 0.2032
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.0003,
+      "valid_loss": 0.1066
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.0001,
+      "valid_loss": 0.0561
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.0001,
+      "valid_loss": 0.6058
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.0001,
+      "valid_loss": 0.0535
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.0001,
+      "valid_loss": 0.2114
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.0,
+      "valid_loss": 0.0146
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.0,
+      "valid_loss": 1.2819
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.0,
+      "valid_loss": 2.1933
+    }
+  ],
+  "findings": [
+    "examples are 45 to 103 tokens long, far below context_length",
+    "no duplicates between train and validation"
+  ],
+  "wrong_answers": [
+    {
+      "query": "My PIN is not working and I need assistance.",
+      "expected": "pin_blocked",
+      "answer": "unable_to_verify_identity"
+    },
+    {
+      "query": "IM still waiting for my account to update from a cash deposit?",
+      "expected": "balance_not_updated_after_cheque_or_cash_deposit",
+      "answer": "cash_withdrawal_not_updated_after_bank_transfer"
+    },
+    {
+      "query": "Why am I being charged twice fro a restaurant?",
+      "expected": "transaction_charged_twice",
+      "answer": "restaurant_charge"
+    },
+    {
+      "query": "The card I've got seems to be broken.",
+      "expected": "card_not_working",
+      "answer": "broken_card"
+    },
+    {
+      "query": "Where are my funds coming from? I need to know.",
+      "expected": "verify_source_of_funds",
+      "answer": "source_of_funds"
+    }
+  ],
+  "known_issues": [
+    {
+      "title": "How we Fine-tuned Qwen3.0-6B to Beat GPT-4o on Text2SQL",
+      "url": "https://www.youtube.com/watch?v=zzthXFhcFD4",
+      "snippet": "[15:04] start with direct string matches just to just to get a sense of what that accuracy would be. So we can say like\n[15:11] what is the or find me all the rows where\n[15:18] query or no where SQL is equal to the prediction. This\n[15:25] will just give you like a raw count of how many times um SQL directly matches the prediction.\n[15:33] And you can see this filtered it down to 22 rows. So out "
+    },
+    {
+      "title": "LoRA fine-tuning Hyperparameters Guide | Unsloth Documentation",
+      "url": "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide",
+      "snippet": "Typical Range: `2e-4` (0.0002) to `5e-6` (0.000005). \ud83d\udfe9 For normal LoRA/QLoRA Fine-tuning, we recommend `2e-4` as a starting point. \ud83d\udfe6 For Reinforcement Learning (DPO, GRPO etc.), we recommend `5e-6` . \u2b1c For Full Fine-tuning, lower learning rates are generally more appropriate. [...] 1. The rank (`r`) of the fine-tuning process. A larger rank uses more memory and will be slower, but can increase acc"
+    },
+    {
+      "title": "LoRA Learns Less and Forgets Less",
+      "url": "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+      "snippet": "For Code IFT (Fig. 1B and Table S5), HumanEval accuracy is clearly ordered by rank from the very first epoch. The more common r = 16 and r = 64 LoRA configurations have lower accuracy than full finetuning, with HumanEval scores of 0.358 and 0.417 at epoch 4, respectively). With a high LoRA rank (r = 256), full finetuning performance can be matched (LoRA=0.498 in epoch 4, full finetuning=0.497 in e"
+    },
+    {
+      "title": "Fine-tuning Small Model (Qwen3-0.6B) for Domain Knowledge + Reasoning: Seeking Optimization Advice - Beginners - Hugging Face Forums",
+      "url": "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558",
+      "snippet": "0.6B definitely small. I would go with 4B - it works for pretty similar case for my project, and is able to deliver solid baseline that can be perfected with fine tuning.\n\nI would say 1B is minimum for such task, 3-4B is best option.\n\nIf you REALYY want to make 0.6B work - then I would advice to train 2 separate adapters - Domain Knowledge Only and Enable reasoning capability for MCP tool selectio"
+    },
+    {
+      "title": "How to Fine-Tune Qwen3 on Text2SQL to GPT-4o level performance | Oxen.ai",
+      "url": "https://www.oxen.ai/blog/how-to-fine-tune-qwen3-to-gpt-4o-level-performance",
+      "snippet": "This means we have a winner! It still is by no means perfect, but proves that it is indeed possible.\n\n| Model | Accuracy |\n --- |\n| `GPT-4o` | 45% |\n| `Qwen3-0.6B` | 8% |\n| `SFT_Qwen3-0.6B` | 42% |\n| `SFT_Qwen3-1.7B` | 57% \ud83e\udd47 |\n\n`GPT-4o`\n`Qwen3-0.6B`\n`SFT_Qwen3-0.6B`\n`SFT_Qwen3-1.7B`\n\n## Conclusion [...] Extracting the accuracy with our notebooks/extract-accuracy.py notebook we can see the model no"
+    },
+    {
+      "title": "LoRA vs Full Fine-tuning: An Illusion of Equivalence",
+      "url": "https://arxiv.org/html/2410.21228v2",
+      "snippet": "| Dataset | LoRA | \u03bb=0.3\\lambda=0.3 | | \u03bb=0.5\\lambda=0.5 | | \u03bb=0.7\\lambda=0.7 | | \u03bb=0.9\\lambda=0.9 | |\n ---  ---  ---  ---  --- |\n| Rank | TA | PTL | TA | PTL | TA | PTL | TA | PTL |\n| MetaMath | r=16 | -15.0 | -46.5 | -6.6 | -40.4 | -2.7 | -28.2 | 0.0 | -10.5 |\n| r=64 | -5.8 | -29.1 | -4.4 | -22.3 | 0.3 | -14.2 | 0.3 | -4.9 |\n| r=256 | -0.1 | -33.3 | 1.8 | -25.2 | 0.5 | -15.5 | -0.8 | -5.2 |\n| Ma"
+    }
+  ]
+}

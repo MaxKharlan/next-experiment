@@ -1,0 +1,45 @@
+{
+  "support_counts": {
+    "lr_too_low": 3,
+    "lora_rank_too_small": 3,
+    "contradictory_labels": 2,
+    "distribution_shift": 2
+  },
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.45,
+      "rationale": "The learning rate is set to 6e-6, which is an order of magnitude below the typical LoRA rate (~1e-4) and even below the factory default (1e-5). Such a tiny rate yields minimal parameter updates, so the model hardly deviates from the base checkpoint despite decreasing train loss, explaining the low held-out accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "Known issues show that LoRA performance scales with rank; r=16 gave substantially lower accuracy than higher ranks (e.g., r=256) on similar tasks. With 77 intents, a rank of 16 may be insufficient to capture the needed function space.",
+      "sources": [
+        "https://arxiv.org/html/2410.21228v2",
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "training data (label assignments)",
+      "prior": 0.11666666666666665,
+      "rationale": "Several wrong answers are semantically close to the correct label (e.g., 'getting_pin' vs 'pin_blocked', 'top_up_verification_required' vs 'verify_top_up'), suggesting the training data contains similar inputs mapped to different labels, causing instability.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "training data vs production queries",
+      "prior": 0.06666666666666667,
+      "rationale": "Findings note examples are only 45\u2013103 tokens, far below the model\u2019s context length, indicating the training texts may be overly terse or formatted differently from real user queries, leading to a mismatch at inference.",
+      "sources": []
+    }
+  ]
+}

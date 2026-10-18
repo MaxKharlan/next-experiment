@@ -1,0 +1,54 @@
+{
+  "support_counts": {
+    "lr_too_low": 3,
+    "lora_rank_too_small": 3,
+    "contradictory_labels": 2,
+    "too_many_epochs": 2,
+    "distribution_shift": 1
+  },
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.3666666666666667,
+      "rationale": "The Token Factory default learning rate is 1e-5, but LoRA typically requires around 1e-4 to achieve noticeable updates. With such a low LR the model receives minimal gradient steps, staying close to the base Qwen3-0.6B and yielding poor classification accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2333333333333333,
+      "rationale": "The LoRA rank used is r=16. Evidence from a LoRA study shows that higher ranks (e.g., r=256) are needed to match full fine\u2011tuning performance on complex tasks; a rank of 16 may be insufficient for distinguishing 77 banking intents, causing the model\u2019s quality to stall.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.18333333333333335,
+      "rationale": "Validation loss falls from epoch 1 to 2 then rises at epoch 3 (1.082 \u2192 1.1954), indicating overfitting after the second epoch. Continuing to a third epoch likely hurt generalization, yielding low held-out accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "contradictory_labels",
+      "location": "training data (unspecified file)",
+      "prior": 0.11666666666666665,
+      "rationale": "Several incorrect predictions are semantically close to the true labels (e.g., 'pin_not_working' vs expected 'pin_blocked'), suggesting label noise or overlapping intents in the training set. Such contradictory labels can destabilize learning and hurt generalization to held\u2011out queries.",
+      "sources": []
+    },
+    {
+      "id": "h5",
+      "fault_class": "distribution_shift",
+      "location": "data",
+      "prior": 0.03333333333333333,
+      "rationale": "Training examples are 45\u2011103 tokens while the model can handle 8192; if production queries differ greatly in length or style, the model may not generalize, leading to low held\u2011out accuracy.",
+      "sources": []
+    }
+  ]
+}
