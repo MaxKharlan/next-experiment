@@ -107,13 +107,15 @@ def test_accumulation_rejects_empty_targets_before_backward():
         assert all(p.grad is None for p in model.parameters())
 
 
-def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch):
+@pytest.mark.parametrize("code_fault", [None, "eos_as_pad"])
+def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch, code_fault):
     import json
 
     from jobs.kaggle import train_lora as trainer
 
     class Tokenizer(_Tok):
         pad_token_id = 0
+        eos_token_id = 2
 
         def __call__(self, text, add_special_tokens):
             return {"input_ids": [ord(c) % 8 for c in text]}
@@ -122,6 +124,13 @@ def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch):
         def save_pretrained(self, path):
             pass
 
+    original_evaluate = trainer.evaluate
+
+    def checked_evaluate(model, rows, *args):
+        assert all(row["labels"][-1] == 2 for row in rows)
+        return original_evaluate(model, rows, *args)
+
+    monkeypatch.setattr(trainer, "evaluate", checked_evaluate)
     models = []
 
     def load(*args, **kwargs):
@@ -152,6 +161,7 @@ def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch):
                 tmp_path / str(bs),
                 device="cpu",
                 seed=42,
+                code_fault=code_fault,
                 hp={"batch_size": bs, "gradient_accumulation_steps": accumulation},
             )
         )
@@ -160,7 +170,11 @@ def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch):
     for full, accumulated in zip(models[0].parameters(), models[1].parameters()):
         torch.testing.assert_close(full, accumulated)
     assert summaries[1]["gradient_accumulation_steps"] == 3
-    assert summaries[1]["code_fault"] is None
+    assert summaries[1]["code_fault"] == code_fault
+    assert summaries[1]["answer_tokens"] == (18 if code_fault else 23)
+    audit = summaries[1]["label_audit"]
+    assert audit["reference_eos_targets"] == 5
+    assert audit["removed_eos_targets"] == (5 if code_fault else 0)
 
 
 @pytest.mark.parametrize("accumulation", [0, -1, True, 1.5])
@@ -182,3 +196,52 @@ def test_invalid_code_fault_fails_before_loading(fault):
 
     with pytest.raises(ValueError):
         train("missing", "missing", "unused", code_fault=fault)
+
+
+def test_collate_with_eos_padding_keeps_real_eos_targets():
+    rows = [
+        {"input_ids": [4, 5, 2], "labels": [-100, 5, 2]},
+        {"input_ids": [4, 2], "labels": [-100, 2]},
+    ]
+    batch = collate(rows, pad_id=2, device="cpu")
+    assert batch["labels"][0, 2] == 2
+    assert batch["labels"][1, 1] == 2
+    assert batch["labels"][batch["attention_mask"] == 0].eq(-100).all()
+
+
+@pytest.mark.parametrize(
+    "eos_id,labels,message",
+    [
+        (None, [-100, 2], "EOS token"),
+        (2, [-100, 3], "removed no"),
+        (2, [-100, 2], "no supervised"),
+    ],
+)
+def test_eos_fault_rejects_unusable_data_before_model_loading(
+    tmp_path, monkeypatch, eos_id, labels, message
+):
+    from types import SimpleNamespace
+
+    from jobs.kaggle import train_lora as trainer
+
+    monkeypatch.setattr(
+        trainer.AutoTokenizer,
+        "from_pretrained",
+        lambda *_: SimpleNamespace(pad_token_id=0, eos_token_id=eos_id),
+    )
+    monkeypatch.setattr(
+        trainer,
+        "encode",
+        lambda *_: {"input_ids": [1, labels[-1]], "labels": labels.copy()},
+    )
+    monkeypatch.setattr(
+        trainer.AutoModelForCausalLM,
+        "from_pretrained",
+        lambda *a, **kw: pytest.fail("Model must not load for invalid fault data"),
+    )
+    path = tmp_path / "data.jsonl"
+    path.write_text('{"messages": []}\n')
+    with pytest.raises(ValueError, match=message):
+        trainer.train(
+            path, path, tmp_path / "out", code_fault="eos_as_pad", device="cpu"
+        )
