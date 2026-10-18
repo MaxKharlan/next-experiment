@@ -62,3 +62,48 @@ def test_label_rewrites_are_not_reported_as_preserved():
     changed[0]["labels"][-1] = 7
     with pytest.raises(ValueError, match="only mask"):
         audit_eos_labels(ROWS, changed, 2)
+
+
+def test_prompt_fault_counts_targets_without_mutating_reference():
+    from bench.faults.labels import audit_prompt_labels, include_prompt_labels
+
+    original = deepcopy(ROWS)
+    faulty = include_prompt_labels(ROWS)
+    report = audit_prompt_labels(ROWS, faulty)
+    assert ROWS == original
+    assert report == {
+        "prompt_positions": 2,
+        "supervised_prompt_tokens": 2,
+        "answer_targets": 4,
+        "total_targets": 6,
+        "prompt_loss_fraction": 1 / 3,
+        "status": "included",
+    }
+    assert audit_prompt_labels(ROWS, ROWS)["status"] == "masked"
+    eos = audit_eos_labels(ROWS, faulty, 2, allow_prompt_targets=True)
+    assert eos["removed_eos_targets"] == 0
+    assert eos["observed_targets"] == 6
+    with pytest.raises(ValueError):
+        audit_eos_labels(ROWS, faulty, 2)
+
+
+def test_prompt_audit_excludes_first_position_and_empty_objective():
+    from bench.faults.labels import audit_prompt_labels, include_prompt_labels
+
+    rows = [{"input_ids": [3, 4], "labels": [-100, 4]}]
+    assert (
+        audit_prompt_labels(rows, include_prompt_labels(rows))["status"]
+        == "no_prompt_targets"
+    )
+    assert audit_prompt_labels([], [])["prompt_loss_fraction"] is None
+
+
+def test_prompt_audit_rejects_changed_answers_and_misalignment():
+    from bench.faults.labels import audit_prompt_labels
+
+    bad = deepcopy(ROWS)
+    bad[0]["labels"][-1] = -100
+    with pytest.raises(ValueError, match="Answer"):
+        audit_prompt_labels(ROWS, bad)
+    with pytest.raises(ValueError, match="align"):
+        audit_prompt_labels(ROWS, [])

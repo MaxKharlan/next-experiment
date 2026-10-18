@@ -23,7 +23,12 @@ import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from bench.faults.labels import audit_eos_labels, mask_padding_labels
+from bench.faults.labels import (
+    audit_eos_labels,
+    audit_prompt_labels,
+    include_prompt_labels,
+    mask_padding_labels,
+)
 from bench.faults.recipe import HEALTHY_HP, STRENGTHS, inject
 
 # Batch width is rounded up to this: every new width grows the MPS cache
@@ -203,7 +208,7 @@ def train(
     accumulation = hp.get("gradient_accumulation_steps", 1)
     if type(accumulation) is not int or accumulation < 1:
         raise ValueError("gradient_accumulation_steps must be a positive integer")
-    if code_fault not in {None, "microbatch_mean", "eos_as_pad"}:
+    if code_fault not in {None, "microbatch_mean", "eos_as_pad", "prompt_loss"}:
         raise ValueError("Unknown code fault")
     if code_fault == "microbatch_mean" and accumulation == 1:
         raise ValueError("microbatch_mean requires gradient_accumulation_steps > 1")
@@ -226,8 +231,25 @@ def train(
     reference_rows = train_rows
     if code_fault == "eos_as_pad":
         train_rows = mask_padding_labels(reference_rows, pad_id)
+    if code_fault == "prompt_loss":
+        train_rows = include_prompt_labels(reference_rows)
+    prompt_label_audit = (
+        audit_prompt_labels(reference_rows, train_rows)
+        if code_fault != "eos_as_pad"
+        else None
+    )
+    if (
+        code_fault == "prompt_loss"
+        and not prompt_label_audit["supervised_prompt_tokens"]
+    ):
+        raise ValueError("prompt_loss added no supervised prompt targets")
     label_audit = (
-        audit_eos_labels(reference_rows, train_rows, eos_id)
+        audit_eos_labels(
+            reference_rows,
+            train_rows,
+            eos_id,
+            allow_prompt_targets=code_fault == "prompt_loss",
+        )
         if eos_id is not None
         else None
     )
@@ -274,7 +296,7 @@ def train(
 
     write({"step": 0, "epoch": 0.0, **evaluate(model, valid_rows, pad_id, device, bs)})
     order = random.Random(seed)
-    step, answer_tokens, input_tokens = 0, 0, 0
+    step, answer_tokens, input_tokens, supervised_tokens = 0, 0, 0, 0
     for _ in range(hp["n_epochs"]):
         idx = list(range(len(train_rows)))
         order.shuffle(idx)
@@ -294,7 +316,15 @@ def train(
             opt.zero_grad(set_to_none=True)
             free_cache(device)
             step += 1
-            answer_tokens += n
+            supervised_tokens += n
+            answer_tokens += (
+                sum(
+                    sum(label != -100 for label in reference_rows[j]["labels"][1:])
+                    for j in group
+                )
+                if code_fault == "prompt_loss"
+                else n
+            )
             input_tokens += sum(int(b["attention_mask"].sum()) for b in batches)
             epoch = round(step / steps_per_epoch, 4)
             write(
@@ -306,6 +336,7 @@ def train(
                     "lr": lr,
                     "grad_norm": grad_norm.item(),
                     "answer_tokens": answer_tokens,
+                    "supervised_tokens": supervised_tokens,
                 }
             )
             if step % eval_every == 0 or step % steps_per_epoch == 0:
@@ -321,6 +352,9 @@ def train(
         "fault": fault,
         "code_fault": code_fault,
         "label_audit": label_audit,
+        "prompt_label_audit": prompt_label_audit
+        if code_fault != "eos_as_pad"
+        else None,
         "gradient_accumulation_steps": accumulation,
         "strength": strength,
         "seed": seed,
@@ -331,6 +365,7 @@ def train(
         "valid_examples": len(valid_rows),
         "steps": step,
         "answer_tokens": answer_tokens,
+        "supervised_tokens": supervised_tokens,
         "input_tokens": input_tokens,
         "wall_seconds": round(time.monotonic() - started, 1),
         "final": final,
@@ -348,7 +383,9 @@ def main() -> None:
     parser.add_argument("--hp", default="{}", help="JSON with hyperparameter overrides")
     parser.add_argument("--fault", choices=sorted(STRENGTHS))
     parser.add_argument("--strength", type=float)
-    parser.add_argument("--code-fault", choices=["microbatch_mean", "eos_as_pad"])
+    parser.add_argument(
+        "--code-fault", choices=["microbatch_mean", "eos_as_pad", "prompt_loss"]
+    )
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument(
         "--lr-schedule", choices=["linear", "constant"], default="linear"

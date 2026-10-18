@@ -12,7 +12,9 @@ already ignored prompt labels. The report counts supervised targets before and
 after masking, reference EOS targets, and removed EOS targets. The removal
 fraction is null when there are no reference EOS targets; that status is
 `no_eos_targets`, not evidence that masking is correct. The function requires
-aligned input tokens and accepts only label masking, rejecting label rewrites.
+aligned input tokens and accepts only label masking by default. Its explicit
+`allow_prompt_targets` option supports the [prompt-loss audit](prompt-loss.md);
+other label rewrites are rejected.
 
 The trainer saves this report as `label_audit` in `summary.json`, alongside the
 selected `code_fault`. For tokenizers without an EOS ID, healthy runs record a
