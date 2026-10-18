@@ -1,0 +1,122 @@
+{
+  "fingerprint": "7205b4c99113398a6d4038d787788847f45397ae141c2b0e4d7bb819bfae9aae",
+  "condition": "with_tavily",
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.35,
+      "rationale": "LoRA for Qwen3-0.6B typically requires a learning rate around 1e-4 to achieve good adaptation; the used rate 2e-05 is an order lower, resulting in minimal weight updates and poor generalization despite low training loss. The arXiv study shows accuracy drops sharply at lower lrs for r=16 LoRA.",
+      "sources": [
+        "https://arxiv.org/html/2602.04998v2"
+      ]
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "lora_r",
+      "prior": 0.25,
+      "rationale": "With 77 distinct intent labels, a LoRA rank of 16 may be too limited to capture the necessary adaptations; higher ranks (e.g., 256) have been shown to match full fine\u2011tuning performance. The model therefore stalls below expected quality.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "https://tensoria.fr/en/blog/lora-qlora-fine-tuning-guide"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "chat_template_mismatch",
+      "location": "training data format (chat template)",
+      "prior": 0.2,
+      "rationale": "Token Factory expects chat\u2011formatted examples (<|user|>\u2026<|assistant|>\u2026). If the user supplied plain query\u2011label pairs, the model sees a mismatch between training and inference formats, causing it to ignore the instruction and produce random labels.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "train_val_overlap",
+      "location": "validation file",
+      "prior": 0.1,
+      "rationale": "Although no exact duplicates exist, the sharp drop in validation loss to 0.041 at epoch\u202f6 suggests the model memorized a subset of validation examples (near\u2011duplicates or easy patterns), indicating overlap\u2011like behavior that harms generalization to held\u2011out queries.",
+      "sources": []
+    },
+    {
+      "id": "h5",
+      "fault_class": "distribution_shift",
+      "location": "training examples",
+      "prior": 0.1,
+      "rationale": "The held\u2011out queries may differ in phrasing or domain from the training set, causing the model to fail despite low training loss; this matches the symptom of good validation performance (eventually) but poor real\u2011world accuracy.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "56f1fb6cb38a",
+      "investigation_id": "routing-priors-dev-ref-fault6-mild-s0",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3224,
+      "tokens_out": 2648,
+      "cost_usd": 0.0033504,
+      "latency_ms": 17373,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792350987.682347
+    }
+  ],
+  "known_issues": {
+    "queries": [
+      "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 36% of 200",
+      "LoRA fine-tuning learning_rate 2e-05 6 epochs rank 16 common problems"
+    ],
+    "sources": [
+      {
+        "title": "Learning Rate Matters: Vanilla LoRA May Suffice for LLM Fine-tuning",
+        "url": "https://arxiv.org/html/2602.04998v2",
+        "snippet": "### F.1 Qwen3-0.6B\n\n#### F.1.1 Mathematical Reasoning\n\nMethods\n \n\nBatch\n\nSize\nLearning Rate\n\n1.12e-05\n2.00e-05\n3.56e-05\n6.32e-05\n1.12e-04\n2.00e-04\n3.56e-04\n6.32e-04\n1.12e-03\n2.00e-03\n3.56e-03\n6.32e-03\n\nLoRA\n16\n38.94\u00b11.02\n46.49\u00b11.17\n47.78\u00b10.47\n47.85\u00b10.42\n48.13\u00b10.40\n48.90\u00b10.41\n48.41\u00b10.59\n49.05\u00b10.49\n47.64\u00b10.86\n44.00\u00b10.45\n26.59\u00b121.82\n5.03\u00b15.33\n\n64\n29.53\u00b10.18\n33.02\u00b10.28\n39.15\u00b10.33\n46.49\u00b10.25\n48.16\u00b10.24",
+        "score": 0.7206637,
+        "query": "LoRA fine-tuning learning_rate 2e-05 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "LoRA & QLoRA: Fine-tuning LLMs on a Budget : Guide",
+        "url": "https://tensoria.fr/en/blog/lora-qlora-fine-tuning-guide",
+        "snippet": "Heuristic: alpha = 2 \u00d7 r. So for r=16, use alpha=32. This effectively doubles the learning rate for the adapter relative to the baseline, which empirically works well across most tasks. You then tune the actual learning rate separately rather than using alpha as a secondary learning rate dial, which is what most engineers accidentally do when they set alpha equal to r. [...] ```\nW' = W + \u0394W = W + ",
+        "score": 0.6599319,
+        "query": "LoRA fine-tuning learning_rate 2e-05 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "LoRA Learns Less and Forgets Less",
+        "url": "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "snippet": "For Code IFT (Fig. 1B and Table S5), HumanEval accuracy is clearly ordered by rank from the very first epoch. The more common r = 16 and r = 64 LoRA configurations have lower accuracy than full finetuning, with HumanEval scores of 0.358 and 0.417 at epoch 4, respectively). With a high LoRA rank (r = 256), full finetuning performance can be matched (LoRA=0.498 in epoch 4, full finetuning=0.497 in e",
+        "score": 0.65173227,
+        "query": "LoRA fine-tuning learning_rate 2e-05 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "How we Fine-tuned Qwen3.0-6B to Beat GPT-4o on Text2SQL",
+        "url": "https://www.youtube.com/watch?v=zzthXFhcFD4",
+        "snippet": "[15:04] start with direct string matches just to just to get a sense of what that accuracy would be. So we can say like\n[15:11] what is the or find me all the rows where\n[15:18] query or no where SQL is equal to the prediction. This\n[15:25] will just give you like a raw count of how many times um SQL directly matches the prediction.\n[15:33] And you can see this filtered it down to 22 rows. So out ",
+        "score": 0.54492307,
+        "query": "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 36% of 200"
+      },
+      {
+        "title": "My Experiences with FineTuning LLMs using LoRa | by Rachit Tayal | Medium",
+        "url": "https://medium.com/@rachittayal7/my-experiences-with-finetuning-llms-using-lora-b9c90f1839c6",
+        "snippet": "We started experimenting with rank starting from 8, 16, 32, 64, 128, 256. We wanted the model to learn some complex SQL patterns like nested subqueries, multiple joins (5 to 6 joins in a single query), date-time related queries, some in-house macros, in which the model was consistently failing. So, with the right dataset having such diverse patterns, we wanted the LoRa layers to absorb these patte",
+        "score": 0.53269315,
+        "query": "LoRA fine-tuning learning_rate 2e-05 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "How to Fine-Tune Qwen3 on Text2SQL to GPT-4o level performance | Oxen.ai",
+        "url": "https://www.oxen.ai/blog/how-to-fine-tune-qwen3-to-gpt-4o-level-performance",
+        "snippet": "The first model that comes to mind is `Qwen/Qwen3-0.6B` from the latest release from the Qwen team. This is a small, light weight model that has been pre-trained on 36 trillion tokens and post-trained to have both a \u201cthinking mode\u201d (for complex, multi-step reasoning) and \u201cnon-thinking mode\u201d (for rapid, context-driven responses). You can learn more about these models from their research paper.\n\n`Qw",
+        "score": 0.51325434,
+        "query": "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 36% of 200"
+      }
+    ],
+    "credits": 0
+  },
+  "retrieval_provenance": {
+    "source": "artifacts/ablations/priors-v1/dev/ref-fault6-mild-s0/with_tavily.json",
+    "sha256": "895bd6392f7d5f04850d787a18319882071cbb476ab54a05b6eac6be11e72687",
+    "reused": true
+  }
+}

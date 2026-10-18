@@ -1,0 +1,111 @@
+{
+  "protocol_version": 2,
+  "no_causal_rule": "EIG until the first intervention; retain ranking without confirmation",
+  "belief_model": "causal-odds-heuristic-v1",
+  "weight_probe_enabled": false,
+  "split": "dev",
+  "cases": [
+    "fault6-lr1e-5",
+    "ref-epochs18-s0",
+    "ref-fault6-mild-s0",
+    "ref-fault6-strong-s0",
+    "ref-healthy-s0"
+  ],
+  "variants": [
+    [
+      "full",
+      "with_tavily",
+      "eig",
+      0
+    ],
+    [
+      "no_tavily",
+      "without_tavily",
+      "eig",
+      0
+    ],
+    [
+      "no_planner",
+      "with_tavily",
+      "fixed",
+      0
+    ],
+    [
+      "no_causal",
+      "with_tavily",
+      "no_causal",
+      0
+    ],
+    [
+      "random_0",
+      "with_tavily",
+      "random",
+      0
+    ],
+    [
+      "random_1",
+      "with_tavily",
+      "random",
+      1
+    ],
+    [
+      "random_2",
+      "with_tavily",
+      "random",
+      2
+    ],
+    [
+      "random_3",
+      "with_tavily",
+      "random",
+      3
+    ],
+    [
+      "random_4",
+      "with_tavily",
+      "random",
+      4
+    ],
+    [
+      "random_5",
+      "with_tavily",
+      "random",
+      5
+    ],
+    [
+      "random_6",
+      "with_tavily",
+      "random",
+      6
+    ],
+    [
+      "random_7",
+      "with_tavily",
+      "random",
+      7
+    ],
+    [
+      "random_8",
+      "with_tavily",
+      "random",
+      8
+    ],
+    [
+      "random_9",
+      "with_tavily",
+      "random",
+      9
+    ]
+  ],
+  "noise_sd": 0.019,
+  "min_effect": 0.06,
+  "pairs_name": "pairs-check",
+  "budget_usd": 1.0,
+  "max_interventions": 2,
+  "seeds_per_arm": 2,
+  "narratives": "disabled for every variant",
+  "cost_scope": "hypothesis LLM calls plus estimated pair training",
+  "tavily_cost": "credits recorded in priors; excluded from USD totals",
+  "new_training_jobs": 0,
+  "new_api_calls_during_replay": 0
+}

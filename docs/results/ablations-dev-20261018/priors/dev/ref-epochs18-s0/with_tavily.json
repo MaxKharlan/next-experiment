@@ -1,0 +1,111 @@
+{
+  "fingerprint": "931d5e57ed59e656806445444203301e1fa93bdae7247a5b952374ac79c2717a",
+  "condition": "with_tavily",
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.35,
+      "rationale": "Validation loss falls to ~0.0009 at epoch 6 then rises to >1.0 by epoch 18, while training loss drives to zero, indicating overfitting after epoch 6.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "A LoRA rank of 16 may be too low to capture the 77\u2011intent classification task; the cited paper shows higher ranks yield substantially better performance.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "training dataset",
+      "prior": 0.2,
+      "rationale": "Validation loss shows large, unpredictable swings epoch\u2011to\u2011epoch, a pattern consistent with noisy or contradictory labels in the data.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "validation dataset (vs. production queries)",
+      "prior": 0.1,
+      "rationale": "Despite low training loss, the model only reaches 56% accuracy on held\u2011out queries, suggesting the training data does not reflect the distribution of real banking queries.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "f8657447b279",
+      "investigation_id": "routing-priors-dev-ref-epochs18-s0",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3675,
+      "tokens_out": 1507,
+      "cost_usd": 0.0024588,
+      "latency_ms": 9942,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792350970.2997031
+    }
+  ],
+  "known_issues": {
+    "queries": [
+      "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 56% of 200",
+      "LoRA fine-tuning learning_rate 0.0002 18 epochs rank 16 common problems"
+    ],
+    "sources": [
+      {
+        "title": "How we Fine-tuned Qwen3.0-6B to Beat GPT-4o on Text2SQL",
+        "url": "https://www.youtube.com/watch?v=zzthXFhcFD4",
+        "snippet": "[15:04] start with direct string matches just to just to get a sense of what that accuracy would be. So we can say like\n[15:11] what is the or find me all the rows where\n[15:18] query or no where SQL is equal to the prediction. This\n[15:25] will just give you like a raw count of how many times um SQL directly matches the prediction.\n[15:33] And you can see this filtered it down to 22 rows. So out ",
+        "score": 0.55478466,
+        "query": "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 56% of 200"
+      },
+      {
+        "title": "LoRA fine-tuning Hyperparameters Guide | Unsloth Documentation",
+        "url": "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide",
+        "snippet": "Typical Range: `2e-4` (0.0002) to `5e-6` (0.000005). \ud83d\udfe9 For normal LoRA/QLoRA Fine-tuning, we recommend `2e-4` as a starting point. \ud83d\udfe6 For Reinforcement Learning (DPO, GRPO etc.), we recommend `5e-6` . \u2b1c For Full Fine-tuning, lower learning rates are generally more appropriate. [...] 1. The rank (`r`) of the fine-tuning process. A larger rank uses more memory and will be slower, but can increase acc",
+        "score": 0.53997856,
+        "query": "LoRA fine-tuning learning_rate 0.0002 18 epochs rank 16 common problems"
+      },
+      {
+        "title": "LoRA Learns Less and Forgets Less",
+        "url": "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "snippet": "For Code IFT (Fig. 1B and Table S5), HumanEval accuracy is clearly ordered by rank from the very first epoch. The more common r = 16 and r = 64 LoRA configurations have lower accuracy than full finetuning, with HumanEval scores of 0.358 and 0.417 at epoch 4, respectively). With a high LoRA rank (r = 256), full finetuning performance can be matched (LoRA=0.498 in epoch 4, full finetuning=0.497 in e",
+        "score": 0.5194,
+        "query": "LoRA fine-tuning learning_rate 0.0002 18 epochs rank 16 common problems"
+      },
+      {
+        "title": "Fine-tuning Small Model (Qwen3-0.6B) for Domain Knowledge + Reasoning: Seeking Optimization Advice - Beginners - Hugging Face Forums",
+        "url": "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558",
+        "snippet": "0.6B definitely small. I would go with 4B - it works for pretty similar case for my project, and is able to deliver solid baseline that can be perfected with fine tuning.\n\nI would say 1B is minimum for such task, 3-4B is best option.\n\nIf you REALYY want to make 0.6B work - then I would advice to train 2 separate adapters - Domain Knowledge Only and Enable reasoning capability for MCP tool selectio",
+        "score": 0.50022036,
+        "query": "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 56% of 200"
+      },
+      {
+        "title": "How to Fine-Tune Qwen3 on Text2SQL to GPT-4o level performance | Oxen.ai",
+        "url": "https://www.oxen.ai/blog/how-to-fine-tune-qwen3-to-gpt-4o-level-performance",
+        "snippet": "This means we have a winner! It still is by no means perfect, but proves that it is indeed possible.\n\n| Model | Accuracy |\n --- |\n| `GPT-4o` | 45% |\n| `Qwen3-0.6B` | 8% |\n| `SFT_Qwen3-0.6B` | 42% |\n| `SFT_Qwen3-1.7B` | 57% \ud83e\udd47 |\n\n`GPT-4o`\n`Qwen3-0.6B`\n`SFT_Qwen3-0.6B`\n`SFT_Qwen3-1.7B`\n\n## Conclusion [...] Extracting the accuracy with our notebooks/extract-accuracy.py notebook we can see the model no",
+        "score": 0.49846253,
+        "query": "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 56% of 200"
+      },
+      {
+        "title": "LoRA vs Full Fine-tuning: An Illusion of Equivalence",
+        "url": "https://arxiv.org/html/2410.21228v2",
+        "snippet": "| Dataset | LoRA | \u03bb=0.3\\lambda=0.3 | | \u03bb=0.5\\lambda=0.5 | | \u03bb=0.7\\lambda=0.7 | | \u03bb=0.9\\lambda=0.9 | |\n ---  ---  ---  ---  --- |\n| Rank | TA | PTL | TA | PTL | TA | PTL | TA | PTL |\n| MetaMath | r=16 | -15.0 | -46.5 | -6.6 | -40.4 | -2.7 | -28.2 | 0.0 | -10.5 |\n| r=64 | -5.8 | -29.1 | -4.4 | -22.3 | 0.3 | -14.2 | 0.3 | -4.9 |\n| r=256 | -0.1 | -33.3 | 1.8 | -25.2 | 0.5 | -15.5 | -0.8 | -5.2 |\n| Ma",
+        "score": 0.48396602,
+        "query": "LoRA fine-tuning learning_rate 0.0002 18 epochs rank 16 common problems"
+      }
+    ],
+    "credits": 0
+  },
+  "retrieval_provenance": {
+    "source": "artifacts/ablations/priors-v1/dev/ref-epochs18-s0/with_tavily.json",
+    "sha256": "b8b77c92e3d65be9138959a51b544b5003ea83ef9c8bc9e3f4daa264e1cd9ec3",
+    "reused": true
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "method": "no_causal",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.5739
+    ],
+    [
+      "distribution_shift",
+      0.2014
+    ],
+    [
+      "lora_rank_too_small",
+      0.0863
+    ],
+    [
+      "too_many_epochs",
+      0.0378
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0021222000000000003,
+  "llm_tokens": 4326,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.35,
+          "rationale": "The default learning rate for Token Factory is 1e-5, but LoRA typically requires around 1e-4 to achieve noticeable adaptation. With such a low LR the model only shifts slightly from the base, consistent with the low 14% accuracy despite decreasing train loss.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.3,
+          "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for 77 distinct intent labels. Known work shows that higher ranks (e.g., 256) can match full fine\u2011tuning performance, while low ranks stall accuracy.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.2,
+          "rationale": "Validation loss fell from epoch\u202f1 to epoch\u202f2 but rose again at epoch\u202f3 (1.082 \u2192 1.1954), a classic sign of over\u2011fitting when training continues past the optimum. More epochs would likely worsen generalization.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "distribution_shift",
+          "location": "training examples",
+          "prior": 0.1,
+          "rationale": "The training set contains only 200 short examples (45\u2011103 tokens) that may not resemble the varied phrasing of real\u2011world banking queries, leading to good training loss but poor held\u2011out performance.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1,
+        "unlisted": 0.05
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9978778,
+      "outcome": "normal",
+      "gain_bits": 0.4049,
+      "raw": {
+        "train_loss": [
+          1.5303,
+          0.8395,
+          0.6533
+        ],
+        "valid_loss": [
+          1.5691,
+          1.082,
+          1.1954
+        ],
+        "train_drop": 0.573090243743057
+      },
+      "probs": {
+        "h1": 0.1507,
+        "h2": 0.4306,
+        "h3": 0.1675,
+        "h4": 0.1675,
+        "unlisted": 0.0837
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9978778,
+      "outcome": "ok",
+      "gain_bits": 0.4532,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.2351,
+        "h2": 0.1119,
+        "h3": 0.2612,
+        "h4": 0.2612,
+        "unlisted": 0.1306
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9978778,
+      "outcome": "ok",
+      "gain_bits": 0.2578,
+      "raw": {
+        "n_epochs": 3,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.2984,
+        "h2": 0.1421,
+        "h3": 0.0622,
+        "h4": 0.3316,
+        "unlisted": 0.1658
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9978778,
+      "outcome": "low",
+      "gain_bits": 0.2961,
+      "raw": {
+        "learning_rate": 1e-05,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.5739,
+        "h2": 0.0863,
+        "h3": 0.0378,
+        "h4": 0.2014,
+        "unlisted": 0.1007
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "causal checks disabled for this ablation",
+      "probs": {
+        "h1": 0.5739,
+        "h2": 0.0863,
+        "h3": 0.0378,
+        "h4": 0.2014,
+        "unlisted": 0.1007
+      }
+    }
+  ],
+  "confirmed": []
+}

@@ -1,0 +1,68 @@
+{
+  "[{\"learning_rate\": 0.0001}, {}]": {
+    "target": {
+      "metrics": [
+        0.415,
+        0.415
+      ],
+      "ft_job_ids": [
+        "ftjob-5aa5f03e1f884f4aaa7675df11d2395a",
+        "ftjob-abe4e163fe2447f392183d3bd54ec715"
+      ]
+    },
+    "control": {
+      "metrics": [
+        0.1,
+        0.1
+      ],
+      "ft_job_ids": [
+        "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+        "ftjob-89ad5c411b944bb8a8c91fc0deea288b"
+      ]
+    }
+  },
+  "[{\"n_epochs\": 1}, {}]": {
+    "target": {
+      "metrics": [
+        0.055,
+        0.055
+      ],
+      "ft_job_ids": [
+        "ftjob-4719ef89631f43c3804638721212192c",
+        "ftjob-568ef141e0334036a819de8f5239170b"
+      ]
+    },
+    "control": {
+      "metrics": [
+        0.12,
+        0.095
+      ],
+      "ft_job_ids": [
+        "ftjob-b23a7978afee4cffb8a6bc8a059ea15c",
+        "ftjob-73f9b05704ec4ff69f7cd8d416917b7a"
+      ]
+    }
+  },
+  "[{\"lora_alpha\": 64, \"lora_r\": 64}, {}]": {
+    "target": {
+      "metrics": [
+        0.18,
+        0.18
+      ],
+      "ft_job_ids": [
+        "ftjob-31a5e1d6f3cf4a79aa4bdf3df6e40c04",
+        "ftjob-26070e9a75984a23949526fe8037f6f1"
+      ]
+    },
+    "control": {
+      "metrics": [
+        0.12,
+        0.095
+      ],
+      "ft_job_ids": [
+        "ftjob-e99feacb61c64071acb7a271e35d95ac",
+        "ftjob-cb38d816735d46fd9356ebecccb17ff3"
+      ]
+    }
+  }
+}

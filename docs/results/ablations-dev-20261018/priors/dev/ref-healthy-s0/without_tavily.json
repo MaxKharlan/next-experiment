@@ -1,0 +1,62 @@
+{
+  "fingerprint": "c8632a1f50064a0c6b58b2a7aaa735f493a78891ec234fe23d5d02a5091e4d68",
+  "condition": "without_tavily",
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "distribution_shift",
+      "location": "training data (queries) vs production queries",
+      "prior": 0.3,
+      "rationale": "The model achieves low validation loss by epoch 6 but only 54% accuracy on held-out queries, suggesting the training set does not reflect the distribution of real banking queries. Small dataset (200 train, 50 val) increases risk of shift.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.25,
+      "rationale": "With LoRA rank 16 on a 0.6B model, the adapter may lack capacity to capture the 77-way classification boundaries, causing stalled quality despite low training loss.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.2,
+      "rationale": "Validation loss decreases to a minimum at epoch 2 then rises sharply through epoch 5, indicative of overfitting before the final epoch where noise reduces loss again; excess epochs hurt generalization.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "chat_template_mismatch",
+      "location": "chat_template used in training vs inference",
+      "prior": 0.15,
+      "rationale": "If training employed a chat template (e.g., <|im_start|>assistant) but inference expects plain label outputs, the model may generate extra tokens that are interpreted as wrong intent labels, lowering accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h5",
+      "fault_class": "contradictory_labels",
+      "location": "training data (label assignments)",
+      "prior": 0.09,
+      "rationale": "Some wrong answers are semantically close to expected labels (e.g., 'unable_to_verify_pin' vs 'pin_blocked'), hinting at possible label noise or ambiguous examples that confuse the model.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "1b3e76bc889e",
+      "investigation_id": "ablation-dev-ref-healthy-s0-without_tavily",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 1847,
+      "tokens_out": 1363,
+      "cost_usd": 0.0017808000000000001,
+      "latency_ms": 7154,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792354819.1888351
+    }
+  ],
+  "known_issues": null
+}

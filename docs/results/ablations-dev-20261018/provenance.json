@@ -1,0 +1,477 @@
+{
+  "code_commit": "493ec246f93f7aab413af27229894e7ba5b44e4c",
+  "split": "dev",
+  "source_sha256": [
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "bench/__init__.py"
+    },
+    {
+      "sha256": "22511bfca0ee530399b08725810d474db490090892607e437aea894e1371552a",
+      "path": "bench/ablations.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "bench/baselines/__init__.py"
+    },
+    {
+      "sha256": "1feac2c5728e14288eeba2f2c11995f2e75ade2f1c3456cf5ab86d2e4497e1ad",
+      "path": "bench/baselines/checklist.py"
+    },
+    {
+      "sha256": "620b2d388e018d5cd9cbd91d8a53e365e7f56c03ffd760409e9f75c890d7fac2",
+      "path": "bench/baselines/react_super.py"
+    },
+    {
+      "sha256": "eecb66295fd4076c241a0b26da5df3be367dd876743911c82d9001a045f6ca02",
+      "path": "bench/baselines/single_ultra.py"
+    },
+    {
+      "sha256": "72975805bdd332236bd3244e60f8f1b05a4ee6cb150f540050fe9504d5b8f58e",
+      "path": "bench/baselines/tools.py"
+    },
+    {
+      "sha256": "f0ab3e83aadda1ca1372a04fc4bea8c2f2009b183fad2e8366c09194e13b77b9",
+      "path": "bench/calibration.py"
+    },
+    {
+      "sha256": "ac02536b1d8db423d56bd8d1b7f7e8e46dd897a3f0b97c5d7953cb63a7dcd5b7",
+      "path": "bench/cases.py"
+    },
+    {
+      "sha256": "533db2ec20517fbade043ed4bc75be5003ee7f1b508654aa18f828ee80d5cc18",
+      "path": "bench/diagnosis.py"
+    },
+    {
+      "sha256": "e37d6f94c8288b56f01c6136ecce16e080499c60b2294d964431901c5e4abb18",
+      "path": "bench/failure_report.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "bench/faults/__init__.py"
+    },
+    {
+      "sha256": "ee2f3bee57f1fa367922c716641ff01323d1b31d9d5fdb3659e898d2c2365f66",
+      "path": "bench/faults/data.py"
+    },
+    {
+      "sha256": "4b6f8a6a1397c3628e745f8046638daeb0a4aa51bb573ff49d6aa200b52ddf0d",
+      "path": "bench/faults/recipe.py"
+    },
+    {
+      "sha256": "0077220eead899079a31d4a8b2546de8108c1ba84dd0c34b889cbc1ccd831eb2",
+      "path": "bench/fit_signatures.py"
+    },
+    {
+      "sha256": "0130286fdb10893aa53de6480caeb04c19933f68b4ebfea63001ae686ae2989d",
+      "path": "bench/fixes.py"
+    },
+    {
+      "sha256": "c62537cf4e71a53b9ca5caa0bd7b946cfe8ad2b76395f4d73b104af6365b60bd",
+      "path": "bench/methods.py"
+    },
+    {
+      "sha256": "458b67fad56dc22eb6134525b2d3de1677e8cad0f8f00aaa7504258475745a0e",
+      "path": "bench/pair_cache.py"
+    },
+    {
+      "sha256": "7ef2837653e54fbeef4ae8c784273ce585f906fb55b3af247551aff689889b3e",
+      "path": "bench/reference.py"
+    },
+    {
+      "sha256": "a880bd536d8076bf38f86db546820c0654ad0357b630fe72538fdd65624256ac",
+      "path": "bench/reliability_plot.py"
+    },
+    {
+      "sha256": "69c088b26766637fe654db4597ac4aa53d1a9bc82e61ab112804a53510a2c23e",
+      "path": "bench/routing_ablation.py"
+    },
+    {
+      "sha256": "5f3de73e1dbf5f78b8cf48be7773af56972784f37360a85e6bed8793f1dd0116",
+      "path": "bench/run_bench.py"
+    },
+    {
+      "sha256": "f0e716749863f5f1be97502098d69beeab5a857ac6c356aadae4060e8efe6415",
+      "path": "bench/score.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "bench/tasks/__init__.py"
+    },
+    {
+      "sha256": "da49eecacf6f073193073b4f04f6a1e568b31733adf0e7125fb3e4e147cf3d00",
+      "path": "bench/tasks/banking77.py"
+    },
+    {
+      "sha256": "b72b56653162af0fdaeb94966e4d4bd9f9472cbf90d8f57a7fc57183b97bacf0",
+      "path": "bench/temperature.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/__init__.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/agent/__init__.py"
+    },
+    {
+      "sha256": "4b265ee1f6e162255cf3ad1ccbcb2a85c9e07e4d209106fdebf0a5afafe48e3c",
+      "path": "core/agent/catalog.py"
+    },
+    {
+      "sha256": "82ac923bd825b96c1589d7e063f1f0efdb7f749d0baecc6b6701f3f7d3ee4cac",
+      "path": "core/agent/context.py"
+    },
+    {
+      "sha256": "9d75435b4b56d580ddcfd6f2f7a29c9402db117d9ea33a9220700047da15788b",
+      "path": "core/agent/ensemble.py"
+    },
+    {
+      "sha256": "80421f04c1a38ec7e4b507c9927285a5b8a705cd8892d70b03c3dd9795eef60f",
+      "path": "core/agent/known_issues.py"
+    },
+    {
+      "sha256": "e2d951fd822367df9e582fc857900df37a60c75dfcf73de1724f4218954b436b",
+      "path": "core/agent/loop.py"
+    },
+    {
+      "sha256": "6c24ef4abdf4c57f80a5c68b4676062023941eb1bb64734154fa7cabd2d399d7",
+      "path": "core/agent/prompts/hypotheses.v1.md"
+    },
+    {
+      "sha256": "0ccf6db5b7d93668a0c6365694f108d8be653e2726e4c1be7661ff91d4fd357f",
+      "path": "core/agent/prompts/hypotheses.v2.md"
+    },
+    {
+      "sha256": "912296b69a5843a69b66bd8099d3bcc865cc067567d1a4c0dc0d64b4c08f0581",
+      "path": "core/agent/prompts/hypotheses.v3.md"
+    },
+    {
+      "sha256": "82900cf8119eefda523b155302b118109f261922c599a7b1a03347bcc7b1c629",
+      "path": "core/agent/prompts/interpret_probe.v1.md"
+    },
+    {
+      "sha256": "fe94175d5ccfb37d00a191be201e8f236e1918e148d651050ace5b367fd29c66",
+      "path": "core/agent/prompts/react.v1.md"
+    },
+    {
+      "sha256": "0564199da89f83dcbf3d8d6805c87704d4cbb75df33a52789efd09ae3368b006",
+      "path": "core/agent/prompts/single_shot.v1.md"
+    },
+    {
+      "sha256": "209149709fa87c212d66eb26bebc1ed08686299df653c418ca83a0dd1ce98e37",
+      "path": "core/agent/prompts/verdict.v1.md"
+    },
+    {
+      "sha256": "47290359112311631b70a21292f4eb0461941ed6114b9418eb60e046291c2f21",
+      "path": "core/agent/router.py"
+    },
+    {
+      "sha256": "2c10da5aaef8f36f76a5220aa086add0560f7e1ae04f2c6ce57cc0708d56732a",
+      "path": "core/agent/schemas.py"
+    },
+    {
+      "sha256": "7901650f3660ee31c3884c59597c88e9acaf45c38c6d36cb65aeb1bc0a7dac35",
+      "path": "core/agent/steps.py"
+    },
+    {
+      "sha256": "25bfcab76fbc5220f6a3b9513fd5d31f61cc134186e5ce790e925b3259577e27",
+      "path": "core/case.py"
+    },
+    {
+      "sha256": "22fb9a30c5d20f1d71493dd7d9b41d5c2a2e52e8ee37a978522d718180612daa",
+      "path": "core/config.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/connectors/__init__.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/connectors/compute.py"
+    },
+    {
+      "sha256": "6aae274255029f68d2a28a6d736adf874737e0a547cb7e80a8260ce45216ef82",
+      "path": "core/connectors/storage.py"
+    },
+    {
+      "sha256": "5cd8515be5b94c819cb5ec1bb3a5fd1c4a49a0ad8b0ccf66e1d1f81a8134967a",
+      "path": "core/connectors/tavily.py"
+    },
+    {
+      "sha256": "3642588e8054aab2abfb5f1ef1c7f427f3bf091e2f2d43617e533c1fdeb5e409",
+      "path": "core/connectors/token_factory.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/db/__init__.py"
+    },
+    {
+      "sha256": "efa3e7b6a0919e0f95199b8a2adcd43ee6599e2f6ea80ac9ea8034cb465c4152",
+      "path": "core/eval/__init__.py"
+    },
+    {
+      "sha256": "55a4ac2f592bed8c3c4220f72eb87b16268c2144510d1a7596f8f6391e720994",
+      "path": "core/eval/breakdown.py"
+    },
+    {
+      "sha256": "1bf25aebcc074bc69cb57ee2787a055b975b58ac813a777765cf54f4749eddcb",
+      "path": "core/eval/checkpoints.py"
+    },
+    {
+      "sha256": "5618acdbd8bac665b71d99b8c3b72e9a07e2d8f17701e78ca673b71aaccbeaa7",
+      "path": "core/eval/data.py"
+    },
+    {
+      "sha256": "c03ed92207a4e0b3007fdb3c31370a1fec1d5a1a1a0973fbe8006583fb94f563",
+      "path": "core/eval/generate.py"
+    },
+    {
+      "sha256": "b8c20ffce4747b16c2aa7a6fe3f88c1096dc92bfe1a10ab38f26be2cabcad807",
+      "path": "core/eval/metrics.py"
+    },
+    {
+      "sha256": "b87c87a71e71880e67ab4fef2fd2d7b7861a0f2cb3a7817e2c025cc70902d220",
+      "path": "core/eval/records.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/interventions/__init__.py"
+    },
+    {
+      "sha256": "7f2f3b7b90bdf79653b2c127c5ca9e7746e8bd29fac3d189adef5747a7125411",
+      "path": "core/interventions/answer_check.py"
+    },
+    {
+      "sha256": "fd552203825c88d1436972e412be137921add531d6a26e37c417c6b214d5b2dc",
+      "path": "core/interventions/data_pairs.py"
+    },
+    {
+      "sha256": "aec71014490e7ac167f0a617fdc06ae918b86fa2469a5285b4eee93a6cb3a8a2",
+      "path": "core/interventions/pairs.py"
+    },
+    {
+      "sha256": "f82cfa09478b79660821b16a182ff2766dec449d5baf46e85e099ad12f7f3489",
+      "path": "core/interventions/retrain.py"
+    },
+    {
+      "sha256": "09090bc68fe9601381786fab9c47d52e91286dedabec9d463c520f839a39e0df",
+      "path": "core/interventions/stats.py"
+    },
+    {
+      "sha256": "4e0bbe13b4e0a12a2c91c3b2c98de39a604cd7145a7490f477fed8867c283816",
+      "path": "core/interventions/tf_runner.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/planner/__init__.py"
+    },
+    {
+      "sha256": "ed7a022b9944a894c1389c8d1a577222b63140eb22a68daa1e406bb0b646c954",
+      "path": "core/planner/causal_belief.py"
+    },
+    {
+      "sha256": "5d4e43eb7c92d7d35dfa3880867a75e416fe7476cac7d5badf57e3242d98c928",
+      "path": "core/planner/eig.py"
+    },
+    {
+      "sha256": "db3baff4ecd17d686c0a9ba8a52d8b788094649cd6c1cd5819195e3138067daa",
+      "path": "core/planner/job_cost.py"
+    },
+    {
+      "sha256": "b49795acff941404f966319d5ee6c79c267fc3df3712f1875c9474d608f6ab8f",
+      "path": "core/planner/outcome_model.py"
+    },
+    {
+      "sha256": "6cbb79e2686eaea03a103933d644a3e506a9e064f487588bf6146201ccbb08dc",
+      "path": "core/planner/stopping.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/probes/__init__.py"
+    },
+    {
+      "sha256": "eeee432fd7814c3c85e6e18ffcb63cba6fb2b196b85e5ea7186679aa3b3c7b04",
+      "path": "core/probes/base.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/probes/level0/__init__.py"
+    },
+    {
+      "sha256": "d31871fadefcf1f049db21ec15a37dbd4f6a7322ed4e87cbc7e2535689e04d7b",
+      "path": "core/probes/level0/answers.py"
+    },
+    {
+      "sha256": "caefde3854f35c4447038dd6f3e78ec68afabc3fa52e06a0164e23c10453fd17",
+      "path": "core/probes/level0/lengths.py"
+    },
+    {
+      "sha256": "295140b8e33c74387d7f642f175ed9f1f5168e70d10974ae296d2348e9e00d85",
+      "path": "core/probes/level0/recipe.py"
+    },
+    {
+      "sha256": "0ca64bf6759796ba5cd83e3c07675c2563e2cadde12aeca6ea9d6cbe290112d6",
+      "path": "core/probes/level0/weights.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/probes/level1/__init__.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/probes/level2/__init__.py"
+    },
+    {
+      "sha256": "40f01bf4f8c09a558acf3639ea4bf3777500c7f406d8116b0c9a4744d91f1c7f",
+      "path": "core/probes/signatures.yaml"
+    },
+    {
+      "sha256": "33a8b211c954f56dabada6b48bf8ff629f964e1fe08ca4d68ee6d9630395a274",
+      "path": "core/probes/weight_cache.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/report/__init__.py"
+    },
+    {
+      "sha256": "85483403caa58b4b5cc6b21a0eb6bae6c7c3f4aeeb1f71e91050cd6d427a2c12",
+      "path": "core/report/investigation.py"
+    },
+    {
+      "sha256": "d37f94deddffe9a3bfd8b6ec27a6babe04917938d373236ce409ccd669c4eb96",
+      "path": "core/report/kaggle.py"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "core/telemetry/__init__.py"
+    },
+    {
+      "sha256": "be21e9e26a481368123cb49bd042385df121ad58663a3717e4ccd65928d5fabf",
+      "path": "core/telemetry/calls.py"
+    }
+  ],
+  "input_sha256": {
+    "artifacts/b6/train.jsonl": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad",
+    "bench/cases/dev/fault6-lr1e-5.json": "cd3fb48498771438b65ef5b0daedbbcdac5498a8b70a646ef3dcd9619a71277e",
+    "bench/cases/dev/ref-epochs18-s0.json": "9c5239b6299e510b683846e6bf313426eab600a1f000341c8854b13c1f58f60c",
+    "bench/cases/dev/ref-fault6-mild-s0.json": "c2773c8c5a39136b3ef64631950b58d5beb33d8ee79ad187f1e1eaf4b033cd11",
+    "bench/cases/dev/ref-fault6-strong-s0.json": "dcb8d9294e7115737d1784eac1e448e4f1aa58a3c3ddd97f4c386ea0acda762a",
+    "bench/cases/dev/ref-healthy-s0.json": "94ca0734ac208260b34063637e5e6c45d8322713b6cb41f906e56efa41b79afe",
+    "bench/references/banking77.json": "bf7f3d30082e385d8ec14761c93690390ec45cafd7b840a9696f4e68e9e401b2"
+  },
+  "train_examples": {
+    "fault6-lr1e-5": 200,
+    "ref-epochs18-s0": 200,
+    "ref-fault6-mild-s0": 200,
+    "ref-fault6-strong-s0": 200,
+    "ref-healthy-s0": 200
+  },
+  "new_hypothesis_calls": 5,
+  "new_hypothesis_cost_usd": 0.0083064,
+  "new_hypothesis_tokens": 15558,
+  "new_tavily_calls": 0,
+  "new_training_jobs": 0,
+  "signature_table": "core/probes/signatures.yaml; B16 fitted override not enabled",
+  "notes": [
+    "Five with-Tavily priors reused from the routing comparison; five without-Tavily priors generated now.",
+    "Full replay performed on current code. Costs in score rows attribute historical hypotheses and cached training, not fresh spending.",
+    "Super-only results remain in the separate earlier narrative-enabled routing experiment."
+  ],
+  "bundle_sha256": {
+    "cached-inputs/fault6-lr1e-5/fixes.json": "d7a7ccd0408df6a2fdd86978da8bbc9d925b97ca7fc9b397a50bc8b2c64db52f",
+    "cached-inputs/fault6-lr1e-5/pairs-check.json": "d2097062c598573efc6b07b4ccbd40696a970d41a96b09ae25a6587636477b42",
+    "cached-inputs/ref-epochs18-s0/fixes.json": "f6a2ea35a18829b8224255b5459691f3e78958c9b1bac53dcae9998373af69b2",
+    "cached-inputs/ref-epochs18-s0/pairs-check.json": "54843b1bb112ddb33047e68a302ed1a696406cfa24b685a37c89441c173cfe35",
+    "cached-inputs/ref-fault6-mild-s0/fixes.json": "f6a2ea35a18829b8224255b5459691f3e78958c9b1bac53dcae9998373af69b2",
+    "cached-inputs/ref-fault6-mild-s0/pairs-check.json": "c130af73021cafd954f78b01660a50d1abb7feb040e472cab20af1dd5b79bdea",
+    "cached-inputs/ref-fault6-strong-s0/fixes.json": "baf57efabb6459d6eabcc73176ce97d91d1f29a6a0644d82a17e61361816e7c0",
+    "cached-inputs/ref-fault6-strong-s0/pairs-check.json": "4cfc6ad0c3cccb6ae9d93b342cc4db7ea2bb798aac698859a1a8b10a7cf671a6",
+    "cached-inputs/ref-healthy-s0/fixes.json": "f6a2ea35a18829b8224255b5459691f3e78958c9b1bac53dcae9998373af69b2",
+    "cached-inputs/ref-healthy-s0/pairs-check.json": "31fbd1d4494122785d4902ea24e6d5a172b4f65f8598c74410ab891726a27039",
+    "fault6-lr1e-5--full.json": "a7f27d954ff916aaf92a7c79e5244726a6de0a7152b72d728c9ede10e50e9072",
+    "fault6-lr1e-5--no_causal.json": "4643c4df730516bbee581dd9e32020ce3436f3d820c57fe7134a9284b4371857",
+    "fault6-lr1e-5--no_planner.json": "6fd0d1b1fad10453313cead5153fc9d0cf5a03a76898b1bde086a453ed0e3607",
+    "fault6-lr1e-5--no_tavily.json": "7bbf497c74c29e5ee6319aad925c34ab6a2882cce4712c938c9c76f5a960bbbf",
+    "fault6-lr1e-5--random_0.json": "b89bbba74b1cf1672bdd246a5cd96fc4975257d089a24a59bd09815c2b84cac7",
+    "fault6-lr1e-5--random_1.json": "1d6c0ba0070e0bdb2ca3cd53a85bb83476d0fca58bef9a47d3936d65e10ec21d",
+    "fault6-lr1e-5--random_2.json": "09cd318977bcb50da2d114177364cae850844fac8111e6c1fb810ebc3413d187",
+    "fault6-lr1e-5--random_3.json": "eba23e14618a48970cba6004e4dca1491054adafa3729f9283825afc818ca962",
+    "fault6-lr1e-5--random_4.json": "61e36fe62a7b811a9f33706d5fcc2a8efb103b90022bb90cfc461a6cf5a110fd",
+    "fault6-lr1e-5--random_5.json": "66df6d942b540f2a71c2a2df3925cedd89f90270071ba4f5f7b9c2e5eb175442",
+    "fault6-lr1e-5--random_6.json": "192bb745f8155f57b9449c69ed5d5bfdeb67b2a9fdd8df7bc3d8ab0df7c95b91",
+    "fault6-lr1e-5--random_7.json": "347e6594adacf064307a3dfb32d8be1a73ac570fd2ff058530a179bbe040c429",
+    "fault6-lr1e-5--random_8.json": "7a4471652534b650a38f3bb8469139df223ba0e5cc3884af70a072dffd6467b9",
+    "fault6-lr1e-5--random_9.json": "80c58a6e239a447b8cc21b74d3e4a80563c15f778870af6e9ec5451e84c4836d",
+    "priors/dev/fault6-lr1e-5/with_tavily.json": "7a547f225f2f8c198ef788fe6d5ee5fb19a9c90e33ab8a7ecc5496b752067dee",
+    "priors/dev/fault6-lr1e-5/without_tavily.json": "bc435d18fad0935961711f7b8a04f190c2d496e3d36f48c582a2838fa6be579f",
+    "priors/dev/ref-epochs18-s0/with_tavily.json": "3bf12d802a8838c5ced124a5763e48e6ac59d454b0804008db6af18c461847c9",
+    "priors/dev/ref-epochs18-s0/without_tavily.json": "14ded30905489ceaf47884c08a9af5345f828f39a70cb399da8ca2bb1f20c17f",
+    "priors/dev/ref-fault6-mild-s0/with_tavily.json": "93934f1417d31c8f59d81161d02db2fa271c94ac5f34f7539794dbc182807621",
+    "priors/dev/ref-fault6-mild-s0/without_tavily.json": "f30f265697da95eb4986eeb36976eccefed050a43695a1c43f8ed7cdb57a3995",
+    "priors/dev/ref-fault6-strong-s0/with_tavily.json": "0e0a4c95090933a9478aa1537e04de0784deb7e3f54e59756fbe408a815377c7",
+    "priors/dev/ref-fault6-strong-s0/without_tavily.json": "52f21990447ab59ddc9d25fa657c9bb0aca74592d7fe413f225418333a67d2a8",
+    "priors/dev/ref-healthy-s0/with_tavily.json": "10c161eba6a76f9319e30eb43412f9b4bd1ef42951ed5c7901e43782aac0599a",
+    "priors/dev/ref-healthy-s0/without_tavily.json": "867908df45401e1337ce4a4008b0ba615e4bb4a46f94a83b59be5322c60c4fc8",
+    "protocol.json": "14103fe087a74cd4027e28dee5d5b2e5970527df3874a852da432a4b9620d897",
+    "ref-epochs18-s0--full.json": "898f25b0bd3805dc15bf484b339787c04de63953b0015e823c3723d61cec9f03",
+    "ref-epochs18-s0--no_causal.json": "9c68b0696cbbddd5967c34e3aee78554ed84dcb48f6ec6d4e5bbb04077e7580b",
+    "ref-epochs18-s0--no_planner.json": "7743fc8cf511fe0027c4f4196170a09ad49fe7d5afb83358cdd7f22d6571ed45",
+    "ref-epochs18-s0--no_tavily.json": "e3fdc1079e5c42006ad9fab4941e37564af2a163e9bf745ecaacc5d9a172fb73",
+    "ref-epochs18-s0--random_0.json": "38ee2dd0b9336f28a1b20cac0586a20123b5e96290c86ac08910099914f91c1a",
+    "ref-epochs18-s0--random_1.json": "7d120b8736e9d8772a841191827464fccaa5292899622dc26b0e98c955384567",
+    "ref-epochs18-s0--random_2.json": "9d2f9e9b27cad6fed70bf86381f8d0380e6c20bee3c2aae8a6949c486c334416",
+    "ref-epochs18-s0--random_3.json": "cce94b49400c119c33df0cdde757fe5397558a580cfcb8abd0f1160b3125c722",
+    "ref-epochs18-s0--random_4.json": "409f74609a9f34308e9cfe06b2bc3f40a3dbdcfd17b2d3cf507fc956bb6206f4",
+    "ref-epochs18-s0--random_5.json": "9872cba38657944d4d4d86ab3167f456538a3b109cbfb4c0a193b73c1b639608",
+    "ref-epochs18-s0--random_6.json": "ee8aa5cb560beae260a5c527cdad72165a546997825d772a106176ff37516c2c",
+    "ref-epochs18-s0--random_7.json": "ff9ae3ab2cc617eff07668a820f093c0a29861b0c1464b659e9163b6391f9736",
+    "ref-epochs18-s0--random_8.json": "5b08222da46510f604ed98b7423f13c7b057ec8f2af5092543263b838e61dda9",
+    "ref-epochs18-s0--random_9.json": "dacf4603b986fdaa2ee5b90b2ac66c1dd86c0b726367b110dd91d00fb9868d05",
+    "ref-fault6-mild-s0--full.json": "7638c39372ace6d920540667d080e4a1e556d97da76df7dfd7262e6794ef1370",
+    "ref-fault6-mild-s0--no_causal.json": "bb9abfd99933c89254a09392a7052fa4ec8d7fa77b1bdbca3c936da7f4ec4cf2",
+    "ref-fault6-mild-s0--no_planner.json": "5a12882aed2e8e4a5ab272f778d05cd46c236b27f0a044964c17de7dbb65adf4",
+    "ref-fault6-mild-s0--no_tavily.json": "32e9f34dbd32f7ebba5fcebdc168fa86f9c978bc31acd8b7c2e8ed9d81b10904",
+    "ref-fault6-mild-s0--random_0.json": "f06fd78cda551737a0559c7bbbb9e78b9ef35e1772079bc2be3a5fad933c5336",
+    "ref-fault6-mild-s0--random_1.json": "291259fb46fa0070b9c1522d2154f4e122cef08c66677a26f5cf03634fbbe1e1",
+    "ref-fault6-mild-s0--random_2.json": "d8a54c395a10f169b22d06753d2e4610938ebff27347b5f77a0cf82b79904f11",
+    "ref-fault6-mild-s0--random_3.json": "d4caeff48d96e12c825d8374598162c83ad8b0727e7b94678bbae904b51a539e",
+    "ref-fault6-mild-s0--random_4.json": "4366a6c1041710b595d1c299a506f217eab3af004d42cabeb602a29bff994b75",
+    "ref-fault6-mild-s0--random_5.json": "a942cfc8f5e85b05d18fa0d95502a2d6f974d1a1cff6f80b9ee382975b55a7f8",
+    "ref-fault6-mild-s0--random_6.json": "7a2e345706681d451ebafbe4aa02bd5b99c3df8f83643291d41944a040dbf16d",
+    "ref-fault6-mild-s0--random_7.json": "372d7fefd8787f64e3d58272dd96cca513ed5b200f473d2c9d07fcf244fc4d26",
+    "ref-fault6-mild-s0--random_8.json": "2c717e0a880745a35731bac439c4a3da80ed8e03780a5ade56f148e35ab92f92",
+    "ref-fault6-mild-s0--random_9.json": "5bd73e0457792096fe9d8e61071763b7b9924e8d641772691d5e22484c8869b1",
+    "ref-fault6-strong-s0--full.json": "c892566cc5f83bdd0b3a6ba0b99006ab342ff5a0c3d92052591d7332f445c187",
+    "ref-fault6-strong-s0--no_causal.json": "3f93d05876b33e1cb6230fe1c8bef05781474addfb0b0e4446fb64f801dca96a",
+    "ref-fault6-strong-s0--no_planner.json": "e7b0f2a6cfe3c4ab3d522db79a012cc18a2f9e3bc574f2b5cb61a7d5ffd5e187",
+    "ref-fault6-strong-s0--no_tavily.json": "d8a67ef043a7cecee98dd9459c8848448a9871f8a9035bbf258086e2d561cdbe",
+    "ref-fault6-strong-s0--random_0.json": "a43469dfeb9a136f4f1cf75006e986e51f54cf881e1a443fe002ca2a506239d3",
+    "ref-fault6-strong-s0--random_1.json": "db7dd37eb2df0f2e6af2d58eaee3e9e9938fe7efef1dad8429901b4f8970a35d",
+    "ref-fault6-strong-s0--random_2.json": "a86d2c948d892a795a54ed6786ec1bc131d5d659f69dcaaef14ea6d4aab6fdf9",
+    "ref-fault6-strong-s0--random_3.json": "9887eaf438dc7aaafa2eed0ed28487a05df220df71d560e9db4482544d67483c",
+    "ref-fault6-strong-s0--random_4.json": "3b162f4a1b70b55ac3b71707e295f8de702edc92f017c806c06433b2856016cd",
+    "ref-fault6-strong-s0--random_5.json": "3aedb1c20b61b2f345eb0769fc112e66d4aa303dd2bb1086a807258d2ba0f3e7",
+    "ref-fault6-strong-s0--random_6.json": "8b7465074979fc1031daa9b3f634b7a77eca9b4c6c6ee0e49981e427d00f9dad",
+    "ref-fault6-strong-s0--random_7.json": "9d6cb3b4dfff06361c3fba65b42554e5e28d58ba40fa74761bd5fa7f3c09e861",
+    "ref-fault6-strong-s0--random_8.json": "1282c63397fbad8a91edc04859a32cc09745d20bdf505965f91ad5dbab122a17",
+    "ref-fault6-strong-s0--random_9.json": "a7187c7cbb13f7e6bba139cadc47a2b0cf74efb9b54a439920a5e1d431f64bd7",
+    "ref-healthy-s0--full.json": "eede9d1c604a57847cff5651cf1634955b64295887e5d0578c638e9884fafd2e",
+    "ref-healthy-s0--no_causal.json": "17df7d6cec46762a8719e7ba55b6dd20abfc7717e4bba2d9b20109172a6d5c75",
+    "ref-healthy-s0--no_planner.json": "dbc9272632a00880ee00333053746276e0f6384085ce48a8a3081257b75aef6e",
+    "ref-healthy-s0--no_tavily.json": "50eb32f8007d7debda21b19fcbfa26c36fce07de94da925d04d95b675c380d6b",
+    "ref-healthy-s0--random_0.json": "41f257dda2b067954c9fa3a18370d2c4fa9f056d0a19081dba2575964a0a96e3",
+    "ref-healthy-s0--random_1.json": "801ef20c701df585aebccf72be228d497cf6516c8a90122fbb808a945d265037",
+    "ref-healthy-s0--random_2.json": "045b4487b549f6d58a2087bd009608bdb61946ba12af623b7dd3667d0c4bb8e3",
+    "ref-healthy-s0--random_3.json": "273c2cf81fdbc640d2b53d50c7b32295f14d0444e28ad458fea4f95d487c7c11",
+    "ref-healthy-s0--random_4.json": "f0c6849b985b3d9a13e8c04ae3ff063db1862a6b0a0ce07b88a6322d1c502476",
+    "ref-healthy-s0--random_5.json": "ecdf8ab228a3074f0f99f513b8e2f3bb4c457bfb18d8e787d684619003a5005b",
+    "ref-healthy-s0--random_6.json": "77b64af9cd698352804be212e351c31913f9df46a80d93b00c591b8c7b070e0c",
+    "ref-healthy-s0--random_7.json": "ed78e1412f9b555848a1b68f4f93f14abb7ea0694dfcfd7a940671db41303263",
+    "ref-healthy-s0--random_8.json": "6eaf0fee76bc7e7c7c15012e1e85bc69e07b3fbf207b29f2c09a25ae2efd1ba1",
+    "ref-healthy-s0--random_9.json": "c59da62847c5b5cf4646d71a8fc3ebd35a3054dc11e3a36aa3bdd0155bfd4d86",
+    "rows.jsonl": "6558e2a509a01fa5b39d4dd87ccf90a4797b99453e54e768be61ba7ae665c690",
+    "summary.json": "8ba37933b07860752573126327fe5e257f8f26f52bc59b71b494c6ebee0d6c1d",
+    "summary.md": "4f08ac7bf1114d6a5a8880c52d9caa404e50bffcff6af4ed453f35f34b9a67b0"
+  }
+}

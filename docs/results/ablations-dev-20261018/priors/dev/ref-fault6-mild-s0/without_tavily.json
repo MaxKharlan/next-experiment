@@ -1,0 +1,54 @@
+{
+  "fingerprint": "7205b4c99113398a6d4038d787788847f45397ae141c2b0e4d7bb819bfae9aae",
+  "condition": "without_tavily",
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.4,
+      "rationale": "The used learning rate (2e-5) is below the typical LoRA recommendation (~1e-4). A low LR can limit the adapter\u2019s ability to learn sufficiently distinct weight updates, resulting in a model that fits the training data but fails to generalize to held\u2011out queries.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "With LoRA rank r=16 the adapter may have insufficient expressive power to capture the mapping from diverse banking queries to 77 fine\u2011grained intent labels, causing the model to stall at sub\u2011optimal accuracy despite low training loss.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "distribution_shift",
+      "location": "training data vs production queries",
+      "prior": 0.2,
+      "rationale": "Training examples are unusually short (45\u2011103 tokens) while the model expects longer contexts; if real\u2011world queries differ in length or phrasing, the model may have learned patterns that do not transfer, yielding poor held\u2011out performance.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "answer_truncation",
+      "location": "user\u2011side data preparation (label strings)",
+      "prior": 0.1,
+      "rationale": "Some intent labels are long (e.g., balance_not_updated_after_cheque_or_cash_deposit). If the user truncated these labels before upload, the model would learn incomplete labels, leading to systematic mis\u2011classifications such as the observed wrong answers.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "faee0e05407c",
+      "investigation_id": "ablation-dev-ref-fault6-mild-s0-without_tavily",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 1826,
+      "tokens_out": 1408,
+      "cost_usd": 0.001815,
+      "latency_ms": 8150,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792354805.7040808
+    }
+  ],
+  "known_issues": null
+}

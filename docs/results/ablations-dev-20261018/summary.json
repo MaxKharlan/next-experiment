@@ -1,0 +1,338 @@
+{
+  "full": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.8666710819935757,
+    "cost_usd": 0.12291816,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 3.2
+  },
+  "no_tavily": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.861520543979653,
+    "cost_usd": 0.12204528,
+    "llm_tokens": 3111.6,
+    "mini_jobs": 3.2
+  },
+  "no_planner": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7610865754933286,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "no_causal": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      0,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.6908333333333333,
+    "cost_usd": 0.00253416,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 0.0
+  },
+  "random_0": {
+    "cases": 5,
+    "top1": [
+      0,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      0,
+      0
+    ],
+    "wrong_confirmations": 3,
+    "p_true": 0.4633433601309822,
+    "cost_usd": 0.24330215999999996,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 6.4
+  },
+  "random_1": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7610865754933286,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "random_2": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7610865754933286,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "random_3": {
+    "cases": 5,
+    "top1": [
+      0,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      0,
+      0
+    ],
+    "wrong_confirmations": 3,
+    "p_true": 0.46334336013098215,
+    "cost_usd": 0.24330215999999996,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 6.4
+  },
+  "random_4": {
+    "cases": 5,
+    "top1": [
+      0,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      0,
+      0
+    ],
+    "wrong_confirmations": 3,
+    "p_true": 0.45790077175685767,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "random_5": {
+    "cases": 5,
+    "top1": [
+      0,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      0,
+      0
+    ],
+    "wrong_confirmations": 3,
+    "p_true": 0.45790077175685767,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "random_6": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7610865754933286,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "random_7": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7610865754933286,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "random_8": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7610865754933286,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  },
+  "random_9": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      2,
+      3
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7610865754933286,
+    "cost_usd": 0.21047016,
+    "llm_tokens": 4942.8,
+    "mini_jobs": 4.8
+  }
+}

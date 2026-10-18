@@ -1,0 +1,112 @@
+{
+  "fingerprint": "fb580b85a10e1d161b126067b517d36497ff0ae4c77a71d86fdba468bcfcf43a",
+  "condition": "with_tavily",
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.4,
+      "rationale": "The learning rate used (6e-06) is below the default 1e-05 and far under the typical LoRA recommendation (~1e-04), implying minimal parameter updates; despite decreasing train loss, the model remains close to the base and fails to learn the classification task.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "Known issues show that LoRA rank 16 yields lower accuracy than full fine\u2011tuning and recommend higher ranks for complex tasks; with 77 intent classes the rank may be insufficient, causing the model\u2019s quality to stall.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "data file (training examples)",
+      "prior": 0.2,
+      "rationale": "Many incorrect predictions are semantically close to the true label (e.g., pin_blocked \u2192 getting_pin), suggesting overlapping or noisy labels in the small training set; contradictory labels destabilize learning and hurt held\u2011out accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.1,
+      "rationale": "Validation loss increases from epoch 2 to epoch 4 before dropping again, indicating possible over\u2011fitting or instability due to training too many epochs on only 200 examples.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "dc374a84624d",
+      "investigation_id": "routing-priors-dev-ref-fault6-strong-s0",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3068,
+      "tokens_out": 1919,
+      "cost_usd": 0.0026475,
+      "latency_ms": 12428,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792351000.1174898
+    }
+  ],
+  "known_issues": {
+    "queries": [
+      "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 20% of 200",
+      "LoRA fine-tuning learning_rate 6e-06 6 epochs rank 16 common problems"
+    ],
+    "sources": [
+      {
+        "title": "LoRA Learns Less and Forgets Less",
+        "url": "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "snippet": "For Code IFT (Fig. 1B and Table S5), HumanEval accuracy is clearly ordered by rank from the very first epoch. The more common r = 16 and r = 64 LoRA configurations have lower accuracy than full finetuning, with HumanEval scores of 0.358 and 0.417 at epoch 4, respectively). With a high LoRA rank (r = 256), full finetuning performance can be matched (LoRA=0.498 in epoch 4, full finetuning=0.497 in e",
+        "score": 0.6307082,
+        "query": "LoRA fine-tuning learning_rate 6e-06 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "LoRA vs Full Fine-tuning: An Illusion of Equivalence",
+        "url": "https://arxiv.org/html/2410.21228v2",
+        "snippet": "| Dataset | LoRA | \u03bb=0.3\\lambda=0.3 | | \u03bb=0.5\\lambda=0.5 | | \u03bb=0.7\\lambda=0.7 | | \u03bb=0.9\\lambda=0.9 | |\n ---  ---  ---  ---  --- |\n| Rank | TA | PTL | TA | PTL | TA | PTL | TA | PTL |\n| MetaMath | r=16 | -15.0 | -46.5 | -6.6 | -40.4 | -2.7 | -28.2 | 0.0 | -10.5 |\n| r=64 | -5.8 | -29.1 | -4.4 | -22.3 | 0.3 | -14.2 | 0.3 | -4.9 |\n| r=256 | -0.1 | -33.3 | 1.8 | -25.2 | 0.5 | -15.5 | -0.8 | -5.2 |\n| Ma",
+        "score": 0.6041426,
+        "query": "LoRA fine-tuning learning_rate 6e-06 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "LoRA fine-tuning Hyperparameters Guide | Unsloth Documentation",
+        "url": "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide",
+        "snippet": "1. The rank (`r`) of the fine-tuning process. A larger rank uses more memory and will be slower, but can increase accuracy on complex tasks. We suggest ranks like 8 or 16 (for fast fine-tunes) and up to 128. Using a rank that is too large can cause overfitting and harm your model's quality.\\ [...] Was this helpful?\n\n```\nr = 16, # Choose any number > 0 ! Suggested 8, 16, 32, 64, 128r = 16, # Choose",
+        "score": 0.5008063,
+        "query": "LoRA fine-tuning learning_rate 6e-06 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "The LoRA Hyperparameters No One Explains | How to Fine-Tune Correctly, Part 4 | by Suchitra Malimbada | Towards AI",
+        "url": "https://pub.towardsai.net/the-lora-hyperparameters-no-one-explains-how-to-fine-tune-correctly-part-4-a58268050766",
+        "snippet": "Rank and alpha get treated as separate decisions in most tutorials. They are not. What actually enters the residual stream is the adapter output scaled by `alpha / rank`. That ratio is the effective injection strength. Setting rank to 16 and alpha to 16 produces a scaling factor of 1.0, which is conservative and stable. Setting alpha to 32 with the same rank doubles the injection strength, which a",
+        "score": 0.47022632,
+        "query": "LoRA fine-tuning learning_rate 6e-06 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "Fine-Tuning LLMs: In-Depth Analysis with LLAMA-2 | Anyscale",
+        "url": "https://www.anyscale.com/blog/fine-tuning-llms-lora-or-full-parameter-an-in-depth-analysis-with-llama-2",
+        "snippet": "#### LinkRank: 8\n\nChoosing a higher rank for our decomposition matrices would counteract LoRA's efficiency gains. Our preliminary tests suggested minimal performance boosts when increasing the rank to, for instance, 16. As a result, we settled on a rank of 8 to maintain smaller checkpoint sizes and to avoid artificially inflating our checkpoint files.\n\n#### LinkAlpha: 16",
+        "score": 0.45696765,
+        "query": "LoRA fine-tuning learning_rate 6e-06 6 epochs rank 16 common problems"
+      },
+      {
+        "title": "200 - song and lyrics by Future, Young Thug",
+        "url": "https://open.spotify.com/track/5b06JZjts6dgyyuY1m7roq",
+        "snippet": "- [x] Switch Label label [...] Apply Cancel\n\nConsent Leg.Interest\n\n- [x] checkbox label label\n\n- [x] checkbox label label\n\n- [x] checkbox label label\n\nConfirm My Choices\n\nImage 77: Powered by Onetrust [...] ### Manage Consent Preferences\n\n#### Enable Tailored Advertising\n\n- [x] Enable Tailored Advertising \n\n   ##### First Party Targeting Cookies\n\n- [x] Switch Label label  \nThese cookies may be use",
+        "score": 0.13145196,
+        "query": "Qwen/Qwen3-0.6B LoRA fine-tuning After fine-tuning the model gives the right label for 20% of 200"
+      }
+    ],
+    "credits": 0
+  },
+  "retrieval_provenance": {
+    "source": "artifacts/ablations/priors-v1/dev/ref-fault6-strong-s0/with_tavily.json",
+    "sha256": "5117ac295be41047b859d652a57d66364688c605a828ef72f23abe9182426ede",
+    "reused": true
+  }
+}

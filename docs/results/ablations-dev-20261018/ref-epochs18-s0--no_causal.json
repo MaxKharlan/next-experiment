@@ -1,0 +1,128 @@
+{
+  "method": "no_causal",
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.7881
+    ],
+    [
+      "contradictory_labels",
+      0.106
+    ],
+    [
+      "distribution_shift",
+      0.053
+    ],
+    [
+      "lora_rank_too_small",
+      0.0265
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0024588,
+  "llm_tokens": 5182,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.35,
+          "rationale": "Validation loss falls to ~0.0009 at epoch 6 then rises to >1.0 by epoch 18, while training loss drives to zero, indicating overfitting after epoch 6.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.3,
+          "rationale": "A LoRA rank of 16 may be too low to capture the 77\u2011intent classification task; the cited paper shows higher ranks yield substantially better performance.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "training dataset",
+          "prior": 0.2,
+          "rationale": "Validation loss shows large, unpredictable swings epoch\u2011to\u2011epoch, a pattern consistent with noisy or contradictory labels in the data.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "distribution_shift",
+          "location": "validation dataset (vs. production queries)",
+          "prior": 0.1,
+          "rationale": "Despite low training loss, the model only reaches 56% accuracy on held\u2011out queries, suggesting the training data does not reflect the distribution of real banking queries.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1,
+        "unlisted": 0.05
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9975412,
+      "outcome": "ok",
+      "gain_bits": 0.3985,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.4667,
+        "h2": 0.0667,
+        "h3": 0.2667,
+        "h4": 0.1333,
+        "unlisted": 0.0667
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9975412,
+      "outcome": "high",
+      "gain_bits": 0.3303,
+      "raw": {
+        "n_epochs": 18,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.7881,
+        "h2": 0.0265,
+        "h3": 0.106,
+        "h4": 0.053,
+        "unlisted": 0.0265
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "causal checks disabled for this ablation",
+      "probs": {
+        "h1": 0.7881,
+        "h2": 0.0265,
+        "h3": 0.106,
+        "h4": 0.053,
+        "unlisted": 0.0265
+      }
+    }
+  ],
+  "confirmed": []
+}

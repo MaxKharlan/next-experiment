@@ -1,0 +1,136 @@
+{
+  "method": "no_causal",
+  "ranking": [
+    [
+      "distribution_shift",
+      0.4712
+    ],
+    [
+      "contradictory_labels",
+      0.2885
+    ],
+    [
+      "chat_template_mismatch",
+      0.1346
+    ],
+    [
+      "lora_rank_too_small",
+      0.0385
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0020919000000000003,
+  "llm_tokens": 4347,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "distribution_shift",
+          "location": "validation file",
+          "prior": 0.35,
+          "rationale": "Validation loss becomes very low (0.0162) while held-out accuracy is only 54%, indicating the validation set does not represent the production query distribution.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "contradictory_labels",
+          "location": "training data (label column)",
+          "prior": 0.3,
+          "rationale": "Valid loss spikes at epochs 3\u20115 (1.33\u21921.62\u21921.35) before dropping, a pattern typical of noisy or conflicting labels that destabilize learning.",
+          "sources": []
+        },
+        {
+          "id": "h3",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.2,
+          "rationale": "With 77 intent classes, a LoRA rank of 16 may limit the model\u2019s capacity to learn distinct decision boundaries; the Unsloth guide notes larger rank can increase accuracy.",
+          "sources": [
+            "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+          ]
+        },
+        {
+          "id": "h4",
+          "fault_class": "chat_template_mismatch",
+          "location": "training_config.chat_template",
+          "prior": 0.1,
+          "rationale": "If training used a chat template with assistant prefixes but inference expects only the label, the model would learn to generate extra tokens, causing label mismatches seen in the wrong answers.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1,
+        "unlisted": 0.05
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9979081,
+      "outcome": "ok",
+      "gain_bits": 0.3141,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.42,
+        "h2": 0.36,
+        "h3": 0.04,
+        "h4": 0.12,
+        "unlisted": 0.06
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9979081,
+      "outcome": "normal",
+      "gain_bits": 0.0335,
+      "raw": {
+        "train_loss": [
+          1.2127,
+          0.3876,
+          0.1094,
+          0.0619,
+          0.0149,
+          0.0018
+        ],
+        "valid_loss": [
+          0.6329,
+          0.5294,
+          1.3384,
+          1.6164,
+          1.3452,
+          0.0162
+        ],
+        "train_drop": 0.9985157087490724
+      },
+      "probs": {
+        "h1": 0.4712,
+        "h2": 0.2885,
+        "h3": 0.0385,
+        "h4": 0.1346,
+        "unlisted": 0.0673
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "no probe left and the likeliest testable hypothesis, h3 at 0.04, is too unlikely to pay for a causal check"
+    }
+  ],
+  "confirmed": []
+}

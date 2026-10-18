@@ -1,0 +1,271 @@
+{
+  "method": "random_0",
+  "ranking": [
+    [
+      "lora_rank_too_small",
+      0.13054830287206268
+    ],
+    [
+      "lr_too_low",
+      0.3472584856396867
+    ],
+    [
+      "chat_template_mismatch",
+      0.24369016536118362
+    ],
+    [
+      "train_val_overlap",
+      0.15665796344647523
+    ],
+    [
+      "distribution_shift",
+      0.12184508268059181
+    ]
+  ],
+  "status": "confirmed",
+  "cause": "lora_rank_too_small",
+  "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -2,9 +2,9 @@\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n   \"learning_rate\": 2e-05,\n-  \"lora_alpha\": 16,\n+  \"lora_alpha\": 64,\n   \"lora_dropout\": 0.05,\n-  \"lora_r\": 16,\n+  \"lora_r\": 64,\n   \"max_grad_norm\": 1.0,\n   \"n_epochs\": 6,\n   \"warmup_ratio\": 0.0,",
+  "llm_cost_usd": 0.0033504,
+  "llm_tokens": 5872,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.10944,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.35,
+          "rationale": "LoRA for Qwen3-0.6B typically requires a learning rate around 1e-4 to achieve good adaptation; the used rate 2e-05 is an order lower, resulting in minimal weight updates and poor generalization despite low training loss. The arXiv study shows accuracy drops sharply at lower lrs for r=16 LoRA.",
+          "sources": [
+            "https://arxiv.org/html/2602.04998v2"
+          ]
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "lora_r",
+          "prior": 0.25,
+          "rationale": "With 77 distinct intent labels, a LoRA rank of 16 may be too limited to capture the necessary adaptations; higher ranks (e.g., 256) have been shown to match full fine\u2011tuning performance. The model therefore stalls below expected quality.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+            "https://tensoria.fr/en/blog/lora-qlora-fine-tuning-guide"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "chat_template_mismatch",
+          "location": "training data format (chat template)",
+          "prior": 0.2,
+          "rationale": "Token Factory expects chat\u2011formatted examples (<|user|>\u2026<|assistant|>\u2026). If the user supplied plain query\u2011label pairs, the model sees a mismatch between training and inference formats, causing it to ignore the instruction and produce random labels.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "train_val_overlap",
+          "location": "validation file",
+          "prior": 0.1,
+          "rationale": "Although no exact duplicates exist, the sharp drop in validation loss to 0.041 at epoch\u202f6 suggests the model memorized a subset of validation examples (near\u2011duplicates or easy patterns), indicating overlap\u2011like behavior that harms generalization to held\u2011out queries.",
+          "sources": []
+        },
+        {
+          "id": "h5",
+          "fault_class": "distribution_shift",
+          "location": "training examples",
+          "prior": 0.1,
+          "rationale": "The held\u2011out queries may differ in phrasing or domain from the training set, causing the model to fail despite low training loss; this matches the symptom of good validation performance (eventually) but poor real\u2011world accuracy.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.25,
+        "h3": 0.2,
+        "h4": 0.1,
+        "h5": 0.1
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9966496,
+      "outcome": "normal",
+      "gain_bits": 0.2676,
+      "raw": {
+        "train_loss": [
+          1.3326,
+          0.556,
+          0.2923,
+          0.172,
+          0.0994,
+          0.0468
+        ],
+        "valid_loss": [
+          1.1793,
+          0.7839,
+          1.1468,
+          1.2148,
+          1.2362,
+          0.0411
+        ],
+        "train_drop": 0.9648806843764071
+      },
+      "probs": {
+        "h1": 0.1228,
+        "h2": 0.2924,
+        "h3": 0.2729,
+        "h4": 0.1754,
+        "h5": 0.1365
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9966496,
+      "outcome": "ok",
+      "gain_bits": 0.0,
+      "raw": {
+        "n_epochs": 6,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.1228,
+        "h2": 0.2924,
+        "h3": 0.2729,
+        "h4": 0.1754,
+        "h5": 0.1365
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9966496,
+      "outcome": "low",
+      "gain_bits": 0.1497,
+      "raw": {
+        "learning_rate": 2e-05,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.3072,
+        "h2": 0.2309,
+        "h3": 0.2156,
+        "h4": 0.1386,
+        "h5": 0.1078
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9966496,
+      "outcome": "ok",
+      "gain_bits": 0.3445,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.3804,
+        "h2": 0.0477,
+        "h3": 0.2669,
+        "h4": 0.1716,
+        "h5": 0.1335
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h2",
+      "reason": "random hypothesis order",
+      "target": {
+        "hypothesis_id": "h2",
+        "kind": "target",
+        "patch": {
+          "lora_r": 64,
+          "lora_alpha": 64
+        },
+        "description": "lora_r 16 -> 64 with lora_alpha 16 -> 64, the same alpha / r",
+        "ft_job_ids": [
+          "ftjob-049c069520794e43aacc0047d1fc0adb",
+          "ftjob-1f613bcc81a54d4dabc4a9d21d8acb4a"
+        ],
+        "metrics": [
+          0.455,
+          0.435
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h2",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-622e97d133aa44e9bc0e076df8493c1e",
+          "ftjob-eadda2ce4505457c9447f6be2474c374"
+        ],
+        "metrics": [
+          0.335,
+          0.355
+        ]
+      },
+      "result": {
+        "status": "confirmed",
+        "effect": 0.10000000000000003,
+        "ci_low": 0.06276068429373902,
+        "ci_high": 0.13723931570626105,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "prior_probs": {
+        "h1": 0.3803622497616778,
+        "h2": 0.04766444232602479,
+        "h3": 0.2669208770257388,
+        "h4": 0.17159199237368927,
+        "h5": 0.1334604385128694
+      },
+      "planning_probs": {
+        "h1": 0.3803622497616777,
+        "h2": 0.04766444232602478,
+        "h3": 0.26692087702573875,
+        "h4": 0.17159199237368924,
+        "h5": 0.13346043851286937
+      },
+      "probs": {
+        "h1": 0.3472584856396867,
+        "h2": 0.13054830287206268,
+        "h3": 0.24369016536118362,
+        "h4": 0.15665796344647523,
+        "h5": 0.12184508268059181
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.10944
+    },
+    {
+      "kind": "verdict",
+      "hypothesis_id": "h2",
+      "status": "confirmed",
+      "evidence": [
+        "probe:loss_curve",
+        "probe:epoch_count",
+        "probe:lr_range",
+        "probe:lora_rank",
+        "intervention:h2"
+      ],
+      "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -2,9 +2,9 @@\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n   \"learning_rate\": 2e-05,\n-  \"lora_alpha\": 16,\n+  \"lora_alpha\": 64,\n   \"lora_dropout\": 0.05,\n-  \"lora_r\": 16,\n+  \"lora_r\": 64,\n   \"max_grad_norm\": 1.0,\n   \"n_epochs\": 6,\n   \"warmup_ratio\": 0.0,",
+      "summary": "Narrative generation is disabled for all ablation variants."
+    }
+  ],
+  "confirmed": [
+    "lora_rank_too_small"
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "method": "no_causal",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.7151
+    ],
+    [
+      "chat_template_mismatch",
+      0.129
+    ],
+    [
+      "train_val_overlap",
+      0.0645
+    ],
+    [
+      "distribution_shift",
+      0.0645
+    ],
+    [
+      "lora_rank_too_small",
+      0.0269
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0033504,
+  "llm_tokens": 5872,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.35,
+          "rationale": "LoRA for Qwen3-0.6B typically requires a learning rate around 1e-4 to achieve good adaptation; the used rate 2e-05 is an order lower, resulting in minimal weight updates and poor generalization despite low training loss. The arXiv study shows accuracy drops sharply at lower lrs for r=16 LoRA.",
+          "sources": [
+            "https://arxiv.org/html/2602.04998v2"
+          ]
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "lora_r",
+          "prior": 0.25,
+          "rationale": "With 77 distinct intent labels, a LoRA rank of 16 may be too limited to capture the necessary adaptations; higher ranks (e.g., 256) have been shown to match full fine\u2011tuning performance. The model therefore stalls below expected quality.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+            "https://tensoria.fr/en/blog/lora-qlora-fine-tuning-guide"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "chat_template_mismatch",
+          "location": "training data format (chat template)",
+          "prior": 0.2,
+          "rationale": "Token Factory expects chat\u2011formatted examples (<|user|>\u2026<|assistant|>\u2026). If the user supplied plain query\u2011label pairs, the model sees a mismatch between training and inference formats, causing it to ignore the instruction and produce random labels.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "train_val_overlap",
+          "location": "validation file",
+          "prior": 0.1,
+          "rationale": "Although no exact duplicates exist, the sharp drop in validation loss to 0.041 at epoch\u202f6 suggests the model memorized a subset of validation examples (near\u2011duplicates or easy patterns), indicating overlap\u2011like behavior that harms generalization to held\u2011out queries.",
+          "sources": []
+        },
+        {
+          "id": "h5",
+          "fault_class": "distribution_shift",
+          "location": "training examples",
+          "prior": 0.1,
+          "rationale": "The held\u2011out queries may differ in phrasing or domain from the training set, causing the model to fail despite low training loss; this matches the symptom of good validation performance (eventually) but poor real\u2011world accuracy.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.25,
+        "h3": 0.2,
+        "h4": 0.1,
+        "h5": 0.1
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9966496,
+      "outcome": "ok",
+      "gain_bits": 0.3613,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.4421,
+        "h2": 0.0526,
+        "h3": 0.2526,
+        "h4": 0.1263,
+        "h5": 0.1263
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9966496,
+      "outcome": "low",
+      "gain_bits": 0.3596,
+      "raw": {
+        "learning_rate": 2e-05,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.7151,
+        "h2": 0.0269,
+        "h3": 0.129,
+        "h4": 0.0645,
+        "h5": 0.0645
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "causal checks disabled for this ablation",
+      "probs": {
+        "h1": 0.7151,
+        "h2": 0.0269,
+        "h3": 0.129,
+        "h4": 0.0645,
+        "h5": 0.0645
+      }
+    }
+  ],
+  "confirmed": []
+}
