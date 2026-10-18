@@ -1,0 +1,65 @@
+{
+  "support_counts": {
+    "lora_rank_too_small": 3,
+    "lr_too_low": 3,
+    "contradictory_labels": 1,
+    "too_many_epochs": 2,
+    "answer_truncation": 1,
+    "distribution_shift": 1
+  },
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2833333333333334,
+      "rationale": "The LoRA rank of 16 may be insufficient to capture the 77-intent classification task; the OpenReview paper shows higher ranks (e.g., 256) achieve near full\u2011fine\u2011tuning performance while r=16 stalls.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h2",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.lora_alpha (effective learning rate due to alpha=r)",
+      "prior": 0.26666666666666666,
+      "rationale": "The user set lora_alpha equal to lora_r (16), whereas the common heuristic is alpha=2*r, which would double the adapter\u2019s effective learning rate. With the base learning rate of 2e-05, the effective LoRA update is likely too small, causing under\u2011fitting. The arXiv snippet shows that for Qwen3-0.6B LoRA r=16, a learning rate of 2e-05 yields ~46% accuracy, lower than higher rates, indicating LR sensitivity.",
+      "sources": [
+        "https://arxiv.org/html/2602.04998v2",
+        "https://tensoria.fr/en/blog/lora-qlora-fine-tuning-guide"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.18333333333333335,
+      "rationale": "Validation loss decreases from epoch 1 to 2 then rises steadily through epoch 5, indicating overfitting after the early optimum; with only 200 training examples, 6 epochs is likely excessive.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "answer_truncation",
+      "location": "training data file (assistant answers/label column)",
+      "prior": 0.06666666666666667,
+      "rationale": "If the user\u2011side data preparation truncated assistant answers before upload, the model would learn incomplete or incorrect labels, producing the observed wrong predictions that are still valid label names but mismatched to the query. Truncated labels would appear as shortened strings, but even partial corruption can cause mis\u2011classification.",
+      "sources": []
+    },
+    {
+      "id": "h5",
+      "fault_class": "contradictory_labels",
+      "location": "training dataset (input\u2011label pairs)",
+      "prior": 0.06666666666666667,
+      "rationale": "Several incorrect predictions are semantically close to the true label (e.g., pin_blocked \u2194 lost_or_typed_pin, fiat_currency_support \u2194 country_support), indicating overlapping or ambiguous intents that cause unstable learning and plateauing validation loss.",
+      "sources": []
+    },
+    {
+      "id": "h6",
+      "fault_class": "distribution_shift",
+      "location": "training data content vs. held\u2011out queries",
+      "prior": 0.03333333333333333,
+      "rationale": "The training examples may not reflect the phrasing or distribution of the held\u2011out banking queries, causing the model to perform well on training loss but poorly on unseen cases. The validation loss eventually drops at epoch\u202f6, suggesting the model began to memorize the small validation set rather than generalize.",
+      "sources": []
+    }
+  ]
+}

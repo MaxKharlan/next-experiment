@@ -1,0 +1,61 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.3,
+      "rationale": "The default LR of 1e-5 is an order of magnitude below the typical ~1e-4 needed for LoRA updates; with such a low rate the model receives minimal gradient steps, leaving it close to the base model and yielding low accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.25,
+      "rationale": "Valid loss fell from epoch 1 to 2 then rose at epoch 3, indicating over\u2011fitting after the second epoch; training for three epochs likely hurts generalization on held\u2011out queries.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2,
+      "rationale": "The LoRA rank of 16 may be too limited for a 77\u2011way classification; the known issue shows that higher ranks (e.g., 256) are required to match full fine\u2011tuning performance, suggesting capacity bottleneck.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h4",
+      "fault_class": "contradictory_labels",
+      "location": "data",
+      "prior": 0.15,
+      "rationale": "Several wrong answers are semantically close to the expected label (e.g., pin_not_working vs pin_blocked), hinting at label noise or synonymous labels that confuse the model during training.",
+      "sources": []
+    },
+    {
+      "id": "h5",
+      "fault_class": "distribution_shift",
+      "location": "data",
+      "prior": 0.1,
+      "rationale": "Training examples are 45\u2011103 tokens while the model can handle 8192; if production queries differ greatly in length or style, the model may not generalize, leading to low held\u2011out accuracy.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "32aa89ff5d7e",
+      "investigation_id": "sampling-dev-fault6-lr1e-5-3",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 2952,
+      "tokens_out": 1992,
+      "cost_usd": 0.0026784,
+      "latency_ms": 11849,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792351893.66851
+    }
+  ]
+}

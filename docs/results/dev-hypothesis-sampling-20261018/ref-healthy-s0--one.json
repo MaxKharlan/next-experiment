@@ -1,0 +1,131 @@
+{
+  "method": "one",
+  "ranking": [
+    [
+      "distribution_shift",
+      0.4667
+    ],
+    [
+      "contradictory_labels",
+      0.2222
+    ],
+    [
+      "answer_truncation",
+      0.1556
+    ],
+    [
+      "lora_rank_too_small",
+      0.0778
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0025662,
+  "llm_tokens": 4874,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.35,
+          "rationale": "The model uses LoRA rank 16. The Unsloth guide notes that rank influences capacity and larger ranks can improve accuracy, and the LoRA vs Full fine\u2011tuning paper shows that accuracy varies with rank when the total learning rate is fixed. With only 200 training examples and 77 intent labels, rank 16 may be insufficient to capture the needed variations, causing underfitting despite low train loss.",
+          "sources": [
+            "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide",
+            "https://arxiv.org/html/2410.21228v2"
+          ]
+        },
+        {
+          "id": "h2",
+          "fault_class": "distribution_shift",
+          "location": "data (training examples)",
+          "prior": 0.3,
+          "rationale": "Training examples are short (45\u2011103 tokens) and far below the context length, suggesting they are templated queries. The held\u2011out set likely contains phrasing or banking intents not represented in this narrow distribution, leading to poor generalization even though training loss drives to zero and validation loss eventually drops.",
+          "sources": []
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "data (label noise)",
+          "prior": 0.2,
+          "rationale": "Many incorrect answers are semantically close to the expected labels (e.g., 'unable_to_verify_pin' vs 'pin_blocked'), indicating that similar queries may have conflicting labels in the training data. Such noise would produce unstable predictions and limit accuracy to around half.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "answer_truncation",
+          "location": "data (label truncation)",
+          "prior": 0.1,
+          "rationale": "Although labels appear intact, user\u2011side truncation could have removed distinguishing suffixes, causing the model to learn incomplete patterns. The absence of obviously truncated JSON or broken labels makes this hypothesis less likely than the others.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1,
+        "unlisted": 0.05
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "outcome": "ok",
+      "gain_bits": 0.4264,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.0824,
+        "h2": 0.4235,
+        "h3": 0.2824,
+        "h4": 0.1412,
+        "unlisted": 0.0706
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "outcome": "normal",
+      "gain_bits": 0.0297,
+      "raw": {
+        "train_loss": [
+          1.2127,
+          0.3876,
+          0.1094,
+          0.0619,
+          0.0149,
+          0.0018
+        ],
+        "valid_loss": [
+          0.6329,
+          0.5294,
+          1.3384,
+          1.6164,
+          1.3452,
+          0.0162
+        ],
+        "train_drop": 0.9985157087490724
+      },
+      "probs": {
+        "h1": 0.0778,
+        "h2": 0.4667,
+        "h3": 0.2222,
+        "h4": 0.1556,
+        "unlisted": 0.0778
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "no probe left and the likeliest testable hypothesis, h1 at 0.08, is too unlikely to pay for a causal check"
+    }
+  ],
+  "confirmed": []
+}

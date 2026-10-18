@@ -1,0 +1,102 @@
+{
+  "symptom": "After fine-tuning the model gives the right label for 14% of 200 held-out queries. We expected much better. 5 of the wrong answers are attached.",
+  "task": "classify banking queries into 77 intent labels, answer with the label",
+  "job": {
+    "model": "Qwen/Qwen3-0.6B",
+    "status": "succeeded",
+    "train_examples": 200,
+    "validation_examples": 50,
+    "hyperparameters": {
+      "batch_size": 8,
+      "n_epochs": 3,
+      "learning_rate": 1e-05,
+      "warmup_ratio": 0.0,
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "context_length": 8192,
+      "lora_r": 16,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05
+    }
+  },
+  "checkpoints": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5303,
+      "valid_loss": 1.5691
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8395,
+      "valid_loss": 1.082
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.6533,
+      "valid_loss": 1.1954
+    }
+  ],
+  "findings": [
+    "examples are 45 to 103 tokens long, far below context_length",
+    "no duplicates between train and validation"
+  ],
+  "wrong_answers": [
+    {
+      "query": "My PIN is not working and I need assistance.",
+      "expected": "pin_blocked",
+      "answer": "pin_not_working"
+    },
+    {
+      "query": "Why do I have to verify the top-up that I started?",
+      "expected": "verify_top_up",
+      "answer": "top_up_verification_required"
+    },
+    {
+      "query": "Can you tell me what currency I can have?",
+      "expected": "fiat_currency_support",
+      "answer": "asking_for_currency_support"
+    },
+    {
+      "query": "IM still waiting for my account to update from a cash deposit?",
+      "expected": "balance_not_updated_after_cheque_or_cash_deposit",
+      "answer": "cash_deposit_not_recognised"
+    },
+    {
+      "query": "How long is my Europe transfer wait?",
+      "expected": "transfer_timing",
+      "answer": "transfer_wait_for_payment"
+    }
+  ],
+  "known_issues": [
+    {
+      "title": "LoRA Learns Less and Forgets Less",
+      "url": "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+      "snippet": "For Code IFT (Fig. 1B and Table S5), HumanEval accuracy is clearly ordered by rank from the very first epoch. The more common r = 16 and r = 64 LoRA configurations have lower accuracy than full finetuning, with HumanEval scores of 0.358 and 0.417 at epoch 4, respectively). With a high LoRA rank (r = 256), full finetuning performance can be matched (LoRA=0.498 in epoch 4, full finetuning=0.497 in e"
+    },
+    {
+      "title": "LoRA vs Full Fine-tuning: An Illusion of Equivalence",
+      "url": "https://arxiv.org/html/2410.21228v2",
+      "snippet": "We generally follow the procedure used by [Hu et al. ](#bib.bib15). For all models, we use a linear learning rate schedule with 0.06 linear warmup ratio and train for a maximum of 5 epochs with batch size 16. We use the Adam optimizer [Kingma and Ba, 2017] with no weight decay and a maximum sequence length of 512. We fine-tune all linear layers besides the embedding matrix. For full fine-tuning, w"
+    },
+    {
+      "title": "How we Fine-tuned Qwen3.0-6B to Beat GPT-4o on Text2SQL",
+      "url": "https://www.youtube.com/watch?v=zzthXFhcFD4&xstg=CAMSBhUDze3xHw%3D%3D",
+      "snippet": "[15:04] start with direct string matches just to just to get a sense of what that accuracy would be. So we can say like\n[15:11] what is the or find me all the rows where\n[15:18] query or no where SQL is equal to the prediction. This\n[15:25] will just give you like a raw count of how many times um SQL directly matches the prediction.\n[15:33] And you can see this filtered it down to 22 rows. So out "
+    },
+    {
+      "title": "Fine-tuning Small Model (Qwen3-0.6B) for Domain Knowledge + Reasoning: Seeking Optimization Advice - Beginners - Hugging Face Forums",
+      "url": "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558",
+      "snippet": "0.6B definitely small. I would go with 4B - it works for pretty similar case for my project, and is able to deliver solid baseline that can be perfected with fine tuning.\n\nI would say 1B is minimum for such task, 3-4B is best option.\n\nIf you REALYY want to make 0.6B work - then I would advice to train 2 separate adapters - Domain Knowledge Only and Enable reasoning capability for MCP tool selectio"
+    },
+    {
+      "title": "How Small Can You Go? LoRA Fine-Tuning270M\u20138B Models for Merchant Information Extraction in Financial Transactions",
+      "url": "https://arxiv.org/html/2606.08051v2",
+      "snippet": "All 16 matched pairs improve substantially after fine-tuning, from ++0.208 F1 for Qwen 3.5 4B JO to ++0.921 for Qwen 3.5 0.8B FT. The best zero-shot configuration, Qwen 3.5 4B JO, reaches 0.758 F1 and 0.473 strict R-EM; its fine-tuned counterpart reaches 0.966 F1 and 0.917 strict R-EM. [...] |  |  |  |  |  |\n ---  --- \n| Model | Pr. | Bench. F1 | Endpt. F1 | \u0394\\DeltaF1 |\n| Qwen 3.5 2B | JO | .9464 "
+    },
+    {
+      "title": "LoRA fine-tuning Hyperparameters Guide | Unsloth Documentation",
+      "url": "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide",
+      "snippet": "1. The rank (`r`) of the fine-tuning process. A larger rank uses more memory and will be slower, but can increase accuracy on complex tasks. We suggest ranks like 8 or 16 (for fast fine-tunes) and up to 128. Using a rank that is too large can cause overfitting and harm your model's quality.\\ [...] Was this helpful?\n\n```\nr = 16, # Choose any number > 0 ! Suggested 8, 16, 32, 64, 128r = 16, # Choose"
+    }
+  ]
+}

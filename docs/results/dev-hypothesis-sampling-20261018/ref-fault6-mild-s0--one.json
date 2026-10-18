@@ -1,0 +1,245 @@
+{
+  "method": "one",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.6707526354498651
+    ],
+    [
+      "contradictory_labels",
+      0.15690120127482224
+    ],
+    [
+      "lora_rank_too_small",
+      0.04707036038244667
+    ],
+    [
+      "too_many_epochs",
+      0.015444962000490316
+    ]
+  ],
+  "status": "confirmed",
+  "cause": "lr_too_low",
+  "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 2e-05,\n+  \"learning_rate\": 0.0002,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+  "llm_cost_usd": 0.0028572,
+  "llm_tokens": 5324,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.10944,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.3,
+          "rationale": "The LoRA rank of 16 may be insufficient to capture the 77-intent classification task; the OpenReview paper shows higher ranks (e.g., 256) achieve near full\u2011fine\u2011tuning performance while r=16 stalls.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+          ]
+        },
+        {
+          "id": "h2",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate (effective LR reduced by lora_alpha=16)",
+          "prior": 0.25,
+          "rationale": "The heuristic alpha \u2248 2\u00d7r suggests alpha should be 32 for r=16; using alpha=16 halves the adapter\u2019s effective learning rate. Combined with the modest 2e\u20115 LR, the update step may be too small, as shown in the arXiv study where performance peaks around 2e\u20115\u20136e\u20115 and drops outside that range.",
+          "sources": [
+            "https://arxiv.org/html/2602.04998v2"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "training dataset (input\u2011label pairs)",
+          "prior": 0.2,
+          "rationale": "Several incorrect predictions are semantically close to the true label (e.g., pin_blocked \u2194 lost_or_typed_pin, fiat_currency_support \u2194 country_support), indicating overlapping or ambiguous intents that cause unstable learning and plateauing validation loss.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.15,
+          "rationale": "Validation loss rises after epoch\u202f2, then sharply drops at epoch\u202f6, a pattern typical of over\u2011fitting when training continues past the point of optimal generalization.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.3,
+        "h2": 0.25,
+        "h3": 0.2,
+        "h4": 0.15,
+        "unlisted": 0.1
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "outcome": "ok",
+      "gain_bits": 0.3985,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.0667,
+        "h2": 0.3333,
+        "h3": 0.2667,
+        "h4": 0.2,
+        "unlisted": 0.1333
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "outcome": "normal",
+      "gain_bits": 0.3779,
+      "raw": {
+        "train_loss": [
+          1.3326,
+          0.556,
+          0.2923,
+          0.172,
+          0.0994,
+          0.0468
+        ],
+        "valid_loss": [
+          1.1793,
+          0.7839,
+          1.1468,
+          1.2148,
+          1.2362,
+          0.0411
+        ],
+        "train_drop": 0.9648806843764071
+      },
+      "probs": {
+        "h1": 0.1008,
+        "h2": 0.1513,
+        "h3": 0.3361,
+        "h4": 0.1765,
+        "unlisted": 0.2353
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "outcome": "ok",
+      "gain_bits": 0.1964,
+      "raw": {
+        "n_epochs": 6,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.1177,
+        "h2": 0.1766,
+        "h3": 0.3924,
+        "h4": 0.0386,
+        "unlisted": 0.2747
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "outcome": "low",
+      "gain_bits": 0.2027,
+      "raw": {
+        "learning_rate": 2e-05,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.0851,
+        "h2": 0.4044,
+        "h3": 0.2838,
+        "h4": 0.0279,
+        "unlisted": 0.1987
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h2",
+      "reason": "h2 at 0.40",
+      "target": {
+        "hypothesis_id": "h2",
+        "kind": "target",
+        "patch": {
+          "learning_rate": 0.0002
+        },
+        "description": "learning_rate 2e-05 -> 0.0002",
+        "ft_job_ids": [
+          "ftjob-e95406ff5263433abec6eacf09522d1e",
+          "ftjob-63f5a192a6994269a02629ae3a412d0e"
+        ],
+        "metrics": [
+          0.495,
+          0.51
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h2",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-026d35e8d29c4ddeb753a7041272e677",
+          "ftjob-a32852bc0823427c8003e5c125f69c92"
+        ],
+        "metrics": [
+          0.335,
+          0.355
+        ]
+      },
+      "result": {
+        "status": "confirmed",
+        "effect": 0.15749999999999997,
+        "ci_low": 0.12026068429373896,
+        "ci_high": 0.194739315706261,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "prior_probs": {
+        "h1": 0.08514412416851441,
+        "h2": 0.4044345898004435,
+        "h3": 0.2838137472283814,
+        "h4": 0.027937915742793792,
+        "unlisted": 0.1986696230598669
+      },
+      "planning_probs": {
+        "h1": 0.08514412416851441,
+        "h2": 0.4044345898004435,
+        "h3": 0.2838137472283814,
+        "h4": 0.027937915742793792,
+        "unlisted": 0.1986696230598669
+      },
+      "probs": {
+        "h1": 0.04707036038244667,
+        "h2": 0.6707526354498651,
+        "h3": 0.15690120127482224,
+        "h4": 0.015444962000490316,
+        "unlisted": 0.10983084089237553
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.10944
+    },
+    {
+      "kind": "verdict",
+      "hypothesis_id": "h2",
+      "status": "confirmed",
+      "evidence": [
+        "probe:lora_rank",
+        "probe:loss_curve",
+        "probe:epoch_count",
+        "probe:lr_range",
+        "intervention:h2"
+      ],
+      "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 2e-05,\n+  \"learning_rate\": 0.0002,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+      "summary": "Narrative generation is disabled for all ablation variants."
+    }
+  ],
+  "confirmed": [
+    "lr_too_low"
+  ]
+}

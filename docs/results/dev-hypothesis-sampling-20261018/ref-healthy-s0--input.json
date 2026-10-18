@@ -1,0 +1,117 @@
+{
+  "symptom": "After fine-tuning the model gives the right label for 54% of 200 held-out queries. We expected much better. 5 of the wrong answers are attached.",
+  "task": "classify banking queries into 77 intent labels, answer with the label",
+  "job": {
+    "model": "Qwen/Qwen3-0.6B",
+    "status": "succeeded",
+    "train_examples": 200,
+    "validation_examples": 50,
+    "hyperparameters": {
+      "batch_size": 8,
+      "n_epochs": 6,
+      "learning_rate": 0.0002,
+      "warmup_ratio": 0.0,
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "context_length": 8192,
+      "lora_r": 16,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05
+    }
+  },
+  "checkpoints": [
+    {
+      "epoch": 1,
+      "train_loss": 1.2127,
+      "valid_loss": 0.6329
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.3876,
+      "valid_loss": 0.5294
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.1094,
+      "valid_loss": 1.3384
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.0619,
+      "valid_loss": 1.6164
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0149,
+      "valid_loss": 1.3452
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.0018,
+      "valid_loss": 0.0162
+    }
+  ],
+  "findings": [
+    "examples are 45 to 103 tokens long, far below context_length",
+    "no duplicates between train and validation"
+  ],
+  "wrong_answers": [
+    {
+      "query": "My PIN is not working and I need assistance.",
+      "expected": "pin_blocked",
+      "answer": "unable_to_verify_pin"
+    },
+    {
+      "query": "IM still waiting for my account to update from a cash deposit?",
+      "expected": "balance_not_updated_after_cheque_or_cash_deposit",
+      "answer": "pending_cash_deposit"
+    },
+    {
+      "query": "Why am I being charged twice fro a restaurant?",
+      "expected": "transaction_charged_twice",
+      "answer": "restaurant_fee_charged_twice"
+    },
+    {
+      "query": "I sent some money and the receiver can't access it.",
+      "expected": "transfer_not_received_by_recipient",
+      "answer": "transfer_not_working"
+    },
+    {
+      "query": "Where are my funds coming from? I need to know.",
+      "expected": "verify_source_of_funds",
+      "answer": "top_up_by_bank_transfer_charge"
+    }
+  ],
+  "known_issues": [
+    {
+      "title": "LoRA fine-tuning Hyperparameters Guide | Unsloth Documentation",
+      "url": "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide",
+      "snippet": "Typical Range: `2e-4` (0.0002) to `5e-6` (0.000005). \ud83d\udfe9 For normal LoRA/QLoRA Fine-tuning, we recommend `2e-4` as a starting point. \ud83d\udfe6 For Reinforcement Learning (DPO, GRPO etc.), we recommend `5e-6` . \u2b1c For Full Fine-tuning, lower learning rates are generally more appropriate. [...] 1. The rank (`r`) of the fine-tuning process. A larger rank uses more memory and will be slower, but can increase acc"
+    },
+    {
+      "title": "LoRA vs Full Fine-tuning: An Illusion of Equivalence",
+      "url": "https://arxiv.org/html/2410.21228v2",
+      "snippet": "all ranks in {1, 2, 4, 8, 16, 64}. We hold the \u201ctotal learning rate of LoRA\", which is \u03b1\u2217\u03b7\\alpha\\\\eta, fixed as we sweep rank such that this product always equals 2.4e-3. We fine-tune these models to equivalent accuracy on their downstream task. We fine-tune on six sequence classification tasks: sentiment analysis [Socher et al., 2013], entailment [Williams et al., 2018], duplicate identification "
+    },
+    {
+      "title": "LoRA Learns Less and Forgets Less",
+      "url": "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+      "snippet": "As in all main experiments, we compared full finetuning and LoRA r = 16, 64, 256, targeting all transformer modules. For each of the four experimental conditions, we trained a model for up to 6 epochs and evaluated it after 2, 4, and 6 epochs. Different from the main experiments, the checkpoints evaluated are \u201chot\u201d and are not cooled down for each training duration. [...] For Code IFT (Fig. 1B and"
+    },
+    {
+      "title": "How we Fine-tuned Qwen3.0-6B to Beat GPT-4o on Text2SQL",
+      "url": "https://www.youtube.com/watch?v=zzthXFhcFD4",
+      "snippet": "[15:04] start with direct string matches just to just to get a sense of what that accuracy would be. So we can say like\n[15:11] what is the or find me all the rows where\n[15:18] query or no where SQL is equal to the prediction. This\n[15:25] will just give you like a raw count of how many times um SQL directly matches the prediction.\n[15:33] And you can see this filtered it down to 22 rows. So out "
+    },
+    {
+      "title": "Fine-tuning Small Model (Qwen3-0.6B) for Domain Knowledge + Reasoning: Seeking Optimization Advice - Beginners - Hugging Face Forums",
+      "url": "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558",
+      "snippet": "0.6B definitely small. I would go with 4B - it works for pretty similar case for my project, and is able to deliver solid baseline that can be perfected with fine tuning.\n\nI would say 1B is minimum for such task, 3-4B is best option.\n\nIf you REALYY want to make 0.6B work - then I would advice to train 2 separate adapters - Domain Knowledge Only and Enable reasoning capability for MCP tool selectio"
+    },
+    {
+      "title": "How to Fine-Tune Qwen3 on Text2SQL to GPT-4o level performance | Oxen.ai",
+      "url": "https://www.oxen.ai/blog/how-to-fine-tune-qwen3-to-gpt-4o-level-performance",
+      "snippet": "To extract the accuracy we can use a notebook that extracts the values from the column.\n\nThe notebook allows us to put in a repo and filename and compute the accuracy. Under the hood we use a simple regex to extract the answer from the xml.\n\nOkay we\u2019ve got our baseline to beat. We know GPT-4o can at least get `91 / 200 = 45%` accuracy on this test set.\n\n`91 / 200 = 45%`\n\n## Evaluating `Qwen/Qwen3-"
+    }
+  ]
+}

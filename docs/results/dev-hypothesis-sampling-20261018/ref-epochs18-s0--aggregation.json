@@ -1,0 +1,48 @@
+{
+  "support_counts": {
+    "too_many_epochs": 3,
+    "lora_rank_too_small": 3,
+    "distribution_shift": 2,
+    "chat_template_mismatch": 1
+  },
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.45,
+      "rationale": "Validation loss reaches a minimum at epoch 6 (0.0009) then rises sharply, indicating overfitting after that point. Training for 18 epochs likely caused the model to memorize the training set and generalize poorly to held\u2011out queries.",
+      "sources": [
+        "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+      ]
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "A LoRA rank of 16 may be too limited for a 77\u2011intent classification task; the LoRA Learns Less and Forgets Less paper shows that higher ranks (e.g., 256) are needed to approach full fine\u2011tuning performance on similar tasks.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "distribution_shift",
+      "location": "training data (example length 45\u2011103 tokens)",
+      "prior": 0.10000000000000002,
+      "rationale": "Despite very low training loss, the model\u2019s accuracy on held\u2011out queries is modest, suggesting the training examples do not resemble the production query distribution; a HuggingFace forum note warns that Qwen3\u20110.6B may be too small for such tasks without more representative data.",
+      "sources": [
+        "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558"
+      ]
+    },
+    {
+      "id": "h4",
+      "fault_class": "chat_template_mismatch",
+      "location": "data/chat_template",
+      "prior": 0.049999999999999996,
+      "rationale": "If the chat template used during training differs from the one used at inference, the model may have learned to follow the training format but produces incorrect labels when the inference format changes, explaining the low held\u2011out accuracy.",
+      "sources": []
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "distribution_shift",
+      "location": "held-out test queries (200 samples) vs training/validation data",
+      "prior": 0.45,
+      "rationale": "Training and validation loss drop to very low values (valid_loss 0.0162 at epoch 6) indicating the model fits the training/validation distribution well, yet accuracy on held-out queries is only 54%, suggesting the held-out data differs from the training distribution. The short example lengths (45\u2011103 tokens) vs large context_length also hint that the model may not have seen the full variability of real banking queries.",
+      "sources": [
+        "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558"
+      ]
+    },
+    {
+      "id": "h2",
+      "fault_class": "contradictory_labels",
+      "location": "training data (possible similar queries mapped to different intents)",
+      "prior": 0.3,
+      "rationale": "The validation loss shows a sharp increase at epoch 3 (from 0.5294 to 1.3384) before decreasing again, a pattern that can arise when the model encounters conflicting labels for similar inputs during training. Several wrong answers are semantically close to the expected label (e.g., 'pin_blocked' vs 'unable_to_verify_pin'), indicating label confusion.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r = 16",
+      "prior": 0.15,
+      "rationale": "With 77 intent classes and subtle distinctions, a LoRA rank of 16 may limit the model's ability to capture the necessary weight updates, causing the model to stall at ~54% accuracy despite low training loss. The Unsloft guide notes that larger ranks increase capacity, implying the current rank could be insufficient.",
+      "sources": [
+        "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+      ]
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "64542b9e32ec",
+      "investigation_id": "sampling-dev-ref-healthy-s0-2",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3034,
+      "tokens_out": 2300,
+      "cost_usd": 0.0029801999999999997,
+      "latency_ms": 13427,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352092.476084
+    }
+  ]
+}

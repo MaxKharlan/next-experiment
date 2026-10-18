@@ -1,0 +1,15 @@
+[
+  {
+    "id": "64542b9e32ec",
+    "investigation_id": "sampling-dev-ref-healthy-s0-2",
+    "purpose": "hypotheses",
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "tokens_in": 3034,
+    "tokens_out": 2300,
+    "cost_usd": 0.0029801999999999997,
+    "latency_ms": 13427,
+    "prompt_version": "hypotheses-v3",
+    "attempt": 1,
+    "created_at": 1792352092.476084
+  }
+]

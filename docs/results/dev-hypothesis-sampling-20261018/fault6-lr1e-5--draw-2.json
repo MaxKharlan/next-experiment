@@ -1,0 +1,46 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.4,
+      "rationale": "The default learning rate of 1e-5 is at the low end for LoRA; typical LoRA rates are around 1e-4. With such a low rate the model updates very little, which matches the poor held-out accuracy despite decreasing training loss.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.3,
+      "rationale": "Validation loss falls from epoch 1 to 2 then rises at epoch 3 (1.082 \u2192 1.1954), indicating overfitting after the second epoch. Continuing to a third epoch likely hurt generalization, yielding low held-out accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2,
+      "rationale": "LoRA rank of 16 may be insufficient for a 77\u2011intent classification task; known work shows accuracy improves with higher ranks (e.g., r=256 matches full fine\u2011tuning). The modest rank could limit the model\u2019s capacity to learn the intent mapping.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+      ]
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "efd1ec2ffdab",
+      "investigation_id": "sampling-dev-fault6-lr1e-5-2",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 2952,
+      "tokens_out": 1157,
+      "cost_usd": 0.0019269,
+      "latency_ms": 7676,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792351881.814649
+    }
+  ]
+}

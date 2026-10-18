@@ -1,0 +1,55 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "The LoRA rank of 16 may be insufficient to capture the 77-intent classification task; the OpenReview paper shows higher ranks (e.g., 256) achieve near full\u2011fine\u2011tuning performance while r=16 stalls.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h2",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate (effective LR reduced by lora_alpha=16)",
+      "prior": 0.25,
+      "rationale": "The heuristic alpha \u2248 2\u00d7r suggests alpha should be 32 for r=16; using alpha=16 halves the adapter\u2019s effective learning rate. Combined with the modest 2e\u20115 LR, the update step may be too small, as shown in the arXiv study where performance peaks around 2e\u20115\u20136e\u20115 and drops outside that range.",
+      "sources": [
+        "https://arxiv.org/html/2602.04998v2"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "training dataset (input\u2011label pairs)",
+      "prior": 0.2,
+      "rationale": "Several incorrect predictions are semantically close to the true label (e.g., pin_blocked \u2194 lost_or_typed_pin, fiat_currency_support \u2194 country_support), indicating overlapping or ambiguous intents that cause unstable learning and plateauing validation loss.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.15,
+      "rationale": "Validation loss rises after epoch\u202f2, then sharply drops at epoch\u202f6, a pattern typical of over\u2011fitting when training continues past the point of optimal generalization.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "22e207a7b463",
+      "investigation_id": "sampling-dev-ref-fault6-mild-s0-1",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3224,
+      "tokens_out": 2100,
+      "cost_usd": 0.0028572,
+      "latency_ms": 86831,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352019.333179
+    }
+  ]
+}

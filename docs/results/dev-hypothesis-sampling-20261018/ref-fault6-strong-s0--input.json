@@ -1,0 +1,117 @@
+{
+  "symptom": "After fine-tuning the model gives the right label for 20% of 200 held-out queries. We expected much better. 5 of the wrong answers are attached.",
+  "task": "classify banking queries into 77 intent labels, answer with the label",
+  "job": {
+    "model": "Qwen/Qwen3-0.6B",
+    "status": "succeeded",
+    "train_examples": 200,
+    "validation_examples": 50,
+    "hyperparameters": {
+      "batch_size": 8,
+      "n_epochs": 6,
+      "learning_rate": 6e-06,
+      "warmup_ratio": 0.0,
+      "weight_decay": 0.0,
+      "max_grad_norm": 1.0,
+      "context_length": 8192,
+      "lora_r": 16,
+      "lora_alpha": 16,
+      "lora_dropout": 0.05
+    }
+  },
+  "checkpoints": [
+    {
+      "epoch": 1,
+      "train_loss": 1.668,
+      "valid_loss": 1.7731
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.9796,
+      "valid_loss": 1.133
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.7416,
+      "valid_loss": 1.1763
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.627,
+      "valid_loss": 1.4662
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.5497,
+      "valid_loss": 1.0707
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.4776,
+      "valid_loss": 0.5955
+    }
+  ],
+  "findings": [
+    "examples are 45 to 103 tokens long, far below context_length",
+    "no duplicates between train and validation"
+  ],
+  "wrong_answers": [
+    {
+      "query": "My PIN is not working and I need assistance.",
+      "expected": "pin_blocked",
+      "answer": "getting_pin"
+    },
+    {
+      "query": "Why do I have to verify the top-up that I started?",
+      "expected": "verify_top_up",
+      "answer": "top_up_verification_required"
+    },
+    {
+      "query": "Can you tell me what currency I can have?",
+      "expected": "fiat_currency_support",
+      "answer": "getting_currency_info"
+    },
+    {
+      "query": "IM still waiting for my account to update from a cash deposit?",
+      "expected": "balance_not_updated_after_cheque_or_cash_deposit",
+      "answer": "cash_deposit_not_recognised"
+    },
+    {
+      "query": "How long is my Europe transfer wait?",
+      "expected": "transfer_timing",
+      "answer": "transfer_wait_for_processing"
+    }
+  ],
+  "known_issues": [
+    {
+      "title": "LoRA Learns Less and Forgets Less",
+      "url": "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+      "snippet": "For Code IFT (Fig. 1B and Table S5), HumanEval accuracy is clearly ordered by rank from the very first epoch. The more common r = 16 and r = 64 LoRA configurations have lower accuracy than full finetuning, with HumanEval scores of 0.358 and 0.417 at epoch 4, respectively). With a high LoRA rank (r = 256), full finetuning performance can be matched (LoRA=0.498 in epoch 4, full finetuning=0.497 in e"
+    },
+    {
+      "title": "LoRA vs Full Fine-tuning: An Illusion of Equivalence",
+      "url": "https://arxiv.org/html/2410.21228v2",
+      "snippet": "| Dataset | LoRA | \u03bb=0.3\\lambda=0.3 | | \u03bb=0.5\\lambda=0.5 | | \u03bb=0.7\\lambda=0.7 | | \u03bb=0.9\\lambda=0.9 | |\n ---  ---  ---  ---  --- |\n| Rank | TA | PTL | TA | PTL | TA | PTL | TA | PTL |\n| MetaMath | r=16 | -15.0 | -46.5 | -6.6 | -40.4 | -2.7 | -28.2 | 0.0 | -10.5 |\n| r=64 | -5.8 | -29.1 | -4.4 | -22.3 | 0.3 | -14.2 | 0.3 | -4.9 |\n| r=256 | -0.1 | -33.3 | 1.8 | -25.2 | 0.5 | -15.5 | -0.8 | -5.2 |\n| Ma"
+    },
+    {
+      "title": "LoRA fine-tuning Hyperparameters Guide | Unsloth Documentation",
+      "url": "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide",
+      "snippet": "1. The rank (`r`) of the fine-tuning process. A larger rank uses more memory and will be slower, but can increase accuracy on complex tasks. We suggest ranks like 8 or 16 (for fast fine-tunes) and up to 128. Using a rank that is too large can cause overfitting and harm your model's quality.\\ [...] Was this helpful?\n\n```\nr = 16, # Choose any number > 0 ! Suggested 8, 16, 32, 64, 128r = 16, # Choose"
+    },
+    {
+      "title": "The LoRA Hyperparameters No One Explains | How to Fine-Tune Correctly, Part 4 | by Suchitra Malimbada | Towards AI",
+      "url": "https://pub.towardsai.net/the-lora-hyperparameters-no-one-explains-how-to-fine-tune-correctly-part-4-a58268050766",
+      "snippet": "Rank and alpha get treated as separate decisions in most tutorials. They are not. What actually enters the residual stream is the adapter output scaled by `alpha / rank`. That ratio is the effective injection strength. Setting rank to 16 and alpha to 16 produces a scaling factor of 1.0, which is conservative and stable. Setting alpha to 32 with the same rank doubles the injection strength, which a"
+    },
+    {
+      "title": "Fine-Tuning LLMs: In-Depth Analysis with LLAMA-2 | Anyscale",
+      "url": "https://www.anyscale.com/blog/fine-tuning-llms-lora-or-full-parameter-an-in-depth-analysis-with-llama-2",
+      "snippet": "#### LinkRank: 8\n\nChoosing a higher rank for our decomposition matrices would counteract LoRA's efficiency gains. Our preliminary tests suggested minimal performance boosts when increasing the rank to, for instance, 16. As a result, we settled on a rank of 8 to maintain smaller checkpoint sizes and to avoid artificially inflating our checkpoint files.\n\n#### LinkAlpha: 16"
+    },
+    {
+      "title": "200 - song and lyrics by Future, Young Thug",
+      "url": "https://open.spotify.com/track/5b06JZjts6dgyyuY1m7roq",
+      "snippet": "- [x] Switch Label label [...] Apply Cancel\n\nConsent Leg.Interest\n\n- [x] checkbox label label\n\n- [x] checkbox label label\n\n- [x] checkbox label label\n\nConfirm My Choices\n\nImage 77: Powered by Onetrust [...] ### Manage Consent Preferences\n\n#### Enable Tailored Advertising\n\n- [x] Enable Tailored Advertising \n\n   ##### First Party Targeting Cookies\n\n- [x] Switch Label label  \nThese cookies may be use"
+    }
+  ]
+}

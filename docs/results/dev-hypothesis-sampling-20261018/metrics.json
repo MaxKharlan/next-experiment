@@ -1,0 +1,50 @@
+{
+  "one": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      0,
+      0
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.8263442452389014,
+    "cost_usd": 0.12279665999999997,
+    "llm_tokens": 4807.8,
+    "mini_jobs": 3.2
+  },
+  "three": {
+    "cases": 5,
+    "top1": [
+      3,
+      3
+    ],
+    "top3": [
+      3,
+      3
+    ],
+    "false_alarms": [
+      0,
+      2
+    ],
+    "fix_success": [
+      0,
+      0
+    ],
+    "wrong_confirmations": 0,
+    "p_true": 0.7640187260105232,
+    "cost_usd": 0.12764232,
+    "llm_tokens": 14446.0,
+    "mini_jobs": 3.2
+  }
+}

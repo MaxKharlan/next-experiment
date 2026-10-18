@@ -1,0 +1,54 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.35,
+      "rationale": "The job used learning_rate 6e-06, far below the typical LoRA rate (~1e-4) and even below the Token Factory default of 1e-5. Such a low rate yields minimal weight updates, leaving the model close to the base and explaining the low accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "Known issues show that LoRA performance scales with rank; r=16 gave substantially lower accuracy than higher ranks (e.g., r=256) on similar tasks. With 77 intents, a rank of 16 may be insufficient to capture the needed function space.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "https://arxiv.org/html/2410.21228v2"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "training data (label assignments)",
+      "prior": 0.2,
+      "rationale": "Several wrong answers are semantically close to the correct label (e.g., 'getting_pin' vs 'pin_blocked', 'top_up_verification_required' vs 'verify_top_up'), suggesting the training data contains similar inputs mapped to different labels, causing instability.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "training data vs production queries",
+      "prior": 0.1,
+      "rationale": "Findings note examples are only 45\u2013103 tokens, far below the model\u2019s context length, indicating the training texts may be overly terse or formatted differently from real user queries, leading to a mismatch at inference.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "72dd59dcfc78",
+      "investigation_id": "sampling-dev-ref-fault6-strong-s0-1",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3068,
+      "tokens_out": 1413,
+      "cost_usd": 0.0021920999999999998,
+      "latency_ms": 8029,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352050.203072
+    }
+  ]
+}

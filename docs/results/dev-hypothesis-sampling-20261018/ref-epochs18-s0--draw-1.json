@@ -1,0 +1,47 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.4,
+      "rationale": "Training loss quickly reaches near zero while validation loss shows large fluctuations and later increases, indicating overfitting from excessive epochs; one checkpoint per epoch shows validation loss dropping at epoch 6 then rising again.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "A LoRA rank of 16 may be too limited for a 77\u2011intent classification task; the LoRA Learns Less and Forgets Less paper shows that higher ranks (e.g., 256) are needed to approach full fine\u2011tuning performance on similar tasks.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "distribution_shift",
+      "location": "training data (example length 45\u2011103 tokens)",
+      "prior": 0.2,
+      "rationale": "Despite very low training loss, the model\u2019s accuracy on held\u2011out queries is modest, suggesting the training examples do not resemble the production query distribution; a HuggingFace forum note warns that Qwen3\u20110.6B may be too small for such tasks without more representative data.",
+      "sources": [
+        "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558"
+      ]
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "4f1b10c992d9",
+      "investigation_id": "sampling-dev-ref-epochs18-s0-1",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3675,
+      "tokens_out": 1567,
+      "cost_usd": 0.0025128000000000004,
+      "latency_ms": 20444,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792351914.133044
+    }
+  ]
+}

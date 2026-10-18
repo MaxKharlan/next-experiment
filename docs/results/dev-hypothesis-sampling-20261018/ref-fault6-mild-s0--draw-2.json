@@ -1,0 +1,56 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.lora_alpha (effective learning rate due to alpha=r)",
+      "prior": 0.35,
+      "rationale": "The user set lora_alpha equal to lora_r (16), whereas the common heuristic is alpha=2*r, which would double the adapter\u2019s effective learning rate. With the base learning rate of 2e-05, the effective LoRA update is likely too small, causing under\u2011fitting. The arXiv snippet shows that for Qwen3-0.6B LoRA r=16, a learning rate of 2e-05 yields ~46% accuracy, lower than higher rates, indicating LR sensitivity.",
+      "sources": [
+        "https://arxiv.org/html/2602.04998v2",
+        "https://tensoria.fr/en/blog/lora-qlora-fine-tuning-guide"
+      ]
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.25,
+      "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for 77 distinct banking intents, leading to limited representational capacity and stalled performance. The OpenReview paper demonstrates that higher ranks (e.g., 256) achieve substantially better accuracy on similar tasks, while r=16 stays far below full fine\u2011tuning levels.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "answer_truncation",
+      "location": "training data file (assistant answers/label column)",
+      "prior": 0.2,
+      "rationale": "If the user\u2011side data preparation truncated assistant answers before upload, the model would learn incomplete or incorrect labels, producing the observed wrong predictions that are still valid label names but mismatched to the query. Truncated labels would appear as shortened strings, but even partial corruption can cause mis\u2011classification.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "training data content vs. held\u2011out queries",
+      "prior": 0.1,
+      "rationale": "The training examples may not reflect the phrasing or distribution of the held\u2011out banking queries, causing the model to perform well on training loss but poorly on unseen cases. The validation loss eventually drops at epoch\u202f6, suggesting the model began to memorize the small validation set rather than generalize.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "d852bf2eb3de",
+      "investigation_id": "sampling-dev-ref-fault6-mild-s0-2",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3224,
+      "tokens_out": 1867,
+      "cost_usd": 0.0026475,
+      "latency_ms": 12028,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352031.3708742
+    }
+  ]
+}

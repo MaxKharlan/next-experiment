@@ -1,0 +1,45 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "distribution_shift",
+      "location": "training data file",
+      "prior": 0.35,
+      "rationale": "The model achieves only 54% accuracy on held-out queries despite low training loss, suggesting the training examples do not resemble the production queries. The short example lengths (45\u2011103 tokens) far below the context length may indicate a mismatch in phrasing or intent distribution.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.25,
+      "rationale": "With LoRA rank 16 the model may lack sufficient capacity to learn the 77\u2011class intent mapping, leading to stalled performance. The Unsloth guide notes that larger rank can increase accuracy, implying the current rank could be limiting.",
+      "sources": [
+        "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.2,
+      "rationale": "Valid loss spikes at epoch 3\u20115 then drops sharply at epoch 6, indicating possible over\u2011fitting to noise or memorization of training samples, which harms generalization to held\u2011out data. Six epochs may be excessive for this small dataset.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "64eb7a83c72a",
+      "investigation_id": "sampling-dev-ref-healthy-s0-3",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3034,
+      "tokens_out": 1072,
+      "cost_usd": 0.001875,
+      "latency_ms": 6187,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352098.667886
+    }
+  ]
+}

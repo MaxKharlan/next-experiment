@@ -1,0 +1,175 @@
+{
+  "method": "three",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.8181818181818181
+    ],
+    [
+      "contradictory_labels",
+      0.07070707070707069
+    ],
+    [
+      "distribution_shift",
+      0.040404040404040394
+    ],
+    [
+      "lora_rank_too_small",
+      0.030303030303030293
+    ]
+  ],
+  "status": "confirmed",
+  "cause": "lr_too_low",
+  "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 6e-06,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+  "llm_cost_usd": 0.0064746,
+  "llm_tokens": 13330,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.10944,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.45,
+          "rationale": "The learning rate is set to 6e-6, which is an order of magnitude below the typical LoRA rate (~1e-4) and even below the factory default (1e-5). Such a tiny rate yields minimal parameter updates, so the model hardly deviates from the base checkpoint despite decreasing train loss, explaining the low held-out accuracy.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.3,
+          "rationale": "Known issues show that LoRA performance scales with rank; r=16 gave substantially lower accuracy than higher ranks (e.g., r=256) on similar tasks. With 77 intents, a rank of 16 may be insufficient to capture the needed function space.",
+          "sources": [
+            "https://arxiv.org/html/2410.21228v2",
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "training data (label assignments)",
+          "prior": 0.11666666666666665,
+          "rationale": "Several wrong answers are semantically close to the correct label (e.g., 'getting_pin' vs 'pin_blocked', 'top_up_verification_required' vs 'verify_top_up'), suggesting the training data contains similar inputs mapped to different labels, causing instability.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "distribution_shift",
+          "location": "training data vs production queries",
+          "prior": 0.06666666666666667,
+          "rationale": "Findings note examples are only 45\u2013103 tokens, far below the model\u2019s context length, indicating the training texts may be overly terse or formatted differently from real user queries, leading to a mismatch at inference.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.45,
+        "h2": 0.3,
+        "h3": 0.1167,
+        "h4": 0.0667,
+        "unlisted": 0.0667
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "outcome": "ok",
+      "gain_bits": 0.3985,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.6,
+        "h2": 0.0667,
+        "h3": 0.1556,
+        "h4": 0.0889,
+        "unlisted": 0.0889
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h1",
+      "reason": "h1 at 0.60",
+      "target": {
+        "hypothesis_id": "h1",
+        "kind": "target",
+        "patch": {
+          "learning_rate": 0.0001
+        },
+        "description": "learning_rate 6e-06 -> 0.0001",
+        "ft_job_ids": [
+          "ftjob-df32b4a5947f4be080e486e741edd8f9",
+          "ftjob-d6b2161c4b97445eb9d8058ba8525499"
+        ],
+        "metrics": [
+          0.53,
+          0.51
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h1",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-23d5cc2d72b448d38d96d462f8500748",
+          "ftjob-f873c6fa14ff43f7b457c193c895c2e6"
+        ],
+        "metrics": [
+          0.13,
+          0.13
+        ]
+      },
+      "result": {
+        "status": "confirmed",
+        "effect": 0.39,
+        "ci_low": 0.352760684293739,
+        "ci_high": 0.427239315706261,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "prior_probs": {
+        "h1": 0.6000000000000001,
+        "h2": 0.06666666666666667,
+        "h3": 0.15555555555555556,
+        "h4": 0.08888888888888889,
+        "unlisted": 0.08888888888888888
+      },
+      "planning_probs": {
+        "h1": 0.6000000000000001,
+        "h2": 0.06666666666666667,
+        "h3": 0.15555555555555556,
+        "h4": 0.08888888888888889,
+        "unlisted": 0.08888888888888888
+      },
+      "probs": {
+        "h1": 0.8181818181818181,
+        "h2": 0.030303030303030293,
+        "h3": 0.07070707070707069,
+        "h4": 0.040404040404040394,
+        "unlisted": 0.04040404040404039
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.10944
+    },
+    {
+      "kind": "verdict",
+      "hypothesis_id": "h1",
+      "status": "confirmed",
+      "evidence": [
+        "probe:lora_rank",
+        "intervention:h1"
+      ],
+      "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 6e-06,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+      "summary": "Narrative generation is disabled for all ablation variants."
+    }
+  ],
+  "confirmed": [
+    "lr_too_low"
+  ]
+}

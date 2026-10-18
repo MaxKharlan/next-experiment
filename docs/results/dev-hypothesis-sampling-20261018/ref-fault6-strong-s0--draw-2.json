@@ -1,0 +1,46 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.5,
+      "rationale": "The learning rate is set to 6e-6, which is an order of magnitude below the typical LoRA rate (~1e-4) and even below the factory default (1e-5). Such a tiny rate yields minimal parameter updates, so the model hardly deviates from the base checkpoint despite decreasing train loss, explaining the low held-out accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "A LoRA rank of 16 may provide insufficient expressivity for a 77\u2011way intent classification task. Empirical LoRA studies show accuracy scales with rank, and r=256 approaches full\u2011finetuning performance while r=16 lags behind.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+        "https://arxiv.org/html/2410.21228v2"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "data file (training examples)",
+      "prior": 0.15,
+      "rationale": "Validation loss shows irregular jumps (e.g., rise from epoch 2 to 4) and several held\u2011out queries map to semantically related but different labels (e.g., PIN blocked vs getting pin), suggesting label noise or contradictory examples that destabilize learning.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "f73999acaa8d",
+      "investigation_id": "sampling-dev-ref-fault6-strong-s0-2",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3068,
+      "tokens_out": 1292,
+      "cost_usd": 0.0020832,
+      "latency_ms": 7928,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352058.136815
+    }
+  ]
+}

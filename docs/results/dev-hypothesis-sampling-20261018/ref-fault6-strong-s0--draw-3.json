@@ -1,0 +1,45 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate = 6e-06",
+      "prior": 0.5,
+      "rationale": "The learning rate is an order of magnitude below the typical ~1e-4 recommended for LoRA fine\u2011tuning, so the adapter receives very small updates. Training loss declines slowly and the model remains close to the base, yielding only 20% correct on held\u2011out queries.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r = 16",
+      "prior": 0.3,
+      "rationale": "Known issue \u2018LoRA Learns Less and Forgets Less\u2019 shows that for similar tasks a rank of 16 yields markedly lower accuracy than higher ranks (e.g., r=256 matches full fine\u2011tuning). With 77 intent classes the model may lack sufficient expressive capacity at r=16.",
+      "sources": [
+        "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+      ]
+    },
+    {
+      "id": "h3",
+      "fault_class": "distribution_shift",
+      "location": "training data vs. production queries",
+      "prior": 0.1,
+      "rationale": "Validation loss reaches a low 0.5955 by epoch 6, indicating the model fits the training set, yet held\u2011out accuracy is only 20%. This gap suggests the training examples do not resemble the real\u2011world banking queries the user expects, i.e., a distribution shift.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "36bd6ab5f942",
+      "investigation_id": "sampling-dev-ref-fault6-strong-s0-3",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3068,
+      "tokens_out": 1421,
+      "cost_usd": 0.0021993000000000004,
+      "latency_ms": 8717,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792352066.859752
+    }
+  ]
+}

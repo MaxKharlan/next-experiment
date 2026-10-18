@@ -1,0 +1,244 @@
+[
+  {
+    "case": "fault6-lr1e-5",
+    "method": "one",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "contradictory_labels",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.9156626506024096,
+    "false_alarm": null,
+    "cost_usd": 0.056655,
+    "llm_tokens": 4118,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "fault6-lr1e-5",
+    "method": "three",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "contradictory_labels",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.7929703452909481,
+    "false_alarm": null,
+    "cost_usd": 0.0612603,
+    "llm_tokens": 13171,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-epochs18-s0",
+    "method": "one",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "too_many_epochs",
+      "distribution_shift",
+      "lora_rank_too_small"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.3308328,
+    "llm_tokens": 5242,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-epochs18-s0",
+    "method": "three",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "too_many_epochs",
+      "distribution_shift",
+      "lora_rank_too_small"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.3361923,
+    "llm_tokens": 16097,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-fault6-mild-s0",
+    "method": "one",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "contradictory_labels",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.6707526354498651,
+    "false_alarm": null,
+    "cost_usd": 0.1122972,
+    "llm_tokens": 5324,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-fault6-mild-s0",
+    "method": "three",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "answer_truncation",
+      "contradictory_labels"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.680904014558803,
+    "false_alarm": null,
+    "cost_usd": 0.117423,
+    "llm_tokens": 15318,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-fault6-strong-s0",
+    "method": "one",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "contradictory_labels",
+      "distribution_shift"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.8926174496644295,
+    "false_alarm": null,
+    "cost_usd": 0.1116321,
+    "llm_tokens": 4481,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-fault6-strong-s0",
+    "method": "three",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "contradictory_labels",
+      "distribution_shift"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.8181818181818181,
+    "false_alarm": null,
+    "cost_usd": 0.11591459999999999,
+    "llm_tokens": 13330,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-healthy-s0",
+    "method": "one",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "distribution_shift",
+      "contradictory_labels",
+      "answer_truncation"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.0025662,
+    "llm_tokens": 4874,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ref-healthy-s0",
+    "method": "three",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "distribution_shift",
+      "contradictory_labels",
+      "lora_rank_too_small"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.0074214,
+    "llm_tokens": 14314,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": null,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  }
+]

@@ -1,0 +1,169 @@
+{
+  "method": "three",
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.3333333333333333
+    ],
+    [
+      "distribution_shift",
+      0.22222222222222227
+    ],
+    [
+      "lora_rank_too_small",
+      0.11111111111111112
+    ],
+    [
+      "chat_template_mismatch",
+      0.11111111111111112
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0078723,
+  "llm_tokens": 16097,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.32832,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.45,
+          "rationale": "Validation loss reaches a minimum at epoch 6 (0.0009) then rises sharply, indicating overfitting after that point. Training for 18 epochs likely caused the model to memorize the training set and generalize poorly to held\u2011out queries.",
+          "sources": [
+            "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+          ]
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.3,
+          "rationale": "A LoRA rank of 16 may be too limited for a 77\u2011intent classification task; the LoRA Learns Less and Forgets Less paper shows that higher ranks (e.g., 256) are needed to approach full fine\u2011tuning performance on similar tasks.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "distribution_shift",
+          "location": "training data (example length 45\u2011103 tokens)",
+          "prior": 0.10000000000000002,
+          "rationale": "Despite very low training loss, the model\u2019s accuracy on held\u2011out queries is modest, suggesting the training examples do not resemble the production query distribution; a HuggingFace forum note warns that Qwen3\u20110.6B may be too small for such tasks without more representative data.",
+          "sources": [
+            "https://discuss.huggingface.co/t/fine-tuning-small-model-qwen3-0-6b-for-domain-knowledge-reasoning-seeking-optimization-advice/171558"
+          ]
+        },
+        {
+          "id": "h4",
+          "fault_class": "chat_template_mismatch",
+          "location": "data/chat_template",
+          "prior": 0.049999999999999996,
+          "rationale": "If the chat template used during training differs from the one used at inference, the model may have learned to follow the training format but produces incorrect labels when the inference format changes, explaining the low held\u2011out accuracy.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.45,
+        "h2": 0.3,
+        "h3": 0.1,
+        "h4": 0.05,
+        "unlisted": 0.1
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "outcome": "ok",
+      "gain_bits": 0.3985,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.6,
+        "h2": 0.0667,
+        "h3": 0.1333,
+        "h4": 0.0667,
+        "unlisted": 0.1333
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h1",
+      "reason": "h1 at 0.60",
+      "target": {
+        "hypothesis_id": "h1",
+        "kind": "target",
+        "patch": {
+          "n_epochs": 6
+        },
+        "description": "n_epochs 18 -> 6",
+        "ft_job_ids": [
+          "ftjob-f1b61cd525b64f5499c1c128802d358c",
+          "ftjob-42d912162a184fa59e6303a3eb54c7df"
+        ],
+        "metrics": [
+          0.495,
+          0.51
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h1",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds: 18 epochs, more than the target",
+        "ft_job_ids": [
+          "ftjob-ac341ff4cc184aa6bb4bc24f4186dbfb",
+          "ftjob-149a107c6c5247749331e6875e69baa8"
+        ],
+        "metrics": [
+          0.57,
+          0.52
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "effect": -0.04249999999999998,
+        "ci_low": -0.079739315706261,
+        "ci_high": -0.005260684293738972,
+        "p_value": 1.0,
+        "min_effect": 0.06,
+        "reason": "the fix gains less than the minimum effect"
+      },
+      "prior_probs": {
+        "h1": 0.6,
+        "h2": 0.06666666666666667,
+        "h3": 0.13333333333333336,
+        "h4": 0.06666666666666667,
+        "unlisted": 0.1333333333333333
+      },
+      "planning_probs": {
+        "h1": 0.6,
+        "h2": 0.06666666666666667,
+        "h3": 0.13333333333333336,
+        "h4": 0.06666666666666667,
+        "unlisted": 0.1333333333333333
+      },
+      "probs": {
+        "h1": 0.3333333333333333,
+        "h2": 0.11111111111111112,
+        "h3": 0.22222222222222227,
+        "h4": 0.11111111111111112,
+        "unlisted": 0.22222222222222218
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.32832
+    },
+    {
+      "kind": "stop",
+      "reason": "no probe left and the likeliest testable hypothesis, h2 at 0.17, is too unlikely to pay for a causal check"
+    }
+  ],
+  "confirmed": []
+}
