@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "assumptions": "Independent normal seed-level metrics; known, equal SD in both arms",
+  "interval_scope": "Monte Carlo sampling error only",
+  "stats_sha256": "1e2731a3451a16bda8bcf5bf55d06ee0349ca763a846c1768414703970a3bf87",
+  "simulator_sha256": "8e7a6f684b228165c5f58dd04e014665a5a77cfb7961538a88660f2528b0132a",
+  "rows": [
+    {
+      "effect": 0,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 2,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 0,
+        "rejected": 441,
+        "inconclusive": 59
+      },
+      "confirmation_rate": 0.0,
+      "mc_interval_95": [
+        4.336808689942018e-19,
+        0.007624340461552241
+      ],
+      "permutation_gate_active": false
+    },
+    {
+      "effect": 0,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 3,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 0,
+        "rejected": 482,
+        "inconclusive": 18
+      },
+      "confirmation_rate": 0.0,
+      "mc_interval_95": [
+        4.336808689942018e-19,
+        0.007624340461552241
+      ],
+      "permutation_gate_active": true
+    },
+    {
+      "effect": 0,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 4,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 0,
+        "rejected": 496,
+        "inconclusive": 4
+      },
+      "confirmation_rate": 0.0,
+      "mc_interval_95": [
+        4.336808689942018e-19,
+        0.007624340461552241
+      ],
+      "permutation_gate_active": true
+    },
+    {
+      "effect": 0.03,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 2,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 39,
+        "rejected": 166,
+        "inconclusive": 295
+      },
+      "confirmation_rate": 0.078,
+      "mc_interval_95": [
+        0.05758139347616159,
+        0.10485354987338852
+      ],
+      "permutation_gate_active": false
+    },
+    {
+      "effect": 0.03,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 3,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 17,
+        "rejected": 230,
+        "inconclusive": 253
+      },
+      "confirmation_rate": 0.034,
+      "mc_interval_95": [
+        0.02133451980853219,
+        0.053771365501634506
+      ],
+      "permutation_gate_active": true
+    },
+    {
+      "effect": 0.03,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 4,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 6,
+        "rejected": 327,
+        "inconclusive": 167
+      },
+      "confirmation_rate": 0.012,
+      "mc_interval_95": [
+        0.005510995174027703,
+        0.025930361116447292
+      ],
+      "permutation_gate_active": true
+    },
+    {
+      "effect": 0.06,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 2,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 251,
+        "rejected": 12,
+        "inconclusive": 237
+      },
+      "confirmation_rate": 0.502,
+      "mc_interval_95": [
+        0.45832636322986225,
+        0.5456431394082917
+      ],
+      "permutation_gate_active": false
+    },
+    {
+      "effect": 0.06,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 3,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 266,
+        "rejected": 20,
+        "inconclusive": 214
+      },
+      "confirmation_rate": 0.532,
+      "mc_interval_95": [
+        0.48818610813244,
+        0.5753259340780207
+      ],
+      "permutation_gate_active": true
+    },
+    {
+      "effect": 0.06,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 4,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 225,
+        "rejected": 10,
+        "inconclusive": 265
+      },
+      "confirmation_rate": 0.45,
+      "mc_interval_95": [
+        0.4069396517813318,
+        0.4938227822648235
+      ],
+      "permutation_gate_active": true
+    },
+    {
+      "effect": 0.1,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 2,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 492,
+        "rejected": 0,
+        "inconclusive": 8
+      },
+      "confirmation_rate": 0.984,
+      "mc_interval_95": [
+        0.9687488914666058,
+        0.9918707469666117
+      ],
+      "permutation_gate_active": false
+    },
+    {
+      "effect": 0.1,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 3,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 495,
+        "rejected": 0,
+        "inconclusive": 5
+      },
+      "confirmation_rate": 0.99,
+      "mc_interval_95": [
+        0.9768069002442693,
+        0.9957212461034096
+      ],
+      "permutation_gate_active": true
+    },
+    {
+      "effect": 0.1,
+      "noise_sd": 0.019,
+      "seeds_per_arm": 4,
+      "trials": 500,
+      "random_seed": 0,
+      "min_effect": 0.06,
+      "counts": {
+        "confirmed": 498,
+        "rejected": 0,
+        "inconclusive": 2
+      },
+      "confirmation_rate": 0.996,
+      "mc_interval_95": [
+        0.9855342847848231,
+        0.9989023694773173
+      ],
+      "permutation_gate_active": true
+    }
+  ]
+}
