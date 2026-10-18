@@ -2,12 +2,28 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+from contextvars import ContextVar
 from functools import lru_cache
 from pathlib import Path
 
 import yaml
 
 SIGNATURES = Path(__file__).resolve().parents[1] / "probes" / "signatures.yaml"
+
+_ACTIVE = ContextVar("signature_path", default=SIGNATURES)
+
+
+@contextmanager
+def using_signatures(path: Path):
+    """Select a frozen table for this context only; restore it even after failure."""
+    path = Path(path).resolve()
+    load_signatures(path)
+    token = _ACTIVE.set(path)
+    try:
+        yield
+    finally:
+        _ACTIVE.reset(token)
 
 
 @lru_cache
@@ -21,9 +37,9 @@ def load_signatures(path: Path = SIGNATURES) -> dict[str, dict[str, dict[str, fl
 
 
 def likelihood(probe: str, fault_class: str, outcome: str) -> float:
-    rows = load_signatures()[probe]
+    rows = load_signatures(_ACTIVE.get())[probe]
     return rows.get(fault_class, rows["default"])[outcome]
 
 
 def outcomes(probe: str) -> list[str]:
-    return list(load_signatures()[probe]["default"])
+    return list(load_signatures(_ACTIVE.get())[probe]["default"])
