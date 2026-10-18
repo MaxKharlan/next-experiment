@@ -8,43 +8,13 @@ ManimGX needs Python 3.13 or newer, so it runs outside the project's environment
     uv run --no-project --python 3.14 --with manimgx==0.1.1 python docs/animation/architecture.py
 """
 
-from pathlib import Path
-
 import manimgx as m
 import numpy as np
 
-import svg
+from films import THEMES, text, write
 
-OUT = Path(__file__).resolve().parents[1] / "media"
-SIZE, FPS = (1280, 640), 30
-FONT = "Noto Sans"
 LIFT = 0.1  # the layout sits this much above the frame's center
 TIP = 0.17  # length of an arrowhead
-# svg.py resamples long outlines for a camera that moves; this one stays, so glyphs
-# such as "m" keep all their curves
-svg.EXACT = 10_000
-
-# the investigation screen's colors (apps/api/static/index.html)
-THEMES = {
-    "dark": {
-        "ink": "#E4EBE9",
-        "muted": "#97A6A2",
-        "line": "#2E3D3A",
-        "strong": "#62736F",
-        "accent": "#5DBF9F",
-        "soft": "#16302A",
-        "on_accent": "#0E1413",
-    },
-    "light": {
-        "ink": "#152120",
-        "muted": "#5A6866",
-        "line": "#D6DEDB",
-        "strong": "#849390",
-        "accent": "#1E6B57",
-        "soft": "#E1F0EB",
-        "on_accent": "#FFFFFF",
-    },
-}
 
 # scene units, 16 by 8. The app's parts and the services' share left and right edges.
 APP, SERVICES = (-4.0, 0.7), (3.35, 7.45)
@@ -78,10 +48,6 @@ STEPS = [
     ([((0.7, -0.45), (3.35, -0.45))], None, ["ultra"]),  # verdict
     ([((-5.55, 2.35), (-4.0, 2.35))], None, ["api", "causal", "jobs"]),  # retrain
 ]
-
-
-def text(words: str, color: str, size: int = 16, weight: str = "NORMAL") -> m.Text:
-    return m.Text(words, font=FONT, font_size=size, weight=weight, color=color)
 
 
 def point(x: float, y: float) -> np.ndarray:
@@ -185,23 +151,5 @@ class Architecture(m.Scene):
         self.wait(0.4)
 
 
-def main() -> None:
-    m.config.pixel_width, m.config.pixel_height = SIZE
-    m.config.frame_rate = FPS
-    for theme, palette in THEMES.items():
-        scene = type(
-            f"Architecture{theme.title()}", (Architecture,), {"palette": palette}
-        )
-        file = OUT / f"architecture-{theme}.svg"
-        # the scene fades its own steps, so the parts stay on when the film loops
-        svg.write(svg.record(scene), file, fade=0)
-        film = file.read_text(encoding="utf-8")
-        start = film.index("<g>") + len("<g>")
-        end = film.index("/>", start) + len("/>")
-        if 'attributeName="opacity"' in film[start:end]:
-            file.write_text(film[:start] + film[end:], encoding="utf-8")
-        print(file, f"{file.stat().st_size / 1024:.0f} KiB")
-
-
 if __name__ == "__main__":
-    main()
+    write(Architecture, "architecture")
