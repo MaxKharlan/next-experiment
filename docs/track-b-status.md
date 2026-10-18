@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #72
-(`e5d134a`) and the repository implementation on October 18, 2026.
+Compared the original project plan with `main` through PR #73
+(`93e2934`) and the repository implementation on October 18, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -22,11 +22,11 @@ has measured evidence.
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
 | B23 | Investigation UI, case launch, costs and report downloads exist. |
-| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. This change adds injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. Faults 9 and 11, agent-facing checks and downstream quality evidence remain open. |
+| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. This change adds fault 9 (prompt loss), a prompt-target audit and separate supervised-token counts. Fault 11, agent-facing checks and downstream quality evidence remain open. |
 | B25 | Weight probes are wired into live runs and the benchmark. Threshold transfer and rank-fault discrimination need more evidence. |
 | B26 | A classifier model publication with validated transfer metrics remains open. |
 
-The selected task is the fault-10 label-masking mechanism in B24. It injects
-EOS/padding masking in the local LoRA trainer and audits removed EOS supervision.
-See [EOS label masking](eos-label-masking.md). No Kaggle job, downloaded model or
-paid training was used. B24 remains partial; PR #72 already covers fault 12.
+The selected task is the fault-9 prompt-loss mechanism in B24. It adds prompt
+supervision in the local LoRA trainer and records its share of the objective.
+See [Prompt loss](prompt-loss.md). No Kaggle job, downloaded model or paid
+training was used. B24 remains partial; PRs #72 and #73 cover faults 12 and 10.

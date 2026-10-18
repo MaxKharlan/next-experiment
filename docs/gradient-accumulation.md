@@ -55,5 +55,6 @@ layouts. Separate tests reject invalid accumulation settings before model loadin
 This implements one B24 mechanism and its regression checks. It provides no
 measurement of downstream model-quality degradation, no agent-facing diagnosis,
 and no reproduction of an external user's training run. Fault 10 now has a [label-masking implementation and audit](eos-label-masking.md).
-Faults 9 and 11 remain open. Validation data still uses the healthy answer-only objective
+Fault 9 now has a [prompt-loss implementation and audit](prompt-loss.md).
+Fault 11 remains open. Validation data still uses the healthy answer-only objective
 in both experimental arms.

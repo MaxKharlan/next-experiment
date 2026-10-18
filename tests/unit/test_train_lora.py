@@ -107,7 +107,7 @@ def test_accumulation_rejects_empty_targets_before_backward():
         assert all(p.grad is None for p in model.parameters())
 
 
-@pytest.mark.parametrize("code_fault", [None, "eos_as_pad"])
+@pytest.mark.parametrize("code_fault", [None, "eos_as_pad", "prompt_loss"])
 def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch, code_fault):
     import json
 
@@ -171,10 +171,17 @@ def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch, code_f
         torch.testing.assert_close(full, accumulated)
     assert summaries[1]["gradient_accumulation_steps"] == 3
     assert summaries[1]["code_fault"] == code_fault
-    assert summaries[1]["answer_tokens"] == (18 if code_fault else 23)
+    assert summaries[1]["answer_tokens"] == (18 if code_fault == "eos_as_pad" else 23)
     audit = summaries[1]["label_audit"]
     assert audit["reference_eos_targets"] == 5
-    assert audit["removed_eos_targets"] == (5 if code_fault else 0)
+    assert audit["removed_eos_targets"] == (5 if code_fault == "eos_as_pad" else 0)
+    if code_fault == "prompt_loss":
+        prompt = summaries[1]["prompt_label_audit"]
+        assert prompt["supervised_prompt_tokens"] == 85
+        assert prompt["answer_targets"] == 23
+        assert summaries[1]["supervised_tokens"] == 108
+    else:
+        assert summaries[1]["supervised_tokens"] == summaries[1]["answer_tokens"]
 
 
 @pytest.mark.parametrize("accumulation", [0, -1, True, 1.5])
@@ -244,4 +251,52 @@ def test_eos_fault_rejects_unusable_data_before_model_loading(
     with pytest.raises(ValueError, match=message):
         trainer.train(
             path, path, tmp_path / "out", code_fault="eos_as_pad", device="cpu"
+        )
+
+
+def test_prompt_loss_does_not_supervise_padding():
+    from bench.faults.labels import include_prompt_labels
+
+    rows = [{"input_ids": [3, 4, 5], "labels": [-100, -100, 5]}]
+    batch = collate(include_prompt_labels(rows), pad_id=0, device="cpu")
+    assert batch["labels"][0, :3].tolist() == [3, 4, 5]
+    assert batch["labels"][batch["attention_mask"] == 0].eq(-100).all()
+
+
+def test_prompt_fault_changes_gradient():
+    from bench.faults.labels import include_prompt_labels
+
+    rows = [{"input_ids": [1, 2, 3, 4], "labels": [-100, -100, -100, 4]}]
+    healthy = _gradients([rows])
+    faulty = _gradients([include_prompt_labels(rows)])
+    assert healthy[3] == 1
+    assert faulty[3] == 3
+    assert not torch.allclose(healthy[0], faulty[0])
+
+
+def test_prompt_fault_without_prompt_targets_fails_before_model_loading(
+    tmp_path, monkeypatch
+):
+    from types import SimpleNamespace
+
+    from jobs.kaggle import train_lora as trainer
+
+    monkeypatch.setattr(
+        trainer.AutoTokenizer,
+        "from_pretrained",
+        lambda *_: SimpleNamespace(pad_token_id=0, eos_token_id=2),
+    )
+    monkeypatch.setattr(
+        trainer, "encode", lambda *_: {"input_ids": [1, 2], "labels": [-100, 2]}
+    )
+    monkeypatch.setattr(
+        trainer.AutoModelForCausalLM,
+        "from_pretrained",
+        lambda *a, **kw: pytest.fail("Model must not load"),
+    )
+    path = tmp_path / "data.jsonl"
+    path.write_text('{"messages": []}\n')
+    with pytest.raises(ValueError, match="added no"):
+        trainer.train(
+            path, path, tmp_path / "out", code_fault="prompt_loss", device="cpu"
         )

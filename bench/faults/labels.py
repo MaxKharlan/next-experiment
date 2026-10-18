@@ -1,4 +1,4 @@
-"""Mode B fault 10: token-value padding masks remove real EOS targets."""
+"""Mode B label faults and audits against healthy answer-only labels."""
 
 from copy import deepcopy
 
@@ -18,7 +18,13 @@ def mask_padding_labels(rows: list[dict], pad_id: int) -> list[dict]:
     return result
 
 
-def audit_eos_labels(reference: list[dict], observed: list[dict], eos_id: int) -> dict:
+def audit_eos_labels(
+    reference: list[dict],
+    observed: list[dict],
+    eos_id: int,
+    *,
+    allow_prompt_targets: bool = False,
+) -> dict:
     """Count removed EOS targets against healthy labels after causal shifting.
 
     Prompt tokens and the first position are not supervised targets. Absence of
@@ -36,8 +42,11 @@ def audit_eos_labels(reference: list[dict], observed: list[dict], eos_id: int) -
             or len(obs["labels"]) != len(ref["labels"])
         ):
             raise ValueError("Reference and observed tokens must align")
-        for expected, actual in zip(ref["labels"][1:], obs["labels"][1:]):
-            if actual not in (expected, -100):
+        for token, expected, actual in zip(
+            ref["input_ids"][1:], ref["labels"][1:], obs["labels"][1:]
+        ):
+            added_prompt = allow_prompt_targets and expected == -100 and actual == token
+            if actual not in (expected, -100) and not added_prompt:
                 raise ValueError("Observed labels must only mask reference labels")
             before += expected != -100
             after += actual != -100
@@ -56,4 +65,59 @@ def audit_eos_labels(reference: list[dict], observed: list[dict], eos_id: int) -
         else "removed"
         if removed
         else "preserved",
+    }
+
+
+def include_prompt_labels(rows: list[dict]) -> list[dict]:
+    """Inject fault 9 on unpadded encoded rows without mutating the reference."""
+    result = deepcopy(rows)
+    for row in result:
+        if len(row["input_ids"]) != len(row["labels"]):
+            raise ValueError("input_ids and labels must have equal lengths")
+        row["labels"] = list(row["input_ids"])
+    return result
+
+
+def audit_prompt_labels(reference: list[dict], observed: list[dict]) -> dict:
+    """Audit unpadded answer-only rows; ignored reference positions are prompt.
+
+    Position zero is excluded because causal loss has no prediction for it.
+    Observed labels may only reveal original token IDs at ignored positions.
+    """
+    if len(reference) != len(observed):
+        raise ValueError("Reference and observed rows must align")
+    prompt = included = answer = 0
+    for ref, obs in zip(reference, observed):
+        if (
+            ref["input_ids"] != obs["input_ids"]
+            or len(ref["labels"]) != len(ref["input_ids"])
+            or len(obs["labels"]) != len(ref["labels"])
+        ):
+            raise ValueError("Reference and observed tokens must align")
+        for token, expected, actual in zip(
+            ref["input_ids"][1:], ref["labels"][1:], obs["labels"][1:]
+        ):
+            if expected == -100:
+                if actual not in (-100, token):
+                    raise ValueError(
+                        "Prompt labels must match input tokens or be ignored"
+                    )
+                prompt += 1
+                included += actual != -100
+            else:
+                if actual != expected:
+                    raise ValueError("Answer labels must remain unchanged")
+                answer += 1
+    total = answer + included
+    return {
+        "prompt_positions": prompt,
+        "supervised_prompt_tokens": included,
+        "answer_targets": answer,
+        "total_targets": total,
+        "prompt_loss_fraction": included / total if total else None,
+        "status": "included"
+        if included
+        else "masked"
+        if prompt
+        else "no_prompt_targets",
     }
