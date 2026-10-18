@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #76
-(`c07ab42`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #77
+(`da7ca2f`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -22,12 +22,11 @@ has measured evidence.
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
 | B23 | Investigation UI, case launch, costs and report downloads exist. |
-| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. This change adds a first-backward gradient audit and stops before the first update on missing-all or nonfinite gradients. Agent-facing checks and downstream quality evidence remain open. |
+| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. PR #77 added a first-backward gradient audit. This change exposes bounded label checks to mode-B hypothesis generation through the Python investigation entry point. REST/UI attachment support, mode-B interventions and downstream quality evidence remain open. |
 | B25 | Weight probes are wired into live runs and the benchmark. Threshold transfer and rank-fault discrimination need more evidence. |
 | B26 | A classifier model publication with validated transfer metrics remains open. |
 
-The selected task is first-backward gradient-flow inspection in B24. The local
-trainer distinguishes missing, zero, nonzero and nonfinite gradients and saves
-the report before clipping or updating weights. See [Gradient flow](gradient-flow.md).
-Verification used a tiny local PEFT model without downloaded weights or Kaggle.
-B24 remains partial; the snapshot does not verify later steps or model quality.
+The selected task is agent-facing label evidence in B24. Mode-B investigations
+can inspect caller-supplied reference and observed labels before hypothesis
+generation and persist aggregate observations. See [Agent label checks](agent-label-checks.md).
+This adds no calibrated likelihoods or causal confirmation. B24 remains partial.

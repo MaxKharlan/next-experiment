@@ -178,3 +178,65 @@ def test_no_proposal_without_a_confirmed_fix():
     )
     assert result.retrain_plan is None
     assert "retrain_proposal" not in [s["kind"] for s in result.steps]
+
+
+def test_mode_b_label_checks_reach_hypotheses_without_raw_tokens(monkeypatch):
+    from copy import deepcopy
+
+    from core.agent import loop
+
+    ctx = _ctx()
+    ctx.mode = "B"
+    rows = [{"input_ids": [1, 3, 4, 2], "labels": [-100, -100, 4, 2]}]
+    case = {"training_labels": {"reference": rows, "observed": rows}}
+    original = deepcopy(case)
+    captured = []
+    hypotheses = [_hyp("h1", "loss_on_prompt", 0.4)]
+
+    def propose(router, supplied_case, **kwargs):
+        captured.append(supplied_case)
+        return hypotheses
+
+    monkeypatch.setattr(loop, "propose_hypotheses", propose)
+    recorded = []
+    result = investigate(
+        ctx,
+        case,
+        FakeRouter(hypotheses),
+        lambda *_: None,
+        probes=(),
+        causal_checks=False,
+        on_step=recorded.append,
+    )
+    assert case == original
+    assert "training_labels" not in captured[0]
+    assert captured[0]["training_label_checks"]["alignment"]["status"] == "aligned"
+    assert result.steps[0]["kind"] == "training_label_checks"
+    assert recorded[0] == result.steps[0]
+    assert result.status == "inconclusive"
+    assert result.hypotheses[0].prior == 0.4
+
+
+def test_mode_a_rejects_label_attachment_before_model_calls():
+    import pytest
+
+    router = FakeRouter([])
+    with pytest.raises(ValueError, match="mode B"):
+        investigate(_ctx(), {"training_labels": {}}, router, lambda *_: None)
+    assert router.steps == []
+
+
+def test_invalid_mode_b_labels_fail_before_model_calls():
+    import pytest
+
+    ctx = _ctx()
+    ctx.mode = "B"
+    router = FakeRouter([])
+    with pytest.raises(ValueError):
+        investigate(
+            ctx,
+            {"training_labels": {"reference": [], "observed": []}},
+            router,
+            lambda *_: None,
+        )
+    assert router.steps == []
