@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import json
+import random
 from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass, field
 from typing import Any
@@ -33,6 +34,7 @@ from core.connectors.storage import Storage
 from core.connectors.tavily import Tavily, TavilyBudgetError
 from core.interventions.pairs import BUILDERS, Intervention, make_pair
 from core.interventions.stats import causal_check
+from core.planner.causal_belief import MODEL, update_causal
 from core.planner.eig import best_probe, expected_gain, update
 from core.planner.stopping import next_action
 from core.probes.base import Probe
@@ -93,8 +95,16 @@ def investigate(
     tavily: Tavily | None = None,
     on_step: Callable[[dict[str, Any]], None] | None = None,
     propose_retrain: ProposeRetrain | None = None,
+    policy: str = "eig",
+    random_seed: int = 0,
+    initial_hypotheses: Sequence[Hypothesis] | None = None,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
+    if policy not in {"eig", "fixed", "random"}:
+        raise ValueError(f"Unknown policy: {policy}")
+    if max_interventions < 1:
+        raise ValueError("max_interventions must be positive")
+    rng = random.Random(random_seed)
     steps: list[dict[str, Any]] = []
 
     def add(step: dict[str, Any]) -> None:
@@ -120,7 +130,11 @@ def investigate(
             add({"kind": "known_issues", **found})
         except (TavilyBudgetError, httpx.HTTPError) as err:
             add({"kind": "known_issues", "error": str(err)})
-    hypotheses = propose_hypotheses(router, case, mode=ctx.mode)
+    hypotheses = (
+        propose_hypotheses(router, case, mode=ctx.mode)
+        if initial_hypotheses is None
+        else list(initial_hypotheses)
+    )
     by_id = {h.id: h for h in hypotheses}
     classes = {h.id: h.fault_class for h in hypotheses}
     probs = {h.id: h.prior for h in hypotheses}
@@ -142,20 +156,53 @@ def investigate(
         }
     )
     interventions = 0
+    tested: set[str] = set()
 
     while True:
-        costs = {name: p.estimate_cost(ctx) for name, p in remaining.items()}
-        probe_name, _ = best_probe(probs, classes, costs)
-        gain = expected_gain(probs, classes, probe_name) if probe_name else 0.0
+        candidates = [h.id for h in hypotheses if h.id in testable]
+        # Scheduling conditions on causes that have not been tested.
+        # The reported belief still includes tested causes and unlisted mass.
+        planning_probs = {h: p for h, p in probs.items() if h not in tested}
+        planning_mass = sum(planning_probs.values())
+        if planning_mass > 0:
+            planning_probs = {h: p / planning_mass for h, p in planning_probs.items()}
         budget = ctx.budget_left_usd - router.log.cost_usd
-        action, why = next_action(
-            probs,
-            threshold=threshold,
-            gain_bits=gain,
-            budget_left_usd=budget,
-            intervention_cost_usd=intervention_cost_usd,
-            testable=testable,
-        )
+        if policy == "eig":
+            costs = {name: p.estimate_cost(ctx) for name, p in remaining.items()}
+            probe_name, _ = best_probe(planning_probs, classes, costs)
+            gain = (
+                expected_gain(planning_probs, classes, probe_name)
+                if probe_name
+                else 0.0
+            )
+            action, why = next_action(
+                planning_probs,
+                threshold=threshold,
+                gain_bits=gain,
+                budget_left_usd=budget,
+                intervention_cost_usd=intervention_cost_usd,
+                testable=testable,
+            )
+        else:
+            names = list(remaining)
+            probe_name = (
+                rng.choice(names)
+                if policy == "random" and names
+                else next(iter(names), None)
+            )
+            gain = (
+                expected_gain(probs, classes, probe_name)
+                if probe_name is not None
+                else 0.0
+            )
+            if not candidates:
+                action, why = "stop", "no hypothesis left to test"
+            elif probe_name is not None:
+                action, why = "probe", f"{policy} probe order"
+            elif budget < intervention_cost_usd:
+                action, why = "stop", "the budget does not cover a causal check"
+            else:
+                action, why = "intervene", f"{policy} hypothesis order"
         if action == "stop":
             add({"kind": "stop", "reason": why})
             break
@@ -181,12 +228,20 @@ def investigate(
             evidence.append(f"probe:{probe_name}")
             continue
 
-        leader = by_id[max(testable, key=probs.get)]
+        if policy == "random":
+            leader_id = rng.choice(candidates)
+        elif policy == "fixed":
+            leader_id = candidates[0]
+        else:
+            leader_id = max(candidates, key=probs.get)
+        leader = by_id[leader_id]
         target, control = make_pair(leader, ctx)
         run_pair(target, control)
         check = causal_check(
             target.metrics, control.metrics, min_effect=min_effect, noise_sd=noise_sd
         )
+        prior_probs = dict(probs)
+        probs = update_causal(probs, classes, leader.id, check.status)
         interventions += 1
         ctx.budget_left_usd -= intervention_cost_usd
         evidence.append(f"intervention:{leader.id}")
@@ -198,6 +253,10 @@ def investigate(
                 "target": asdict(target),
                 "control": asdict(control),
                 "result": asdict(check),
+                "prior_probs": prior_probs,
+                "planning_probs": dict(planning_probs),
+                "probs": dict(probs),
+                "belief_model": MODEL,
                 "cost_usd": intervention_cost_usd,
             }
         )
@@ -212,11 +271,9 @@ def investigate(
                 result.retrain_plan = plan
                 add({"kind": "retrain_proposal", **plan})
             break
-        # not confirmed: drop the leader and spread its mass over the rest
+        # Do not repeat a tested hypothesis; retain its updated belief.
         testable.discard(leader.id)
-        probs[leader.id] = 0.0
-        total = sum(probs.values())
-        probs = {h: p / total for h, p in probs.items()} if total else probs
+        tested.add(leader.id)
         if interventions >= max_interventions:
             add({"kind": "stop", "reason": "intervention limit"})
             break
