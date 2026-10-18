@@ -17,6 +17,17 @@ def build_report(snapshot: dict[str, Any]) -> dict[str, Any]:
             (step for step in reversed(steps) if step.get("kind") == kind), None
         )
 
+    calls = [event["data"] for event in events if event["type"] == "llm_call"]
+    usage = None
+    if calls:
+        usage = {
+            "calls": calls,
+            "call_count": len(calls),
+            "tokens_in": sum(call["tokens_in"] for call in calls),
+            "tokens_out": sum(call["tokens_out"] for call in calls),
+            "cost_usd": sum(call["cost_usd"] for call in calls),
+            "scope": "Recorded LLM responses only; excludes training and requests without usage data",
+        }
     started = last_event("started") or {}
     waiting = last_event("awaiting_approval") or {}
     summary = last_event("finished") or waiting.get("summary") or {}
@@ -46,6 +57,7 @@ def build_report(snapshot: dict[str, Any]) -> dict[str, Any]:
         "approval": last_event("resumed"),
         "comparison": comparison,
         "summary": summary,
+        "llm_usage": usage,
         "error": error,
         "events": events,
         "last_event_seq": events[-1]["seq"] if events else None,
