@@ -37,3 +37,10 @@ lora_weights:
   # no jobs with other causes to count, so they all use the default row.
   lr_too_low: {small: 0.90, normal: 0.10}
   default: {small: 0.14, normal: 0.86}
+
+example_length:
+  # A8: at least 1% of training examples longer in tokens than context_length. The
+  # probe measures the cause of fault 1 directly, so a truncated outcome is likely
+  # with it and rare without it. First guesses, not calibrated yet (A14, O3).
+  truncation: {truncated: 0.90, ok: 0.10}
+  default: {truncated: 0.05, ok: 0.95}
