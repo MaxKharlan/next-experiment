@@ -203,15 +203,34 @@ def investigation_report(inv_id: str, download: bool = False) -> JSONResponse:
 
 
 @app.get("/api/investigations/{inv_id}/events")
-async def events(inv_id: str, request: Request) -> EventSourceResponse:
+async def events(
+    inv_id: str,
+    request: Request,
+    last_event_id: str | None = Header(default=None),
+) -> EventSourceResponse:
     get_investigation(inv_id)
+    start_seq = 0
+    if last_event_id:
+        if (
+            len(last_event_id) > 18
+            or not last_event_id.isascii()
+            or not last_event_id.isdecimal()
+        ):
+            raise HTTPException(
+                422, "Last-Event-ID must be a nonnegative decimal sequence"
+            )
+        start_seq = int(last_event_id) + 1
 
     async def stream():
-        seq = 0
+        seq = start_seq
         while not await request.is_disconnected():
             for event in store.events_since(inv_id, seq):
                 seq = event["seq"] + 1
-                yield {"event": event["type"], "data": json.dumps(event["data"])}
+                yield {
+                    "id": str(event["seq"]),
+                    "event": event["type"],
+                    "data": json.dumps(event["data"]),
+                }
             if store.is_done(inv_id) and not store.events_since(inv_id, seq):
                 break
             await asyncio.sleep(0.3)
