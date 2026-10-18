@@ -175,15 +175,23 @@ def list_investigations() -> list[dict]:
     return [
         {k: m[k] for k in ("id", "status", "backend", "title", "created_at")}
         for m in store.list()
+        if not get_settings().public_demo or m["backend"] == "replay"
     ]
 
 
 @app.get("/api/investigations/{inv_id}")
 def get_investigation(inv_id: str) -> dict:
     try:
-        return store.get(inv_id)
+        meta = store.get(inv_id)
     except KeyError:
         raise HTTPException(404, f"no investigation {inv_id}") from None
+    _check_visibility(meta)
+    return meta
+
+
+def _check_visibility(meta: dict) -> None:
+    if get_settings().public_demo and meta["backend"] != "replay":
+        raise HTTPException(403, "the public demo only exposes replay investigations")
 
 
 @app.get("/api/investigations/{inv_id}/report")
@@ -192,8 +200,7 @@ def investigation_report(inv_id: str, download: bool = False) -> JSONResponse:
         snapshot = store.snapshot(inv_id)
     except KeyError:
         raise HTTPException(404, f"no investigation {inv_id}") from None
-    if get_settings().public_demo and snapshot["meta"]["backend"] != "replay":
-        raise HTTPException(403, "the public demo only exposes replay reports")
+    _check_visibility(snapshot["meta"])
     headers = {"Cache-Control": "no-store"}
     if download:
         headers["Content-Disposition"] = (
