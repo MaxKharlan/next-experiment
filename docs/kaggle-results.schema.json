@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "Evaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "split": {
+          "enum": [
+            "check",
+            "validation",
+            "test"
+          ],
+          "title": "Split",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "examples": {
+          "exclusiveMinimum": 0,
+          "title": "Examples",
+          "type": "integer"
+        },
+        "metric": {
+          "const": "exact_match",
+          "default": "exact_match",
+          "title": "Metric",
+          "type": "string"
+        }
+      },
+      "required": [
+        "split",
+        "sha256",
+        "examples"
+      ],
+      "title": "Evaluation",
+      "type": "object"
+    },
+    "Measurement": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "title": "Run Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "healthy",
+            "damaged",
+            "target",
+            "control"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "metric": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Metric",
+          "type": "number"
+        },
+        "train_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Train Sha256",
+          "type": "string"
+        },
+        "hyperparameters": {
+          "additionalProperties": true,
+          "title": "Hyperparameters",
+          "type": "object"
+        },
+        "summary_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary Path"
+        }
+      },
+      "required": [
+        "run_id",
+        "role",
+        "seed",
+        "metric",
+        "train_sha256",
+        "hyperparameters"
+      ],
+      "title": "Measurement",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "backend": {
+      "const": "kaggle",
+      "title": "Backend",
+      "type": "string"
+    },
+    "model": {
+      "minLength": 1,
+      "title": "Model",
+      "type": "string"
+    },
+    "fault": {
+      "const": "answer_truncation",
+      "title": "Fault",
+      "type": "string"
+    },
+    "evaluation": {
+      "$ref": "#/$defs/Evaluation"
+    },
+    "runs": {
+      "items": {
+        "$ref": "#/$defs/Measurement"
+      },
+      "minItems": 1,
+      "title": "Runs",
+      "type": "array"
+    },
+    "control_description": {
+      "default": "",
+      "title": "Control Description",
+      "type": "string"
+    },
+    "environment": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Environment",
+      "type": "object"
+    }
+  },
+  "required": [
+    "version",
+    "backend",
+    "model",
+    "fault",
+    "evaluation",
+    "runs"
+  ],
+  "title": "KaggleResults",
+  "type": "object"
+}
