@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "split": "dev",
+  "variants": [
+    "mixed",
+    "super_only"
+  ],
+  "models": {
+    "nano": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "super": "nvidia/nemotron-3-super-120b-a12b",
+    "ultra": "nvidia/Nemotron-3-Ultra-550b-a55b"
+  },
+  "source_hashes": {
+    "core/agent/router.py": "47290359112311631b70a21292f4eb0461941ed6114b9418eb60e046291c2f21",
+    "core/agent/loop.py": "5f11dfc916cb03fcd9d75328f31b8d30154e6ae65ace37d64f62a7b60cd965b5",
+    "bench/ablations.py": "22511bfca0ee530399b08725810d474db490090892607e437aea894e1371552a",
+    "bench/routing_ablation.py": "69c088b26766637fe654db4597ac4aa53d1a9bc82e61ab112804a53510a2c23e",
+    "core/agent/steps.py": "7901650f3660ee31c3884c59597c88e9acaf45c38c6d36cb65aeb1bc0a7dac35",
+    "core/agent/prompts/verdict.v1.md": "209149709fa87c212d66eb26bebc1ed08686299df653c418ca83a0dd1ce98e37",
+    "core/agent/prompts/interpret_probe.v1.md": "82900cf8119eefda523b155302b118109f261922c599a7b1a03347bcc7b1c629"
+  },
+  "pair_cache_hashes": {
+    "fault6-lr1e-5": "d2097062c598573efc6b07b4ccbd40696a970d41a96b09ae25a6587636477b42",
+    "ref-epochs18-s0": "54843b1bb112ddb33047e68a302ed1a696406cfa24b685a37c89441c173cfe35",
+    "ref-fault6-mild-s0": "c130af73021cafd954f78b01660a50d1abb7feb040e472cab20af1dd5b79bdea",
+    "ref-fault6-strong-s0": "4cfc6ad0c3cccb6ae9d93b342cc4db7ea2bb798aac698859a1a8b10a7cf671a6",
+    "ref-healthy-s0": "31fbd1d4494122785d4902ea24e6d5a172b4f65f8598c74410ab891726a27039"
+  },
+  "frozen_inputs": {
+    "fault6-lr1e-5": "7a547f225f2f8c198ef788fe6d5ee5fb19a9c90e33ab8a7ecc5496b752067dee",
+    "ref-epochs18-s0": "3bf12d802a8838c5ced124a5763e48e6ac59d454b0804008db6af18c461847c9",
+    "ref-fault6-mild-s0": "93934f1417d31c8f59d81161d02db2fa271c94ac5f34f7539794dbc182807621",
+    "ref-fault6-strong-s0": "0e0a4c95090933a9478aa1537e04de0784deb7e3f54e59756fbe408a815377c7",
+    "ref-healthy-s0": "10c161eba6a76f9319e30eb43412f9b4bd1ef42951ed5c7901e43782aac0599a"
+  },
+  "weight_probe_enabled": false,
+  "noise_sd": 0.019,
+  "min_effect": 0.06,
+  "pairs_name": "pairs-check",
+  "budget_usd": 1.0,
+  "max_interventions": 2,
+  "seeds_per_arm": 2,
+  "new_training_jobs": 0,
+  "hypotheses": "shared frozen Super calls with Tavily evidence",
+  "narratives": "live probe explanations and verdicts in both variants",
+  "cost_scope": "shared hypothesis cost plus live calls plus estimated cached training",
+  "limitations": [
+    "Narrative quality is not scored automatically.",
+    "Model text does not determine causal status or patch.",
+    "Different LLM costs can change budget-limited trajectories.",
+    "One generation per variant; generation variance is not estimated.",
+    "Held-out reruns are exploratory."
+  ]
+}

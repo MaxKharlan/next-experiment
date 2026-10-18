@@ -1,0 +1,20 @@
+{
+  "mixed": {
+    "new_llm_cost_usd": 0.016144699999999998,
+    "llm_cost_usd": 0.028815499999999997,
+    "new_llm_calls": 16,
+    "cached_training_jobs": 16,
+    "estimated_training_cost_usd": 0.60192
+  },
+  "super_only": {
+    "new_llm_cost_usd": 0.011163000000000001,
+    "llm_cost_usd": 0.023833800000000002,
+    "new_llm_calls": 16,
+    "cached_training_jobs": 16,
+    "estimated_training_cost_usd": 0.60192
+  },
+  "preparation_cost_usd": 0.012670800000000001,
+  "total_new_cost_usd": 0.0399785,
+  "total_new_llm_calls": 37,
+  "new_training_jobs": 0
+}

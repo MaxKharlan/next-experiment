@@ -1,0 +1,84 @@
+{
+  "shared_hypothesis_calls": [
+    {
+      "id": "b441c2d61925",
+      "investigation_id": "routing-priors-dev-fault6-lr1e-5",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 2952,
+      "tokens_out": 1374,
+      "cost_usd": 0.0021222000000000003,
+      "latency_ms": 8405,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792350960.350153
+    }
+  ],
+  "new_calls": [
+    {
+      "id": "6e806283ebe0",
+      "investigation_id": "routing-dev-fault6-lr1e-5-super_only",
+      "purpose": "interpret_probe",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 903,
+      "tokens_out": 745,
+      "cost_usd": 0.0009414,
+      "latency_ms": 5354,
+      "prompt_version": "interpret_probe-v1",
+      "attempt": 1,
+      "created_at": 1792351037.0928562
+    },
+    {
+      "id": "3bed7dd29ff4",
+      "investigation_id": "routing-dev-fault6-lr1e-5-super_only",
+      "purpose": "interpret_probe",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 829,
+      "tokens_out": 323,
+      "cost_usd": 0.0005394,
+      "latency_ms": 2351,
+      "prompt_version": "interpret_probe-v1",
+      "attempt": 1,
+      "created_at": 1792351039.445651
+    },
+    {
+      "id": "b6afb3fdcde4",
+      "investigation_id": "routing-dev-fault6-lr1e-5-super_only",
+      "purpose": "interpret_probe",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 827,
+      "tokens_out": 368,
+      "cost_usd": 0.0005792999999999999,
+      "latency_ms": 2828,
+      "prompt_version": "interpret_probe-v1",
+      "attempt": 1,
+      "created_at": 1792351042.275595
+    },
+    {
+      "id": "3f5a1844874b",
+      "investigation_id": "routing-dev-fault6-lr1e-5-super_only",
+      "purpose": "interpret_probe",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 834,
+      "tokens_out": 256,
+      "cost_usd": 0.0004806,
+      "latency_ms": 2184,
+      "prompt_version": "interpret_probe-v1",
+      "attempt": 1,
+      "created_at": 1792351044.462121
+    },
+    {
+      "id": "c8b8ca104488",
+      "investigation_id": "routing-dev-fault6-lr1e-5-super_only",
+      "purpose": "verdict",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 952,
+      "tokens_out": 642,
+      "cost_usd": 0.0008634000000000001,
+      "latency_ms": 3070,
+      "prompt_version": "verdict-v1",
+      "attempt": 1,
+      "created_at": 1792351047.5349162
+    }
+  ]
+}

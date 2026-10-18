@@ -126,7 +126,7 @@ class ReplayRouter:
         )
 
 
-def replay(case, frozen, policy, seed, args):
+def replay(case, frozen, policy, seed, args, *, router=None):
     ctx = InvestigationContext(
         investigation_id=f"ablation-{case.id}-{policy}-{seed}",
         mode="A",
@@ -150,11 +150,13 @@ def replay(case, frozen, policy, seed, args):
     result = investigate(
         ctx,
         {},
-        ReplayRouter(ctx.investigation_id, frozen["llm_calls"]),
+        router
+        if router is not None
+        else ReplayRouter(ctx.investigation_id, frozen["llm_calls"]),
         cached_pair,
         initial_hypotheses=hypotheses,
         probes=investigation_probes(ctx),
-        explain=False,
+        explain=router is not None,
         policy="eig" if policy == "no_causal" else policy,
         causal_checks=policy != "no_causal",
         random_seed=seed,

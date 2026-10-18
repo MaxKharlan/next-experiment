@@ -1,0 +1,310 @@
+[
+  {
+    "case": "fault6-lr1e-5",
+    "variant": "mixed",
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.8016072325464588
+      ],
+      [
+        "distribution_shift",
+        0.09375523187677881
+      ],
+      [
+        "lora_rank_too_small",
+        0.040180813661476626
+      ],
+      [
+        "too_many_epochs",
+        0.017579105976896024
+      ]
+    ],
+    "llm_cost_usd": 0.0073117,
+    "llm_tokens": 11077,
+    "new_llm_cost_usd": 0.0051895,
+    "new_llm_calls": 5,
+    "estimated_training_cost_usd": 0.05472,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "fault6-lr1e-5",
+    "variant": "super_only",
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.8016072325464588
+      ],
+      [
+        "distribution_shift",
+        0.09375523187677881
+      ],
+      [
+        "lora_rank_too_small",
+        0.040180813661476626
+      ],
+      [
+        "too_many_epochs",
+        0.017579105976896024
+      ]
+    ],
+    "llm_cost_usd": 0.0055263000000000005,
+    "llm_tokens": 11005,
+    "new_llm_cost_usd": 0.0034041,
+    "new_llm_calls": 5,
+    "estimated_training_cost_usd": 0.05472,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "ref-epochs18-s0",
+    "variant": "mixed",
+    "status": "inconclusive",
+    "cause": null,
+    "ranking": [
+      [
+        "too_many_epochs",
+        0.8815
+      ],
+      [
+        "contradictory_labels",
+        0.0593
+      ],
+      [
+        "distribution_shift",
+        0.0296
+      ],
+      [
+        "lora_rank_too_small",
+        0.0148
+      ]
+    ],
+    "llm_cost_usd": 0.0041922,
+    "llm_tokens": 8786,
+    "new_llm_cost_usd": 0.0017334,
+    "new_llm_calls": 3,
+    "estimated_training_cost_usd": 0.32832,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "ref-epochs18-s0",
+    "variant": "super_only",
+    "status": "inconclusive",
+    "cause": null,
+    "ranking": [
+      [
+        "too_many_epochs",
+        0.8815
+      ],
+      [
+        "contradictory_labels",
+        0.0593
+      ],
+      [
+        "distribution_shift",
+        0.0296
+      ],
+      [
+        "lora_rank_too_small",
+        0.0148
+      ]
+    ],
+    "llm_cost_usd": 0.0044262,
+    "llm_tokens": 9046,
+    "new_llm_cost_usd": 0.0019674000000000002,
+    "new_llm_calls": 3,
+    "estimated_training_cost_usd": 0.32832,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "ref-fault6-mild-s0",
+    "variant": "mixed",
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.8827433628318585
+      ],
+      [
+        "chat_template_mismatch",
+        0.053097345132743376
+      ],
+      [
+        "train_val_overlap",
+        0.026548672566371688
+      ],
+      [
+        "distribution_shift",
+        0.026548672566371688
+      ],
+      [
+        "lora_rank_too_small",
+        0.011061946902654869
+      ]
+    ],
+    "llm_cost_usd": 0.0072368,
+    "llm_tokens": 10090,
+    "new_llm_cost_usd": 0.0038864,
+    "new_llm_calls": 3,
+    "estimated_training_cost_usd": 0.10944,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "ref-fault6-mild-s0",
+    "variant": "super_only",
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.8827433628318585
+      ],
+      [
+        "chat_template_mismatch",
+        0.053097345132743376
+      ],
+      [
+        "train_val_overlap",
+        0.026548672566371688
+      ],
+      [
+        "distribution_shift",
+        0.026548672566371688
+      ],
+      [
+        "lora_rank_too_small",
+        0.011061946902654869
+      ]
+    ],
+    "llm_cost_usd": 0.0056048999999999995,
+    "llm_tokens": 10383,
+    "new_llm_cost_usd": 0.0022545,
+    "new_llm_calls": 3,
+    "estimated_training_cost_usd": 0.10944,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "ref-fault6-strong-s0",
+    "variant": "mixed",
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.9156626506024096
+      ],
+      [
+        "contradictory_labels",
+        0.04819277108433735
+      ],
+      [
+        "too_many_epochs",
+        0.024096385542168676
+      ],
+      [
+        "lora_rank_too_small",
+        0.012048192771084338
+      ]
+    ],
+    "llm_cost_usd": 0.006632000000000001,
+    "llm_tokens": 8920,
+    "new_llm_cost_usd": 0.0039845,
+    "new_llm_calls": 3,
+    "estimated_training_cost_usd": 0.10944,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "ref-fault6-strong-s0",
+    "variant": "super_only",
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "ranking": [
+      [
+        "lr_too_low",
+        0.9156626506024096
+      ],
+      [
+        "contradictory_labels",
+        0.04819277108433735
+      ],
+      [
+        "too_many_epochs",
+        0.024096385542168676
+      ],
+      [
+        "lora_rank_too_small",
+        0.012048192771084338
+      ]
+    ],
+    "llm_cost_usd": 0.004851600000000001,
+    "llm_tokens": 9146,
+    "new_llm_cost_usd": 0.0022041,
+    "new_llm_calls": 3,
+    "estimated_training_cost_usd": 0.10944,
+    "cached_training_jobs": 4
+  },
+  {
+    "case": "ref-healthy-s0",
+    "variant": "mixed",
+    "status": "inconclusive",
+    "cause": null,
+    "ranking": [
+      [
+        "distribution_shift",
+        0.4712
+      ],
+      [
+        "contradictory_labels",
+        0.2885
+      ],
+      [
+        "chat_template_mismatch",
+        0.1346
+      ],
+      [
+        "lora_rank_too_small",
+        0.0385
+      ]
+    ],
+    "llm_cost_usd": 0.0034428,
+    "llm_tokens": 6904,
+    "new_llm_cost_usd": 0.0013509,
+    "new_llm_calls": 2,
+    "estimated_training_cost_usd": 0,
+    "cached_training_jobs": 0
+  },
+  {
+    "case": "ref-healthy-s0",
+    "variant": "super_only",
+    "status": "inconclusive",
+    "cause": null,
+    "ranking": [
+      [
+        "distribution_shift",
+        0.4712
+      ],
+      [
+        "contradictory_labels",
+        0.2885
+      ],
+      [
+        "chat_template_mismatch",
+        0.1346
+      ],
+      [
+        "lora_rank_too_small",
+        0.0385
+      ]
+    ],
+    "llm_cost_usd": 0.0034248000000000004,
+    "llm_tokens": 6884,
+    "new_llm_cost_usd": 0.0013328999999999997,
+    "new_llm_calls": 2,
+    "estimated_training_cost_usd": 0,
+    "cached_training_jobs": 0
+  }
+]

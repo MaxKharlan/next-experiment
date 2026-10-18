@@ -42,15 +42,25 @@ ESCALATING = {"hypotheses", "interpret_probe"}
 
 
 class Router:
-    def __init__(self, tf: TokenFactory, log: CallLog, escalate_after: int = 2):
+    def __init__(
+        self,
+        tf: TokenFactory,
+        log: CallLog,
+        escalate_after: int = 2,
+        *,
+        super_only: bool = False,
+    ):
         self.tf = tf
         self.log = log
         self.escalate_after = escalate_after
         self.mismatches = 0
+        self.super_only = super_only
 
     def role(self, step: str) -> str:
         if step not in STEP_ROLES:
             raise KeyError(f"unknown agent step {step!r}")
+        if self.super_only:
+            return "super"
         if step in ESCALATING and self.mismatches >= self.escalate_after:
             return "ultra"
         return STEP_ROLES[step]

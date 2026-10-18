@@ -1,0 +1,58 @@
+{
+  "shared_hypothesis_calls": [
+    {
+      "id": "dc374a84624d",
+      "investigation_id": "routing-priors-dev-ref-fault6-strong-s0",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 3068,
+      "tokens_out": 1919,
+      "cost_usd": 0.0026475,
+      "latency_ms": 12428,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792351000.1174898
+    }
+  ],
+  "new_calls": [
+    {
+      "id": "da9ef7a00c4b",
+      "investigation_id": "routing-dev-ref-fault6-strong-s0-mixed",
+      "purpose": "interpret_probe",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 820,
+      "tokens_out": 389,
+      "cost_usd": 0.0005961,
+      "latency_ms": 2719,
+      "prompt_version": "interpret_probe-v1",
+      "attempt": 1,
+      "created_at": 1792351082.616951
+    },
+    {
+      "id": "74d557fc236a",
+      "investigation_id": "routing-dev-ref-fault6-strong-s0-mixed",
+      "purpose": "interpret_probe",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 825,
+      "tokens_out": 341,
+      "cost_usd": 0.0005544000000000001,
+      "latency_ms": 2599,
+      "prompt_version": "interpret_probe-v1",
+      "attempt": 1,
+      "created_at": 1792351085.218984
+    },
+    {
+      "id": "56a5d2fa4eff",
+      "investigation_id": "routing-dev-ref-fault6-strong-s0-mixed",
+      "purpose": "verdict",
+      "model": "nvidia/Nemotron-3-Ultra-550b-a55b",
+      "tokens_in": 920,
+      "tokens_out": 638,
+      "cost_usd": 0.002834,
+      "latency_ms": 2164,
+      "prompt_version": "verdict-v1",
+      "attempt": 1,
+      "created_at": 1792351087.387535
+    }
+  ]
+}
