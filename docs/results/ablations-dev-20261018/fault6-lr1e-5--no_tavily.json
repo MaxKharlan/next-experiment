@@ -1,0 +1,207 @@
+{
+  "method": "no_tavily",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.782888618642249
+    ],
+    [
+      "contradictory_labels",
+      0.11445740038629372
+    ],
+    [
+      "too_many_epochs",
+      0.02253380070105157
+    ]
+  ],
+  "status": "confirmed",
+  "cause": "lr_too_low",
+  "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 1e-05,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+  "llm_cost_usd": 0.0014391,
+  "llm_tokens": 2743,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.05472,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.4,
+          "rationale": "LoRA fine-tuning usually requires a learning rate around 1e-4, but the job used the default 1e-5. Such a low rate yields minimal weight updates, leaving the model close to the base and unable to learn the classification mapping.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.3,
+          "rationale": "Validation loss improved from epoch 1 to epoch 2 but increased at epoch 3, indicating overfitting after the second epoch. Training for three epochs therefore likely hurt generalization on held\u2011out queries.",
+          "sources": []
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "training data (label assignments)",
+          "prior": 0.2,
+          "rationale": "Several incorrect predictions are semantically close to the true label (e.g., pin_not_working vs pin_blocked, top_up_verification_required vs verify_top_up). This pattern suggests label noise or ambiguous mappings in the data, causing the model to learn inconsistent associations.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.4,
+        "h2": 0.3,
+        "h3": 0.2,
+        "unlisted": 0.1
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9985609,
+      "outcome": "normal",
+      "gain_bits": 0.4607,
+      "raw": {
+        "train_loss": [
+          1.5303,
+          0.8395,
+          0.6533
+        ],
+        "valid_loss": [
+          1.5691,
+          1.082,
+          1.1954
+        ],
+        "train_drop": 0.573090243743057
+      },
+      "probs": {
+        "h1": 0.2075,
+        "h2": 0.3026,
+        "h3": 0.2882,
+        "unlisted": 0.2017
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9985609,
+      "outcome": "ok",
+      "gain_bits": 0.281,
+      "raw": {
+        "n_epochs": 3,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.2751,
+        "h2": 0.0752,
+        "h3": 0.3821,
+        "unlisted": 0.2675
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9985609,
+      "outcome": "low",
+      "gain_bits": 0.2811,
+      "raw": {
+        "learning_rate": 1e-05,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.5459,
+        "h2": 0.0471,
+        "h3": 0.2394,
+        "unlisted": 0.1676
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h1",
+      "reason": "h1 at 0.55",
+      "target": {
+        "hypothesis_id": "h1",
+        "kind": "target",
+        "patch": {
+          "learning_rate": 0.0001
+        },
+        "description": "learning_rate 1e-05 -> 0.0001",
+        "ft_job_ids": [
+          "ftjob-5aa5f03e1f884f4aaa7675df11d2395a",
+          "ftjob-abe4e163fe2447f392183d3bd54ec715"
+        ],
+        "metrics": [
+          0.415,
+          0.415
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h1",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-6b929c0c770f416f8efd2e46bbd76646",
+          "ftjob-89ad5c411b944bb8a8c91fc0deea288b"
+        ],
+        "metrics": [
+          0.1,
+          0.1
+        ]
+      },
+      "result": {
+        "status": "confirmed",
+        "effect": 0.31499999999999995,
+        "ci_low": 0.27776068429373896,
+        "ci_high": 0.35223931570626094,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "prior_probs": {
+        "h1": 0.5458626365404758,
+        "h2": 0.047134520424958845,
+        "h3": 0.23941343707915608,
+        "unlisted": 0.1675894059554094
+      },
+      "planning_probs": {
+        "h1": 0.5458626365404758,
+        "h2": 0.047134520424958845,
+        "h3": 0.23941343707915608,
+        "unlisted": 0.1675894059554094
+      },
+      "probs": {
+        "h1": 0.782888618642249,
+        "h2": 0.02253380070105157,
+        "h3": 0.11445740038629372,
+        "unlisted": 0.08012018027040567
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.05472
+    },
+    {
+      "kind": "verdict",
+      "hypothesis_id": "h1",
+      "status": "confirmed",
+      "evidence": [
+        "probe:loss_curve",
+        "probe:epoch_count",
+        "probe:lr_range",
+        "intervention:h1"
+      ],
+      "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 1e-05,\n+  \"learning_rate\": 0.0001,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+      "summary": "Narrative generation is disabled for all ablation variants."
+    }
+  ],
+  "confirmed": [
+    "lr_too_low"
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "method": "random_1",
+  "ranking": [
+    [
+      "distribution_shift",
+      0.4711538461538461
+    ],
+    [
+      "contradictory_labels",
+      0.28846153846153844
+    ],
+    [
+      "chat_template_mismatch",
+      0.13461538461538458
+    ],
+    [
+      "lora_rank_too_small",
+      0.03846153846153846
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0020919000000000003,
+  "llm_tokens": 4347,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.10944,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "distribution_shift",
+          "location": "validation file",
+          "prior": 0.35,
+          "rationale": "Validation loss becomes very low (0.0162) while held-out accuracy is only 54%, indicating the validation set does not represent the production query distribution.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "contradictory_labels",
+          "location": "training data (label column)",
+          "prior": 0.3,
+          "rationale": "Valid loss spikes at epochs 3\u20115 (1.33\u21921.62\u21921.35) before dropping, a pattern typical of noisy or conflicting labels that destabilize learning.",
+          "sources": []
+        },
+        {
+          "id": "h3",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.2,
+          "rationale": "With 77 intent classes, a LoRA rank of 16 may limit the model\u2019s capacity to learn distinct decision boundaries; the Unsloth guide notes larger rank can increase accuracy.",
+          "sources": [
+            "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+          ]
+        },
+        {
+          "id": "h4",
+          "fault_class": "chat_template_mismatch",
+          "location": "training_config.chat_template",
+          "prior": 0.1,
+          "rationale": "If training used a chat template with assistant prefixes but inference expects only the label, the model would learn to generate extra tokens, causing label mismatches seen in the wrong answers.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1,
+        "unlisted": 0.05
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9979081,
+      "outcome": "ok",
+      "gain_bits": -0.0,
+      "raw": {
+        "n_epochs": 6,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1,
+        "unlisted": 0.05
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9979081,
+      "outcome": "normal",
+      "gain_bits": 0.0282,
+      "raw": {
+        "train_loss": [
+          1.2127,
+          0.3876,
+          0.1094,
+          0.0619,
+          0.0149,
+          0.0018
+        ],
+        "valid_loss": [
+          0.6329,
+          0.5294,
+          1.3384,
+          1.6164,
+          1.3452,
+          0.0162
+        ],
+        "train_drop": 0.9985157087490724
+      },
+      "probs": {
+        "h1": 0.3952,
+        "h2": 0.2419,
+        "h3": 0.1935,
+        "h4": 0.1129,
+        "unlisted": 0.0565
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9979081,
+      "outcome": "ok",
+      "gain_bits": 0.0,
+      "raw": {
+        "learning_rate": 0.0002,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.3952,
+        "h2": 0.2419,
+        "h3": 0.1935,
+        "h4": 0.1129,
+        "unlisted": 0.0565
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9979081,
+      "outcome": "ok",
+      "gain_bits": 0.3073,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.4712,
+        "h2": 0.2885,
+        "h3": 0.0385,
+        "h4": 0.1346,
+        "unlisted": 0.0673
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h3",
+      "reason": "random hypothesis order",
+      "target": {
+        "hypothesis_id": "h3",
+        "kind": "target",
+        "patch": {
+          "lora_r": 64,
+          "lora_alpha": 64
+        },
+        "description": "lora_r 16 -> 64 with lora_alpha 16 -> 64, the same alpha / r",
+        "ft_job_ids": [
+          "ftjob-f276d45c103644819a27867ddb972f2e",
+          "ftjob-8f42e2c57a994a449bd1685222f977eb"
+        ],
+        "metrics": [
+          0.535,
+          0.53
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h3",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-0be28c20892d4f479bc47e9c2a08499c",
+          "ftjob-b5dfb5ed2e024d789639623b6a8f63e6"
+        ],
+        "metrics": [
+          0.495,
+          0.51
+        ]
+      },
+      "result": {
+        "status": "inconclusive",
+        "effect": 0.030000000000000027,
+        "ci_low": -0.007239315706260983,
+        "ci_high": 0.06723931570626104,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the interval spans the minimum effect"
+      },
+      "prior_probs": {
+        "h1": 0.4711538461538461,
+        "h2": 0.28846153846153844,
+        "h3": 0.03846153846153846,
+        "h4": 0.13461538461538458,
+        "unlisted": 0.0673076923076925
+      },
+      "planning_probs": {
+        "h1": 0.4711538461538461,
+        "h2": 0.28846153846153844,
+        "h3": 0.03846153846153846,
+        "h4": 0.13461538461538458,
+        "unlisted": 0.0673076923076925
+      },
+      "probs": {
+        "h1": 0.4711538461538461,
+        "h2": 0.28846153846153844,
+        "h3": 0.03846153846153846,
+        "h4": 0.13461538461538458,
+        "unlisted": 0.0673076923076925
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.10944
+    },
+    {
+      "kind": "stop",
+      "reason": "no hypothesis left to test"
+    }
+  ],
+  "confirmed": []
+}

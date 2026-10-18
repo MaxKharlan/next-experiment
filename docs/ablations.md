@@ -129,3 +129,9 @@ These results must not be mixed with narrative-disabled ablation costs. Reruns o
 the already inspected held-out cases remain exploratory.
 
 The first dev run is recorded in [Dev routing results](routing-ablation-dev.md), with the raw diagnoses and call logs included.
+
+## Combined dev report
+
+The [current dev ablation report](ablations-current-dev.md) includes all five
+variant families and ten random orders, with saved inputs and per-case results.
+It links the earlier narrative-enabled Super-only comparison separately.

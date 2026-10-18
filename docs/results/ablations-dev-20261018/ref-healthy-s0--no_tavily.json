@@ -1,0 +1,170 @@
+{
+  "method": "no_tavily",
+  "ranking": [
+    [
+      "distribution_shift",
+      0.5184
+    ],
+    [
+      "chat_template_mismatch",
+      0.2592
+    ],
+    [
+      "contradictory_labels",
+      0.1111
+    ],
+    [
+      "lora_rank_too_small",
+      0.0617
+    ],
+    [
+      "too_many_epochs",
+      0.0324
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0017808000000000001,
+  "llm_tokens": 3210,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "distribution_shift",
+          "location": "training data (queries) vs production queries",
+          "prior": 0.3,
+          "rationale": "The model achieves low validation loss by epoch 6 but only 54% accuracy on held-out queries, suggesting the training set does not reflect the distribution of real banking queries. Small dataset (200 train, 50 val) increases risk of shift.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.25,
+          "rationale": "With LoRA rank 16 on a 0.6B model, the adapter may lack capacity to capture the 77-way classification boundaries, causing stalled quality despite low training loss.",
+          "sources": []
+        },
+        {
+          "id": "h3",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.2,
+          "rationale": "Validation loss decreases to a minimum at epoch 2 then rises sharply through epoch 5, indicative of overfitting before the final epoch where noise reduces loss again; excess epochs hurt generalization.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "chat_template_mismatch",
+          "location": "chat_template used in training vs inference",
+          "prior": 0.15,
+          "rationale": "If training employed a chat template (e.g., <|im_start|>assistant) but inference expects plain label outputs, the model may generate extra tokens that are interpreted as wrong intent labels, lowering accuracy.",
+          "sources": []
+        },
+        {
+          "id": "h5",
+          "fault_class": "contradictory_labels",
+          "location": "training data (label assignments)",
+          "prior": 0.09,
+          "rationale": "Some wrong answers are semantically close to expected labels (e.g., 'unable_to_verify_pin' vs 'pin_blocked'), hinting at possible label noise or ambiguous examples that confuse the model.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.3,
+        "h2": 0.25,
+        "h3": 0.2,
+        "h4": 0.15,
+        "h5": 0.09,
+        "unlisted": 0.01
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9982192,
+      "outcome": "ok",
+      "gain_bits": 0.3613,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.3789,
+        "h2": 0.0526,
+        "h3": 0.2526,
+        "h4": 0.1895,
+        "h5": 0.1137,
+        "unlisted": 0.0126
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9982192,
+      "outcome": "ok",
+      "gain_bits": 0.2525,
+      "raw": {
+        "n_epochs": 6,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.4768,
+        "h2": 0.0662,
+        "h3": 0.0596,
+        "h4": 0.2384,
+        "h5": 0.143,
+        "unlisted": 0.0159
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9982192,
+      "outcome": "normal",
+      "gain_bits": 0.0793,
+      "raw": {
+        "train_loss": [
+          1.2127,
+          0.3876,
+          0.1094,
+          0.0619,
+          0.0149,
+          0.0018
+        ],
+        "valid_loss": [
+          0.6329,
+          0.5294,
+          1.3384,
+          1.6164,
+          1.3452,
+          0.0162
+        ],
+        "train_drop": 0.9985157087490724
+      },
+      "probs": {
+        "h1": 0.5184,
+        "h2": 0.0617,
+        "h3": 0.0324,
+        "h4": 0.2592,
+        "h5": 0.1111,
+        "unlisted": 0.0173
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "no probe left and the likeliest testable hypothesis, h2 at 0.06, is too unlikely to pay for a causal check"
+    }
+  ],
+  "confirmed": []
+}

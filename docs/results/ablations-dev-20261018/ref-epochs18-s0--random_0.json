@@ -1,0 +1,334 @@
+{
+  "method": "random_0",
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.8902743142144638
+    ],
+    [
+      "contradictory_labels",
+      0.059850374064837925
+    ],
+    [
+      "distribution_shift",
+      0.029925187032418962
+    ],
+    [
+      "lora_rank_too_small",
+      0.004987531172069826
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0024588,
+  "llm_tokens": 5182,
+  "mini_jobs": 8,
+  "training_cost_usd": 0.65664,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.35,
+          "rationale": "Validation loss falls to ~0.0009 at epoch 6 then rises to >1.0 by epoch 18, while training loss drives to zero, indicating overfitting after epoch 6.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.3,
+          "rationale": "A LoRA rank of 16 may be too low to capture the 77\u2011intent classification task; the cited paper shows higher ranks yield substantially better performance.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "training dataset",
+          "prior": 0.2,
+          "rationale": "Validation loss shows large, unpredictable swings epoch\u2011to\u2011epoch, a pattern consistent with noisy or contradictory labels in the data.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "distribution_shift",
+          "location": "validation dataset (vs. production queries)",
+          "prior": 0.1,
+          "rationale": "Despite low training loss, the model only reaches 56% accuracy on held\u2011out queries, suggesting the training data does not reflect the distribution of real banking queries.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1,
+        "unlisted": 0.05
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "loss_curve",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9975412,
+      "outcome": "overfit",
+      "gain_bits": 0.2372,
+      "raw": {
+        "train_loss": [
+          1.2122,
+          0.3801,
+          0.1697,
+          0.1074,
+          0.0352,
+          0.0459,
+          0.0145,
+          0.016,
+          0.0021,
+          0.0015,
+          0.0003,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0001,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "valid_loss": [
+          0.603,
+          1.0419,
+          1.3309,
+          1.5169,
+          1.4312,
+          0.0009,
+          0.2815,
+          0.301,
+          1.429,
+          0.2032,
+          0.1066,
+          0.0561,
+          0.6058,
+          0.0535,
+          0.2114,
+          0.0146,
+          1.2819,
+          2.1933
+        ],
+        "train_drop": 1.0
+      },
+      "probs": {
+        "h1": 0.7636,
+        "h2": 0.1091,
+        "h3": 0.0727,
+        "h4": 0.0364,
+        "unlisted": 0.0182
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "epoch_count",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9975412,
+      "outcome": "high",
+      "gain_bits": 0.2494,
+      "raw": {
+        "n_epochs": 18,
+        "high_from": 10
+      },
+      "probs": {
+        "h1": 0.9321,
+        "h2": 0.0313,
+        "h3": 0.0209,
+        "h4": 0.0104,
+        "unlisted": 0.0052
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9975412,
+      "outcome": "ok",
+      "gain_bits": -0.0,
+      "raw": {
+        "learning_rate": 0.0002,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.9321,
+        "h2": 0.0313,
+        "h3": 0.0209,
+        "h4": 0.0104,
+        "unlisted": 0.0052
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9975412,
+      "outcome": "ok",
+      "gain_bits": 0.0659,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.9571,
+        "h2": 0.0054,
+        "h3": 0.0214,
+        "h4": 0.0107,
+        "unlisted": 0.0054
+      }
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h2",
+      "reason": "random hypothesis order",
+      "target": {
+        "hypothesis_id": "h2",
+        "kind": "target",
+        "patch": {
+          "lora_r": 64,
+          "lora_alpha": 64
+        },
+        "description": "lora_r 16 -> 64 with lora_alpha 16 -> 64, the same alpha / r",
+        "ft_job_ids": [
+          "ftjob-c7b658adf7e347f680a6013a96914622",
+          "ftjob-3c94beaeaac944e4ba1a03d760cfcea8"
+        ],
+        "metrics": [
+          0.58,
+          0.51
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h2",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-bf73f236f3d4433285e727f1a64823a6",
+          "ftjob-e2c3f8409ced4597a4e7e06e46efb4e6"
+        ],
+        "metrics": [
+          0.57,
+          0.52
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "effect": 0.0,
+        "ci_low": -0.03723931570626101,
+        "ci_high": 0.03723931570626101,
+        "p_value": 0.6666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix gains less than the minimum effect"
+      },
+      "prior_probs": {
+        "h1": 0.9571045576407506,
+        "h2": 0.005361930294906167,
+        "h3": 0.021447721179624672,
+        "h4": 0.010723860589812336,
+        "unlisted": 0.005361930294906183
+      },
+      "planning_probs": {
+        "h1": 0.9571045576407506,
+        "h2": 0.005361930294906167,
+        "h3": 0.021447721179624672,
+        "h4": 0.010723860589812336,
+        "unlisted": 0.005361930294906183
+      },
+      "probs": {
+        "h1": 0.9605381165919282,
+        "h2": 0.0017937219730941706,
+        "h3": 0.021524663677130053,
+        "h4": 0.010762331838565026,
+        "unlisted": 0.005381165919282528
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.32832
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h1",
+      "reason": "random hypothesis order",
+      "target": {
+        "hypothesis_id": "h1",
+        "kind": "target",
+        "patch": {
+          "n_epochs": 6
+        },
+        "description": "n_epochs 18 -> 6",
+        "ft_job_ids": [
+          "ftjob-f1b61cd525b64f5499c1c128802d358c",
+          "ftjob-42d912162a184fa59e6303a3eb54c7df"
+        ],
+        "metrics": [
+          0.495,
+          0.51
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h1",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds: 18 epochs, more than the target",
+        "ft_job_ids": [
+          "ftjob-ac341ff4cc184aa6bb4bc24f4186dbfb",
+          "ftjob-149a107c6c5247749331e6875e69baa8"
+        ],
+        "metrics": [
+          0.57,
+          0.52
+        ]
+      },
+      "result": {
+        "status": "rejected",
+        "effect": -0.04249999999999998,
+        "ci_low": -0.079739315706261,
+        "ci_high": -0.005260684293738972,
+        "p_value": 1.0,
+        "min_effect": 0.06,
+        "reason": "the fix gains less than the minimum effect"
+      },
+      "prior_probs": {
+        "h1": 0.9605381165919282,
+        "h2": 0.0017937219730941706,
+        "h3": 0.021524663677130053,
+        "h4": 0.010762331838565026,
+        "unlisted": 0.005381165919282528
+      },
+      "planning_probs": {
+        "h1": 0.9622641509433962,
+        "h3": 0.021563342318059307,
+        "h4": 0.010781671159029654,
+        "unlisted": 0.005390835579514842
+      },
+      "probs": {
+        "h1": 0.8902743142144638,
+        "h2": 0.004987531172069826,
+        "h3": 0.059850374064837925,
+        "h4": 0.029925187032418962,
+        "unlisted": 0.014962593516209523
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.32832
+    },
+    {
+      "kind": "stop",
+      "reason": "intervention limit"
+    }
+  ],
+  "confirmed": []
+}

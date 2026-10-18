@@ -1,0 +1,46 @@
+{
+  "fingerprint": "fb580b85a10e1d161b126067b517d36497ff0ae4c77a71d86fdba468bcfcf43a",
+  "condition": "without_tavily",
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.4,
+      "rationale": "A LoRA rank of 16 may be insufficient to capture the distinctions needed among 77 intent labels, causing the model to confuse similar intents as seen in the wrong answers.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.3,
+      "rationale": "The learning rate of 6e-6 is far below the typical ~1e-4 effective for LoRA, resulting in slow weight updates; although loss decreases, the model may not fully separate classes, leading to low accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "chat_template_mismatch",
+      "location": "data preparation (chat template)",
+      "prior": 0.2,
+      "rationale": "If training examples used a chat template with special tokens but inference expects only the label, the model may generate label-like strings but occasionally select a wrong intent due to token misalignment.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "6cdf7a9d501a",
+      "investigation_id": "ablation-dev-ref-fault6-strong-s0-without_tavily",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 1824,
+      "tokens_out": 1128,
+      "cost_usd": 0.0015624,
+      "latency_ms": 6320,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792354812.027786
+    }
+  ],
+  "known_issues": null
+}

@@ -1,0 +1,54 @@
+{
+  "fingerprint": "931d5e57ed59e656806445444203301e1fa93bdae7247a5b952374ac79c2717a",
+  "condition": "without_tavily",
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.4,
+      "rationale": "Training loss rapidly approaches zero while validation loss shows high variance and rises after epoch 6, indicating overfitting due to excessive epochs for a small dataset (200 train, 50 val).",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2,
+      "rationale": "A LoRA rank of 16 may limit the model's ability to capture the 77\u2011intent mapping, resulting in poor generalization despite near\u2011zero training loss.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "distribution_shift",
+      "location": "training examples length (45\u2011103 tokens)",
+      "prior": 0.2,
+      "rationale": "The fine\u2011tuning data consists of very short queries, whereas production banking queries may be longer or phrased differently, causing the model to fail on real\u2011world inputs.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "chat_template_mismatch",
+      "location": "unknown (training vs inference prompt format)",
+      "prior": 0.1,
+      "rationale": "If the training data used a plain prompt format while inference expects a specific chat template, the model may ignore the instruction and produce incorrect labels.",
+      "sources": []
+    }
+  ],
+  "llm_calls": [
+    {
+      "id": "4f04a5a566e9",
+      "investigation_id": "ablation-dev-ref-epochs18-s0-without_tavily",
+      "purpose": "hypotheses",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 2280,
+      "tokens_out": 1139,
+      "cost_usd": 0.0017091,
+      "latency_ms": 5634,
+      "prompt_version": "hypotheses-v3",
+      "attempt": 1,
+      "created_at": 1792354797.54785
+    }
+  ],
+  "known_issues": null
+}

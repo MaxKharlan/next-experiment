@@ -1,0 +1,125 @@
+{
+  "method": "no_causal",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.7835
+    ],
+    [
+      "contradictory_labels",
+      0.1237
+    ],
+    [
+      "too_many_epochs",
+      0.0619
+    ],
+    [
+      "lora_rank_too_small",
+      0.0309
+    ]
+  ],
+  "status": "inconclusive",
+  "cause": null,
+  "patch": "",
+  "llm_cost_usd": 0.0026475,
+  "llm_tokens": 4987,
+  "mini_jobs": 0,
+  "training_cost_usd": 0,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.4,
+          "rationale": "The learning rate used (6e-06) is below the default 1e-05 and far under the typical LoRA recommendation (~1e-04), implying minimal parameter updates; despite decreasing train loss, the model remains close to the base and fails to learn the classification task.",
+          "sources": []
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "hyperparameters.lora_r",
+          "prior": 0.3,
+          "rationale": "Known issues show that LoRA rank 16 yields lower accuracy than full fine\u2011tuning and recommend higher ranks for complex tasks; with 77 intent classes the rank may be insufficient, causing the model\u2019s quality to stall.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+            "https://unsloth.ai/docs/get-started/fine-tuning-llms-guide/lora-hyperparameters-guide"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "contradictory_labels",
+          "location": "data file (training examples)",
+          "prior": 0.2,
+          "rationale": "Many incorrect predictions are semantically close to the true label (e.g., pin_blocked \u2192 getting_pin), suggesting overlapping or noisy labels in the small training set; contradictory labels destabilize learning and hurt held\u2011out accuracy.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "too_many_epochs",
+          "location": "hyperparameters.n_epochs",
+          "prior": 0.1,
+          "rationale": "Validation loss increases from epoch 2 to epoch 4 before dropping again, indicating possible over\u2011fitting or instability due to training too many epochs on only 200 examples.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.4,
+        "h2": 0.3,
+        "h3": 0.2,
+        "h4": 0.1
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9973525,
+      "outcome": "ok",
+      "gain_bits": 0.3985,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.5333,
+        "h2": 0.0667,
+        "h3": 0.2667,
+        "h4": 0.1333
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0,
+      "budget_left_usd": 0.9973525,
+      "outcome": "low",
+      "gain_bits": 0.373,
+      "raw": {
+        "learning_rate": 6e-06,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.7835,
+        "h2": 0.0309,
+        "h3": 0.1237,
+        "h4": 0.0619
+      }
+    },
+    {
+      "kind": "stop",
+      "reason": "causal checks disabled for this ablation",
+      "probs": {
+        "h1": 0.7835,
+        "h2": 0.0309,
+        "h3": 0.1237,
+        "h4": 0.0619
+      }
+    }
+  ],
+  "confirmed": []
+}
