@@ -28,15 +28,14 @@ from sse_starlette.sse import EventSourceResponse
 
 from apps.api import runners
 from apps.api.case_input import CaseStart, prepare_case
-from apps.api.store import InvestigationStore
+from apps.api.store import get_investigation_store
 from core.config import get_settings
-from core.connectors.storage import get_storage
 from core.report.investigation import build_report
 
 STATIC = Path(__file__).parent / "static"
 
 app = FastAPI(title="Next Experiment")
-store = InvestigationStore(get_storage())
+store = get_investigation_store()
 
 
 class StartRequest(BaseModel):

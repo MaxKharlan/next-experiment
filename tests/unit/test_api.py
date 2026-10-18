@@ -8,13 +8,21 @@ from fastapi.testclient import TestClient
 from apps.api import main
 from apps.api.store import InvestigationStore
 from core.connectors.storage import LocalStorage
+from core.db.investigations import SQLiteInvestigations
 from core.interventions.pairs import Intervention
 from core.interventions.retrain import plan_retrain
 
 
-@pytest.fixture
-def client(tmp_path, monkeypatch):
-    monkeypatch.setattr(main, "store", InvestigationStore(LocalStorage(tmp_path)))
+@pytest.fixture(params=["storage", "sqlite"])
+def client(tmp_path, monkeypatch, request):
+    repository = (
+        SQLiteInvestigations(f"sqlite:///{tmp_path}/investigations.db")
+        if request.param == "sqlite"
+        else None
+    )
+    monkeypatch.setattr(
+        main, "store", InvestigationStore(LocalStorage(tmp_path), repository)
+    )
     return TestClient(main.app)
 
 
@@ -57,7 +65,7 @@ def test_finished_investigation_survives_a_restart(client, tmp_path):
         "/api/investigations", json={"backend": "replay", "delay_s": 0}
     ).json()["id"]
     _wait(client, inv_id)
-    fresh = InvestigationStore(LocalStorage(tmp_path))
+    fresh = InvestigationStore(LocalStorage(tmp_path), main.store.repository)
     assert fresh.get(inv_id)["status"] == "finished"
     assert fresh.events_since(inv_id, 0)[-1]["type"] == "finished"
 
@@ -155,7 +163,7 @@ def test_waiting_investigation_survives_a_restart(client, monkeypatch, tmp_path)
     monkeypatch.setattr(main.runners, "live", _waiting_run)
     inv_id = client.post("/api/investigations", json={"backend": "tf"}).json()["id"]
     _wait_for(client, inv_id, "awaiting_approval")
-    fresh = InvestigationStore(LocalStorage(tmp_path))
+    fresh = InvestigationStore(LocalStorage(tmp_path), main.store.repository)
     assert fresh.get(inv_id)["status"] == "awaiting_approval"
     assert fresh.resume(inv_id, False)["plan"] == PLAN
 

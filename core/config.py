@@ -18,6 +18,7 @@ class Settings(BaseSettings):
 
     storage_backend: Literal["local", "s3"] = "local"
     artifacts_dir: str = "./artifacts"
+    investigation_backend: Literal["storage", "sqlite"] = "storage"
     database_url: str = "sqlite:///./artifacts/next_experiment.db"
 
     s3_endpoint_url: str = "https://storage.eu-north1.nebius.cloud"
