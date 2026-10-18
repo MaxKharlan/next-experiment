@@ -121,3 +121,55 @@ def audit_prompt_labels(reference: list[dict], observed: list[dict]) -> dict:
         if prompt
         else "no_prompt_targets",
     }
+
+
+def shift_labels_once(rows: list[dict]) -> list[dict]:
+    """Pre-shift unpadded labels, causing a second shift inside causal loss."""
+    result = deepcopy(rows)
+    for row in result:
+        if len(row["input_ids"]) != len(row["labels"]):
+            raise ValueError("input_ids and labels must have equal lengths")
+        labels = row["labels"]
+        row["labels"] = labels[1:] + [-100] if labels else []
+    return result
+
+
+def audit_label_shift(reference: list[dict], observed: list[dict]) -> dict:
+    """Compare effective targets with healthy and pre-shifted reference labels.
+
+    A matching pre-shift pattern is evidence about these tensors, not a diagnosis
+    of downstream model behavior. Identical candidate patterns are inconclusive.
+    """
+    if len(reference) != len(observed):
+        raise ValueError("Reference and observed rows must align")
+    healthy_errors = shifted_errors = informative = targets = 0
+    for ref, obs in zip(reference, observed):
+        labels = ref["labels"]
+        if (
+            ref["input_ids"] != obs["input_ids"]
+            or len(labels) != len(ref["input_ids"])
+            or len(obs["labels"]) != len(labels)
+        ):
+            raise ValueError("Reference and observed tokens must align")
+        shifted = labels[1:] + [-100] if labels else []
+        for healthy, faulty, actual in zip(labels[1:], shifted[1:], obs["labels"][1:]):
+            healthy_errors += actual != healthy
+            shifted_errors += actual != faulty
+            informative += healthy != faulty
+            targets += actual != -100
+    status = (
+        "inconclusive"
+        if not informative
+        else "aligned"
+        if not healthy_errors
+        else "double_shift"
+        if not shifted_errors
+        else "other_mismatch"
+    )
+    return {
+        "status": status,
+        "informative_positions": informative,
+        "healthy_mismatches": healthy_errors,
+        "preshift_mismatches": shifted_errors,
+        "observed_targets": targets,
+    }

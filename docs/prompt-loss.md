@@ -55,5 +55,5 @@ Other controls cover healthy masking, position zero, input mutation, malformed
 labels and refusal of an ineffective injection before model loading.
 
 This implements fault 9 and its label audit within B24. It does not establish
-that a trained model repeats prompts or loses downstream quality. Fault 11,
-agent-facing checks and downstream quality experiments remain open.
+that a trained model repeats prompts or loses downstream quality. Fault 11 now has a [double-shift implementation and audit](double-label-shift.md).
+Agent-facing checks and downstream quality experiments remain open.
