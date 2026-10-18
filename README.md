@@ -170,6 +170,7 @@ uv run --group eval pytest -q
 
 | File | Contents |
 |---|---|
+| `docs/architecture.md` | how an investigation moves through the code: model steps, modules, contracts, API, storage, configuration |
 | `docs/benchmark.md` | dev and held-out results, case by case, error analysis, limits |
 | `docs/b25-lora-weights.md` | the weight probe: measurements, threshold, why rank is not used |
 | `docs/b10-noise-floor.md` | noise between seeds and the decision rule of the causal check |

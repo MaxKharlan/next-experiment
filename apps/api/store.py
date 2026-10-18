@@ -27,7 +27,7 @@ WAITING = "awaiting_approval"
 class InvestigationStore:
     def __init__(self, storage: Storage):
         self.storage = storage
-        self.lock = threading.Lock()
+        self.lock = threading.RLock()
         self.meta: dict[str, dict[str, Any]] = {}
         self.events: dict[str, list[dict[str, Any]]] = {}
 
@@ -44,7 +44,7 @@ class InvestigationStore:
         with self.lock:
             self.meta[inv_id] = meta
             self.events[inv_id] = []
-        self._save(inv_id)
+            self._save(inv_id)
         return inv_id
 
     def emit(self, inv_id: str, kind: str, data: dict[str, Any]) -> None:
@@ -55,7 +55,7 @@ class InvestigationStore:
                 self.meta[inv_id]["status"] = "running"
             elif kind in TERMINAL or kind == WAITING:
                 self.meta[inv_id]["status"] = kind
-        self._save(inv_id)
+            self._save(inv_id)
 
     def events_since(self, inv_id: str, seq: int) -> list[dict[str, Any]]:
         self._load(inv_id)
@@ -68,12 +68,18 @@ class InvestigationStore:
         with self.lock:
             if self.meta[inv_id]["status"] != WAITING:
                 raise ValueError(f"{inv_id} is not waiting for approval")
-            self.meta[inv_id]["status"] = "running"  # a second answer finds it taken
             waiting = next(
-                e["data"] for e in reversed(self.events[inv_id]) if e["type"] == WAITING
+                (
+                    e["data"]
+                    for e in reversed(self.events[inv_id])
+                    if e["type"] == WAITING
+                ),
+                None,
             )
-        self.emit(inv_id, "resumed", {"approved": approved})
-        return waiting
+            if waiting is None:
+                raise ValueError(f"{inv_id} has no persisted approval proposal")
+            self.emit(inv_id, "resumed", {"approved": approved})
+            return waiting
 
     def is_done(self, inv_id: str) -> bool:
         return self.get(inv_id)["status"] in TERMINAL
@@ -96,8 +102,8 @@ class InvestigationStore:
         with self.lock:
             meta = json.dumps(self.meta[inv_id])
             events = "".join(json.dumps(e) + "\n" for e in self.events[inv_id])
-        self.storage.put_text(f"investigations/{inv_id}/meta.json", meta)
-        self.storage.put_text(f"investigations/{inv_id}/events.jsonl", events)
+            self.storage.put_text(f"investigations/{inv_id}/events.jsonl", events)
+            self.storage.put_text(f"investigations/{inv_id}/meta.json", meta)
 
     def _load(self, inv_id: str) -> None:
         with self.lock:
