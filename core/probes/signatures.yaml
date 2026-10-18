@@ -47,3 +47,12 @@ example_length:
   # not see. First guesses, not calibrated yet (A14, O3).
   truncation: {truncated: 0.90, ok: 0.10}
   default: {truncated: 0.05, ok: 0.95}
+
+answer_cut:
+  # At least 1% of training answers look cut: a prefix of a more frequent answer, or
+  # broken JSON in a JSON file. The probe sees the damage of answer_truncation
+  # directly, so a cut outcome is likely with it; without it a few rare labels that
+  # are prefixes of others can still trip it. answer_truncation is not in the agent's
+  # catalog yet. First guesses, not calibrated yet (A14, O3).
+  answer_truncation: {cut: 0.90, ok: 0.10}
+  default: {cut: 0.03, ok: 0.97}
