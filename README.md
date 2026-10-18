@@ -41,11 +41,18 @@ The project plan has three parts that are not built yet: a Next.js screen, a sep
 1. Tavily searches for problems others reported with the model and recipe. Results are cached, and every investigation has a credit limit.
 2. Nemotron 3 Super ranks the possible causes from the fault catalog and gives each a probability.
 3. Free level-0 probes read the recipe, the loss per epoch and, when the job's adapter is available, the adapter's weights. The planner picks the next probe by the expected information it gives per dollar and updates the probabilities from a table of outcome likelihoods.
-4. A causal check tests the leading cause: the fix and a same-cost control each train as two Post-training jobs. The adapters are downloaded and scored locally by exact match on a separate check set. The cause is confirmed when the fix beats the control by at least the minimum effect, with the 95% interval above zero and a permutation test at p ≤ 0.05.
+4. A causal check tests the leading cause: the fix and a same-cost control each train as two Post-training jobs. The adapters are downloaded and scored locally by exact match on a separate check set. The cause is confirmed when the fix beats the control by at least the minimum effect and the 95% interval is above zero; with three or more seeds per arm, a permutation test must also give p ≤ 0.05.
 5. Nemotron 3 Ultra writes the verdict: the explanation and the patch to the recipe. The status comes from the causal check, not from the model.
 6. With your approval, one job retrains the fixed recipe on the whole training file, and the three models answer the same held-out queries.
 
 Each step is streamed to the screen as it happens, and the paid steps show their cost.
+
+Step 4 on the demo case: the fix and the control train two jobs each, and the effect stands far outside the noise between seeds.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/media/causal-check-dark.svg">
+  <img alt="The causal check of the demo case. The control, the failed recipe trained again, scores 0.12 exact match on both seeds; the fix, a learning rate of 1e-4 instead of 1e-5, scores 0.50 on both. The effect is +0.38 with a 95% interval of 0.35 to 0.41, well above the minimum effect of 0.03, so the cause is confirmed." src="docs/media/causal-check-light.svg" width="100%">
+</picture>
 
 ## Results
 
@@ -141,7 +148,7 @@ uv run --group eval pytest -q
 | `scripts/` | command-line tools: investigations, retrain, sweeps, cases, calibration |
 | `demo/` | the saved investigation the screen replays |
 | `docs/` | write-ups listed below |
-| `docs/animation/` | the scene of the architecture diagram, drawn with [ManimGX](https://github.com/academa-labs/manimgx) and written as SVG by its `svg.py` (MIT) |
+| `docs/animation/` | the scenes of the README's animations, the architecture and the causal check, drawn with [ManimGX](https://github.com/academa-labs/manimgx) and written as SVG by its `svg.py` (MIT) |
 
 ## Documents
 
