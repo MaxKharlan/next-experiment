@@ -54,5 +54,6 @@ and 0/2 correct targets. These are constructed logits, not measured LLM quality.
 The trainer integration test checks the recorded audit and agreement between
 full-batch and accumulated AdamW updates, including the final incomplete group.
 Validation EOS labels remain unchanged. No downloaded model or paid training
-was used. B24 now has injection mechanisms for faults 9–12; agent-facing checks,
-trainable-parameter inspection and downstream quality evidence remain open.
+was used. B24 now has injection mechanisms for faults 9–12;
+[trainable-parameter inspection](trainable-parameters.md) is now implemented;
+agent integration and downstream quality evidence remain open.
