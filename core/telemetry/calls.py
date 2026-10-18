@@ -10,6 +10,7 @@ import json
 import time
 import uuid
 from collections import defaultdict
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
@@ -36,6 +37,7 @@ class LLMCall:
 class CallLog:
     investigation_id: str
     calls: list[LLMCall] = field(default_factory=list)
+    on_add: Callable[[LLMCall], None] | None = field(default=None, repr=False)
 
     def add(
         self, purpose: str, prompt_version: str, result: CallResult, attempt: int = 1
@@ -54,6 +56,8 @@ class CallLog:
             created_at=time.time(),
         )
         self.calls.append(call)
+        if self.on_add is not None:
+            self.on_add(call)
         return call
 
     def totals(self, by: str = "model") -> dict[str, dict[str, Any]]:

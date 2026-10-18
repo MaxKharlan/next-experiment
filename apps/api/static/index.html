@@ -301,6 +301,10 @@
       <h2 id="statusTitle">Pick a saved investigation and press Replay</h2>
       <div class="proof"><span class="badge idle" id="statusBadge">idle</span><span id="statusProof" class="muted"></span></div>
       <p class="about" id="about" hidden></p>
+      <p id="reportActions" hidden>
+        <a id="reportDownload" class="btn btn-ghost" download>Download report (JSON)</a>
+        <span class="muted small" id="reportNote">Includes progress recorded so far.</span>
+      </p>
     </div>
     <div class="metrics">
       <div class="metric" hidden><b id="mEffect"></b><span>effect of the fix</span></div>
@@ -407,6 +411,9 @@ function reset() {
   $("feed").innerHTML = ""; $("board").innerHTML = '<div class="muted small">No hypotheses yet.</div>'; $("checks").textContent = "";
   $("caseCard").innerHTML = '<h2 class="label">Case</h2><div class="muted small" id="case">Loading the case.</div>';
   $("costCard").hidden = true;
+  $("reportActions").hidden = true;
+  $("reportDownload").removeAttribute("href");
+  $("reportNote").textContent = "Includes progress recorded so far.";
   for (const m of ["mEffect", "mHeldout", "mJobs", "mCost"]) metric(m, "");
   $("statusProof").textContent = "";
   setStatus("Connecting", "Loading the investigation", "running", "running");
@@ -433,12 +440,15 @@ const HANDLERS = {
   started: d => { replayOf = d.replay_of || ""; showCase(d.case);
     setStatus(d.replay_of ? "Replay of a saved investigation" : `Live run on ${BACKENDS[d.backend] || d.backend || "the server"}`, "Looking for the cause", "running", "running"); },
   step: d => showStep(d),
-  finished: d => { finish(d); done(); },
+  finished: d => { finish(d); $("reportNote").textContent = "Completed investigation."; done(); },
   awaiting_approval: d => { showCost(d.summary); askApproval(d.plan);
+    $("reportNote").textContent = "Partial report: awaiting your decision.";
     setStatus(null, null, "waiting", "needs your approval"); },
   resumed: d => { setApproval(d.approved ? "Approved" : "Declined");
+    $("reportNote").textContent = "Includes progress recorded so far.";
     setStatus(null, null, "running", d.approved ? "retraining" : "running"); },
   failed: d => { step("The investigation stopped", "Error", "", `<pre>${esc(d.error)}</pre>`, "error");
+    $("reportNote").textContent = "Partial report: includes the recorded error.";
     setStatus(null, "The investigation stopped", "failed", "failed"); done(); },
 };
 
@@ -446,7 +456,9 @@ function watch(id) {
   stop();
   reset();
   current = id;
-  source = new EventSource(`/api/investigations/${id}/events`);
+  $("reportDownload").href = `/api/investigations/${encodeURIComponent(id)}/report?download=true`;
+  $("reportActions").hidden = false;
+  source = new EventSource(`/api/investigations/${encodeURIComponent(id)}/events`);
   for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data)));
 }
 function stop() { if (source) source.close(); source = null; clearTimeout(timer); queue = []; }

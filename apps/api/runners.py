@@ -114,7 +114,13 @@ def live(
     try:
         storage = LocalStorage("artifacts")
         tf = TokenFactory.from_settings()
-        router = Router(tf, CallLog(inv_id))
+        router = Router(
+            tf,
+            CallLog(
+                inv_id,
+                on_add=lambda call: store.emit(inv_id, "llm_call", asdict(call)),
+            ),
+        )
         tavily = (
             Tavily.from_settings(storage) if get_settings().tavily_api_key else None
         )
