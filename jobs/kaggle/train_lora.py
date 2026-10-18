@@ -23,6 +23,7 @@ import torch.nn.functional as F
 from peft import LoraConfig, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
+from bench.faults.labels import audit_eos_labels, mask_padding_labels
 from bench.faults.recipe import HEALTHY_HP, STRENGTHS, inject
 
 # Batch width is rounded up to this: every new width grows the MPS cache
@@ -202,9 +203,9 @@ def train(
     accumulation = hp.get("gradient_accumulation_steps", 1)
     if type(accumulation) is not int or accumulation < 1:
         raise ValueError("gradient_accumulation_steps must be a positive integer")
-    if code_fault not in {None, "microbatch_mean"}:
+    if code_fault not in {None, "microbatch_mean", "eos_as_pad"}:
         raise ValueError("Unknown code fault")
-    if code_fault and accumulation == 1:
+    if code_fault == "microbatch_mean" and accumulation == 1:
         raise ValueError("microbatch_mean requires gradient_accumulation_steps > 1")
     device = pick_device(device)
     random.seed(seed)
@@ -212,10 +213,28 @@ def train(
 
     tok = AutoTokenizer.from_pretrained(model_id)
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
+    eos_id = getattr(tok, "eos_token_id", None)
+    if code_fault == "eos_as_pad":
+        if eos_id is None:
+            raise ValueError("eos_as_pad requires an EOS token")
+        pad_id = eos_id
     train_chats, valid_chats = read_jsonl(train_path), read_jsonl(valid_path)
     ctx = hp["context_length"]
     train_rows = [encode(tok, c["messages"], ctx) for c in train_chats]
     valid_rows = [encode(tok, c["messages"], ctx) for c in valid_chats]
+
+    reference_rows = train_rows
+    if code_fault == "eos_as_pad":
+        train_rows = mask_padding_labels(reference_rows, pad_id)
+    label_audit = (
+        audit_eos_labels(reference_rows, train_rows, eos_id)
+        if eos_id is not None
+        else None
+    )
+    if code_fault == "eos_as_pad" and not label_audit["removed_eos_targets"]:
+        raise ValueError("eos_as_pad removed no supervised EOS targets")
+    if any(not any(label != -100 for label in r["labels"][1:]) for r in train_rows):
+        raise ValueError("Training row has no supervised next-token targets")
 
     model = AutoModelForCausalLM.from_pretrained(model_id, dtype=torch.float32)
     lora = LoraConfig(
@@ -301,6 +320,7 @@ def train(
         "model": model_id,
         "fault": fault,
         "code_fault": code_fault,
+        "label_audit": label_audit,
         "gradient_accumulation_steps": accumulation,
         "strength": strength,
         "seed": seed,
@@ -328,7 +348,7 @@ def main() -> None:
     parser.add_argument("--hp", default="{}", help="JSON with hyperparameter overrides")
     parser.add_argument("--fault", choices=sorted(STRENGTHS))
     parser.add_argument("--strength", type=float)
-    parser.add_argument("--code-fault", choices=["microbatch_mean"])
+    parser.add_argument("--code-fault", choices=["microbatch_mean", "eos_as_pad"])
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument(
         "--lr-schedule", choices=["linear", "constant"], default="linear"
