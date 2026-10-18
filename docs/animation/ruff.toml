@@ -1,0 +1,4 @@
+# ManimGX needs Python 3.13 or newer; the rest of the repository targets 3.11.
+target-version = "py313"
+# svg.py stays as ManimGX wrote it
+extend-exclude = ["svg.py"]
