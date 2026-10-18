@@ -38,7 +38,7 @@ store = InvestigationStore(get_storage())
 class StartRequest(BaseModel):
     backend: Literal["replay", "local", "tf"] = "replay"
     demo: str = "fault6-tf"
-    delay_s: float = 1.5  # pause between replayed steps
+    delay_s: float = runners.REPLAY_DELAY_S  # pause between replayed steps
 
 
 class Answer(BaseModel):
@@ -52,10 +52,7 @@ def screen() -> FileResponse:
 
 @app.get("/api/demo-cases")
 def demo_cases() -> list[dict]:
-    return [
-        {"name": name, "title": d.get("title", name), "note": d.get("note", "")}
-        for name, d in runners.demo_cases().items()
-    ]
+    return runners.demo_index()
 
 
 @app.post("/api/investigations")

@@ -2,6 +2,8 @@
 
 An agent that finds out why your LLM fine-tune failed and proves the cause with experiments on Nebius Token Factory.
 
+Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/media/investigation-dark.png">
   <img alt="The investigation screen: the cause and its proof at the top, the hypothesis board and the case on the left, the numbered experiment log on the right" src="docs/media/investigation-light.png">
@@ -26,7 +28,7 @@ The animation draws one investigation over the parts; its numbers are the steps 
 
 | Part | Where it runs | Code | What it does |
 |---|---|---|---|
-| Screen | the browser; the API serves it as one static page | `apps/api/static/index.html` | starts a replay or a live run, shows each step as it streams in, asks before the retrain |
+| Screen | the browser; the API serves it as one static page, and GitHub Pages serves a copy that replays the saved run without a server | `apps/api/static/index.html` | starts a replay or a live run, shows each step as it streams in, asks before the retrain |
 | API | a uvicorn process on your machine | `apps/api/` | creates investigations, streams their events over server-sent events, takes the answer about the retrain |
 | Investigation worker | a thread in the same process, one for each investigation | `core/agent/`, `core/planner/`, `core/probes/` | runs the agent loop, sends each step to its model, picks the next probe or check |
 | Causal check | the same thread; jobs on Token Factory, or local training with the `local` backend; scoring on the app's machine with CUDA, Apple MPS or the CPU | `core/interventions/`, `jobs/eval_local/` | trains fix and control pairs, downloads the adapters, scores them by exact match, applies the decision rule |
@@ -83,7 +85,8 @@ As of 18 October 2026:
 | Benchmark: 13 cases, four methods, scorer, runner with resume, results and error analysis | done |
 | Tools: fault sweeps on Token Factory, case builder, reference runs, noise floor, rescoring, checkpoint pruning, local LoRA simulations | done |
 | Weight probe in the API's live runner and in the benchmark | not yet; it runs from `scripts/investigate_tf.py` |
-| Public demo page, a fresh demo run with the Tavily step, video | not yet |
+| Public demo page on GitHub Pages, replaying the saved run | done |
+| A fresh demo run with the Tavily step, video | not yet |
 
 ## Run it
 
@@ -99,6 +102,16 @@ With `PUBLIC_DEMO=true` the server allows only replays. Live runs from the scree
 
 ```bash
 uv run --group ml --group eval uvicorn apps.api.main:app
+```
+
+The public demo is the same screen built as a static site; `.github/workflows/pages.yml` publishes it to GitHub Pages on pushes to main. Build it, serve it, then open http://127.0.0.1:8000:
+
+```bash
+uv run python -m scripts.build_pages --out _site
+```
+
+```bash
+python -m http.server -d _site
 ```
 
 Investigate the demo case from the command line, with causal checks on Token Factory (about $0.06 and 10 to 20 minutes per check when Token Factory has free capacity). `--job <failed job ID>` also runs the weight probe on that job's adapter:
