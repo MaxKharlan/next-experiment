@@ -27,3 +27,16 @@ The SSE stream includes the additional `llm_call` event type. Consumers can use 
 for usage displays or ignore it. Investigation status and causal step ordering
 are unchanged. This supports B17 cost accounting; it does not implement a hard
 spending cap, a durable worker queue, or automatic recovery of in-flight jobs.
+
+## Investigation screen
+
+The cost card updates as `llm_call` events arrive, grouping calls and tokens by
+model. Retry attempts have separate call IDs and are included. Repeated delivery
+of the same call ID is ignored. Selecting another investigation clears the local
+usage journal; replaying its stored events rebuilds the card.
+
+Costs remain visible if the investigation fails. The final summary is not added
+to the recorded calls a second time. Saved demos without per-call events still
+use their original summary. The card distinguishes estimated training costs and
+states that pending requests and Tavily charges are excluded. It shows recorded
+usage, not a live provider invoice or a spending limit.
