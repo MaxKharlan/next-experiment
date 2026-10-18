@@ -59,19 +59,29 @@ def min_detectable_effect(
 
 def permutation_p(fix: Sequence[float], control: Sequence[float]) -> float:
     """One-sided p that the fix mean exceeds the control mean by chance."""
+    if not fix or not control:
+        raise ValueError("Permutation test requires two nonempty arms")
+    if not all(math.isfinite(x) for x in (*fix, *control)):
+        raise ValueError("Permutation values must be finite")
     pooled, n = list(fix) + list(control), len(fix)
     observed = statistics.fmean(fix) - statistics.fmean(control)
     total = len(pooled)
-    splits = list(combinations(range(total), n))
-    if len(splits) > 20_000:  # sample instead of enumerating
+    sampled = math.comb(total, n) > 20_000
+    if sampled:
         rng = random.Random(0)
-        splits = [tuple(rng.sample(range(total), n)) for _ in range(20_000)]
+        splits = (tuple(rng.sample(range(total), n)) for _ in range(20_000))
+        count = 20_000
+    else:
+        splits = combinations(range(total), n)
+        count = math.comb(total, n)
     hits = 0
     for idx in splits:
+        chosen = set(idx)
         a = [pooled[i] for i in idx]
-        b = [pooled[i] for i in range(total) if i not in idx]
+        b = [pooled[i] for i in range(total) if i not in chosen]
         hits += statistics.fmean(a) - statistics.fmean(b) >= observed - 1e-12
-    return hits / len(splits)
+    # Include the observed assignment in the Monte Carlo estimate.
+    return (hits + 1) / (count + 1) if sampled else hits / count
 
 
 @dataclass(frozen=True)

@@ -52,3 +52,10 @@ The local sweep gives a check of the rule. It compares the healthy recipe, taken
 - The numbers cover one task, one model and one data size. B10 also asks for 200 and 1000 examples; the same sweep with `--train` from `scripts.measure_post_training --dry-run` covers those sizes.
 - All runs use the same 100 validation examples, so the noise floor is training noise only. Generalizing to new examples adds sampling error, about 0.05 for exact match near 0.42 on 100 examples.
 - Token Factory checkpoints report a `valid_loss` that jumps between epochs (0.43, 0.002, 0.36, 0.04 in one job) and leave `full_valid_loss` empty. Causal checks on Token Factory jobs therefore need their own evaluation of the checkpoints.
+
+## Power of the full decision rule
+
+The seed-count approximation above is not the probability that the implemented
+rule returns `confirmed`. The [simulation audit](causal-power-audit.md) evaluates
+that full rule and its minimum-effect threshold. At a true effect equal to the
+threshold, confirmation is about 50%, even as seed counts increase.
