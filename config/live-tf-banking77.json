@@ -1,0 +1,10 @@
+{
+  "name": "banking77-qwen3-06b-v1",
+  "model": "Qwen/Qwen3-0.6B",
+  "check": "artifacts/b10/check.jsonl",
+  "noise_sd": 0.019,
+  "min_effect": 0.06,
+  "seeds": [0, 1],
+  "tokens_per_example": 57.0,
+  "budget_usd": 1.0
+}

@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import json
+import math
 import random
 from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass, field
@@ -56,6 +57,7 @@ class InvestigationResult:
     llm_cost_usd: float = 0.0
     llm_calls: dict[str, dict[str, Any]] = field(default_factory=dict)
     retrain_plan: dict[str, Any] | None = None
+    protocol: dict[str, Any] | None = None
 
     def to_json(self) -> str:
         data = {
@@ -67,6 +69,7 @@ class InvestigationResult:
             "llm_cost_usd": self.llm_cost_usd,
             "llm_calls": self.llm_calls,
             "retrain_plan": self.retrain_plan,
+            "protocol": self.protocol,
         }
         return json.dumps(data, indent=2)
 
@@ -98,6 +101,7 @@ def investigate(
     policy: str = "eig",
     random_seed: int = 0,
     initial_hypotheses: Sequence[Hypothesis] | None = None,
+    estimate_pair_cost: Callable[[Intervention, Intervention], float] | None = None,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
     if policy not in {"eig", "fixed", "random"}:
@@ -236,6 +240,24 @@ def investigate(
             leader_id = max(candidates, key=probs.get)
         leader = by_id[leader_id]
         target, control = make_pair(leader, ctx)
+        check_cost = (
+            estimate_pair_cost(target, control)
+            if estimate_pair_cost is not None
+            else intervention_cost_usd
+        )
+        if not math.isfinite(check_cost) or check_cost < 0:
+            raise ValueError("The pair cost must be finite and nonnegative")
+        remaining_budget = ctx.budget_left_usd - router.log.cost_usd
+        if check_cost > remaining_budget:
+            add(
+                {
+                    "kind": "stop",
+                    "reason": "the budget does not cover this causal check",
+                    "estimated_cost_usd": check_cost,
+                    "budget_left_usd": remaining_budget,
+                }
+            )
+            break
         run_pair(target, control)
         check = causal_check(
             target.metrics, control.metrics, min_effect=min_effect, noise_sd=noise_sd
@@ -243,7 +265,7 @@ def investigate(
         prior_probs = dict(probs)
         probs = update_causal(probs, classes, leader.id, check.status)
         interventions += 1
-        ctx.budget_left_usd -= intervention_cost_usd
+        ctx.budget_left_usd -= check_cost
         evidence.append(f"intervention:{leader.id}")
         add(
             {
@@ -257,7 +279,7 @@ def investigate(
                 "planning_probs": dict(planning_probs),
                 "probs": dict(probs),
                 "belief_model": MODEL,
-                "cost_usd": intervention_cost_usd,
+                "cost_usd": check_cost,
             }
         )
         if check.status == "confirmed":

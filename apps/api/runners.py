@@ -21,6 +21,11 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+from apps.api.live_protocol import (
+    estimate_pair_cost,
+    prepare_live_run,
+    verify_datasets,
+)
 from apps.api.store import InvestigationStore
 
 DEMO_DIR = Path(__file__).resolve().parents[2] / "demo"
@@ -106,6 +111,7 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
         tavily = (
             Tavily.from_settings(storage) if get_settings().tavily_api_key else None
         )
+        protocol = None
         case_data, job_hp, job_id = CASE, JOB_HP, "local"
         if backend == "tf":
             source = next(
@@ -114,6 +120,7 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
             case_data = source.case
             job_hp = source.hyperparameters
             job_id = source.job_id
+            protocol = prepare_live_run(source)
         elif weights_enabled():
             raise ValueError("B25 is calibrated for Token Factory; use the tf backend")
         ctx = InvestigationContext(
@@ -125,28 +132,50 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
                 "hyperparameters": job_hp,
                 "checkpoints": case_data["checkpoints"],
             },
-            budget_left_usd=1.0,
+            budget_left_usd=protocol["budget_usd"] if protocol else 1.0,
         )
         store.emit(
             inv_id,
             "started",
-            {"case": case_data, "backend": backend, "job_id": job_id},
+            {
+                "case": case_data,
+                "backend": backend,
+                "job_id": job_id,
+                "protocol": protocol,
+            },
         )
         result = investigate(
             ctx,
             case_data,
             router,
-            _pair_runner(backend, inv_id, tf, storage, job_hp),
+            _pair_runner(backend, inv_id, tf, storage, job_hp, protocol),
             probes=investigation_probes(ctx),
             tavily=tavily,
             on_step=lambda step: store.emit(inv_id, "step", step),
-            propose_retrain=_proposal(backend),
+            propose_retrain=_proposal(backend, protocol),
+            **(
+                {
+                    "noise_sd": protocol["noise_sd"],
+                    "min_effect": protocol["min_effect"],
+                    "intervention_cost_usd": protocol["pair_estimate_usd"],
+                    "estimate_pair_cost": lambda target, control: estimate_pair_cost(
+                        protocol, target, control
+                    ),
+                }
+                if protocol
+                else {}
+            ),
         )
+        result.protocol = protocol
         result.save(storage)
         summary = _summary(json.loads(result.to_json()))
         if result.retrain_plan:
             plan = result.retrain_plan
-            store.emit(inv_id, "awaiting_approval", {"plan": plan, "summary": summary})
+            store.emit(
+                inv_id,
+                "awaiting_approval",
+                {"plan": plan, "summary": summary, "protocol": protocol},
+            )
         else:
             store.emit(inv_id, "finished", summary)
     except Exception as err:  # noqa: BLE001 - the stream must end on any failure
@@ -164,8 +193,21 @@ def retrain(
 
     try:
         if approved:
+            protocol = waiting.get("protocol")
+            dataset_args = {}
+            if protocol is not None:
+                verify_datasets(protocol)
+                datasets = protocol["datasets"]
+                dataset_args = {
+                    "train": Path(datasets["train"]["path"]),
+                    "valid": Path(datasets["validation"]["path"]),
+                    "heldout": Path(datasets["test"]["path"]),
+                }
             retrainer = retrain_tf.make_retrainer(
-                TokenFactory.from_settings(), LocalStorage("artifacts"), inv_id
+                TokenFactory.from_settings(),
+                LocalStorage("artifacts"),
+                inv_id,
+                **dataset_args,
             )
             comparison = retrainer(
                 RetrainPlan(**waiting["plan"]),
@@ -187,30 +229,58 @@ def _fail(store: InvestigationStore, inv_id: str, err: Exception) -> None:
     )
 
 
-def _proposal(backend: str):
+def _proposal(backend: str, protocol: dict | None = None):
     """The full retrain runs on Token Factory, so only the tf backend proposes it."""
     if backend != "tf":
         return None
+    if protocol is not None:
+        from core.interventions.retrain import plan_retrain
+
+        return lambda target, control: asdict(
+            plan_retrain(
+                target,
+                protocol["hyperparameters"],
+                protocol["model"],
+                protocol["datasets"]["train"]["examples"],
+                protocol["tokens_per_example"],
+                protocol["job_id"],
+            )
+        )
     from scripts.retrain_tf import propose
 
     return lambda target, control: asdict(propose(target, control))
 
 
-def _pair_runner(backend: str, inv_id: str, tf: Any, storage: Any, job_hp: dict):
+def _pair_runner(
+    backend: str,
+    inv_id: str,
+    tf: Any,
+    storage: Any,
+    job_hp: dict,
+    protocol: dict | None = None,
+):
     train, valid = Path("artifacts/b6/train.jsonl"), Path("artifacts/b6/valid.jsonl")
     if backend == "tf":
+        if protocol is None:
+            raise ValueError("The TF runner requires a validated protocol")
+        datasets = protocol["datasets"]
+        train = Path(datasets["train"]["path"])
+        valid = Path(datasets["validation"]["path"])
+        check = Path(datasets["check"]["path"])
         from core.interventions.tf_runner import TokenFactoryPairRunner
         from jobs.eval_local.exact_match import evaluate_adapter
 
         def run_tf(target, control):
+            verify_datasets(protocol)
             TokenFactoryPairRunner(
                 tf=tf,
                 storage=storage,
-                model="Qwen/Qwen3-0.6B",
+                model=protocol["model"],
                 train_path=train,
                 valid_path=valid,
                 base_hp=job_hp,
-                evaluate=lambda adapter: evaluate_adapter(adapter, valid),
+                evaluate=lambda adapter: evaluate_adapter(adapter, check),
+                seeds=protocol["seeds"],
                 prefix=f"investigations/{inv_id}/tf/{target.hypothesis_id}",
             )(target, control)
 
@@ -227,7 +297,14 @@ def _pair_runner(backend: str, inv_id: str, tf: Any, storage: Any, job_hp: dict)
 
 
 def _summary(report: dict[str, Any]) -> dict[str, Any]:
+    training = sum(
+        step.get("cost_usd", 0.0)
+        for step in report.get("steps", [])
+        if step["kind"] == "intervention"
+    )
     return {
+        "estimated_training_cost_usd": training,
+        "estimated_total_cost_usd": training + report.get("llm_cost_usd", 0.0),
         "status": report["status"],
         "llm_cost_usd": report.get("llm_cost_usd", 0.0),
         "llm_calls": report.get("llm_calls", {}),
