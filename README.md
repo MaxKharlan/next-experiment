@@ -13,6 +13,29 @@ A fine-tuning job can finish with status `succeeded` and still give a model that
 
 On the saved demo case, a Qwen3-0.6B job trained with a learning rate of 1e-5 answers 14% of 200 held-out queries. The investigation proves the low learning rate with 4 Post-training jobs, and the retrained model answers 42.5%. The whole run, model calls and training, costs about $0.075.
 
+## Architecture
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/media/architecture-dark.svg">
+  <img alt="Architecture. The screen in the browser talks to the API. The API, the investigation worker with its agent loop, model router, planner and probes, the causal check and storage run in one Python process. The worker calls Tavily and Nemotron 3 Super and Ultra; the causal check trains LoRA jobs on the Post-training API of Nebius Token Factory. Numbers 1 to 6 mark the steps of one investigation." src="docs/media/architecture-light.svg" width="100%">
+</picture>
+
+Next Experiment runs on Nebius Token Factory: Nemotron 3 Super and Ultra do the reasoning, and the Post-training API trains the fix and control jobs of each causal check and the final retrain. The app itself is one Python process: the API, a worker thread for each investigation and the scoring of downloaded adapters. Artifacts go to a local folder, or to an Object Storage bucket in Nebius AI Cloud, eu-north1, with `STORAGE_BACKEND=s3`.
+
+The animation draws one investigation over the parts; its numbers are the steps in the next section.
+
+| Part | Where it runs | Code | What it does |
+|---|---|---|---|
+| Screen | the browser; the API serves it as one static page | `apps/api/static/index.html` | starts a replay or a live run, shows each step as it streams in, asks before the retrain |
+| API | a uvicorn process on your machine | `apps/api/` | creates investigations, streams their events over server-sent events, takes the answer about the retrain |
+| Investigation worker | a thread in the same process, one for each investigation | `core/agent/`, `core/planner/`, `core/probes/` | runs the agent loop, sends each step to its model, picks the next probe or check |
+| Causal check | the same thread; jobs on Token Factory, or local training with the `local` backend; scoring on the app's machine with CUDA, Apple MPS or the CPU | `core/interventions/`, `jobs/eval_local/` | trains fix and control pairs, downloads the adapters, scores them by exact match, applies the decision rule |
+| Storage | a local folder, or a Nebius Object Storage bucket in eu-north1 | `core/connectors/storage.py` | each investigation's status and events, results of the checks, the Tavily cache |
+| Models and training | Nebius Token Factory | `core/connectors/token_factory.py` | Nemotron 3 Super and Ultra, the Post-training API |
+| Known issues | Tavily | `core/connectors/tavily.py` | searches for problems others reported with the model and the recipe |
+
+The project plan has three parts that are not built yet: a Next.js screen, a separate worker process with a SQLite queue, and hosting on Hugging Face Spaces. Without the queue, investigations are kept in memory and written to storage, so finished ones survive a restart of the app.
+
 ## How an investigation runs
 
 1. Tavily searches for problems others reported with the model and recipe. Results are cached, and every investigation has a credit limit.
@@ -118,6 +141,7 @@ uv run --group eval pytest -q
 | `scripts/` | command-line tools: investigations, retrain, sweeps, cases, calibration |
 | `demo/` | the saved investigation the screen replays |
 | `docs/` | write-ups listed below |
+| `docs/animation/` | the scene of the architecture diagram, drawn with [ManimGX](https://github.com/academa-labs/manimgx) and written as SVG by its `svg.py` (MIT) |
 
 ## Documents
 
