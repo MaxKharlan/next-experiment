@@ -170,6 +170,10 @@ def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch, code_f
     for bs, summary in zip((3, 1), summaries):
         saved = json.loads((tmp_path / str(bs) / "parameter-audit.json").read_text())
         assert saved == summary["parameter_audit"]
+        gradient = json.loads((tmp_path / str(bs) / "gradient-audit.json").read_text())
+        assert gradient == summary["gradient_audit"]
+        assert gradient["tensor_counts"]["nonzero"] == 1
+        assert gradient["findings"] == []
         assert saved["trainable_parameters"] == 64
         assert "trainable_non_lora_parameters" in saved["findings"]
     assert [s["steps"] for s in summaries] == [2, 2]
@@ -407,3 +411,50 @@ def test_frozen_model_saves_audit_and_stops_before_optimizer(tmp_path, monkeypat
     assert audit["trainable_parameters"] == 0
     assert "no_trainable_parameters" in audit["findings"]
     assert not (out / "metrics.jsonl").exists()
+
+
+@pytest.mark.parametrize("failure", ["missing", "nonfinite"])
+def test_bad_first_gradients_are_saved_before_optimizer_step(
+    tmp_path, monkeypatch, failure
+):
+    import json
+    from types import SimpleNamespace
+
+    from jobs.kaggle import train_lora as trainer
+
+    model = _TinyLM()
+    monkeypatch.setattr(
+        trainer.AutoTokenizer,
+        "from_pretrained",
+        lambda *_: SimpleNamespace(pad_token_id=0, eos_token_id=2),
+    )
+    monkeypatch.setattr(
+        trainer, "encode", lambda *_: {"input_ids": [1, 2], "labels": [-100, 2]}
+    )
+    monkeypatch.setattr(
+        trainer.AutoModelForCausalLM, "from_pretrained", lambda *a, **kw: model
+    )
+    monkeypatch.setattr(trainer, "get_peft_model", lambda m, _: m)
+
+    def backward(*args, **kwargs):
+        if failure == "nonfinite":
+            model.projection.weight.grad = torch.full_like(
+                model.projection.weight, float("nan")
+            )
+        return 1.0, 0, 1
+
+    monkeypatch.setattr(trainer, "backward_microbatches", backward)
+    monkeypatch.setattr(trainer, "evaluate", lambda *a, **kw: {})
+    monkeypatch.setattr(
+        trainer.torch.optim.AdamW,
+        "step",
+        lambda *a, **kw: pytest.fail("Must stop before optimizer step"),
+    )
+    data = tmp_path / "data.jsonl"
+    data.write_text('{"messages": []}\n')
+    out = tmp_path / "out"
+    with pytest.raises(ValueError, match="Unusable gradients"):
+        trainer.train(data, data, out, device="cpu")
+    audit = json.loads((out / "gradient-audit.json").read_text())
+    assert audit["tensor_counts"][failure] == 1
+    assert not (out / "summary.json").exists()

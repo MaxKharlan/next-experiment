@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #75
-(`d195e16`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #76
+(`c07ab42`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -22,12 +22,12 @@ has measured evidence.
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
 | B23 | Investigation UI, case launch, costs and report downloads exist. |
-| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. This change adds a persisted trainable-parameter inventory and an early stop for fully frozen models. Agent-facing checks, gradient-flow verification and downstream quality evidence remain open. |
+| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. This change adds a first-backward gradient audit and stops before the first update on missing-all or nonfinite gradients. Agent-facing checks and downstream quality evidence remain open. |
 | B25 | Weight probes are wired into live runs and the benchmark. Threshold transfer and rank-fault discrimination need more evidence. |
 | B26 | A classifier model publication with validated transfer metrics remains open. |
 
-The selected task is trainable-parameter inspection in B24. The local trainer
-records trainable LoRA and non-LoRA tensors before optimizer creation and stops
-when no parameters are trainable. See [Trainable parameters](trainable-parameters.md).
+The selected task is first-backward gradient-flow inspection in B24. The local
+trainer distinguishes missing, zero, nonzero and nonfinite gradients and saves
+the report before clipping or updating weights. See [Gradient flow](gradient-flow.md).
 Verification used a tiny local PEFT model without downloaded weights or Kaggle.
-B24 remains partial; the audit does not measure downstream model quality.
+B24 remains partial; the snapshot does not verify later steps or model quality.

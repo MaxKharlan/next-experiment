@@ -32,6 +32,7 @@ from bench.faults.labels import (
     shift_labels_once,
 )
 from bench.faults.recipe import HEALTHY_HP, STRENGTHS, inject
+from core.training.gradients import audit_gradients
 from core.training.parameters import audit_trainable_parameters
 
 # Batch width is rounded up to this: every new width grows the MPS cache
@@ -322,6 +323,7 @@ def train(
 
     write({"step": 0, "epoch": 0.0, **evaluate(model, valid_rows, pad_id, device, bs)})
     order = random.Random(seed)
+    gradient_audit = None
     step, answer_tokens, input_tokens, supervised_tokens = 0, 0, 0, 0
     for _ in range(hp["n_epochs"]):
         idx = list(range(len(train_rows)))
@@ -335,6 +337,18 @@ def train(
             loss, correct, n = backward_microbatches(
                 model, batches, microbatch_mean=code_fault == "microbatch_mean"
             )
+            if step == 0:
+                gradient_audit = audit_gradients(model)
+                (out / "gradient-audit.json").write_text(
+                    json.dumps(gradient_audit, indent=2), encoding="utf-8"
+                )
+                fatal = {
+                    "all_gradients_missing",
+                    "no_trainable_tensors",
+                    "nonfinite_gradients",
+                }
+                if fatal.intersection(gradient_audit["findings"]):
+                    raise ValueError("Unusable gradients; see gradient-audit.json")
             grad_norm = torch.nn.utils.clip_grad_norm_(params, hp["max_grad_norm"])
             lr = sched.get_last_lr()[0]
             opt.step()
@@ -376,6 +390,7 @@ def train(
     summary = {
         "model": model_id,
         "parameter_audit": parameter_audit,
+        "gradient_audit": gradient_audit,
         "fault": fault,
         "code_fault": code_fault,
         "label_audit": label_audit,
