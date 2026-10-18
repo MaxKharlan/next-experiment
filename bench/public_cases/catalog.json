@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "scope": "Public reports for reproduction triage, not benchmark ground truth",
+  "cases": [
+    {
+      "id": "trl-696",
+      "source_url": "https://github.com/huggingface/trl/issues/696",
+      "title": "EOS generation disappears after fine-tuning",
+      "evidence_status": "author_reported_fix",
+      "owner": "A25",
+      "mode": "B",
+      "candidate_cause": "EOS and padding token collision",
+      "symptom": "Llama-2 chat models repeat assistant text and stop emitting EOS after SFT.",
+      "evidence_urls": [
+        "https://github.com/huggingface/trl/issues/696#issuecomment-1694180161",
+        "https://github.com/huggingface/trl/issues/696#issuecomment-1701144350"
+      ],
+      "caveat": "The author reports success with a different padding token. This is not a controlled project reproduction; the linked TinyLlama report has a different explanation.",
+      "reproduction_plan": "Pin the original trainer stack; inspect EOS labels after collation. Compare identical data with padding separated from EOS, then compare EOS emission under matched training budgets.",
+      "missing": [
+        "Complete original dataset and pinned environment"
+      ],
+      "priority": 1,
+      "reviewed_on": "2026-10-18",
+      "project_reproduced": false,
+      "benchmark_eligible": false
+    },
+    {
+      "id": "transformers-38837",
+      "source_url": "https://github.com/huggingface/transformers/issues/38837",
+      "title": "Incomplete accumulation cycle scales the loss incorrectly",
+      "evidence_status": "maintainer_acknowledged_mechanism",
+      "owner": "B24",
+      "mode": "B",
+      "candidate_cause": "Loss divided by configured accumulation count rather than actual final count",
+      "symptom": "The final incomplete accumulation cycle has an artificial loss drop.",
+      "evidence_urls": [
+        "https://github.com/huggingface/transformers/issues/38837#issuecomment-2984557752"
+      ],
+      "caveat": "The maintainer distinguishes models using num_items_in_batch. This report does not establish a downstream fine-tuning quality drop for our models.",
+      "reproduction_plan": "Use the supplied synthetic example on transformers 4.51.3. Compare gradients and parameter updates with an equivalent full batch, including remainder batches; assess quality separately.",
+      "missing": [
+        "Project reproduction and downstream quality measurement"
+      ],
+      "priority": 2,
+      "reviewed_on": "2026-10-18",
+      "project_reproduced": false,
+      "benchmark_eligible": false
+    },
+    {
+      "id": "hf-68899",
+      "source_url": "https://discuss.huggingface.co/t/mistralai-mistral-7b-instruct-v0-2-fine-tuning-prompt-format/68899",
+      "title": "Mistral emits conversation delimiters after successful training",
+      "evidence_status": "unresolved",
+      "owner": "A25",
+      "mode": "A_or_B",
+      "candidate_cause": "Chat formatting or stopping configuration; unconfirmed",
+      "symptom": "Successful fine-tuning is followed by unexpected instruction delimiters and continued conversation.",
+      "evidence_urls": [
+        "https://discuss.huggingface.co/t/mistralai-mistral-7b-instruct-v0-2-fine-tuning-prompt-format/68899/3"
+      ],
+      "caveat": "The author still reports the symptom after applying the suggested chat-template preprocessing. The thread does not confirm a fix.",
+      "reproduction_plan": "Use synthetic non-medical text. Inspect training and inference tokenization, EOS configuration and decoded continuation separately before any training comparison.",
+      "missing": [
+        "Original training data, confirmed cause and controlled fix"
+      ],
+      "priority": 3,
+      "reviewed_on": "2026-10-18",
+      "project_reproduced": false,
+      "benchmark_eligible": false
+    },
+    {
+      "id": "hf-126058",
+      "source_url": "https://discuss.huggingface.co/t/bad-performance-finetuning-llama-chat-and-instruct-models-on-gsm8k/126058",
+      "title": "GSM8K fine-tuning differs between training pipelines",
+      "evidence_status": "unresolved",
+      "owner": "B9",
+      "mode": "B",
+      "candidate_cause": "Training or evaluation pipeline difference; unconfirmed",
+      "symptom": "The reporter measures lower GSM8K performance than a comparison training pipeline.",
+      "evidence_urls": [
+        "https://discuss.huggingface.co/t/bad-performance-finetuning-llama-chat-and-instruct-models-on-gsm8k/126058/6"
+      ],
+      "caveat": "The reporter checked matching tokenized outputs and also tried one GPU. These observations do not identify a unique cause.",
+      "reproduction_plan": "Freeze evaluation extraction and decoding first. Compare package versions, labels, padding and optimizer updates with the same dataset and model.",
+      "missing": [
+        "Validated common evaluation protocol and causal isolation"
+      ],
+      "priority": 4,
+      "reviewed_on": "2026-10-18",
+      "project_reproduced": false,
+      "benchmark_eligible": false
+    },
+    {
+      "id": "trl-3910",
+      "source_url": "https://github.com/huggingface/trl/issues/3910",
+      "title": "Stagnant loss after changing TRL versions",
+      "evidence_status": "unresolved",
+      "owner": "B9",
+      "mode": "B",
+      "candidate_cause": "Unknown; version and packing explanations disputed",
+      "symptom": "A reporter observes stagnant training loss after upgrading TRL.",
+      "evidence_urls": [
+        "https://github.com/huggingface/trl/issues/3910#issuecomment-5044490352",
+        "https://github.com/huggingface/trl/issues/3910#issuecomment-5198524911",
+        "https://github.com/huggingface/trl/issues/3910#issuecomment-5201042990"
+      ],
+      "caveat": "Later comments challenge dtype and packing explanations; the original environment is no longer available. A renamed-argument exception is a separate hard failure.",
+      "reproduction_plan": "Retain as an abstention case. Do not assign a fault label without a reproducible original configuration and a matched intervention.",
+      "missing": [
+        "Original environment, reproducible stagnation and confirmed cause"
+      ],
+      "priority": 5,
+      "reviewed_on": "2026-10-18",
+      "project_reproduced": false,
+      "benchmark_eligible": false
+    }
+  ]
+}

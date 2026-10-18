@@ -1,0 +1,51 @@
+{
+  "reviewed_on": "2026-10-18",
+  "provider": "Tavily",
+  "search_depth": "basic",
+  "credits_used": 4,
+  "queries": [
+    {
+      "query": "site:github.com/huggingface/trl/issues fine tuning eos pad token never stops",
+      "urls": [
+        "https://github.com/huggingface/trl/issues/4974",
+        "https://github.com/huggingface/trl/issues/837",
+        "https://github.com/huggingface/trl/issues/3877",
+        "https://github.com/huggingface/trl/issues/2429"
+      ]
+    },
+    {
+      "query": "site:github.com/huggingface/trl/issues fine tuning loss zero response template",
+      "urls": [
+        "https://github.com/huggingface/trl/issues/5138",
+        "https://github.com/huggingface/trl/issues/3910",
+        "https://github.com/huggingface/trl/issues/3279",
+        "https://github.com/huggingface/trl/issues/2390"
+      ]
+    },
+    {
+      "query": "site:discuss.huggingface.co fine tuning worse chat template resolved",
+      "urls": [
+        "https://discuss.huggingface.co/t/fine-tuning-gemma-4-e2b-on-macbook-m3/175228",
+        "https://discuss.huggingface.co/t/mistralai-mistral-7b-instruct-v0-2-fine-tuning-prompt-format/68899",
+        "https://discuss.huggingface.co/t/llama-2-7b-chat-fine-tuning/54877",
+        "https://discuss.huggingface.co/t/bad-performance-finetuning-llama-chat-and-instruct-models-on-gsm8k/126058"
+      ]
+    },
+    {
+      "query": "site:github.com/huggingface/transformers/issues gradient accumulation loss fine tuning 2024",
+      "urls": [
+        "https://github.com/huggingface/transformers/issues/38837",
+        "https://github.com/huggingface/transformers/issues/39567",
+        "https://github.com/huggingface/transformers/issues/45676"
+      ]
+    }
+  ],
+  "followed_links": [
+    {
+      "from": "https://github.com/huggingface/trl/issues/837",
+      "to": "https://github.com/huggingface/trl/issues/696"
+    }
+  ],
+  "verification": "GitHub issue bodies and comments via gh; Hugging Face forum pages via browser retrieval",
+  "local_search_sha256": "f382cc20851ac598ea23f96b4541a57adb3fa1a6e93eda5c79f43cbb592e2546"
+}
