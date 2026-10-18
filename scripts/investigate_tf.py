@@ -6,6 +6,9 @@ is downloaded to artifacts/ and scored by exact match on this MacBook. For
 Qwen3-0.6B with 200 examples and 3 epochs a pair with 2 seeds is 4 jobs, about $0.06
 and 10 to 20 minutes when Token Factory has free capacity. A confirmed fix ends with
 the proposal of the full retrain; scripts/retrain_tf.py runs it after approval.
+
+With --job (the failed job's ID) or --adapter (its adapter in a local directory) the
+agent can also run the lora_weights probe (B25) on the failed job's weights.
 """
 
 from __future__ import annotations
@@ -23,8 +26,13 @@ from core.connectors.tavily import Tavily
 from core.connectors.token_factory import TokenFactory
 from core.interventions.pairs import Intervention
 from core.interventions.retrain import RetrainPlan
-from core.interventions.tf_runner import TokenFactoryPairRunner
+from core.interventions.tf_runner import (
+    TokenFactoryPairRunner,
+    download_last_checkpoint,
+)
 from core.planner.job_cost import estimate_job
+from core.probes.level0.recipe import LEVEL0
+from core.probes.level0.weights import LoraWeights
 from core.telemetry.calls import CallLog
 from jobs.eval_local.exact_match import evaluate_adapter
 from scripts.retrain_tf import describe, propose
@@ -40,6 +48,13 @@ def main() -> None:
     parser.add_argument("--seeds", type=int, nargs="+", default=[0, 1])
     # chat template tokens per BANKING77 example for Qwen3 (docs/b6-post-training.md)
     parser.add_argument("--tokens-per-example", type=float, default=57)
+    weights = parser.add_mutually_exclusive_group()
+    weights.add_argument(
+        "--job", help="failed job ID: its last checkpoint feeds lora_weights"
+    )
+    weights.add_argument(
+        "--adapter", help="the failed job's adapter in a local directory"
+    )
     args = parser.parse_args()
 
     storage = LocalStorage("artifacts")
@@ -53,11 +68,19 @@ def main() -> None:
     pair_cost = 2 * len(args.seeds) * one_job.cost_usd
     print(f"one causal check: {2 * len(args.seeds)} jobs, about ${pair_cost:.3f}")
 
+    adapter = args.adapter
+    if args.job:
+        adapter = str(
+            download_last_checkpoint(
+                tf, storage, args.job, f"investigations/{args.id}/failed"
+            )
+        )
     ctx = InvestigationContext(
         investigation_id=args.id,
         mode="A",
-        job_id="local",
+        job_id=args.job or "local",
         job_config={"hyperparameters": JOB_HP, "checkpoints": CASE["checkpoints"]},
+        files={"adapter": adapter} if adapter else {},
         budget_left_usd=1.0,
     )
 
@@ -82,6 +105,7 @@ def main() -> None:
         CASE,
         router,
         run_pair,
+        probes=(*LEVEL0, LoraWeights()),
         intervention_cost_usd=pair_cost,
         tavily=tavily,
         propose_retrain=lambda target, control: asdict(
