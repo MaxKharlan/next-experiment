@@ -1,0 +1,780 @@
+[
+  {
+    "case": "ho-def-fault6-mild-s0",
+    "method": "single_ultra",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "other"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.35,
+    "false_alarm": null,
+    "cost_usd": 0.006878,
+    "llm_tokens": 3312,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-def-fault6-mild-s0",
+    "method": "react_super",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.9,
+    "false_alarm": null,
+    "cost_usd": 0.0599643,
+    "llm_tokens": 11995,
+    "mini_jobs": 4,
+    "fixed_metric": 0.395,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-def-fault6-mild-s0",
+    "method": "checklist",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "train_val_overlap",
+      "truncation"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.13669064748201437,
+    "false_alarm": null,
+    "cost_usd": 0.16416,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": 0.395,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-def-fault6-mild-s0",
+    "method": "next_experiment",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.6,
+    "false_alarm": null,
+    "cost_usd": 0.0589824,
+    "llm_tokens": 5149,
+    "mini_jobs": 4,
+    "fixed_metric": 0.395,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-def-fault6-strong-s0",
+    "method": "single_ultra",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.7,
+    "false_alarm": null,
+    "cost_usd": 0.005878,
+    "llm_tokens": 2972,
+    "mini_jobs": 0,
+    "fixed_metric": 0.395,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-def-fault6-strong-s0",
+    "method": "react_super",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 1.0,
+    "false_alarm": null,
+    "cost_usd": 0.0583176,
+    "llm_tokens": 8320,
+    "mini_jobs": 4,
+    "fixed_metric": 0.395,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-def-fault6-strong-s0",
+    "method": "checklist",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "contradictory_labels",
+      "truncation"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.7069767441860465,
+    "false_alarm": null,
+    "cost_usd": 0.16416,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": 0.395,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-def-fault6-strong-s0",
+    "method": "next_experiment",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "too_many_epochs",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.6667,
+    "false_alarm": null,
+    "cost_usd": 0.0599609,
+    "llm_tokens": 6355,
+    "mini_jobs": 4,
+    "fixed_metric": 0.395,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-fault6-mild-s0",
+    "method": "single_ultra",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "contradictory_labels",
+      "too_many_epochs",
+      "lora_rank_too_small"
+    ],
+    "top1": false,
+    "top3": false,
+    "p_true": 0.05,
+    "false_alarm": null,
+    "cost_usd": 0.008879,
+    "llm_tokens": 4209,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-fault6-mild-s0",
+    "method": "react_super",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "distribution_shift"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.5,
+    "false_alarm": null,
+    "cost_usd": 0.4489971,
+    "llm_tokens": 25019,
+    "mini_jobs": 8,
+    "fixed_metric": 0.555,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-fault6-mild-s0",
+    "method": "checklist",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "truncation",
+      "chat_template_mismatch"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.11949685534591194,
+    "false_alarm": null,
+    "cost_usd": 0.65664,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": 0.555,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 1
+  },
+  {
+    "case": "ho-e12-fault6-mild-s0",
+    "method": "next_experiment",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "too_many_epochs"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.375,
+    "false_alarm": null,
+    "cost_usd": 0.44524969999999997,
+    "llm_tokens": 10850,
+    "mini_jobs": 8,
+    "fixed_metric": 0.555,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-fault6-strong-s0",
+    "method": "single_ultra",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "distribution_shift"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.45,
+    "false_alarm": null,
+    "cost_usd": 0.010002,
+    "llm_tokens": 4578,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-fault6-strong-s0",
+    "method": "react_super",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "too_many_epochs",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.9,
+    "false_alarm": null,
+    "cost_usd": 0.2234118,
+    "llm_tokens": 10028,
+    "mini_jobs": 4,
+    "fixed_metric": 0.555,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-fault6-strong-s0",
+    "method": "checklist",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "train_val_overlap",
+      "truncation"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.13669064748201437,
+    "false_alarm": null,
+    "cost_usd": 0.65664,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": 0.555,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 1
+  },
+  {
+    "case": "ho-e12-fault6-strong-s0",
+    "method": "next_experiment",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "chat_template_mismatch",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.6667,
+    "false_alarm": null,
+    "cost_usd": 0.22388719999999998,
+    "llm_tokens": 7065,
+    "mini_jobs": 4,
+    "fixed_metric": 0.555,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-healthy-s0",
+    "method": "single_ultra",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "lora_rank_too_small",
+      "too_many_epochs",
+      "contradictory_labels"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.008237,
+    "llm_tokens": 4003,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-healthy-s0",
+    "method": "react_super",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "contradictory_labels",
+      "other",
+      "lora_rank_too_small"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.4523328,
+    "llm_tokens": 32428,
+    "mini_jobs": 8,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-healthy-s0",
+    "method": "checklist",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "truncation",
+      "chat_template_mismatch",
+      "contradictory_labels"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.65664,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e12-healthy-s0",
+    "method": "next_experiment",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "contradictory_labels",
+      "chat_template_mismatch",
+      "lora_rank_too_small"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.22414679999999998,
+    "llm_tokens": 9902,
+    "mini_jobs": 4,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-fault6-mild-s0",
+    "method": "single_ultra",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "too_many_epochs"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.5,
+    "false_alarm": null,
+    "cost_usd": 0.008533,
+    "llm_tokens": 3939,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-fault6-mild-s0",
+    "method": "react_super",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "too_many_epochs"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.8,
+    "false_alarm": null,
+    "cost_usd": 0.11332829999999999,
+    "llm_tokens": 8899,
+    "mini_jobs": 4,
+    "fixed_metric": 0.5,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-fault6-mild-s0",
+    "method": "checklist",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "train_val_overlap",
+      "truncation"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.13669064748201437,
+    "false_alarm": null,
+    "cost_usd": 0.32832,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": 0.5,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 1
+  },
+  {
+    "case": "ho-e6-fault6-mild-s0",
+    "method": "next_experiment",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "distribution_shift",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.7835,
+    "false_alarm": null,
+    "cost_usd": 0.1156603,
+    "llm_tokens": 8354,
+    "mini_jobs": 4,
+    "fixed_metric": 0.5,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-fault6-strong-s0",
+    "method": "single_ultra",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "distribution_shift"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.7,
+    "false_alarm": null,
+    "cost_usd": 0.005492,
+    "llm_tokens": 2922,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": false,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-fault6-strong-s0",
+    "method": "react_super",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "lora_rank_too_small",
+      "too_many_epochs"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.95,
+    "false_alarm": null,
+    "cost_usd": 0.1133106,
+    "llm_tokens": 8654,
+    "mini_jobs": 4,
+    "fixed_metric": 0.5,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-fault6-strong-s0",
+    "method": "checklist",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "train_val_overlap",
+      "truncation"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.13669064748201437,
+    "false_alarm": null,
+    "cost_usd": 0.32832,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": 0.5,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-fault6-strong-s0",
+    "method": "next_experiment",
+    "truth": [
+      "lr_too_low"
+    ],
+    "status": "confirmed",
+    "cause": "lr_too_low",
+    "top": [
+      "lr_too_low",
+      "chat_template_mismatch",
+      "lora_rank_too_small"
+    ],
+    "top1": true,
+    "top3": true,
+    "p_true": 0.6786,
+    "false_alarm": null,
+    "cost_usd": 0.1147208,
+    "llm_tokens": 7344,
+    "mini_jobs": 4,
+    "fixed_metric": 0.5,
+    "reference": 0.535,
+    "fix_success": true,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-healthy-s0",
+    "method": "single_ultra",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "too_many_epochs",
+      "lora_rank_too_small",
+      "distribution_shift"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.009248,
+    "llm_tokens": 4186,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-healthy-s0",
+    "method": "react_super",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "distribution_shift",
+      "lora_rank_too_small",
+      "other"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.0082149,
+    "llm_tokens": 17847,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-healthy-s0",
+    "method": "checklist",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "train_val_overlap",
+      "truncation",
+      "chat_template_mismatch"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.32832,
+    "llm_tokens": 0,
+    "mini_jobs": 12,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  },
+  {
+    "case": "ho-e6-healthy-s0",
+    "method": "next_experiment",
+    "truth": [],
+    "status": "inconclusive",
+    "cause": null,
+    "top": [
+      "chat_template_mismatch",
+      "distribution_shift",
+      "contradictory_labels"
+    ],
+    "top1": null,
+    "top3": null,
+    "p_true": null,
+    "false_alarm": false,
+    "cost_usd": 0.0047349,
+    "llm_tokens": 8981,
+    "mini_jobs": 0,
+    "fixed_metric": null,
+    "reference": 0.535,
+    "fix_success": null,
+    "wrong_confirmations": 0
+  }
+]

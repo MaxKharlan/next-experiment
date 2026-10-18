@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "methods": {
+    "single_ultra": {
+      "cases": 5,
+      "fault_cases": 3,
+      "healthy_cases": 2,
+      "cases_with_findings": 3,
+      "category_case_counts": {
+        "wrong_top_candidate": 2,
+        "cause_not_confirmed": 3
+      },
+      "wrong_confirmation_count": 0,
+      "confirmed_without_measured_fix": 0
+    },
+    "react_super": {
+      "cases": 5,
+      "fault_cases": 3,
+      "healthy_cases": 2,
+      "cases_with_findings": 1,
+      "category_case_counts": {
+        "measured_fix_failed": 1
+      },
+      "wrong_confirmation_count": 0,
+      "confirmed_without_measured_fix": 0
+    },
+    "checklist": {
+      "cases": 5,
+      "fault_cases": 3,
+      "healthy_cases": 2,
+      "cases_with_findings": 3,
+      "category_case_counts": {
+        "wrong_confirmations": 3,
+        "measured_fix_failed": 1
+      },
+      "wrong_confirmation_count": 3,
+      "confirmed_without_measured_fix": 0
+    },
+    "next_experiment": {
+      "cases": 5,
+      "fault_cases": 3,
+      "healthy_cases": 2,
+      "cases_with_findings": 1,
+      "category_case_counts": {
+        "measured_fix_failed": 1
+      },
+      "wrong_confirmation_count": 0,
+      "confirmed_without_measured_fix": 0
+    }
+  },
+  "findings": [
+    {
+      "source_record": 1,
+      "categories": [
+        "wrong_top_candidate",
+        "cause_not_confirmed"
+      ],
+      "row": {
+        "case": "fault6-lr1e-5",
+        "method": "single_ultra",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "inconclusive",
+        "cause": null,
+        "top": [
+          "too_many_epochs",
+          "lr_too_low",
+          "lora_rank_too_small"
+        ],
+        "top1": false,
+        "top3": true,
+        "p_true": 0.3,
+        "false_alarm": null,
+        "cost_usd": 0.010904,
+        "llm_tokens": 4656,
+        "mini_jobs": 0,
+        "fixed_metric": null,
+        "reference": 0.535,
+        "fix_success": false,
+        "wrong_confirmations": 0
+      }
+    },
+    {
+      "source_record": 2,
+      "categories": [
+        "measured_fix_failed"
+      ],
+      "row": {
+        "case": "fault6-lr1e-5",
+        "method": "react_super",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "confirmed",
+        "cause": "lr_too_low",
+        "top": [
+          "lr_too_low",
+          "lora_rank_too_small",
+          "other"
+        ],
+        "top1": true,
+        "top3": true,
+        "p_true": 0.8,
+        "false_alarm": null,
+        "cost_usd": 0.0639744,
+        "llm_tokens": 20458,
+        "mini_jobs": 4,
+        "fixed_metric": 0.425,
+        "reference": 0.535,
+        "fix_success": false,
+        "wrong_confirmations": 0
+      }
+    },
+    {
+      "source_record": 3,
+      "categories": [
+        "wrong_confirmations",
+        "measured_fix_failed"
+      ],
+      "row": {
+        "case": "fault6-lr1e-5",
+        "method": "checklist",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "confirmed",
+        "cause": "lr_too_low",
+        "top": [
+          "lr_too_low",
+          "train_val_overlap",
+          "truncation"
+        ],
+        "top1": true,
+        "top3": true,
+        "p_true": 0.13669064748201437,
+        "false_alarm": null,
+        "cost_usd": 0.16416,
+        "llm_tokens": 0,
+        "mini_jobs": 12,
+        "fixed_metric": 0.425,
+        "reference": 0.535,
+        "fix_success": false,
+        "wrong_confirmations": 1
+      }
+    },
+    {
+      "source_record": 4,
+      "categories": [
+        "measured_fix_failed"
+      ],
+      "row": {
+        "case": "fault6-lr1e-5",
+        "method": "next_experiment",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "confirmed",
+        "cause": "lr_too_low",
+        "top": [
+          "lr_too_low",
+          "lora_rank_too_small",
+          "too_many_epochs"
+        ],
+        "top1": true,
+        "top3": true,
+        "p_true": 0.6684,
+        "false_alarm": null,
+        "cost_usd": 0.0613958,
+        "llm_tokens": 10020,
+        "mini_jobs": 4,
+        "fixed_metric": 0.425,
+        "reference": 0.535,
+        "fix_success": false,
+        "wrong_confirmations": 0
+      }
+    },
+    {
+      "source_record": 9,
+      "categories": [
+        "wrong_top_candidate",
+        "cause_not_confirmed"
+      ],
+      "row": {
+        "case": "ref-fault6-mild-s0",
+        "method": "single_ultra",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "inconclusive",
+        "cause": null,
+        "top": [
+          "distribution_shift",
+          "contradictory_labels",
+          "too_many_epochs"
+        ],
+        "top1": false,
+        "top3": false,
+        "p_true": 0.05,
+        "false_alarm": null,
+        "cost_usd": 0.010642,
+        "llm_tokens": 4642,
+        "mini_jobs": 0,
+        "fixed_metric": null,
+        "reference": 0.535,
+        "fix_success": false,
+        "wrong_confirmations": 0
+      }
+    },
+    {
+      "source_record": 11,
+      "categories": [
+        "wrong_confirmations"
+      ],
+      "row": {
+        "case": "ref-fault6-mild-s0",
+        "method": "checklist",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "confirmed",
+        "cause": "lr_too_low",
+        "top": [
+          "lr_too_low",
+          "train_val_overlap",
+          "truncation"
+        ],
+        "top1": true,
+        "top3": true,
+        "p_true": 0.13669064748201437,
+        "false_alarm": null,
+        "cost_usd": 0.32832,
+        "llm_tokens": 0,
+        "mini_jobs": 12,
+        "fixed_metric": 0.535,
+        "reference": 0.535,
+        "fix_success": true,
+        "wrong_confirmations": 1
+      }
+    },
+    {
+      "source_record": 13,
+      "categories": [
+        "cause_not_confirmed"
+      ],
+      "row": {
+        "case": "ref-fault6-strong-s0",
+        "method": "single_ultra",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "inconclusive",
+        "cause": null,
+        "top": [
+          "lr_too_low",
+          "lora_rank_too_small",
+          "contradictory_labels"
+        ],
+        "top1": true,
+        "top3": true,
+        "p_true": 0.5,
+        "false_alarm": null,
+        "cost_usd": 0.016929,
+        "llm_tokens": 7995,
+        "mini_jobs": 0,
+        "fixed_metric": null,
+        "reference": 0.535,
+        "fix_success": false,
+        "wrong_confirmations": 0
+      }
+    },
+    {
+      "source_record": 15,
+      "categories": [
+        "wrong_confirmations"
+      ],
+      "row": {
+        "case": "ref-fault6-strong-s0",
+        "method": "checklist",
+        "truth": [
+          "lr_too_low"
+        ],
+        "status": "confirmed",
+        "cause": "lr_too_low",
+        "top": [
+          "lr_too_low",
+          "train_val_overlap",
+          "truncation"
+        ],
+        "top1": true,
+        "top3": true,
+        "p_true": 0.13669064748201437,
+        "false_alarm": null,
+        "cost_usd": 0.32832,
+        "llm_tokens": 0,
+        "mini_jobs": 12,
+        "fixed_metric": 0.5,
+        "reference": 0.535,
+        "fix_success": true,
+        "wrong_confirmations": 1
+      }
+    }
+  ],
+  "scope": "saved benchmark scores; overlapping categories; no new diagnoses",
+  "split": "dev",
+  "source_sha256": "00d907ad9757b6d56e30a00a2a44879e9f5eba0c06b4f9ea330ae9b840f8f2cb",
+  "truth_sha256": "b5fc3f2ba0e665ba1837e288c16b1873e46b58535c99446f6813ed60dd582471"
+}
