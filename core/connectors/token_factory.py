@@ -147,6 +147,7 @@ class TokenFactory:
         *,
         attempts: int = 3,
         max_tokens: int = 4096,
+        on_call: Callable[[CallResult], None] | None = None,
     ) -> tuple[T, list[CallResult]]:
         """Ask for JSON matching `schema`; on a mismatch, retry with the error attached."""
         schema_json = json.dumps(schema.model_json_schema(), ensure_ascii=False)
@@ -162,6 +163,8 @@ class TokenFactory:
         for _ in range(attempts):
             call = self._chat_json(model, history, schema, max_tokens)
             calls.append(call)
+            if on_call is not None:
+                on_call(call)
             try:
                 return schema.model_validate_json(extract_json(call.text)), calls
             except ValidationError as err:

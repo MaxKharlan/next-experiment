@@ -10,12 +10,19 @@ The report endpoint exposes `llm_usage` with `call_count`, `tokens_in`,
 purpose, prompt version, attempt number, latency and timestamp. Prompts and model
 response text are not stored in these usage events.
 
-The router logs the attempts returned by a successful structured request and the
-attempts carried by `StructuredOutputError`. Thus a failed JSON validation can
-still contribute recorded costs. Persistence occurs when the router receives
-those results; a crash while the provider is still working, or a transport error
-without returned usage, may leave an unrecorded charge. This is not a provider
-invoice or a complete billing reconciliation.
+The Token Factory connector notifies the router immediately after each completed
+structured-output response, before validating JSON or issuing a correction
+request. The router records that attempt and the live API persists its usage
+event. A later transport error therefore leaves earlier completed attempts in
+the report. Returning or raising the accumulated attempts does not log them a
+second time. Adapters accepting `on_call` but returning only a final call list
+still use the router's fallback logging.
+
+If the persistence callback fails, the exception stops the request sequence;
+no correction request is sent after that failure. This does not guarantee a
+record when storage itself is unavailable. A crash before usage is received,
+or a provider request whose response is lost, can still leave an unrecorded
+charge. The log is not a provider invoice or complete billing reconciliation.
 
 `llm_usage` is a separate view of recorded model calls. Do not add it to the
 summary LLM cost, which covers the same calls on a completed run. It excludes

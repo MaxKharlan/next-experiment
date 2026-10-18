@@ -93,14 +93,22 @@ class Router:
         prompt_version: str,
         **kwargs: Any,
     ) -> T:
+        recorded = 0
+
+        def record(call: CallResult) -> None:
+            nonlocal recorded
+            self.log.add(step, prompt_version, call, attempt=recorded + 1)
+            recorded += 1
+
         try:
             parsed, calls = self.tf.structured(
-                self.model(step), messages, schema, **kwargs
+                self.model(step), messages, schema, on_call=record, **kwargs
             )
         except StructuredOutputError as err:
-            for i, call in enumerate(err.calls, start=1):
-                self.log.add(step, prompt_version, call, attempt=i)
+            # Adapters that do not invoke the callback can still return their log.
+            for call in err.calls[recorded:]:
+                record(call)
             raise
-        for i, call in enumerate(calls, start=1):
-            self.log.add(step, prompt_version, call, attempt=i)
+        for call in calls[recorded:]:
+            record(call)
         return parsed
