@@ -30,9 +30,10 @@ const fs=require('fs'), vm=require('vm'), assert=require('assert');
 const text=fs.readFileSync(process.argv[1], 'utf8');
 const nodes={}; const el=id=>nodes[id] ||= {value:'',disabled:false,textContent:''};
 const requests=[]; const watched=[];
-const context={ $:el, money:x=>String(x), history:{replaceState(){}}, watch:id=>watched.push(id),
+const context={ $:el, crypto:{randomUUID:()=> 'test-request-key'}, money:x=>String(x), history:{replaceState(){}}, watch:id=>watched.push(id),
   fetch:async (url, options)=>{
     requests.push([url,JSON.parse(options.body)]);
+    if(url.endsWith('/from-case')) assert.equal(options.headers['Idempotency-Key'],'test-request-key');
     if(url.endsWith('/validate')) return {ok:true,json:async()=>({protocol:{job_id:'job',model:'model',budget_usd:1,pair_estimate_usd:0.05,datasets:{train:{examples:10}}}})};
     return {ok:true,json:async()=>({id:'inv-test'})};
   }

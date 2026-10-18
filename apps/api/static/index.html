@@ -420,6 +420,7 @@ $("past").onchange = (e) => { if (e.target.value) { history.replaceState(null, "
 
 let validatedCaseText = null;
 let caseBusy = false;
+let caseRequestKey = null, caseRequestKeyText = null;
 function invalidateCase() {
   validatedCaseText = null;
   $("launchCase").disabled = true;
@@ -433,7 +434,8 @@ function caseControls(busy) {
 async function casePost(route, text) {
   const payload = JSON.parse(text);
   const response = await fetch(`/api/investigations/${route}`, {
-    method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload),
+    method: "POST", headers: {"Content-Type": "application/json",
+      ...(route === "from-case" ? {"Idempotency-Key": caseRequestKey} : {})}, body: JSON.stringify(payload),
   });
   const body = await response.json();
   if (!response.ok) throw new Error(typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail || body));
@@ -467,16 +469,21 @@ $("validateCase").onclick = async () => {
 $("launchCase").onclick = async () => {
   if (caseBusy || validatedCaseText === null || validatedCaseText !== $("caseRequest").value) return;
   const text = validatedCaseText;
+  if (!caseRequestKey || caseRequestKeyText !== text) {
+    caseRequestKey = crypto.randomUUID();
+    caseRequestKeyText = text;
+  }
   validatedCaseText = null;
   caseControls(true);
   try {
     const result = await casePost("from-case", text);
-    $("caseFeedback").textContent = `Started ${result.id}.`;
+    $("caseFeedback").textContent = `${result.reused ? "Reopened" : "Started"} ${result.id}.`;
+    caseRequestKey = null; caseRequestKeyText = null;
     $("caseStart").open = false;
     history.replaceState(null, "", `?id=${encodeURIComponent(result.id)}`);
     watch(result.id);
   } catch (error) {
-    $("caseFeedback").textContent = `${error.message} Check Past runs before retrying: a network error can occur after the server has started the investigation.`;
+    $("caseFeedback").textContent = `${error.message} Validate and retry the unchanged request in this page to reuse its start key. If you reload the page, check Past runs before starting again.`;
   } finally { caseControls(false); }
 };
 
