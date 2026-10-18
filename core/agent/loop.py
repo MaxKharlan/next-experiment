@@ -102,6 +102,9 @@ def investigate(
     random_seed: int = 0,
     initial_hypotheses: Sequence[Hypothesis] | None = None,
     estimate_pair_cost: Callable[[Intervention, Intervention], float] | None = None,
+    pair_factory: Callable = make_pair,
+    testable_classes: set[str] | None = None,
+    initial_evidence: Sequence[str] = (),
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
     if policy not in {"eig", "fixed", "random"}:
@@ -145,10 +148,11 @@ def investigate(
     rest = 1 - sum(probs.values())
     if rest > 1e-9:  # causes outside the list keep their share of the mass
         probs["unlisted"], classes["unlisted"] = rest, "unlisted"
-    testable = {h.id for h in hypotheses if h.fault_class in BUILDERS}
+    supported = set(BUILDERS) if testable_classes is None else testable_classes
+    testable = {h.id for h in hypotheses if h.fault_class in supported}
     remaining = {p.name: p for p in probes if p.available(ctx)}
     base_hp = dict(ctx.job_config.get("hyperparameters", {}))
-    evidence: list[str] = []
+    evidence: list[str] = list(initial_evidence)
     result = InvestigationResult(
         ctx.investigation_id, "inconclusive", hypotheses, steps=steps
     )
@@ -239,7 +243,7 @@ def investigate(
         else:
             leader_id = max(candidates, key=probs.get)
         leader = by_id[leader_id]
-        target, control = make_pair(leader, ctx)
+        target, control = pair_factory(leader, ctx)
         check_cost = (
             estimate_pair_cost(target, control)
             if estimate_pair_cost is not None

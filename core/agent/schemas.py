@@ -5,6 +5,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 FaultClass = Literal[
+    "answer_truncation",
     "truncation",
     "chat_template_mismatch",
     "contradictory_labels",

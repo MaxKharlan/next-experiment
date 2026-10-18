@@ -1,0 +1,144 @@
+"""Validate an explicit investigation case before starting a worker."""
+
+from __future__ import annotations
+
+import math
+from pathlib import Path
+from types import SimpleNamespace
+
+from pydantic import BaseModel, ConfigDict, Field
+
+from apps.api.live_protocol import ProtocolConfig, prepare_live_run, verify_datasets
+from core.case import InvestigationCase
+from core.connectors.token_factory import hyperparameter_problem
+from core.probes.level0.lengths import read_chat_jsonl
+
+
+class ExperimentSettings(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+
+    name: str = Field(min_length=1)
+    noise_sd: float = Field(gt=0)
+    min_effect: float = Field(gt=0)
+    tokens_per_example: float = Field(gt=0)
+    seeds: list[int] = Field(default_factory=lambda: [0, 1], min_length=2)
+
+
+class CaseStart(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    case: InvestigationCase
+    experiment: ExperimentSettings
+
+
+def prepare_case(request: CaseStart) -> dict:
+    case = request.case
+    if case.mode != "A":
+        raise ValueError("Explicit cases currently support Token Factory mode A")
+    if case.task != "banking77" or case.job.model != "Qwen/Qwen3-0.6B":
+        raise ValueError("Supported task/model: banking77 and Qwen/Qwen3-0.6B")
+    evaluator = case.evaluator
+    if (
+        evaluator.name != "intent_label"
+        or evaluator.metric != "exact_match"
+        or not evaluator.higher_is_better
+        or evaluator.parameters
+    ):
+        raise ValueError("Supported evaluator: intent_label / exact_match")
+    if not math.isfinite(case.budget_usd):
+        raise ValueError("The budget must be finite")
+
+    hp = case.job.hyperparameters
+    required = {
+        "learning_rate",
+        "n_epochs",
+        "lora_r",
+        "lora_alpha",
+        "batch_size",
+        "context_length",
+    }
+    if missing := required - hp.keys():
+        raise ValueError(f"Missing explicit hyperparameters: {sorted(missing)}")
+    for key, value in hp.items():
+        if key in {"lora", "packing"}:
+            continue
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+        ):
+            raise ValueError(f"{key} must be a finite number")
+    for key in ("n_epochs", "lora_r", "batch_size", "context_length"):
+        if type(hp[key]) is not int or hp[key] < 1:
+            raise ValueError(f"{key} must be a positive integer")
+    if hp["learning_rate"] <= 0 or hp["context_length"] < 8192:
+        raise ValueError("Require positive learning_rate and context_length >= 8192")
+    if hp.get("lora", True) is not True or hp.get("packing", False) is not False:
+        raise ValueError("The current runner requires LoRA without packing")
+    if problem := hyperparameter_problem(hp):
+        raise ValueError(problem)
+
+    refs = {
+        role: getattr(case.datasets, role)
+        for role in ("train", "validation", "check", "test")
+    }
+    for role, ref in refs.items():
+        path = Path(ref.ref)
+        rows = read_chat_jsonl(path)
+        if any(messages[-1]["role"] != "assistant" for _, messages in rows):
+            raise ValueError(f"{role}: every example must end with an assistant answer")
+        if any(not line.strip() for line in path.read_text().splitlines()):
+            raise ValueError(f"{role}: blank JSONL lines are not supported")
+
+    config = ProtocolConfig(
+        **request.experiment.model_dump(),
+        model=case.job.model,
+        check=refs["check"].ref,
+        budget_usd=case.budget_usd,
+    )
+    source = SimpleNamespace(
+        model=case.job.model,
+        job_id=case.job.id,
+        hyperparameters=hp,
+        train=refs["train"].ref,
+        valid=refs["validation"].ref,
+        heldout=refs["test"].ref,
+    )
+    protocol = prepare_live_run(source, config=config)
+    for role, ref in refs.items():
+        actual = protocol["datasets"][role]
+        if ref.sha256 is not None and ref.sha256 != actual["sha256"]:
+            raise ValueError(f"{role}: declared SHA-256 does not match")
+        if ref.examples is not None and ref.examples != actual["examples"]:
+            raise ValueError(f"{role}: declared example count does not match")
+
+    protocol["evaluator"] = evaluator.model_dump()
+    protocol["calibration_scope"] = "caller-specified experimental settings"
+    verify_datasets(protocol)
+
+    # Evaluation datasets and any benchmark truth stay out of model prompts.
+    agent_case = {
+        "task": case.task,
+        "symptom": case.symptom,
+        "job": case.job.model_dump(exclude={"checkpoints"}),
+        "checkpoints": case.job.checkpoints,
+    }
+    return {"agent_case": agent_case, "protocol": protocol}
+
+
+def verify_original_job(tf, prepared):
+    """Read the original job before any hypothesis calls or new training."""
+    protocol = prepared["protocol"]
+    job = tf.job(protocol["job_id"])
+    if job.status != "succeeded":
+        raise ValueError("The original job must have status succeeded")
+    if job.model != protocol["model"]:
+        raise ValueError("Original job model does not match the case")
+    actual = job.hyperparameters
+    if hasattr(actual, "model_dump"):
+        actual = actual.model_dump()
+    if not isinstance(actual, dict):
+        raise TypeError("Original job hyperparameters are unavailable")
+    for key, expected in protocol["hyperparameters"].items():
+        if actual.get(key) != expected:
+            raise ValueError(f"Original job hyperparameter mismatch: {key}")

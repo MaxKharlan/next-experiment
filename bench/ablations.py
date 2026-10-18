@@ -29,7 +29,7 @@ def fingerprint(case):
         Path("core/agent/steps.py"),
         Path("core/agent/catalog.py"),
         Path("core/agent/known_issues.py"),
-        Path("core/agent/prompts/hypotheses.v2.md"),
+        Path("core/agent/prompts/hypotheses.v3.md"),
     ]
     payload = {
         "case": asdict(case),

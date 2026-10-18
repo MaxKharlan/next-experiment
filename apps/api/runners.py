@@ -90,16 +90,23 @@ def replay_steps(report: dict[str, Any]) -> list[dict[str, Any]]:
     return steps
 
 
-def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
-    """The agent on the fault-6 case; heavy imports stay inside."""
+def live(
+    store: InvestigationStore,
+    inv_id: str,
+    backend: str,
+    *,
+    prepared: dict | None = None,
+) -> None:
+    """Run an explicit case or the existing demo case."""
+    from apps.api.case_input import verify_original_job
     from bench.cases import load_cases
     from core.agent.context import InvestigationContext
-    from core.agent.loop import investigate
     from core.agent.router import Router
     from core.config import get_settings
     from core.connectors.storage import LocalStorage
     from core.connectors.tavily import Tavily
     from core.connectors.token_factory import TokenFactory
+    from core.interventions.answer_check import investigate_with_answers
     from core.probes.weight_cache import investigation_probes, weights_enabled
     from core.telemetry.calls import CallLog
     from scripts.smoke_agent_steps import CASE, JOB_HP
@@ -113,7 +120,16 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
         )
         protocol = None
         case_data, job_hp, job_id = CASE, JOB_HP, "local"
-        if backend == "tf":
+        if prepared is not None:
+            if backend != "tf":
+                raise ValueError("Explicit cases require the tf backend")
+            case_data = prepared["agent_case"]
+            protocol = prepared["protocol"]
+            job_hp = protocol["hyperparameters"]
+            job_id = protocol["job_id"]
+            verify_datasets(protocol)
+            verify_original_job(tf, prepared)
+        elif backend == "tf":
             source = next(
                 case for case in load_cases("dev") if case.id == "fault6-lr1e-5"
             )
@@ -133,6 +149,11 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
                 "checkpoints": case_data["checkpoints"],
             },
             budget_left_usd=protocol["budget_usd"] if protocol else 1.0,
+            files=(
+                {role: entry["path"] for role, entry in protocol["datasets"].items()}
+                if protocol
+                else {}
+            ),
         )
         store.emit(
             inv_id,
@@ -144,7 +165,7 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
                 "protocol": protocol,
             },
         )
-        result = investigate(
+        result = investigate_with_answers(
             ctx,
             case_data,
             router,
@@ -267,12 +288,13 @@ def _pair_runner(
         train = Path(datasets["train"]["path"])
         valid = Path(datasets["validation"]["path"])
         check = Path(datasets["check"]["path"])
-        from core.interventions.tf_runner import TokenFactoryPairRunner
+        from core.interventions.answer_check import DataAwareTFPairRunner
         from jobs.eval_local.exact_match import evaluate_adapter
 
         def run_tf(target, control):
             verify_datasets(protocol)
-            TokenFactoryPairRunner(
+            DataAwareTFPairRunner(
+                protocol=protocol,
                 tf=tf,
                 storage=storage,
                 model=protocol["model"],
@@ -284,6 +306,7 @@ def _pair_runner(
                 prefix=f"investigations/{inv_id}/tf/{target.hypothesis_id}",
             )(target, control)
 
+        run_tf.supports_answer_drop = True
         return run_tf
 
     from jobs.kaggle.run_pair import train_arm

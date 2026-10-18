@@ -85,8 +85,9 @@ def verify_datasets(protocol):
         raise ValueError("Dataset files changed after the investigation started")
 
 
-def prepare_live_run(case, config_path=CONFIG_PATH):
-    config = ProtocolConfig.model_validate_json(Path(config_path).read_text())
+def prepare_live_run(case, config_path=CONFIG_PATH, *, config=None):
+    if config is None:
+        config = ProtocolConfig.model_validate_json(Path(config_path).read_text())
     if case.model != config.model:
         raise ValueError("The case model does not match the calibrated protocol")
     if not case.job_id.startswith("ftjob-"):

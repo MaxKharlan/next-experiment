@@ -13,7 +13,6 @@ from apps.api.live_protocol import (
     verify_datasets,
 )
 from core.agent.loop import investigate
-from core.interventions import tf_runner
 from core.interventions.pairs import Intervention
 from tests.unit.test_loop import FakeRouter, _ctx, _hyp, _runner
 
@@ -130,7 +129,9 @@ def test_tf_runner_scores_on_check_and_validates_on_validation(protocol, monkeyp
         "jobs.eval_local.exact_match",
         SimpleNamespace(evaluate_adapter=evaluate),
     )
-    monkeypatch.setattr(tf_runner, "TokenFactoryPairRunner", PairRunner)
+    monkeypatch.setattr(
+        "core.interventions.answer_check.DataAwareTFPairRunner", PairRunner
+    )
     run = runners._pair_runner(
         "tf",
         "inv-test",
