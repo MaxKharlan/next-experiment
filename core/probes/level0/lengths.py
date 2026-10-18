@@ -1,8 +1,15 @@
 """A8: a level-0 probe on example lengths in tokens against the job's context_length.
 
-Fault 1 (truncation): Token Factory cuts every training example longer than
-context_length, so the end of the answer never reaches the loss and the model learns
-to stop early or to break the format on long inputs. The probe renders each chat
+Examples longer than context_length. In mode A this is a check before a job, not
+the cause of a silent failure: Token Factory does not cut long examples, it fails
+the job while processing the dataset ("Sequence length is too long: 9013 > 8192"),
+and it refuses a context_length below 8192 (measured on 2026-10-18). A training
+file that passed a succeeded job therefore fits; the probe matters for files about
+to be trained, such as a fix or a retrain. In mode B a trainer may cut long examples
+silently, so the end of the answer never reaches the loss and the model learns to
+stop early: that is fault 1 (truncation) as the catalog describes it. Answers cut by
+the user's own preparation before the upload are a different fault
+(bench/faults/data.py) that this probe does not see. The probe renders each chat
 example with the base model's chat template, counts its tokens and compares the
 count with the limit. No GPU, no LLM: only the base model's tokenizer.
 
@@ -16,10 +23,11 @@ Limits:
   trained with the documented Token Factory default of 8192, and the raw result
   records which of the two the probe used;
 - with packing (on by default) several short examples share one sequence; the probe
-  assumes that an example longer than context_length is cut either way, and it does
-  not measure how packing splits shorter ones;
-- the probe counts the examples it sees. A long example shows the risk of truncation,
-  not that truncation made the model fail: that is the causal check's job.
+  assumes that an example longer than context_length does not fit either way, and
+  it does not measure how packing splits shorter ones;
+- the probe counts the examples it sees. A long example shows the risk of a failed
+  job or of truncation, not that truncation made the model fail: that is the causal
+  check's job.
 """
 
 from __future__ import annotations
