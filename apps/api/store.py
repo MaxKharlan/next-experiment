@@ -12,6 +12,7 @@ keeps it waiting, because nothing was running.
 
 from __future__ import annotations
 
+import copy
 import json
 import threading
 import time
@@ -88,6 +89,14 @@ class InvestigationStore:
         self._load(inv_id)
         with self.lock:
             return dict(self.meta[inv_id])
+
+    def snapshot(self, inv_id: str) -> dict[str, Any]:
+        """Copy metadata and events under one lock for a consistent report."""
+        with self.lock:
+            self._load(inv_id)
+            return copy.deepcopy(
+                {"meta": self.meta[inv_id], "events": self.events[inv_id]}
+            )
 
     def list(self) -> list[dict[str, Any]]:
         ids = {
