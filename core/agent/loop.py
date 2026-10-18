@@ -105,6 +105,7 @@ def investigate(
     pair_factory: Callable = make_pair,
     testable_classes: set[str] | None = None,
     initial_evidence: Sequence[str] = (),
+    causal_checks: bool = True,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
     if policy not in {"eig", "fixed", "random"}:
@@ -235,6 +236,16 @@ def investigate(
             add(step)
             evidence.append(f"probe:{probe_name}")
             continue
+
+        if not causal_checks:
+            add(
+                {
+                    "kind": "stop",
+                    "reason": "causal checks disabled for this ablation",
+                    "probs": _rounded(probs),
+                }
+            )
+            break
 
         if policy == "random":
             leader_id = rng.choice(candidates)

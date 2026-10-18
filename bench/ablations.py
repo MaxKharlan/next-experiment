@@ -155,7 +155,8 @@ def replay(case, frozen, policy, seed, args):
         initial_hypotheses=hypotheses,
         probes=investigation_probes(ctx),
         explain=False,
-        policy=policy,
+        policy="eig" if policy == "no_causal" else policy,
+        causal_checks=policy != "no_causal",
         random_seed=seed,
         max_interventions=2,
         intervention_cost_usd=pair_cost(case, seeds=2),
@@ -165,21 +166,38 @@ def replay(case, frozen, policy, seed, args):
     return from_investigation(result)
 
 
+VARIANT_NAMES = ("full", "no_tavily", "no_planner", "no_causal", "random")
+
+
+def selected_variants(random_seeds, selected=None):
+    names = set(VARIANT_NAMES if selected is None else selected)
+    unknown = names - set(VARIANT_NAMES)
+    if unknown:
+        raise ValueError(f"Unknown ablation variants: {sorted(unknown)}")
+    if not names:
+        raise ValueError("Select at least one ablation variant")
+    variants = [
+        ("full", "with_tavily", "eig", 0),
+        ("no_tavily", "without_tavily", "eig", 0),
+        ("no_planner", "with_tavily", "fixed", 0),
+        ("no_causal", "with_tavily", "no_causal", 0),
+    ]
+    return [row for row in variants if row[0] in names] + (
+        [(f"random_{seed}", "with_tavily", "random", seed) for seed in random_seeds]
+        if "random" in names
+        else []
+    )
+
+
 def run(args, cases):
     if args.out is None:
         raise SystemExit("--out is required for replay")
     args.out.mkdir(parents=True, exist_ok=False)
 
-    variants = [
-        ("full", "with_tavily", "eig", 0),
-        ("no_tavily", "without_tavily", "eig", 0),
-        ("no_planner", "with_tavily", "fixed", 0),
-        *[
-            (f"random_{seed}", "with_tavily", "random", seed)
-            for seed in args.random_seeds
-        ],
-    ]
+    variants = selected_variants(args.random_seeds, getattr(args, "variants", None))
     metadata = {
+        "protocol_version": 2,
+        "no_causal_rule": "EIG until the first intervention; retain ranking without confirmation",
         "belief_model": MODEL,
         "weight_probe_enabled": weights_enabled(),
         "split": args.split,
@@ -204,7 +222,7 @@ def run(args, cases):
     try:
         for case in cases:
             inputs = {}
-            for condition in ("with_tavily", "without_tavily"):
+            for condition in sorted({row[1] for row in variants}):
                 path = frozen_path(args.priors, case, condition)
                 frozen = json.loads(path.read_text())
                 if frozen["fingerprint"] != fingerprint(case):
@@ -249,6 +267,12 @@ def run(args, cases):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--prepare", action="store_true")
+    parser.add_argument(
+        "--variants",
+        nargs="+",
+        choices=VARIANT_NAMES,
+        help="Replay selected variants; random expands to --random-seeds",
+    )
     parser.add_argument("--split", choices=["dev", "heldout"], required=True)
     parser.add_argument("--artifacts", type=Path, default=Path("artifacts"))
     parser.add_argument(
@@ -260,6 +284,10 @@ def main():
     parser.add_argument("--min-effect", type=float, default=0.06)
     parser.add_argument("--random-seeds", nargs="+", type=int, default=list(range(10)))
     args = parser.parse_args()
+    if args.prepare and args.variants is not None:
+        parser.error(
+            "--variants selects replay only; preparation creates both retrieval conditions"
+        )
     if len(args.random_seeds) != len(set(args.random_seeds)):
         parser.error("Random seeds must be unique")
     cases = load_cases(args.split)

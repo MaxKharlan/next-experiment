@@ -6,6 +6,7 @@ POST /api/investigations              start a replay of a demo case or a live ru
 GET  /api/investigations              list investigations
 GET  /api/investigations/{id}         status, backend and case
 GET  /api/investigations/{id}/events  server-sent events: started, step..., finished
+GET  /api/investigations/{id}/report  persisted JSON report; ?download=true
 GET  /api/demo-cases                  saved investigations that can be replayed
 POST /api/investigations/{id}/retrain approve or decline the proposed full retrain
 With PUBLIC_DEMO=true only replays are allowed.
@@ -20,7 +21,7 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
 
@@ -29,6 +30,7 @@ from apps.api.case_input import CaseStart, prepare_case
 from apps.api.store import InvestigationStore
 from core.config import get_settings
 from core.connectors.storage import get_storage
+from core.report.investigation import build_report
 
 STATIC = Path(__file__).parent / "static"
 
@@ -144,6 +146,22 @@ def get_investigation(inv_id: str) -> dict:
         return store.get(inv_id)
     except KeyError:
         raise HTTPException(404, f"no investigation {inv_id}") from None
+
+
+@app.get("/api/investigations/{inv_id}/report")
+def investigation_report(inv_id: str, download: bool = False) -> JSONResponse:
+    try:
+        snapshot = store.snapshot(inv_id)
+    except KeyError:
+        raise HTTPException(404, f"no investigation {inv_id}") from None
+    if get_settings().public_demo and snapshot["meta"]["backend"] != "replay":
+        raise HTTPException(403, "the public demo only exposes replay reports")
+    headers = {"Cache-Control": "no-store"}
+    if download:
+        headers["Content-Disposition"] = (
+            'attachment; filename="investigation-report.json"'
+        )
+    return JSONResponse(build_report(snapshot), headers=headers)
 
 
 @app.get("/api/investigations/{inv_id}/events")

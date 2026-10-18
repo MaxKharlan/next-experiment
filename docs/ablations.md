@@ -1,17 +1,20 @@
 # Cached ablations
 
-This experiment compares four variants:
+This experiment compares five variant families:
 
 - `full`: the EIG planner with Tavily-informed hypotheses.
 - `no_tavily`: the EIG planner with hypotheses generated without retrieval.
+- `no_causal`: the same EIG policy and Tavily-informed hypotheses as `full`,
+  stopping immediately before the first causal intervention.
 - `no_planner`: every available probe in registration order, followed by
   causal checks in the original hypothesis order.
 - `random_<seed>`: probes and causal checks in seeded random order.
 
-All variants use a USD 1 budget, at most two causal checks, two seeds per arm,
-a noise SD of 0.019 and a minimum effect of 0.06.
+All variants use a USD 1 budget. Variants with causal checks allow at most two
+checks, with two seeds per arm, a noise SD of 0.019 and a minimum effect of 0.06.
+`no_causal` requests no pairs and incurs no training cost.
 
-The full, fixed-order and random-order variants share frozen hypotheses.
+The full, no-causal, fixed-order and random-order variants share frozen hypotheses.
 The no-Tavily variant has a separate frozen hypothesis generation.
 This is one LLM sample per retrieval condition; differences can include
 generation variance. Multiple independent preparations are needed to estimate it.
@@ -51,3 +54,30 @@ the EIG planner uses a separate distribution conditioned on hypotheses that
 have not been tested. Unlisted probability mass remains in that distribution.
 This scheduling distribution is recorded as `planning_probs`; it must not
 be interpreted as the reported posterior probability of a cause.
+
+## Replay without causal checks
+
+```bash
+uv run python -m bench.ablations --split dev \
+  --variants no_causal \
+  --out artifacts/ablations/dev-no-causal-v1
+```
+
+The output directory must be new. This selection needs only the matching
+`with_tavily` frozen hypotheses; it does not read pair results or require
+`without_tavily` hypotheses. Use `--variants full no_causal` for a comparison;
+the full variant requires its cached pairs. Omitting `--variants` runs every
+family. `--variants` applies only to replay, not preparation.
+
+The ablation follows the full method's probe decisions until the first
+intervention would occur. A sufficiently high prior can therefore stop it before
+any probe. It retains the ranking and probabilities at that point, with status
+`inconclusive`, no confirmed cause, no patch and no retrain proposal. Top-1, top-3
+and P(true cause) remain measurable. Zero false confirmations and zero successful
+fixes follow from this protocol; they are not evidence of better diagnosis.
+
+Protocol version 2 records the no-causal rule and selected variants. Frozen
+hypotheses must still match their source fingerprint. Older caches are rejected;
+replay does not regenerate them or make API calls. Preparing replacement
+hypotheses is a separate, potentially paid operation. Historical results remain
+unchanged. The Super-only routing ablation is still outstanding.
