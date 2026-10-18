@@ -25,6 +25,7 @@ from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
 
 from apps.api import runners
+from apps.api.case_input import CaseStart, prepare_case
 from apps.api.store import InvestigationStore
 from core.config import get_settings
 from core.connectors.storage import get_storage
@@ -71,6 +72,43 @@ def start(req: StartRequest) -> dict:
         inv_id = store.create(req.backend, {}, f"Fault 6, live ({req.backend})")
         target, args = runners.live, (store, inv_id, req.backend)
     threading.Thread(target=target, args=args, daemon=True).start()
+    return {"id": inv_id}
+
+
+def _prepare_explicit_case(req: CaseStart) -> dict:
+    if get_settings().public_demo:
+        raise HTTPException(403, "the public demo only replays saved investigations")
+    try:
+        return prepare_case(req)
+    except (OSError, ValueError, TypeError) as err:
+        raise HTTPException(422, str(err)) from None
+
+
+@app.post("/api/investigations/validate")
+def validate_case(req: CaseStart) -> dict:
+    prepared = _prepare_explicit_case(req)
+    return {
+        "valid": True,
+        "protocol": prepared["protocol"],
+        "provider_job_verified": False,
+        "training_started": False,
+    }
+
+
+@app.post("/api/investigations/from-case", status_code=202)
+def start_from_case(req: CaseStart) -> dict:
+    prepared = _prepare_explicit_case(req)
+    inv_id = store.create(
+        "tf",
+        req.case.model_dump(),
+        f"{req.case.task}: {req.case.job.id}",
+    )
+    threading.Thread(
+        target=runners.live,
+        args=(store, inv_id, "tf"),
+        kwargs={"prepared": prepared},
+        daemon=True,
+    ).start()
     return {"id": inv_id}
 
 

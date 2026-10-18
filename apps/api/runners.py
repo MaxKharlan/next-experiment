@@ -90,8 +90,15 @@ def replay_steps(report: dict[str, Any]) -> list[dict[str, Any]]:
     return steps
 
 
-def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
-    """The agent on the fault-6 case; heavy imports stay inside."""
+def live(
+    store: InvestigationStore,
+    inv_id: str,
+    backend: str,
+    *,
+    prepared: dict | None = None,
+) -> None:
+    """Run an explicit case or the existing demo case."""
+    from apps.api.case_input import verify_original_job
     from bench.cases import load_cases
     from core.agent.context import InvestigationContext
     from core.agent.router import Router
@@ -113,7 +120,16 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
         )
         protocol = None
         case_data, job_hp, job_id = CASE, JOB_HP, "local"
-        if backend == "tf":
+        if prepared is not None:
+            if backend != "tf":
+                raise ValueError("Explicit cases require the tf backend")
+            case_data = prepared["agent_case"]
+            protocol = prepared["protocol"]
+            job_hp = protocol["hyperparameters"]
+            job_id = protocol["job_id"]
+            verify_datasets(protocol)
+            verify_original_job(tf, prepared)
+        elif backend == "tf":
             source = next(
                 case for case in load_cases("dev") if case.id == "fault6-lr1e-5"
             )
