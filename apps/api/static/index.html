@@ -366,6 +366,7 @@ const METHOD = [
 let hyps = {}, probs = {}, prevProbs = {}, priors = {}, out = new Set(), proved = {}, ruled = {}, open = {};
 let source = null, current = null, entries = 0, stepOf = {}, lastCheck = null, verdictStep = null, caseHp = {}, replayOf = "";
 let trainingUsd = 0, jobs = 0, checks = 0, llmUsd = 0, model = "", proof = null;
+let recordedCalls = new Map();
 
 /* GitHub Pages has no server; scripts/build_pages.py switches the page to static mode there */
 const STATIC = document.documentElement.dataset.mode === "static";
@@ -405,6 +406,7 @@ function showMethod() {
 function reset() {
   hyps = {}; probs = {}; prevProbs = {}; priors = {}; out = new Set(); proved = {}; ruled = {}; open = {};
   trainingUsd = 0; jobs = 0; checks = 0; llmUsd = 0; model = ""; proof = null; entries = 0;
+  recordedCalls.clear();
   stepOf = {}; lastCheck = null; verdictStep = null; caseHp = {};
   document.body.classList.remove("idle");
   $("logTitle").textContent = "Experiment log";
@@ -439,7 +441,8 @@ function setMetrics() {
 const HANDLERS = {
   started: d => { replayOf = d.replay_of || ""; showCase(d.case);
     setStatus(d.replay_of ? "Replay of a saved investigation" : `Live run on ${BACKENDS[d.backend] || d.backend || "the server"}`, "Looking for the cause", "running", "running"); },
-  step: d => showStep(d),
+  llm_call: d => recordCall(d),
+  step: d => { showStep(d); if (recordedCalls.size) showCost({}); },
   finished: d => { finish(d); $("reportNote").textContent = "Completed investigation."; done(); },
   awaiting_approval: d => { showCost(d.summary); askApproval(d.plan);
     $("reportNote").textContent = "Partial report: awaiting your decision.";
@@ -774,13 +777,36 @@ function setApproval(text) {
   const h3 = entry.querySelector("h3"); h3.textContent = h3.textContent.replace(/\?$/, "");
 }
 
+function recordCall(call) {
+  if (!call.id || recordedCalls.has(call.id)) return;
+  recordedCalls.set(call.id, call);
+  showCost({});
+}
+
+function recordedCost() {
+  const models = Object.create(null);
+  let cost = 0;
+  for (const call of recordedCalls.values()) {
+    const row = models[call.model] ||= {calls: 0, tokens_in: 0, tokens_out: 0, cost_usd: 0};
+    row.calls += 1;
+    row.tokens_in += call.tokens_in;
+    row.tokens_out += call.tokens_out;
+    row.cost_usd += call.cost_usd;
+    cost += call.cost_usd;
+  }
+  return {llm_cost_usd: cost, llm_calls: models};
+}
+
 function showCost(f) {
+  // The summary and the event journal describe the same calls, not extra charges.
+  if (recordedCalls.size) f = recordedCost();
   llmUsd = f.llm_cost_usd || 0;
   const rows = Object.entries(f.llm_calls || {}).map(([m, v]) =>
     `<div class="cost-row"><div><div>${esc(m.split("/").pop())}</div><div class="muted small">${plural(v.calls, "call")}, ${(v.tokens_in + v.tokens_out).toLocaleString("en")} tokens</div></div><span class="mono">${money(v.cost_usd, 4)}</span></div>`).join("");
   const training = trainingUsd ? `<div class="cost-row"><div><div>Token Factory training</div><div class="muted small">${plural(jobs, "job")}, estimated</div></div><span class="mono">${money(trainingUsd)}</span></div>` : "";
   const total = `<div class="cost-row total"><div>${trainingUsd ? "Total, estimated" : "Total"}</div><span class="mono">${money(llmUsd + trainingUsd)}</span></div>`;
-  $("costbody").innerHTML = rows + training + total;
+  const note = recordedCalls.size ? '<p class="muted small">Recorded model responses; training costs are estimates. Pending requests and Tavily charges are excluded.</p>' : "";
+  $("costbody").innerHTML = rows + training + total + note;
   $("costbody").style.cssText = "display:grid;gap:12px";
   $("costCard").hidden = false;
   setMetrics();
