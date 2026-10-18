@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-19",
+  "request_page": "https://tokenfactory.nebius.com/sandboxes/about",
+  "form_title": "Token Factory Sandboxes Beta",
+  "required_project_id": "prefilled from the authenticated project",
+  "email": "not supplied (optional)",
+  "description": "Next Experiment is a hackathon project for diagnosing fine-tuning failures. We would like to run short agent-generated Python checks on explicitly supplied synthetic or non-sensitive JSON data. Checks must execute in isolation without API keys, host files, or network access. We currently use a restricted local Docker runner and would like to evaluate the Token Factory Sandbox API as the hosted alternative.",
+  "confirmation_text": "Ваш ответ отправлен.",
+  "activation_confirmed": false,
+  "screenshot": "beta-request-confirmation.png"
+}

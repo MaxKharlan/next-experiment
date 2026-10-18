@@ -1,0 +1,164 @@
+{
+  "scope": "pre-intervention top-1 recipe recovery; no causal-confirmation sensitivity",
+  "curves": [
+    {
+      "study": "local-mps-banking77-500-dev",
+      "fault": "lora_rank_too_small",
+      "parameter": "lora_r",
+      "value": 2,
+      "severity_ratio": 8.0,
+      "hits": 3,
+      "total": 3,
+      "top1_recovery": 1.0,
+      "wilson_95": [
+        0.43849391955098227,
+        1.0
+      ],
+      "errors": 0
+    },
+    {
+      "study": "local-mps-banking77-500-dev",
+      "fault": "lora_rank_too_small",
+      "parameter": "lora_r",
+      "value": 4,
+      "severity_ratio": 4.0,
+      "hits": 3,
+      "total": 3,
+      "top1_recovery": 1.0,
+      "wilson_95": [
+        0.43849391955098227,
+        1.0
+      ],
+      "errors": 0
+    },
+    {
+      "study": "local-mps-banking77-500-dev",
+      "fault": "lr_too_low",
+      "parameter": "learning_rate",
+      "value": 3e-06,
+      "severity_ratio": 33.333333333333336,
+      "hits": 3,
+      "total": 3,
+      "top1_recovery": 1.0,
+      "wilson_95": [
+        0.43849391955098227,
+        1.0
+      ],
+      "errors": 0
+    },
+    {
+      "study": "local-mps-banking77-500-dev",
+      "fault": "lr_too_low",
+      "parameter": "learning_rate",
+      "value": 1e-05,
+      "severity_ratio": 10.0,
+      "hits": 3,
+      "total": 3,
+      "top1_recovery": 1.0,
+      "wilson_95": [
+        0.43849391955098227,
+        1.0
+      ],
+      "errors": 0
+    },
+    {
+      "study": "tokenfactory-banking77-500-dev",
+      "fault": "too_many_epochs",
+      "parameter": "n_epochs",
+      "value": 9,
+      "severity_ratio": 3.0,
+      "hits": 3,
+      "total": 3,
+      "top1_recovery": 1.0,
+      "wilson_95": [
+        0.43849391955098227,
+        1.0
+      ],
+      "errors": 0
+    },
+    {
+      "study": "tokenfactory-banking77-500-dev",
+      "fault": "too_many_epochs",
+      "parameter": "n_epochs",
+      "value": 18,
+      "severity_ratio": 6.0,
+      "hits": 3,
+      "total": 3,
+      "top1_recovery": 1.0,
+      "wilson_95": [
+        0.43849391955098227,
+        1.0
+      ],
+      "errors": 0
+    }
+  ],
+  "thresholds": [
+    {
+      "study": "local-mps-banking77-500-dev",
+      "fault": "lora_rank_too_small",
+      "minimum_tested_value_at_observed_80_percent": 4,
+      "minimum_tested_value_with_95_percent_lower_bound_at_80_percent": null
+    },
+    {
+      "study": "local-mps-banking77-500-dev",
+      "fault": "lr_too_low",
+      "minimum_tested_value_at_observed_80_percent": 1e-05,
+      "minimum_tested_value_with_95_percent_lower_bound_at_80_percent": null
+    },
+    {
+      "study": "tokenfactory-banking77-500-dev",
+      "fault": "too_many_epochs",
+      "minimum_tested_value_at_observed_80_percent": 9,
+      "minimum_tested_value_with_95_percent_lower_bound_at_80_percent": null
+    }
+  ],
+  "healthy": [
+    {
+      "study": "local-mps-banking77-500-dev",
+      "total": 3,
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "recipe_top1_on_healthy": 0,
+      "any_fault_top1_on_healthy": 3,
+      "top1_counts": {
+        "lr_too_low": 0,
+        "too_many_epochs": 0,
+        "lora_rank_too_small": 0
+      }
+    },
+    {
+      "study": "tokenfactory-banking77-500-dev",
+      "total": 3,
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "recipe_top1_on_healthy": 3,
+      "any_fault_top1_on_healthy": 3,
+      "top1_counts": {
+        "lr_too_low": 0,
+        "too_many_epochs": 3,
+        "lora_rank_too_small": 0
+      }
+    }
+  ],
+  "cost_usd": 0.04210200000000001
+}

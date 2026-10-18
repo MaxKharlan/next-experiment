@@ -1,0 +1,12 @@
+{
+  "authorized_usd": 10,
+  "reserved_training_usd": 9.478731,
+  "training_cost_estimate_usd": 1.2311032000000002,
+  "recorded_generation_usd": 0.0012888,
+  "unrecorded_generation_reserve_usd": 0.1,
+  "billing_receipt": false,
+  "detection_inference_usd": 0.04210200000000001,
+  "recorded_total_estimate_usd": 1.2744940000000002,
+  "total_with_unrecorded_call_reserve_usd": 1.3744940000000003,
+  "remaining_from_batch_cap_usd": 8.625506
+}

@@ -1,0 +1,1 @@
+{"id": "2b34cf93a5c6", "investigation_id": "case-10", "purpose": "hypotheses", "model": "nvidia/nemotron-3-super-120b-a12b", "tokens_in": 2459, "tokens_out": 1220, "cost_usd": 0.0018356999999999998, "latency_ms": 7132, "prompt_version": "hypotheses-v3", "attempt": 1, "created_at": 1792361937.7645829}

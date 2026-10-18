@@ -1,0 +1,304 @@
+{
+  "case_id": "case-12",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 0,
+  "fault": "lr_too_low",
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 3e-06,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 3e-06,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 3.812451124191284,
+        "valid_loss": 3.370508579199746
+      },
+      {
+        "step": 24,
+        "train_loss": 2.8712053298950195,
+        "valid_loss": 3.187403020442732
+      },
+      {
+        "step": 36,
+        "train_loss": 3.279099464416504,
+        "valid_loss": 3.052766501903534
+      },
+      {
+        "step": 48,
+        "train_loss": 2.996006965637207,
+        "valid_loss": 2.9477844046266286
+      },
+      {
+        "step": 60,
+        "train_loss": 3.1820404529571533,
+        "valid_loss": 2.8589204289769166
+      },
+      {
+        "step": 63,
+        "train_loss": 2.3515806198120117,
+        "valid_loss": 2.8398792695679123
+      },
+      {
+        "step": 72,
+        "train_loss": 2.9244346618652344,
+        "valid_loss": 2.788082274014518
+      },
+      {
+        "step": 84,
+        "train_loss": 2.8829352855682373,
+        "valid_loss": 2.731422481520864
+      },
+      {
+        "step": 96,
+        "train_loss": 3.2321977615356445,
+        "valid_loss": 2.686097340295779
+      },
+      {
+        "step": 108,
+        "train_loss": 2.1035420894622803,
+        "valid_loss": 2.647915282905502
+      },
+      {
+        "step": 120,
+        "train_loss": 2.8259880542755127,
+        "valid_loss": 2.6155573793705678
+      },
+      {
+        "step": 126,
+        "train_loss": 3.767594337463379,
+        "valid_loss": 2.601544539800426
+      },
+      {
+        "step": 132,
+        "train_loss": 2.959700584411621,
+        "valid_loss": 2.5889449691612447
+      },
+      {
+        "step": 144,
+        "train_loss": 2.501619577407837,
+        "valid_loss": 2.5684889594980533
+      },
+      {
+        "step": 156,
+        "train_loss": 3.084381341934204,
+        "valid_loss": 2.554017598196964
+      },
+      {
+        "step": 168,
+        "train_loss": 2.347508430480957,
+        "valid_loss": 2.5445976785365367
+      },
+      {
+        "step": 180,
+        "train_loss": 2.337620496749878,
+        "valid_loss": 2.5395805231676807
+      },
+      {
+        "step": 189,
+        "train_loss": 3.4383819103240967,
+        "valid_loss": 2.5382254635727644
+      }
+    ],
+    "validation_exact_match": 0.03,
+    "reference_validation_exact_match": 0.43,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "lr_too_low",
+      0.6786
+    ],
+    [
+      "answer_truncation",
+      0.1071
+    ],
+    [
+      "chat_template_mismatch",
+      0.0804
+    ],
+    [
+      "lora_rank_too_small",
+      0.0536
+    ],
+    [
+      "train_val_overlap",
+      0.0268
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-12",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "lr_too_low",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.4,
+        "rationale": "The learning rate is set to 3e-6, far below the typical ~1e-4 needed for LoRA adaptation on a 0.6B model. Such a low rate yields minimal weight updates, explaining why validation loss improves only slowly and exact match remains far below the reference.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "answer_truncation",
+        "location": "training data file (assistant answers/intents)",
+        "prior": 0.2,
+        "rationale": "If the intent labels were truncated during user-side data preparation, the model would learn incomplete or malformed targets. This would allow the loss to decrease (as the model fits the truncated labels) while exact match on full intents stays very low.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "chat_template_mismatch",
+        "location": "training data format vs inference prompt",
+        "prior": 0.15,
+        "rationale": "The job used a local Transformers/PEFT pipeline without applying the Qwen chat template, whereas inference likely expects the template. A mismatch causes the model to ignore the instruction structure, hurting classification performance despite some loss reduction.",
+        "sources": []
+      },
+      {
+        "id": "h4",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.1,
+        "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for BANKING77 intent classification on Qwen3-0.6B, limiting the model's ability to deviate from the base weights and resulting in poor generalization.",
+        "sources": []
+      },
+      {
+        "id": "h5",
+        "fault_class": "train_val_overlap",
+        "location": "validation file overlapping training file",
+        "prior": 0.05,
+        "rationale": "Overlap would produce unusually low validation loss relative to test performance. While validation loss does decrease, it remains moderately high, making overlap less likely but still a possible contributor to the gap between validation and reference exact match.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "lr_too_low",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.4,
+            "rationale": "The learning rate is set to 3e-6, far below the typical ~1e-4 needed for LoRA adaptation on a 0.6B model. Such a low rate yields minimal weight updates, explaining why validation loss improves only slowly and exact match remains far below the reference.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "answer_truncation",
+            "location": "training data file (assistant answers/intents)",
+            "prior": 0.2,
+            "rationale": "If the intent labels were truncated during user-side data preparation, the model would learn incomplete or malformed targets. This would allow the loss to decrease (as the model fits the truncated labels) while exact match on full intents stays very low.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "chat_template_mismatch",
+            "location": "training data format vs inference prompt",
+            "prior": 0.15,
+            "rationale": "The job used a local Transformers/PEFT pipeline without applying the Qwen chat template, whereas inference likely expects the template. A mismatch causes the model to ignore the instruction structure, hurting classification performance despite some loss reduction.",
+            "sources": []
+          },
+          {
+            "id": "h4",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.1,
+            "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for BANKING77 intent classification on Qwen3-0.6B, limiting the model's ability to deviate from the base weights and resulting in poor generalization.",
+            "sources": []
+          },
+          {
+            "id": "h5",
+            "fault_class": "train_val_overlap",
+            "location": "validation file overlapping training file",
+            "prior": 0.05,
+            "rationale": "Overlap would produce unusually low validation loss relative to test performance. While validation loss does decrease, it remains moderately high, making overlap less likely but still a possible contributor to the gap between validation and reference exact match.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.2,
+          "h3": 0.15,
+          "h4": 0.1,
+          "h5": 0.05,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lr_range",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09825460000000001,
+        "outcome": "low",
+        "gain_bits": 0.3463,
+        "raw": {
+          "learning_rate": 3e-06,
+          "low_below": 5e-05
+        },
+        "probs": {
+          "h1": 0.6786,
+          "h2": 0.1071,
+          "h3": 0.0804,
+          "h4": 0.0536,
+          "h5": 0.0268,
+          "unlisted": 0.0536
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.6786,
+          "h2": 0.1071,
+          "h3": 0.0804,
+          "h4": 0.0536,
+          "h5": 0.0268,
+          "unlisted": 0.0536
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0017454,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2455,
+        "tokens_out": 1121,
+        "cost_usd": 0.0017454,
+        "latency_ms": 6814
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0017454
+}

@@ -1,6 +1,23 @@
 import pytest
 
-from core.planner.job_cost import LLAMA_8B, estimate_job, price_per_m
+from core.planner.job_cost import (
+    LLAMA_8B,
+    MEASURED_DURATIONS,
+    DurationModel,
+    estimate_job,
+    price_per_m,
+)
+
+
+def test_model_specific_duration_and_explicit_override(monkeypatch):
+    model = "Qwen/Qwen3-0.6B"
+    measured = DurationModel(train_fixed_s=900)
+    monkeypatch.setitem(MEASURED_DURATIONS, model, measured)
+    assert estimate_job(model, 100, 50).seconds == measured.total_seconds(5000, 1)
+    assert estimate_job(
+        model, 100, 50, duration=LLAMA_8B
+    ).seconds == LLAMA_8B.total_seconds(5000, 1)
+
 
 LLAMA = "meta-llama/Llama-3.1-8B-Instruct"
 

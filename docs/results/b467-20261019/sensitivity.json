@@ -1,0 +1,342 @@
+[
+  {
+    "study": "local-mps-banking77-500-dev",
+    "healthy": [
+      {
+        "study": "local-mps-banking77-500-dev",
+        "seed": 0,
+        "fault": null,
+        "hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 0.0001,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "exact_match": 0.43,
+        "source": "docs/results/loss-classifier-local-20261018/inputs/healthy-s0/summary.json",
+        "sha256": "e02a4a8164688c351783655a97ab9def9a0b8844025e75069358ea33960b15cd"
+      },
+      {
+        "study": "local-mps-banking77-500-dev",
+        "seed": 1,
+        "fault": null,
+        "hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 0.0001,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "exact_match": 0.41,
+        "source": "docs/results/loss-classifier-local-20261018/inputs/healthy-s1/summary.json",
+        "sha256": "8a2e8e0032e4de7aaf311b6a7808819ec7ad41e9564eac9807dcc60629a4e9b6"
+      },
+      {
+        "study": "local-mps-banking77-500-dev",
+        "seed": 2,
+        "fault": null,
+        "hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 0.0001,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "exact_match": 0.42,
+        "source": "docs/results/loss-classifier-local-20261018/inputs/healthy-s2/summary.json",
+        "sha256": "868309303dc9d66be341752ab9a38f8c338f5c9d6f780a0aad76ea4cbb86d1ab"
+      }
+    ],
+    "curves": [
+      {
+        "fault": "lora_rank_too_small",
+        "parameter": "lora_r",
+        "value": 2,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "scores": [
+          0.43,
+          0.39,
+          0.43
+        ],
+        "mean_exact_match": 0.4166666666666667,
+        "mean_change_from_healthy": -0.003333333333333318,
+        "seed_sd": 0.023094010767585018
+      },
+      {
+        "fault": "lora_rank_too_small",
+        "parameter": "lora_r",
+        "value": 4,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "scores": [
+          0.44,
+          0.41,
+          0.4
+        ],
+        "mean_exact_match": 0.4166666666666667,
+        "mean_change_from_healthy": -0.003333333333333318,
+        "seed_sd": 0.020816659994661323
+      },
+      {
+        "fault": "lr_too_low",
+        "parameter": "learning_rate",
+        "value": 3e-06,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "scores": [
+          0.03,
+          0.03,
+          0.03
+        ],
+        "mean_exact_match": 0.03,
+        "mean_change_from_healthy": -0.39,
+        "seed_sd": 0.0
+      },
+      {
+        "fault": "lr_too_low",
+        "parameter": "learning_rate",
+        "value": 1e-05,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "scores": [
+          0.05,
+          0.05,
+          0.05
+        ],
+        "mean_exact_match": 0.05,
+        "mean_change_from_healthy": -0.37,
+        "seed_sd": 0.0
+      }
+    ],
+    "scope": "descriptive validation sensitivity; no causal significance or held-out claim"
+  },
+  {
+    "study": "tokenfactory-banking77-500-dev",
+    "healthy": [
+      {
+        "run": "healthy-s0",
+        "fault": null,
+        "strength": null,
+        "seed": 0,
+        "model": "Qwen/Qwen3-0.6B",
+        "hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 0.0001,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "job_id": "ftjob-782cf8ba66bd4f229c7e5c436067dce9",
+        "status": "succeeded",
+        "error": null,
+        "trained_tokens": 84984,
+        "cost_usd": 0.0339936,
+        "steps": [
+          63,
+          126,
+          189
+        ],
+        "train_loss": [
+          0.3907579183578491,
+          0.14100448787212372,
+          0.024205902591347694
+        ],
+        "valid_loss": [
+          0.8380046486854553,
+          0.008777881041169167,
+          0.2673508822917938
+        ],
+        "seconds": {
+          "datasets": 46,
+          "training_started": 239,
+          "training_completed": 645,
+          "finished": 721
+        },
+        "study": "tokenfactory-banking77-500-dev",
+        "exact_match": 0.67,
+        "evaluation": "validation",
+        "examples": 100,
+        "validation_sha256": "01456b6f587377b09dbf7591b3b289ba6a1771d6df48edbbed3a862e04dcaced",
+        "source_sha256": "4c07e3a0374c1d2fdfb1077c39038e047cb261eef340c0f7f408e9988931b669",
+        "evaluation_sha256": "73ade97ca64993adc12539ae84b14db9528eed913686679656c6fb652bd44807"
+      },
+      {
+        "run": "healthy-s1",
+        "fault": null,
+        "strength": null,
+        "seed": 1,
+        "model": "Qwen/Qwen3-0.6B",
+        "hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 0.0001,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "job_id": "ftjob-8c2df2423af349d79df7975bb10a6961",
+        "status": "succeeded",
+        "error": null,
+        "trained_tokens": 84984,
+        "cost_usd": 0.0339936,
+        "steps": [
+          63,
+          126,
+          189
+        ],
+        "train_loss": [
+          0.3619886338710785,
+          0.10623057186603546,
+          0.02368343435227871
+        ],
+        "valid_loss": [
+          0.35793986916542053,
+          0.0075403619557619095,
+          0.27196836471557617
+        ],
+        "seconds": {
+          "datasets": 54,
+          "training_started": 253,
+          "training_completed": 649,
+          "finished": 725
+        },
+        "study": "tokenfactory-banking77-500-dev",
+        "exact_match": 0.66,
+        "evaluation": "validation",
+        "examples": 100,
+        "validation_sha256": "01456b6f587377b09dbf7591b3b289ba6a1771d6df48edbbed3a862e04dcaced",
+        "source_sha256": "0d505c786d089c5c0755956bb6404d5271212236b4cc0c80d4144e1d1ddc53e8",
+        "evaluation_sha256": "0f36cbc919ee2bdc894c14188f551b8a8d6dbe1ecf48f266ae698266ce0be50f"
+      },
+      {
+        "run": "healthy-s2",
+        "fault": null,
+        "strength": null,
+        "seed": 2,
+        "model": "Qwen/Qwen3-0.6B",
+        "hyperparameters": {
+          "n_epochs": 3,
+          "batch_size": 8,
+          "learning_rate": 0.0001,
+          "warmup_ratio": 0.0,
+          "weight_decay": 0.0,
+          "max_grad_norm": 1.0,
+          "lora_r": 16,
+          "lora_alpha": 16,
+          "lora_dropout": 0.05,
+          "context_length": 8192
+        },
+        "job_id": "ftjob-b10407c248e743aea87e53394522072e",
+        "status": "succeeded",
+        "error": null,
+        "trained_tokens": 84984,
+        "cost_usd": 0.0339936,
+        "steps": [
+          63,
+          126,
+          189
+        ],
+        "train_loss": [
+          0.35642850399017334,
+          0.11274219304323196,
+          0.020925775170326233
+        ],
+        "valid_loss": [
+          0.4343046545982361,
+          0.010066111572086811,
+          0.06530537456274033
+        ],
+        "seconds": {
+          "datasets": 57,
+          "training_started": 255,
+          "training_completed": 659,
+          "finished": 734
+        },
+        "study": "tokenfactory-banking77-500-dev",
+        "exact_match": 0.69,
+        "evaluation": "validation",
+        "examples": 100,
+        "validation_sha256": "01456b6f587377b09dbf7591b3b289ba6a1771d6df48edbbed3a862e04dcaced",
+        "source_sha256": "07a9c557aeb0a12ec17c1df4c7e5febab9485fa931438f128a9016bd4b5cbecf",
+        "evaluation_sha256": "38fd4b4e2e246658634515e67f6bfa3325a3305c28e9a532def2e7e1477d07ba"
+      }
+    ],
+    "curves": [
+      {
+        "fault": "too_many_epochs",
+        "parameter": "n_epochs",
+        "value": 9,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "scores": [
+          0.69,
+          0.63,
+          0.67
+        ],
+        "mean_exact_match": 0.6633333333333333,
+        "mean_change_from_healthy": -0.010000000000000009,
+        "seed_sd": 0.030550504633038912
+      },
+      {
+        "fault": "too_many_epochs",
+        "parameter": "n_epochs",
+        "value": 18,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "scores": [
+          0.7,
+          0.68,
+          0.68
+        ],
+        "mean_exact_match": 0.6866666666666666,
+        "mean_change_from_healthy": 0.013333333333333345,
+        "seed_sd": 0.011547005383792462
+      }
+    ],
+    "scope": "descriptive validation sensitivity; no causal significance or held-out claim"
+  }
+]

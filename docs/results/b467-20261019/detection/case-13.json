@@ -1,0 +1,258 @@
+{
+  "case_id": "case-13",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 1,
+  "fault": "lr_too_low",
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 3e-06,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 3e-06,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.921839952468872,
+        "valid_loss": 3.365545474842891
+      },
+      {
+        "step": 24,
+        "train_loss": 2.1652259826660156,
+        "valid_loss": 3.1842904842939954
+      },
+      {
+        "step": 36,
+        "train_loss": 3.7752013206481934,
+        "valid_loss": 3.0489397216963288
+      },
+      {
+        "step": 48,
+        "train_loss": 2.5632941722869873,
+        "valid_loss": 2.9435102867600103
+      },
+      {
+        "step": 60,
+        "train_loss": 2.9764137268066406,
+        "valid_loss": 2.858887608419329
+      },
+      {
+        "step": 63,
+        "train_loss": 3.3315184116363525,
+        "valid_loss": 2.8402883222439144
+      },
+      {
+        "step": 72,
+        "train_loss": 2.3278074264526367,
+        "valid_loss": 2.791310152751487
+      },
+      {
+        "step": 84,
+        "train_loss": 2.3831262588500977,
+        "valid_loss": 2.7338765079543093
+      },
+      {
+        "step": 96,
+        "train_loss": 2.6879940032958984,
+        "valid_loss": 2.685651786775397
+      },
+      {
+        "step": 108,
+        "train_loss": 2.391475200653076,
+        "valid_loss": 2.6446115510575723
+      },
+      {
+        "step": 120,
+        "train_loss": 3.2287871837615967,
+        "valid_loss": 2.6119573316318077
+      },
+      {
+        "step": 126,
+        "train_loss": 2.8733317852020264,
+        "valid_loss": 2.5984165152447334
+      },
+      {
+        "step": 132,
+        "train_loss": 2.8803939819335938,
+        "valid_loss": 2.58672446372525
+      },
+      {
+        "step": 144,
+        "train_loss": 2.462108850479126,
+        "valid_loss": 2.5670612734436187
+      },
+      {
+        "step": 156,
+        "train_loss": 2.602304458618164,
+        "valid_loss": 2.5522149445226527
+      },
+      {
+        "step": 168,
+        "train_loss": 2.754624366760254,
+        "valid_loss": 2.542322054005309
+      },
+      {
+        "step": 180,
+        "train_loss": 2.649059534072876,
+        "valid_loss": 2.537075170734585
+      },
+      {
+        "step": 189,
+        "train_loss": 3.105172634124756,
+        "valid_loss": 2.5357295718769097
+      }
+    ],
+    "validation_exact_match": 0.03,
+    "reference_validation_exact_match": 0.41,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "lr_too_low",
+      0.7215
+    ],
+    [
+      "lora_rank_too_small",
+      0.1266
+    ],
+    [
+      "distribution_shift",
+      0.0759
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-13",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "lr_too_low",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.45,
+        "rationale": "The learning rate is set to 3e-06, which is far below the Token Factory default of 1e-5 and the typical LoRA rate (~1e-4). Such a tiny step size yields minimal parameter updates, explaining why validation loss only slowly declines and exact match remains near zero.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.25,
+        "rationale": "A LoRA rank of 16 may be insufficient to capture the nuances of intent classification for BANKING77, especially with a small model. If the rank is too low, the model\u2019s expressive power is limited, causing quality to stall despite training.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "distribution_shift",
+        "location": "validation file vs training file",
+        "prior": 0.15,
+        "rationale": "Validation loss decreases while exact match stays extremely low, suggesting the model learns to fit the training distribution but fails on the validation set, indicating a shift between training and validation data (e.g., different intent balance or preprocessing).",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "lr_too_low",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.45,
+            "rationale": "The learning rate is set to 3e-06, which is far below the Token Factory default of 1e-5 and the typical LoRA rate (~1e-4). Such a tiny step size yields minimal parameter updates, explaining why validation loss only slowly declines and exact match remains near zero.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.25,
+            "rationale": "A LoRA rank of 16 may be insufficient to capture the nuances of intent classification for BANKING77, especially with a small model. If the rank is too low, the model\u2019s expressive power is limited, causing quality to stall despite training.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "distribution_shift",
+            "location": "validation file vs training file",
+            "prior": 0.15,
+            "rationale": "Validation loss decreases while exact match stays extremely low, suggesting the model learns to fit the training distribution but fails on the validation set, indicating a shift between training and validation data (e.g., different intent balance or preprocessing).",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.45,
+          "h2": 0.25,
+          "h3": 0.15,
+          "unlisted": 0.15
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lr_range",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09788830000000001,
+        "outcome": "low",
+        "gain_bits": 0.3616,
+        "raw": {
+          "learning_rate": 3e-06,
+          "low_below": 5e-05
+        },
+        "probs": {
+          "h1": 0.7215,
+          "h2": 0.1266,
+          "h3": 0.0759,
+          "unlisted": 0.0759
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.7215,
+          "h2": 0.1266,
+          "h3": 0.0759,
+          "unlisted": 0.0759
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0021116999999999998,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2458,
+        "tokens_out": 1527,
+        "cost_usd": 0.0021116999999999998,
+        "latency_ms": 7433
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0021116999999999998
+}

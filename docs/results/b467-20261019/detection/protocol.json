@@ -1,0 +1,11 @@
+{
+  "scope": "frozen agent ranking before causal intervention; no confirmation claim",
+  "case_sha256": "bd4db360676475633f0c949d367034626ee9dda2798fda23df2f5c0d92e36acb",
+  "cases": 24,
+  "budget_usd": 2.4,
+  "per_case_reserve_usd": 0.1,
+  "hypothesis_prompt": "hypotheses-v3",
+  "causal_checks": false,
+  "explain": false,
+  "threshold": 0.6
+}

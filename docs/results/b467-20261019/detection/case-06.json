@@ -1,0 +1,258 @@
+{
+  "case_id": "case-06",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 0,
+  "fault": "lora_rank_too_small",
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 2,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 2,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.594080686569214,
+        "valid_loss": 2.070313487276935
+      },
+      {
+        "step": 24,
+        "train_loss": 1.732248306274414,
+        "valid_loss": 1.7217627441723076
+      },
+      {
+        "step": 36,
+        "train_loss": 1.6431858539581299,
+        "valid_loss": 1.4739482538812112
+      },
+      {
+        "step": 48,
+        "train_loss": 1.4205493927001953,
+        "valid_loss": 1.2312987068755514
+      },
+      {
+        "step": 60,
+        "train_loss": 1.0928974151611328,
+        "valid_loss": 1.0503111804691738
+      },
+      {
+        "step": 63,
+        "train_loss": 0.9872686266899109,
+        "valid_loss": 1.0136456726581458
+      },
+      {
+        "step": 72,
+        "train_loss": 0.8594107627868652,
+        "valid_loss": 0.950590394987356
+      },
+      {
+        "step": 84,
+        "train_loss": 0.810678243637085,
+        "valid_loss": 0.8346774881118096
+      },
+      {
+        "step": 96,
+        "train_loss": 0.5814676284790039,
+        "valid_loss": 0.7583612121591632
+      },
+      {
+        "step": 108,
+        "train_loss": 0.19337986409664154,
+        "valid_loss": 0.7118717542030667
+      },
+      {
+        "step": 120,
+        "train_loss": 0.5693917870521545,
+        "valid_loss": 0.6522900411146599
+      },
+      {
+        "step": 126,
+        "train_loss": 1.1822460889816284,
+        "valid_loss": 0.628225736670046
+      },
+      {
+        "step": 132,
+        "train_loss": 0.34534111618995667,
+        "valid_loss": 0.6156905115450788
+      },
+      {
+        "step": 144,
+        "train_loss": 0.2258385717868805,
+        "valid_loss": 0.5887560164368393
+      },
+      {
+        "step": 156,
+        "train_loss": 0.2521808445453644,
+        "valid_loss": 0.5560766507515171
+      },
+      {
+        "step": 168,
+        "train_loss": 0.22227254509925842,
+        "valid_loss": 0.5356408899662478
+      },
+      {
+        "step": 180,
+        "train_loss": 0.3664509952068329,
+        "valid_loss": 0.528131482385149
+      },
+      {
+        "step": 189,
+        "train_loss": 0.480912983417511,
+        "valid_loss": 0.524246890372878
+      }
+    ],
+    "validation_exact_match": 0.43,
+    "reference_validation_exact_match": 0.43,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "lora_rank_too_small",
+      0.85
+    ],
+    [
+      "distribution_shift",
+      0.075
+    ],
+    [
+      "contradictory_labels",
+      0.05
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-06",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.4,
+        "rationale": "LoRA rank set to 2 may be too low to capture the intent classification patterns in BANKING77, resulting in minimal adaptation despite decreasing train loss; validation exact match equals the reference, indicating the model did not improve over the base.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "distribution_shift",
+        "location": "training data file",
+        "prior": 0.3,
+        "rationale": "If the training examples differ from the production intents used for evaluation, the model can fit the training set (loss decreasing) yet fail to generalize, leaving validation performance unchanged from the reference.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "contradictory_labels",
+        "location": "training data file",
+        "prior": 0.2,
+        "rationale": "Noisy or conflicting labels for similar utterances would cause the model to converge to a suboptimal solution, manifesting as low training loss but stagnant validation metrics and no gain over the base model.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.4,
+            "rationale": "LoRA rank set to 2 may be too low to capture the intent classification patterns in BANKING77, resulting in minimal adaptation despite decreasing train loss; validation exact match equals the reference, indicating the model did not improve over the base.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "distribution_shift",
+            "location": "training data file",
+            "prior": 0.3,
+            "rationale": "If the training examples differ from the production intents used for evaluation, the model can fit the training set (loss decreasing) yet fail to generalize, leaving validation performance unchanged from the reference.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "contradictory_labels",
+            "location": "training data file",
+            "prior": 0.2,
+            "rationale": "Noisy or conflicting labels for similar utterances would cause the model to converge to a suboptimal solution, manifesting as low training loss but stagnant validation metrics and no gain over the base model.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "h3": 0.2,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09836170000000001,
+        "outcome": "low",
+        "gain_bits": 0.4456,
+        "raw": {
+          "lora_r": 2,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.85,
+          "h2": 0.075,
+          "h3": 0.05,
+          "unlisted": 0.025
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.85,
+          "h2": 0.075,
+          "h3": 0.05,
+          "unlisted": 0.025
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0016383,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2467,
+        "tokens_out": 998,
+        "cost_usd": 0.0016383,
+        "latency_ms": 6361
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0016383
+}

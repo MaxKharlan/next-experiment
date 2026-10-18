@@ -1,0 +1,255 @@
+{
+  "case_id": "case-21",
+  "study": "tokenfactory-banking77-500-dev",
+  "seed": 2,
+  "fault": null,
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "Token Factory",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.35642850399017334,
+        "valid_loss": 0.4343046545982361
+      },
+      {
+        "step": 126,
+        "train_loss": 0.11274219304323196,
+        "valid_loss": 0.010066111572086811
+      },
+      {
+        "step": 189,
+        "train_loss": 0.020925775170326233,
+        "valid_loss": 0.06530537456274033
+      }
+    ],
+    "validation_exact_match": 0.69,
+    "reference_validation_exact_match": 0.69,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.3719
+    ],
+    [
+      "distribution_shift",
+      0.2645
+    ],
+    [
+      "train_val_overlap",
+      0.1983
+    ],
+    [
+      "lora_rank_too_small",
+      0.0331
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-21",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "train_val_overlap",
+        "location": "validation file overlaps training data",
+        "prior": 0.3,
+        "rationale": "Validation loss becomes unusually low after epoch 2 (0.01) then rises in epoch 3, a pattern typical when validation examples are also seen during training, causing the model to memorize them. The exact\u2011match score stays equal to the reference, suggesting the overlap does not improve generalisation.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "too_many_epochs",
+        "location": "hyperparameters.n_epochs = 3",
+        "prior": 0.25,
+        "rationale": "With three epochs the validation loss reaches a minimum at epoch 2 and increases at epoch 3, indicating over\u2011training. Too many epochs can cause the model to repeat training answers without gaining new generalisation.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "distribution_shift",
+        "location": "validation file content vs production requests",
+        "prior": 0.2,
+        "rationale": "The validation exact\u2011match matches the reference baseline, yet the validation loss shows over\u2011fitting, implying the validation set may not represent the true distribution of banking intents the model will see in practice.",
+        "sources": []
+      },
+      {
+        "id": "h4",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r = 16",
+        "prior": 0.15,
+        "rationale": "A LoRA rank of 16 may be insufficient to capture the nuances of intent classification for Qwen\u20110.6B, resulting in little or no improvement over the base model, which aligns with the unchanged exact\u2011match score.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "train_val_overlap",
+            "location": "validation file overlaps training data",
+            "prior": 0.3,
+            "rationale": "Validation loss becomes unusually low after epoch 2 (0.01) then rises in epoch 3, a pattern typical when validation examples are also seen during training, causing the model to memorize them. The exact\u2011match score stays equal to the reference, suggesting the overlap does not improve generalisation.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "too_many_epochs",
+            "location": "hyperparameters.n_epochs = 3",
+            "prior": 0.25,
+            "rationale": "With three epochs the validation loss reaches a minimum at epoch 2 and increases at epoch 3, indicating over\u2011training. Too many epochs can cause the model to repeat training answers without gaining new generalisation.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "distribution_shift",
+            "location": "validation file content vs production requests",
+            "prior": 0.2,
+            "rationale": "The validation exact\u2011match matches the reference baseline, yet the validation loss shows over\u2011fitting, implying the validation set may not represent the true distribution of banking intents the model will see in practice.",
+            "sources": []
+          },
+          {
+            "id": "h4",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r = 16",
+            "prior": 0.15,
+            "rationale": "A LoRA rank of 16 may be insufficient to capture the nuances of intent classification for Qwen\u20110.6B, resulting in little or no improvement over the base model, which aligns with the unchanged exact\u2011match score.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.3,
+          "h2": 0.25,
+          "h3": 0.2,
+          "h4": 0.15,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0985201,
+        "outcome": "ok",
+        "gain_bits": 0.2561,
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.3429,
+          "h2": 0.2857,
+          "h3": 0.2286,
+          "h4": 0.0286,
+          "unlisted": 0.1143
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "epoch_count",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0985201,
+        "outcome": "ok",
+        "gain_bits": 0.2721,
+        "raw": {
+          "n_epochs": 3,
+          "high_from": 10
+        },
+        "probs": {
+          "h1": 0.4465,
+          "h2": 0.0698,
+          "h3": 0.2977,
+          "h4": 0.0372,
+          "unlisted": 0.1488
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "loss_curve",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0985201,
+        "outcome": "overfit",
+        "gain_bits": 0.1297,
+        "raw": {
+          "train_loss": [
+            0.35642850399017334,
+            0.11274219304323196,
+            0.020925775170326233
+          ],
+          "valid_loss": [
+            0.4343046545982361,
+            0.010066111572086811,
+            0.06530537456274033
+          ],
+          "train_drop": 0.9412903992355697
+        },
+        "probs": {
+          "h1": 0.1983,
+          "h2": 0.3719,
+          "h3": 0.2645,
+          "h4": 0.0331,
+          "unlisted": 0.1322
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.1983,
+          "h2": 0.3719,
+          "h3": 0.2645,
+          "h4": 0.0331,
+          "unlisted": 0.1322
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0014799000000000001,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 1540,
+        "tokens_out": 1131,
+        "cost_usd": 0.0014799000000000001,
+        "latency_ms": 7440
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0014799000000000001
+}

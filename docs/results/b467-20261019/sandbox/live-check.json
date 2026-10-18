@@ -1,0 +1,37 @@
+{
+  "result": {
+    "question": "Count examples and invalid JSON answers. Return total and invalid_json integers.",
+    "code": "import json\ndata = DATA\ntotal = len(data.get(\"examples\", []))\ninvalid = 0\nfor ex in data.get(\"examples\", []):\n    ans = ex.get(\"answer\")\n    if isinstance(ans, str):\n        try:\n            json.loads(ans)\n        except Exception:\n            invalid += 1\n    else:\n        invalid += 1\nresult = {\"total\": total, \"invalid_json\": invalid}\nprint(json.dumps(result))",
+    "input_sha256": "d1c69046df619edb0a7ea8b2a192abe5db84bf54dc8894cbe914f41bd680caa2",
+    "prompt_version": "probe_code-v1",
+    "causal_confirmation": false,
+    "execution": {
+      "exit_code": 0,
+      "stdout": "{\"total\": 3, \"invalid_json\": 1}\n",
+      "stderr": "",
+      "timed_out": false,
+      "output_limited": false
+    },
+    "status": "completed",
+    "observations": {
+      "total": 3,
+      "invalid_json": 1
+    }
+  },
+  "cost_usd": 0.0004005,
+  "calls": [
+    {
+      "id": "893ed54c8582",
+      "investigation_id": "b4-lines-20261019",
+      "purpose": "probe_code",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 336,
+      "tokens_out": 333,
+      "cost_usd": 0.0004005,
+      "latency_ms": 2815,
+      "prompt_version": "probe_code-v1",
+      "attempt": 1,
+      "created_at": 1792358389.016586
+    }
+  ]
+}

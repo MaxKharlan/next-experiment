@@ -1,0 +1,325 @@
+{
+  "case_id": "case-10",
+  "study": "local-mps-banking77-500-dev",
+  "seed": 1,
+  "fault": "lr_too_low",
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 1e-05,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "local Transformers/PEFT",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 1e-05,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.674201250076294,
+        "valid_loss": 2.9825424715976587
+      },
+      {
+        "step": 24,
+        "train_loss": 1.8088268041610718,
+        "valid_loss": 2.678344857772725
+      },
+      {
+        "step": 36,
+        "train_loss": 3.1303517818450928,
+        "valid_loss": 2.4835044769632737
+      },
+      {
+        "step": 48,
+        "train_loss": 1.9197381734848022,
+        "valid_loss": 2.3578843438385317
+      },
+      {
+        "step": 60,
+        "train_loss": 2.258777141571045,
+        "valid_loss": 2.274484190764843
+      },
+      {
+        "step": 63,
+        "train_loss": 2.480307102203369,
+        "valid_loss": 2.2584684459155038
+      },
+      {
+        "step": 72,
+        "train_loss": 1.933993935585022,
+        "valid_loss": 2.217020564431312
+      },
+      {
+        "step": 84,
+        "train_loss": 1.846142053604126,
+        "valid_loss": 2.142824800222512
+      },
+      {
+        "step": 96,
+        "train_loss": 2.1352663040161133,
+        "valid_loss": 2.097875797908578
+      },
+      {
+        "step": 108,
+        "train_loss": 1.8116390705108643,
+        "valid_loss": 2.065198577490429
+      },
+      {
+        "step": 120,
+        "train_loss": 2.5757274627685547,
+        "valid_loss": 2.0383807900767996
+      },
+      {
+        "step": 126,
+        "train_loss": 1.882871389389038,
+        "valid_loss": 2.0250510849408654
+      },
+      {
+        "step": 132,
+        "train_loss": 2.2088370323181152,
+        "valid_loss": 2.0136215692798562
+      },
+      {
+        "step": 144,
+        "train_loss": 1.8601807355880737,
+        "valid_loss": 1.9940023802270825
+      },
+      {
+        "step": 156,
+        "train_loss": 1.7958698272705078,
+        "valid_loss": 1.9787717583595505
+      },
+      {
+        "step": 168,
+        "train_loss": 1.9738537073135376,
+        "valid_loss": 1.9696718230343504
+      },
+      {
+        "step": 180,
+        "train_loss": 1.910996675491333,
+        "valid_loss": 1.9647647236417605
+      },
+      {
+        "step": 189,
+        "train_loss": 2.444669008255005,
+        "valid_loss": 1.9633825855367135
+      }
+    ],
+    "validation_exact_match": 0.05,
+    "reference_validation_exact_match": 0.41,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "lr_too_low",
+      0.6404
+    ],
+    [
+      "contradictory_labels",
+      0.1011
+    ],
+    [
+      "distribution_shift",
+      0.1011
+    ],
+    [
+      "other",
+      0.0674
+    ],
+    [
+      "lora_rank_too_small",
+      0.0225
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-10",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "lr_too_low",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.3,
+        "rationale": "The default learning rate for Token Factory is 1e-5, but LoRA fine-tuning typically requires around 1e-4 to move weights sufficiently from the base model. With LR=1e-5 the model may barely change, yielding low classification accuracy despite decreasing training/validation loss.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.2,
+        "rationale": "A LoRA rank of 16 may be too low to capture the nuanced patterns needed for BANKING77 intent classification on a 0.6B model, causing the adapted model to stall below expected performance levels.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "contradictory_labels",
+        "location": "training data (e.g., training.json)",
+        "prior": 0.15,
+        "rationale": "If similar utterances are labeled with different intents in the training set, the model receives conflicting signals, leading to unstable predictions and low exact-match accuracy while the loss can still decrease as it averages over contradictions.",
+        "sources": []
+      },
+      {
+        "id": "h4",
+        "fault_class": "distribution_shift",
+        "location": "training data vs evaluation data",
+        "prior": 0.15,
+        "rationale": "The training examples may not resemble the real banking queries used for evaluation (different phrasing, domain shift), so the model achieves low validation loss on the training distribution but fails on the actual task.",
+        "sources": []
+      },
+      {
+        "id": "h5",
+        "fault_class": "other",
+        "location": "training objective (language modeling loss vs classification)",
+        "prior": 0.1,
+        "rationale": "The job may be optimizing next-token loss rather than a classification objective, so loss improves while the model does not learn to produce the correct intent label, resulting in poor exact-match despite lowered loss.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "lr_too_low",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.3,
+            "rationale": "The default learning rate for Token Factory is 1e-5, but LoRA fine-tuning typically requires around 1e-4 to move weights sufficiently from the base model. With LR=1e-5 the model may barely change, yielding low classification accuracy despite decreasing training/validation loss.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.2,
+            "rationale": "A LoRA rank of 16 may be too low to capture the nuanced patterns needed for BANKING77 intent classification on a 0.6B model, causing the adapted model to stall below expected performance levels.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "contradictory_labels",
+            "location": "training data (e.g., training.json)",
+            "prior": 0.15,
+            "rationale": "If similar utterances are labeled with different intents in the training set, the model receives conflicting signals, leading to unstable predictions and low exact-match accuracy while the loss can still decrease as it averages over contradictions.",
+            "sources": []
+          },
+          {
+            "id": "h4",
+            "fault_class": "distribution_shift",
+            "location": "training data vs evaluation data",
+            "prior": 0.15,
+            "rationale": "The training examples may not resemble the real banking queries used for evaluation (different phrasing, domain shift), so the model achieves low validation loss on the training distribution but fails on the actual task.",
+            "sources": []
+          },
+          {
+            "id": "h5",
+            "fault_class": "other",
+            "location": "training objective (language modeling loss vs classification)",
+            "prior": 0.1,
+            "rationale": "The job may be optimizing next-token loss rather than a classification objective, so loss improves while the model does not learn to produce the correct intent label, resulting in poor exact-match despite lowered loss.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.3,
+          "h2": 0.2,
+          "h3": 0.15,
+          "h4": 0.15,
+          "h5": 0.1,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09816430000000001,
+        "outcome": "ok",
+        "gain_bits": 0.3141,
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.36,
+          "h2": 0.04,
+          "h3": 0.18,
+          "h4": 0.18,
+          "h5": 0.12,
+          "unlisted": 0.12
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lr_range",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.09816430000000001,
+        "outcome": "low",
+        "gain_bits": 0.3295,
+        "raw": {
+          "learning_rate": 1e-05,
+          "low_below": 5e-05
+        },
+        "probs": {
+          "h1": 0.6404,
+          "h2": 0.0225,
+          "h3": 0.1011,
+          "h4": 0.1011,
+          "h5": 0.0674,
+          "unlisted": 0.0674
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.6404,
+          "h2": 0.0225,
+          "h3": 0.1011,
+          "h4": 0.1011,
+          "h5": 0.0674,
+          "unlisted": 0.0674
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0018356999999999998,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2459,
+        "tokens_out": 1220,
+        "cost_usd": 0.0018356999999999998,
+        "latency_ms": 7132
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0018356999999999998
+}

@@ -1,0 +1,63 @@
+{
+  "run": "too_many_epochs-mild-s1",
+  "fault": "too_many_epochs",
+  "strength": 3,
+  "seed": 1,
+  "model": "Qwen/Qwen3-0.6B",
+  "hyperparameters": {
+    "n_epochs": 9,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "job_id": "ftjob-0f3ad68977be46fb8615cc5bd15d623b",
+  "status": "succeeded",
+  "error": null,
+  "trained_tokens": 254952,
+  "cost_usd": 0.1019808,
+  "steps": [
+    63,
+    126,
+    189,
+    252,
+    315,
+    378,
+    441,
+    504,
+    567
+  ],
+  "train_loss": [
+    0.37090834975242615,
+    0.15511226654052734,
+    0.05499333143234253,
+    0.021267259493470192,
+    0.015306754037737846,
+    0.0008440308156423271,
+    0.00022872535919304937,
+    0.0001060065915226005,
+    9.564922947902232e-05
+  ],
+  "valid_loss": [
+    0.3709714114665985,
+    0.008914144709706306,
+    0.14543069899082184,
+    0.20634570717811584,
+    0.32898351550102234,
+    0.08925237506628036,
+    0.3279918432235718,
+    0.00039240537444129586,
+    0.21982398629188538
+  ],
+  "seconds": {
+    "datasets": 47,
+    "training_started": 259,
+    "training_completed": 1285,
+    "finished": 1365
+  }
+}

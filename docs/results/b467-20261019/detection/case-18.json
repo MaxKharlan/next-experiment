@@ -1,0 +1,230 @@
+{
+  "case_id": "case-18",
+  "study": "tokenfactory-banking77-500-dev",
+  "seed": 1,
+  "fault": null,
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "Token Factory",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 3,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.3619886338710785,
+        "valid_loss": 0.35793986916542053
+      },
+      {
+        "step": 126,
+        "train_loss": 0.10623057186603546,
+        "valid_loss": 0.0075403619557619095
+      },
+      {
+        "step": 189,
+        "train_loss": 0.02368343435227871,
+        "valid_loss": 0.27196836471557617
+      }
+    ],
+    "validation_exact_match": 0.66,
+    "reference_validation_exact_match": 0.66,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.5625
+    ],
+    [
+      "distribution_shift",
+      0.25
+    ],
+    [
+      "lora_rank_too_small",
+      0.0625
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-18",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "too_many_epochs",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.4,
+        "rationale": "Validation loss drops sharply at epoch 2 then rises at epoch 3, indicating overfitting after the optimal point. The model shows no improvement in exact match over the reference, consistent with excessive epochs.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.3,
+        "rationale": "Although validation loss initially decreases, the subsequent increase suggests the model cannot capture sufficient complexity to generalize; a rank of 16 may be insufficient for BANKING77 intent classification, leading to overfitting on training and poor held\u2011out performance.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "distribution_shift",
+        "location": "training_data.json",
+        "prior": 0.2,
+        "rationale": "The validation exact match equals the reference, implying the fine\u2011tuned model does not outperform the base on the validation set; if the training data differs from production intents, the model may learn patterns that do not transfer, yielding no gain.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "too_many_epochs",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.4,
+            "rationale": "Validation loss drops sharply at epoch 2 then rises at epoch 3, indicating overfitting after the optimal point. The model shows no improvement in exact match over the reference, consistent with excessive epochs.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.3,
+            "rationale": "Although validation loss initially decreases, the subsequent increase suggests the model cannot capture sufficient complexity to generalize; a rank of 16 may be insufficient for BANKING77 intent classification, leading to overfitting on training and poor held\u2011out performance.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "distribution_shift",
+            "location": "training_data.json",
+            "prior": 0.2,
+            "rationale": "The validation exact match equals the reference, implying the fine\u2011tuned model does not outperform the base on the validation set; if the training data differs from production intents, the model may learn patterns that do not transfer, yielding no gain.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "h3": 0.2,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "lora_rank",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0986929,
+        "outcome": "ok",
+        "gain_bits": 0.3985,
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        },
+        "probs": {
+          "h1": 0.5333,
+          "h2": 0.0667,
+          "h3": 0.2667,
+          "unlisted": 0.1333
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "epoch_count",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0986929,
+        "outcome": "ok",
+        "gain_bits": 0.3316,
+        "raw": {
+          "n_epochs": 3,
+          "high_from": 10
+        },
+        "probs": {
+          "h1": 0.1765,
+          "h2": 0.1176,
+          "h3": 0.4706,
+          "unlisted": 0.2353
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "loss_curve",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0986929,
+        "outcome": "overfit",
+        "gain_bits": 0.1482,
+        "raw": {
+          "train_loss": [
+            0.3619886338710785,
+            0.10623057186603546,
+            0.02368343435227871
+          ],
+          "valid_loss": [
+            0.35793986916542053,
+            0.0075403619557619095,
+            0.27196836471557617
+          ],
+          "train_drop": 0.9345740939459621
+        },
+        "probs": {
+          "h1": 0.5625,
+          "h2": 0.0625,
+          "h3": 0.25,
+          "unlisted": 0.125
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.5625,
+          "h2": 0.0625,
+          "h3": 0.25,
+          "unlisted": 0.125
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0013070999999999998,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 1540,
+        "tokens_out": 939,
+        "cost_usd": 0.0013070999999999998,
+        "latency_ms": 5738
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0013070999999999998
+}

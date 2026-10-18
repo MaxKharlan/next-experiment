@@ -1,0 +1,128 @@
+{
+  "runs": [
+    {
+      "run": "Qwen3-0.6B-n50-e1",
+      "model": "Qwen/Qwen3-0.6B",
+      "examples": 50,
+      "epochs": 1,
+      "reservation_usd": 0.039994,
+      "train_sha256": "5e9d50a2b591101a387191af5466668fd58c1aba04e436d2f269dcd226855b00"
+    },
+    {
+      "run": "Qwen3-0.6B-n200-e1",
+      "model": "Qwen/Qwen3-0.6B",
+      "examples": 200,
+      "epochs": 1,
+      "reservation_usd": 0.160541,
+      "train_sha256": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad"
+    },
+    {
+      "run": "Qwen3-0.6B-n1000-e1",
+      "model": "Qwen/Qwen3-0.6B",
+      "examples": 1000,
+      "epochs": 1,
+      "reservation_usd": 0.806541,
+      "train_sha256": "47e5f8a46cabf10382adc5dec2a38aa46b872e93bdd4aee521a413b311fd2ec7"
+    },
+    {
+      "run": "Qwen3-0.6B-n200-e3",
+      "model": "Qwen/Qwen3-0.6B",
+      "examples": 200,
+      "epochs": 3,
+      "reservation_usd": 0.481623,
+      "train_sha256": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad"
+    },
+    {
+      "run": "Qwen3-0.6B-n500-e2",
+      "model": "Qwen/Qwen3-0.6B",
+      "examples": 500,
+      "epochs": 2,
+      "reservation_usd": 0.806038,
+      "train_sha256": "99a8ec81b002f513f2f2a82b72adc177566e8e477dd42f28020cf3e2b7d1d801"
+    },
+    {
+      "run": "Qwen3-1.7B-n50-e1",
+      "model": "Qwen/Qwen3-1.7B",
+      "examples": 50,
+      "epochs": 1,
+      "reservation_usd": 0.039994,
+      "train_sha256": "5e9d50a2b591101a387191af5466668fd58c1aba04e436d2f269dcd226855b00"
+    },
+    {
+      "run": "Qwen3-1.7B-n200-e1",
+      "model": "Qwen/Qwen3-1.7B",
+      "examples": 200,
+      "epochs": 1,
+      "reservation_usd": 0.160541,
+      "train_sha256": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad"
+    },
+    {
+      "run": "Qwen3-1.7B-n1000-e1",
+      "model": "Qwen/Qwen3-1.7B",
+      "examples": 1000,
+      "epochs": 1,
+      "reservation_usd": 0.806541,
+      "train_sha256": "47e5f8a46cabf10382adc5dec2a38aa46b872e93bdd4aee521a413b311fd2ec7"
+    },
+    {
+      "run": "Qwen3-1.7B-n200-e3",
+      "model": "Qwen/Qwen3-1.7B",
+      "examples": 200,
+      "epochs": 3,
+      "reservation_usd": 0.481623,
+      "train_sha256": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad"
+    },
+    {
+      "run": "Qwen3-1.7B-n500-e2",
+      "model": "Qwen/Qwen3-1.7B",
+      "examples": 500,
+      "epochs": 2,
+      "reservation_usd": 0.806038,
+      "train_sha256": "99a8ec81b002f513f2f2a82b72adc177566e8e477dd42f28020cf3e2b7d1d801"
+    },
+    {
+      "run": "Llama-3.2-1B-Instruct-n50-e1",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "examples": 50,
+      "epochs": 1,
+      "reservation_usd": 0.039994,
+      "train_sha256": "5e9d50a2b591101a387191af5466668fd58c1aba04e436d2f269dcd226855b00"
+    },
+    {
+      "run": "Llama-3.2-1B-Instruct-n200-e1",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "examples": 200,
+      "epochs": 1,
+      "reservation_usd": 0.160541,
+      "train_sha256": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad"
+    },
+    {
+      "run": "Llama-3.2-1B-Instruct-n1000-e1",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "examples": 1000,
+      "epochs": 1,
+      "reservation_usd": 0.806541,
+      "train_sha256": "47e5f8a46cabf10382adc5dec2a38aa46b872e93bdd4aee521a413b311fd2ec7"
+    },
+    {
+      "run": "Llama-3.2-1B-Instruct-n200-e3",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "examples": 200,
+      "epochs": 3,
+      "reservation_usd": 0.481623,
+      "train_sha256": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad"
+    },
+    {
+      "run": "Llama-3.2-1B-Instruct-n500-e2",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "examples": 500,
+      "epochs": 2,
+      "reservation_usd": 0.806038,
+      "train_sha256": "99a8ec81b002f513f2f2a82b72adc177566e8e477dd42f28020cf3e2b7d1d801"
+    }
+  ],
+  "reserved_usd": 6.8842110000000005,
+  "validation_sha256": "4a18a3572d530f2c937ccdd02c26b953d720ad8bb61869b1ecb5ef986f78f0bf",
+  "budget_usd": 9.0,
+  "price_ceiling_per_million": 1.0
+}

@@ -1,0 +1,40 @@
+{
+  "run": "Llama-3.2-1B-Instruct-n50-e1",
+  "model": "meta-llama/Llama-3.2-1B-Instruct",
+  "examples": 50,
+  "epochs": 1,
+  "reservation_usd": 0.039994,
+  "train_sha256": "5e9d50a2b591101a387191af5466668fd58c1aba04e436d2f269dcd226855b00",
+  "hyperparameters": {
+    "n_epochs": 1,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "job_id": "ftjob-820c72abb1814c2da596103bc39c2fa8",
+  "status": "succeeded",
+  "error": null,
+  "trained_tokens": 3577,
+  "cost_usd": 0.0014308,
+  "steps": [
+    7
+  ],
+  "train_loss": [
+    3.914144277572632
+  ],
+  "valid_loss": [
+    1.9464913606643677
+  ],
+  "seconds": {
+    "datasets": 43,
+    "training_started": 224,
+    "training_completed": 326,
+    "finished": 402
+  }
+}

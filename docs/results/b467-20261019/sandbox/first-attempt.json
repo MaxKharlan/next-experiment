@@ -1,0 +1,33 @@
+{
+  "result": {
+    "question": "Count total examples and examples whose answer is not valid JSON. Return total and invalid_json counts.",
+    "code": "import json, sys, os, builtins  # but we can keep minimal imports. Actually only json needed.",
+    "input_sha256": "d1c69046df619edb0a7ea8b2a192abe5db84bf54dc8894cbe914f41bd680caa2",
+    "prompt_version": "probe_code-v1",
+    "causal_confirmation": false,
+    "execution": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "timed_out": false,
+      "output_limited": false
+    },
+    "status": "invalid_output"
+  },
+  "cost_usd": 0.0003669,
+  "calls": [
+    {
+      "id": "4cd78ab24014",
+      "investigation_id": "b4-live-20261019",
+      "purpose": "probe_code",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tokens_in": 269,
+      "tokens_out": 318,
+      "cost_usd": 0.0003669,
+      "latency_ms": 16143,
+      "prompt_version": "probe_code-v1",
+      "attempt": 1,
+      "created_at": 1792358216.227299
+    }
+  ]
+}

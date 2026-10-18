@@ -1,0 +1,28 @@
+{
+  "model": "Qwen/Qwen3-0.6B",
+  "train_sha256": "99a8ec81b002f513f2f2a82b72adc177566e8e477dd42f28020cf3e2b7d1d801",
+  "valid_sha256": "01456b6f587377b09dbf7591b3b289ba6a1771d6df48edbbed3a862e04dcaced",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "epochs": [
+    3,
+    9,
+    18
+  ],
+  "hyperparameters": {
+    "n_epochs": 3,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "scope": "descriptive validation study; local exact-match evaluation"
+}

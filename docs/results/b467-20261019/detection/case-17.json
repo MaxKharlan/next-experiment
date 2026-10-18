@@ -1,0 +1,304 @@
+{
+  "case_id": "case-17",
+  "study": "tokenfactory-banking77-500-dev",
+  "seed": 0,
+  "fault": "too_many_epochs",
+  "hyperparameters": {
+    "n_epochs": 18,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "observation": {
+    "task": "BANKING77 intent classification",
+    "backend": "Token Factory",
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "model": "Qwen/Qwen3-0.6B",
+    "job": {
+      "hyperparameters": {
+        "n_epochs": 18,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      }
+    },
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.40974992513656616,
+        "valid_loss": 0.919580340385437
+      },
+      {
+        "step": 126,
+        "train_loss": 0.1906013935804367,
+        "valid_loss": 0.03482147678732872
+      },
+      {
+        "step": 189,
+        "train_loss": 0.05001221224665642,
+        "valid_loss": 0.42789092659950256
+      },
+      {
+        "step": 252,
+        "train_loss": 0.030445538461208344,
+        "valid_loss": 0.2480483502149582
+      },
+      {
+        "step": 315,
+        "train_loss": 0.022662734612822533,
+        "valid_loss": 0.029541507363319397
+      },
+      {
+        "step": 378,
+        "train_loss": 0.016744442284107208,
+        "valid_loss": 0.14825646579265594
+      },
+      {
+        "step": 441,
+        "train_loss": 0.002366681583225727,
+        "valid_loss": 0.49650752544403076
+      },
+      {
+        "step": 504,
+        "train_loss": 0.004158623516559601,
+        "valid_loss": 0.00429006852209568
+      },
+      {
+        "step": 567,
+        "train_loss": 8.674395212437958e-05,
+        "valid_loss": 0.27594417333602905
+      },
+      {
+        "step": 630,
+        "train_loss": 5.9572808822849765e-05,
+        "valid_loss": 0.0084982980042696
+      },
+      {
+        "step": 693,
+        "train_loss": 4.546350101009011e-05,
+        "valid_loss": 0.1502823829650879
+      },
+      {
+        "step": 756,
+        "train_loss": 4.195960354991257e-05,
+        "valid_loss": 0.06771756708621979
+      },
+      {
+        "step": 819,
+        "train_loss": 3.159292464260943e-05,
+        "valid_loss": 0.11538918316364288
+      },
+      {
+        "step": 882,
+        "train_loss": 3.613428634707816e-05,
+        "valid_loss": 0.35177740454673767
+      },
+      {
+        "step": 945,
+        "train_loss": 3.133610880468041e-05,
+        "valid_loss": 0.2839806377887726
+      },
+      {
+        "step": 1008,
+        "train_loss": 3.0435639928327873e-05,
+        "valid_loss": 0.25582611560821533
+      },
+      {
+        "step": 1071,
+        "train_loss": 2.963634869956877e-05,
+        "valid_loss": 0.22555501759052277
+      },
+      {
+        "step": 1134,
+        "train_loss": 2.8843991458415985e-05,
+        "valid_loss": 0.5067092776298523
+      }
+    ],
+    "validation_exact_match": 0.7,
+    "reference_validation_exact_match": 0.67,
+    "evaluation_examples": 100
+  },
+  "ranking": [
+    [
+      "too_many_epochs",
+      0.6959
+    ],
+    [
+      "distribution_shift",
+      0.117
+    ],
+    [
+      "contradictory_labels",
+      0.0936
+    ],
+    [
+      "chat_template_mismatch",
+      0.0468
+    ],
+    [
+      "lora_rank_too_small",
+      0.0234
+    ]
+  ],
+  "trace": {
+    "investigation_id": "case-17",
+    "status": "inconclusive",
+    "hypotheses": [
+      {
+        "id": "h1",
+        "fault_class": "too_many_epochs",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.35,
+        "rationale": "Validation loss exhibits large oscillations and occasional increases after epoch ~7\u20118 while training loss continues to drop, a pattern typical of overfitting when LoRA training runs far beyond convergence. The default 18 epochs is higher than needed for this task.",
+        "sources": []
+      },
+      {
+        "id": "h2",
+        "fault_class": "distribution_shift",
+        "location": "validation data",
+        "prior": 0.25,
+        "rationale": "Training loss steadily declines to near\u2011zero, yet validation loss jumps between very low and high values across epochs, indicating the validation set does not mirror the training distribution, causing noisy validation signals.",
+        "sources": []
+      },
+      {
+        "id": "h3",
+        "fault_class": "contradictory_labels",
+        "location": "training data",
+        "prior": 0.2,
+        "rationale": "The unstable validation loss resembles label noise: similar inputs receive conflicting intents in BANKING77, leading to inconsistent gradients and fluctuating validation performance.",
+        "sources": []
+      },
+      {
+        "id": "h4",
+        "fault_class": "chat_template_mismatch",
+        "location": "chat template used in training vs inference",
+        "prior": 0.1,
+        "rationale": "If the training chat template differs from the one used at inference, the model may sometimes correctly follow the format (low loss) and sometimes ignore it (high loss), producing the observed validation loss swings.",
+        "sources": []
+      },
+      {
+        "id": "h5",
+        "fault_class": "lora_rank_too_small",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.05,
+        "rationale": "A LoRA rank of 16 might be insufficient to capture the full intent\u2011classification variability, causing the model to stall; however the occasional very low validation loss suggests this is less likely than the above issues.",
+        "sources": []
+      }
+    ],
+    "steps": [
+      {
+        "kind": "hypotheses",
+        "hypotheses": [
+          {
+            "id": "h1",
+            "fault_class": "too_many_epochs",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.35,
+            "rationale": "Validation loss exhibits large oscillations and occasional increases after epoch ~7\u20118 while training loss continues to drop, a pattern typical of overfitting when LoRA training runs far beyond convergence. The default 18 epochs is higher than needed for this task.",
+            "sources": []
+          },
+          {
+            "id": "h2",
+            "fault_class": "distribution_shift",
+            "location": "validation data",
+            "prior": 0.25,
+            "rationale": "Training loss steadily declines to near\u2011zero, yet validation loss jumps between very low and high values across epochs, indicating the validation set does not mirror the training distribution, causing noisy validation signals.",
+            "sources": []
+          },
+          {
+            "id": "h3",
+            "fault_class": "contradictory_labels",
+            "location": "training data",
+            "prior": 0.2,
+            "rationale": "The unstable validation loss resembles label noise: similar inputs receive conflicting intents in BANKING77, leading to inconsistent gradients and fluctuating validation performance.",
+            "sources": []
+          },
+          {
+            "id": "h4",
+            "fault_class": "chat_template_mismatch",
+            "location": "chat template used in training vs inference",
+            "prior": 0.1,
+            "rationale": "If the training chat template differs from the one used at inference, the model may sometimes correctly follow the format (low loss) and sometimes ignore it (high loss), producing the observed validation loss swings.",
+            "sources": []
+          },
+          {
+            "id": "h5",
+            "fault_class": "lora_rank_too_small",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.05,
+            "rationale": "A LoRA rank of 16 might be insufficient to capture the full intent\u2011classification variability, causing the model to stall; however the occasional very low validation loss suggests this is less likely than the above issues.",
+            "sources": []
+          }
+        ],
+        "probs": {
+          "h1": 0.35,
+          "h2": 0.25,
+          "h3": 0.2,
+          "h4": 0.1,
+          "h5": 0.05,
+          "unlisted": 0.05
+        }
+      },
+      {
+        "kind": "probe",
+        "probe": "epoch_count",
+        "estimated_cost_usd": 0.0,
+        "cost_usd": 0.0,
+        "budget_left_usd": 0.0977572,
+        "outcome": "high",
+        "gain_bits": 0.3021,
+        "raw": {
+          "n_epochs": 18,
+          "high_from": 10
+        },
+        "probs": {
+          "h1": 0.6959,
+          "h2": 0.117,
+          "h3": 0.0936,
+          "h4": 0.0468,
+          "h5": 0.0234,
+          "unlisted": 0.0234
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "causal checks disabled for this ablation",
+        "probs": {
+          "h1": 0.6959,
+          "h2": 0.117,
+          "h3": 0.0936,
+          "h4": 0.0468,
+          "h5": 0.0234,
+          "unlisted": 0.0234
+        }
+      }
+    ],
+    "verdict": null,
+    "llm_cost_usd": 0.0022428,
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "tokens_in": 2538,
+        "tokens_out": 1646,
+        "cost_usd": 0.0022428,
+        "latency_ms": 9019
+      }
+    },
+    "retrain_plan": null,
+    "protocol": null
+  },
+  "error": null,
+  "cost_usd": 0.0022428
+}

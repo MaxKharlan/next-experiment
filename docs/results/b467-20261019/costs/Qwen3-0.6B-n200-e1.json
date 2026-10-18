@@ -1,0 +1,40 @@
+{
+  "run": "Qwen3-0.6B-n200-e1",
+  "model": "Qwen/Qwen3-0.6B",
+  "examples": 200,
+  "epochs": 1,
+  "reservation_usd": 0.160541,
+  "train_sha256": "8242131e2132bcb6d8645211933c90d15c509b500d853b514e012e1097b24cad",
+  "hyperparameters": {
+    "n_epochs": 1,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "job_id": "ftjob-04eedb2155ae43dcb3b1127a6a0ab8b6",
+  "status": "succeeded",
+  "error": null,
+  "trained_tokens": 11164,
+  "cost_usd": 0.0044656,
+  "steps": [
+    25
+  ],
+  "train_loss": [
+    1.1940457820892334
+  ],
+  "valid_loss": [
+    0.7847959995269775
+  ],
+  "seconds": {
+    "datasets": 395,
+    "training_started": 541,
+    "training_completed": 674,
+    "finished": 749
+  }
+}
