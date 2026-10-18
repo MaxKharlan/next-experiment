@@ -27,6 +27,7 @@ from typing import Any
 import httpx
 
 from core.agent.context import InvestigationContext
+from core.agent.ensemble import sample_hypotheses
 from core.agent.known_issues import find_known_issues
 from core.agent.router import Router
 from core.agent.schemas import Hypothesis, Verdict
@@ -106,8 +107,13 @@ def investigate(
     testable_classes: set[str] | None = None,
     initial_evidence: Sequence[str] = (),
     causal_checks: bool = True,
+    hypothesis_samples: int = 1,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
+    if type(hypothesis_samples) is not int or not 1 <= hypothesis_samples <= 5:
+        raise ValueError("hypothesis_samples must be an integer from 1 to 5")
+    if initial_hypotheses is not None and hypothesis_samples != 1:
+        raise ValueError("Frozen hypotheses cannot be combined with repeated sampling")
     if policy not in {"eig", "fixed", "random"}:
         raise ValueError(f"Unknown policy: {policy}")
     if max_interventions < 1:
@@ -138,11 +144,21 @@ def investigate(
             add({"kind": "known_issues", **found})
         except (TavilyBudgetError, httpx.HTTPError) as err:
             add({"kind": "known_issues", "error": str(err)})
-    hypotheses = (
-        propose_hypotheses(router, case, mode=ctx.mode)
-        if initial_hypotheses is None
-        else list(initial_hypotheses)
-    )
+    if hypothesis_samples > 1:
+        hypotheses, sampling = sample_hypotheses(
+            router,
+            case,
+            mode=ctx.mode,
+            samples=hypothesis_samples,
+            budget_usd=ctx.budget_left_usd,
+        )
+        add(sampling)
+    else:
+        hypotheses = (
+            propose_hypotheses(router, case, mode=ctx.mode)
+            if initial_hypotheses is None
+            else list(initial_hypotheses)
+        )
     by_id = {h.id: h for h in hypotheses}
     classes = {h.id: h.fault_class for h in hypotheses}
     probs = {h.id: h.prior for h in hypotheses}

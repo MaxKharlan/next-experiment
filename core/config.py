@@ -1,6 +1,7 @@
 from functools import lru_cache
 from typing import Literal
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -33,6 +34,7 @@ class Settings(BaseSettings):
     default_budget_usd: float = 5.0
     approval_threshold_usd: float = 1.0
     public_demo: bool = False
+    hypothesis_samples: int = Field(default=1, ge=1, le=5)
 
 
 @lru_cache
