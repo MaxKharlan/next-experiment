@@ -32,6 +32,7 @@ from bench.faults.labels import (
     shift_labels_once,
 )
 from bench.faults.recipe import HEALTHY_HP, STRENGTHS, inject
+from core.training.parameters import audit_trainable_parameters
 
 # Batch width is rounded up to this: every new width grows the MPS cache
 PAD_MULTIPLE = 16
@@ -287,6 +288,14 @@ def train(
     )
     model = get_peft_model(model, lora).to(device)
     model.train()
+    parameter_audit = audit_trainable_parameters(model)
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "parameter-audit.json").write_text(
+        json.dumps(parameter_audit, indent=2), encoding="utf-8"
+    )
+    if parameter_audit["trainable_parameters"] == 0:
+        raise ValueError("No trainable parameters; see parameter-audit.json")
 
     bs = hp["batch_size"]
     steps_per_epoch = math.ceil(len(train_rows) / (bs * accumulation))
@@ -366,6 +375,7 @@ def train(
     model.save_pretrained(out / "adapter")
     summary = {
         "model": model_id,
+        "parameter_audit": parameter_audit,
         "fault": fault,
         "code_fault": code_fault,
         "label_audit": label_audit,

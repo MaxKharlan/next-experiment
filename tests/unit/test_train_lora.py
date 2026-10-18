@@ -167,6 +167,11 @@ def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch, code_f
                 hp={"batch_size": bs, "gradient_accumulation_steps": accumulation},
             )
         )
+    for bs, summary in zip((3, 1), summaries):
+        saved = json.loads((tmp_path / str(bs) / "parameter-audit.json").read_text())
+        assert saved == summary["parameter_audit"]
+        assert saved["trainable_parameters"] == 64
+        assert "trainable_non_lora_parameters" in saved["findings"]
     assert [s["steps"] for s in summaries] == [2, 2]
     assert summaries[0]["answer_tokens"] == summaries[1]["answer_tokens"]
     for full, accumulated in zip(models[0].parameters(), models[1].parameters()):
@@ -367,3 +372,38 @@ def test_double_shift_rejects_unusable_rows_before_loading(
         trainer.train(
             path, path, tmp_path / "out", code_fault="double_shift", device="cpu"
         )
+
+
+def test_frozen_model_saves_audit_and_stops_before_optimizer(tmp_path, monkeypatch):
+    import json
+    from types import SimpleNamespace
+
+    from jobs.kaggle import train_lora as trainer
+
+    model = _TinyLM().requires_grad_(False)
+    monkeypatch.setattr(
+        trainer.AutoTokenizer,
+        "from_pretrained",
+        lambda *_: SimpleNamespace(pad_token_id=0, eos_token_id=2),
+    )
+    monkeypatch.setattr(
+        trainer, "encode", lambda *_: {"input_ids": [1, 2], "labels": [-100, 2]}
+    )
+    monkeypatch.setattr(
+        trainer.AutoModelForCausalLM, "from_pretrained", lambda *a, **kw: model
+    )
+    monkeypatch.setattr(trainer, "get_peft_model", lambda m, _: m)
+    monkeypatch.setattr(
+        trainer.torch.optim,
+        "AdamW",
+        lambda *a, **kw: pytest.fail("Optimizer must not start"),
+    )
+    data = tmp_path / "data.jsonl"
+    data.write_text('{"messages": []}\n')
+    out = tmp_path / "out"
+    with pytest.raises(ValueError, match="No trainable parameters"):
+        trainer.train(data, data, out, device="cpu")
+    audit = json.loads((out / "parameter-audit.json").read_text())
+    assert audit["trainable_parameters"] == 0
+    assert "no_trainable_parameters" in audit["findings"]
+    assert not (out / "metrics.jsonl").exists()
