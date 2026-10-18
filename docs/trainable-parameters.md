@@ -45,6 +45,7 @@ the summary and verify that a fully frozen model saves its report before
 stopping, without creating an optimizer or metrics log. Existing CPU training
 fixtures still run through all label fault modes.
 
-This completes the trainable-parameter inspection portion of B24. Agent-facing
-checks, gradient-flow verification and downstream quality experiments remain
-open; the report does not assign benchmark ground truth.
+This completes the trainable-parameter inspection portion of B24. A separate
+[first-backward gradient audit](gradient-flow.md) checks gradient presence and
+finiteness. Agent-facing checks and downstream quality experiments remain open;
+the report does not assign benchmark ground truth.
