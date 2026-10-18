@@ -114,6 +114,12 @@ uv run python -m scripts.build_pages --out _site
 python -m http.server -d _site
 ```
 
+The README's video is the same site, recorded at a slower pace so that each step can be read. Recording it needs Google Chrome and ffmpeg:
+
+```bash
+uv run --with playwright python -m scripts.record_demo_video --out demo.mp4
+```
+
 Investigate the demo case from the command line, with causal checks on Token Factory (about $0.06 and 10 to 20 minutes per check when Token Factory has free capacity). `--job <failed job ID>` also runs the weight probe on that job's adapter:
 
 ```bash
