@@ -17,3 +17,11 @@ The version-1 report contains the input case, protocol when recorded, hypotheses
 Reports come from the API store's persisted events, including retrain and comparison events. Metadata and events are copied under one lock. The route uses the configured store, including Object Storage. Historical logs can lack protocol details or other fields; those remain null or empty. Summary costs are returned as recorded and may omit full retrain costs.
 
 Unknown IDs return 404. In public-demo mode, live reports return 403 and replay reports remain available. Responses use `Cache-Control: no-store`. This endpoint does not start work, answer approval requests or change an investigation.
+
+## Download from the investigation screen
+
+When an API investigation is selected, the screen shows **Download report (JSON)**
+under its status. The link downloads the current persisted snapshot, including
+partial progress while running, waiting for approval or failed. The adjacent note
+identifies partial reports. Selecting another run updates the link to that run.
+The static GitHub Pages demo retains its existing saved-demo JSON link.
