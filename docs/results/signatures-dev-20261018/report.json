@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "fit_split": "dev",
+  "alpha": 1.0,
+  "formula": "(count + alpha) / (n + alpha * number_of_outcomes)",
+  "observations": [
+    {
+      "case": "fault6-lr1e-5",
+      "truth": [
+        "lr_too_low"
+      ],
+      "outcomes": {
+        "lr_range": "low",
+        "epoch_count": "ok",
+        "lora_rank": "ok",
+        "loss_curve": "normal"
+      }
+    },
+    {
+      "case": "ref-epochs18-s0",
+      "truth": [],
+      "outcomes": {
+        "lr_range": "ok",
+        "epoch_count": "high",
+        "lora_rank": "ok",
+        "loss_curve": "overfit"
+      }
+    },
+    {
+      "case": "ref-fault6-mild-s0",
+      "truth": [
+        "lr_too_low"
+      ],
+      "outcomes": {
+        "lr_range": "low",
+        "epoch_count": "ok",
+        "lora_rank": "ok",
+        "loss_curve": "normal"
+      }
+    },
+    {
+      "case": "ref-fault6-strong-s0",
+      "truth": [
+        "lr_too_low"
+      ],
+      "outcomes": {
+        "lr_range": "low",
+        "epoch_count": "ok",
+        "lora_rank": "ok",
+        "loss_curve": "normal"
+      }
+    },
+    {
+      "case": "ref-healthy-s0",
+      "truth": [],
+      "outcomes": {
+        "lr_range": "ok",
+        "epoch_count": "ok",
+        "lora_rank": "ok",
+        "loss_curve": "normal"
+      }
+    }
+  ],
+  "coverage": {
+    "lr_range": {
+      "lr_too_low": {
+        "n": 3,
+        "counts": {
+          "low": 3,
+          "ok": 0
+        },
+        "smoothed": {
+          "low": 0.8,
+          "ok": 0.2
+        }
+      },
+      "healthy": {
+        "n": 2,
+        "counts": {
+          "low": 0,
+          "ok": 2
+        },
+        "smoothed": {
+          "low": 0.25,
+          "ok": 0.75
+        }
+      }
+    },
+    "epoch_count": {
+      "lr_too_low": {
+        "n": 3,
+        "counts": {
+          "high": 0,
+          "ok": 3
+        },
+        "smoothed": {
+          "high": 0.2,
+          "ok": 0.8
+        }
+      },
+      "healthy": {
+        "n": 2,
+        "counts": {
+          "high": 1,
+          "ok": 1
+        },
+        "smoothed": {
+          "high": 0.5,
+          "ok": 0.5
+        }
+      }
+    },
+    "lora_rank": {
+      "lr_too_low": {
+        "n": 3,
+        "counts": {
+          "low": 0,
+          "ok": 3
+        },
+        "smoothed": {
+          "low": 0.2,
+          "ok": 0.8
+        }
+      },
+      "healthy": {
+        "n": 2,
+        "counts": {
+          "low": 0,
+          "ok": 2
+        },
+        "smoothed": {
+          "low": 0.25,
+          "ok": 0.75
+        }
+      }
+    },
+    "loss_curve": {
+      "lr_too_low": {
+        "n": 3,
+        "counts": {
+          "barely_moved": 0,
+          "overfit": 0,
+          "normal": 3
+        },
+        "smoothed": {
+          "barely_moved": 0.16666666666666666,
+          "overfit": 0.16666666666666666,
+          "normal": 0.6666666666666666
+        }
+      },
+      "healthy": {
+        "n": 2,
+        "counts": {
+          "barely_moved": 0,
+          "overfit": 1,
+          "normal": 1
+        },
+        "smoothed": {
+          "barely_moved": 0.2,
+          "overfit": 0.4,
+          "normal": 0.4
+        }
+      }
+    }
+  },
+  "default_policy": "Unchanged: healthy cases do not represent all unlisted causes",
+  "unobserved_policy": "Retain baseline rows; these remain uncalibrated",
+  "active_probes": [
+    "lr_range",
+    "epoch_count",
+    "lora_rank",
+    "loss_curve"
+  ],
+  "baseline_sha256": "40f01bf4f8c09a558acf3639ea4bf3777500c7f406d8116b0c9a4744d91f1c7f",
+  "case_sha256": {
+    "fault6-lr1e-5.json": "cd3fb48498771438b65ef5b0daedbbcdac5498a8b70a646ef3dcd9619a71277e",
+    "ref-epochs18-s0.json": "9c5239b6299e510b683846e6bf313426eab600a1f000341c8854b13c1f58f60c",
+    "ref-fault6-mild-s0.json": "c2773c8c5a39136b3ef64631950b58d5beb33d8ee79ad187f1e1eaf4b033cd11",
+    "ref-fault6-strong-s0.json": "dcb8d9294e7115737d1784eac1e448e4f1aa58a3c3ddd97f4c386ea0acda762a",
+    "ref-healthy-s0.json": "94ca0734ac208260b34063637e5e6c45d8322713b6cb41f906e56efa41b79afe"
+  },
+  "probe_source_sha256": "295140b8e33c74387d7f642f175ed9f1f5168e70d10974ae296d2348e9e00d85",
+  "fitted_sha256": "127fe0b2789ea723b61f689a446ee66ae0a33045a4dcbf0f63ee52e29f13642d"
+}

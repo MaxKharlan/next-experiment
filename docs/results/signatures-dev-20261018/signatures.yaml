@@ -1,0 +1,73 @@
+answer_cut:
+  answer_truncation:
+    cut: 0.9
+    ok: 0.1
+  default:
+    cut: 0.03
+    ok: 0.97
+epoch_count:
+  default:
+    high: 0.2
+    ok: 0.8
+  lr_too_low:
+    high: 0.2
+    ok: 0.8
+  too_many_epochs:
+    high: 0.85
+    ok: 0.15
+example_length:
+  default:
+    ok: 0.95
+    truncated: 0.05
+  truncation:
+    ok: 0.1
+    truncated: 0.9
+lora_rank:
+  default:
+    low: 0.1
+    ok: 0.9
+  lora_rank_too_small:
+    low: 0.85
+    ok: 0.15
+  lr_too_low:
+    low: 0.2
+    ok: 0.8
+lora_weights:
+  default:
+    normal: 0.86
+    small: 0.14
+  lr_too_low:
+    normal: 0.1
+    small: 0.9
+loss_curve:
+  contradictory_labels:
+    barely_moved: 0.4
+    normal: 0.5
+    overfit: 0.1
+  default:
+    barely_moved: 0.2
+    normal: 0.7
+    overfit: 0.1
+  lora_rank_too_small:
+    barely_moved: 0.3
+    normal: 0.6
+    overfit: 0.1
+  lr_too_low:
+    barely_moved: 0.16666666666666666
+    normal: 0.6666666666666666
+    overfit: 0.16666666666666666
+  too_many_epochs:
+    barely_moved: 0.05
+    normal: 0.35
+    overfit: 0.6
+  train_val_overlap:
+    barely_moved: 0.05
+    normal: 0.9
+    overfit: 0.05
+lr_range:
+  default:
+    low: 0.3
+    ok: 0.7
+  lr_too_low:
+    low: 0.8
+    ok: 0.2
