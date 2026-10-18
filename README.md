@@ -81,7 +81,7 @@ As of 18 October 2026:
 | HTTP API with server-sent events and the investigation screen; replay of the saved demo run and live runs | done |
 | Benchmark: 13 cases, four methods, scorer, runner with resume, results and error analysis | done |
 | Tools: fault sweeps on Token Factory, case builder, reference runs, noise floor, rescoring, checkpoint pruning, local LoRA simulations | done |
-| Weight probe in the API's live runner and in the benchmark | not yet; it runs from `scripts/investigate_tf.py` |
+| Weight probe in the API's live runner and in the benchmark | available with `NEXT_EXPERIMENT_WEIGHTS=1` after preparing job-specific measurements; historical results above exclude it |
 | Public demo page on GitHub Pages, replaying the saved run | done |
 | A fresh demo run with the Tavily step, video | not yet |
 

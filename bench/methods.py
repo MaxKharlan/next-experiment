@@ -25,6 +25,7 @@ from core.connectors.token_factory import TokenFactory
 from core.interventions.pairs import Intervention
 from core.interventions.tf_runner import TokenFactoryPairRunner
 from core.planner.job_cost import estimate_job
+from core.probes.weight_cache import investigation_probes
 
 METHODS = ("single_ultra", "react", "checklist", "next_experiment")
 
@@ -92,17 +93,26 @@ def run_method(
         investigation_id=f"bench-{case.id}-{method}",
         mode="A",
         job_id=case.job_id,
-        job_config=case.job_config(),
+        job_config={"model": case.model, **case.job_config()},
         budget_left_usd=1.0,
     )
     if method == "single_ultra":
         return diagnose_single(router, case.case)
+    probes = investigation_probes(ctx)
     if method == "react":
         return diagnose_react(
-            ctx, case.case, router, run_pair, pair_cost_usd=pair_cost_usd, **checks
+            ctx,
+            case.case,
+            router,
+            run_pair,
+            pair_cost_usd=pair_cost_usd,
+            probes=probes,
+            **checks,
         )
     if method == "checklist":
-        return diagnose_checklist(ctx, run_pair, pair_cost_usd=pair_cost_usd, **checks)
+        return diagnose_checklist(
+            ctx, run_pair, pair_cost_usd=pair_cost_usd, probes=probes, **checks
+        )
     if method == "next_experiment":
         result = investigate(
             ctx,
@@ -110,6 +120,7 @@ def run_method(
             router,
             run_pair,
             intervention_cost_usd=pair_cost_usd,
+            probes=probes,
             tavily=tavily,
             **checks,
         )

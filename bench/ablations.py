@@ -19,6 +19,7 @@ from core.agent.loop import investigate
 from core.agent.schemas import Hypothesis, Verdict
 from core.connectors.storage import LocalStorage
 from core.planner.causal_belief import MODEL
+from core.probes.weight_cache import investigation_probes, weights_enabled
 from core.telemetry.calls import CallLog, LLMCall
 
 
@@ -130,7 +131,7 @@ def replay(case, frozen, policy, seed, args):
         investigation_id=f"ablation-{case.id}-{policy}-{seed}",
         mode="A",
         job_id=case.job_id,
-        job_config=case.job_config(),
+        job_config={"model": case.model, **case.job_config()},
         budget_left_usd=1.0,
     )
     storage = LocalStorage(args.artifacts)
@@ -152,6 +153,7 @@ def replay(case, frozen, policy, seed, args):
         ReplayRouter(ctx.investigation_id, frozen["llm_calls"]),
         cached_pair,
         initial_hypotheses=hypotheses,
+        probes=investigation_probes(ctx),
         explain=False,
         policy=policy,
         random_seed=seed,
@@ -179,6 +181,7 @@ def run(args, cases):
     ]
     metadata = {
         "belief_model": MODEL,
+        "weight_probe_enabled": weights_enabled(),
         "split": args.split,
         "cases": [case.id for case in cases],
         "variants": variants,

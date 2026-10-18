@@ -87,6 +87,7 @@ def replay_steps(report: dict[str, Any]) -> list[dict[str, Any]]:
 
 def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
     """The agent on the fault-6 case; heavy imports stay inside."""
+    from bench.cases import load_cases
     from core.agent.context import InvestigationContext
     from core.agent.loop import investigate
     from core.agent.router import Router
@@ -94,6 +95,7 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
     from core.connectors.storage import LocalStorage
     from core.connectors.tavily import Tavily
     from core.connectors.token_factory import TokenFactory
+    from core.probes.weight_cache import investigation_probes, weights_enabled
     from core.telemetry.calls import CallLog
     from scripts.smoke_agent_steps import CASE, JOB_HP
 
@@ -104,19 +106,38 @@ def live(store: InvestigationStore, inv_id: str, backend: str) -> None:
         tavily = (
             Tavily.from_settings(storage) if get_settings().tavily_api_key else None
         )
+        case_data, job_hp, job_id = CASE, JOB_HP, "local"
+        if backend == "tf":
+            source = next(
+                case for case in load_cases("dev") if case.id == "fault6-lr1e-5"
+            )
+            case_data = source.case
+            job_hp = source.hyperparameters
+            job_id = source.job_id
+        elif weights_enabled():
+            raise ValueError("B25 is calibrated for Token Factory; use the tf backend")
         ctx = InvestigationContext(
             investigation_id=inv_id,
             mode="A",
-            job_id="local",
-            job_config={"hyperparameters": JOB_HP, "checkpoints": CASE["checkpoints"]},
+            job_id=job_id,
+            job_config={
+                "model": case_data["job"]["model"],
+                "hyperparameters": job_hp,
+                "checkpoints": case_data["checkpoints"],
+            },
             budget_left_usd=1.0,
         )
-        store.emit(inv_id, "started", {"case": CASE, "backend": backend})
+        store.emit(
+            inv_id,
+            "started",
+            {"case": case_data, "backend": backend, "job_id": job_id},
+        )
         result = investigate(
             ctx,
-            CASE,
+            case_data,
             router,
-            _pair_runner(backend, inv_id, tf, storage, JOB_HP),
+            _pair_runner(backend, inv_id, tf, storage, job_hp),
+            probes=investigation_probes(ctx),
             tavily=tavily,
             on_step=lambda step: store.emit(inv_id, "step", step),
             propose_retrain=_proposal(backend),
