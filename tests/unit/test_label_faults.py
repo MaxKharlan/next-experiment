@@ -107,3 +107,43 @@ def test_prompt_audit_rejects_changed_answers_and_misalignment():
         audit_prompt_labels(ROWS, bad)
     with pytest.raises(ValueError, match="align"):
         audit_prompt_labels(ROWS, [])
+
+
+def test_double_shift_audit_and_nonmutation():
+    from bench.faults.labels import audit_label_shift, shift_labels_once
+
+    rows = [{"input_ids": [1, 2, 3, 4], "labels": [-100, -100, 3, 4]}]
+    original = deepcopy(rows)
+    shifted = shift_labels_once(rows)
+    assert rows == original
+    assert shifted[0]["labels"] == [-100, 3, 4, -100]
+    assert audit_label_shift(rows, rows)["status"] == "aligned"
+    report = audit_label_shift(rows, shifted)
+    assert report["status"] == "double_shift"
+    assert report["healthy_mismatches"] == 3
+    assert report["preshift_mismatches"] == 0
+    assert report["observed_targets"] == 2
+    shifted[0]["labels"][1] = 7
+    assert audit_label_shift(rows, shifted)["status"] == "other_mismatch"
+
+
+@pytest.mark.parametrize("labels", [[], [-100], [-100, -100]])
+def test_shift_audit_without_effective_evidence(labels):
+    from bench.faults.labels import audit_label_shift, shift_labels_once
+
+    rows = [{"input_ids": [1] * len(labels), "labels": labels}]
+    shifted = shift_labels_once(rows)
+    assert len(shifted[0]["labels"]) == len(labels)
+    assert audit_label_shift(rows, shifted)["status"] == "inconclusive"
+
+
+def test_shift_audit_rejects_unaligned_rows():
+    from bench.faults.labels import audit_label_shift, shift_labels_once
+
+    with pytest.raises(ValueError, match="align"):
+        audit_label_shift(ROWS, [])
+    bad = [{"input_ids": [1], "labels": []}]
+    with pytest.raises(ValueError):
+        shift_labels_once(bad)
+    with pytest.raises(ValueError):
+        audit_label_shift(bad, bad)

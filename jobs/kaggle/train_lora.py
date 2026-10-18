@@ -25,9 +25,11 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from bench.faults.labels import (
     audit_eos_labels,
+    audit_label_shift,
     audit_prompt_labels,
     include_prompt_labels,
     mask_padding_labels,
+    shift_labels_once,
 )
 from bench.faults.recipe import HEALTHY_HP, STRENGTHS, inject
 
@@ -208,7 +210,13 @@ def train(
     accumulation = hp.get("gradient_accumulation_steps", 1)
     if type(accumulation) is not int or accumulation < 1:
         raise ValueError("gradient_accumulation_steps must be a positive integer")
-    if code_fault not in {None, "microbatch_mean", "eos_as_pad", "prompt_loss"}:
+    if code_fault not in {
+        None,
+        "microbatch_mean",
+        "eos_as_pad",
+        "prompt_loss",
+        "double_shift",
+    }:
         raise ValueError("Unknown code fault")
     if code_fault == "microbatch_mean" and accumulation == 1:
         raise ValueError("microbatch_mean requires gradient_accumulation_steps > 1")
@@ -233,9 +241,18 @@ def train(
         train_rows = mask_padding_labels(reference_rows, pad_id)
     if code_fault == "prompt_loss":
         train_rows = include_prompt_labels(reference_rows)
+    if code_fault == "double_shift":
+        train_rows = shift_labels_once(reference_rows)
+    shift_audit = (
+        audit_label_shift(reference_rows, train_rows)
+        if code_fault in {None, "microbatch_mean", "double_shift"}
+        else None
+    )
+    if code_fault == "double_shift" and shift_audit["status"] != "double_shift":
+        raise ValueError("double_shift did not change effective target alignment")
     prompt_label_audit = (
         audit_prompt_labels(reference_rows, train_rows)
-        if code_fault != "eos_as_pad"
+        if code_fault not in {"eos_as_pad", "double_shift"}
         else None
     )
     if (
@@ -250,7 +267,7 @@ def train(
             eos_id,
             allow_prompt_targets=code_fault == "prompt_loss",
         )
-        if eos_id is not None
+        if eos_id is not None and code_fault != "double_shift"
         else None
     )
     if code_fault == "eos_as_pad" and not label_audit["removed_eos_targets"]:
@@ -352,8 +369,9 @@ def train(
         "fault": fault,
         "code_fault": code_fault,
         "label_audit": label_audit,
+        "label_shift_audit": shift_audit,
         "prompt_label_audit": prompt_label_audit
-        if code_fault != "eos_as_pad"
+        if code_fault not in {"eos_as_pad", "double_shift"}
         else None,
         "gradient_accumulation_steps": accumulation,
         "strength": strength,
@@ -384,7 +402,8 @@ def main() -> None:
     parser.add_argument("--fault", choices=sorted(STRENGTHS))
     parser.add_argument("--strength", type=float)
     parser.add_argument(
-        "--code-fault", choices=["microbatch_mean", "eos_as_pad", "prompt_loss"]
+        "--code-fault",
+        choices=["microbatch_mean", "eos_as_pad", "prompt_loss", "double_shift"],
     )
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument(

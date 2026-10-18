@@ -107,7 +107,9 @@ def test_accumulation_rejects_empty_targets_before_backward():
         assert all(p.grad is None for p in model.parameters())
 
 
-@pytest.mark.parametrize("code_fault", [None, "eos_as_pad", "prompt_loss"])
+@pytest.mark.parametrize(
+    "code_fault", [None, "eos_as_pad", "prompt_loss", "double_shift"]
+)
 def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch, code_fault):
     import json
 
@@ -173,8 +175,13 @@ def test_training_accumulation_steps_and_remainder(tmp_path, monkeypatch, code_f
     assert summaries[1]["code_fault"] == code_fault
     assert summaries[1]["answer_tokens"] == (18 if code_fault == "eos_as_pad" else 23)
     audit = summaries[1]["label_audit"]
-    assert audit["reference_eos_targets"] == 5
-    assert audit["removed_eos_targets"] == (5 if code_fault == "eos_as_pad" else 0)
+    if code_fault == "double_shift":
+        assert audit is None
+        assert summaries[1]["label_shift_audit"]["status"] == "double_shift"
+        assert summaries[1]["label_shift_audit"]["preshift_mismatches"] == 0
+    else:
+        assert audit["reference_eos_targets"] == 5
+        assert audit["removed_eos_targets"] == (5 if code_fault == "eos_as_pad" else 0)
     if code_fault == "prompt_loss":
         prompt = summaries[1]["prompt_label_audit"]
         assert prompt["supervised_prompt_tokens"] == 85
@@ -299,4 +306,64 @@ def test_prompt_fault_without_prompt_targets_fails_before_model_loading(
     with pytest.raises(ValueError, match="added no"):
         trainer.train(
             path, path, tmp_path / "out", code_fault="prompt_loss", device="cpu"
+        )
+
+
+def test_double_shift_uses_token_two_positions_ahead():
+    from types import SimpleNamespace
+
+    from bench.faults.labels import shift_labels_once
+    from jobs.kaggle.train_lora import loss_and_accuracy
+
+    class NextTokenModel:
+        def __call__(self, input_ids, attention_mask):
+            logits = torch.full((*input_ids.shape, 8), -10.0)
+            logits.scatter_(-1, ((input_ids + 1) % 8).unsqueeze(-1), 10.0)
+            return SimpleNamespace(logits=logits)
+
+    rows = [{"input_ids": [1, 2, 3, 4], "labels": [-100, 2, 3, 4]}]
+    healthy = loss_and_accuracy(NextTokenModel(), collate(rows, 0, "cpu"))
+    faulty_batch = collate(shift_labels_once(rows), 0, "cpu")
+    assert faulty_batch["labels"][0, 1:4].tolist() == [3, 4, -100]
+    faulty = loss_and_accuracy(NextTokenModel(), faulty_batch)
+    assert healthy[0].item() < 1e-5
+    assert healthy[1:] == (3, 3)
+    assert faulty[0].item() > 19
+    assert faulty[1:] == (0, 2)
+    assert faulty_batch["labels"][faulty_batch["attention_mask"] == 0].eq(-100).all()
+
+
+@pytest.mark.parametrize(
+    "labels,message", [([-100], "did not change"), ([-100, 2], "no supervised")]
+)
+def test_double_shift_rejects_unusable_rows_before_loading(
+    tmp_path, monkeypatch, labels, message
+):
+    from types import SimpleNamespace
+
+    from jobs.kaggle import train_lora as trainer
+
+    monkeypatch.setattr(
+        trainer.AutoTokenizer,
+        "from_pretrained",
+        lambda *_: SimpleNamespace(pad_token_id=0, eos_token_id=2),
+    )
+    monkeypatch.setattr(
+        trainer,
+        "encode",
+        lambda *_: {
+            "input_ids": list(range(1, len(labels) + 1)),
+            "labels": labels.copy(),
+        },
+    )
+    monkeypatch.setattr(
+        trainer.AutoModelForCausalLM,
+        "from_pretrained",
+        lambda *a, **kw: pytest.fail("Model must not load"),
+    )
+    path = tmp_path / "data.jsonl"
+    path.write_text('{"messages": []}\n')
+    with pytest.raises(ValueError, match=message):
+        trainer.train(
+            path, path, tmp_path / "out", code_fault="double_shift", device="cpu"
         )
