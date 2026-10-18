@@ -80,4 +80,50 @@ Protocol version 2 records the no-causal rule and selected variants. Frozen
 hypotheses must still match their source fingerprint. Older caches are rejected;
 replay does not regenerate them or make API calls. Preparing replacement
 hypotheses is a separate, potentially paid operation. Historical results remain
-unchanged. The Super-only routing ablation is still outstanding.
+unchanged. The separate routing comparison below enables narratives.
+
+
+## Super-only routing
+
+`bench.routing_ablation` compares the normal router (`mixed`) with `super_only`.
+The latter sends every registered step to Super, including verdicts and steps
+that would normally escalate to Ultra. The API and other benchmarks retain their
+normal routing unless this option is explicitly selected in `Router`.
+
+Both variants reuse the same frozen, Tavily-informed Super hypotheses and cached
+training pairs. Probe explanations and verdict narratives are enabled in both.
+The cached ablations above cannot measure routing differences: their hypotheses
+already come from Super and their narratives are disabled.
+
+This comparison makes paid Nemotron calls, but starts no training and makes no
+Tavily calls. It checks every frozen input and the offline pair trajectory before
+creating the provider. Missing pairs or stale hypotheses stop the run. A missing
+pair later in a live trajectory also stops it; there is no training fallback.
+Use a new output directory:
+
+```bash
+uv run python -m bench.routing_ablation \
+  --split dev \
+  --priors artifacts/ablations/priors-v1 \
+  --out artifacts/ablations/dev-routing-v1 \
+  --allow-api-calls
+```
+
+The priors must match the current source fingerprint and record hypothesis calls
+from the configured Super model. Preparing replacement priors through
+`bench.ablations --prepare` is a separate, potentially paid operation.
+
+Each case produces a diagnosis and a call log for each variant. `rows.json`
+compares rankings, causal status, tokens, LLM costs and cached training use.
+`protocol.json` records the models, thresholds, source hashes and input hashes.
+Call logs distinguish shared hypothesis costs from new narrative calls, including
+billed retries on failure. A failed run writes `INCOMPLETE.txt` and produces no
+combined results file. Existing output directories are never overwritten.
+
+Causal status and the patch come from code, not the verdict model. This experiment
+primarily measures narrative cost and provides texts for review; it does not
+score explanation quality automatically. Different call costs can affect decisions
+near the USD 1 budget limit. This budget guides the loop; it is not a hard provider
+spending cap. One generation per variant does not estimate generation variance.
+These results must not be mixed with narrative-disabled ablation costs. Reruns of
+the already inspected held-out cases remain exploratory.
