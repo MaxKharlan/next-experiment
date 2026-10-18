@@ -127,3 +127,5 @@ near the USD 1 budget limit. This budget guides the loop; it is not a hard provi
 spending cap. One generation per variant does not estimate generation variance.
 These results must not be mixed with narrative-disabled ablation costs. Reruns of
 the already inspected held-out cases remain exploratory.
+
+The first dev run is recorded in [Dev routing results](routing-ablation-dev.md), with the raw diagnoses and call logs included.

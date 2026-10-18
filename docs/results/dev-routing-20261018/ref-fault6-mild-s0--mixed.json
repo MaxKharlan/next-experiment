@@ -1,0 +1,209 @@
+{
+  "method": "mixed",
+  "ranking": [
+    [
+      "lr_too_low",
+      0.8827433628318585
+    ],
+    [
+      "chat_template_mismatch",
+      0.053097345132743376
+    ],
+    [
+      "train_val_overlap",
+      0.026548672566371688
+    ],
+    [
+      "distribution_shift",
+      0.026548672566371688
+    ],
+    [
+      "lora_rank_too_small",
+      0.011061946902654869
+    ]
+  ],
+  "status": "confirmed",
+  "cause": "lr_too_low",
+  "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 2e-05,\n+  \"learning_rate\": 0.0002,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+  "llm_cost_usd": 0.0072368,
+  "llm_tokens": 10090,
+  "mini_jobs": 4,
+  "training_cost_usd": 0.10944,
+  "steps": [
+    {
+      "kind": "hypotheses",
+      "hypotheses": [
+        {
+          "id": "h1",
+          "fault_class": "lr_too_low",
+          "location": "hyperparameters.learning_rate",
+          "prior": 0.35,
+          "rationale": "LoRA for Qwen3-0.6B typically requires a learning rate around 1e-4 to achieve good adaptation; the used rate 2e-05 is an order lower, resulting in minimal weight updates and poor generalization despite low training loss. The arXiv study shows accuracy drops sharply at lower lrs for r=16 LoRA.",
+          "sources": [
+            "https://arxiv.org/html/2602.04998v2"
+          ]
+        },
+        {
+          "id": "h2",
+          "fault_class": "lora_rank_too_small",
+          "location": "lora_r",
+          "prior": 0.25,
+          "rationale": "With 77 distinct intent labels, a LoRA rank of 16 may be too limited to capture the necessary adaptations; higher ranks (e.g., 256) have been shown to match full fine\u2011tuning performance. The model therefore stalls below expected quality.",
+          "sources": [
+            "https://openreview.net/pdf/ab275bf1fed6b1e3642e0eb167b4b7cbd7810a94.pdf",
+            "https://tensoria.fr/en/blog/lora-qlora-fine-tuning-guide"
+          ]
+        },
+        {
+          "id": "h3",
+          "fault_class": "chat_template_mismatch",
+          "location": "training data format (chat template)",
+          "prior": 0.2,
+          "rationale": "Token Factory expects chat\u2011formatted examples (<|user|>\u2026<|assistant|>\u2026). If the user supplied plain query\u2011label pairs, the model sees a mismatch between training and inference formats, causing it to ignore the instruction and produce random labels.",
+          "sources": []
+        },
+        {
+          "id": "h4",
+          "fault_class": "train_val_overlap",
+          "location": "validation file",
+          "prior": 0.1,
+          "rationale": "Although no exact duplicates exist, the sharp drop in validation loss to 0.041 at epoch\u202f6 suggests the model memorized a subset of validation examples (near\u2011duplicates or easy patterns), indicating overlap\u2011like behavior that harms generalization to held\u2011out queries.",
+          "sources": []
+        },
+        {
+          "id": "h5",
+          "fault_class": "distribution_shift",
+          "location": "training examples",
+          "prior": 0.1,
+          "rationale": "The held\u2011out queries may differ in phrasing or domain from the training set, causing the model to fail despite low training loss; this matches the symptom of good validation performance (eventually) but poor real\u2011world accuracy.",
+          "sources": []
+        }
+      ],
+      "probs": {
+        "h1": 0.35,
+        "h2": 0.25,
+        "h3": 0.2,
+        "h4": 0.1,
+        "h5": 0.1
+      }
+    },
+    {
+      "kind": "probe",
+      "probe": "lora_rank",
+      "outcome": "ok",
+      "gain_bits": 0.3613,
+      "raw": {
+        "lora_r": 16,
+        "low_up_to": 4
+      },
+      "probs": {
+        "h1": 0.4421,
+        "h2": 0.0526,
+        "h3": 0.2526,
+        "h4": 0.1263,
+        "h5": 0.1263
+      },
+      "card": "The probe measured the LoRA rank setting used in training; it found lora_r = 16, which is above the low_up_to threshold of 4, so the rank is considered acceptable (outcome ok). This indicates that the rank is not too small, weakening hypothesis h2 (lora_rank_too_small) while leaving the other hypotheses unchanged."
+    },
+    {
+      "kind": "probe",
+      "probe": "lr_range",
+      "outcome": "low",
+      "gain_bits": 0.3596,
+      "raw": {
+        "learning_rate": 2e-05,
+        "low_below": 5e-05
+      },
+      "probs": {
+        "h1": 0.7151,
+        "h2": 0.0269,
+        "h3": 0.129,
+        "h4": 0.0645,
+        "h5": 0.0645
+      },
+      "card": "The check measured whether the learning rate is below the low threshold of 5e-05. It found the learning rate is 2e-05, which is below that threshold, yielding a 'low' outcome. This supports the hypothesis h1 (lr_too_low) because the used rate is an order of magnitude lower than the typical 1e-4 needed for effective LoRA adaptation, while providing no direct evidence for or against the other hypotheses."
+    },
+    {
+      "kind": "intervention",
+      "hypothesis": "h1",
+      "reason": "h1 at 0.72",
+      "target": {
+        "hypothesis_id": "h1",
+        "kind": "target",
+        "patch": {
+          "learning_rate": 0.0002
+        },
+        "description": "learning_rate 2e-05 -> 0.0002",
+        "ft_job_ids": [
+          "ftjob-e95406ff5263433abec6eacf09522d1e",
+          "ftjob-63f5a192a6994269a02629ae3a412d0e"
+        ],
+        "metrics": [
+          0.495,
+          0.51
+        ]
+      },
+      "control": {
+        "hypothesis_id": "h1",
+        "kind": "control",
+        "patch": {},
+        "description": "the failed recipe again with new seeds",
+        "ft_job_ids": [
+          "ftjob-026d35e8d29c4ddeb753a7041272e677",
+          "ftjob-a32852bc0823427c8003e5c125f69c92"
+        ],
+        "metrics": [
+          0.335,
+          0.355
+        ]
+      },
+      "result": {
+        "status": "confirmed",
+        "effect": 0.15749999999999997,
+        "ci_low": 0.12026068429373896,
+        "ci_high": 0.194739315706261,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "prior_probs": {
+        "h1": 0.71505376344086,
+        "h2": 0.02688172043010752,
+        "h3": 0.12903225806451613,
+        "h4": 0.06451612903225806,
+        "h5": 0.06451612903225806
+      },
+      "planning_probs": {
+        "h1": 0.7150537634408601,
+        "h2": 0.026881720430107527,
+        "h3": 0.12903225806451615,
+        "h4": 0.06451612903225808,
+        "h5": 0.06451612903225808
+      },
+      "probs": {
+        "h1": 0.8827433628318585,
+        "h2": 0.011061946902654869,
+        "h3": 0.053097345132743376,
+        "h4": 0.026548672566371688,
+        "h5": 0.026548672566371688
+      },
+      "belief_model": "causal-odds-heuristic-v1",
+      "cost_usd": 0.10944
+    },
+    {
+      "kind": "verdict",
+      "hypothesis_id": "h1",
+      "status": "confirmed",
+      "evidence": [
+        "probe:lora_rank",
+        "probe:lr_range",
+        "intervention:h1"
+      ],
+      "patch": "--- hyperparameters\n+++ hyperparameters\n@@ -1,7 +1,7 @@\n {\n   \"batch_size\": 8,\n   \"context_length\": 8192,\n-  \"learning_rate\": 2e-05,\n+  \"learning_rate\": 0.0002,\n   \"lora_alpha\": 16,\n   \"lora_dropout\": 0.05,\n   \"lora_r\": 16,",
+      "summary": "The learning rate was set too low at 2e-05, causing minimal weight updates and poor generalization. The causal check showed that increasing the learning rate to 0.0002 improved exact match accuracy by about 0.157 (95% CI 0.120 to 0.195) over the control. Apply the patch to raise the learning rate in the hyperparameters."
+    }
+  ],
+  "confirmed": [
+    "lr_too_low"
+  ]
+}
