@@ -171,6 +171,7 @@ def live(
             router,
             _pair_runner(backend, inv_id, tf, storage, job_hp, protocol),
             probes=investigation_probes(ctx),
+            hypothesis_samples=getattr(get_settings(), "hypothesis_samples", 1),
             tavily=tavily,
             on_step=lambda step: store.emit(inv_id, "step", step),
             propose_retrain=_proposal(backend, protocol),
