@@ -15,12 +15,13 @@ With PUBLIC_DEMO=true only replays are allowed.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import threading
 from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse
@@ -103,20 +104,52 @@ def validate_case(req: CaseStart) -> dict:
 
 
 @app.post("/api/investigations/from-case", status_code=202)
-def start_from_case(req: CaseStart) -> dict:
+def start_from_case(
+    req: CaseStart,
+    idempotency_key: str | None = Header(default=None),
+) -> dict:
+    if get_settings().public_demo:
+        raise HTTPException(403, "the public demo only replays saved investigations")
+    identity = None
+    if idempotency_key is not None:
+        if not 1 <= len(idempotency_key) <= 128 or not all(
+            33 <= ord(char) <= 126 for char in idempotency_key
+        ):
+            raise HTTPException(
+                422, "Idempotency-Key must contain 1-128 visible ASCII characters"
+            )
+        identity = (
+            hashlib.sha256(idempotency_key.encode()).hexdigest(),
+            hashlib.sha256(
+                json.dumps(
+                    req.model_dump(), sort_keys=True, separators=(",", ":")
+                ).encode()
+            ).hexdigest(),
+        )
+        try:
+            existing = store.find_request(*identity)
+        except ValueError as err:
+            raise HTTPException(409, str(err)) from None
+        if existing is not None:
+            return {"id": existing, "reused": True}
     prepared = _prepare_explicit_case(req)
-    inv_id = store.create(
-        "tf",
-        req.case.model_dump(),
-        f"{req.case.task}: {req.case.job.id}",
-    )
-    threading.Thread(
-        target=runners.live,
-        args=(store, inv_id, "tf"),
-        kwargs={"prepared": prepared},
-        daemon=True,
-    ).start()
-    return {"id": inv_id}
+    case = req.case.model_dump()
+    title = f"{req.case.task}: {req.case.job.id}"
+    if identity is None:
+        inv_id, created = store.create("tf", case, title), True
+    else:
+        try:
+            inv_id, created = store.create_once("tf", case, title, *identity)
+        except ValueError as err:
+            raise HTTPException(409, str(err)) from None
+    if created:
+        threading.Thread(
+            target=runners.live,
+            args=(store, inv_id, "tf"),
+            kwargs={"prepared": prepared},
+            daemon=True,
+        ).start()
+    return {"id": inv_id, "reused": not created}
 
 
 @app.post("/api/investigations/{inv_id}/retrain")

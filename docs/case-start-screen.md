@@ -18,9 +18,10 @@ this result and disables starting until validation succeeds again.
 **Start paid investigation** submits the validated request. The server validates
 it again, checks the provider job in the worker and streams the investigation.
 The form disables duplicate clicks while a request is pending. A failed start
-requires validation again. After a network error, inspect Past runs before
-retrying: the server may have created the investigation even if the response did
-not reach the browser. This interface does not add server-side idempotency.
+requires validation again. After a network error, revalidate and retry the unchanged request in the same
+page: its retained idempotency key retrieves the original investigation. After
+reloading the page, inspect Past runs before starting again. See
+[idempotent starts](case-idempotency.md) for persistence and concurrency limits.
 
 The public API demo and static GitHub Pages demo hide this form. The API's existing
 public-demo restrictions still reject explicit validation and training requests.

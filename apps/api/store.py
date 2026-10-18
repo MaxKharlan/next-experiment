@@ -32,7 +32,14 @@ class InvestigationStore:
         self.meta: dict[str, dict[str, Any]] = {}
         self.events: dict[str, list[dict[str, Any]]] = {}
 
-    def create(self, backend: str, case: dict[str, Any], title: str = "") -> str:
+    def create(
+        self,
+        backend: str,
+        case: dict[str, Any],
+        title: str = "",
+        *,
+        request_identity: tuple[str, str] | None = None,
+    ) -> str:
         inv_id = f"inv-{uuid.uuid4().hex[:8]}"
         meta = {
             "id": inv_id,
@@ -42,11 +49,35 @@ class InvestigationStore:
             "case": case,
             "created_at": time.time(),
         }
+        if request_identity is not None:
+            meta["request_key_hash"], meta["request_digest"] = request_identity
         with self.lock:
             self.meta[inv_id] = meta
             self.events[inv_id] = []
             self._save(inv_id)
         return inv_id
+
+    def find_request(self, key_hash: str, digest: str) -> str | None:
+        """Resolve a persisted request identity under this store's process lock."""
+        with self.lock:
+            for meta in self.list():
+                if meta.get("request_key_hash") != key_hash:
+                    continue
+                if meta.get("request_digest") != digest:
+                    raise ValueError(
+                        "Idempotency key was already used with a different request"
+                    )
+                return meta["id"]
+        return None
+
+    def create_once(self, backend, case, title, key_hash, digest):
+        with self.lock:
+            existing = self.find_request(key_hash, digest)
+            if existing is not None:
+                return existing, False
+            return self.create(
+                backend, case, title, request_identity=(key_hash, digest)
+            ), True
 
     def emit(self, inv_id: str, kind: str, data: dict[str, Any]) -> None:
         with self.lock:
