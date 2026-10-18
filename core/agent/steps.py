@@ -89,7 +89,7 @@ def clean_hypotheses(
 
 
 def propose_hypotheses(
-    router: Router, case: dict[str, Any], mode: str = "A", version: str = "v2"
+    router: Router, case: dict[str, Any], mode: str = "A", version: str = "v3"
 ) -> list[Hypothesis]:
     """Super lists hypotheses for a case: symptom, job config, metrics, findings
     and known issues found by Tavily."""

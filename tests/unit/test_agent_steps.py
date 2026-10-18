@@ -39,7 +39,7 @@ class FakeRouter:
 
 
 def test_catalog_covers_twelve_faults():
-    assert len(FAULTS) == 12
+    assert {fault.number for fault in FAULTS} == set(range(1, 13))
     assert "loss_on_prompt" not in allowed_classes("A")
     assert "loss_on_prompt" in allowed_classes("B")
     assert "lr_too_low" in catalog_text("A")
@@ -68,7 +68,7 @@ def test_hypotheses_are_cleaned_for_mode_a():
     assert [h.id for h in found] == ["h1", "h2"]
     assert sum(h.prior for h in found) == pytest.approx(1.0)
     step, version, messages = router.sent[0]
-    assert (step, version) == ("hypotheses", "hypotheses-v2")
+    assert (step, version) == ("hypotheses", "hypotheses-v3")
     assert "close to the base model" in messages[1]["content"]
 
 

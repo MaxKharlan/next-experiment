@@ -18,11 +18,19 @@ class Fault:
 FAULTS: tuple[Fault, ...] = (
     Fault(
         1,
+        "answer_truncation",
+        "data",
+        "user-side data preparation cuts assistant answers before upload",
+        "the model learns incomplete labels, broken JSON or shortened answers",
+        "AB",
+    ),
+    Fault(
+        1,
         "truncation",
         "data",
-        "context_length is shorter than some examples, so they are cut",
-        "answers stop early, JSON breaks on long inputs",
-        "AB",
+        "a custom trainer truncates examples at its sequence-length limit",
+        "answer tokens are removed during training",
+        "B",
     ),
     Fault(
         2,
