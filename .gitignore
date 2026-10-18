@@ -242,3 +242,6 @@ artifacts/
 
 # Static demo site built by scripts/build_pages.py
 _site/
+
+# README video recorded by scripts/record_demo_video.py
+demo.mp4
