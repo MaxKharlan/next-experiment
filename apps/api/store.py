@@ -149,14 +149,32 @@ class InvestigationStore:
         with self.lock:
             if inv_id in self.meta:
                 return
-        key = f"investigations/{inv_id}/meta.json"
-        if not self.storage.exists(key):
-            raise KeyError(inv_id)
-        meta = json.loads(self.storage.get_text(key))
-        if meta["status"] not in TERMINAL and meta["status"] != WAITING:
-            # it was running in an app process that has stopped since
-            meta["status"] = "failed"
-        lines = self.storage.get_text(f"investigations/{inv_id}/events.jsonl")
-        with self.lock:
+            key = f"investigations/{inv_id}/meta.json"
+            if not self.storage.exists(key):
+                raise KeyError(inv_id)
+            meta = json.loads(self.storage.get_text(key))
+            lines = self.storage.get_text(f"investigations/{inv_id}/events.jsonl")
+            events = [json.loads(x) for x in lines.splitlines() if x]
+            # Events are saved before metadata; recover the latest transition.
+            persisted_status = meta["status"]
+            for event in events:
+                kind = event["type"]
+                if kind in ("started", "resumed"):
+                    meta["status"] = "running"
+                elif kind in TERMINAL or kind == WAITING:
+                    meta["status"] = kind
             self.meta[inv_id] = meta
-            self.events[inv_id] = [json.loads(x) for x in lines.splitlines() if x]
+            self.events[inv_id] = events
+            if meta["status"] not in TERMINAL and meta["status"] != WAITING:
+                self.emit(
+                    inv_id,
+                    "failed",
+                    {
+                        "error": "Investigation interrupted by an API process restart. "
+                        "Saved results remain available. Provider jobs may still be "
+                        "running; check them before starting another investigation.",
+                        "reason": "process_restart",
+                    },
+                )
+            elif meta["status"] != persisted_status:
+                self._save(inv_id)
