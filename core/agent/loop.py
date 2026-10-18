@@ -29,6 +29,7 @@ import httpx
 from core.agent.context import InvestigationContext
 from core.agent.ensemble import sample_hypotheses
 from core.agent.known_issues import find_known_issues
+from core.agent.label_checks import check_training_labels
 from core.agent.router import Router
 from core.agent.schemas import Hypothesis, Verdict
 from core.agent.steps import interpret_probe, propose_hypotheses, write_verdict
@@ -126,6 +127,15 @@ def investigate(
         if on_step is not None:
             on_step(step)
 
+    label_checks = None
+    if "training_labels" in case:
+        if ctx.mode != "B":
+            raise ValueError("training_labels are supported only in mode B")
+        label_checks = check_training_labels(case["training_labels"])
+        case = {k: v for k, v in case.items() if k != "training_labels"}
+        case["training_label_checks"] = label_checks
+        add({"kind": "training_label_checks", "raw": label_checks, "cost_usd": 0.0})
+
     if tavily is not None:
         job = case.get(
             "job", {"hyperparameters": ctx.job_config.get("hyperparameters")}
@@ -170,6 +180,8 @@ def investigate(
     remaining = {p.name: p for p in probes if p.available(ctx)}
     base_hp = dict(ctx.job_config.get("hyperparameters", {}))
     evidence: list[str] = list(initial_evidence)
+    if label_checks is not None:
+        evidence.append("training_label_checks")
     result = InvestigationResult(
         ctx.investigation_id, "inconclusive", hypotheses, steps=steps
     )
