@@ -67,8 +67,12 @@ def from_investigation(result: InvestigationResult) -> Diagnosis:
     probs: dict[str, float] = {}
     for step in result.steps:
         probs = step.get("probs", probs)
-        if step["kind"] == "intervention" and step["result"]["status"] != "confirmed":
-            # the loop drops a leader that was not confirmed, as here
+        if (
+            step["kind"] == "intervention"
+            and "probs" not in step
+            and step["result"]["status"] != "confirmed"
+        ):
+            # Preserve the historical behavior for reports without posteriors.
             probs = {**probs, step["hypothesis"]: 0.0}
             total = sum(probs.values())
             probs = {h: p / total for h, p in probs.items()} if total else probs
