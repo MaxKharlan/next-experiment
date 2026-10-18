@@ -234,17 +234,40 @@ def investigate(
 
         if action == "probe":
             probe = remaining.pop(probe_name)
+            estimated_cost = probe.estimate_cost(ctx)
+            if not math.isfinite(estimated_cost) or estimated_cost < 0:
+                raise ValueError(
+                    "The probe cost estimate must be finite and nonnegative"
+                )
+            remaining_budget = ctx.budget_left_usd - router.log.cost_usd
+            if estimated_cost > remaining_budget:
+                add(
+                    {
+                        "kind": "stop",
+                        "reason": "the budget does not cover this probe",
+                        "probe": probe_name,
+                        "estimated_cost_usd": estimated_cost,
+                        "budget_left_usd": remaining_budget,
+                    }
+                )
+                break
             run = probe.run(ctx)
+            if not math.isfinite(run.cost_usd) or run.cost_usd < 0:
+                raise ValueError("The probe cost must be finite and nonnegative")
+            ctx.budget_left_usd -= run.cost_usd
             probs = update(probs, classes, probe_name, run.outcome)
             step = {
                 "kind": "probe",
                 "probe": probe_name,
+                "estimated_cost_usd": estimated_cost,
+                "cost_usd": run.cost_usd,
+                "budget_left_usd": ctx.budget_left_usd - router.log.cost_usd,
                 "outcome": run.outcome,
                 "gain_bits": round(gain, 4),
                 "raw": json.loads(run.summary),
                 "probs": _rounded(probs),
             }
-            if explain:
+            if explain and ctx.budget_left_usd > router.log.cost_usd:
                 card = interpret_probe(
                     router, hypotheses, probe_name, run.outcome, step["raw"]
                 )
