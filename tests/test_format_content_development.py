@@ -216,3 +216,123 @@ def test_paid_settlement_resume_uses_existing_actual(tmp_path, monkeypatch):
     runner.collect(tmp_path, None)
     assert state["job"]["settled"]
     assert ledger.snapshot()["committed_usd"] == 0.02
+
+
+def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_path):
+    from bench.tasks.structured import sha
+    from scripts.fresh_answer_calibration import save
+    from scripts.report_format_content import verify_export
+
+    data = build(tmp_path / "data", CharTokenizer())
+    state, jobs = {}, {}
+    for arm in ("format", "healthy", "cut", "wrong"):
+        for seed in (1, 2, 3):
+            name = f"{arm}-s{seed}"
+            path = tmp_path / f"{name}-train.jsonl"
+            path.write_bytes((tmp_path / "data" / f"{arm}-train.jsonl").read_bytes())
+            jobs[name] = {
+                "train": f"/old/{path.name}",
+                "train_sha256": sha(path),
+                "validation": f"/old/data/{arm}-validation.jsonl",
+                "validation_sha256": data[f"{arm}_validation"]["sha256"],
+            }
+            state[name] = {
+                "job_id": name,
+                "weights_sha256": name,
+                "status": "succeeded",
+                "settled": True,
+            }
+    rule = {
+        "format_exact_minimum": 0.9,
+        "healthy_choice_minimum": 0.35,
+        "healthy_choice_maximum": 0.95,
+        "healthy_minus_format_choice": 0.1,
+        "healthy_minus_wrong_choice": 0.1,
+        "healthy_minus_cut_strict": 0.08,
+    }
+    plan = {"datasets": data, "jobs": jobs, "evaluation_runtime": {}, "gates": rule}
+    for entry in data.values():
+        entry["path"] = "/old/data/" + entry["path"].split("/")[-1]
+    save(tmp_path / "protocol.json", plan)
+    digest = sha(tmp_path / "protocol.json")
+    (tmp_path / "protocol.sha256").write_text(digest + "\n")
+    choices = json.loads((tmp_path / "data/choices.json").read_text())
+    groups = {
+        a: {k: {} for k in ("format", "content")}
+        for a in ("format", "healthy", "cut", "wrong")
+    }
+    for name, entry in {"base": {}, **state}.items():
+        record = {
+            "protocol_sha256": digest,
+            "runtime": {},
+            "job_id": entry.get("job_id"),
+            "weights_sha256": entry.get("weights_sha256"),
+        }
+        for kind in ("format", "content"):
+            rows = []
+            for i, line in enumerate(
+                (tmp_path / "data" / f"check-{kind}.jsonl").read_text().splitlines()
+            ):
+                expected = json.loads(line)["messages"][-1]["content"]
+                row = {
+                    "line": i + 1,
+                    "expected": expected,
+                    "answer": expected,
+                    **generation_metrics(expected, expected),
+                }
+                if kind == "content":
+                    row.update(
+                        logprobs=[
+                            1.0 if j == choices[i]["correct_index"] else 0.0
+                            for j in range(4)
+                        ],
+                        choice_exact=1.0,
+                    )
+                rows.append(row)
+            metrics = {
+                k: 1.0 for k in ("strict_exact", "schema_valid", "unwrapped_exact")
+            }
+            if kind == "content":
+                metrics["choice_exact"] = 1.0
+            record[kind] = {
+                "rows": rows,
+                "summary": metrics,
+                "data_sha256": data[f"check_{kind}"]["sha256"],
+            }
+            if name != "base":
+                for metric, value in metrics.items():
+                    groups[name.split("-")[0]][kind].setdefault(metric, []).append(
+                        value
+                    )
+        save(tmp_path / "scores" / f"{name}.json", record)
+    decision = {
+        "base": {k: record[k]["summary"] for k in ("format", "content")},
+        "groups": groups,
+        "failures": gate_failures(groups, rule),
+        "weight_digests": {a: [f"{a}-s{s}" for s in (1, 2, 3)] for a in groups},
+        "status": "stopped",
+        "selected_seeds": [],
+        "power": None,
+    }
+    save(tmp_path / "state.json", state)
+    save(tmp_path / "decision.json", decision)
+
+    def manifest():
+        save(
+            tmp_path / "manifest.json",
+            {
+                str(p.relative_to(tmp_path)): sha(p)
+                for p in tmp_path.rglob("*")
+                if p.is_file() and p.name != "manifest.json"
+            },
+        )
+
+    manifest()
+    verify_export(tmp_path)
+    path = tmp_path / "scores/healthy-s1.json"
+    bad = json.loads(path.read_text())
+    bad["content"]["rows"][0]["answer"] = "{}"
+    save(path, bad)
+    manifest()  # Even a refreshed file manifest cannot make wrong saved metrics pass.
+    with pytest.raises(ValueError, match="Generation metric changed"):
+        verify_export(tmp_path)

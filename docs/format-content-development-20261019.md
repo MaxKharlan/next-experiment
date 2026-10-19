@@ -75,5 +75,55 @@ are part of this experiment.
 
 ## Execution result
 
-Pending the frozen series; results will be recorded here after all planned
-models have been evaluated.
+Protocol SHA-256:
+`28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09`.
+Source commit: `330841d`. The complete series reserves $1.1311488 before tax.
+All twelve provider jobs were accepted once. Evaluation is pending completion.
+
+| Arm | Rendered training tokens per epoch | Maximum example tokens | Three-job reservation |
+| --- | ---: | ---: | ---: |
+| format | 61,932 | 292 | $0.1513728 |
+| healthy | 97,818 | 630 | $0.3265920 |
+| cut | 96,184 | 630 | $0.3265920 |
+| wrong | 97,818 | 630 | $0.3265920 |
+
+All check histories are balanced across the three families (16 each). Candidate
+position is shuffled and frozen; candidates are scored independently, not shown
+as an ordered multiple-choice list to the model.
+
+Reproduce preparation in a new artifact directory with the frozen source commit
+and runtime. The generator fixes the RNG; path fields in a regenerated protocol
+will differ. Never submit against the historical ledger again.
+
+```bash
+uv run python -m scripts.format_content_development prepare \
+  --root artifacts/format-content-development-20261019-v1 \
+  --old artifacts/ticket-updates-development-20261019-v1
+uv run python -m scripts.format_content_development submit \
+  --root artifacts/format-content-development-20261019-v1 --env-file /path/to/.env
+uv run python -m scripts.format_content_development base \
+  --root artifacts/format-content-development-20261019-v1
+uv run python -m scripts.format_content_development collect \
+  --root artifacts/format-content-development-20261019-v1 --env-file /path/to/.env
+uv run python -m scripts.format_content_development score \
+  --root artifacts/format-content-development-20261019-v1
+uv run python -m scripts.format_content_development analyze \
+  --root artifacts/format-content-development-20261019-v1
+```
+
+Do not run the paid submission command merely to reproduce analysis. Published
+predictions, candidate scores and data are sufficient for rescoring without a
+provider call. The terminal decision prevents further scoring/submission in the
+same cohort.
+
+To verify a published bundle in a different checkout, without local model files
+or credentials:
+
+```bash
+uv run python -m scripts.report_format_content --verify \
+  --out docs/results/format-content-development-20261019
+```
+
+This rechecks data and training-file hashes, all 936 generated-answer metrics,
+624 four-choice decisions and the stopping decision. It does not rerun model
+inference or independently recover weight bytes from a weight hash.
