@@ -1,8 +1,9 @@
 # Fresh API execution — 19 October 2026
 
 PR #89 is merged as `4e374a2`; runtime and execution support from PR #90 is merged
-as `9c4f0a0`. The six development jobs have succeeded. Local scoring waits for the
-B9 owner's MPS handoff. No fresh reference training or final-test model evaluation
+as `9c4f0a0`. The six development jobs have succeeded. The B9 owner confirmed
+`MPS_HANDOFF_READY` at 10:07:46 UTC after exit code 0 and validation of all 210
+summaries. Development scoring is now running on MPS. No fresh reference training or final-test model evaluation
 has run yet.
 
 The development protocol digest is
@@ -23,6 +24,12 @@ were checked against the authenticated provider table before API calls.
 ## Continue the recorded run
 
 Use the same checkout, dependencies, cohort and protocol. Do not regenerate them.
+Before resuming, inspect `artifacts/fresh-answer-development-20261019/active-scoring.json`
+and its recorded process. The current scoring command runs in exec session `32934`,
+PID `82655`; do not start another scorer while it is alive. Its six result files are
+written under `scores/` as each adapter completes. If the process exits, inspect its
+exit status before running the power gate.
+
 Each paid submission command retains job IDs; a missing ID after an attempted
 submission requires provider reconciliation, not a retry.
 

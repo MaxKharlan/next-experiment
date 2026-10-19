@@ -1,10 +1,13 @@
 {
   "api_preflight": "Real single-worker loopback HTTP API, SQLite, capabilities and empty investigation list returned 200; no case started",
-  "b9_resource_policy": "MPS reserved for PID 47214 until successful exit and 210 summaries; no duplicate sweep",
+  "b9_resource_policy": "MPS_HANDOFF_READY confirmed by owner after exit 0 and validation of 210 summaries; B9 follow-up CPU-only.",
   "development_jobs": {
     "damaged-s1101": {
       "job_id": "ftjob-26abd6d33fc44da3a8166dd5f47586a1",
-      "status": "running"
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.044644,
+      "trained_tokens": 111610,
+      "weights_sha256": "44da7296e1b7a3cc50f850a9711cb3233d951488f460a1db47640015da06310f"
     },
     "damaged-s1102": {
       "job_id": "ftjob-ceb05dce32434a18b25ba4c2072a884b",
@@ -47,21 +50,33 @@
   "fresh_model_training_jobs": 0,
   "implementation_commit": "abccf2e41a241c31954b8cae733767004a7106d6",
   "implementation_pr": "https://github.com/MaxKharlan/next-experiment/pull/90",
+  "mps_handoff": {
+    "b9_constraint": "B9 follow-up is CPU-only until a new exclusive MPS slot is coordinated.",
+    "conditions": [
+      "exec session 5676 exited with code 0",
+      "PID 47214 absent",
+      "210/210 summary.json parsed",
+      "all 7 recipes x 30 seeds present"
+    ],
+    "confirmed_at": "2026-10-19T10:07:46.958944+00:00",
+    "recipient": "fresh answer-cut persisted API trace in thread 01a15356-1a3b-7903-a3a4-c0e419b8f23d",
+    "state": "MPS_HANDOFF_READY"
+  },
   "pr_89": {
     "commit": "4e374a2ed8a4d870f925349e3f17717a06f7cbea",
     "state": "merged"
   },
   "spending": {
-    "available_usd": 4.7267976,
+    "available_usd": 4.7289536,
     "cap_usd": 5.0,
-    "committed_usd": 0.27320239999999996,
+    "committed_usd": 0.27104639999999997,
     "operations": [
       {
-        "actual_usd": null,
+        "actual_usd": 0.044644,
         "id": "damaged-s1101",
         "purpose": "development_training",
         "reserved_usd": 0.0468,
-        "status": "pending"
+        "status": "settled"
       },
       {
         "actual_usd": 0.044644,
@@ -100,8 +115,8 @@
       }
     ]
   },
-  "status": "development_training_and_resource_wait",
-  "updated_at": "2026-10-19T09:27:58.608704+00:00",
+  "status": "development_scoring",
+  "updated_at": "2026-10-19T10:09:32.700651+00:00",
   "validation": {
     "ci": "passed on abccf2e; 767 passed, 15 skipped",
     "full_ml_suite": "813 passed, 8 skipped",
