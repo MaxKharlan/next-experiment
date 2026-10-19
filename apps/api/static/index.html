@@ -607,6 +607,9 @@ const HANDLERS = {
   awaiting_approval: d => { showCost(d.summary); askApproval(d.plan);
     $("reportNote").textContent = "Partial report: awaiting your decision.";
     setStatus(null, null, "waiting", "needs your approval"); },
+  awaiting_paid_step: d => { askPaidStep(d.proposal);
+    $("reportNote").textContent = "Partial report: awaiting your decision.";
+    setStatus(null, null, "waiting", "needs your approval"); },
   resumed: d => { setApproval(d.approved ? "Approved" : "Declined");
     $("reportNote").textContent = "Includes progress recorded so far.";
     setStatus(null, null, "running", d.approved ? "retraining" : "running"); },
@@ -954,6 +957,21 @@ function askApproval(plan) {
   const answer = async (approve) => {
     $("yes").disabled = $("no").disabled = true;
     const res = await fetch(`/api/investigations/${current}/retrain`, {method: "POST",
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
+    if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted small">${esc((await res.json()).detail)}</span>`);
+  };
+  $("yes").onclick = () => answer(true);
+  $("no").onclick = () => answer(false);
+}
+
+function askPaidStep(proposal) {
+  const box = $("approval");
+  if (!box) return;
+  const label = proposal.kind === "causal_check" ? "causal check" : proposal.kind;
+  box.innerHTML = `<button id="yes" class="btn btn-primary">Run ${esc(label)} for up to ${money(proposal.estimated_cost_usd)}</button><button id="no" class="btn btn-ghost">Stop here</button>`;
+  const answer = async (approve) => {
+    $("yes").disabled = $("no").disabled = true;
+    const res = await fetch(`/api/investigations/${current}/paid-step`, {method: "POST",
       headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
     if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted small">${esc((await res.json()).detail)}</span>`);
   };

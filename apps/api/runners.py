@@ -106,11 +106,14 @@ def live(
     backend: str,
     *,
     prepared: dict | None = None,
+    resume_state: dict | None = None,
+    approved_paid_step: dict | None = None,
 ) -> None:
     """Run an explicit case or the existing demo case."""
     from apps.api.case_input import verify_original_job
     from bench.cases import load_cases
     from core.agent.context import InvestigationContext
+    from core.agent.loop import PaidStepApprovalRequired
     from core.agent.router import Router
     from core.config import get_settings
     from core.connectors.storage import LocalStorage
@@ -121,6 +124,7 @@ def live(
     from core.telemetry.calls import CallLog
     from scripts.smoke_agent_steps import CASE, JOB_HP
 
+    spending = None
     try:
         storage = LocalStorage("artifacts")
         tf = TokenFactory.from_settings()
@@ -144,7 +148,8 @@ def live(
             job_hp = protocol["hyperparameters"]
             job_id = protocol["job_id"]
             verify_datasets(protocol)
-            verify_original_job(tf, prepared)
+            if resume_state is None:
+                verify_original_job(tf, prepared)
         elif backend == "tf":
             source = next(
                 case for case in load_cases("dev") if case.id == "fault6-lr1e-5"
@@ -171,22 +176,48 @@ def live(
                 else {}
             ),
         )
-        store.emit(
-            inv_id,
-            "started",
-            {
-                "case": case_data,
-                "backend": backend,
-                "job_id": job_id,
-                "protocol": protocol,
-            },
+        from core.db.spending import SpendingLedger
+
+        spending = SpendingLedger(
+            Path("artifacts/investigations") / inv_id / "spending.sqlite3",
+            ctx.budget_left_usd,
         )
+        tf.spending = spending
+        if resume_state is None:
+            store.emit(
+                inv_id,
+                "started",
+                {
+                    "case": case_data,
+                    "backend": backend,
+                    "job_id": job_id,
+                    "protocol": protocol,
+                },
+            )
+        approval_consumed = False
+
+        def approve_paid_step(proposal):
+            nonlocal approval_consumed
+            if approved_paid_step is not None and not approval_consumed:
+                expected = approved_paid_step["proposal"]
+                if (
+                    proposal["kind"] != expected["kind"]
+                    or proposal["estimated_cost_usd"] != expected["estimated_cost_usd"]
+                ):
+                    raise ValueError("The resumed paid step differs from its proposal")
+                approval_consumed = True
+                return True
+            raise PaidStepApprovalRequired(proposal)
+
         result = investigate_with_answers(
             ctx,
             case_data,
             router,
             _pair_runner(backend, inv_id, tf, storage, job_hp, protocol),
             probes=investigation_probes(ctx),
+            spending=spending,
+            approve_paid_step=approve_paid_step,
+            resume_state=resume_state,
             hypothesis_samples=getattr(get_settings(), "hypothesis_samples", 1),
             tavily=tavily,
             on_step=lambda step: store.emit(inv_id, "step", step),
@@ -207,6 +238,7 @@ def live(
         result.protocol = protocol
         result.save(storage)
         summary = _summary(json.loads(result.to_json()))
+        summary["spending"] = spending.snapshot()
         if result.retrain_plan:
             plan = result.retrain_plan
             store.emit(
@@ -216,8 +248,50 @@ def live(
             )
         else:
             store.emit(inv_id, "finished", summary)
+    except PaidStepApprovalRequired as pause:
+        public_proposal = {
+            key: value for key, value in pause.proposal.items() if key != "continuation"
+        }
+        store.emit(
+            inv_id,
+            "awaiting_paid_step",
+            {
+                "proposal": public_proposal,
+                "continuation": pause.proposal["continuation"],
+                "prepared": prepared,
+                "spending": spending.snapshot(),
+            },
+        )
     except Exception as err:  # noqa: BLE001 - the stream must end on any failure
-        _fail(store, inv_id, err)
+        _fail(store, inv_id, err, spending=spending)
+
+
+def resume_paid(
+    store: InvestigationStore,
+    inv_id: str,
+    waiting: dict,
+    approved: bool,
+) -> None:
+    """Resume a saved investigation at the exact paid operation it proposed."""
+    if not approved:
+        store.emit(
+            inv_id,
+            "finished",
+            {
+                "status": "inconclusive",
+                "reason": "paid step declined",
+                "spending": waiting["spending"],
+            },
+        )
+        return
+    live(
+        store,
+        inv_id,
+        "tf",
+        prepared=waiting.get("prepared"),
+        resume_state=waiting["continuation"],
+        approved_paid_step=waiting,
+    )
 
 
 def retrain(
@@ -260,11 +334,17 @@ def retrain(
         _fail(store, inv_id, err)
 
 
-def _fail(store: InvestigationStore, inv_id: str, err: Exception) -> None:
+def _fail(
+    store: InvestigationStore, inv_id: str, err: Exception, *, spending=None
+) -> None:
     store.emit(
         inv_id,
         "failed",
-        {"error": f"{type(err).__name__}: {err}", "trace": traceback.format_exc()},
+        {
+            "error": f"{type(err).__name__}: {err}",
+            "trace": traceback.format_exc(),
+            **({"spending": spending.snapshot()} if spending is not None else {}),
+        },
     )
 
 

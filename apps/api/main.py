@@ -9,6 +9,7 @@ GET  /api/investigations/{id}/events  server-sent events: started, step..., fini
 GET  /api/investigations/{id}/report  persisted JSON report; ?download=true
 GET  /api/demo-cases                  saved investigations that can be replayed
 POST /api/investigations/{id}/retrain approve or decline the proposed full retrain
+POST /api/investigations/{id}/paid-step approve or decline the next paid step
 With PUBLIC_DEMO=true only replays are allowed.
 """
 
@@ -226,6 +227,23 @@ def answer_retrain(inv_id: str, answer: Answer) -> dict:
     return {"id": inv_id, "approved": answer.approve}
 
 
+@app.post("/api/investigations/{inv_id}/paid-step")
+def answer_paid_step(inv_id: str, answer: Answer) -> dict:
+    if get_settings().public_demo:
+        raise HTTPException(403, "the public demo does not run paid steps")
+    get_investigation(inv_id)
+    try:
+        waiting = store.resume_paid(inv_id, answer.approve)
+    except ValueError as err:
+        raise HTTPException(409, str(err)) from None
+    threading.Thread(
+        target=runners.resume_paid,
+        args=(store, inv_id, waiting, answer.approve),
+        daemon=True,
+    ).start()
+    return {"id": inv_id, "approved": answer.approve}
+
+
 @app.get("/api/investigations")
 def list_investigations() -> list[dict]:
     return [
@@ -289,10 +307,16 @@ async def events(
         while not await request.is_disconnected():
             for event in store.events_since(inv_id, seq):
                 seq = event["seq"] + 1
+                data = event["data"]
+                if event["type"] == "awaiting_paid_step":
+                    data = {
+                        "proposal": data["proposal"],
+                        "spending": data["spending"],
+                    }
                 yield {
                     "id": str(event["seq"]),
                     "event": event["type"],
-                    "data": json.dumps(event["data"]),
+                    "data": json.dumps(data),
                 }
             if store.is_done(inv_id) and not store.events_since(inv_id, seq):
                 break

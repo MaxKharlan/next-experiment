@@ -32,7 +32,10 @@ def test_restart_records_one_failure_and_preserves_results(tmp_path, started):
     assert InvestigationStore(storage).snapshot(inv_id) == states[0]
 
 
-@pytest.mark.parametrize("kind", ["finished", "failed", "awaiting_approval", "resumed"])
+@pytest.mark.parametrize(
+    "kind",
+    ["finished", "failed", "awaiting_approval", "awaiting_paid_step", "resumed"],
+)
 def test_events_recover_transition_saved_before_metadata(tmp_path, kind):
     storage = LocalStorage(tmp_path)
     original = InvestigationStore(storage)
@@ -42,7 +45,10 @@ def test_events_recover_transition_saved_before_metadata(tmp_path, kind):
         original.emit(inv_id, "awaiting_approval", {"plan": {}})
     meta_key = f"investigations/{inv_id}/meta.json"
     old_meta = storage.get_text(meta_key)
-    original.emit(inv_id, kind, {"plan": {}, "error": "original failure"})
+    event_data = {"plan": {}, "error": "original failure"}
+    if kind == "awaiting_paid_step":
+        event_data["proposal"] = {"kind": "causal_check"}
+    original.emit(inv_id, kind, event_data)
     storage.put_text(meta_key, old_meta)
     fresh = InvestigationStore(storage)
     snapshot = fresh.snapshot(inv_id)
@@ -55,6 +61,9 @@ def test_events_recover_transition_saved_before_metadata(tmp_path, kind):
         assert snapshot["events"] == original.events_since(inv_id, 0)
     if kind == "awaiting_approval":
         assert fresh.resume(inv_id, False)["plan"] == {}
+    if kind == "awaiting_paid_step":
+        waiting = fresh.resume_paid(inv_id, False)
+        assert waiting["plan"] == {}
 
 
 def test_restart_failure_reaches_stream_and_report(tmp_path, monkeypatch):

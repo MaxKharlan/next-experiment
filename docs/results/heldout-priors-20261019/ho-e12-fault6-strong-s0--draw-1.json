@@ -1,0 +1,36 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.4,
+      "rationale": "The default learning rate for Token Factory is 1e-5, and LoRA fine-tuning usually requires around 1e-4. The job used 6e-06, an order of magnitude lower, which yields minimal weight updates and leaves the model close to its base, explaining the low held-out accuracy despite decreasing train loss.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "distribution_shift",
+      "location": "training data (queries)",
+      "prior": 0.3,
+      "rationale": "Validation loss reaches low values while held-out accuracy is only 27%, indicating the model fits the training distribution but fails on real‑world queries. The findings note no train/val overlap, suggesting the training set may not represent the production query distribution.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "dataset (similar queries with different intents)",
+      "prior": 0.15,
+      "rationale": "Several incorrect answers are semantically close to the expected label (e.g., 'getting_spare_pin' vs 'pin_blocked'), hinting at label noise or ambiguous mappings that cause the model to learn conflicting signals for similar inputs.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.1,
+      "rationale": "With a 0.6B base model and 77 intent classes, a LoRA rank of 16 may be insufficient to capture the necessary adaptation, leading to stalled quality even as the loss continues to drop.",
+      "sources": []
+    }
+  ]
+}

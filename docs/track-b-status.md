@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #79
-(`e10f4b5`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #84
+(`0b0db5f`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -19,7 +19,7 @@ has measured evidence.
 | B12 | Calibration audit, temperature fitting and reliability plots exist. Independent validation and calibrated live priors remain separate work. |
 | B13–B15 | Versioned prompts, hypothesis sampling and sourced known-issue search are implemented. One-versus-three sampling results are saved. |
 | B16 | Dev signature fitting with smoothing and provenance was added in PR #65. Coverage is limited to observed fault classes. |
-| B17–B18 | Persisted steps, usage, probe budget checks, approvals, verdicts and retraining flow exist. Cross-process execution and hard spending reservations remain open. |
+| B17–B18 | Persisted steps, usage, probe budget checks, approvals, verdicts and retraining flow exist. This follow-up adds SQLite spending reservations and persisted REST/UI paid-step approval/resume. Provider invoice reconciliation and cross-process execution ownership remain open. |
 | B19–B20 | Baselines and ablations exist. PR #66 saves the current dev comparison and limitations. More fault classes require new evidence. |
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
@@ -44,3 +44,12 @@ all four requested fault injections and code checks; its remaining extensions
 are not three separate plan items. B21 reproduction and B25 transfer validation
 retain their evidence dependencies. The user then authorized three B24 sub-tasks: API/UI label audits, local interventions and a synthetic downstream-quality experiment. All three sub-tasks have implementation and local evidence; B24 remains partial.
 See the [selection audit](results/eligibility-audit-20261019/README.md).
+
+## B9/B12/B17 publication snapshot
+
+The [follow-up](next-batch-20261019.md) includes the negative frozen-classifier
+transfer baseline, development and heldout calibration audits, and spending
+reservations with REST/UI approval and resume. The fitted temperature worsens
+heldout NLL and Brier; the default remains T=1. The separate 210-run local sweep
+is still running and is excluded from this snapshot. These additions do not
+close the full B9/B12/B17 requirements.

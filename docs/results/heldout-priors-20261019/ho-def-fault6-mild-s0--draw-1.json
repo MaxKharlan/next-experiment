@@ -1,0 +1,36 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.35,
+      "rationale": "The default learning rate for Token Factory is 1e-5, but LoRA fine-tuning typically requires ~1e-4 to achieve noticeable weight updates. With such a low LR the model barely changes from the base, consistent with low accuracy and validation loss that plateaus after epoch 2.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "distribution_shift",
+      "location": "training data (size and coverage)",
+      "prior": 0.3,
+      "rationale": "Only 200 training examples were used, far below the model's capacity and likely insufficient to cover the 77-intent distribution. This leads to good performance on the small validation split but poor generalization to held-out queries, matching the observed 8% accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "lora_rank_too_small",
+      "location": "lora_r",
+      "prior": 0.2,
+      "rationale": "A LoRA rank of 8 may be too low to express the complex mapping needed for 77 distinct intent labels, causing the model's quality to stall below expected levels despite training.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "answer_truncation",
+      "location": "dataset preparation (label strings)",
+      "prior": 0.15,
+      "rationale": "Some wrong answers are semantically related but not identical to expected labels (e.g., 'pin_not_working' vs 'pin_blocked'), which could stem from truncated or altered assistant answers during user-side data prep, though no explicit truncation evidence is present.",
+      "sources": []
+    }
+  ]
+}

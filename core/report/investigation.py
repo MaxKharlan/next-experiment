@@ -37,6 +37,16 @@ def build_report(snapshot: dict[str, Any]) -> dict[str, Any]:
         error = {"error": "The stored investigation was interrupted before completion"}
     hypotheses = last_step("hypotheses") or {}
     comparison = last_step("comparison")
+    public_events = []
+    for event in events:
+        data = event["data"]
+        if event["type"] == "awaiting_paid_step":
+            data = {
+                "proposal": data["proposal"],
+                "spending": data["spending"],
+            }
+        public_events.append({**event, "data": data})
+
     return {
         "version": 1,
         "source": "persisted_api_events",
@@ -59,7 +69,7 @@ def build_report(snapshot: dict[str, Any]) -> dict[str, Any]:
         "summary": summary,
         "llm_usage": usage,
         "error": error,
-        "events": events,
+        "events": public_events,
         "last_event_seq": events[-1]["seq"] if events else None,
         "cost_scope": "Summary costs are recorded as emitted; full retrain costs may be absent",
     }

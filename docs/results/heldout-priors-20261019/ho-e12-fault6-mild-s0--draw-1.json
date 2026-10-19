@@ -1,0 +1,36 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.35,
+      "rationale": "Training loss drops to near zero while validation loss exhibits large fluctuations and spikes after epoch 6, a classic sign of overfitting when too many epochs are run on a small dataset.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.25,
+      "rationale": "A LoRA rank of 16 may limit the model's ability to represent the 77 distinct intent labels, resulting in low training loss but poor generalization to held‑out queries.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "training data (label file)",
+      "prior": 0.2,
+      "rationale": "Validation loss spikes and inconsistent predictions on semantically similar queries (e.g., pin_blocked vs unable_to_verify_pin) suggest that similar inputs have conflicting labels in the data.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "training data vs production queries",
+      "prior": 0.15,
+      "rationale": "Examples are unusually short (45–103 tokens) and may not reflect the phrasing of real banking queries, causing the model to perform poorly on held‑out items that resemble actual usage.",
+      "sources": []
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "answer_truncation",
+      "location": "training data label strings",
+      "prior": 0.3,
+      "rationale": "Several incorrect predictions are truncated versions of the true label (e.g., 'balance_not_updated_after_cash_deposit' vs expected 'balance_not_updated_after_cheque_or_cash_deposit'), indicating the model learned incomplete labels.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs = 12",
+      "prior": 0.25,
+      "rationale": "Training loss reaches near‑zero by epoch 6, but validation loss is low only at epoch 6 and rises again afterwards, a classic sign of over‑fitting due to excess epochs.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "contradictory_labels",
+      "location": "training data (similar queries with different labels)",
+      "prior": 0.2,
+      "rationale": "Validation loss shows large, irregular spikes (epochs 3,4,5,7,9) while training loss keeps decreasing, suggesting conflicting labels for similar inputs destabilize learning.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "training examples 45‑103 tokens vs likely longer production queries",
+      "prior": 0.15,
+      "rationale": "The training instances are far shorter than the model’s context length; if real‑world banking queries are longer, the model may not have seen the relevant input distribution.",
+      "sources": []
+    }
+  ]
+}

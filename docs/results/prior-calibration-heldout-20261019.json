@@ -1,0 +1,900 @@
+{
+  "version": 1,
+  "scope": "proposed classes plus unlisted mass",
+  "temperature": 19.99999999999943,
+  "at_search_boundary": true,
+  "leave_one_case_out_mean": {
+    "before": {
+      "nll": 1.730144916808151,
+      "multiclass_brier": 0.8109999999999999
+    },
+    "after": {
+      "nll": 1.7957308264097798,
+      "multiclass_brier": 0.8659183711558451
+    }
+  },
+  "fit_cases": [
+    "fault6-lr1e-5",
+    "ref-epochs18-s0",
+    "ref-fault6-mild-s0",
+    "ref-fault6-strong-s0",
+    "ref-healthy-s0"
+  ],
+  "before": {
+    "nll": 1.730144916808151,
+    "multiclass_brier": 0.8109999999999999,
+    "reliability": {
+      "n": 5,
+      "accuracy": 0.4,
+      "mean_confidence": 0.36000000000000004,
+      "binary_brier": 0.231,
+      "ece": 0.039999999999999994,
+      "bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.2,
+          "upper_inclusive": false,
+          "count": 0,
+          "mean_confidence": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.4,
+          "upper_inclusive": false,
+          "count": 3,
+          "mean_confidence": 0.3333333333333333,
+          "accuracy": 0.3333333333333333
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.6,
+          "upper_inclusive": false,
+          "count": 2,
+          "mean_confidence": 0.4,
+          "accuracy": 0.5
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.8,
+          "upper_inclusive": false,
+          "count": 0,
+          "mean_confidence": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.8,
+          "upper": 1.0,
+          "upper_inclusive": true,
+          "count": 0,
+          "mean_confidence": null,
+          "accuracy": null
+        }
+      ]
+    }
+  },
+  "fitted_dev": {
+    "nll": 1.523515318666976,
+    "multiclass_brier": 0.7814088165790702,
+    "reliability": {
+      "n": 5,
+      "accuracy": 0.4,
+      "mean_confidence": 0.22706152342863878,
+      "binary_brier": 0.26606667481257,
+      "ece": 0.17293847657136124,
+      "bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.2,
+          "upper_inclusive": false,
+          "count": 0,
+          "mean_confidence": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.4,
+          "upper_inclusive": false,
+          "count": 5,
+          "mean_confidence": 0.22706152342863878,
+          "accuracy": 0.4
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.6,
+          "upper_inclusive": false,
+          "count": 0,
+          "mean_confidence": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.8,
+          "upper_inclusive": false,
+          "count": 0,
+          "mean_confidence": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.8,
+          "upper": 1.0,
+          "upper_inclusive": true,
+          "count": 0,
+          "mean_confidence": null,
+          "accuracy": null
+        }
+      ]
+    }
+  },
+  "leave_one_case_out": [
+    {
+      "case": "fault6-lr1e-5",
+      "training_cases": [
+        "ref-epochs18-s0",
+        "ref-fault6-mild-s0",
+        "ref-fault6-strong-s0",
+        "ref-healthy-s0"
+      ],
+      "temperature": 20.0,
+      "before": {
+        "nll": 0.916290731874155,
+        "multiclass_brier": 0.5,
+        "reliability": {
+          "n": 1,
+          "accuracy": 1.0,
+          "mean_confidence": 0.4,
+          "binary_brier": 0.36,
+          "ece": 0.6,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.4,
+              "accuracy": 1.0
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      },
+      "after": {
+        "nll": 1.3570427164588819,
+        "multiclass_brier": 0.7353254598436704,
+        "reliability": {
+          "n": 1,
+          "accuracy": 1.0,
+          "mean_confidence": 0.25742091906878756,
+          "binary_brier": 0.5514236914366443,
+          "ece": 0.7425790809312125,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.25742091906878756,
+              "accuracy": 1.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "ref-epochs18-s0",
+      "training_cases": [
+        "fault6-lr1e-5",
+        "ref-fault6-mild-s0",
+        "ref-fault6-strong-s0",
+        "ref-healthy-s0"
+      ],
+      "temperature": 2.722530716798759,
+      "before": {
+        "nll": 2.302585092994045,
+        "multiclass_brier": 1.0999999999999999,
+        "reliability": {
+          "n": 1,
+          "accuracy": 0.0,
+          "mean_confidence": 0.4,
+          "binary_brier": 0.16000000000000003,
+          "ece": 0.4,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.4,
+              "accuracy": 0.0
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      },
+      "after": {
+        "nll": 1.6957961216873652,
+        "multiclass_brier": 0.8913613755989698,
+        "reliability": {
+          "n": 1,
+          "accuracy": 0.0,
+          "mean_confidence": 0.30525651105471274,
+          "binary_brier": 0.09318153754129596,
+          "ece": 0.30525651105471274,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.30525651105471274,
+              "accuracy": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "ref-fault6-mild-s0",
+      "training_cases": [
+        "fault6-lr1e-5",
+        "ref-epochs18-s0",
+        "ref-fault6-strong-s0",
+        "ref-healthy-s0"
+      ],
+      "temperature": 20.0,
+      "before": {
+        "nll": 1.3862943611198906,
+        "multiclass_brier": 0.725,
+        "reliability": {
+          "n": 1,
+          "accuracy": 0.0,
+          "mean_confidence": 0.3,
+          "binary_brier": 0.09,
+          "ece": 0.3,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.3,
+              "accuracy": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      },
+      "after": {
+        "nll": 1.5949461787965076,
+        "multiclass_brier": 0.7942357647622965,
+        "reliability": {
+          "n": 1,
+          "accuracy": 0.0,
+          "mean_confidence": 0.20477773634954263,
+          "binary_brier": 0.041933921304442796,
+          "ece": 0.20477773634954263,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.20477773634954263,
+              "accuracy": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "ref-fault6-strong-s0",
+      "training_cases": [
+        "fault6-lr1e-5",
+        "ref-epochs18-s0",
+        "ref-fault6-mild-s0",
+        "ref-healthy-s0"
+      ],
+      "temperature": 20.0,
+      "before": {
+        "nll": 1.0498221244986778,
+        "multiclass_brier": 0.5650000000000002,
+        "reliability": {
+          "n": 1,
+          "accuracy": 1.0,
+          "mean_confidence": 0.35,
+          "binary_brier": 0.42250000000000004,
+          "ece": 0.65,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.35,
+              "accuracy": 1.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      },
+      "after": {
+        "nll": 1.5709673780559246,
+        "multiclass_brier": 0.7845703255619273,
+        "reliability": {
+          "n": 1,
+          "accuracy": 1.0,
+          "mean_confidence": 0.20784402132803756,
+          "binary_brier": 0.6275110945457346,
+          "ece": 0.7921559786719624,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.20784402132803756,
+              "accuracy": 1.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "ref-healthy-s0",
+      "training_cases": [
+        "fault6-lr1e-5",
+        "ref-epochs18-s0",
+        "ref-fault6-mild-s0",
+        "ref-fault6-strong-s0"
+      ],
+      "temperature": 1.1803412029920648,
+      "before": {
+        "nll": 2.9957322735539877,
+        "multiclass_brier": 1.1649999999999996,
+        "reliability": {
+          "n": 1,
+          "accuracy": 0.0,
+          "mean_confidence": 0.35,
+          "binary_brier": 0.12249999999999998,
+          "ece": 0.35,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.35,
+              "accuracy": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      },
+      "after": {
+        "nll": 2.7599017370502184,
+        "multiclass_brier": 1.1240989300123616,
+        "reliability": {
+          "n": 1,
+          "accuracy": 0.0,
+          "mean_confidence": 0.32913014118529177,
+          "binary_brier": 0.1083266498366501,
+          "ece": 0.32913014118529177,
+          "bins": [
+            {
+              "lower": 0.0,
+              "upper": 0.2,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "upper_inclusive": false,
+              "count": 1,
+              "mean_confidence": 0.32913014118529177,
+              "accuracy": 0.0
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "upper_inclusive": false,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1.0,
+              "upper_inclusive": true,
+              "count": 0,
+              "mean_confidence": null,
+              "accuracy": null
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "generalization_claim": false,
+  "rows": [
+    {
+      "case": "fault6-lr1e-5",
+      "probabilities": {
+        "lr_too_low": 0.4,
+        "lora_rank_too_small": 0.3,
+        "contradictory_labels": 0.2,
+        "unlisted": 0.10000000000000009
+      },
+      "target": "lr_too_low",
+      "input_sha256": "6025e04509f56ec5397ce11b5a6824a4009ada67085858422404c2b5297c6fb6",
+      "case_sha256": "6986d9fe62a3f058aac7354c63b72f93247a0cb7f3bb4f4be1a1ea4dc2888cd5"
+    },
+    {
+      "case": "ref-epochs18-s0",
+      "probabilities": {
+        "too_many_epochs": 0.4,
+        "lora_rank_too_small": 0.3,
+        "distribution_shift": 0.2,
+        "unlisted": 0.10000000000000009
+      },
+      "target": "unlisted",
+      "input_sha256": "45e169cd1057bea05edba5ae16a6525f82c03e322d9a704a73923c4b8571dd62",
+      "case_sha256": "b7190ec694321f146a7cb9c8a42e246dc7bd89463e7522b34a5f003f4c0f2560"
+    },
+    {
+      "case": "ref-fault6-mild-s0",
+      "probabilities": {
+        "lora_rank_too_small": 0.3,
+        "lr_too_low": 0.25,
+        "contradictory_labels": 0.2,
+        "too_many_epochs": 0.15,
+        "unlisted": 0.09999999999999998
+      },
+      "target": "lr_too_low",
+      "input_sha256": "d66403f484287f4e3bcb7b55049adad441db1d476101cd60aa9607157b22a9cc",
+      "case_sha256": "f424cca53ba71d84b4e55e336e8bfdf12fe1a6e109232ea1921a6e0cf5b3b966"
+    },
+    {
+      "case": "ref-fault6-strong-s0",
+      "probabilities": {
+        "lr_too_low": 0.35,
+        "lora_rank_too_small": 0.3,
+        "contradictory_labels": 0.2,
+        "distribution_shift": 0.1,
+        "unlisted": 0.050000000000000155
+      },
+      "target": "lr_too_low",
+      "input_sha256": "b6929ed521aa78851eecdb033182e00c6984384b441ed05bf52ee3d782697813",
+      "case_sha256": "bcc36c366894b9768f8cd9ce5f3adf2675c91d35f2fb08fedbaea8bea727303a"
+    },
+    {
+      "case": "ref-healthy-s0",
+      "probabilities": {
+        "lora_rank_too_small": 0.35,
+        "distribution_shift": 0.3,
+        "contradictory_labels": 0.2,
+        "answer_truncation": 0.1,
+        "unlisted": 0.050000000000000155
+      },
+      "target": "unlisted",
+      "input_sha256": "9e98a3121d840571f23fd148cb0ecf83e2e043ed79fe3db3f2d19011ee9c8e92",
+      "case_sha256": "a441cb20d62995668d92994b6ffc1604b926dfda4389240efcd1ab366f651f4c"
+    }
+  ],
+  "heldout": {
+    "cases": [
+      "ho-def-fault6-mild-s0",
+      "ho-def-fault6-strong-s0",
+      "ho-e12-fault6-mild-s0",
+      "ho-e12-fault6-strong-s0",
+      "ho-e12-healthy-s0",
+      "ho-e6-fault6-mild-s0",
+      "ho-e6-fault6-strong-s0",
+      "ho-e6-healthy-s0"
+    ],
+    "before": {
+      "nll": 1.556177363020238,
+      "multiclass_brier": 0.72375,
+      "reliability": {
+        "n": 8,
+        "accuracy": 0.625,
+        "mean_confidence": 0.36875,
+        "binary_brier": 0.2871875,
+        "ece": 0.25625,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.2,
+            "upper_inclusive": false,
+            "count": 0,
+            "mean_confidence": null,
+            "accuracy": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "upper_inclusive": false,
+            "count": 4,
+            "mean_confidence": 0.3375,
+            "accuracy": 0.5
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "upper_inclusive": false,
+            "count": 4,
+            "mean_confidence": 0.4,
+            "accuracy": 0.75
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "upper_inclusive": false,
+            "count": 0,
+            "mean_confidence": null,
+            "accuracy": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1.0,
+            "upper_inclusive": true,
+            "count": 0,
+            "mean_confidence": null,
+            "accuracy": null
+          }
+        ]
+      }
+    },
+    "after": {
+      "nll": 1.6006286844069455,
+      "multiclass_brier": 0.7940686067736741,
+      "reliability": {
+        "n": 8,
+        "accuracy": 0.625,
+        "mean_confidence": 0.208935518777986,
+        "binary_brier": 0.41882359142794007,
+        "ece": 0.416064481222014,
+        "bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.2,
+            "upper_inclusive": false,
+            "count": 2,
+            "mean_confidence": 0.1758892919675685,
+            "accuracy": 1.0
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "upper_inclusive": false,
+            "count": 6,
+            "mean_confidence": 0.21995092771479183,
+            "accuracy": 0.5
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "upper_inclusive": false,
+            "count": 0,
+            "mean_confidence": null,
+            "accuracy": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "upper_inclusive": false,
+            "count": 0,
+            "mean_confidence": null,
+            "accuracy": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1.0,
+            "upper_inclusive": true,
+            "count": 0,
+            "mean_confidence": null,
+            "accuracy": null
+          }
+        ]
+      }
+    },
+    "temperature_refitted": false
+  },
+  "source_sha256": {
+    "bench/prior_calibration.py": "8a18b3f3b755ac282b38a37ad0d8cc4b4857a807168ee91835292ebc06c91db9",
+    "core/agent/prior_calibration.py": "81ebb03d3ef76f108f64aa4033586bc6c7c4dea8347625cbf432f25c8c1b2351"
+  }
+}

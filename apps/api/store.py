@@ -26,6 +26,7 @@ from core.db.investigations import SQLiteInvestigations
 
 TERMINAL = {"finished", "failed"}
 WAITING = "awaiting_approval"
+WAITING_PAID = "awaiting_paid_step"
 
 
 class InvestigationStore:
@@ -91,7 +92,7 @@ class InvestigationStore:
             events.append({"seq": len(events), "type": kind, "data": data})
             if kind in ("started", "resumed"):
                 self.meta[inv_id]["status"] = "running"
-            elif kind in TERMINAL or kind == WAITING:
+            elif kind in TERMINAL or kind in {WAITING, WAITING_PAID}:
                 self.meta[inv_id]["status"] = kind
             self._save(inv_id)
 
@@ -117,6 +118,29 @@ class InvestigationStore:
             if waiting is None:
                 raise ValueError(f"{inv_id} has no persisted approval proposal")
             self.emit(inv_id, "resumed", {"approved": approved})
+            return waiting
+
+    def resume_paid(self, inv_id: str, approved: bool) -> dict[str, Any]:
+        """Consume one durable decision for the next paid investigation step."""
+        self._load(inv_id)
+        with self.lock:
+            if self.meta[inv_id]["status"] != WAITING_PAID:
+                raise ValueError(f"{inv_id} is not waiting for a paid-step decision")
+            waiting = next(
+                (
+                    event["data"]
+                    for event in reversed(self.events[inv_id])
+                    if event["type"] == WAITING_PAID
+                ),
+                None,
+            )
+            if waiting is None:
+                raise ValueError(f"{inv_id} has no persisted paid-step proposal")
+            self.emit(
+                inv_id,
+                "resumed",
+                {"approved": approved, "paid_step": waiting["proposal"]["kind"]},
+            )
             return waiting
 
     def is_done(self, inv_id: str) -> bool:
@@ -176,11 +200,14 @@ class InvestigationStore:
                 kind = event["type"]
                 if kind in ("started", "resumed"):
                     meta["status"] = "running"
-                elif kind in TERMINAL or kind == WAITING:
+                elif kind in TERMINAL or kind in {WAITING, WAITING_PAID}:
                     meta["status"] = kind
             self.meta[inv_id] = meta
             self.events[inv_id] = events
-            if meta["status"] not in TERMINAL and meta["status"] != WAITING:
+            if meta["status"] not in TERMINAL and meta["status"] not in {
+                WAITING,
+                WAITING_PAID,
+            }:
                 self.emit(
                     inv_id,
                     "failed",

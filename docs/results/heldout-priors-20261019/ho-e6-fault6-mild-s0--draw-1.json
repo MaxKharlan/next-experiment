@@ -1,0 +1,44 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.4,
+      "rationale": "The default learning rate of 1e-5 is likely too low for LoRA adaptation; LoRA typically requires ~1e-4 to achieve noticeable weight updates, which would explain why training loss decreased but the model still performs poorly on held‑out queries.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2,
+      "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for 77 distinct banking intents, causing the model to stall below expected accuracy despite loss reduction.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "answer_truncation",
+      "location": "training data file",
+      "prior": 0.15,
+      "rationale": "If the user‑side data preparation truncated assistant answers, the model would learn incomplete intent labels, leading to predictions like 'unable_to_verify_pin' instead of 'pin_blocked'. The observed wrong answers are semantically related but differ in suffix, consistent with label truncation.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "contradictory_labels",
+      "location": "training data file",
+      "prior": 0.1,
+      "rationale": "Similar queries mapping to different intents in the training set would create conflicting gradients, causing unstable predictions and low held‑out accuracy while loss continues to decrease.",
+      "sources": []
+    },
+    {
+      "id": "h5",
+      "fault_class": "distribution_shift",
+      "location": "training data vs production queries",
+      "prior": 0.05,
+      "rationale": "The training examples (45‑103 tokens) may not reflect the phrasing or length of real user queries, so the model fits the training distribution but fails on the held‑out set that represents true usage.",
+      "sources": []
+    }
+  ]
+}

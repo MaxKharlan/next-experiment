@@ -1,0 +1,28 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "distribution_shift",
+      "location": "training data file (user-provided examples)",
+      "prior": 0.4,
+      "rationale": "The model achieves low validation loss by epoch 6 but only 50% accuracy on held-out queries, indicating the training data does not resemble the production distribution.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "too_many_epochs",
+      "location": "hyperparameters.n_epochs",
+      "prior": 0.3,
+      "rationale": "Validation loss decreases to epoch 2 then rises sharply, a classic sign of over‑fitting from excessive epochs; the final drop at epoch 6 is likely noise from the tiny validation set.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2,
+      "rationale": "With 77 intent classes, a LoRA rank of 16 may be insufficient to capture the needed decision boundaries, causing the model to stall at modest accuracy despite low training loss.",
+      "sources": []
+    }
+  ]
+}
