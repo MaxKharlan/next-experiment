@@ -1,0 +1,27 @@
+{
+  "datasets": {
+    "test": "8abe433696fd79f6348f48039ee3c7a6f611feb0c5b68330e18399edf1aab501",
+    "train": "416187eaa8f3c9ca5d3715de784bf5021cfa922967f714b65ac145dc88885fb2"
+  },
+  "hyperparameters": {
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 0.015,
+    "steps": 100
+  },
+  "metric": "greedy sequence exact match including EOS; maximum 6 new tokens",
+  "min_effect": 0.1,
+  "python": "3.11.15",
+  "scope": "Synthetic CPU GRU; no pretrained model or provider transfer",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "service_cost_usd": 0.0,
+  "source_sha256": "04a9f2af7a353bd6f9d8e1c7926775ded78fe3cb532a76129e588a94694fa6bf",
+  "test_used_for_selection": false,
+  "torch": "2.14.1"
+}

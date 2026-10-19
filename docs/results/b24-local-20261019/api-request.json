@@ -1,0 +1,38 @@
+{
+  "title": "EOS label check",
+  "training_labels": {
+    "reference": [
+      {
+        "input_ids": [
+          1,
+          3,
+          4,
+          2
+        ],
+        "labels": [
+          -100,
+          -100,
+          4,
+          2
+        ]
+      }
+    ],
+    "observed": [
+      {
+        "input_ids": [
+          1,
+          3,
+          4,
+          2
+        ],
+        "labels": [
+          -100,
+          -100,
+          4,
+          -100
+        ]
+      }
+    ],
+    "eos_token_id": 2
+  }
+}

@@ -1,0 +1,10 @@
+Base commit: e10f4b5ffadd4e88baa1eb984fc7f444dd4e96fd
+Baseline: 606 passed, 8 skipped in 101.36s
+Final: uv run ruff check . -> All checks passed
+Final: uv run ruff format --check . -> 273 files already formatted
+Final: uv run --group ml --group eval pytest -q -> 628 passed, 8 skipped in 15.26s
+Final: git diff --check -> passed
+Browser: label audit form submitted; EOS removal displayed; audit-only completion; report link present
+Experiment: 60 CPU trainings, 6 seeds x 2 arms x 5 comparisons; repeated once with identical per-seed scores
+Service spending: USD 0
+No commits, push, PR or merge performed

@@ -300,6 +300,14 @@
 </header>
 
 <main class="content">
+  <details class="card case-start" id="labelAudit" hidden>
+    <summary>Inspect local training labels · free</summary>
+    <p class="muted small">Paste reference and observed unpadded token rows. The reference must use correct answer-only labels. This checks prompt loss, EOS masking and label alignment. It does not train a model or confirm a cause.</p>
+    <label for="labelPayload">Label audit request (JSON)</label>
+    <textarea id="labelPayload" spellcheck="false">{"training_labels":{"reference":[{"input_ids":[1,2,3],"labels":[-100,2,3]}],"observed":[{"input_ids":[1,2,3],"labels":[-100,2,-100]}],"eos_token_id":3}}</textarea>
+    <button id="runLabelAudit" class="btn btn-primary" type="button">Save label audit</button>
+    <pre id="labelFeedback" role="status" aria-live="polite"></pre>
+  </details>
   <details class="card case-start" id="caseStart" hidden>
     <summary>Investigate your own job</summary>
     <p class="muted small">Token Factory · BANKING77 · Qwen3-0.6B. Paste a JSON object containing case and experiment, or load it from a file. Dataset paths must exist on the API server; this form does not upload training data.</p>
@@ -396,7 +404,11 @@ async function init() {
   if (STATIC) return staticMode(cases);
   try {
     const response = await fetch("/api/capabilities");
-    if (response.ok) $("caseStart").hidden = !(await response.json()).explicit_cases;
+    if (response.ok) {
+      const enabled = (await response.json()).explicit_cases;
+      $("caseStart").hidden = !enabled;
+      $("labelAudit").hidden = !enabled;
+    }
   } catch { /* Keep paid controls hidden when capabilities are unavailable. */ }
   const past = await (await fetch("/api/investigations")).json();
   const groups = {};
@@ -485,6 +497,23 @@ $("launchCase").onclick = async () => {
   } catch (error) {
     $("caseFeedback").textContent = `${error.message} Validate and retry the unchanged request in this page to reuse its start key. If you reload the page, check Past runs before starting again.`;
   } finally { caseControls(false); }
+};
+
+$("runLabelAudit").onclick = async () => {
+  const button = $("runLabelAudit");
+  button.disabled = true;
+  try {
+    const payload = JSON.parse($("labelPayload").value);
+    const response = await fetch("/api/investigations/label-audit", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(JSON.stringify(result.detail));
+    $("labelFeedback").textContent = `Saved ${result.id}. No training or model calls.`;
+    watch(result.id);
+  } catch (error) { $("labelFeedback").textContent = error.message; }
+  finally { button.disabled = false; }
 };
 
 function showMethod() {
@@ -594,6 +623,11 @@ function skip() {
 
 function finish(summary) {
   showCost(summary);
+  if (summary.audit_only) {
+    setStatus("Local label audit", "Label audit completed", "inconclusive", "audit only");
+    $("statusProof").textContent = "Inspect the findings below. No causal experiment was run.";
+    return;
+  }
   if (proof) setStatus(null, null, "confirmed", "confirmed");
   else {
     setStatus(null, "No cause proved", "inconclusive", summary.status || "inconclusive");
@@ -602,6 +636,11 @@ function finish(summary) {
 }
 
 function showCase(c) {
+  if (c?.mode === "B" && c.job?.model === "local labels") {
+    model = "local labels"; caseHp = {};
+    $("case").outerHTML = '<div id="case"><p>Mode B · supplied training labels</p><p class="muted small">Local audit. Reference correctness is caller-owned. No model calls or training.</p></div>';
+    return;
+  }
   if (!c || !c.job) return;
   const hp = c.job.hyperparameters || {};
   caseHp = hp; model = c.job.model || "";
@@ -712,6 +751,13 @@ const changeText = (a) => {
 };
 
 function showStep(s) {
+  if (s.kind === "training_label_checks") {
+    checks += 1;
+    const raw = s.raw || {};
+    step("Training label audit", "Local label checks", "free",
+      `<p>Alignment: ${esc(raw.alignment?.status)} · Prompt: ${esc(raw.prompt?.status)} · EOS: ${esc(raw.eos?.status)}</p><p class="muted small">${esc(raw.scope)}. No causal confirmation.</p><details><summary>Audit details</summary><pre>${esc(JSON.stringify(raw, null, 2))}</pre></details>`);
+    return;
+  }
   if (s.kind === "known_issues") {
     const list = (s.sources || []).map(x => `<div class="source"><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a><span class="mono">${esc(host(x.url))}</span></div>`).join("");
     step(s.error ? "Search failed" : `${plural((s.sources || []).length, "source")} found`, `Tavily search for known issues${s.credits ? `, ${plural(s.credits, "credit")}` : ""}`, "",

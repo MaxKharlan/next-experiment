@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #78
-(`618db22`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #79
+(`e10f4b5`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -24,13 +24,24 @@ has measured evidence.
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
 | B23 | Investigation UI, case launch, costs and report downloads exist. |
-| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. PR #77 added a first-backward gradient audit. PR #78 exposes bounded label checks to mode-B hypothesis generation through the Python investigation entry point. REST/UI attachment support, mode-B interventions and downstream quality evidence remain open. |
+| B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. PR #77 added a first-backward gradient audit. PR #78 exposes bounded label checks to mode-B hypothesis generation through the Python investigation entry point. This package adds REST/UI label audits, opt-in local code-switch interventions and a 60-run synthetic CPU generation experiment; see `mode-b-local-package.md`. B24 remains partial: pretrained-LLM quality, arbitrary-code repair and full REST mode-B investigations are not validated. |
 | B25 | Weight probes are wired into live runs and the benchmark. Threshold transfer and rank-fault discrimination need more evidence. |
 | B26 | A classifier model publication with validated transfer metrics remains open. |
 
-The current batch covers B4, B6 and B7. B5 is deferred until approved A2/A3
+The PR #79 batch covers B4, B6 and B7. B5 is deferred until approved A2/A3
 train, validation and held-out data exists. B4, B6 and B7 now have the requested implementations and saved measurements.
 Cloud Sandbox activation is pending; B7 detection measures pre-intervention
 ranking and does not claim causal confirmation or a statistically supported 80%
 threshold. The protocol and
 budget are recorded in [the batch protocol](results/b467-20261019/protocol.md).
+
+## Independent third-batch selection audit
+
+A fresh clone of `origin/main` at `e10f4b5` was audited on October 19, 2026.
+Under the exclusions for active B4/B6/B7, B9/B12/B17, dataset-dependent B5/B10
+and B26, three unfinished independent plan items were not available. B14, B20
+and B22 already meet their implementation requirements. B24 already contains
+all four requested fault injections and code checks; its remaining extensions
+are not three separate plan items. B21 reproduction and B25 transfer validation
+retain their evidence dependencies. The user then authorized three B24 sub-tasks: API/UI label audits, local interventions and a synthetic downstream-quality experiment. All three sub-tasks have implementation and local evidence; B24 remains partial.
+See the [selection audit](results/eligibility-audit-20261019/README.md).
