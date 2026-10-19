@@ -52,3 +52,11 @@ Kaggle uses noise estimated from its own intervention arms. This does not valida
 transfer of the Token Factory noise SD (0.019), signature likelihoods or priors.
 The Token Factory comparison provides mode-A evidence on one task/model; fresh
 multi-task calibration and an end-to-end investigation remain separate work.
+
+## Follow-up execution boundaries
+
+Mode B requires its trainer's explicit context length; the length probe is
+unavailable without one. Loading frozen hypotheses or resuming an investigation
+cannot bypass the mode-specific catalog. New intervention events record the
+statistical settings and skipped permutation gates in `comparison_evidence`;
+`verdict-v3` uses those fields. See the [full fault review](fault-evidence-review.md).

@@ -126,7 +126,7 @@
   .hyp { display: grid; gap: 6px; }
   .hyp-head { display: flex; align-items: baseline; gap: 8px; }
   .hyp-head b { font-weight: 500; flex: 1; min-width: 0; overflow-wrap: anywhere; }
-  .hyp.out .hyp-head b { color: var(--muted); text-decoration: line-through; }
+  .hyp.out .hyp-head b { color: var(--muted); }
   .tag { font: 500 12px/16px var(--font-body); color: var(--accent); white-space: nowrap; }
   .tag.lead { color: var(--ink); }
   .tag.out { color: var(--bad); }
@@ -710,8 +710,8 @@ function finish(summary) {
   }
   if (proof) setStatus(null, null, "confirmed", "confirmed");
   else {
-    setStatus(null, "No cause proved", "inconclusive", summary.status || "inconclusive");
-    $("statusProof").textContent = "No fix beat its same-cost control beyond the noise.";
+    setStatus(null, "No tested fix supported", "inconclusive", summary.status || "inconclusive");
+    $("statusProof").textContent = "No tested fix met the decision rule against its specified control.";
   }
 }
 
@@ -793,8 +793,8 @@ function drawBoard() {
     const x = hyps[h] || {fault_class: h, rationale: "", sources: []};
     const d = h in prevProbs ? Math.round((probs[h] - prevProbs[h]) * 100) : 0;
     const prior = priors[h] ?? probs[h];
-    const tag = proved[h] ? `<span class="tag">proved in step ${proved[h]}</span>`
-              : ruled[h] ? `<span class="tag out">ruled out in step ${ruled[h]}</span>`
+    const tag = proved[h] ? `<span class="tag">fix supported in step ${proved[h]}</span>`
+              : ruled[h] ? `<span class="tag out">fix below threshold in step ${ruled[h]}</span>`
               : open[h] ? `<span class="tag open">inconclusive in step ${open[h]}</span>`
               : h === lead && checks ? `<span class="tag lead">leading</span>` : "";
     const src = (x.sources || []).map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join("");
@@ -835,6 +835,17 @@ function step(title, who, meta, body, node = "") {
   return entries;
 }
 const badge = (status, text) => `<span class="badge ${esc(status)}">${esc(text || status)}</span>`;
+function comparisonNote(e) {
+  if (e?.version !== "intervention-evidence-v1") return "This saved comparison does not record its statistical settings. Equal cost, cause specificity and full recovery are not established here.";
+  const p = e.permutation, interval = e.interval;
+  const gate = p.gate === "skipped_unattainable"
+    ? `Permutation gate skipped: minimum attainable p ${fx(p.minimum_attainable_p, 3)} exceeds alpha ${fx(p.alpha, 3)}. The interval and effect rule decide the status.`
+    : `Permutation gate applied at alpha ${fx(p.alpha, 3)}.`;
+  const noise = interval.method === "external_sd_normal"
+    ? `The 95% interval uses supplied noise SD ${fx(interval.noise_sd, 4)}; transfer to this task and model is not checked by this comparison.`
+    : "The 95% interval estimates noise from these arms.";
+  return `${e.target_seeds} target and ${e.control_seeds} control seeds. ${gate} ${noise} Equal cost, a unique cause and full recovery are not established by this comparison.`;
+}
 const host = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch { return ""; } };
 /* "learning_rate from 0.00001 to 0.0001" from the patch, so no backend arrows reach the screen */
 const changeText = (a) => {
@@ -897,6 +908,7 @@ function showStep(s) {
     stepOf[`probe:${s.probe}`] = n;
   } else if (s.kind === "intervention") {
     checks += 1;
+    if (s.probs) setProbs(s.probs);
     const r = s.result, t = s.target, c = s.control;
     const n = (t.metrics || []).length + (c.metrics || []).length;
     jobs += n; trainingUsd += s.cost_usd || 0; setMetrics();
@@ -905,18 +917,19 @@ function showStep(s) {
     const arm = (a, label, cls) => `<div class="arm ${cls}"><div class="lbl">${label}</div><div class="change">${esc(changeText(a))}</div>
       <div class="seeds">exact match per seed ${(a.metrics || []).map(v => `<span class="seed">${Number(v).toFixed(2)}</span>`).join("")}</div>
       ${(a.ft_job_ids || []).length ? `<div class="jobs">${a.ft_job_ids.map(j => esc(j.slice(0, 14))).join(", ")}</div>` : ""}</div>`;
-    const notes = {confirmed: "the fix beats a same-cost control", rejected: "the fix does not beat a same-cost control", inconclusive: "more seeds may decide it"};
+    const notes = {confirmed: "the tested fix meets the decision rule against this control", rejected: "the interval is below the minimum useful effect", inconclusive: "the comparison does not decide the intervention"};
     const side = r.effect >= 0 ? "above" : "below";
     const entry = step(`${esc(cause(name))}?`, `Causal check on ${onTF ? "Token Factory" : "local mini-jobs"}, ${plural(n, "job")}`, s.cost_usd ? money(s.cost_usd) : "",
          `<div class="row">${badge(r.status)}<span class="muted small">${notes[r.status] || ""}</span></div>
           <div class="arms">${arm(t, "Fix", "")}${arm(c, "Control", "control")}</div>
           ${effectChart(r)}
-          <p class="muted small">The fix scored ${Math.abs(r.effect).toFixed(2)} ${side} the control (95% interval ${fx(r.ci_low)} to ${fx(r.ci_high)}). The threshold for a cause is ${r.min_effect}.</p>`,
+          <p class="muted small">The fix scored ${Math.abs(r.effect).toFixed(2)} ${side} the control (95% interval ${fx(r.ci_low)} to ${fx(r.ci_high)}). Minimum useful effect: ${esc(r.min_effect)}. Permutation p: ${fx(r.p_value, 3)}.</p>
+          <p class="muted small">${esc(comparisonNote(s.comparison_evidence))}</p>`,
          onTF ? "paid" : "");
     stepOf[`intervention:${s.hypothesis}`] = entry; lastCheck = entry;
     untangle($("feed").lastElementChild.querySelector(".effect"));
     if (r.status === "confirmed") {
-      proved[s.hypothesis] = entry; proof = r;
+      proved[s.hypothesis] = entry; proof = {...r, comparison_evidence: s.comparison_evidence};
       metric("mEffect", signed(r.effect));
       showFix(t.patch);
     } else if (r.status === "rejected") { ruled[s.hypothesis] = entry; out.add(s.hypothesis); }
@@ -925,8 +938,8 @@ function showStep(s) {
   } else if (s.kind === "verdict") {
     const name = hyps[s.hypothesis_id] ? hyps[s.hypothesis_id].fault_class : "";
     if (s.status === "confirmed" && proof) {
-      setStatus(null, cause(name), "confirmed", "confirmed");
-      $("statusProof").textContent = `${signed(proof.effect)} exact match over a same-cost control, 95% interval ${fx(proof.ci_low)} to ${fx(proof.ci_high)}`;
+      setStatus(null, `Fix supported: ${cause(name)}`, "confirmed", "confirmed");
+      $("statusProof").textContent = `${signed(proof.effect)} exact match over the specified control, 95% interval ${fx(proof.ci_low)} to ${fx(proof.ci_high)}. ${comparisonNote(proof.comparison_evidence)}`;
     }
     const known = (s.evidence || []).map(e => stepOf[e]).filter(Boolean);
     const unknown = (s.evidence || []).filter(e => !stepOf[e]);

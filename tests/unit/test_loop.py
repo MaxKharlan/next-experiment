@@ -307,6 +307,7 @@ def test_declined_paid_pair_never_runs_and_is_persisted():
     assert calls == []
     assert len(proposals) == 1
     assert proposals[0]["target"]["patch"] == {"learning_rate": 0.0001}
+    assert proposals[0]["continuation"]["mode"] == "A"
     assert result.steps[-1]["reason"] == "paid causal check declined"
     assert result.steps[-2]["approved"] is False
 
@@ -351,3 +352,19 @@ def test_calibrated_priors_reach_planner_without_changing_default():
     assert result.steps[0]["kind"] == "prior_calibration"
     assert result.steps[1]["probs"]["h1"] == 0.75
     assert result.steps[1]["probs"]["unlisted"] == 0.25
+
+
+def test_comparison_records_skipped_gate_and_supplied_noise():
+    router = FakeRouter([_hyp("h1", "lr_too_low", 0.9)])
+    runner, _ = _runner({"h1": ([0.5, 0.52], [0.1, 0.12])})
+    result = investigate(_ctx(), {}, router, runner, probes=[], noise_sd=0.019)
+    step = next(s for s in result.steps if s["kind"] == "intervention")
+    evidence = step["comparison_evidence"]
+    assert result.status == "confirmed"
+    assert step["result"]["p_value"] > 0.05
+    assert evidence["permutation"]["gate"] == "skipped_unattainable"
+    assert evidence["target_seeds"] == evidence["control_seeds"] == 2
+    assert evidence["interval"]["noise_sd"] == 0.019
+    assert evidence["unique_cause_established"] is False
+    assert evidence["full_recovery_established"] is False
+    assert json.loads(result.to_json())["steps"][1]["comparison_evidence"] == evidence

@@ -50,7 +50,7 @@ Step 4 on the demo case: the fix and the control train two jobs each, and the ef
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/media/causal-check-dark.svg">
-  <img alt="The causal check of the demo case. The control, the failed recipe trained again, scores 0.12 exact match on both seeds; the fix, a learning rate of 1e-4 instead of 1e-5, scores 0.50 on both. The effect is +0.38 with a 95% interval of 0.35 to 0.41, well above the minimum effect of 0.03, so the cause is confirmed." src="docs/media/causal-check-light.svg" width="100%">
+  <img alt="The intervention check of the demo case. The control, the failed recipe trained again, scores 0.12 exact match on both seeds; the fix, a learning rate of 1e-4 instead of 1e-5, scores 0.50 on both. The effect is +0.38 with a 95% interval of 0.35 to 0.41, above the minimum effect of 0.03. With two seeds per arm, the permutation gate is skipped." src="docs/media/causal-check-light.svg" width="100%">
 </picture>
 
 ## Results
@@ -238,7 +238,7 @@ The B tasks that appear here:
 | B5 | reference runs: the best recipe for a task and model | `bench/references/`, `scripts/reference_tf.py` |
 | B6 | cost and duration model of Post-training jobs | `core/planner/job_cost.py`, `docs/b6-post-training.md` |
 | B7 | planted faults 6 to 8 in a recipe | `bench/faults/recipe.py` |
-| B8 | fixes and same-cost controls | `core/interventions/pairs.py` |
+| B8 | fixes and specified control recipes | `core/interventions/pairs.py` |
 | B9 | simulation lab: fault sweeps locally and on Token Factory | `jobs/kaggle/`, `scripts/tf_fault_sweep.py` |
 | B10 | noise floor between seeds | `scripts/noise_floor.py`, `scripts/rescore_pairs.py`, `docs/b10-noise-floor.md` |
 | B11 | statistics and decision rule of the causal check | `core/interventions/stats.py` |

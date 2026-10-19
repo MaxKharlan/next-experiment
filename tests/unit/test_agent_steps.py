@@ -99,8 +99,18 @@ def test_verdict_takes_status_and_patch_from_the_code():
     )
     router = FakeRouter({"verdict": reply})
     verdict = write_verdict(
-        router, _hyp("lr_too_low", 0.7, "h1"), target, control, result, BASE, ["iv-1"]
+        router,
+        _hyp("lr_too_low", 0.7, "h1"),
+        target,
+        control,
+        result,
+        BASE,
+        ["iv-1"],
+        comparison={"version": "intervention-evidence-v1"},
     )
+    assert router.sent[0][1] == "verdict-v3"
+    assert '"comparison_evidence"' in router.sent[0][2][1]["content"]
+    assert "Never assume equal cost" in router.sent[0][2][0]["content"]
     assert (verdict.hypothesis_id, verdict.status) == ("h1", "confirmed")
     assert verdict.evidence == ["iv-1"]
     assert '+  "learning_rate": 0.0001' in verdict.patch

@@ -173,3 +173,28 @@ def test_signatures_cover_the_probe_outcomes():
     assert set(outcomes("example_length")) == set(ExampleLength.outcomes)
     assert likelihood("example_length", "truncation", "truncated") == 0.90
     assert likelihood("example_length", "lr_too_low", "truncated") == 0.05
+
+
+def test_custom_trainer_without_limit_cannot_borrow_provider_default(tmp_path):
+    train = _write(tmp_path / "train.jsonl", [_example(3)])
+    ctx = _ctx({"train": train})
+    ctx.mode = "B"
+    probe = ExampleLength(
+        tokenizer=lambda _: pytest.fail("No tokenizer without a limit")
+    )
+    assert not probe.available(ctx)
+    with pytest.raises(ValueError, match="explicit trainer context_length"):
+        probe.run(ctx)
+
+
+def test_custom_trainer_uses_its_explicit_limit(tmp_path):
+    train = _write(tmp_path / "train.jsonl", [_example(3)])
+    ctx = _ctx({"train": train}, context_length=8)
+    ctx.mode = "B"
+    assert ExampleLength().available(ctx)
+    result, raw = _run(ctx)
+    assert result.outcome == "truncated"
+    assert raw["context_length"] == 8
+    assert raw["context_length_source"] == "job"
+    assert raw["mode"] == "B"
+    assert "does not prove token removal" in raw["interpretation"]
