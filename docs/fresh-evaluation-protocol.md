@@ -1,6 +1,8 @@
 # Fresh evaluation protocol
 
 Status: specification for the next run; no new test set or paid run is claimed.
+The [answer-drop execution path](answer-data-retrain.md) now supports the final
+approved retrain; its provider-stub tests are execution evidence only.
 The historical 13-case benchmark and later inspected cases are development or
 exploratory evidence now. Do not label another pass over them as an untouched test.
 

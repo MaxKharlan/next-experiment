@@ -115,7 +115,12 @@ class SavedProvider:
 
 
 @pytest.mark.parametrize("confirmed", [True, False], ids=["confirmed", "small-effect"])
-def test_answer_cut_investigation_survives_restart(tmp_path, monkeypatch, confirmed):
+@pytest.mark.parametrize(
+    "retrain_approved", [True, False], ids=["approve-retrain", "decline-retrain"]
+)
+def test_answer_cut_investigation_survives_restart(
+    tmp_path, monkeypatch, confirmed, retrain_approved
+):
     payload = make_payload(tmp_path)
     provider = SavedProvider(payload["case"])
     pairs = []
@@ -156,6 +161,34 @@ def test_answer_cut_investigation_survives_restart(tmp_path, monkeypatch, confir
         return run
 
     monkeypatch.setattr(runners, "_pair_runner", pair_runner)
+    from core.interventions.retrain import Retrainer
+    from scripts import retrain_tf
+    from tests.unit.test_tf_runner import FakeTF
+
+    retrain_provider, scored = FakeTF(), []
+
+    def make_retrainer(tf, storage, investigation_id, **kwargs):
+        def score_adapter(adapter, data):
+            scored.append(str(data))
+            return 0.50 if "ftjob-0" in adapter.name else 0.10
+
+        def score_base(model, data, template):
+            scored.append(str(data))
+            return 0.0
+
+        return Retrainer(
+            retrain_provider,
+            storage,
+            kwargs["train"],
+            kwargs["valid"],
+            kwargs["heldout"],
+            score_adapter,
+            score_base,
+            f"investigations/{investigation_id}/retrain",
+            sleep=lambda _: None,
+        )
+
+    monkeypatch.setattr(retrain_tf, "make_retrainer", make_retrainer)
     with TestClient(main.app) as client:
         response = client.post("/api/investigations/from-case", json=payload)
         assert response.status_code == 202, response.text
@@ -181,6 +214,27 @@ def test_answer_cut_investigation_survives_restart(tmp_path, monkeypatch, confir
             if status in {"finished", "failed", "awaiting_approval"}:
                 break
             time.sleep(0.01)
+        if confirmed:
+            assert status == "awaiting_approval"
+            waiting_report = client.get(f"{root}/report").json()
+            assert waiting_report["partial"] is True
+            assert waiting_report["retrain_plan"]["data_patch"]["line_numbers"] == [
+                9,
+                10,
+            ]
+            assert not retrain_provider.created and not scored
+            # The full retrain proposal survives loss of the original in-memory store.
+            monkeypatch.setattr(main, "store", InvestigationStore(storage))
+            response = client.post(
+                f"{root}/retrain", json={"approve": retrain_approved}
+            )
+            assert response.status_code == 200, response.text
+            deadline = time.monotonic() + 5
+            while time.monotonic() < deadline:
+                status = client.get(root).json()["status"]
+                if status in {"finished", "failed"}:
+                    break
+                time.sleep(0.01)
         response = client.get(f"{root}/report")
         assert response.status_code == 200
         report = response.json()
@@ -191,17 +245,18 @@ def test_answer_cut_investigation_survives_restart(tmp_path, monkeypatch, confir
         )
         assert report["input_case"]["job"] == payload["case"]["job"]
         assert report["protocol"]["job_id"] == "ftjob-e2e"
-        assert report["retrain_plan"] is None
+        assert (report["retrain_plan"] is not None) == confirmed
         assert report["error"] is None
         events = report["events"]
         assert [e["seq"] for e in events] == list(range(len(events)))
         assert events[0]["type"] == "started"
         assert events[-1]["type"] == "finished"
         assert all(
-            e["type"] in {"step", "awaiting_paid_step", "resumed"} for e in events[1:-1]
+            e["type"] in {"step", "awaiting_paid_step", "awaiting_approval", "resumed"}
+            for e in events[1:-1]
         )
         assert [e["type"] for e in events].count("awaiting_paid_step") == 1
-        assert [e["type"] for e in events].count("resumed") == 1
+        assert [e["type"] for e in events].count("resumed") == (2 if confirmed else 1)
         steps = report["steps"]
         assert steps[0]["probe"] == "answer_cut"
         assert steps[0]["causal_check_available"] is True
@@ -210,7 +265,31 @@ def test_answer_cut_investigation_survives_restart(tmp_path, monkeypatch, confir
         checks = [s for s in steps if s["kind"] == "intervention"]
         assert len(checks) == len(pairs) == 1
         if confirmed:
-            assert kinds[-1] == "verdict"
+            assert "retrain_proposal" in kinds
+            if retrain_approved:
+                assert kinds[-1] == "comparison"
+                assert len(retrain_provider.created) == 1
+                fixed_rows = Path(retrain_provider.uploads[0]).read_text().splitlines()
+                assert len(fixed_rows) == 8
+                assert all(
+                    json.loads(r)["messages"][-1]["content"] == "card_arrival"
+                    for r in fixed_rows
+                )
+                assert scored == [payload["case"]["datasets"]["test"]["ref"]] * 3
+                assert (
+                    report["comparison"]["provenance"]["dataset_sha256"]["test"]
+                    == payload["case"]["datasets"]["test"]["sha256"]
+                )
+                operations = report["summary"]["spending"]["operations"]
+                assert [op["purpose"] for op in operations] == [
+                    "causal_check",
+                    "retrain",
+                ]
+                assert all(op["status"] == "settled" for op in operations)
+                assert report["summary"]["retrain_estimated_cost_usd"] > 0
+            else:
+                assert kinds[-1] == "retrain_declined"
+                assert not retrain_provider.created and not scored
             assert report["verdict"]["status"] == "confirmed"
             assert "probe:answer_cut" in report["verdict"]["evidence"]
             assert "intervention:h1" in report["verdict"]["evidence"]

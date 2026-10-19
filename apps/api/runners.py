@@ -305,6 +305,7 @@ def retrain(
     from core.interventions.retrain import RetrainPlan
     from scripts import retrain_tf
 
+    spending = None
     try:
         if approved:
             protocol = waiting.get("protocol")
@@ -324,16 +325,34 @@ def retrain(
                 inv_id,
                 **dataset_args,
             )
-            comparison = retrainer(
-                RetrainPlan(**waiting["plan"]),
-                on_step=lambda step: store.emit(inv_id, "step", step),
-            )
+            plan = RetrainPlan(**waiting["plan"])
+            on_step = lambda step: store.emit(inv_id, "step", step)
+            if plan.data_patch is not None:
+                from core.db.spending import SpendingLedger
+                from core.interventions.data_retrain import retrain_data
+
+                if protocol is None:
+                    raise ValueError("Data retraining requires a frozen protocol")
+                spending = SpendingLedger(
+                    Path("artifacts/investigations") / inv_id / "spending.sqlite3",
+                    protocol["budget_usd"],
+                )
+                comparison = retrain_data(retrainer, plan, protocol, spending, on_step)
+                summary = dict(waiting["summary"])
+                for key in ("estimated_training_cost_usd", "estimated_total_cost_usd"):
+                    if summary.get(key) is not None:
+                        summary[key] += plan.cost_usd
+                summary["retrain_estimated_cost_usd"] = plan.cost_usd
+                summary["spending"] = spending.snapshot()
+                waiting = {**waiting, "summary": summary}
+            else:
+                comparison = retrainer(plan, on_step=on_step)
             store.emit(inv_id, "step", comparison)
         else:
             store.emit(inv_id, "step", {"kind": "retrain_declined"})
         store.emit(inv_id, "finished", waiting["summary"])
     except Exception as err:  # noqa: BLE001 - the stream must end on any failure
-        _fail(store, inv_id, err)
+        _fail(store, inv_id, err, spending=spending)
 
 
 def _fail(
@@ -355,18 +374,26 @@ def _proposal(backend: str, protocol: dict | None = None):
     if backend != "tf":
         return None
     if protocol is not None:
+        from core.interventions.answer_check import AnswerDrop
+        from core.interventions.data_retrain import plan_data_retrain
         from core.interventions.retrain import plan_retrain
 
-        return lambda target, control: asdict(
-            plan_retrain(
-                target,
-                protocol["hyperparameters"],
-                protocol["model"],
-                protocol["datasets"]["train"]["examples"],
-                protocol["tokens_per_example"],
-                protocol["job_id"],
+        def propose(target, control):
+            if isinstance(target, AnswerDrop):
+                return asdict(plan_data_retrain(target, protocol))
+            return asdict(
+                plan_retrain(
+                    target,
+                    protocol["hyperparameters"],
+                    protocol["model"],
+                    protocol["datasets"]["train"]["examples"],
+                    protocol["tokens_per_example"],
+                    protocol["job_id"],
+                )
             )
-        )
+
+        propose.supports_answer_drop = True
+        return propose
     from scripts.retrain_tf import propose
 
     return lambda target, control: asdict(propose(target, control))
