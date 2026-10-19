@@ -1,12 +1,12 @@
 # Project status — 19 October 2026
 
-Repository baseline: main `c5941c4`, including merged PRs #82–#87. Review of
-#87 found it already merged. Main passed Ruff and 730 tests (15 skipped);
-the public Pages HTML, script and 36-report index matched a local build.
-Comparison evidence and mode boundaries are described in the
-[fault-by-fault review](fault-evidence-review.md). This follow-up adds the
-[approved answer-drop retrain path](answer-data-retrain.md); implementation
-coverage and experimental coverage remain separate.
+Repository baseline: main `099aa16`, including merged PRs #82–#88. Main passed
+741 tests (15 skipped), Ruff and formatting in this continuation. PR #88's
+approved answer-drop retrain implementation is merged. The current follow-up
+[prepares a new reviewed JSON cohort](fresh-answer-preparation.md) and fixes the
+probe's failure above 10% malformed JSON. No fresh model quality is measured.
+Comparison evidence and mode boundaries remain described in the
+[fault-by-fault review](fault-evidence-review.md).
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
@@ -23,7 +23,7 @@ coverage and experimental coverage remain separate.
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
 | O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
 
-The concurrent B9 chat reported 127/210 completed runs during this review,
+The concurrent B9 chat reported 144/210 completed runs during this preparation,
 with no final analysis or fitted model yet. This is a dated checkpoint, not a live
 counter. The local sweep has no provider charge; the B12 collection in #85 records
 eight Super calls costing $0.0135807. The active training checkout is independent
@@ -31,14 +31,15 @@ from this follow-up.
 
 ## Next work, in order
 
-1. Review the answer-drop retrain follow-up. Its provider-stub API test covers
-   approval, restart, exact row deletion, final-test scoring and budget accounting.
-   It does not establish quality improvement or close the fresh demo.
+1. Complete development noise calibration and freeze execution after the
+   [fresh cohort preparation](fresh-answer-preparation.md). PR #88 is merged;
+   the full persisted API trace and final-test quality remain unmeasured.
 2. Complete B9 in its existing chat. Add final results on the current main; do not
    reapply the preliminary 37-file package already merged in #85.
-3. Use the [fresh evaluation protocol](fresh-evaluation-protocol.md) to prepare
-   new task/model references and an answer-cut API trace. Finalize data hashes,
-   seed plan, stopping rule and cost cap before provider submission. Avoid a second
+3. Use the [fresh evaluation protocol](fresh-evaluation-protocol.md) for the
+   answer-cut API trace. Reviewed data hashes, tokenizer counts and a $5-cap plan
+   now exist; pin runtime revisions, verify provider pricing and select seeds
+   from development noise before submission. Avoid a second
    model load or MPS evaluation while B9 uses the shared 16 GB machine.
 4. Calibrate signatures/noise on development data. Keep T=1 and the experimental
    classifier out of default live diagnosis until independent evidence supports them.

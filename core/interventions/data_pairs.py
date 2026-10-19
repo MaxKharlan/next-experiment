@@ -1,16 +1,10 @@
-"""A7: a targeted fix and a same-cost control for a data fault.
+"""A7: a targeted data fix and an equal-row-count control.
 
-The pairs in pairs.py change hyperparameters. A data fault needs the training file
-itself changed, so an arm here is a list of training examples to drop. Both arms
-keep the failed job's hyperparameters.
-
-answer_truncation: the target drops the examples whose answers the answer_cut probe
-flagged (core/probes/level0/answers.py). It uses only the probe's line numbers, not
-the original answers, which the user no longer has. The control drops as many
-examples, drawn at random from the ones the probe did not flag, so a win of the
-target cannot come from a smaller training file. The probe flags the longest
-examples first when the user's code cut to a length budget, so the target usually
-drops more tokens than the control: the control trains at least as many tokens.
+The target drops only probe-flagged rows. The control drops the same number of
+unflagged rows, keeping the original recipe. Retained token counts can differ in
+either direction: removing short damaged answers can make the target more costly.
+Report actual tokens and recipes; row matching does not establish matched compute
+or a unique cause for any measured improvement.
 """
 
 from __future__ import annotations

@@ -1,6 +1,7 @@
 # Fresh evaluation protocol
 
-Status: specification for the next run; no new test set or paid run is claimed.
+Status: specification for the next run. A [new cohort and offline plan](fresh-answer-preparation.md)
+are prepared; execution is not frozen and no paid run is claimed.
 The [answer-drop execution path](answer-data-retrain.md) now supports the final
 approved retrain; its provider-stub tests are execution evidence only.
 The historical 13-case benchmark and later inspected cases are development or

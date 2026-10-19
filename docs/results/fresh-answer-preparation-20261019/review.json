@@ -1,0 +1,34 @@
+{
+  "counts": {
+    "check": 108,
+    "test": 108,
+    "train": 432,
+    "validation": 108
+  },
+  "cross_split_normalized_prompts": 0,
+  "cross_split_semantic_groups": 0,
+  "historical_entity_ids": 0,
+  "historical_files_sha256": {
+    "datasets/structured-mixed-v1/function_calling/check.jsonl": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45",
+    "datasets/structured-mixed-v1/function_calling/test.jsonl": "3d154a1ef988714b1369cc5cfdcee6ef52096fdec3ac47ccab053447f9acc69c",
+    "datasets/structured-mixed-v1/function_calling/train.jsonl": "8ae5e926107250410fbd7baf544c7db2811f9657a06a10443d77b8de712a71ba",
+    "datasets/structured-mixed-v1/function_calling/validation.jsonl": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03",
+    "datasets/structured-mixed-v1/json_extraction/check.jsonl": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+    "datasets/structured-mixed-v1/json_extraction/test.jsonl": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494",
+    "datasets/structured-mixed-v1/json_extraction/train.jsonl": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db",
+    "datasets/structured-mixed-v1/json_extraction/validation.jsonl": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+  },
+  "historical_normalized_prompts": 0,
+  "human_review": false,
+  "limitations": "Shared schema and bounded vocabulary. This measures held-out slot combinations, not general natural-language extraction. Historical semantic slot overlap is expected and is not claimed absent.",
+  "model_evaluation": false,
+  "reference_review": "all rows, separate text-only rule parser",
+  "reviewer_sha256": "c1cf40042c80ba6fcb4bc793c79ab8f9c155e619e508e965ee94a2bbfea4167a",
+  "semantic_group": [
+    "product",
+    "priority",
+    "callback",
+    "due_date_bucket"
+  ],
+  "version": 1
+}

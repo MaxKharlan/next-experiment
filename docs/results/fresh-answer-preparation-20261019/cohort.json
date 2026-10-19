@@ -1,0 +1,58 @@
+{
+  "agent_access": "observed/<strength> train/validation only; evaluator owns check/test and evaluator-only",
+  "clean": {
+    "datasets": {
+      "check": {
+        "examples": 108,
+        "format": "chat_jsonl",
+        "ref": "check.jsonl",
+        "sha256": "aa23f87087722f6cef65158c24beec1b337c25ed49132bb99356ff65882f43a4"
+      },
+      "test": {
+        "examples": 108,
+        "format": "chat_jsonl",
+        "ref": "test.jsonl",
+        "sha256": "372982fb0e748e91e2600ac9744b5c677d9c9ce56f902981423e3bb447106d4b"
+      },
+      "train": {
+        "examples": 432,
+        "format": "chat_jsonl",
+        "ref": "train.jsonl",
+        "sha256": "b3acff14a4a893e0ef992287aa360f521332153c449d7168f447cd55f549e3ee"
+      },
+      "validation": {
+        "examples": 108,
+        "format": "chat_jsonl",
+        "ref": "validation.jsonl",
+        "sha256": "5779ae62831f1de0e0bc8cbf504df49b8429bd43da1486af2cb9314523c6ffe3"
+      }
+    },
+    "evaluator": {
+      "metric": "json_fields_exact",
+      "name": "ticket_json_v1",
+      "parameters": {
+        "max_new_tokens": 192
+      }
+    },
+    "generator_sha256": "eff118a88c8f5b132b6e05fc85d64a2b632809ac18395ea475987c2498cc1fd0",
+    "license": "Apache-2.0",
+    "provenance": "New authored synthetic templates; no provider calls",
+    "seed": 2026101901,
+    "task": "json_extraction",
+    "version": 1
+  },
+  "final_test_model_evaluations": 0,
+  "paid_jobs": 0,
+  "required_before_submission": [
+    "measured development noise and power/seed choice",
+    "pinned runtime/model/tokenizer/template",
+    "verified provider price and total cap",
+    "execution protocol hash",
+    "MPS resource handoff"
+  ],
+  "review_sha256": "a854f8f2875a7a162b70d0d43da653d214b741c79f7c5716d3c65e29bb488ff0",
+  "seed": 2026101901,
+  "status": "data_reviewed_execution_not_frozen",
+  "task": "json_extraction",
+  "version": 1
+}
