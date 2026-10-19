@@ -31,6 +31,9 @@ class LLMCall:
     prompt_version: str
     attempt: int  # 1 for the first try, more for structured-output retries
     created_at: float
+    provider_request_id: str | None = None
+    provider_response_id: str | None = None
+    spending_operation_id: str | None = None
 
 
 @dataclass
@@ -54,6 +57,9 @@ class CallLog:
             prompt_version=prompt_version,
             attempt=attempt,
             created_at=time.time(),
+            provider_request_id=result.provider_request_id,
+            provider_response_id=result.provider_response_id,
+            spending_operation_id=result.spending_operation_id,
         )
         self.calls.append(call)
         if self.on_add is not None:

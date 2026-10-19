@@ -79,6 +79,8 @@ mode-A investigations simply by loading their hypothesis list.
 4. Define measured mechanisms and repair/control pairs for faults 2–5, then
    pretrained-LLM confirmation for 9–12. These remain open work, not closed by the
    catalog or the local audit UI.
-5. Reconcile invoices and extend budget ownership to retrain, Tavily and multiple
-   workers. A recorded training estimate is not billed cost. Submission/video and
-   eligibility remain separate user-owned work.
+5. Complete invoice and per-call inference reconciliation. [Retrain/Tavily
+   reservations](paid-operation-recovery.md) and [same-host worker ownership](sqlite-investigations.md)
+   are implemented; [224 completed training jobs match aggregate provider Usage](provider-cost-reconciliation-20261019.md).
+   New inference calls retain [provider request references](persisted-llm-usage.md).
+   Submission/video and eligibility remain separate user-owned work.

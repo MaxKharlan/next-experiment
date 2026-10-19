@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import sqlite3
+import time
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -24,6 +25,12 @@ class SpendingLedger:
             )
             db.execute(
                 "CREATE TABLE IF NOT EXISTS spending (id TEXT PRIMARY KEY, purpose TEXT NOT NULL, reserved REAL NOT NULL, actual REAL, status TEXT NOT NULL)"
+            )
+            db.execute(
+                "CREATE TABLE IF NOT EXISTS provider_receipts ("
+                "operation_id TEXT PRIMARY KEY, provider_request_id TEXT, "
+                "provider_response_id TEXT, outcome TEXT NOT NULL, "
+                "http_status INTEGER, received_at REAL NOT NULL)"
             )
             db.execute("INSERT OR IGNORE INTO budget VALUES (1, ?)", (cap_usd,))
             if db.execute("SELECT cap FROM budget WHERE id=1").fetchone()[0] != cap_usd:
@@ -78,6 +85,64 @@ class SpendingLedger:
                 (actual, operation_id),
             )
 
+    def record_provider_receipt(
+        self, operation_id, *, request_id, response_id, outcome, http_status
+    ):
+        """Keep response references even if usage is absent; never settle a hold."""
+        for value in (request_id, response_id):
+            if value is not None and (not isinstance(value, str) or not value.strip()):
+                raise ValueError(
+                    "Provider identifiers must be nonblank strings or null"
+                )
+        if outcome not in {"response", "http_error"}:
+            raise ValueError("Unknown receipt outcome")
+        values = (request_id, response_id, outcome, http_status)
+        with self.transaction() as db:
+            if (
+                db.execute(
+                    "SELECT 1 FROM spending WHERE id=?", (operation_id,)
+                ).fetchone()
+                is None
+            ):
+                raise ValueError("Receipt requires an existing reservation")
+            old = db.execute(
+                "SELECT provider_request_id, provider_response_id, outcome, http_status "
+                "FROM provider_receipts WHERE operation_id=?",
+                (operation_id,),
+            ).fetchone()
+            if old is not None:
+                if old != values:
+                    raise ValueError(
+                        "Provider receipt conflicts with the recorded operation"
+                    )
+                return
+            db.execute(
+                "INSERT INTO provider_receipts VALUES (?, ?, ?, ?, ?, ?)",
+                (operation_id, *values, time.time()),
+            )
+
+    @staticmethod
+    def _receipts(db):
+        return [
+            dict(
+                zip(
+                    (
+                        "operation_id",
+                        "provider_request_id",
+                        "provider_response_id",
+                        "outcome",
+                        "http_status",
+                        "received_at",
+                    ),
+                    row,
+                    strict=True,
+                )
+            )
+            for row in db.execute(
+                "SELECT * FROM provider_receipts ORDER BY received_at, operation_id"
+            )
+        ]
+
     def snapshot(self):
         with self.transaction() as db:
             cap = db.execute("SELECT cap FROM budget WHERE id=1").fetchone()[0]
@@ -91,6 +156,7 @@ class SpendingLedger:
                 )
                 for row in db.execute("SELECT * FROM spending ORDER BY rowid")
             ]
+            receipts = self._receipts(db)
         used = sum(
             r["actual_usd"] if r["status"] == "settled" else r["reserved_usd"]
             for r in rows
@@ -100,4 +166,5 @@ class SpendingLedger:
             "committed_usd": used,
             "available_usd": max(0, cap - used),
             "operations": rows,
+            "provider_receipts": receipts,
         }
