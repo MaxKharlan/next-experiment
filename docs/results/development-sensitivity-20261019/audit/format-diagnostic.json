@@ -1,0 +1,620 @@
+{
+  "analysis": "Post-hoc diagnostic only, after observing base answers; never an admission metric or replacement for frozen strict scores.",
+  "content_correct_after_unwrap": 102.0,
+  "fenced": 102,
+  "rows": [
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 1,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 2,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 3,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 4,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 5,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 6,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 7,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 8,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 9,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 10,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 11,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 12,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 13,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 14,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 15,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 16,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 17,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 18,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 19,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 20,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 21,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 22,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 23,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 24,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 25,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 26,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 27,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 28,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 29,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 30,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 31,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 32,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 33,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 34,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 35,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 36,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 37,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 38,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 39,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 40,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 41,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 42,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 43,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 44,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 45,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 46,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 47,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 48,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 49,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 50,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 51,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 52,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 53,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 54,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 55,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 56,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 57,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 58,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 59,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 60,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 61,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 62,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 63,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 64,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 65,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 66,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 67,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 68,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 69,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 70,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 71,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 72,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 73,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 74,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 75,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 76,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 77,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 78,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 79,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 80,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 81,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 82,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 83,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 84,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 85,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 86,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 87,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 88,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 89,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 90,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 91,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 92,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 93,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 94,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 95,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 96,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 97,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 98,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 99,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 100,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 101,
+      "strict_score": 0.0
+    },
+    {
+      "content_after_unwrap": 1.0,
+      "fenced": true,
+      "line": 102,
+      "strict_score": 0.0
+    }
+  ],
+  "total": 102
+}

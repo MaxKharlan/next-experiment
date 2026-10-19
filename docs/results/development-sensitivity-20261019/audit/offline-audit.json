@@ -1,0 +1,38 @@
+{
+  "check_slot_groups": 18,
+  "check_slot_groups_present_in_train": 18,
+  "counts": {
+    "check": 102,
+    "train": 390,
+    "validation": 102
+  },
+  "data_sha256": {
+    "check": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+    "train": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db",
+    "validation": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+  },
+  "historical_protocol_sha256": "32e4a4ef030c323985001327e13274576b3cf724bc2805ef9d9fd464a321acdd",
+  "metric_mutation_checks": {
+    "callback": 102,
+    "due_date": 102,
+    "priority": 102,
+    "product": 102,
+    "reference_accepted": 102,
+    "ticket_id": 102,
+    "truncated": 102
+  },
+  "normalized_user_prompts": {
+    "check": 42,
+    "train": 42,
+    "validation": 42
+  },
+  "rescored": {
+    "damaged-s1101": 1.0,
+    "damaged-s1102": 1.0,
+    "damaged-s1103": 1.0,
+    "healthy-s1101": 1.0,
+    "healthy-s1102": 1.0,
+    "healthy-s1103": 1.0
+  },
+  "scope": "Historical train/validation/check only. No protected final test read. Descriptive audit; cannot restart the stopped protocol."
+}

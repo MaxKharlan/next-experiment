@@ -1,21 +1,24 @@
 # Project status — 19 October 2026
 
-Repository baseline: main `099aa16`, including merged PRs #82–#88. Main passed
-741 tests (15 skipped), Ruff and formatting in this continuation. PR #88's
-approved answer-drop retrain implementation is merged. The current follow-up
-[prepares a new reviewed JSON cohort](fresh-answer-preparation.md) and fixes the
-probe's failure above 10% malformed JSON. No fresh model quality is measured.
-Comparison evidence and mode boundaries remain described in the
-[fault-by-fault review](fault-evidence-review.md).
+Repository baseline: main `2dff394`, including merged PRs #89–#92. PR #92
+records the terminal `zero_sd` development stop; its CI passed. All six historical
+development adapters scored 102/102. No fresh reference jobs, full persisted API
+investigation or fresh final-test evaluation followed. The old protocol and its
+prepared final test remain frozen. See [the execution record](fresh-api-execution-20261019.md).
+
+The [development sensitivity follow-up](development-sensitivity-20261019.md)
+audits the ceiling and records a separate candidate design. It retains the $5
+budget and its $0.2710464 historical charge estimate. Comparison evidence and mode
+boundaries remain in the [fault review](fault-evidence-review.md).
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
 | A2/A3 datasets | #82: JSON extraction and function calling, versioned splits and agent-reviewed references | Full task/model quality references and fresh evaluation; tracks A/B |
 | A4 validation | Explicit-case API validates roles, nonblank text and user prompts before worker creation; tests cover all three tasks and four splits | Semantic duplicate detection remains outside this validation; track A |
-| A7/A8/fault 1 | [Semantic record](fault-1-semantics.md), answer-cut probe and observed-row drop pair; length preflight is distinct | Calibrated likelihoods, competing-cause specificity, multi-task evidence; tracks A/B |
+| A7/A8/fault 1 | [Semantic record](fault-1-semantics.md), answer-cut probe and observed-row drop pair; length preflight is distinct | [Clean-prefix and alternative-malformation controls](answer-cut-specificity-controls-20261019.md) measured; independent likelihood calibration, causal specificity and multi-task evidence; tracks A/B |
 | Measured fault 1 | #84: Kaggle and Token Factory target/control results with incomplete recovery; two new public experiment replays | Fresh complete API investigation and untouched final test; tracks A/B |
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
-| B9 | #85 publishes negative historical transfer; local 210-run sweep still active | Finish sweep, seed-grouped analysis and independent transfer; concurrent B9 chat |
+| B9 | #91: all 210 runs completed; local binary balanced accuracy 96.7%, historical Token Factory transfer 25% | Keep classifiers offline; independent provider-compatible transfer remains a B26 dependency |
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
 | B17 | #85: SQLite reservations, REST/UI paid-step approval/resume | Answer-drop retrain now reserves its estimate; billing reconciliation, recipe retrain/Tavily scope and durable multiworker ownership remain; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
@@ -23,30 +26,34 @@ Comparison evidence and mode boundaries remain described in the
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
 | O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
 
-The concurrent B9 chat reported 144/210 completed runs during this preparation,
-with no final analysis or fitted model yet. This is a dated checkpoint, not a live
-counter. The local sweep has no provider charge; the B12 collection in #85 records
-eight Super calls costing $0.0135807. The active training checkout is independent
-from this follow-up.
+B9 analysis and publication are complete; do not repeat its 210 trainings or
+reapply its earlier package. Its local sweep used no provider service. The B12
+package separately records eight Super calls costing $0.0135807; that package is
+outside this continuation's explicitly inherited $5 ledger. B9 confirmed MPS was
+free before this follow-up; local evaluations run one process at a time.
 
 ## Next work, in order
 
-1. Complete development noise calibration and freeze execution after the
-   [fresh cohort preparation](fresh-answer-preparation.md). PR #88 is merged;
-   the full persisted API trace and final-test quality remain unmeasured.
-2. Complete B9 in its existing chat. Add final results on the current main; do not
-   reapply the preliminary 37-file package already merged in #85.
-3. Use the [fresh evaluation protocol](fresh-evaluation-protocol.md) for the
-   answer-cut API trace. Reviewed data hashes, tokenizer counts and a $5-cap plan
-   now exist; pin runtime revisions, verify provider pricing and select seeds
-   from development noise before submission. Avoid a second
-   model load or MPS evaluation while B9 uses the shared 16 GB machine.
-4. Calibrate signatures/noise on development data. Keep T=1 and the experimental
-   classifier out of default live diagnosis until independent evidence supports them.
-5. Decide the supported scope for faults 2–5, embeddings/Nano/cleanlab, B24
-   pretrained confirmation, and reproducible regression export.
-6. Confirm submission ownership/eligibility, create the final public video and
-   complete submission. Repository changes cannot establish registration status.
+1. Finish the separate development sensitivity audit and obey its frozen gates.
+   The old `zero_sd` run is terminal. Candidate development outcomes cannot reopen
+   that run or its final test.
+2. Only after a suitable new development design passes its noise/power gates,
+   freeze a new confirmation protocol: fresh reference/control comparisons,
+   persisted API trace with paid approvals and restart recovery, then final test
+   after the intervention decision. One task/model study does not close the 3×3 matrix.
+3. Calibrate signatures and competing-cause specificity on development evidence.
+   [35 synthetic probe controls](answer-cut-specificity-controls-20261019.md) now
+   demonstrate clean-prefix false alarms and alternative JSON causes; these
+   constructed counts do not estimate deployment likelihoods.
+   Keep T=1 and both experimental B9 classifiers out of live diagnosis.
+4. Reconcile provider billing and durable multiworker ownership as B17 operational
+   follow-ups. The existing persistence/approval implementation is already merged;
+   invoice reconciliation must not be inferred from token estimates.
+5. Resolve supported scope for faults 2–5, embeddings/Nano/cleanlab, B24 pretrained
+   confirmation and reproducible regression export with tracks A/B. B24 CPU
+   synthetic evidence does not validate a pretrained model or a full mode-B trace.
+6. The submission owner must confirm eligibility/registration, make the public
+   video and submit the package. The repository cannot establish those facts.
 
-No new paid experiments were started during this follow-up. Historic heldout cases
-have been viewed and reused; their metrics are not fresh generalization evidence.
+Historical heldout cases have been viewed and reused; their metrics remain
+exploratory evidence. No new automation is scheduled for this continuation.

@@ -1,9 +1,13 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #90
-(`9c4f0a0`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #92
+(`2dff394`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
+
+The current main also includes #92 (`2dff394`): the fresh answer-cut protocol
+stopped at `zero_sd` before reference jobs or a persisted API trace. See the
+[separate development sensitivity audit](development-sensitivity-20261019.md).
 
 | Plan items | Existing implementation and remaining work |
 | --- | --- |
