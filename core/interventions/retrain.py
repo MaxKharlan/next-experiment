@@ -137,9 +137,17 @@ class Retrainer:
         for key, path in (("_train", self.train_path), ("_valid", self.valid_path)):
             if key not in state:
                 state[key] = self.tf.upload(path)
+                self.storage.put_text(state_key, json.dumps(state, indent=2))
         recipes = {"fixed": plan.hyperparameters, "failed": plan.base_hyperparameters}
         for name in plan.jobs:
             if name not in state:
+                attempts = state.setdefault("_attempts", {})
+                if name in attempts:
+                    raise ValueError(
+                        "Unresolved retrain submission; reconcile before retrying"
+                    )
+                attempts[name] = "submitting"
+                self.storage.put_text(state_key, json.dumps(state, indent=2))
                 state[name] = self.tf.create_job(
                     plan.model,
                     state["_train"],

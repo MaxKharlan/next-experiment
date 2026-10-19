@@ -22,7 +22,7 @@ boundaries remain in the [fault review](fault-evidence-review.md).
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
 | B9 | #91: all 210 runs completed; local binary balanced accuracy 96.7%, historical Token Factory transfer 25% | Keep classifiers offline; independent provider-compatible transfer remains a B26 dependency |
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
-| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume | Answer-drop retrain now reserves its estimate; billing reconciliation, recipe retrain/Tavily scope and durable multiworker ownership remain; track B |
+| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | Provider billing reconciliation and durable multiworker ownership remain; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
 | Public UI | Replay selection clears prior results and ignores stale loads; nested evidence is readable; 36 saved reports | #87 deployment verified against main; fresh trace still pending; this chat |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
@@ -51,8 +51,8 @@ free before this follow-up; local evaluations run one process at a time.
    constructed counts do not estimate deployment likelihoods.
    Keep T=1 and both experimental B9 classifiers out of live diagnosis.
 4. Reconcile provider billing and durable multiworker ownership as B17 operational
-   follow-ups. The existing persistence/approval implementation is already merged;
-   invoice reconciliation must not be inferred from token estimates.
+   follow-ups. Recipe retraining now shares the investigation ledger; Tavily credits
+   survive restarts. Invoice reconciliation must not be inferred from estimates.
 5. Resolve supported scope for faults 2–5, embeddings/Nano/cleanlab, B24 pretrained
    confirmation and reproducible regression export with tracks A/B. B24 CPU
    synthetic evidence does not validate a pretrained model or a full mode-B trace.

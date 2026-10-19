@@ -27,7 +27,7 @@ calibrate deployment likelihoods.
 | B12 | The calibration task is complete with a negative deployment decision. Temperature fitting, reliability plots and ECE/Brier audits exist; a development-fitted temperature worsens all three heldout measures. The live default remains T=1. |
 | B13–B15 | Versioned prompts, hypothesis sampling and sourced known-issue search are implemented. One-versus-three sampling results are saved. |
 | B16 | Dev signature fitting with smoothing and provenance was added in PR #65. Coverage is limited to observed fault classes. |
-| B17–B18 | The planned investigation cycle is implemented: persisted states, budgets, paid-step approval, statuses, verdicts and retraining flow. SQLite reservations and REST/UI resume cover process restarts. Provider invoice reconciliation and multiworker ownership are operational extensions outside the original B17 acceptance condition. |
+| B17–B18 | The planned investigation cycle is implemented: persisted states, budgets, paid-step approval, statuses, verdicts and retraining flow. SQLite reservations and REST/UI resume cover process restarts. [Recipe retrain and Tavily](paid-operation-recovery.md) now retain budget reservations across failures. Provider invoice reconciliation and multiworker ownership are operational extensions outside the original B17 acceptance condition. |
 | B19–B20 | Baselines and ablations exist. PR #66 saves the current dev comparison and limitations. More fault classes require new evidence. |
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |

@@ -312,17 +312,19 @@ def retrain(
     try:
         if approved:
             protocol = waiting.get("protocol")
-            dataset_args = {}
-            if protocol is not None:
-                verify_datasets(protocol)
-                datasets = protocol["datasets"]
-                dataset_args = {
-                    "train": Path(datasets["train"]["path"]),
-                    "valid": Path(datasets["validation"]["path"]),
-                    "heldout": Path(datasets["test"]["path"]),
-                    "evaluator_spec": protocol.get("evaluator"),
-                    "evaluation_runtime": protocol.get("evaluation_runtime"),
-                }
+            if protocol is None:
+                raise ValueError(
+                    "Paid retraining requires a frozen protocol and budget; prepare a new proposal"
+                )
+            verify_datasets(protocol)
+            datasets = protocol["datasets"]
+            dataset_args = {
+                "train": Path(datasets["train"]["path"]),
+                "valid": Path(datasets["validation"]["path"]),
+                "heldout": Path(datasets["test"]["path"]),
+                "evaluator_spec": protocol.get("evaluator"),
+                "evaluation_runtime": protocol.get("evaluation_runtime"),
+            }
             retrainer = retrain_tf.make_retrainer(
                 TokenFactory.from_settings(),
                 LocalStorage("artifacts"),
@@ -331,26 +333,23 @@ def retrain(
             )
             plan = RetrainPlan(**waiting["plan"])
             on_step = lambda step: store.emit(inv_id, "step", step)
-            if plan.data_patch is not None:
-                from core.db.spending import SpendingLedger
-                from core.interventions.data_retrain import retrain_data
+            from core.db.spending import SpendingLedger
+            from core.interventions.data_retrain import retrain_data
+            from core.interventions.recipe_retrain import retrain_recipe
 
-                if protocol is None:
-                    raise ValueError("Data retraining requires a frozen protocol")
-                spending = SpendingLedger(
-                    Path("artifacts/investigations") / inv_id / "spending.sqlite3",
-                    protocol["budget_usd"],
-                )
-                comparison = retrain_data(retrainer, plan, protocol, spending, on_step)
-                summary = dict(waiting["summary"])
-                for key in ("estimated_training_cost_usd", "estimated_total_cost_usd"):
-                    if summary.get(key) is not None:
-                        summary[key] += plan.cost_usd
-                summary["retrain_estimated_cost_usd"] = plan.cost_usd
-                summary["spending"] = spending.snapshot()
-                waiting = {**waiting, "summary": summary}
-            else:
-                comparison = retrainer(plan, on_step=on_step)
+            spending = SpendingLedger(
+                Path("artifacts/investigations") / inv_id / "spending.sqlite3",
+                protocol["budget_usd"],
+            )
+            execute = retrain_data if plan.data_patch is not None else retrain_recipe
+            comparison = execute(retrainer, plan, protocol, spending, on_step)
+            summary = dict(waiting["summary"])
+            for key in ("estimated_training_cost_usd", "estimated_total_cost_usd"):
+                if summary.get(key) is not None:
+                    summary[key] += plan.cost_usd
+            summary["retrain_estimated_cost_usd"] = plan.cost_usd
+            summary["spending"] = spending.snapshot()
+            waiting = {**waiting, "summary": summary}
             store.emit(inv_id, "step", comparison)
         else:
             store.emit(inv_id, "step", {"kind": "retrain_declined"})

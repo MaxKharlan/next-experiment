@@ -110,26 +110,31 @@ def _events(client, inv_id):
     return main.store.events_since(inv_id, 0)
 
 
-def test_approved_retrain_runs_once_and_finishes(client, monkeypatch):
+def test_approved_retrain_runs_once_and_finishes(client, monkeypatch, tmp_path):
     from core.connectors.token_factory import TokenFactory
     from scripts import retrain_tf
+    from tests.unit.test_recipe_retrain import setup
 
-    plans = []
+    protocol, plan, retrainer, _, _ = setup(tmp_path)
+    monkeypatch.chdir(tmp_path)
 
-    def fake_retrainer(tf, storage, inv_id):
-        def run(plan, on_step):
-            plans.append(plan)
-            on_step({"kind": "retrain", "jobs": {"fixed": "ftjob-9"}})
-            return {"kind": "comparison", "gain": 0.37}
+    def waiting_run(store, inv_id, backend):
+        store.emit(inv_id, "started", {"case": {}, "backend": backend})
+        store.emit(
+            inv_id,
+            "awaiting_approval",
+            {
+                "plan": asdict(plan),
+                "summary": SUMMARY,
+                "protocol": protocol,
+            },
+        )
 
-        return run
-
-    monkeypatch.setattr(main.runners, "live", _waiting_run)
-    monkeypatch.setattr(retrain_tf, "make_retrainer", fake_retrainer)
-    monkeypatch.setattr(TokenFactory, "from_settings", lambda: None)
+    monkeypatch.setattr(main.runners, "live", waiting_run)
+    monkeypatch.setattr(retrain_tf, "make_retrainer", lambda *a, **kw: retrainer)
+    monkeypatch.setattr(TokenFactory, "from_settings", lambda: retrainer.tf)
     inv_id = client.post("/api/investigations", json={"backend": "tf"}).json()["id"]
     _wait_for(client, inv_id, "awaiting_approval")
-
     answer = client.post(
         f"/api/investigations/{inv_id}/retrain", json={"approve": True}
     )
@@ -137,15 +142,34 @@ def test_approved_retrain_runs_once_and_finishes(client, monkeypatch):
     again = client.post(f"/api/investigations/{inv_id}/retrain", json={"approve": True})
     assert again.status_code == 409
     _wait_for(client, inv_id, "finished")
-
-    assert len(plans) == 1 and plans[0].failed_job_id == "ftjob-c0"
-    types = [(e["type"], e["data"].get("kind")) for e in _events(client, inv_id)]
-    assert types[-4:] == [
+    assert len(retrainer.tf.created) == 1
+    events = _events(client, inv_id)
+    assert [(e["type"], e["data"].get("kind")) for e in events][-6:] == [
         ("resumed", None),
+        ("step", "spending_reserved"),
         ("step", "retrain"),
+        ("step", "spending_settled"),
         ("step", "comparison"),
         ("finished", None),
     ]
+    summary = events[-1]["data"]
+    assert summary["spending"]["committed_usd"] == plan.cost_usd
+    assert summary["retrain_estimated_cost_usd"] == plan.cost_usd
+
+
+def test_legacy_retrain_without_protocol_fails_before_provider(client, monkeypatch):
+    from core.connectors.token_factory import TokenFactory
+
+    def forbidden():
+        pytest.fail("provider must not be constructed without a frozen budget")
+
+    monkeypatch.setattr(main.runners, "live", _waiting_run)
+    monkeypatch.setattr(TokenFactory, "from_settings", forbidden)
+    inv_id = client.post("/api/investigations", json={"backend": "tf"}).json()["id"]
+    _wait_for(client, inv_id, "awaiting_approval")
+    client.post(f"/api/investigations/{inv_id}/retrain", json={"approve": True})
+    _wait_for(client, inv_id, "failed")
+    assert "frozen protocol and budget" in _events(client, inv_id)[-1]["data"]["error"]
 
 
 def test_declined_retrain_finishes_without_training(client, monkeypatch):
