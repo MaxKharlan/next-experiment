@@ -336,6 +336,7 @@ def _summary(report: dict[str, Any]) -> dict[str, Any]:
         "estimated_training_cost_usd": training,
         "estimated_total_cost_usd": training + report.get("llm_cost_usd", 0.0),
         "status": report["status"],
+        "audit_only": report.get("audit_only", False),
         "llm_cost_usd": report.get("llm_cost_usd", 0.0),
         "llm_calls": report.get("llm_calls", {}),
     }

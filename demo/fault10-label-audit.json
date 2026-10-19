@@ -1,0 +1,52 @@
+{
+  "title": "Fault 10: EOS label masking \u2014 local audit",
+  "note": "Saved local label inspection. EOS was removed from a supervised target. No training or causal experiment; status remains inconclusive.",
+  "case": {
+    "mode": "B",
+    "symptom": "Caller-supplied label inspection",
+    "job": {
+      "model": "local labels",
+      "hyperparameters": {}
+    }
+  },
+  "report": {
+    "investigation_id": "inv-55ad5738",
+    "status": "inconclusive",
+    "hypotheses": [],
+    "steps": [
+      {
+        "kind": "training_label_checks",
+        "raw": {
+          "scope": "supplied unpadded labels; reference correctness is caller-owned",
+          "rows": 1,
+          "alignment": {
+            "status": "other_mismatch",
+            "informative_positions": 3,
+            "healthy_mismatches": 1,
+            "preshift_mismatches": 2,
+            "observed_targets": 1
+          },
+          "prompt": {
+            "status": "not_applicable",
+            "reason": "labels are not prompt-only additions"
+          },
+          "eos": {
+            "eos_token_id": 2,
+            "reference_targets": 2,
+            "observed_targets": 1,
+            "reference_eos_targets": 1,
+            "removed_eos_targets": 1,
+            "removed_eos_fraction": 1.0,
+            "status": "removed"
+          },
+          "causal_confirmation": false
+        },
+        "input_sha256": "21af890ff10c069b1e2f240e47c6a8793ca8a10c611e77ac25a6e8d7d83cd93c",
+        "cost_usd": 0.0
+      }
+    ],
+    "llm_cost_usd": 0.0,
+    "llm_calls": {},
+    "audit_only": true
+  }
+}
