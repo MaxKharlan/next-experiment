@@ -306,7 +306,13 @@
     <label for="labelPayload">Label audit request (JSON)</label>
     <textarea id="labelPayload" spellcheck="false">{"training_labels":{"reference":[{"input_ids":[1,2,3],"labels":[-100,2,3]}],"observed":[{"input_ids":[1,2,3],"labels":[-100,2,-100]}],"eos_token_id":3}}</textarea>
     <button id="runLabelAudit" class="btn btn-primary" type="button">Save label audit</button>
+    <p class="muted small">On this static site, pasted data stays in your browser. Supply unpadded rows: reference -100 positions must be prompt tokens only. Position 0 is excluded from causal loss. The reference is yours; this audit cannot judge its semantic correctness or prove a cause of model behavior.</p>
+    <p class="muted small">Limits: 1–1024 rows per side, 32768 positions per row, 131072 positions across both sides. Token IDs are nonnegative integers; labels may also be -100. Both sides must describe identical token sequences. Optional eos_token_id must be a nonnegative integer or null.</p>
     <pre id="labelFeedback" role="status" aria-live="polite"></pre>
+    <details id="labelResult" hidden open><summary>Computed audit details</summary>
+      <p class="muted small">double_shift means the supplied labels match one extra shift. other_mismatch means neither alignment pattern matches. not_applicable means the changes do not fit that check. no_eos_targets and inconclusive provide no conclusion for that check. EOS removal is observable; whether padding caused it is not established.</p>
+      <pre id="labelDetails" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre>
+    </details>
   </details>
   <details class="card case-start" id="caseStart" hidden>
     <summary>Investigate your own job</summary>
@@ -399,6 +405,11 @@ const STATIC = document.documentElement.dataset.mode === "static";
 
 async function init() {
   showMethod();
+  if (STATIC) {
+  $("labelAudit").hidden = false;
+  $("labelAudit").open = true;
+  $("runLabelAudit").textContent = "Run audit in this browser";
+  }
   const cases = await (await fetch(STATIC ? "demo-cases.json" : "/api/demo-cases")).json();
   $("demo").innerHTML = cases.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("");
   if (STATIC) return staticMode(cases);
@@ -503,6 +514,14 @@ $("runLabelAudit").onclick = async () => {
   const button = $("runLabelAudit");
   button.disabled = true;
   try {
+    if (STATIC) {
+      $("labelResult").hidden = true;
+      const result = LabelAudit.request($("labelPayload").value);
+      $("labelFeedback").textContent = `Completed locally · ${result.rows} row(s). Alignment: ${result.alignment.status}; prompt: ${result.prompt.status}; EOS: ${result.eos.status}.`;
+      $("labelDetails").textContent = LabelAudit.stringify(result);
+      $("labelResult").hidden = false;
+      return;
+    }
     const payload = JSON.parse($("labelPayload").value);
     const response = await fetch("/api/investigations/label-audit", {
       method: "POST", headers: {"Content-Type": "application/json"},
@@ -590,6 +609,7 @@ function done() { stop(); $("start").disabled = false; $("start").textContent = 
 /* static mode: the saved run plays in the browser with the pauses of the server replay */
 let queue = [], timer = 0, quiet = false;
 function staticMode(cases) {
+
   $("past").hidden = true; $("repo").hidden = false; $("about").hidden = false;
   const about = () => {
     const c = cases.find(x => x.name === $("demo").value) || {};
