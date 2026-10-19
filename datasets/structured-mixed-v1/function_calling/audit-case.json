@@ -1,0 +1,46 @@
+{
+  "budget_usd": 5.0,
+  "datasets": {
+    "check": {
+      "examples": 102,
+      "format": "chat_jsonl",
+      "ref": "check.jsonl",
+      "sha256": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45"
+    },
+    "test": {
+      "examples": 102,
+      "format": "chat_jsonl",
+      "ref": "test.jsonl",
+      "sha256": "3d154a1ef988714b1369cc5cfdcee6ef52096fdec3ac47ccab053447f9acc69c"
+    },
+    "train": {
+      "examples": 390,
+      "format": "chat_jsonl",
+      "ref": "train.jsonl",
+      "sha256": "8ae5e926107250410fbd7baf544c7db2811f9657a06a10443d77b8de712a71ba"
+    },
+    "validation": {
+      "examples": 102,
+      "format": "chat_jsonl",
+      "ref": "validation.jsonl",
+      "sha256": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03"
+    }
+  },
+  "evaluator": {
+    "higher_is_better": true,
+    "metric": "function_call_exact",
+    "name": "order_tools_v1",
+    "parameters": {
+      "max_new_tokens": 192
+    }
+  },
+  "job": {
+    "checkpoints": [],
+    "hyperparameters": {},
+    "id": "local:dataset-audit",
+    "model": "not-trained"
+  },
+  "mode": "B",
+  "symptom": "Inspect this structured task dataset before training",
+  "task": "function_calling"
+}

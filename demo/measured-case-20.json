@@ -1,0 +1,253 @@
+{
+  "case": {
+    "backend": "Token Factory",
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.3693486154079437,
+        "valid_loss": 0.4080454409122467
+      },
+      {
+        "step": 126,
+        "train_loss": 0.1640620231628418,
+        "valid_loss": 0.017154060304164886
+      },
+      {
+        "step": 189,
+        "train_loss": 0.048503194004297256,
+        "valid_loss": 0.33927515149116516
+      },
+      {
+        "step": 252,
+        "train_loss": 0.03648347035050392,
+        "valid_loss": 0.4510335922241211
+      },
+      {
+        "step": 315,
+        "train_loss": 0.01858992874622345,
+        "valid_loss": 0.22833098471164703
+      },
+      {
+        "step": 378,
+        "train_loss": 0.006120017729699612,
+        "valid_loss": 0.16266421973705292
+      },
+      {
+        "step": 441,
+        "train_loss": 0.000541320419870317,
+        "valid_loss": 0.1477343738079071
+      },
+      {
+        "step": 504,
+        "train_loss": 0.00010480450873728842,
+        "valid_loss": 0.00021148473024368286
+      },
+      {
+        "step": 567,
+        "train_loss": 5.763398439739831e-05,
+        "valid_loss": 0.32382068037986755
+      },
+      {
+        "step": 630,
+        "train_loss": 4.6801185817457736e-05,
+        "valid_loss": 0.15205545723438263
+      },
+      {
+        "step": 693,
+        "train_loss": 3.581566488719545e-05,
+        "valid_loss": 0.08135460317134857
+      },
+      {
+        "step": 756,
+        "train_loss": 3.6854737118119374e-05,
+        "valid_loss": 0.006609343457967043
+      },
+      {
+        "step": 819,
+        "train_loss": 3.089771780651063e-05,
+        "valid_loss": 0.05144551023840904
+      },
+      {
+        "step": 882,
+        "train_loss": 2.8188995202071965e-05,
+        "valid_loss": 0.2325693964958191
+      },
+      {
+        "step": 945,
+        "train_loss": 2.859167943825014e-05,
+        "valid_loss": 0.3656666874885559
+      },
+      {
+        "step": 1008,
+        "train_loss": 2.5230754545191303e-05,
+        "valid_loss": 0.2910991311073303
+      },
+      {
+        "step": 1071,
+        "train_loss": 2.6383593649370596e-05,
+        "valid_loss": 0.2032153159379959
+      },
+      {
+        "step": 1134,
+        "train_loss": 2.6839765268960036e-05,
+        "valid_loss": 0.4644993245601654
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 18,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.66,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.68
+  },
+  "note": "tokenfactory-banking77-500-dev. Validation exact match 0.680; matched reference 0.660. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "e16c33ce0fcf356bc3a63787ea18f006711a78e70e180485a8391b91cf0c5f38",
+    "source": "docs/results/b467-20261019/detection/case-20.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "too_many_epochs",
+        "id": "h1",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.4,
+        "rationale": "Training loss continues to drop while validation loss reaches a minimum around step 504 (epoch 8) then rises sharply and remains high, a classic sign of over‑training with too many epochs.",
+        "sources": []
+      },
+      {
+        "fault_class": "contradictory_labels",
+        "id": "h2",
+        "location": "training data file",
+        "prior": 0.2,
+        "rationale": "Validation loss fluctuates wildly even after training loss becomes extremely low, suggesting the model is trying to fit conflicting labels in the data.",
+        "sources": []
+      },
+      {
+        "fault_class": "distribution_shift",
+        "id": "h3",
+        "location": "validation data file",
+        "prior": 0.2,
+        "rationale": "The model achieves near‑zero training loss but validation loss periodically spikes, indicating the validation set may not reflect the true input distribution the model will see in production.",
+        "sources": []
+      },
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h4",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.1,
+        "rationale": "With LoRA rank 16 the model may lack sufficient capacity to capture the nuances of the BANKING77 intent space, leaving performance close to the reference baseline.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-20",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0020316,
+        "latency_ms": 8393,
+        "tokens_in": 2545,
+        "tokens_out": 1409
+      }
+    },
+    "llm_cost_usd": 0.0020316,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "too_many_epochs",
+            "id": "h1",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.4,
+            "rationale": "Training loss continues to drop while validation loss reaches a minimum around step 504 (epoch 8) then rises sharply and remains high, a classic sign of over‑training with too many epochs.",
+            "sources": []
+          },
+          {
+            "fault_class": "contradictory_labels",
+            "id": "h2",
+            "location": "training data file",
+            "prior": 0.2,
+            "rationale": "Validation loss fluctuates wildly even after training loss becomes extremely low, suggesting the model is trying to fit conflicting labels in the data.",
+            "sources": []
+          },
+          {
+            "fault_class": "distribution_shift",
+            "id": "h3",
+            "location": "validation data file",
+            "prior": 0.2,
+            "rationale": "The model achieves near‑zero training loss but validation loss periodically spikes, indicating the validation set may not reflect the true input distribution the model will see in production.",
+            "sources": []
+          },
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h4",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.1,
+            "rationale": "With LoRA rank 16 the model may lack sufficient capacity to capture the nuances of the BANKING77 intent space, leaving performance close to the reference baseline.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.2,
+          "h3": 0.2,
+          "h4": 0.1,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "budget_left_usd": 0.09796840000000001,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.3183,
+        "kind": "probe",
+        "outcome": "high",
+        "probe": "epoch_count",
+        "probs": {
+          "h1": 0.7391,
+          "h2": 0.087,
+          "h3": 0.087,
+          "h4": 0.0435,
+          "unlisted": 0.0435
+        },
+        "raw": {
+          "high_from": 10,
+          "n_epochs": 18
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.7391,
+          "h2": 0.087,
+          "h3": 0.087,
+          "h4": 0.0435,
+          "unlisted": 0.0435
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Fault 7 recipe: lr 0.0001, rank 16, epochs 18, seed 1 — inconclusive"
+}

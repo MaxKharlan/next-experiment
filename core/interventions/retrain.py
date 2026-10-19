@@ -113,6 +113,7 @@ class Retrainer:
     # (base model, data file, directory with the chat template to prompt with)
     score_base: Callable[[str, Path, Path], float]
     prefix: str
+    metric: str = "exact_match"
     heldout_note: str = ""
     poll_s: float = 30
     timeout_s: float = 6 * 3600
@@ -183,7 +184,7 @@ class Retrainer:
         rows = self.heldout_path.read_text(encoding="utf-8").splitlines()
         return {
             "kind": "comparison",
-            "metric": "exact_match",
+            "metric": self.metric,
             "heldout": str(self.heldout_path),
             "heldout_examples": sum(1 for r in rows if r.strip()),
             "heldout_note": self.heldout_note,

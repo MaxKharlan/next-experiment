@@ -1,0 +1,20 @@
+{
+  "alignment": {
+    "healthy_mismatches": 3,
+    "informative_positions": 3,
+    "observed_targets": 2,
+    "preshift_mismatches": 0,
+    "status": "double_shift"
+  },
+  "causal_confirmation": false,
+  "eos": {
+    "reason": "labels are not masking-only changes",
+    "status": "not_applicable"
+  },
+  "prompt": {
+    "reason": "labels are not prompt-only additions",
+    "status": "not_applicable"
+  },
+  "rows": 1,
+  "scope": "supplied unpadded labels; reference correctness is caller-owned"
+}

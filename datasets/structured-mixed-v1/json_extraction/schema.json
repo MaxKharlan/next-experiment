@@ -1,0 +1,52 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "callback": {
+      "title": "Callback",
+      "type": "boolean"
+    },
+    "due_date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Due Date"
+    },
+    "priority": {
+      "enum": [
+        "low",
+        "normal",
+        "high"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "product": {
+      "enum": [
+        "router",
+        "printer",
+        "scanner"
+      ],
+      "title": "Product",
+      "type": "string"
+    },
+    "ticket_id": {
+      "pattern": "^T-[0-9]{6}$",
+      "title": "Ticket Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ticket_id",
+    "product",
+    "priority",
+    "callback",
+    "due_date"
+  ],
+  "title": "Ticket",
+  "type": "object"
+}

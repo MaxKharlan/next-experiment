@@ -1,0 +1,430 @@
+{
+  "audit_only": true,
+  "evidence_scope": "dataset inspection; no model training or causal experiment",
+  "hypotheses": [],
+  "investigation_id": "dataset-audit",
+  "llm_calls": {},
+  "llm_cost_usd": 0.0,
+  "protocol": {
+    "datasets": {
+      "check": {
+        "examples": 102,
+        "path": "docs/results/report-catalog-20261019/json_extraction-cut/check.jsonl",
+        "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+      },
+      "test": {
+        "examples": 102,
+        "path": "docs/results/report-catalog-20261019/json_extraction-cut/test.jsonl",
+        "sha256": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494"
+      },
+      "train": {
+        "examples": 390,
+        "path": "docs/results/report-catalog-20261019/json_extraction-cut/train.jsonl",
+        "sha256": "1bf436a591ec2ea0d03277326f23e2ada3dc58b0d591b1b2eb6c956e2a580ead"
+      },
+      "validation": {
+        "examples": 102,
+        "path": "docs/results/report-catalog-20261019/json_extraction-cut/validation.jsonl",
+        "sha256": "c3c3df8c215ead36a3ac4b44b33dca41301f9f3ba692c0a80861b22139065987"
+      }
+    },
+    "evaluator": {
+      "higher_is_better": true,
+      "metric": "json_fields_exact",
+      "name": "ticket_json_v1",
+      "parameters": {
+        "max_new_tokens": 192
+      }
+    },
+    "task": "json_extraction"
+  },
+  "status": "inconclusive",
+  "steps": [
+    {
+      "cost_usd": 0.0,
+      "datasets": {
+        "check": {
+          "examples": 102,
+          "path": "docs/results/report-catalog-20261019/json_extraction-cut/check.jsonl",
+          "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+        },
+        "test": {
+          "examples": 102,
+          "path": "docs/results/report-catalog-20261019/json_extraction-cut/test.jsonl",
+          "sha256": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494"
+        },
+        "train": {
+          "examples": 390,
+          "path": "docs/results/report-catalog-20261019/json_extraction-cut/train.jsonl",
+          "sha256": "1bf436a591ec2ea0d03277326f23e2ada3dc58b0d591b1b2eb6c956e2a580ead"
+        },
+        "validation": {
+          "examples": 102,
+          "path": "docs/results/report-catalog-20261019/json_extraction-cut/validation.jsonl",
+          "sha256": "c3c3df8c215ead36a3ac4b44b33dca41301f9f3ba692c0a80861b22139065987"
+        }
+      },
+      "kind": "dataset_audit",
+      "metric": "json_fields_exact",
+      "raw": {
+        "check": {
+          "examples": 102,
+          "invalid_reference_lines": []
+        },
+        "test": {
+          "examples": 102,
+          "invalid_reference_lines": []
+        },
+        "train": {
+          "examples": 390,
+          "invalid_reference_lines": [
+            4,
+            5,
+            6,
+            8,
+            13,
+            14,
+            24,
+            32,
+            33,
+            40,
+            41,
+            42,
+            44,
+            45,
+            49,
+            50,
+            53,
+            60,
+            68,
+            69,
+            72,
+            76,
+            77,
+            78,
+            80,
+            85,
+            86,
+            89,
+            96,
+            104,
+            105,
+            108,
+            112,
+            113,
+            114,
+            121,
+            122,
+            125,
+            132,
+            140,
+            141,
+            148,
+            149,
+            150,
+            152,
+            157,
+            158,
+            161,
+            168,
+            176,
+            177,
+            180,
+            184,
+            185,
+            186,
+            189,
+            193,
+            194,
+            204,
+            212,
+            213,
+            216,
+            220,
+            221,
+            222,
+            225,
+            229,
+            230,
+            240,
+            248,
+            249,
+            252,
+            256,
+            257,
+            258,
+            260,
+            265,
+            266,
+            269,
+            276,
+            284,
+            285,
+            288,
+            292,
+            293,
+            294,
+            297,
+            301,
+            302,
+            305,
+            312,
+            320,
+            321,
+            324,
+            328,
+            329,
+            330,
+            332,
+            333,
+            337,
+            338,
+            348,
+            356,
+            357,
+            364,
+            365,
+            366,
+            368,
+            369,
+            373,
+            374,
+            377,
+            384,
+            387,
+            388,
+            389,
+            390
+          ]
+        },
+        "validation": {
+          "examples": 102,
+          "invalid_reference_lines": [
+            3,
+            4,
+            7,
+            11,
+            15,
+            23,
+            24,
+            27,
+            31,
+            32,
+            35,
+            39,
+            40,
+            43,
+            47,
+            51,
+            55,
+            59,
+            60,
+            63,
+            67,
+            68,
+            71,
+            72,
+            75,
+            76,
+            79,
+            83,
+            87,
+            95,
+            96
+          ]
+        }
+      }
+    },
+    {
+      "card": "Observed label integrity; this does not prove a model failure.",
+      "cost_usd": 0.0,
+      "gain_bits": 0.0,
+      "kind": "probe",
+      "outcome": "cut",
+      "probe": "answer_cut",
+      "probs": {},
+      "raw": {
+        "cut_from_share": 0.01,
+        "files": {
+          "train": {
+            "cut": 95,
+            "cut_lines": [
+              4,
+              6,
+              8,
+              13,
+              14,
+              24,
+              32,
+              40,
+              42,
+              44,
+              45,
+              49,
+              50,
+              53,
+              60,
+              68,
+              72,
+              76,
+              78,
+              80,
+              85,
+              86,
+              89,
+              96,
+              104,
+              108,
+              112,
+              114,
+              121,
+              122,
+              125,
+              132,
+              140,
+              148,
+              150,
+              152,
+              157,
+              158,
+              161,
+              168,
+              176,
+              180,
+              184,
+              186,
+              189,
+              193,
+              194,
+              204,
+              212,
+              216,
+              220,
+              222,
+              225,
+              229,
+              230,
+              240,
+              248,
+              252,
+              256,
+              258,
+              260,
+              265,
+              266,
+              269,
+              276,
+              284,
+              288,
+              292,
+              294,
+              297,
+              301,
+              302,
+              305,
+              312,
+              320,
+              324,
+              328,
+              330,
+              332,
+              333,
+              337,
+              338,
+              348,
+              356,
+              364,
+              366,
+              368,
+              369,
+              373,
+              374,
+              377,
+              384,
+              387,
+              388,
+              390
+            ],
+            "cut_share": 0.24358974358974358,
+            "distinct": 312,
+            "examples": 390,
+            "json_file": false,
+            "shown": [
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-04\", \"priority\":",
+                "line": 4,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-100087\"}'"
+              },
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-16\", \"priority\":",
+                "line": 6,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-16\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-100105\"}'"
+              },
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-10\", \"priority\"",
+                "line": 8,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-10\", \"priority\":'"
+              },
+              {
+                "answer": "{\"callback\": false, \"due_date\": null, \"priority\": \"n",
+                "line": 13,
+                "why": "prefix of '{\"callback\": false, \"due_date\": null, \"priority\": \"no'"
+              },
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-01\", \"priority\":",
+                "line": 14,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-01\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-100033\"}'"
+              }
+            ]
+          },
+          "validation": {
+            "cut": 10,
+            "cut_lines": [
+              4,
+              24,
+              31,
+              32,
+              40,
+              68,
+              72,
+              76,
+              95,
+              96
+            ],
+            "cut_share": 0.09803921568627451,
+            "distinct": 99,
+            "examples": 102,
+            "json_file": false,
+            "shown": [
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-07\", \"priority\":",
+                "line": 4,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-07\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-200069\"}'"
+              },
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-08\", \"priority\":",
+                "line": 24,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-08\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-200093\"}'"
+              },
+              {
+                "answer": "{\"callback\": false, \"due_date\": \"2027-02-06\", \"priority\"",
+                "line": 31,
+                "why": "prefix of '{\"callback\": false, \"due_date\": \"2027-02-06\", \"priority\":'"
+              },
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-15\", \"priority\":",
+                "line": 32,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-15\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-200091\"}'"
+              },
+              {
+                "answer": "{\"callback\": true, \"due_date\": \"2027-02-20\", \"priority\":",
+                "line": 40,
+                "why": "prefix of '{\"callback\": true, \"due_date\": \"2027-02-20\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-200035\"}'"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

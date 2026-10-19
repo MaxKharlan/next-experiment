@@ -1,0 +1,102 @@
+{
+  "function_calling": {
+    "dataset_sha256": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03",
+    "metrics": {
+      "exact_match": 1.0,
+      "name_accuracy": 1.0,
+      "schema_valid": 1.0,
+      "valid_json": 1.0
+    },
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "records": [
+      {
+        "answer": "{\"name\": \"track_order\", \"arguments\": {\"order_id\": \"O-200000\"}}",
+        "expected": "{\"arguments\": {\"order_id\": \"O-200000\"}, \"name\": \"track_order\"}",
+        "line": 1,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"name\": \"cancel_order\", \"arguments\": {\"order_id\": \"O-200001\", \"reason\": \"duplicate\"}}",
+        "expected": "{\"arguments\": {\"order_id\": \"O-200001\", \"reason\": \"duplicate\"}, \"name\": \"cancel_order\"}",
+        "line": 2,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"name\": \"schedule_pickup\", \"arguments\": {\"order_id\": \"O-200002\", \"date\": \"2027-02-01\", \"location\": \"front_desk\"}}",
+        "expected": "{\"arguments\": {\"date\": \"2027-02-01\", \"location\": \"front_desk\", \"order_id\": \"O-200002\"}, \"name\": \"schedule_pickup\"}",
+        "line": 3,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"name\": \"track_order\", \"arguments\": {\"order_id\": \"O-200900\"}}",
+        "expected": "{\"arguments\": {\"order_id\": \"O-200900\"}, \"name\": \"track_order\"}",
+        "line": 97,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"name\": \"cancel_order\", \"arguments\": {\"order_id\": \"O-200901\", \"reason\": \"duplicate\"}}",
+        "expected": "{\"arguments\": {\"order_id\": \"O-200901\", \"reason\": \"duplicate\"}, \"name\": \"cancel_order\"}",
+        "line": 98,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"name\": \"schedule_pickup\", \"arguments\": {\"order_id\": \"O-200902\", \"date\": \"2027-02-05\", \"location\": \"front_desk\"}}",
+        "expected": "{\"arguments\": {\"date\": \"2027-02-05\", \"location\": \"front_desk\", \"order_id\": \"O-200902\"}, \"name\": \"schedule_pickup\"}",
+        "line": 99,
+        "score": 1.0
+      }
+    ],
+    "split": "validation",
+    "trained": false
+  },
+  "json_extraction": {
+    "dataset_sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b",
+    "metrics": {
+      "exact_match": 1.0,
+      "field_accuracy": 1.0,
+      "schema_valid": 1.0,
+      "valid_json": 1.0
+    },
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "records": [
+      {
+        "answer": "{\"ticket_id\": \"T-200000\", \"product\": \"router\", \"priority\": \"low\", \"callback\": false, \"due_date\": null}",
+        "expected": "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-200000\"}",
+        "line": 1,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"ticket_id\": \"T-200001\", \"product\": \"printer\", \"priority\": \"low\", \"callback\": true, \"due_date\": \"2027-02-04\"}",
+        "expected": "{\"callback\": true, \"due_date\": \"2027-02-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-200001\"}",
+        "line": 2,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"ticket_id\": \"T-200002\", \"product\": \"scanner\", \"priority\": \"low\", \"callback\": false, \"due_date\": \"2027-02-01\"}",
+        "expected": "{\"callback\": false, \"due_date\": \"2027-02-01\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-200002\"}",
+        "line": 3,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"ticket_id\": \"T-200900\", \"product\": \"router\", \"priority\": \"low\", \"callback\": false, \"due_date\": null}",
+        "expected": "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-200900\"}",
+        "line": 97,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"ticket_id\": \"T-200901\", \"product\": \"printer\", \"priority\": \"low\", \"callback\": true, \"due_date\": \"2027-02-19\"}",
+        "expected": "{\"callback\": true, \"due_date\": \"2027-02-19\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-200901\"}",
+        "line": 98,
+        "score": 1.0
+      },
+      {
+        "answer": "{\"ticket_id\": \"T-200902\", \"product\": \"scanner\", \"priority\": \"low\", \"callback\": false, \"due_date\": \"2027-02-05\"}",
+        "expected": "{\"callback\": false, \"due_date\": \"2027-02-05\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-200902\"}",
+        "line": 99,
+        "score": 1.0
+      }
+    ],
+    "split": "validation",
+    "trained": false
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.0006048000000000001,
+  "latency_ms": 2663,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"requests\": [\"Can you tell me the delivery status for order O-400900?\", \"Please cancel order O-400901 because it's a duplicate.\", \"I would like to arrange a pickup for order O-400902 on 2027-02-05 at front_desk.\", \"Could you please tell me the delivery status for order O-400903?\", \"Please cancel order O-400904 because I changed my mind.\", \"Please arrange a pickup for order O-400905 on 2027-02-19 at loading_bay.\"]}",
+  "tokens_in": 252,
+  "tokens_out": 588
+}

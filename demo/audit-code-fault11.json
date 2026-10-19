@@ -1,0 +1,51 @@
+{
+  "case": {
+    "job": {
+      "hyperparameters": {},
+      "model": "local mechanism fixture"
+    },
+    "mode": "B",
+    "symptom": "Double label shift"
+  },
+  "note": "Reproducible CPU inspection. Findings do not establish a downstream quality failure.",
+  "provenance": {
+    "sha256": "a88e4564db60186993252e0597904cddcea787b4af3dfc9c19b05f05554899c4",
+    "source": "docs/results/report-catalog-20261019/fault11-audit.json"
+  },
+  "report": {
+    "audit_only": true,
+    "evidence_scope": "local mechanism inspection; no trained model diagnosis",
+    "hypotheses": [],
+    "investigation_id": "local-audit-11",
+    "llm_calls": {},
+    "llm_cost_usd": 0.0,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "cost_usd": 0.0,
+        "kind": "training_label_checks",
+        "raw": {
+          "alignment": {
+            "healthy_mismatches": 3,
+            "informative_positions": 3,
+            "observed_targets": 2,
+            "preshift_mismatches": 0,
+            "status": "double_shift"
+          },
+          "causal_confirmation": false,
+          "eos": {
+            "reason": "labels are not masking-only changes",
+            "status": "not_applicable"
+          },
+          "prompt": {
+            "reason": "labels are not prompt-only additions",
+            "status": "not_applicable"
+          },
+          "rows": 1,
+          "scope": "supplied unpadded labels; reference correctness is caller-owned"
+        }
+      }
+    ]
+  },
+  "title": "Fault 11: Double label shift — local audit"
+}

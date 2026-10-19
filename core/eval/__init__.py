@@ -20,6 +20,12 @@ from core.eval.data import Example, read_examples
 from core.eval.generate import DEFAULT_MAX_NEW_TOKENS
 from core.eval.metrics import get_metric
 from core.eval.records import EvalResult, ExampleResult
+from core.eval.structured import (
+    TASK_EVALUATORS,
+    structured_summary,
+    validate_answer,
+    validate_evaluator,
+)
 
 __all__ = [
     "EvalResult",
@@ -55,9 +61,22 @@ def evaluate(
     """
     from core.eval import generate
 
+    task = next(
+        (
+            task
+            for task, (_, metric, _) in TASK_EVALUATORS.items()
+            if metric == spec.metric and task != "banking77"
+        ),
+        None,
+    )
+    if task:
+        spec = validate_evaluator(task, spec)
     metric = get_metric(spec.metric)
     limit = max_new_tokens(spec)
     examples = read_examples(data)
+    if task:
+        for example in examples:
+            validate_answer(task, example.expected)
     device = generate.pick_device(device)
     model, tok, base = generate.load_model(adapter, base_model, template_dir)
     model = model.to(device)
@@ -66,7 +85,7 @@ def evaluate(
     finally:
         del model
         generate.free_cache(device)
-    return EvalResult.from_examples(
+    result = EvalResult.from_examples(
         spec.metric,
         results,
         model=base,
@@ -74,3 +93,9 @@ def evaluate(
         max_new_tokens=limit,
         adapter=str(adapter) if adapter is not None else None,
     )
+
+    if task:
+        result.details = structured_summary(
+            task, [r.answer for r in results], [r.expected for r in results]
+        )
+    return result

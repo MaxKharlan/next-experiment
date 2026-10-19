@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.0002199,
+  "latency_ms": 993,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"name\": \"schedule_pickup\", \"arguments\": {\"order_id\": \"O-200902\", \"date\": \"2027-02-05\", \"location\": \"front_desk\"}}",
+  "tokens_in": 406,
+  "tokens_out": 109
+}

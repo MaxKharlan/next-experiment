@@ -310,12 +310,13 @@
   </details>
   <details class="card case-start" id="caseStart" hidden>
     <summary>Investigate your own job</summary>
-    <p class="muted small">Token Factory · BANKING77 · Qwen3-0.6B. Paste a JSON object containing case and experiment, or load it from a file. Dataset paths must exist on the API server; this form does not upload training data.</p>
+    <p class="muted small">BANKING77, JSON extraction or function calling. Paste a standalone InvestigationCase for a free dataset audit, or case and experiment for a paid Token Factory investigation on Qwen3-0.6B. Dataset paths must exist on the API server.</p>
     <label for="caseFile">Load case request (JSON)</label>
     <input id="caseFile" type="file" accept=".json,application/json">
     <label for="caseRequest">Case and experiment</label>
     <textarea id="caseRequest" spellcheck="false" placeholder='{"case": {...}, "experiment": {...}}'></textarea>
     <div class="controls">
+      <button id="auditCase" class="btn btn-ghost" type="button">Audit dataset · free</button>
       <button id="validateCase" class="btn btn-ghost" type="button">Validate without training</button>
       <button id="launchCase" class="btn btn-primary" type="button" disabled>Start paid investigation</button>
     </div>
@@ -400,7 +401,11 @@ const STATIC = document.documentElement.dataset.mode === "static";
 async function init() {
   showMethod();
   const cases = await (await fetch(STATIC ? "demo-cases.json" : "/api/demo-cases")).json();
-  $("demo").innerHTML = cases.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("");
+  const catalogs = {};
+  for (const c of cases) (catalogs[c.category || "Saved reports"] ||= []).push(c);
+  $("demo").innerHTML = Object.entries(catalogs).map(([label, items]) =>
+    `<optgroup label="${esc(label)}">${items.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("")}</optgroup>`).join("");
+  if (cases.some(c => c.name === "fault6-tf")) $("demo").value = "fault6-tf";
   if (STATIC) return staticMode(cases);
   try {
     const response = await fetch("/api/capabilities");
@@ -439,6 +444,7 @@ function invalidateCase() {
   $("caseFeedback").textContent = "Validate the request before starting.";
 }
 function caseControls(busy) {
+  $("auditCase").disabled = busy;
   caseBusy = busy;
   for (const id of ["caseFile", "caseRequest", "validateCase"]) $(id).disabled = busy;
   $("launchCase").disabled = busy || validatedCaseText !== $("caseRequest").value;
@@ -514,6 +520,21 @@ $("runLabelAudit").onclick = async () => {
     watch(result.id);
   } catch (error) { $("labelFeedback").textContent = error.message; }
   finally { button.disabled = false; }
+};
+$("auditCase").onclick = async () => {
+  if (caseBusy) return;
+  caseControls(true);
+  try {
+    const input = JSON.parse($("caseRequest").value);
+    const response = await fetch("/api/investigations/audit-case", {
+      method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(input.case || input)
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(JSON.stringify(result.detail));
+    $("caseFeedback").textContent = `Saved audit ${result.id}. No model calls or training.`;
+    watch(result.id);
+  } catch (error) { $("caseFeedback").textContent = error.message; }
+  finally { caseControls(false); }
 };
 
 function showMethod() {
@@ -624,8 +645,13 @@ function skip() {
 function finish(summary) {
   showCost(summary);
   if (summary.audit_only) {
-    setStatus("Local label audit", "Label audit completed", "inconclusive", "audit only");
-    $("statusProof").textContent = "Inspect the findings below. No causal experiment was run.";
+    setStatus("Saved local inspection", "Audit completed", "inconclusive", "audit only");
+    $("statusProof").textContent = "Findings are shown below. No model failure was causally confirmed.";
+    return;
+  }
+  if (summary.evidence_scope && !proof) {
+    setStatus("Saved evidence", "Cause remains unconfirmed", "inconclusive", "inconclusive");
+    $("statusProof").textContent = summary.evidence_scope;
     return;
   }
   if (proof) setStatus(null, null, "confirmed", "confirmed");
@@ -636,6 +662,11 @@ function finish(summary) {
 }
 
 function showCase(c) {
+  if (c?.job?.model === "not-trained" || c?.job?.model === "local mechanism fixture") {
+    model = c.job.model; caseHp = {};
+    $("case").innerHTML = `<p>${esc(c.task || c.symptom || "Local mechanism audit")}</p><p class="muted small">Local inspection. No model training or causal quality experiment.</p>`;
+    return;
+  }
   if (c?.mode === "B" && c.job?.model === "local labels") {
     model = "local labels"; caseHp = {};
     $("case").outerHTML = '<div id="case"><p>Mode B · supplied training labels</p><p class="muted small">Local audit. Reference correctness is caller-owned. No model calls or training.</p></div>';
@@ -756,6 +787,12 @@ function showStep(s) {
     const raw = s.raw || {};
     step("Training label audit", "Local label checks", "free",
       `<p>Alignment: ${esc(raw.alignment?.status)} · Prompt: ${esc(raw.prompt?.status)} · EOS: ${esc(raw.eos?.status)}</p><p class="muted small">${esc(raw.scope)}. No causal confirmation.</p><details><summary>Audit details</summary><pre>${esc(JSON.stringify(raw, null, 2))}</pre></details>`);
+    return;
+  }
+  if (["code_audit", "dataset_audit"].includes(s.kind)) {
+    const titles = {training_label_checks: "Training label audit", code_audit: "Gradient accumulation audit", dataset_audit: "Dataset contract audit"};
+    step(titles[s.kind], "Local inspection", "free",
+      `<p class="muted small">Observed evidence only. No causal confirmation.</p><details><summary>Audit details</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(JSON.stringify(s.raw, null, 2))}</pre></details>`);
     return;
   }
   if (s.kind === "known_issues") {

@@ -9,7 +9,7 @@ has measured evidence.
 | --- | --- |
 | B1–B3 | Provider connectors, model router, call logging and Tavily integration are implemented. PR #69 persists completed structured attempts before retries. |
 | B4 | PR #71 added an opt-in local Docker Python runner. This batch adds generated checks through the Python agent entry point, with a live Super → Docker result. The cloud beta request was submitted; activation is pending; see `generated-checks.md`. |
-| B5 | Reference tooling exists. Approved A2/A3 datasets are absent, so the full three-task, three-model matrix remains open. |
+| B5 | Reference tooling exists. Local + Super A2/A3 datasets now exist with agent-reviewed references. The full three-task, three-model matrix remains open. |
 | B6 | This batch measures three models at five size/epoch conditions each, validates duration fits on a preselected condition, and registers accepted fits in the planner. All 15 jobs succeeded; validation errors are 2.46%, 1.21% and 0.27%. See `model-cost-validation.md`. |
 | B7 | Sensitivity curves now cover both strengths of faults 6–8 across three seeds. Low learning rate degrades quality; rank and epoch changes do not show substantial consistent degradation here. Pre-intervention top-1 recovery is 3/3 at each strength, but all healthy provider cases also rank the epoch fault first; no 80% population guarantee is established. See `recipe-sensitivity.md`. |
 | B8 | Target/control recipe builders and cost matching exist. |
@@ -28,8 +28,7 @@ has measured evidence.
 | B25 | Weight probes are wired into live runs and the benchmark. Threshold transfer and rank-fault discrimination need more evidence. |
 | B26 | A classifier model publication with validated transfer metrics remains open. |
 
-The PR #79 batch covers B4, B6 and B7. B5 is deferred until approved A2/A3
-train, validation and held-out data exists. B4, B6 and B7 now have the requested implementations and saved measurements.
+The PR #79 batch covers B4, B6 and B7. A2/A3 now provide train, validation, check and test splits; B5 still requires the full reference matrix. B4, B6 and B7 now have the requested implementations and saved measurements.
 Cloud Sandbox activation is pending; B7 detection measures pre-intervention
 ranking and does not claim causal confirmation or a statistically supported 80%
 threshold. The protocol and

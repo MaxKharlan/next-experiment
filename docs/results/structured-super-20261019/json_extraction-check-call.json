@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.0004821,
+  "latency_ms": 2603,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"requests\": [\"Ticket T-300900 concerns a router. The priority is low. I do not want a callback. No due date has been set.\", \"Ticket T-300901 concerns a printer. The priority is low. Please call me back. The due date is 2027-02-19.\", \"Ticket T-300902 concerns a scanner. The priority is low. I do not want a callback. The due date is 2027-02-05.\", \"Ticket T-300903 concerns a router. The priority is normal. Please call me back. The due date is 2027-02-23.\", \"Ticket T-300904 concerns a printer. The priority is normal. I do not want a callback. No due date has been set.\", \"Ticket T-300905 concerns a scanner. The priority is normal. Please call me back. The due date is 2027-02-19.\"]}",
+  "tokens_in": 344,
+  "tokens_out": 421
+}

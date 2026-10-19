@@ -30,7 +30,9 @@ from apps.api import runners
 from apps.api.case_input import CaseStart, prepare_case
 from apps.api.label_audits import LabelAuditRequest, prepare_audit
 from apps.api.store import get_investigation_store
+from core.case import InvestigationCase
 from core.config import get_settings
+from core.eval.audit_case import audit_case
 from core.report.investigation import build_report
 
 STATIC = Path(__file__).parent / "static"
@@ -120,6 +122,30 @@ def _prepare_explicit_case(req: CaseStart) -> dict:
         return prepare_case(req)
     except (OSError, ValueError, TypeError) as err:
         raise HTTPException(422, str(err)) from None
+
+
+@app.post("/api/investigations/audit-case", status_code=201)
+def audit_dataset(req: InvestigationCase) -> dict:
+    if get_settings().public_demo:
+        raise HTTPException(403, "the public demo only replays saved investigations")
+    try:
+        report = audit_case(req)
+    except (OSError, ValueError, TypeError) as err:
+        raise HTTPException(422, str(err)) from None
+    inv_id = store.create("local", req.model_dump(), f"{req.task}: dataset audit")
+    store.emit(
+        inv_id,
+        "started",
+        {"case": req.model_dump(), "backend": "local", "protocol": report["protocol"]},
+    )
+    for step in report["steps"]:
+        store.emit(inv_id, "step", step)
+    store.emit(
+        inv_id,
+        "finished",
+        {"status": "inconclusive", "audit_only": True, "llm_cost_usd": 0.0},
+    )
+    return {"id": inv_id, "training_started": False}
 
 
 @app.post("/api/investigations/validate")

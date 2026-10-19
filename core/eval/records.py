@@ -33,6 +33,8 @@ class EvalResult:
     adapter: str | None = None  # None for the base model alone
     examples: list[ExampleResult] = field(default_factory=list)
 
+    details: dict[str, float] = field(default_factory=dict)
+
     @classmethod
     def from_examples(
         cls, metric: str, examples: list[ExampleResult], **meta: Any

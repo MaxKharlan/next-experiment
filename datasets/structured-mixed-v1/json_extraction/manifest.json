@@ -1,0 +1,64 @@
+{
+  "datasets": {
+    "check": {
+      "examples": 102,
+      "format": "chat_jsonl",
+      "ref": "check.jsonl",
+      "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+    },
+    "test": {
+      "examples": 102,
+      "format": "chat_jsonl",
+      "ref": "test.jsonl",
+      "sha256": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494"
+    },
+    "train": {
+      "examples": 390,
+      "format": "chat_jsonl",
+      "ref": "train.jsonl",
+      "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db"
+    },
+    "validation": {
+      "examples": 102,
+      "format": "chat_jsonl",
+      "ref": "validation.jsonl",
+      "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+    }
+  },
+  "evaluator": {
+    "metric": "json_fields_exact",
+    "name": "ticket_json_v1",
+    "parameters": {
+      "max_new_tokens": 192
+    }
+  },
+  "generator_sha256": "71bd0f8c70d24d5c93319a807b06b4248545cc0a7961577e774de61c772acfdb",
+  "human_review": "not performed; user requested agent review",
+  "license": "Apache-2.0",
+  "provenance": "Authored templates and synthetic slots plus 24 recorded Super paraphrases",
+  "schema_sha256": "5d741a0a033fdf0eab50ca3a48ae444ae695a4bef99fe98a22d58c878f84c12e",
+  "seed": 20261019,
+  "source_counts": {
+    "check": {
+      "local": 96,
+      "super": 6
+    },
+    "test": {
+      "local": 96,
+      "super": 6
+    },
+    "train": {
+      "local": 384,
+      "super": 6
+    },
+    "validation": {
+      "local": 96,
+      "super": 6
+    }
+  },
+  "split_policy": "Distinct entity IDs and outer wording; shared semantic templates",
+  "super_model": "nvidia/nemotron-3-super-120b-a12b",
+  "super_source_sha256": "9a76367dd41a136f8a5b8f0c75c1415bf5c5b09cfca72690c970656975304f11",
+  "task": "json_extraction",
+  "version": 1
+}

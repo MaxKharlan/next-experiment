@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.0001845,
+  "latency_ms": 859,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"name\": \"track_order\", \"arguments\": {\"order_id\": \"O-200900\"}}",
+  "tokens_in": 393,
+  "tokens_out": 74
+}
