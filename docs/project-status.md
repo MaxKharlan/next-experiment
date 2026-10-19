@@ -1,6 +1,6 @@
 # Project status — 19 October 2026
 
-Repository baseline: main `2dff394`, including merged PRs #89–#92. PR #92
+Repository baseline: main `aa3009a`, including merged PRs #89–#95. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -10,8 +10,11 @@ The [development sensitivity follow-up](development-sensitivity-20261019.md)
 audits the ceiling and rejects a separately frozen candidate: healthy mean
 26.85%, damaged mean 39.81% on new histories. Its paid pilot stopped before
 submission at the strict base gate. Additional provider spend is $0; the $5
-budget retains its $0.2710464 historical charge estimate. Comparison evidence and mode
-boundaries remain in the [fault review](fault-evidence-review.md).
+budget retained its $0.2710464 historical charge estimate at that stop. A new
+[format/content development series](format-content-development-20261019.md) now
+separates direct serialization, history learning, answer cuts and schema-valid
+wrong values in twelve new trainings. Its protocol is frozen before measurements;
+results are pending. Comparison evidence and mode boundaries remain in the [fault review](fault-evidence-review.md).
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
@@ -36,11 +39,11 @@ free before this follow-up; local evaluations run one process at a time.
 
 ## Next work, in order
 
-1. The separate development sensitivity audit is complete. Its candidate removed
-   the ceiling but failed damage-sensitivity admission. Before paid confirmation,
-   specify a new design that separates format learning from content learning and
-   measure degradation/noise on newly trained development repeats. All three
-   existing stopping decisions are terminal; their viewed checks are not final tests.
+1. Complete the frozen twelve-training format/content development series and
+   apply its gates without adaptive repeats. It measures both free generation
+   and bounded content discrimination. The earlier sensitivity candidate failed
+   admission; all historical stopping decisions stay terminal and their viewed
+   checks are not final tests.
 2. Only after a suitable new development design passes its noise/power gates,
    freeze a new confirmation protocol: fresh reference/control comparisons,
    persisted API trace with paid approvals and restart recovery, then final test

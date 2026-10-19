@@ -137,3 +137,82 @@ def test_gate_detects_format_content_and_cut_separately():
     assert "insufficient_choice_gap_wrong" in gate_failures(groups, rule)
     groups["cut"]["content"]["strict_exact"] = [0.8] * 3
     assert "insufficient_cut_sensitivity" in gate_failures(groups, rule)
+
+
+def test_unknown_paid_submission_is_not_retried(tmp_path, monkeypatch):
+    from core.db.spending import SpendingLedger
+    from scripts import format_content_development as runner
+
+    plan = {
+        "id": "test",
+        "model": "test-model",
+        "recipe": {},
+        "jobs": {
+            "healthy-s1301": {
+                "train": "train",
+                "validation": "valid",
+                "reservation_usd": 0.1,
+                "seed": 1301,
+            }
+        },
+    }
+    state = {}
+    monkeypatch.setattr(runner, "load", lambda _: (plan, state, "digest"))
+    calls = []
+
+    class Provider:
+        def upload(self, path):
+            calls.append(str(path))
+            return "file-" + str(path)
+
+        def create_job(self, *args, **kwargs):
+            # Ensure the durable marker exists BEFORE the ambiguous provider call.
+            saved = json.loads((tmp_path / "state.json").read_text())
+            assert saved["healthy-s1301"]["status"] == "submitting"
+            assert (
+                SpendingLedger(tmp_path / "spending.sqlite3", 5).snapshot()[
+                    "committed_usd"
+                ]
+                == 0.1
+            )
+            raise TimeoutError("unknown outcome")
+
+    monkeypatch.setattr(runner, "provider", lambda _: Provider())
+    with pytest.raises(TimeoutError):
+        runner.submit(tmp_path, None)
+    with pytest.raises(ValueError, match="Ambiguous submission"):
+        runner.submit(tmp_path, None)
+    assert calls == ["train", "valid"]
+    snapshot = SpendingLedger(tmp_path / "spending.sqlite3", 5).snapshot()
+    assert len(snapshot["operations"]) == 1
+    assert snapshot["operations"][0]["status"] == "pending"
+
+
+def test_paid_settlement_resume_uses_existing_actual(tmp_path, monkeypatch):
+    from core.db.spending import SpendingLedger
+    from scripts import format_content_development as runner
+
+    ledger = SpendingLedger(tmp_path / "spending.sqlite3", 5)
+    ledger.reserve("test:job", "test", 0.1)
+    ledger.settle("test:job", 0.02)
+    state = {
+        "job": {
+            "job_id": "ft-1",
+            "operation_id": "test:job",
+            "adapter": "already-downloaded",
+        }
+    }
+    monkeypatch.setattr(
+        runner, "load", lambda _: ({"price": {"usd_per_million": 0.4}}, state, "digest")
+    )
+    job = SimpleNamespace(
+        status="succeeded",
+        trained_tokens=50000,
+        model_dump=lambda: {"id": "ft-1", "status": "succeeded"},
+    )
+    monkeypatch.setattr(
+        runner, "provider", lambda _: SimpleNamespace(job=lambda _: job)
+    )
+    runner.collect(tmp_path, None)
+    assert state["job"]["settled"]
+    assert ledger.snapshot()["committed_usd"] == 0.02

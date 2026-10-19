@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #92
-(`2dff394`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #95
+(`aa3009a`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -11,7 +11,10 @@ stopped at `zero_sd` before reference jobs or a persisted API trace. See the
 which also completed with a rejected candidate and $0 additional provider spend.
 [35 probe controls](answer-cut-specificity-controls-20261019.md) demonstrate
 clean-prefix false alarms and alternative causes of broken JSON; they do not
-calibrate deployment likelihoods.
+calibrate deployment likelihoods. The new
+[format/content series](format-content-development-20261019.md) fixes four arms
+and three new training repeats per arm; results are pending. It does not deploy
+a signature model or change T=1.
 
 | Plan items | Existing implementation and remaining work |
 | --- | --- |
