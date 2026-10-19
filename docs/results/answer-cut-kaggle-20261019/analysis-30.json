@@ -1,0 +1,292 @@
+{
+  "version": 1,
+  "backend": "kaggle",
+  "model": "Qwen/Qwen3-0.6B",
+  "fault": "answer_truncation",
+  "source_sha256": "9a595187ed1f6d5dce73012cc25ce08129ae46cc206457a106d7f75bc03c783a",
+  "source_files": [],
+  "provenance": "Run roles and dataset hashes are declared by the exporter",
+  "evaluation": {
+    "split": "check",
+    "sha256": "5a3e4f7fb46dcb95555c8e01fbb4d84b121e1f54fe152c0019952b742fe2401a",
+    "examples": 770,
+    "metric": "exact_match"
+  },
+  "environment": {
+    "transformers": "5.20.0",
+    "peft": "0.21.2",
+    "repository_commit": "2cb1661",
+    "notebook": "docs/results/answer-cut-kaggle-20261019/notebook-as-run.ipynb.json (scripts embedded)",
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu128 (printed in the interactive session on the same Kaggle image)",
+    "qwen3_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "control_description": "drop as many training examples as the target, drawn at random (seed 0) from the examples whose answers the answer_cut probe did not flag; same hyperparameters and training seeds as the target",
+  "runs": [
+    {
+      "run_id": "healthy-s0",
+      "role": "healthy",
+      "seed": 0,
+      "metric": 0.8909090909090909,
+      "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "healthy-s1",
+      "role": "healthy",
+      "seed": 1,
+      "metric": 0.887012987012987,
+      "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "healthy-s2",
+      "role": "healthy",
+      "seed": 2,
+      "metric": 0.8701298701298701,
+      "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "answers-cut-30-s0",
+      "role": "damaged",
+      "seed": 0,
+      "metric": 0.6584415584415585,
+      "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "answers-cut-30-s1",
+      "role": "damaged",
+      "seed": 1,
+      "metric": 0.6519480519480519,
+      "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "answers-cut-30-s2",
+      "role": "damaged",
+      "seed": 2,
+      "metric": 0.6636363636363637,
+      "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "cut30-target-s0",
+      "role": "target",
+      "seed": 0,
+      "metric": 0.8012987012987013,
+      "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "cut30-target-s1",
+      "role": "target",
+      "seed": 1,
+      "metric": 0.8077922077922078,
+      "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "cut30-target-s2",
+      "role": "target",
+      "seed": 2,
+      "metric": 0.8025974025974026,
+      "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "cut30-control-s0",
+      "role": "control",
+      "seed": 0,
+      "metric": 0.6246753246753247,
+      "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "cut30-control-s1",
+      "role": "control",
+      "seed": 1,
+      "metric": 0.6142857142857143,
+      "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "cut30-control-s2",
+      "role": "control",
+      "seed": 2,
+      "metric": 0.6233766233766234,
+      "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    }
+  ],
+  "means": {
+    "healthy": 0.8826839826839826,
+    "damaged": 0.658008658008658,
+    "target": 0.803896103896104,
+    "control": 0.6207792207792208
+  },
+  "min_effect": 0.06,
+  "noise_sd": null,
+  "noise_source": "estimated from these arms",
+  "new_training_jobs": 0,
+  "new_api_calls": 0,
+  "causal_result": {
+    "status": "confirmed",
+    "effect": 0.18311688311688323,
+    "ci_low": 0.17250347698488058,
+    "ci_high": 0.19373028924888588,
+    "p_value": 0.05,
+    "min_effect": 0.06,
+    "reason": "the fix beats the control beyond the noise"
+  },
+  "status": "confirmed",
+  "quality_drop": 0.22467532467532458,
+  "reason": "the fix beats the control beyond the noise",
+  "decision_rule": "core.interventions.stats.causal_check",
+  "permutation_can_reach_0_05": true
+}

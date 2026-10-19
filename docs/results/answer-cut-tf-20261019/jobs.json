@@ -1,0 +1,48 @@
+{
+  "jobs": {
+    "healthy-s0": {
+      "id": "ftjob-4bf0420943394282bcb8062c8b8b08b8",
+      "status": "succeeded",
+      "trained_tokens": 481986,
+      "error": "None"
+    },
+    "damaged-s0": {
+      "id": "ftjob-7d71914ce4354f6fa0b89208913d8052",
+      "status": "succeeded",
+      "trained_tokens": 476660,
+      "error": "None"
+    },
+    "target-s0": {
+      "id": "ftjob-7cdfb67f667348c2aa8939a65d8f0be9",
+      "status": "succeeded",
+      "trained_tokens": 325019,
+      "error": "None"
+    },
+    "target-s1": {
+      "id": "ftjob-cc36f7d1119b44d5a18441e2ce11566c",
+      "status": "succeeded",
+      "trained_tokens": 325019,
+      "error": "None"
+    },
+    "control-s0": {
+      "id": "ftjob-e6d0894c966b49c58f468daebec623f9",
+      "status": "succeeded",
+      "trained_tokens": 354394,
+      "error": "None"
+    },
+    "control-s1": {
+      "id": "ftjob-058c6f78bf104a33a3d3dbf098451c16",
+      "status": "succeeded",
+      "trained_tokens": 354394,
+      "error": "None"
+    }
+  },
+  "adapter_sha256": {
+    "healthy-s0": "81d2202157d9a7d3a5c03233a7fa91d28b8d5772f34717af46b9fd69ab4459e2",
+    "damaged-s0": "915f8ea4dcd60246bf57a82bbbe0178e717d7764a86c86031ed130a135bae8aa",
+    "target-s0": "c7859ad38f4d6318dee1dff0e34037336acacf3addee6f43449f72ed38f34077",
+    "target-s1": "dad498112316ed513890fad9067351843eb5fe43cba429db47491af5a696a76f",
+    "control-s0": "5fe92795b99aefb79c9f65b661998f9ad7157cb3089a356b6071ad66e8f18186",
+    "control-s1": "c9487f89eaac83f4431f5015801123c3c8fc3f8576c57b679ac2d439a5154456"
+  }
+}
