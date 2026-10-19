@@ -1,0 +1,37 @@
+{
+  "assumptions": "Independent normal seed-level metrics with equal known SD; six development runs only. MC interval excludes uncertainty in the estimated SD and task transfer.",
+  "groups": {
+    "damaged": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "healthy": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "noise": {
+    "groups": 2,
+    "runs": 6,
+    "sd": 0.0
+  },
+  "power": [],
+  "protocol_sha256": "32e4a4ef030c323985001327e13274576b3cf724bc2805ef9d9fd464a321acdd",
+  "reason": "zero_sd",
+  "selected_seeds": [],
+  "status": "stopped",
+  "weight_digests": {
+    "damaged": [
+      "44da7296e1b7a3cc50f850a9711cb3233d951488f460a1db47640015da06310f",
+      "37ca1a833192aa276ca2e4ff32e7f5c4a6f8fb374692bf30b100bfe0fa9a82f1",
+      "4a55a54ad3b2929b1fecf60747aa83e0df910882302e1c6fe46a1afe10e664fa"
+    ],
+    "healthy": [
+      "af4a21dd94e3da1cd462a66a7a84bc78de7eb6213c72d4e3aba8aec0ffd84566",
+      "fcd352729f28077b734e71fc6faf2855117fd1bc6d97981b9b58d59aa748843b",
+      "a4d63a582af973156a46e075ae2b225d2211d4e8657e850e50c0b7692c76a1b8"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "currency": "USD",
+  "matched_repository_rates": true,
+  "method": "Authenticated rendered price table, filtered Nemotron-3",
+  "rates": {
+    "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": {
+      "input": 0.06,
+      "output": 0.24
+    },
+    "nvidia/Nemotron-3-Ultra-550b-a55b": {
+      "input": 1.0,
+      "output": 3.0
+    },
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "input": 0.3,
+      "output": 0.9
+    }
+  },
+  "source": "https://tokenfactory.nebius.com/organization/prices",
+  "tax_scope": "excludes taxes",
+  "unit": "1M tokens",
+  "valid_from": {
+    "nano": "2026-01-01",
+    "super": "2026-03-01",
+    "ultra": "2026-06-01"
+  },
+  "verified_at": "2026-10-19"
+}

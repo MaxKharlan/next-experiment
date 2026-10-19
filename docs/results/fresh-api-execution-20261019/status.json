@@ -1,0 +1,200 @@
+{
+  "api_preflight": "Only capabilities and empty investigation list checked over real HTTP; full persisted API trace not executed because development gate stopped the run.",
+  "automation_status": "PAUSED",
+  "b9_resource_policy": "MPS_HANDOFF_READY confirmed by owner after exit 0 and validation of 210 summaries; B9 follow-up CPU-only.",
+  "development_jobs": {
+    "damaged-s1101": {
+      "job_id": "ftjob-26abd6d33fc44da3a8166dd5f47586a1",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.044644,
+      "trained_tokens": 111610,
+      "weights_sha256": "44da7296e1b7a3cc50f850a9711cb3233d951488f460a1db47640015da06310f"
+    },
+    "damaged-s1102": {
+      "job_id": "ftjob-ceb05dce32434a18b25ba4c2072a884b",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.044644,
+      "trained_tokens": 111610,
+      "weights_sha256": "37ca1a833192aa276ca2e4ff32e7f5c4a6f8fb374692bf30b100bfe0fa9a82f1"
+    },
+    "damaged-s1103": {
+      "job_id": "ftjob-2d3cb576f8224fd4add5447c47871587",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.044644,
+      "trained_tokens": 111610,
+      "weights_sha256": "4a55a54ad3b2929b1fecf60747aa83e0df910882302e1c6fe46a1afe10e664fa"
+    },
+    "healthy-s1101": {
+      "job_id": "ftjob-0cad3738075a439aba48813d381cb03e",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.045704800000000004,
+      "trained_tokens": 114262,
+      "weights_sha256": "af4a21dd94e3da1cd462a66a7a84bc78de7eb6213c72d4e3aba8aec0ffd84566"
+    },
+    "healthy-s1102": {
+      "job_id": "ftjob-2d3e97d11db1434cb7f20e3ee92c4b45",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.045704800000000004,
+      "trained_tokens": 114262,
+      "weights_sha256": "fcd352729f28077b734e71fc6faf2855117fd1bc6d97981b9b58d59aa748843b"
+    },
+    "healthy-s1103": {
+      "job_id": "ftjob-0691cbd501ea4b558f3f8223a9ebbadf",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.045704800000000004,
+      "trained_tokens": 114262,
+      "weights_sha256": "a4d63a582af973156a46e075ae2b225d2211d4e8657e850e50c0b7692c76a1b8"
+    }
+  },
+  "development_protocol_sha256": "32e4a4ef030c323985001327e13274576b3cf724bc2805ef9d9fd464a321acdd",
+  "development_scores": {
+    "damaged-s1101": {
+      "correct": 102,
+      "data_sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+      "evidence_sha256": "acbd8f3619da161dcd42d3e9ed5f867ac4cfcaa8f4cb24e2eb607be425490cb2",
+      "examples": 102,
+      "hit_limit": 0,
+      "job_id": "ftjob-26abd6d33fc44da3a8166dd5f47586a1",
+      "metric": "json_fields_exact",
+      "stopped_on_eos": 102,
+      "value": 1.0
+    },
+    "damaged-s1102": {
+      "correct": 102,
+      "data_sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+      "evidence_sha256": "194e76638408c93b116e64db6df0f78a3039dbfb15478f4b23d0208b062ccf3b",
+      "examples": 102,
+      "hit_limit": 0,
+      "job_id": "ftjob-ceb05dce32434a18b25ba4c2072a884b",
+      "metric": "json_fields_exact",
+      "stopped_on_eos": 102,
+      "value": 1.0
+    },
+    "damaged-s1103": {
+      "correct": 102,
+      "data_sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+      "evidence_sha256": "319976bf4c4525764cf10f6ba630a0a320f87aa74333492b961ef0d72eaad238",
+      "examples": 102,
+      "hit_limit": 0,
+      "job_id": "ftjob-2d3cb576f8224fd4add5447c47871587",
+      "metric": "json_fields_exact",
+      "stopped_on_eos": 102,
+      "value": 1.0
+    },
+    "healthy-s1101": {
+      "correct": 102,
+      "data_sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+      "evidence_sha256": "9ae4b04f4ccae3cc4be978c83653afca85991c079d4ac275558401f7894ca504",
+      "examples": 102,
+      "hit_limit": 0,
+      "job_id": "ftjob-0cad3738075a439aba48813d381cb03e",
+      "metric": "json_fields_exact",
+      "stopped_on_eos": 102,
+      "value": 1.0
+    },
+    "healthy-s1102": {
+      "correct": 102,
+      "data_sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+      "evidence_sha256": "32df6ad218aff6db3786e463c654aea270664d67a16c1630d818d517eac54acd",
+      "examples": 102,
+      "hit_limit": 0,
+      "job_id": "ftjob-2d3e97d11db1434cb7f20e3ee92c4b45",
+      "metric": "json_fields_exact",
+      "stopped_on_eos": 102,
+      "value": 1.0
+    },
+    "healthy-s1103": {
+      "correct": 102,
+      "data_sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+      "evidence_sha256": "a38ad09632ac446420c3ff56d4c71ac42d602fa61e0ae9008563800133be85d8",
+      "examples": 102,
+      "hit_limit": 0,
+      "job_id": "ftjob-0691cbd501ea4b558f3f8223a9ebbadf",
+      "metric": "json_fields_exact",
+      "stopped_on_eos": 102,
+      "value": 1.0
+    }
+  },
+  "fresh_final_test_model_evaluations": 0,
+  "fresh_model_training_jobs": 0,
+  "implementation_commit": "abccf2e41a241c31954b8cae733767004a7106d6",
+  "implementation_pr": "https://github.com/MaxKharlan/next-experiment/pull/90",
+  "mps_handoff": {
+    "b9_constraint": "B9 follow-up is CPU-only until a new exclusive MPS slot is coordinated.",
+    "conditions": [
+      "exec session 5676 exited with code 0",
+      "PID 47214 absent",
+      "210/210 summary.json parsed",
+      "all 7 recipes x 30 seeds present"
+    ],
+    "confirmed_at": "2026-10-19T10:07:46.958944+00:00",
+    "recipient": "fresh answer-cut persisted API trace in thread 01a15356-1a3b-7903-a3a4-c0e419b8f23d",
+    "state": "MPS_HANDOFF_READY"
+  },
+  "mps_status": "released_after_scoring",
+  "power_analysis_exit_code": 0,
+  "pr_89": {
+    "commit": "4e374a2ed8a4d870f925349e3f17717a06f7cbea",
+    "state": "merged"
+  },
+  "real_api_investigations": 0,
+  "scoring_process_exit_code": 0,
+  "spending": {
+    "available_usd": 4.7289536,
+    "cap_usd": 5.0,
+    "committed_usd": 0.27104639999999997,
+    "operations": [
+      {
+        "actual_usd": 0.044644,
+        "id": "damaged-s1101",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.044644,
+        "id": "damaged-s1102",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.044644,
+        "id": "damaged-s1103",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.045704800000000004,
+        "id": "healthy-s1101",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.045704800000000004,
+        "id": "healthy-s1102",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.045704800000000004,
+        "id": "healthy-s1103",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      }
+    ]
+  },
+  "status": "stopped_at_development_gate",
+  "stop_reason": "zero_sd",
+  "updated_at": "2026-10-19T10:33:13.898566+00:00",
+  "validation": {
+    "ci": "passed on abccf2e; 767 passed, 15 skipped",
+    "full_ml_suite": "813 passed, 8 skipped",
+    "latest_targeted": "22 passed",
+    "ruff": "passed"
+  }
+}

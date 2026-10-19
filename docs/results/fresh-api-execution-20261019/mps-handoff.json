@@ -1,0 +1,59 @@
+{
+  "released": true,
+  "recorded_at": "2026-10-19T10:08:42.076603+00:00",
+  "owner_thread": "01a150f9-a5da-7971-a8a5-822fea645983",
+  "source": "/Users/harlanmax/Documents/Codex/2026-10-19/next-experiment-next-batch/outputs/coordination-status.json",
+  "source_sha256": "3d3068604bd77f4cf92ccf847e03524fbc262aaf08489b9ac486d35b845030d1",
+  "handoff": {
+    "state": "MPS_HANDOFF_READY",
+    "confirmed_at": "2026-10-19T10:07:46.958944+00:00",
+    "conditions": [
+      "exec session 5676 exited with code 0",
+      "PID 47214 absent",
+      "210/210 summary.json parsed",
+      "all 7 recipes x 30 seeds present"
+    ],
+    "recipient": "fresh answer-cut persisted API trace in thread 01a15356-1a3b-7903-a3a4-c0e419b8f23d",
+    "b9_constraint": "B9 follow-up is CPU-only until a new exclusive MPS slot is coordinated."
+  },
+  "training": {
+    "task": "B9 local Qwen3-0.6B LoRA signature sweep",
+    "state": "completed_successfully",
+    "completed_runs": 210,
+    "planned_runs": 210,
+    "progress_fraction": 1.0,
+    "pid": 47214,
+    "exec_session_id": 5676,
+    "elapsed_at_check": "04:11:06",
+    "provider_spend_usd": 0,
+    "paid_jobs_pending": 0,
+    "command_without_secrets": "python -m jobs.kaggle.sweep --train artifacts/next-batch/data-50/train.jsonl --valid artifacts/next-batch/data-50/valid.jsonl --out artifacts/next-batch/sweep-50 --hp {n_epochs:1,learning_rate:0.0002,context_length:256} --seeds 0..29 --generate",
+    "active_inputs": [
+      "artifacts/next-batch/data-50/train.jsonl",
+      "artifacts/next-batch/data-50/valid.jsonl"
+    ],
+    "actively_changing_paths": [
+      "artifacts/next-batch/sweep-50/"
+    ],
+    "code_loaded_by_run_keep_unchanged": [
+      "jobs/kaggle/sweep.py",
+      "jobs/kaggle/train_lora.py",
+      "core/trainable_parameters.py",
+      "core/gradient_audit.py",
+      "core/label_faults.py"
+    ],
+    "next_steps_after_sweep": [
+      "Fit and evaluate the signature classifier from the completed sweep without refitting on transfer cases.",
+      "Record grouped metrics and failure analysis.",
+      "Update B9 documentation and reproducible result artifacts.",
+      "Run Ruff and the full pytest suite after final source/document changes."
+    ],
+    "final_analysis_present": false,
+    "fitted_model_present": false,
+    "process_exit_code": 0,
+    "process_pid_present": false,
+    "summaries_validated": true,
+    "missing_runs": [],
+    "unexpected_runs": []
+  }
+}
