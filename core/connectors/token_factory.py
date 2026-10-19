@@ -270,7 +270,9 @@ class TokenFactory:
             "seed": seed,
             "suffix": suffix,
         }
-        job = self.client.fine_tuning.jobs.create(
+        # A timeout or server error may follow an accepted, billable submission.
+        # The SDK must not replay this non-idempotent request automatically.
+        job = self.client.with_options(max_retries=0).fine_tuning.jobs.create(
             model=model,
             training_file=training_file,
             **{k: v for k, v in optional.items() if v is not None},

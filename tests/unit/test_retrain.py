@@ -1,4 +1,7 @@
+import json
+import sys
 from dataclasses import asdict
+from pathlib import Path
 
 import pytest
 
@@ -189,3 +192,37 @@ def test_validation_file_stands_in_for_a_missing_heldout_set(tmp_path):
 def test_yes_on_a_russian_layout_counts_too():
     assert all(approved(a) for a in ["y", "Yes ", "\u0443", "да", "\udcd0y"])
     assert not any(approved(a) for a in ["", "n", "нет", "\u043d"])
+
+
+def test_pinned_retrainer_retains_final_example_evidence(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    from scripts.retrain_tf import make_retrainer
+
+    monkeypatch.setitem(sys.modules, "jobs.eval_local.exact_match", None)
+    storage = LocalStorage(tmp_path / "artifacts")
+    evidence = {"value": 0.5, "data_sha256": "test-hash", "examples": [{"score": 0}]}
+    calls = []
+
+    def evaluate(data, spec, **kwargs):
+        calls.append((data, kwargs))
+        return SimpleNamespace(value=0.5, to_dict=lambda: evidence)
+
+    monkeypatch.setattr("core.eval.evaluate", evaluate)
+    heldout = tmp_path / "test.jsonl"
+    heldout.write_text("{}\n")
+    runtime = {"version": "fixture"}
+    retrainer = make_retrainer(
+        None,
+        storage,
+        "inv-pinned",
+        heldout=heldout,
+        evaluator_spec={"name": "ticket_json_v1", "metric": "json_fields_exact"},
+        evaluation_runtime=runtime,
+    )
+    assert retrainer.score_adapter(Path("checkpoint-1"), heldout) == 0.5
+    assert retrainer.score_base("model", heldout, Path("checkpoint-1")) == 0.5
+    for name in ("base", "checkpoint-1"):
+        key = f"investigations/inv-pinned/evaluations/final/{name}.json"
+        assert json.loads(storage.get_text(key)) == evidence
+    assert all(data == heldout and kw["runtime"] == runtime for data, kw in calls)

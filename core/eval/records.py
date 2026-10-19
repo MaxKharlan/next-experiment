@@ -34,6 +34,9 @@ class EvalResult:
     examples: list[ExampleResult] = field(default_factory=list)
 
     details: dict[str, float] = field(default_factory=dict)
+    runtime: dict[str, Any] | None = None
+    data_sha256: str | None = None
+    adapter_files_sha256: dict[str, str] = field(default_factory=dict)
 
     @classmethod
     def from_examples(

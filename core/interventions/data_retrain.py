@@ -12,6 +12,10 @@ from core.interventions.retrain import plan_retrain
 
 
 def _hashes(protocol):
+    if protocol.get("evaluation_runtime") is not None:
+        from core.eval.runtime import verify_runtime
+
+        verify_runtime(protocol["evaluation_runtime"], model=protocol["model"])
     datasets = protocol["datasets"]
     if set(datasets) != {"train", "validation", "check", "test"}:
         raise ValueError("Data retraining requires four frozen dataset splits")
@@ -178,6 +182,7 @@ def retrain_data(retrainer, plan, protocol, spending, on_step=None):
         "model": plan.model,
         "hyperparameters": plan.hyperparameters,
         "evaluator": protocol.get("evaluator"),
+        "evaluation_runtime": protocol.get("evaluation_runtime"),
         "data_patch": patch,
     }
     spending.settle(operation_id, plan.cost_usd)

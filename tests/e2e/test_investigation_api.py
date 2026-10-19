@@ -141,6 +141,16 @@ def test_answer_cut_investigation_survives_restart(
     storage = LocalStorage(tmp_path / "store")
     monkeypatch.setattr(main, "store", InvestigationStore(storage))
 
+    from core.interventions import answer_check
+
+    original_investigate = answer_check.investigate_with_answers
+
+    def inspect_context(ctx, *args, **kwargs):
+        assert set(ctx.files) == {"train", "validation"}
+        return original_investigate(ctx, *args, **kwargs)
+
+    monkeypatch.setattr(answer_check, "investigate_with_answers", inspect_context)
+
     def pair_runner(backend, inv_id, tf, storage, job_hp, protocol):
         assert backend == "tf" and tf is provider
         assert protocol["job_id"] == payload["case"]["job"]["id"]

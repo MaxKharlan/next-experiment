@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 import httpx
 import pytest
-from openai import UnprocessableEntityError
+from openai import APIStatusError, OpenAI, UnprocessableEntityError
 
 from core.agent.schemas import HypothesisList
 from core.config import Settings
@@ -120,3 +120,20 @@ def test_create_job_stops_a_job_token_factory_would_reject():
         _tf(jobs=jobs).create_job(
             "Qwen/Qwen3-0.6B", "file-1", hyperparameters={"lora_r": 4, "lora": True}
         )
+
+
+def test_ambiguous_paid_job_is_not_retried_by_sdk():
+    calls = []
+
+    def respond(request):
+        calls.append(request)
+        return httpx.Response(502, json={"error": {"message": "unknown outcome"}})
+
+    client = OpenAI(
+        api_key="test",
+        http_client=httpx.Client(transport=httpx.MockTransport(respond)),
+    )
+    tf = TokenFactory(client, Settings(_env_file=None))
+    with pytest.raises(APIStatusError):
+        tf.create_job("Qwen/Qwen3-0.6B", "file-1")
+    assert len(calls) == 1
