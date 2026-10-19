@@ -124,3 +124,28 @@ def test_signature_rows():
     assert outcomes("answer_cut") == ["cut", "ok"]
     assert likelihood("answer_cut", "answer_truncation", "cut") == 0.90
     assert likelihood("answer_cut", "lr_too_low", "cut") == 0.03
+
+
+@pytest.mark.parametrize("cut_count", [10, 30, 49])
+def test_structured_damage_does_not_disable_json_detection(tmp_path, cut_count):
+    # Unique IDs prevent the prefix rule from masking a disabled JSON rule.
+    answers = [json.dumps({"id": i, "value": "complete"}) for i in range(100)]
+    answers[:cut_count] = [a[:-3] for a in answers[:cut_count]]
+    result, raw = _run({"train": _write(tmp_path / "t.jsonl", answers)})
+    assert raw["semantics_version"] == "answer-cut-v2"
+    assert result.outcome == "cut"
+    assert raw["files"]["train"]["cut_lines"] == list(range(1, cut_count + 1))
+
+
+def test_brace_prefixed_prose_without_valid_json_anchor_is_not_json(tmp_path):
+    answers = ["{a note " + f"{i:03d}" for i in range(100)]
+    _, raw = _run({"train": _write(tmp_path / "t.jsonl", answers)})
+    assert raw["files"]["train"]["json_file"] is False
+    assert raw["files"]["train"]["cut"] == 0
+
+
+def test_half_valid_json_is_not_a_majority(tmp_path):
+    answers = [json.dumps({"id": i}) for i in range(100)]
+    answers[50:] = [a[:-1] for a in answers[50:]]
+    _, raw = _run({"train": _write(tmp_path / "t.jsonl", answers)})
+    assert raw["files"]["train"]["json_file"] is False

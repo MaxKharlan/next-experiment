@@ -50,7 +50,8 @@ if TYPE_CHECKING:
 
 ROLES = ("train", "validation")
 EXAMPLES = 5  # how many flagged answers the raw result shows with their full form
-JSON_MAJORITY = 0.9  # share of answers that must be JSON for the JSON rule to apply
+JSON_MAJORITY = 0.9  # share of answers that must open like JSON
+JSON_VALID_ANCHOR = 0.5  # require a majority of parseable object/array answers
 
 
 @dataclass
@@ -117,8 +118,13 @@ def _opens_like_json(text: str) -> bool:
 def file_answers(path: Path) -> FileAnswers:
     rows = answers(path)
     counts = Counter(answer for _, answer in rows)
-    json_like = sum(_opens_like_json(a) and _parses(a) for _, a in rows)
-    json_file = json_like >= JSON_MAJORITY * len(rows)
+    json_like = sum(_opens_like_json(a) for _, a in rows)
+    valid_json = sum(_opens_like_json(a) and _parses(a) for _, a in rows)
+    json_file = (
+        bool(rows)
+        and json_like >= JSON_MAJORITY * len(rows)
+        and valid_json > JSON_VALID_ANCHOR * len(rows)
+    )
     prefixes = prefix_cuts(counts)
     cut_lines, shown = [], []
     for line_no, answer in rows:
@@ -171,7 +177,13 @@ class AnswerCut(Probe):
             if ctx.files.get(role) and Path(ctx.files[role]).is_file()
         }
         outcome = "cut" if files["train"]["cut_share"] >= self.CUT else "ok"
-        raw = {"cut_from_share": self.CUT, "files": files}
+        raw = {
+            "semantics_version": "answer-cut-v2",
+            "cut_from_share": self.CUT,
+            "json_open_share": JSON_MAJORITY,
+            "json_valid_anchor_exclusive": JSON_VALID_ANCHOR,
+            "files": files,
+        }
         return self.check_outcome(
             ProbeResult(
                 outcome=outcome,
