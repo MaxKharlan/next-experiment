@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     tavily_max_credits_per_investigation: float = 10
     tavily_credit_budget: float = 200
     tavily_cache_prefix: str = "tavily-cache"
+    tavily_ledger_path: str | None = None
 
     default_budget_usd: float = 5.0
     approval_threshold_usd: float = 1.0
