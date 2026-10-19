@@ -1,0 +1,340 @@
+{
+  "diagnostic_boundary": "Markdown unwrapping is post-hoc descriptive analysis only. All preregistered gates and reported primary outcomes use strict json_fields_exact, unchanged.",
+  "pilot_decision": {
+    "base": 0.0,
+    "paid_jobs": 0,
+    "protocol_sha256": "614f609360032f9481d8e765cacb8d5f4e5a7ddcce456b5d2c9db39c48cda590",
+    "reason": "base_floor_or_ceiling",
+    "status": "stopped"
+  },
+  "scores": {
+    "candidate-base": {
+      "groups": {
+        "all": {
+          "fenced": 0.9861111111111112,
+          "hit_limit": 0.013888888888888888,
+          "json_valid": 0.0,
+          "n": 72,
+          "posthoc_unwrapped_content_exact": 0.4027777777777778,
+          "schema_valid": 0.0,
+          "strict_exact": 0.0
+        },
+        "correction": {
+          "fenced": 1.0,
+          "hit_limit": 0.0,
+          "json_valid": 0.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.5416666666666666,
+          "schema_valid": 0.0,
+          "strict_exact": 0.0
+        },
+        "distractor": {
+          "fenced": 1.0,
+          "hit_limit": 0.0,
+          "json_valid": 0.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.4583333333333333,
+          "schema_valid": 0.0,
+          "strict_exact": 0.0
+        },
+        "void_updates": {
+          "fenced": 0.9583333333333334,
+          "hit_limit": 0.041666666666666664,
+          "json_valid": 0.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.20833333333333334,
+          "schema_valid": 0.0,
+          "strict_exact": 0.0
+        }
+      },
+      "score_sha256": "2cac4468caefa532f491f16c9cc7be097bcfc7f6aa81b5969b3d93c70560e762"
+    },
+    "damaged-s1101": {
+      "groups": {
+        "all": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 72,
+          "posthoc_unwrapped_content_exact": 0.4027777777777778,
+          "schema_valid": 1.0,
+          "strict_exact": 0.4027777777777778
+        },
+        "correction": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.5,
+          "schema_valid": 1.0,
+          "strict_exact": 0.5
+        },
+        "distractor": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.5416666666666666,
+          "schema_valid": 1.0,
+          "strict_exact": 0.5416666666666666
+        },
+        "void_updates": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.16666666666666666,
+          "schema_valid": 1.0,
+          "strict_exact": 0.16666666666666666
+        }
+      },
+      "score_sha256": "0be22ebf776bd5ffb5ae1c01dbbf4386d77df34e2013626afe52ab362e75e0c9"
+    },
+    "damaged-s1102": {
+      "groups": {
+        "all": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 0.9861111111111112,
+          "n": 72,
+          "posthoc_unwrapped_content_exact": 0.4583333333333333,
+          "schema_valid": 0.9861111111111112,
+          "strict_exact": 0.4583333333333333
+        },
+        "correction": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.6666666666666666,
+          "schema_valid": 1.0,
+          "strict_exact": 0.6666666666666666
+        },
+        "distractor": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 0.9583333333333334,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.4583333333333333,
+          "schema_valid": 0.9583333333333334,
+          "strict_exact": 0.4583333333333333
+        },
+        "void_updates": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.25,
+          "schema_valid": 1.0,
+          "strict_exact": 0.25
+        }
+      },
+      "score_sha256": "b64263c14b53957b5301481a08c870be9d74feef5bfe576bf17b5e9215726647"
+    },
+    "damaged-s1103": {
+      "groups": {
+        "all": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 72,
+          "posthoc_unwrapped_content_exact": 0.3333333333333333,
+          "schema_valid": 1.0,
+          "strict_exact": 0.3333333333333333
+        },
+        "correction": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.4583333333333333,
+          "schema_valid": 1.0,
+          "strict_exact": 0.4583333333333333
+        },
+        "distractor": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.4583333333333333,
+          "schema_valid": 1.0,
+          "strict_exact": 0.4583333333333333
+        },
+        "void_updates": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.08333333333333333,
+          "schema_valid": 1.0,
+          "strict_exact": 0.08333333333333333
+        }
+      },
+      "score_sha256": "9a0fbafd7ea6251c17e5354368211cc672765ffd6acff819513aea9aa6b1acc4"
+    },
+    "healthy-s1101": {
+      "groups": {
+        "all": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 72,
+          "posthoc_unwrapped_content_exact": 0.3611111111111111,
+          "schema_valid": 1.0,
+          "strict_exact": 0.3611111111111111
+        },
+        "correction": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.4166666666666667,
+          "schema_valid": 1.0,
+          "strict_exact": 0.4166666666666667
+        },
+        "distractor": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.3333333333333333,
+          "schema_valid": 1.0,
+          "strict_exact": 0.3333333333333333
+        },
+        "void_updates": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.3333333333333333,
+          "schema_valid": 1.0,
+          "strict_exact": 0.3333333333333333
+        }
+      },
+      "score_sha256": "052210a951a13328269bbe5c384277bc38242e0e52b4d619b78c2776d7d00750"
+    },
+    "healthy-s1102": {
+      "groups": {
+        "all": {
+          "fenced": 0.0,
+          "hit_limit": 0.06944444444444445,
+          "json_valid": 0.8333333333333334,
+          "n": 72,
+          "posthoc_unwrapped_content_exact": 0.2638888888888889,
+          "schema_valid": 0.7222222222222222,
+          "strict_exact": 0.2638888888888889
+        },
+        "correction": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.5,
+          "schema_valid": 0.9166666666666666,
+          "strict_exact": 0.5
+        },
+        "distractor": {
+          "fenced": 0.0,
+          "hit_limit": 0.041666666666666664,
+          "json_valid": 0.75,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.20833333333333334,
+          "schema_valid": 0.625,
+          "strict_exact": 0.20833333333333334
+        },
+        "void_updates": {
+          "fenced": 0.0,
+          "hit_limit": 0.16666666666666666,
+          "json_valid": 0.75,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.08333333333333333,
+          "schema_valid": 0.625,
+          "strict_exact": 0.08333333333333333
+        }
+      },
+      "score_sha256": "b69fd143e589e88c290ca289536ee702d49544babae77c83fb138f008d2cc2ad"
+    },
+    "healthy-s1103": {
+      "groups": {
+        "all": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 72,
+          "posthoc_unwrapped_content_exact": 0.18055555555555555,
+          "schema_valid": 1.0,
+          "strict_exact": 0.18055555555555555
+        },
+        "correction": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.16666666666666666,
+          "schema_valid": 1.0,
+          "strict_exact": 0.16666666666666666
+        },
+        "distractor": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.20833333333333334,
+          "schema_valid": 1.0,
+          "strict_exact": 0.20833333333333334
+        },
+        "void_updates": {
+          "fenced": 0.0,
+          "hit_limit": 0.0,
+          "json_valid": 1.0,
+          "n": 24,
+          "posthoc_unwrapped_content_exact": 0.16666666666666666,
+          "schema_valid": 1.0,
+          "strict_exact": 0.16666666666666666
+        }
+      },
+      "score_sha256": "67445fedcc6d4d4ab3a5c9f7c1a4c6642c91edfaf02e9620237f92f2d5b35101"
+    },
+    "historical-base": {
+      "groups": {
+        "all": {
+          "fenced": 1.0,
+          "hit_limit": 0.0,
+          "json_valid": 0.0,
+          "n": 102,
+          "posthoc_unwrapped_content_exact": 1.0,
+          "schema_valid": 0.0,
+          "strict_exact": 0.0
+        }
+      },
+      "score_sha256": "3d48ad5a60b037c14289c46c105220a40f08b25a8ea43b53b24744efc89d2497"
+    }
+  },
+  "screen_decision": {
+    "groups": {
+      "damaged": [
+        0.4027777777777778,
+        0.4583333333333333,
+        0.3333333333333333
+      ],
+      "healthy": [
+        0.3611111111111111,
+        0.2638888888888889,
+        0.18055555555555555
+      ]
+    },
+    "inference": "Exploratory sensitivity of fixed historical adapters on new development histories. No fresh causal or final-test claim.",
+    "means": {
+      "damaged": 0.39814814814814814,
+      "healthy": 0.26851851851851855
+    },
+    "paid_jobs": 0,
+    "pooled_sd": 0.07774470196179012,
+    "protocol_sha256": "ecdcc22c285db28098a957c013fb22f279f31c22fb0c9000b59c15c3daff7a11",
+    "reasons": [
+      "insufficient_damage_sensitivity"
+    ],
+    "selected_seeds": [],
+    "status": "rejected"
+  }
+}

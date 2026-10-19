@@ -9,7 +9,7 @@ inference was run for this follow-up.
 
 | Fault | What is supported | What remains to establish |
 |---|---|---|
-| 1, mode A: `answer_truncation` | Pre-upload answer damage and partial recovery measured on BANKING77, Kaggle and Token Factory; [results](answer-cut.md) | Clean rare-prefix controls, other tasks/models and a fresh complete agent trace |
+| 1, mode A: `answer_truncation` | Pre-upload answer damage and partial recovery measured on BANKING77, Kaggle and Token Factory; [results](answer-cut.md) | [Clean-prefix probe controls measured](answer-cut-specificity-controls-20261019.md); model-quality effects, other tasks/models and a fresh complete agent trace |
 | 1, mode B: `truncation` | Length probe detects over-limit examples; trainer code can remove tokens | Observe actual answer-token removal, measure quality loss, compare the repair with a specified control; length alone is insufficient |
 | 2: chat-template mismatch | Catalog hypothesis; token counting uses a template | Freeze training and inference templates, demonstrate a consequential mismatch and repair; differing template text can be harmless |
 | 3: contradictory labels | Catalog hypothesis | Establish that inputs require equivalent answers, distinguish valid ambiguity, implement observed-data detection and a repair/control pair |
@@ -66,15 +66,16 @@ mode-A investigations simply by loading their hypothesis list.
 
 ## Next work and ownership
 
-1. The B9 owner finishes the existing 210-run sweep, grouped evaluation and
-   independent transfer. The last owner checkpoint was 112/210 at 11:11 Moscow;
-   it is not a live counter. No new sweep is needed for this review.
+1. B9 finished all 210 runs and published grouped analysis in PR #91. Frozen
+   Token Factory transfer failed; both classifiers stay offline. Do not repeat
+   this sweep. See [the completed analysis](b9-final-sweep.md).
 2. Prepare fresh data/protocol artifacts for the answer-cut agent trace and
    the task/model matrix using [the fresh evaluation protocol](fresh-evaluation-protocol.md).
    Historical check/heldout reuse cannot establish generalization.
-3. Build clean prefix-label and benign recipe controls before fitting signature
-   likelihoods or priors. Current signature values are heuristic. Keep the
-   experimental classifier out of default diagnosis and retain T=1.
+3. [Clean prefix-label and alternative JSON-malformation controls](answer-cut-specificity-controls-20261019.md)
+   are now measured: observationally identical labels can be clean or damaged.
+   Benign recipe controls and independent likelihood calibration remain open.
+   Current signature values are heuristic; keep classifiers offline and T=1.
 4. Define measured mechanisms and repair/control pairs for faults 2–5, then
    pretrained-LLM confirmation for 9–12. These remain open work, not closed by the
    catalog or the local audit UI.

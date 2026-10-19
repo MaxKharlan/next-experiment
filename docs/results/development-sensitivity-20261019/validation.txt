@@ -1,0 +1,15 @@
+Baseline: origin/main 2dff394 (merged PRs #91 and #92)
+Full local suite: 826 passed, 8 skipped in 28.61s
+Ruff lint: passed
+Ruff format: 348 files already formatted
+Git diff whitespace: passed
+Historical base evaluation: exit 0, 102 saved predictions
+Candidate base evaluation: exit 0, 72 saved predictions, paid phase stopped
+Fixed-adapter screen: exit 0, 6 evaluations / 432 saved predictions
+Every primary score recomputed from saved answers
+Published summary reproduced byte-for-byte from published score artifacts
+All 38 specificity control artifacts reproduced byte-for-byte
+Historical protocol SHA-256 unchanged: 32e4a4ef030c323985001327e13274576b3cf724bc2805ef9d9fd464a321acdd
+No protected final test read; no new provider jobs; no repeated training
+Additional provider spend: USD 0
+Inherited ledger: 6 settled operations, USD 0.2710464 committed, USD 4.7289536 available

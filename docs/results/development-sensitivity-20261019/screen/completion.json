@@ -1,0 +1,11 @@
+{
+  "available_usd": 4.7289536,
+  "decision": "rejected",
+  "evaluations": 6,
+  "exit_code": 0,
+  "mps_released": true,
+  "new_predictions": 432,
+  "new_provider_spend_usd": 0,
+  "reason": "insufficient_damage_sensitivity",
+  "total_inherited_spend_usd": 0.2710464
+}
