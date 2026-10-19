@@ -43,3 +43,9 @@ def test_downloaded_report_preserves_evidence_without_filling_legacy_gaps():
     )
     assert "comparison_evidence" not in report["steps"][0]
     assert report["steps"][1]["comparison_evidence"] == evidence
+
+
+def test_large_sample_interval_records_the_normal_approximation():
+    arm = SimpleNamespace(metrics=[0.5] * 17)
+    evidence = comparison_evidence(arm, arm, min_effect=0.06, noise_sd=None)
+    assert evidence["interval"]["method"] == "pooled_sd_normal"

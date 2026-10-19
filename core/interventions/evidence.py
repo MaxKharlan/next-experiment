@@ -11,6 +11,13 @@ def comparison_evidence(target, control, *, min_effect, noise_sd, alpha=0.05):
     """
     target_seeds, control_seeds = len(target.metrics), len(control.metrics)
     assignments = math.comb(target_seeds + control_seeds, target_seeds)
+    interval_method = (
+        "external_sd_normal"
+        if noise_sd is not None
+        else "pooled_sd_t"
+        if target_seeds + control_seeds - 2 <= 30
+        else "pooled_sd_normal"
+    )
     return {
         "version": "intervention-evidence-v1",
         "claim": "tested_intervention_vs_control",
@@ -22,7 +29,7 @@ def comparison_evidence(target, control, *, min_effect, noise_sd, alpha=0.05):
         "min_effect": min_effect,
         "interval": {
             "confidence": 0.95,
-            "method": "external_sd_normal" if noise_sd is not None else "pooled_sd_t",
+            "method": interval_method,
             "noise_sd": noise_sd,
             "noise_transfer": "not_assessed_by_comparison",
         },
