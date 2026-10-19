@@ -7,7 +7,11 @@ has measured evidence.
 
 The current main also includes #92 (`2dff394`): the fresh answer-cut protocol
 stopped at `zero_sd` before reference jobs or a persisted API trace. See the
-[separate development sensitivity audit](development-sensitivity-20261019.md).
+[separate development sensitivity audit](development-sensitivity-20261019.md),
+which also completed with a rejected candidate and $0 additional provider spend.
+[35 probe controls](answer-cut-specificity-controls-20261019.md) demonstrate
+clean-prefix false alarms and alternative causes of broken JSON; they do not
+calibrate deployment likelihoods.
 
 | Plan items | Existing implementation and remaining work |
 | --- | --- |

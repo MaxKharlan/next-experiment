@@ -1,0 +1,49 @@
+{
+  "available_usd": 4.7289536,
+  "cap_usd": 5.0,
+  "committed_usd": 0.27104639999999997,
+  "operations": [
+    {
+      "actual_usd": 0.044644,
+      "id": "damaged-s1101",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.044644,
+      "id": "damaged-s1102",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.044644,
+      "id": "damaged-s1103",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.045704800000000004,
+      "id": "healthy-s1101",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.045704800000000004,
+      "id": "healthy-s1102",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.045704800000000004,
+      "id": "healthy-s1103",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    }
+  ]
+}
