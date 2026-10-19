@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "usage_updated_at": "2026-10-19T12:22:00+00:00",
+  "aggregate_training_usage_matches": true,
+  "invoice_reconciled": false,
+  "inference_calls_reconciled": false,
+  "inventory_status_counts": {
+    "cancelled": 3,
+    "failed": 1,
+    "running": 12,
+    "succeeded": 224
+  },
+  "training": [
+    {
+      "product": "Fine-tuning Llama-3.2-1B-Instruct LoRa 8K",
+      "succeeded_jobs": 5,
+      "job_tokens": 206450,
+      "usage_tokens": 206450,
+      "usage_cost_usd": "0.08258",
+      "delta_tokens": 0
+    },
+    {
+      "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+      "succeeded_jobs": 5,
+      "job_tokens": 279088,
+      "usage_tokens": 279088,
+      "usage_cost_usd": "0.1116352",
+      "delta_tokens": 0
+    },
+    {
+      "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+      "succeeded_jobs": 209,
+      "job_tokens": 19448386,
+      "usage_tokens": 19448386,
+      "usage_cost_usd": "7.7793544",
+      "delta_tokens": 0
+    },
+    {
+      "product": "Fine-tuning Qwen3-1.7B LoRa 8K",
+      "succeeded_jobs": 5,
+      "job_tokens": 160894,
+      "usage_tokens": 160894,
+      "usage_cost_usd": "0.0643576",
+      "delta_tokens": 0
+    }
+  ],
+  "usage_training_usd": "8.0379272",
+  "usage_inference_usd": "0.65831022",
+  "usage_subtotal_usd": "8.69623742",
+  "display_total_delta_usd": "0.01",
+  "deferred_job_count": 12,
+  "failed_or_cancelled_job_count": 4,
+  "ledger": {
+    "cap_usd": "5",
+    "settled_usd": "0.271046400000000012",
+    "pending_reservations_usd": "1.131148800000000015",
+    "committed_usd": "1.402195200000000027",
+    "operations": [
+      {
+        "operation_id": "damaged-s1101",
+        "outcome": "matches_job_token_estimate",
+        "provider_status": "succeeded",
+        "job_token_estimate_usd": "0.044644"
+      },
+      {
+        "operation_id": "damaged-s1102",
+        "outcome": "matches_job_token_estimate",
+        "provider_status": "succeeded",
+        "job_token_estimate_usd": "0.044644"
+      },
+      {
+        "operation_id": "damaged-s1103",
+        "outcome": "matches_job_token_estimate",
+        "provider_status": "succeeded",
+        "job_token_estimate_usd": "0.044644"
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:cut-s1301",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:cut-s1302",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:cut-s1303",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:format-s1301",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:format-s1302",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:format-s1303",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:healthy-s1301",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:healthy-s1302",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:healthy-s1303",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:wrong-s1301",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:wrong-s1302",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:wrong-s1303",
+        "outcome": "reservation_retained",
+        "provider_status": "running",
+        "job_token_estimate_usd": null
+      },
+      {
+        "operation_id": "healthy-s1101",
+        "outcome": "matches_job_token_estimate",
+        "provider_status": "succeeded",
+        "job_token_estimate_usd": "0.0457048"
+      },
+      {
+        "operation_id": "healthy-s1102",
+        "outcome": "matches_job_token_estimate",
+        "provider_status": "succeeded",
+        "job_token_estimate_usd": "0.0457048"
+      },
+      {
+        "operation_id": "healthy-s1103",
+        "outcome": "matches_job_token_estimate",
+        "provider_status": "succeeded",
+        "job_token_estimate_usd": "0.0457048"
+      }
+    ]
+  },
+  "discrepancies": [],
+  "limitations": [
+    "Usage is an aggregate observation; individual job charges remain token estimates.",
+    "Failed/cancelled and deferred jobs are not asserted to have zero cost.",
+    "Inference has product totals but no complete per-call provider billing evidence.",
+    "Displayed tax and totals are rounded; no tax rate or invoice is inferred.",
+    "Report is read-only and cannot release holds or authorize another submission."
+  ],
+  "input_sha256": "882db19ccbadf67876c64b29bc712b2590e9c66390f1f21f843ffd229b0b76e1"
+}

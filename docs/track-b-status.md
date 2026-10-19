@@ -27,10 +27,10 @@ calibrate deployment likelihoods.
 | B12 | The calibration task is complete with a negative deployment decision. Temperature fitting, reliability plots and ECE/Brier audits exist; a development-fitted temperature worsens all three heldout measures. The live default remains T=1. |
 | B13–B15 | Versioned prompts, hypothesis sampling and sourced known-issue search are implemented. One-versus-three sampling results are saved. |
 | B16 | Dev signature fitting with smoothing and provenance was added in PR #65. Coverage is limited to observed fault classes. |
-| B17–B18 | The planned investigation cycle is implemented: persisted states, budgets, paid-step approval, statuses, verdicts and retraining flow. SQLite reservations and REST/UI resume cover process restarts. [Recipe retrain and Tavily](paid-operation-recovery.md) now retain budget reservations across failures. [SQLite worker ownership](sqlite-investigations.md) now coordinates request claims and approvals across processes. Provider invoice reconciliation remains an operational extension. |
+| B17–B18 | The planned investigation cycle is implemented: persisted states, budgets, paid-step approval, statuses, verdicts and retraining flow. SQLite reservations and REST/UI resume cover process restarts. [Recipe retrain and Tavily](paid-operation-recovery.md) now retain budget reservations across failures. [SQLite worker ownership](sqlite-investigations.md) now coordinates request claims and approvals across processes. [Aggregate provider training usage is reconciled](provider-cost-reconciliation-20261019.md); invoices, the displayed-total difference and per-call inference remain open. |
 | B19–B20 | Baselines and ablations exist. PR #66 saves the current dev comparison and limitations. More fault classes require new evidence. |
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
-| B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
+| B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; #97 adds same-host worker ownership and migration instructions. Distributed hosting remains unsupported. |
 | B23 | Investigation UI, case launch, costs and report downloads exist. |
 | B24 | PR #72 added token-weighted gradient accumulation and injectable fault 12 with CPU equivalence checks. PR #73 added injectable fault 10 (EOS masked as padding), a persisted label audit and CPU controls. PR #74 added fault 9 (prompt loss), its audit and separate supervised-token counts. PR #75 added fault 11 (double label shifting) and an alignment audit. PR #76 added a persisted trainable-parameter inventory and an early stop for fully frozen models. PR #77 added a first-backward gradient audit. PR #78 exposes bounded label checks to mode-B hypothesis generation through the Python investigation entry point. This package adds REST/UI label audits, opt-in local code-switch interventions and a 60-run synthetic CPU generation experiment; see `mode-b-local-package.md`. B24 remains partial: pretrained-LLM quality, arbitrary-code repair and full REST mode-B investigations are not validated. |
 | B25 | Weight probes are wired into live runs and the benchmark. Threshold transfer and rank-fault discrimination need more evidence. |
@@ -60,8 +60,9 @@ development and heldout calibration audits, and spending reservations with
 REST/UI approval and resume. B9, B12 and the original B17 plan item now have
 measured outcomes. B9's classifier fails frozen provider transfer and stays out
 of live diagnosis. B12 keeps T=1 because fitted calibration worsens heldout NLL,
-Brier and ECE. SQLite worker ownership is implemented; provider billing reconciliation remains
-separate operational work.
+Brier and ECE. SQLite worker ownership is implemented. The provider-cost audit
+matches 224 successful jobs to aggregate Usage; invoice and per-call inference
+reconciliation remain open.
 
 For the current cross-track queue, publication state, fault-1 semantics and demo
 requirements, see [Project status](project-status.md). The original provider-side
