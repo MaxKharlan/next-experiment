@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Next Experiment</title>
-<meta name="description" content="Finds out why a fine-tune on Nebius Token Factory failed and proves it with an experiment">
+<meta name="description" content="Investigates fine-tune failures and tests proposed fixes against controls">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231E6B57'/%3E%3Cg transform='translate(4 4)' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.6a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4l-5.1-10.2a2 2 0 0 1-.2-.9V2'/%3E%3Cpath d='M8.5 2h7'/%3E%3Cpath d='M7 16h10'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -280,6 +280,8 @@
   .case-start textarea { display: block; width: 100%; box-sizing: border-box; min-height: 180px; margin: 12px 0; padding: 12px; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; font-family: var(--font-mono); }
   .case-start .controls { flex-wrap: wrap; }
   .case-start pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.experiment-table { width:100%; border-collapse:collapse; font-size:13px; margin:16px 0; }
+.experiment-table th, .experiment-table td { text-align:left; padding:9px; border-bottom:1px solid var(--line, #34413d); }
 </style>
 </head>
 <body class="idle">
@@ -288,7 +290,7 @@
     <div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.6a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4l-5.1-10.2a2 2 0 0 1-.2-.9V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg></div>
     <div>
       <h1>Next Experiment</h1>
-      <div class="tagline">Finds out why a fine-tune on Nebius Token Factory failed and proves it with an experiment</div>
+      <div class="tagline">Investigates fine-tune failures and tests proposed fixes against controls</div>
     </div>
   </div>
   <div class="controls">
@@ -392,7 +394,7 @@ const STATUSES = {finished: "Finished", awaiting_approval: "Waiting for approval
 const METHOD = [
   ["Ranks the likely causes", "Nemotron Super", "It reads the failed job and gives each cause a probability."],
   ["Moves the probabilities", "Free checks", "Each check reads the recipe or the data. The next one is the check expected to tell the causes apart best."],
-  ["Proves the cause", "Causal check on Token Factory", "The fix and a same-cost control train side by side. The cause counts as proved only if the fix beats the control beyond the noise.", "paid"],
+  ["Tests a proposed fix", "Controlled experiment", "The fix and a control train side by side. A win supports this intervention; identifying a unique cause needs competing explanations to be tested.", "paid"],
   ["Retrains with the fix", "Your decision", "After you approve, the model is retrained, and the base, failed and retrained models answer the same held-out queries.", "ask"],
 ];
 
@@ -567,12 +569,13 @@ function reset() {
   hyps = {}; probs = {}; prevProbs = {}; priors = {}; out = new Set(); proved = {}; ruled = {}; open = {};
   trainingUsd = 0; jobs = 0; checks = 0; llmUsd = 0; model = ""; proof = null; entries = 0;
   recordedCalls.clear();
-  stepOf = {}; lastCheck = null; verdictStep = null; caseHp = {};
+  stepOf = {}; lastCheck = null; verdictStep = null; caseHp = {}; current = null; replayOf = "";
   document.body.classList.remove("idle");
   $("logTitle").textContent = "Experiment log";
   $("feed").innerHTML = ""; $("board").innerHTML = '<div class="muted small">No hypotheses yet.</div>'; $("checks").textContent = "";
   $("caseCard").innerHTML = '<h2 class="label">Case</h2><div class="muted small" id="case">Loading the case.</div>';
   $("costCard").hidden = true;
+  $("hypCard").hidden = false;
   $("reportActions").hidden = true;
   $("reportDownload").removeAttribute("href");
   $("reportNote").textContent = "Includes progress recorded so far.";
@@ -600,10 +603,10 @@ function setMetrics() {
 /* what each event of an investigation does to the screen, streamed by the server or played in the browser */
 const HANDLERS = {
   started: d => { replayOf = d.replay_of || ""; showCase(d.case);
-    setStatus(d.replay_of ? "Replay of a saved investigation" : `Live run on ${BACKENDS[d.backend] || d.backend || "the server"}`, "Looking for the cause", "running", "running"); },
+    setStatus(d.case?.kind === "measured_experiment" ? "Saved measured experiment" : d.replay_of ? "Replay of a saved investigation" : `Live run on ${BACKENDS[d.backend] || d.backend || "the server"}`, d.case?.kind === "measured_experiment" ? "Loading measured results" : "Looking for the cause", "running", "running"); },
   llm_call: d => recordCall(d),
   step: d => { showStep(d); if (recordedCalls.size) showCost({}); },
-  finished: d => { finish(d); $("reportNote").textContent = "Completed investigation."; done(); },
+  finished: d => { finish(d); $("reportNote").textContent = d.measured_experiment ? "Saved experiment." : "Completed investigation."; done(); },
   awaiting_approval: d => { showCost(d.summary); askApproval(d.plan);
     $("reportNote").textContent = "Partial report: awaiting your decision.";
     setStatus(null, null, "waiting", "needs your approval"); },
@@ -627,11 +630,11 @@ function watch(id) {
   source = new EventSource(`/api/investigations/${encodeURIComponent(id)}/events`);
   for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data)));
 }
-function stop() { if (source) source.close(); source = null; clearTimeout(timer); queue = []; }
+function stop() { replayVersion += 1; if (source) source.close(); source = null; clearTimeout(timer); queue = []; }
 function done() { stop(); $("start").disabled = false; $("start").textContent = "Replay"; }
 
 /* static mode: the saved run plays in the browser with the pauses of the server replay */
-let queue = [], timer = 0, quiet = false;
+let queue = [], timer = 0, quiet = false, replayVersion = 0;
 function staticMode(cases) {
 
   $("past").hidden = true; $("repo").hidden = false; $("about").hidden = false;
@@ -640,21 +643,40 @@ function staticMode(cases) {
     $("about").innerHTML = `${c.note ? `${esc(c.note)} ` : ""}This page plays it back in your browser: nothing trains and no model is called.
       <a href="demo/${encodeURIComponent(c.name)}.json">Saved report, JSON</a>`;
   };
-  $("demo").onchange = about;
+  $("demo").onchange = () => {
+    stop();
+    reset();
+    about();
+    $("start").disabled = false;
+    $("start").textContent = "Replay";
+    $("case").textContent = "Press Replay to load the selected case.";
+    setStatus("Saved example selected", "Ready to replay", "waiting", "not started");
+  };
   about();
 }
 async function play(name) {
   stop();
   reset();
   $("start").disabled = true;
-  const res = await fetch(`replays/${encodeURIComponent(name)}.json`).catch(() => null);
-  if (!res || !res.ok) return HANDLERS.failed({error: `The saved run did not load${res ? ` (HTTP ${res.status})` : ""}.`});
-  queue = await res.json();
+  const version = replayVersion;
+  try {
+    const res = await fetch(`replays/${encodeURIComponent(name)}.json`);
+    if (version !== replayVersion) return;
+    if (!res.ok) throw new Error(`The saved run did not load (HTTP ${res.status}).`);
+    const events = await res.json();
+    if (version !== replayVersion) return;
+    if (!Array.isArray(events) || !events.length) throw new Error("The saved run has no events.");
+    queue = events;
+  } catch (error) {
+    if (version !== replayVersion) return;
+    return HANDLERS.failed({error: error.message || "The saved run did not load."});
+  }
   $("start").textContent = "Skip to the end"; $("start").disabled = false;
   next();
 }
 function next() {
   const e = queue.shift();
+  if (!e) return;
   HANDLERS[e.type](e.data);
   if (queue.length) timer = setTimeout(next, queue[0].after_s * 1000);
 }
@@ -666,6 +688,15 @@ function skip() {
 }
 
 function finish(summary) {
+  if (summary.measured_experiment) {
+    const m = summary.measured_experiment;
+    setStatus("Saved measured experiment", "Fix beats control; recovery is partial", "inconclusive", "measured result");
+    $("statusProof").textContent = m.scope;
+    metric("mEffect", `+${fx(m.causal_result.effect, 3)}`, "exact-match gain vs control");
+    metric("mJobs", String(m.runs.length), "saved training runs");
+    if (m.estimated_training_cost_usd !== null) metric("mCost", money(m.estimated_training_cost_usd), "training cost, estimated");
+    return;
+  }
   showCost(summary);
   if (summary.audit_only) {
     setStatus("Saved local inspection", "Audit completed", "inconclusive", "audit only");
@@ -685,6 +716,13 @@ function finish(summary) {
 }
 
 function showCase(c) {
+  if (c?.kind === "measured_experiment") {
+    model = c.job.model; caseHp = {};
+    $("hypCard").hidden = true;
+    $("case").innerHTML = `<p>${esc(c.symptom)}</p><p>${esc(c.job.model)} · BANKING77</p><p class="muted small">Saved training comparison. No agent hypothesis or verdict was recorded.</p>`;
+    setStatus("Saved measured experiment", "Loading measured results", "running", "loading");
+    return;
+  }
   if (c?.job?.model === "not-trained" || c?.job?.model === "local mechanism fixture") {
     model = c.job.model; caseHp = {};
     $("case").innerHTML = `<p>${esc(c.task || c.symptom || "Local mechanism audit")}</p><p class="muted small">Local inspection. No model training or causal quality experiment.</p>`;
@@ -805,6 +843,28 @@ const changeText = (a) => {
 };
 
 function showStep(s) {
+  if (s.kind === "measured_experiment") {
+    const m = s.measurement, r = m.causal_result;
+    const labels = {healthy: "Healthy recipe", damaged: "30% answers cut", target: "Drop flagged examples", control: "Drop random unflagged examples"};
+    const rows = Object.entries(labels).map(([role, label]) => {
+      const runs = m.runs.filter(x => x.role === role);
+      return `<tr><th scope="row">${label}</th><td>${pct1(m.means[role])}</td><td>${runs.length}</td><td>${runs.map(x => pct1(x.metric)).join(", ")}</td></tr>`;
+    }).join("");
+    step(`Answer-cut experiment on ${m.backend}`, "Saved measurements", "",
+      `<p>Exact match on ${esc(m.evaluation.examples)} check examples. These are check-set results.</p>
+       <div style="overflow-x:auto"><table class="experiment-table"><thead><tr><th>Arm</th><th>Mean</th><th>Runs</th><th>Per run</th></tr></thead><tbody>${rows}</tbody></table></div>
+       <p>Fix minus control: +${fx(r.effect, 3)}; 95% interval ${fx(r.ci_low, 3)} to ${fx(r.ci_high, 3)}. Minimum effect: ${fx(r.min_effect)}. Permutation p: ${fx(r.p_value, 3)}.</p>
+       <p>${m.permutation_gate_applied ? "Permutation gate applied." : "Permutation gate skipped: two seeds cannot reach p ≤ 0.05. The saved rule uses the interval alone."}</p>
+       <p>The fix remains ${fx(m.gap_to_healthy * 100, 1)} percentage points below the healthy recipe. ${esc(m.scope)}</p>
+       <ul>${m.limitations.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+       <p>${m.estimated_training_cost_usd === null ? "Kaggle compute cost was not recorded." : `Training estimate from provider tokens: ${money(m.estimated_training_cost_usd, 4)}; not an invoice.`}</p>
+       <details><summary>Original runs, hashes and sources</summary>
+         <p>${esc(m.evaluation_provenance)}</p>
+         ${m.sources.map(x => `<p><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.path)}</a><br><code style="overflow-wrap:anywhere">SHA-256 ${esc(x.sha256)}</code></p>`).join("")}
+         <pre style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(JSON.stringify(m.runs, null, 2))}</pre>
+       </details>`);
+    return;
+  }
   if (s.kind === "training_label_checks") {
     checks += 1;
     const raw = s.raw || {};
@@ -829,8 +889,11 @@ function showStep(s) {
          `<div class="ranked">${Object.values(hyps).map(h => `<span>${esc(cause(h.fault_class))}</span><span class="mono">${pct(h.prior)}</span>`).join("")}</div>`);
   } else if (s.kind === "probe") {
     checks += 1; setProbs(s.probs);
-    const n = step(`<code>${esc(s.probe)}</code> returned “${esc(s.outcome)}”`, `Free check, chosen for an expected gain of ${Number(s.gain_bits).toFixed(2)} bits`, "free",
-         `${s.card ? `<p>${esc(s.card)}</p>` : ""}<div class="raw">${esc(Object.entries(s.raw || {}).map(([k, v]) => `${k} ${v}`).join(", "))}</div>`);
+    const observed = s.probe === "example_length" && s.raw?.semantics_version
+      ? (s.raw.over_limit_found ? "over-limit inputs found" : "inputs fit the measured limit") : s.outcome;
+    const interpretation = s.raw?.interpretation ? `<p>${esc(s.raw.interpretation)}</p>` : "";
+    const n = step(`<code>${esc(s.probe)}</code> returned “${esc(observed)}”`, `Free check, chosen for an expected gain of ${Number(s.gain_bits).toFixed(2)} bits`, "free",
+         `${interpretation}${s.card ? `<p>${esc(s.card)}</p>` : ""}<details><summary>Raw evidence</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(JSON.stringify(s.raw || {}, null, 2))}</pre></details>`);
     stepOf[`probe:${s.probe}`] = n;
   } else if (s.kind === "intervention") {
     checks += 1;

@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #84
-(`0b0db5f`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #85
+(`85aeebe`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -53,3 +53,8 @@ reservations with REST/UI approval and resume. The fitted temperature worsens
 heldout NLL and Brier; the default remains T=1. The separate 210-run local sweep
 is still running and is excluded from this snapshot. These additions do not
 close the full B9/B12/B17 requirements.
+
+For the current cross-track queue, publication state, fault-1 semantics and demo
+requirements, see [Project status](project-status.md). The original provider-side
+silent-truncation assumption is withdrawn for the tested mode-A configuration;
+pre-upload `answer_truncation` has measured Kaggle and Token Factory evidence.

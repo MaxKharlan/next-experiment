@@ -28,8 +28,17 @@ data fraction and seed count. The pair is not submitted if its estimate exceeds
 the remaining budget after recorded LLM costs.
 
 Training costs are estimates from the repository's token-price model, not
-provider billing records. Future LLM calls are not reserved, so this is not
-a hard cap on all API spending. An approved full retrain is priced separately.
+provider billing records. Since PR #85, live inference reserves estimated input
+and maximum output usage in a durable SQLite ledger before each request. Paid
+probes and causal pairs pause for REST/UI approval and resume from saved state.
+Unknown outcomes retain reservations. These estimates do not enforce a cap at the
+provider; invoice reconciliation, Tavily dollars and an approved full retrain
+remain separate. See [the B17 implementation boundaries](next-batch-20261019.md).
+
+Explicit case validation rejects unsupported message roles, blank content and
+missing user prompts in all four splits before starting a worker. Nonempty damaged
+training labels remain inspectable. Length preflight and answer damage are
+separate checks; see [fault 1 semantics](fault-1-semantics.md).
 
 Historical reports and the local-training backend retain their existing
 behavior. New live TF investigations require the complete protocol.

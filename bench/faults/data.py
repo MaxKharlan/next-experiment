@@ -33,8 +33,8 @@ from pathlib import Path
 from typing import Any, Literal
 
 # fault class -> named strengths: the share of examples whose answer is cut. A
-# first guess, set from the effect check in A5. "answer_truncation" is not in
-# core.agent.schemas.FaultClass yet: it joins the catalog with its probe and pair
+# named injection strengths. answer_truncation is a separate catalog class from
+# legacy custom-trainer truncation; manifests are evaluation-only ground truth.
 ANSWER_TRUNCATION = "answer_truncation"
 STRENGTHS: dict[str, dict[str, float]] = {
     ANSWER_TRUNCATION: {"mild": 0.1, "strong": 0.3},

@@ -48,9 +48,11 @@ def demo_index() -> list[dict[str, str]]:
             "title": d.get("title", name),
             "note": d.get("note", ""),
             "status": d["report"]["status"],
-            "category": "Local audits"
+            "category": "Measured experiments"
+            if d["report"].get("measured_experiment")
+            else "Local audits"
             if d["report"].get("audit_only")
-            else "Causally confirmed"
+            else "Agent investigations"
             if d["report"]["status"] == "confirmed"
             else "Unconfirmed traces",
         }
@@ -433,9 +435,15 @@ def _summary(report: dict[str, Any]) -> dict[str, Any]:
         for step in report.get("steps", [])
         if step["kind"] == "intervention"
     )
+    measurement = report.get("measured_experiment")
+    if measurement:
+        training = measurement["estimated_training_cost_usd"]
     return {
+        "measured_experiment": measurement,
         "estimated_training_cost_usd": training,
-        "estimated_total_cost_usd": training + report.get("llm_cost_usd", 0.0),
+        "estimated_total_cost_usd": (
+            training + report.get("llm_cost_usd", 0.0) if training is not None else None
+        ),
         "status": report["status"],
         "audit_only": report.get("audit_only", False),
         "evidence_scope": report.get("evidence_scope"),

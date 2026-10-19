@@ -68,7 +68,7 @@ def test_hypotheses_are_cleaned_for_mode_a():
     assert [h.id for h in found] == ["h1", "h2"]
     assert sum(h.prior for h in found) == pytest.approx(1.0)
     step, version, messages = router.sent[0]
-    assert (step, version) == ("hypotheses", "hypotheses-v3")
+    assert (step, version) == ("hypotheses", "hypotheses-v4")
     assert "close to the base model" in messages[1]["content"]
 
 

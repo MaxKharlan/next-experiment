@@ -32,7 +32,7 @@ sequences. No router, provider or training call is made. The diagnosis remains
 Open the API screen and expand **Inspect local training labels · free** to paste
 the request. The event card shows all three audit statuses and expandable details.
 The public demo hides the form and rejects creation and access to local audit
-investigations. Static pages keep the form hidden.
+investigations. Since PR #83, static Pages exposes a browser-only label audit; pasted rows stay in the browser and do not create a persisted API investigation.
 
 This endpoint inspects labels. Parameter and gradient inventories remain trainer
 artifacts; arbitrary trainer-summary uploads are not supported. The endpoint

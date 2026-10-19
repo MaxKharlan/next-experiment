@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+CATALOG_VERSION = "answer-cut-v1"
+
 
 @dataclass(frozen=True)
 class Fault:

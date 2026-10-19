@@ -1,0 +1,623 @@
+{
+  "title": "Answer cuts on Kaggle T4 \u2014 measured experiment",
+  "note": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+  "case": {
+    "kind": "measured_experiment",
+    "task": "banking77",
+    "symptom": "30% of training answers were cut before training.",
+    "job": {
+      "model": "Qwen/Qwen3-0.6B"
+    }
+  },
+  "report": {
+    "investigation_id": "answer-cut-kaggle",
+    "status": "measured",
+    "hypotheses": [],
+    "llm_calls": {},
+    "llm_cost_usd": 0.0,
+    "evidence_scope": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+    "measured_experiment": {
+      "backend": "Kaggle T4",
+      "model": "Qwen/Qwen3-0.6B",
+      "task": "banking77",
+      "evaluation": {
+        "split": "check",
+        "sha256": "5a3e4f7fb46dcb95555c8e01fbb4d84b121e1f54fe152c0019952b742fe2401a",
+        "examples": 770,
+        "metric": "exact_match"
+      },
+      "evaluation_provenance": "Check file hash and size recorded in the Kaggle bundle.",
+      "runs": [
+        {
+          "run_id": "healthy-s0",
+          "role": "healthy",
+          "seed": 0,
+          "metric": 0.8909090909090909,
+          "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "healthy-s1",
+          "role": "healthy",
+          "seed": 1,
+          "metric": 0.887012987012987,
+          "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "healthy-s2",
+          "role": "healthy",
+          "seed": 2,
+          "metric": 0.8701298701298701,
+          "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "answers-cut-30-s0",
+          "role": "damaged",
+          "seed": 0,
+          "metric": 0.6584415584415585,
+          "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "answers-cut-30-s1",
+          "role": "damaged",
+          "seed": 1,
+          "metric": 0.6519480519480519,
+          "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "answers-cut-30-s2",
+          "role": "damaged",
+          "seed": 2,
+          "metric": 0.6636363636363637,
+          "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "cut30-target-s0",
+          "role": "target",
+          "seed": 0,
+          "metric": 0.8012987012987013,
+          "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "cut30-target-s1",
+          "role": "target",
+          "seed": 1,
+          "metric": 0.8077922077922078,
+          "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "cut30-target-s2",
+          "role": "target",
+          "seed": 2,
+          "metric": 0.8025974025974026,
+          "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "cut30-control-s0",
+          "role": "control",
+          "seed": 0,
+          "metric": 0.6246753246753247,
+          "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "cut30-control-s1",
+          "role": "control",
+          "seed": 1,
+          "metric": 0.6142857142857143,
+          "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        },
+        {
+          "run_id": "cut30-control-s2",
+          "role": "control",
+          "seed": 2,
+          "metric": 0.6233766233766234,
+          "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+          "hyperparameters": {
+            "n_epochs": 1,
+            "batch_size": 8,
+            "learning_rate": 0.0001,
+            "warmup_ratio": 0.0,
+            "weight_decay": 0.0,
+            "max_grad_norm": 1.0,
+            "lora_r": 16,
+            "lora_alpha": 16,
+            "lora_dropout": 0.05,
+            "context_length": 8192
+          },
+          "summary_path": null
+        }
+      ],
+      "means": {
+        "healthy": 0.8826839826839826,
+        "damaged": 0.658008658008658,
+        "target": 0.803896103896104,
+        "control": 0.6207792207792208
+      },
+      "causal_result": {
+        "status": "confirmed",
+        "effect": 0.18311688311688323,
+        "ci_low": 0.17250347698488058,
+        "ci_high": 0.19373028924888588,
+        "p_value": 0.05,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "noise_sd": null,
+      "permutation_gate_applied": true,
+      "quality_drop": 0.22467532467532458,
+      "gap_to_healthy": 0.07878787878787863,
+      "estimated_training_cost_usd": null,
+      "scope": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+      "limitations": [
+        "One task and one model; unique root-cause specificity is not established.",
+        "Target and control keep 6144 examples each; control uses about 9% more training tokens.",
+        "Three seeds per arm; noise is estimated from these arms. The separate three-run 10% damage condition is not shown here.",
+        "Permutation p is 0.05, the smallest value three seeds per arm allow.",
+        "Check-set results; no final untouched test-set evaluation or full agent trace."
+      ],
+      "sources": [
+        {
+          "path": "docs/results/answer-cut-kaggle-20261019/bundles/answers-cut-30.json",
+          "sha256": "9a595187ed1f6d5dce73012cc25ce08129ae46cc206457a106d7f75bc03c783a",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-kaggle-20261019/bundles/answers-cut-30.json"
+        },
+        {
+          "path": "docs/results/answer-cut-kaggle-20261019/analysis-30.json",
+          "sha256": "df2c86b342d6da8ee0654046af06a810db9816c709748856866b57c07108bb2c",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-kaggle-20261019/analysis-30.json"
+        },
+        {
+          "path": "docs/results/answer-cut-kaggle-20261019/evidence/pair.json",
+          "sha256": "93aba1c935c7dabd77fa417c2e884f710e9853e863eae28ae06235939ff356c7",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-kaggle-20261019/evidence/pair.json"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "kind": "measured_experiment",
+        "measurement": {
+          "backend": "Kaggle T4",
+          "model": "Qwen/Qwen3-0.6B",
+          "task": "banking77",
+          "evaluation": {
+            "split": "check",
+            "sha256": "5a3e4f7fb46dcb95555c8e01fbb4d84b121e1f54fe152c0019952b742fe2401a",
+            "examples": 770,
+            "metric": "exact_match"
+          },
+          "evaluation_provenance": "Check file hash and size recorded in the Kaggle bundle.",
+          "runs": [
+            {
+              "run_id": "healthy-s0",
+              "role": "healthy",
+              "seed": 0,
+              "metric": 0.8909090909090909,
+              "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "healthy-s1",
+              "role": "healthy",
+              "seed": 1,
+              "metric": 0.887012987012987,
+              "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "healthy-s2",
+              "role": "healthy",
+              "seed": 2,
+              "metric": 0.8701298701298701,
+              "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "answers-cut-30-s0",
+              "role": "damaged",
+              "seed": 0,
+              "metric": 0.6584415584415585,
+              "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "answers-cut-30-s1",
+              "role": "damaged",
+              "seed": 1,
+              "metric": 0.6519480519480519,
+              "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "answers-cut-30-s2",
+              "role": "damaged",
+              "seed": 2,
+              "metric": 0.6636363636363637,
+              "train_sha256": "16370d741a86d69f70e8c526f4ff21193b7f37245b5b81a90031bc348cb08c82",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "cut30-target-s0",
+              "role": "target",
+              "seed": 0,
+              "metric": 0.8012987012987013,
+              "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "cut30-target-s1",
+              "role": "target",
+              "seed": 1,
+              "metric": 0.8077922077922078,
+              "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "cut30-target-s2",
+              "role": "target",
+              "seed": 2,
+              "metric": 0.8025974025974026,
+              "train_sha256": "e0cd8a4a5458ff45fcd75a25400f156171b7dd7d51d3062d324d4c907c559e24",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "cut30-control-s0",
+              "role": "control",
+              "seed": 0,
+              "metric": 0.6246753246753247,
+              "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "cut30-control-s1",
+              "role": "control",
+              "seed": 1,
+              "metric": 0.6142857142857143,
+              "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            },
+            {
+              "run_id": "cut30-control-s2",
+              "role": "control",
+              "seed": 2,
+              "metric": 0.6233766233766234,
+              "train_sha256": "6f288b8a1616eec4254de5c63ceb92fe45b5d402133b7928daa3d8b72913f7f9",
+              "hyperparameters": {
+                "n_epochs": 1,
+                "batch_size": 8,
+                "learning_rate": 0.0001,
+                "warmup_ratio": 0.0,
+                "weight_decay": 0.0,
+                "max_grad_norm": 1.0,
+                "lora_r": 16,
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "context_length": 8192
+              },
+              "summary_path": null
+            }
+          ],
+          "means": {
+            "healthy": 0.8826839826839826,
+            "damaged": 0.658008658008658,
+            "target": 0.803896103896104,
+            "control": 0.6207792207792208
+          },
+          "causal_result": {
+            "status": "confirmed",
+            "effect": 0.18311688311688323,
+            "ci_low": 0.17250347698488058,
+            "ci_high": 0.19373028924888588,
+            "p_value": 0.05,
+            "min_effect": 0.06,
+            "reason": "the fix beats the control beyond the noise"
+          },
+          "noise_sd": null,
+          "permutation_gate_applied": true,
+          "quality_drop": 0.22467532467532458,
+          "gap_to_healthy": 0.07878787878787863,
+          "estimated_training_cost_usd": null,
+          "scope": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+          "limitations": [
+            "One task and one model; unique root-cause specificity is not established.",
+            "Target and control keep 6144 examples each; control uses about 9% more training tokens.",
+            "Three seeds per arm; noise is estimated from these arms. The separate three-run 10% damage condition is not shown here.",
+            "Permutation p is 0.05, the smallest value three seeds per arm allow.",
+            "Check-set results; no final untouched test-set evaluation or full agent trace."
+          ],
+          "sources": [
+            {
+              "path": "docs/results/answer-cut-kaggle-20261019/bundles/answers-cut-30.json",
+              "sha256": "9a595187ed1f6d5dce73012cc25ce08129ae46cc206457a106d7f75bc03c783a",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-kaggle-20261019/bundles/answers-cut-30.json"
+            },
+            {
+              "path": "docs/results/answer-cut-kaggle-20261019/analysis-30.json",
+              "sha256": "df2c86b342d6da8ee0654046af06a810db9816c709748856866b57c07108bb2c",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-kaggle-20261019/analysis-30.json"
+            },
+            {
+              "path": "docs/results/answer-cut-kaggle-20261019/evidence/pair.json",
+              "sha256": "93aba1c935c7dabd77fa417c2e884f710e9853e863eae28ae06235939ff356c7",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-kaggle-20261019/evidence/pair.json"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
