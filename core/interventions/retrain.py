@@ -48,6 +48,7 @@ class RetrainPlan:
     # the job that stands for the failed model; None trains the failed recipe too
     failed_job_id: str | None = None
     jobs: list[str] = field(default_factory=lambda: ["fixed"])
+    data_patch: dict[str, Any] | None = None
 
     @property
     def hyperparameters(self) -> dict[str, Any]:
@@ -125,6 +126,8 @@ class Retrainer:
         on_step: Callable[[dict[str, Any]], None] | None = None,
     ) -> dict[str, Any]:
         """Train, score the three models and return the comparison step."""
+        if plan.data_patch is not None:
+            raise ValueError("Data patches require the provenance-bound data retrainer")
         state_key = f"{self.prefix}/retrain.json"
         state = (
             json.loads(self.storage.get_text(state_key))

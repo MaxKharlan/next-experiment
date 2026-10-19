@@ -118,7 +118,9 @@ def investigate_with_answers(ctx, case, router, run_pair, **kwargs):
         recipe_proposal = kwargs.pop("propose_retrain", None)
 
         def proposal(target, control):
-            if isinstance(target, AnswerDrop):
+            if isinstance(target, AnswerDrop) and not getattr(
+                recipe_proposal, "supports_answer_drop", False
+            ):
                 return None
             return recipe_proposal(target, control) if recipe_proposal else None
 
@@ -187,7 +189,9 @@ def investigate_with_answers(ctx, case, router, run_pair, **kwargs):
     recipe_proposal = kwargs.pop("propose_retrain", None)
 
     def proposal(target, control):
-        if isinstance(target, AnswerDrop):
+        if isinstance(target, AnswerDrop) and not getattr(
+            recipe_proposal, "supports_answer_drop", False
+        ):
             return None
         return recipe_proposal(target, control) if recipe_proposal else None
 

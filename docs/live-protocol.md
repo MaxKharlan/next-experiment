@@ -32,8 +32,10 @@ provider billing records. Since PR #85, live inference reserves estimated input
 and maximum output usage in a durable SQLite ledger before each request. Paid
 probes and causal pairs pause for REST/UI approval and resume from saved state.
 Unknown outcomes retain reservations. These estimates do not enforce a cap at the
-provider; invoice reconciliation, Tavily dollars and an approved full retrain
-remain separate. See [the B17 implementation boundaries](next-batch-20261019.md).
+provider. Approved answer-drop retraining now reserves and records its training
+estimate in the same ledger. Invoice reconciliation, Tavily dollars and the legacy
+recipe-retrain budget path remain separate. See the
+[answer-drop retrain contract](answer-data-retrain.md). See [the B17 implementation boundaries](next-batch-20261019.md).
 
 Explicit case validation rejects unsupported message roles, blank content and
 missing user prompts in all four splits before starting a worker. Nonempty damaged
