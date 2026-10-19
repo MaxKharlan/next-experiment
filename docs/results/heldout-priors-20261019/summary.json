@@ -1,0 +1,86 @@
+{
+  "split": "heldout",
+  "case_count": 8,
+  "draw_sha256": {
+    "ho-def-fault6-mild-s0": "7d7b85306f21d11cd703eece9beb0efe2537a186fa439232fe3868a674ae0801",
+    "ho-def-fault6-strong-s0": "86d409862c60bc2a087309d125ed8b319d1c2220ad96318594f32f0408a0b721",
+    "ho-e12-fault6-mild-s0": "702b3e0c317ab7ea3c29df3254a527744290197d90dc477ceaecf4581b53bdc9",
+    "ho-e12-fault6-strong-s0": "6a6b5b292647dd4634638e0c2b515d2a2a8bb3a3f3cfbe259d70b85bdac6b096",
+    "ho-e12-healthy-s0": "7e5ffc7ec4dfb7dc8da7e154ab71d94ab0a02734f1676b2512af21aa8651ebe3",
+    "ho-e6-fault6-mild-s0": "debaf86b569ba986fb2655a9c5d4f3913e7bca6e3cf38940ef746e0982e42438",
+    "ho-e6-fault6-strong-s0": "7e6f7e64cab1372b1193ef24b95eb377850032cc462dd42a691149cbb76f639f",
+    "ho-e6-healthy-s0": "0bfa1cc57fae79b6923d4b46244bd89a484b81604f5f4590a1ed0b99bf5922e3"
+  },
+  "llm": {
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "calls": 8,
+      "tokens_in": 15080,
+      "tokens_out": 10063,
+      "cost_usd": 0.0135807,
+      "latency_ms": 58863
+    }
+  },
+  "spending": {
+    "cap_usd": 0.5,
+    "committed_usd": 0.0135807,
+    "available_usd": 0.4864193,
+    "operations": [
+      {
+        "id": "6e3b4306a20e4526abc01e830b7efdc6",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.0073575,
+        "actual_usd": 0.0014661,
+        "status": "settled"
+      },
+      {
+        "id": "ba844e235a0e47ee954ee14afb507cc6",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.0073395,
+        "actual_usd": 0.0018654000000000001,
+        "status": "settled"
+      },
+      {
+        "id": "aafa50e09344428583985028eabbe53f",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.007623,
+        "actual_usd": 0.0018198,
+        "status": "settled"
+      },
+      {
+        "id": "618216a2eabe456998984d68d4e1e587",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.0076167,
+        "actual_usd": 0.0016527,
+        "status": "settled"
+      },
+      {
+        "id": "2001052afff94de197025e22bc83b022",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.0076371,
+        "actual_usd": 0.0020124,
+        "status": "settled"
+      },
+      {
+        "id": "f3111f26f5bd469b86150620b6a328cf",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.007440899999999999,
+        "actual_usd": 0.0015765,
+        "status": "settled"
+      },
+      {
+        "id": "9cb46c1f27ea46b987bc25f99c56e980",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.007436399999999999,
+        "actual_usd": 0.0015435,
+        "status": "settled"
+      },
+      {
+        "id": "e8666458ddb940f997fa99aa398a3d01",
+        "purpose": "inference:nvidia/nemotron-3-super-120b-a12b",
+        "reserved_usd": 0.0074502,
+        "actual_usd": 0.0016443000000000002,
+        "status": "settled"
+      }
+    ]
+  }
+}

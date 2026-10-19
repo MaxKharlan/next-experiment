@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 import time
+import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
@@ -80,8 +81,9 @@ def extract_json(text: str) -> str:
 
 
 class TokenFactory:
-    def __init__(self, client: OpenAI, settings: Settings):
+    def __init__(self, client: OpenAI, settings: Settings, *, spending=None):
         self.client = client
+        self.spending = spending
         self.settings = settings
         # per model: index into JSON_FORMATS that the endpoint accepted last time
         self.format_level: dict[str, int] = {}
@@ -119,7 +121,24 @@ class TokenFactory:
         if response_format is not None:
             extra["response_format"] = response_format
         started = time.monotonic()
-        reply = self.client.chat.completions.create(
+        reservation = None
+        client = self.client
+        if self.spending is not None:
+            if model not in PRICES_USD_PER_M:
+                raise ValueError("Cannot reserve inference cost for an unpriced model")
+            if type(max_tokens) is not int or max_tokens < 1:
+                raise ValueError("max_tokens must be a positive integer")
+            # UTF-8 bytes overestimate content tokens; reserve additional framing.
+            # This is a conservative estimate, not a provider-enforced cap.
+            input_bound = (
+                len(json.dumps([messages, extra], ensure_ascii=False).encode()) + 4096
+            )
+            price_in, price_out = PRICES_USD_PER_M[model]
+            amount = (input_bound * price_in + max_tokens * price_out) / 1_000_000
+            reservation = uuid.uuid4().hex
+            self.spending.reserve(reservation, f"inference:{model}", amount)
+            client = self.client.with_options(max_retries=0)
+        reply = client.chat.completions.create(
             model=model,
             messages=messages,
             max_tokens=max_tokens,
@@ -127,15 +146,22 @@ class TokenFactory:
             **extra,
         )
         usage = reply.usage
+        if reservation is not None and usage is None:
+            raise RuntimeError(
+                "Provider omitted usage; inference reservation remains pending"
+            )
         tokens_in = usage.prompt_tokens if usage else 0
         tokens_out = usage.completion_tokens if usage else 0
         price_in, price_out = PRICES_USD_PER_M.get(model, (0.0, 0.0))
+        cost = (tokens_in * price_in + tokens_out * price_out) / 1_000_000
+        if reservation is not None:
+            self.spending.settle(reservation, cost)
         return CallResult(
             model=model,
             text=reply.choices[0].message.content or "",
             tokens_in=tokens_in,
             tokens_out=tokens_out,
-            cost_usd=(tokens_in * price_in + tokens_out * price_out) / 1_000_000,
+            cost_usd=cost,
             latency_ms=int((time.monotonic() - started) * 1000),
         )
 

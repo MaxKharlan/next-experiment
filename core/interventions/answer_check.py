@@ -9,7 +9,7 @@ import random
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-from core.agent.loop import investigate
+from core.agent.loop import PaidStepApprovalRequired, investigate
 from core.interventions.data_pairs import answer_cut_pair, flagged_lines
 from core.interventions.pairs import BUILDERS, Intervention, make_pair
 from core.interventions.tf_runner import TokenFactoryPairRunner
@@ -90,6 +90,48 @@ def bind_pair(hypothesis_id, raw, source_sha256):
 
 def investigate_with_answers(ctx, case, router, run_pair, **kwargs):
     """Run the free data check before hypotheses, then use the existing loop."""
+    resume_state = kwargs.get("resume_state")
+    if resume_state is not None:
+        saved = next(
+            (
+                step
+                for step in resume_state["steps"]
+                if step.get("probe") == "answer_cut"
+            ),
+            None,
+        )
+        if saved is None:
+            return investigate(ctx, case, router, run_pair, **kwargs)
+        raw = saved["raw"]
+        train = Path(ctx.files["train"])
+        source_sha256 = raw["source_sha256"]["train"]
+
+        def build(hypothesis, context):
+            if hypothesis.fault_class != "answer_truncation":
+                return make_pair(hypothesis, context)
+            pair = bind_pair(hypothesis.id, raw, source_sha256)
+            for arm in pair:
+                arm.rows(train)
+            return pair
+
+        classes = set(BUILDERS) | {"answer_truncation"}
+        recipe_proposal = kwargs.pop("propose_retrain", None)
+
+        def proposal(target, control):
+            if isinstance(target, AnswerDrop):
+                return None
+            return recipe_proposal(target, control) if recipe_proposal else None
+
+        return investigate(
+            ctx,
+            case,
+            router,
+            run_pair,
+            pair_factory=build,
+            testable_classes=classes,
+            propose_retrain=proposal,
+            **kwargs,
+        )
     probe = AnswerCut()
     if not getattr(run_pair, "supports_answer_drop", False) or not probe.available(ctx):
         return investigate(ctx, case, router, run_pair, **kwargs)
@@ -159,17 +201,21 @@ def investigate_with_answers(ctx, case, router, run_pair, **kwargs):
     classes = set(BUILDERS)
     if can_test:
         classes.add("answer_truncation")
-    result = investigate(
-        ctx,
-        {**case, "answer_cut_evidence": raw},
-        router,
-        run_pair,
-        pair_factory=build,
-        testable_classes=classes,
-        initial_evidence=("probe:answer_cut",),
-        propose_retrain=proposal,
-        **kwargs,
-    )
+    try:
+        result = investigate(
+            ctx,
+            {**case, "answer_cut_evidence": raw},
+            router,
+            run_pair,
+            pair_factory=build,
+            testable_classes=classes,
+            initial_evidence=("probe:answer_cut",),
+            propose_retrain=proposal,
+            **kwargs,
+        )
+    except PaidStepApprovalRequired as pause:
+        pause.proposal["continuation"]["steps"].insert(0, step)
+        raise
     result.steps.insert(0, step)
     return result
 

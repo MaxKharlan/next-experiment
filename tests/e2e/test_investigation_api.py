@@ -164,6 +164,20 @@ def test_answer_cut_investigation_survives_restart(tmp_path, monkeypatch, confir
         deadline = time.monotonic() + 5
         while time.monotonic() < deadline:
             status = client.get(root).json()["status"]
+            if status in {
+                "finished",
+                "failed",
+                "awaiting_approval",
+                "awaiting_paid_step",
+            }:
+                break
+            time.sleep(0.01)
+        assert status == "awaiting_paid_step"
+        response = client.post(f"{root}/paid-step", json={"approve": True})
+        assert response.status_code == 200, response.text
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline:
+            status = client.get(root).json()["status"]
             if status in {"finished", "failed", "awaiting_approval"}:
                 break
             time.sleep(0.01)
@@ -183,7 +197,11 @@ def test_answer_cut_investigation_survives_restart(tmp_path, monkeypatch, confir
         assert [e["seq"] for e in events] == list(range(len(events)))
         assert events[0]["type"] == "started"
         assert events[-1]["type"] == "finished"
-        assert all(e["type"] == "step" for e in events[1:-1])
+        assert all(
+            e["type"] in {"step", "awaiting_paid_step", "resumed"} for e in events[1:-1]
+        )
+        assert [e["type"] for e in events].count("awaiting_paid_step") == 1
+        assert [e["type"] for e in events].count("resumed") == 1
         steps = report["steps"]
         assert steps[0]["probe"] == "answer_cut"
         assert steps[0]["causal_check_available"] is True

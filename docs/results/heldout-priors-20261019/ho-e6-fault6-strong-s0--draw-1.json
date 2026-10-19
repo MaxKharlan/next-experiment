@@ -1,0 +1,36 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.35,
+      "rationale": "The used learning rate (3e-6) is far below the default 1e-5 and typical LoRA rates (~1e-4), which can cause the model to barely change from the base weights, resulting in poor accuracy despite decreasing loss.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.3,
+      "rationale": "A LoRA rank of 16 may be insufficient to capture the 77‑way classification mapping in a 0.6B model, limiting expressivity and causing the model to stall at low accuracy even after many epochs.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "chat_template_mismatch",
+      "location": "data (chat template used during training)",
+      "prior": 0.2,
+      "rationale": "If training employed a chat template (e.g., with system/user/assistant tags) while inference expects a plain prompt‑label format, the model learns to predict tokens from the wrong context, yielding incorrect labels despite low loss.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "dataset (training examples)",
+      "prior": 0.1,
+      "rationale": "Training examples are 45‑103 tokens, much shorter than the context length, and may not reflect the phrasing of the held‑out queries, leading to good validation loss but poor real‑world performance.",
+      "sources": []
+    }
+  ]
+}

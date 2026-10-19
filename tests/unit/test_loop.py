@@ -283,3 +283,71 @@ def test_public_demo_rejects_generated_checks_before_calls(monkeypatch):
     with pytest.raises(ValueError, match="public demo"):
         investigate(_ctx(), {}, router, lambda *_: None, sandbox_check={})
     assert router.steps == []
+
+
+def test_declined_paid_pair_never_runs_and_is_persisted():
+    router = FakeRouter([_hyp("h1", "lr_too_low", 0.9)])
+    runner, calls = _runner({"h1": ([0.5, 0.5], [0.1, 0.1])})
+    proposals = []
+
+    def decline(proposal):
+        proposals.append(proposal)
+        return False
+
+    result = investigate(
+        _ctx(),
+        {},
+        router,
+        runner,
+        probes=[],
+        explain=False,
+        intervention_cost_usd=0.1,
+        approve_paid_step=decline,
+    )
+    assert calls == []
+    assert len(proposals) == 1
+    assert proposals[0]["target"]["patch"] == {"learning_rate": 0.0001}
+    assert result.steps[-1]["reason"] == "paid causal check declined"
+    assert result.steps[-2]["approved"] is False
+
+
+def test_pair_failure_keeps_reservation(tmp_path):
+    import pytest
+
+    from core.db.spending import SpendingLedger
+
+    ledger = SpendingLedger(tmp_path / "budget.db", 1)
+    router = FakeRouter([_hyp("h1", "lr_too_low", 0.9)])
+
+    def failed_pair(target, control):
+        assert ledger.snapshot()["committed_usd"] == 0.1
+        raise TimeoutError("unknown job outcome")
+
+    with pytest.raises(TimeoutError):
+        investigate(
+            _ctx(),
+            {},
+            router,
+            failed_pair,
+            probes=[],
+            explain=False,
+            intervention_cost_usd=0.1,
+            spending=ledger,
+        )
+    assert ledger.snapshot()["operations"][0]["status"] == "pending"
+
+
+def test_calibrated_priors_reach_planner_without_changing_default():
+    router = FakeRouter([_hyp("h1", "lr_too_low", 0.9)])
+    result = investigate(
+        _ctx(),
+        {},
+        router,
+        lambda *_: None,
+        probes=[],
+        causal_checks=False,
+        prior_temperature=2,
+    )
+    assert result.steps[0]["kind"] == "prior_calibration"
+    assert result.steps[1]["probs"]["h1"] == 0.75
+    assert result.steps[1]["probs"]["unlisted"] == 0.25

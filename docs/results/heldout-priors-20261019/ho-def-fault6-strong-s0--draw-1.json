@@ -1,0 +1,44 @@
+{
+  "hypotheses": [
+    {
+      "id": "h1",
+      "fault_class": "lr_too_low",
+      "location": "hyperparameters.learning_rate",
+      "prior": 0.4,
+      "rationale": "The learning rate used (3e-6) is far below the typical LoRA rate (~1e-4) and even below the Token Factory default (1e-5). Such a low rate yields minimal parameter updates, so the model remains close to the base checkpoint and cannot learn the 77‑intent mapping, which matches the observed near‑random accuracy.",
+      "sources": []
+    },
+    {
+      "id": "h2",
+      "fault_class": "lora_rank_too_small",
+      "location": "hyperparameters.lora_r",
+      "prior": 0.2,
+      "rationale": "A LoRA rank of 8 may be insufficient to capture the full variation needed for 77 distinct intents in a 0.6B model. The validation loss stops improving after epoch 2 and predictions are semantically related but incorrect, indicating the model’s expressive capacity is saturated.",
+      "sources": []
+    },
+    {
+      "id": "h3",
+      "fault_class": "chat_template_mismatch",
+      "location": "data preprocessing (chat template)",
+      "prior": 0.15,
+      "rationale": "If the training data included chat‑specific tokens (e.g., <|im_start|>assistant) but inference expects only the raw label, the model may learn to output those tokens or omit them, producing label strings that are close variants of the true intent. The wrong answers are semantically similar but not exact, consistent with a template mismatch.",
+      "sources": []
+    },
+    {
+      "id": "h4",
+      "fault_class": "distribution_shift",
+      "location": "training data vs production queries",
+      "prior": 0.1,
+      "rationale": "With only 200 training examples the dataset likely does not cover the full variety of banking queries seen in held‑out set. The model therefore performs well on the seen patterns but fails on unseen phrasing, resulting in low accuracy despite decreasing loss.",
+      "sources": []
+    },
+    {
+      "id": "h5",
+      "fault_class": "answer_truncation",
+      "location": "user-side data preparation",
+      "prior": 0.05,
+      "rationale": "Truncated assistant answers would lead to learning incomplete labels. Although the labels are short and no explicit truncation evidence exists, some labels could have been inadvertently cut during preprocessing, contributing to the observed mismatches.",
+      "sources": []
+    }
+  ]
+}

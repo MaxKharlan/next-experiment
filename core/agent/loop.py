@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import math
 import random
+import uuid
 from collections.abc import Callable, Sequence
 from dataclasses import asdict, dataclass, field
 from typing import Any
@@ -48,6 +49,14 @@ from core.probes.level0.recipe import LEVEL0
 RunPair = Callable[[Intervention, Intervention], None]
 # (target, control) of the confirmed check -> the retrain plan to propose, or None
 ProposeRetrain = Callable[[Intervention, Intervention], dict[str, Any] | None]
+
+
+class PaidStepApprovalRequired(RuntimeError):
+    """Pause an investigation before a paid operation starts."""
+
+    def __init__(self, proposal: dict[str, Any]):
+        super().__init__("paid step requires approval")
+        self.proposal = proposal
 
 
 @dataclass
@@ -111,8 +120,18 @@ def investigate(
     causal_checks: bool = True,
     hypothesis_samples: int = 1,
     sandbox_check: dict[str, Any] | None = None,
+    prior_temperature: float = 1.0,
+    resume_state: dict | None = None,
+    spending=None,
+    approve_paid_step: Callable[[dict[str, Any]], bool] | None = None,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
+    if (
+        isinstance(prior_temperature, bool)
+        or not math.isfinite(prior_temperature)
+        or prior_temperature <= 0
+    ):
+        raise ValueError("Temperature must be finite and positive")
     if type(hypothesis_samples) is not int or not 1 <= hypothesis_samples <= 5:
         raise ValueError("hypothesis_samples must be an integer from 1 to 5")
     if initial_hypotheses is not None and hypothesis_samples != 1:
@@ -129,96 +148,184 @@ def investigate(
         if on_step is not None:
             on_step(step)
 
-    label_checks = None
-    if "training_labels" in case:
-        if ctx.mode != "B":
-            raise ValueError("training_labels are supported only in mode B")
-        label_checks = check_training_labels(case["training_labels"])
-        case = {k: v for k, v in case.items() if k != "training_labels"}
-        case["training_label_checks"] = label_checks
-        add({"kind": "training_label_checks", "raw": label_checks, "cost_usd": 0.0})
+    def reserve_paid(kind, amount, details):
+        proposal = {
+            "kind": kind,
+            "estimated_cost_usd": amount,
+            **details,
+            "continuation": checkpoint,
+        }
+        if amount > 0 and approve_paid_step is not None:
+            approved = approve_paid_step(proposal)
+            add(
+                {
+                    "kind": "paid_step_approval",
+                    "proposal": {
+                        k: v for k, v in proposal.items() if k != "continuation"
+                    },
+                    "approved": approved is True,
+                }
+            )
+            if approved is not True:
+                return False, None
+        operation_id = uuid.uuid4().hex
+        if spending is not None and amount > 0:
+            spending.reserve(operation_id, kind, amount)
+            add(
+                {
+                    "kind": "spending_reserved",
+                    "operation_id": operation_id,
+                    "proposal": {
+                        k: v for k, v in proposal.items() if k != "continuation"
+                    },
+                }
+            )
+            return True, operation_id
+        return True, None
 
-    sandbox_evidence = None
-    if sandbox_check is not None:
-        from core.config import get_settings
+    if resume_state is None:
+        label_checks = None
+        if "training_labels" in case:
+            if ctx.mode != "B":
+                raise ValueError("training_labels are supported only in mode B")
+            label_checks = check_training_labels(case["training_labels"])
+            case = {k: v for k, v in case.items() if k != "training_labels"}
+            case["training_label_checks"] = label_checks
+            add({"kind": "training_label_checks", "raw": label_checks, "cost_usd": 0.0})
 
-        if get_settings().public_demo:
-            raise ValueError("Generated sandbox checks are disabled in public demo")
-        if ctx.budget_left_usd <= router.log.cost_usd:
-            raise ValueError("No remaining budget for check generation")
-        generation_cost_before = router.log.cost_usd
-        sandbox_evidence = generated_check(router, sandbox_check)
+        sandbox_evidence = None
+        if sandbox_check is not None:
+            from core.config import get_settings
+
+            if get_settings().public_demo:
+                raise ValueError("Generated sandbox checks are disabled in public demo")
+            if ctx.budget_left_usd <= router.log.cost_usd:
+                raise ValueError("No remaining budget for check generation")
+            generation_cost_before = router.log.cost_usd
+            sandbox_evidence = generated_check(router, sandbox_check)
+            add(
+                {
+                    "kind": "sandbox_check",
+                    "raw": sandbox_evidence,
+                    "cost_usd": router.log.cost_usd - generation_cost_before,
+                }
+            )
+            case = {**case, "sandbox_check": sandbox_evidence}
+
+        if tavily is not None:
+            job = case.get(
+                "job", {"hyperparameters": ctx.job_config.get("hyperparameters")}
+            )
+            try:
+                found = find_known_issues(
+                    tavily, ctx.investigation_id, job, case.get("symptom", "")
+                )
+                case = {
+                    **case,
+                    "known_issues": [
+                        {k: s[k] for k in ("title", "url", "snippet")}
+                        for s in found["sources"]
+                    ],
+                }
+                add({"kind": "known_issues", **found})
+            except (TavilyBudgetError, httpx.HTTPError) as err:
+                add({"kind": "known_issues", "error": str(err)})
+        if hypothesis_samples > 1:
+            hypotheses, sampling = sample_hypotheses(
+                router,
+                case,
+                mode=ctx.mode,
+                samples=hypothesis_samples,
+                budget_usd=ctx.budget_left_usd,
+            )
+            add(sampling)
+        else:
+            hypotheses = (
+                propose_hypotheses(router, case, mode=ctx.mode)
+                if initial_hypotheses is None
+                else list(initial_hypotheses)
+            )
+        if prior_temperature != 1.0:
+            from core.agent.prior_calibration import calibrate
+
+            hypotheses, calibration_step = calibrate(hypotheses, prior_temperature)
+            add(calibration_step)
+        by_id = {h.id: h for h in hypotheses}
+        classes = {h.id: h.fault_class for h in hypotheses}
+        probs = {h.id: h.prior for h in hypotheses}
+        rest = 1 - sum(probs.values())
+        if rest > 1e-9:  # causes outside the list keep their share of the mass
+            probs["unlisted"], classes["unlisted"] = rest, "unlisted"
+        supported = set(BUILDERS) if testable_classes is None else testable_classes
+        testable = {h.id for h in hypotheses if h.fault_class in supported}
+        remaining = {p.name: p for p in probes if p.available(ctx)}
+        base_hp = dict(ctx.job_config.get("hyperparameters", {}))
+        evidence: list[str] = list(initial_evidence)
+        if sandbox_evidence is not None:
+            evidence.append("sandbox_check")
+        if label_checks is not None:
+            evidence.append("training_label_checks")
+        result = InvestigationResult(
+            ctx.investigation_id, "inconclusive", hypotheses, steps=steps
+        )
         add(
             {
-                "kind": "sandbox_check",
-                "raw": sandbox_evidence,
-                "cost_usd": router.log.cost_usd - generation_cost_before,
+                "kind": "hypotheses",
+                "hypotheses": [h.model_dump() for h in hypotheses],
+                "probs": _rounded(probs),
             }
         )
-        case = {**case, "sandbox_check": sandbox_evidence}
+        interventions = 0
+        tested: set[str] = set()
 
-    if tavily is not None:
-        job = case.get(
-            "job", {"hyperparameters": ctx.job_config.get("hyperparameters")}
-        )
-        try:
-            found = find_known_issues(
-                tavily, ctx.investigation_id, job, case.get("symptom", "")
-            )
-            case = {
-                **case,
-                "known_issues": [
-                    {k: s[k] for k in ("title", "url", "snippet")}
-                    for s in found["sources"]
-                ],
-            }
-            add({"kind": "known_issues", **found})
-        except (TavilyBudgetError, httpx.HTTPError) as err:
-            add({"kind": "known_issues", "error": str(err)})
-    if hypothesis_samples > 1:
-        hypotheses, sampling = sample_hypotheses(
-            router,
-            case,
-            mode=ctx.mode,
-            samples=hypothesis_samples,
-            budget_usd=ctx.budget_left_usd,
-        )
-        add(sampling)
     else:
-        hypotheses = (
-            propose_hypotheses(router, case, mode=ctx.mode)
-            if initial_hypotheses is None
-            else list(initial_hypotheses)
+        from core.telemetry.calls import LLMCall
+
+        if resume_state.get("version") != 1:
+            raise ValueError("Unsupported investigation continuation")
+        hypotheses = [Hypothesis.model_validate(h) for h in resume_state["hypotheses"]]
+        by_id = {h.id: h for h in hypotheses}
+        classes = resume_state["classes"]
+        probs = resume_state["probs"]
+        testable = set(resume_state["testable"])
+        remaining = {p.name: p for p in probes if p.name in resume_state["remaining"]}
+        if set(remaining) != set(resume_state["remaining"]):
+            raise ValueError("Continuation requires the original probes")
+        base_hp = resume_state["base_hp"]
+        evidence = resume_state["evidence"]
+        steps.extend(resume_state["steps"])
+        interventions = resume_state["interventions"]
+        tested = set(resume_state["tested"])
+        ctx.budget_left_usd = resume_state["budget_left_usd"]
+        router.log.calls = [LLMCall(**c) for c in resume_state["llm_calls"]]
+        router.mismatches = resume_state["mismatches"]
+
+        def tuples(value):
+            return tuple(tuples(v) for v in value) if isinstance(value, list) else value
+
+        rng.setstate(tuples(resume_state["rng"]))
+        result = InvestigationResult(
+            ctx.investigation_id, "inconclusive", hypotheses, steps=steps
         )
-    by_id = {h.id: h for h in hypotheses}
-    classes = {h.id: h.fault_class for h in hypotheses}
-    probs = {h.id: h.prior for h in hypotheses}
-    rest = 1 - sum(probs.values())
-    if rest > 1e-9:  # causes outside the list keep their share of the mass
-        probs["unlisted"], classes["unlisted"] = rest, "unlisted"
-    supported = set(BUILDERS) if testable_classes is None else testable_classes
-    testable = {h.id for h in hypotheses if h.fault_class in supported}
-    remaining = {p.name: p for p in probes if p.available(ctx)}
-    base_hp = dict(ctx.job_config.get("hyperparameters", {}))
-    evidence: list[str] = list(initial_evidence)
-    if sandbox_evidence is not None:
-        evidence.append("sandbox_check")
-    if label_checks is not None:
-        evidence.append("training_label_checks")
-    result = InvestigationResult(
-        ctx.investigation_id, "inconclusive", hypotheses, steps=steps
-    )
-    add(
-        {
-            "kind": "hypotheses",
-            "hypotheses": [h.model_dump() for h in hypotheses],
-            "probs": _rounded(probs),
-        }
-    )
-    interventions = 0
-    tested: set[str] = set()
 
     while True:
+        checkpoint = {
+            "version": 1,
+            "hypotheses": [h.model_dump() for h in hypotheses],
+            "classes": dict(classes),
+            "probs": dict(probs),
+            "testable": sorted(testable),
+            "remaining": list(remaining),
+            "base_hp": base_hp,
+            "evidence": list(evidence),
+            "steps": list(steps),
+            "interventions": interventions,
+            "tested": sorted(tested),
+            "budget_left_usd": ctx.budget_left_usd,
+            "llm_calls": [asdict(c) for c in router.log.calls],
+            "mismatches": getattr(router, "mismatches", 0),
+            "rng": rng.getstate(),
+        }
         candidates = [h.id for h in hypotheses if h.id in testable]
         # Scheduling conditions on causes that have not been tested.
         # The reported belief still includes tested causes and unlisted mass.
@@ -286,9 +393,24 @@ def investigate(
                     }
                 )
                 break
+            approved, reservation = reserve_paid(
+                "probe", estimated_cost, {"probe": probe_name}
+            )
+            if not approved:
+                add({"kind": "stop", "reason": "paid probe declined"})
+                break
             run = probe.run(ctx)
             if not math.isfinite(run.cost_usd) or run.cost_usd < 0:
                 raise ValueError("The probe cost must be finite and nonnegative")
+            if reservation is not None:
+                spending.settle(reservation, run.cost_usd)
+                add(
+                    {
+                        "kind": "spending_settled",
+                        "operation_id": reservation,
+                        "cost_usd": run.cost_usd,
+                    }
+                )
             ctx.budget_left_usd -= run.cost_usd
             probs = update(probs, classes, probe_name, run.outcome)
             step = {
@@ -347,7 +469,29 @@ def investigate(
                 }
             )
             break
+        approved, reservation = reserve_paid(
+            "causal_check",
+            check_cost,
+            {
+                "hypothesis": leader.id,
+                "target": asdict(target),
+                "control": asdict(control),
+            },
+        )
+        if not approved:
+            add({"kind": "stop", "reason": "paid causal check declined"})
+            break
         run_pair(target, control)
+        if reservation is not None:
+            spending.settle(reservation, check_cost)
+            add(
+                {
+                    "kind": "spending_settled",
+                    "operation_id": reservation,
+                    "cost_usd": check_cost,
+                    "basis": "training estimate; not a provider invoice",
+                }
+            )
         check = causal_check(
             target.metrics, control.metrics, min_effect=min_effect, noise_sd=noise_sd
         )
