@@ -1,0 +1,77 @@
+{
+  "model": "Qwen/Qwen3-0.6B",
+  "hyperparameters": {
+    "n_epochs": 1,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192,
+    "lora": true,
+    "packing": false
+  },
+  "price_usd_per_m": 0.4,
+  "jobs": {
+    "healthy-s0": {
+      "examples": 8452,
+      "tokens": 490438,
+      "usd": 0.1962,
+      "train": "healthy-s0-train.jsonl",
+      "train_sha256": "b2c8214885c09edaab23a7be12b78c818ed749ebba9a76576d3fdcf9d5276277",
+      "validation": "artifacts/tasks/banking77/validation.jsonl",
+      "seed": 0
+    },
+    "damaged-s0": {
+      "examples": 8452,
+      "tokens": 485112,
+      "usd": 0.194,
+      "train": "damaged-s0-train.jsonl",
+      "train_sha256": "628e833711dc55f87ec15245f51a9883b1580e78496a07fda6e9324bbf532258",
+      "validation": "artifacts/tasks/banking77-answers-cut-30/validation.jsonl",
+      "seed": 0
+    },
+    "target-s0": {
+      "examples": 6144,
+      "tokens": 331163,
+      "usd": 0.1325,
+      "train": "target-s0-train.jsonl",
+      "train_sha256": "d48e0f05c0c181aac0e5b10f27be257d4483877eef9c2fef7324debb376c58b5",
+      "validation": "artifacts/tasks/banking77-answers-cut-30/validation.jsonl",
+      "seed": 0
+    },
+    "target-s1": {
+      "examples": 6144,
+      "tokens": 331163,
+      "usd": 0.1325,
+      "train": "target-s1-train.jsonl",
+      "train_sha256": "05ab0da8d672dd6d1dedd19a0a7c78301c6dd46b3beaa56970b326e209898e8e",
+      "validation": "artifacts/tasks/banking77-answers-cut-30/validation.jsonl",
+      "seed": 1
+    },
+    "control-s0": {
+      "examples": 6144,
+      "tokens": 360538,
+      "usd": 0.1442,
+      "train": "control-s0-train.jsonl",
+      "train_sha256": "01a331bc4b427e50ed2d992d0437e5cc0c69c887e496d611ce034161397af001",
+      "validation": "artifacts/tasks/banking77-answers-cut-30/validation.jsonl",
+      "seed": 0
+    },
+    "control-s1": {
+      "examples": 6144,
+      "tokens": 360538,
+      "usd": 0.1442,
+      "train": "control-s1-train.jsonl",
+      "train_sha256": "b3bc2de9a0f2790badcadd00ae4c7ecae62e60019bbde6bae8dde4a1eeeb9b03",
+      "validation": "artifacts/tasks/banking77-answers-cut-30/validation.jsonl",
+      "seed": 1
+    }
+  },
+  "tokens": 2358952,
+  "usd": 0.9436,
+  "budget_usd": 1.0
+}

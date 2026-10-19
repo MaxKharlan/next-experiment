@@ -1,0 +1,32 @@
+{
+  "cut30-target-s0": {
+    "exact_match": 0.8012987012987013,
+    "train_s": 482,
+    "eval_s": 292
+  },
+  "cut30-target-s1": {
+    "exact_match": 0.8077922077922078,
+    "train_s": 482,
+    "eval_s": 289
+  },
+  "cut30-target-s2": {
+    "exact_match": 0.8025974025974026,
+    "train_s": 483,
+    "eval_s": 281
+  },
+  "cut30-control-s0": {
+    "exact_match": 0.6246753246753247,
+    "train_s": 576,
+    "eval_s": 257
+  },
+  "cut30-control-s1": {
+    "exact_match": 0.6142857142857143,
+    "train_s": 577,
+    "eval_s": 273
+  },
+  "cut30-control-s2": {
+    "exact_match": 0.6233766233766234,
+    "train_s": 579,
+    "eval_s": 268
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "model": "Qwen/Qwen3-0.6B",
+  "fault": null,
+  "strength": null,
+  "seed": 1,
+  "hyperparameters": {
+    "n_epochs": 1,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 8192
+  },
+  "lr_schedule": "linear",
+  "device": "cuda",
+  "train_examples": 8452,
+  "valid_examples": 770,
+  "steps": 1057,
+  "answer_tokens": 52309,
+  "input_tokens": 490438,
+  "wall_seconds": 738.1,
+  "final": {
+    "valid_loss": 0.0924289756427875,
+    "valid_mean_token_accuracy": 0.9749460043196544
+  }
+}

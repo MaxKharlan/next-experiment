@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "backend": "kaggle",
+  "model": "Qwen/Qwen3-0.6B",
+  "fault": "answer_truncation",
+  "source_sha256": "8e507b44c8fa4cdcb51a2e609db0aa8d79859311aa9008d5f5fc2f5b485e5745",
+  "source_files": [],
+  "provenance": "Run roles and dataset hashes are declared by the exporter",
+  "evaluation": {
+    "split": "check",
+    "sha256": "5a3e4f7fb46dcb95555c8e01fbb4d84b121e1f54fe152c0019952b742fe2401a",
+    "examples": 770,
+    "metric": "exact_match"
+  },
+  "environment": {
+    "transformers": "5.20.0",
+    "peft": "0.21.2",
+    "repository_commit": "2cb1661",
+    "notebook": "docs/results/answer-cut-kaggle-20261019/notebook-as-run.ipynb.json (scripts embedded)",
+    "gpu": "Tesla T4",
+    "torch": "2.11.0+cu128 (printed in the interactive session on the same Kaggle image)",
+    "qwen3_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "control_description": "",
+  "runs": [
+    {
+      "run_id": "healthy-s0",
+      "role": "healthy",
+      "seed": 0,
+      "metric": 0.8909090909090909,
+      "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "healthy-s1",
+      "role": "healthy",
+      "seed": 1,
+      "metric": 0.887012987012987,
+      "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "healthy-s2",
+      "role": "healthy",
+      "seed": 2,
+      "metric": 0.8701298701298701,
+      "train_sha256": "202276206e7325f2ac20d80cf7678a8a32157b65b465ce7bf609c841824a13be",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "answers-cut-10-s0",
+      "role": "damaged",
+      "seed": 0,
+      "metric": 0.8064935064935065,
+      "train_sha256": "affb5048383f5bfb87078ee2396f9328f0472e54a41204de9c650048e8e0e5df",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "answers-cut-10-s1",
+      "role": "damaged",
+      "seed": 1,
+      "metric": 0.8090909090909091,
+      "train_sha256": "affb5048383f5bfb87078ee2396f9328f0472e54a41204de9c650048e8e0e5df",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    },
+    {
+      "run_id": "answers-cut-10-s2",
+      "role": "damaged",
+      "seed": 2,
+      "metric": 0.7896103896103897,
+      "train_sha256": "affb5048383f5bfb87078ee2396f9328f0472e54a41204de9c650048e8e0e5df",
+      "hyperparameters": {
+        "n_epochs": 1,
+        "batch_size": 8,
+        "learning_rate": 0.0001,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0,
+        "max_grad_norm": 1.0,
+        "lora_r": 16,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "context_length": 8192
+      },
+      "summary_path": null
+    }
+  ],
+  "means": {
+    "healthy": 0.8826839826839826,
+    "damaged": 0.8017316017316017
+  },
+  "min_effect": 0.06,
+  "noise_sd": null,
+  "noise_source": "estimated from these arms",
+  "new_training_jobs": 0,
+  "new_api_calls": 0,
+  "causal_result": null,
+  "status": "insufficient_evidence",
+  "quality_drop": 0.08095238095238089,
+  "reason": "Target and control measurements are required for a causal verdict"
+}
