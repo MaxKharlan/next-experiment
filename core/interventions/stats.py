@@ -1,8 +1,8 @@
 """B10 and B11: noise floor between seeds, power, and the causal check verdict.
 
-A causal check trains the same mini-job twice per seed: once with the targeted fix
-and once with a control change of the same cost. The cause is confirmed when the fix
-beats the control on the held-out metric by more than the noise between seeds.
+A check compares the targeted fix with its specified control across seeds.
+The legacy status `confirmed` means the intervention meets the decision rule.
+This calculation does not establish equal resources, unique cause or full recovery.
 """
 
 from __future__ import annotations
@@ -104,9 +104,9 @@ def causal_check(
     higher_is_better: bool = True,
     alpha: float = 0.05,
 ) -> CausalResult:
-    """Verdict on a fix versus a same-cost control, one value per seed and arm.
+    """Verdict on a fix versus its specified control, one value per seed and arm.
 
-    min_effect is the smallest improvement worth calling a cause, usually a few
+    min_effect is the smallest useful improvement, usually a few
     noise-floor SDs. With noise_sd from noise_floor() the interval uses it; without,
     it uses the pooled SD of these runs and Student's t.
     confirmed: effect >= min_effect, the interval is above zero and p <= alpha.

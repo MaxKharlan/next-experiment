@@ -20,7 +20,7 @@ test partition. Data creation and semantic review must precede those hashes.
 
 Freeze T=1, prompt versions, probe/signature versions, allowed interventions and
 budget policy. Do not import the experimental all-low-LR classifier. Treat
-hypotheses-v4 as a changed policy requiring its own evaluation, not an improvement
+hypotheses-v4 and verdict-v3 as changed policies requiring its own evaluation, not an improvement
 already established by older benchmark scores.
 
 ## Reference and control arms

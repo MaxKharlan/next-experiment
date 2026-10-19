@@ -9,14 +9,15 @@ const makeNode = () => ({
   textContent: '', innerHTML: '', hidden: false, disabled: false, value: '',
   parentElement: {hidden: false}, nextElementSibling: {}, style: {},
   classList: {remove() {}, add() {}}, removeAttribute(key) {delete this[key];},
-  appendChild(node) {this.innerHTML += node.innerHTML;}, scrollIntoView() {},
+  appendChild(node) {this.innerHTML += node.innerHTML; this.lastElementChild = node;},
+  querySelector() {return {};}, scrollIntoView() {},
 });
 const get = id => {if (!nodes.has(id)) nodes.set(id, makeNode()); return nodes.get(id);};
 const timers = new Map();
 let nextTimer = 0;
 const context = vm.createContext({
   document: {getElementById: get, documentElement: {dataset: {mode: 'static'}},
-    body: makeNode(), createElement: makeNode},
+    body: makeNode(), createElement: makeNode, querySelector: () => null},
   addEventListener() {}, matchMedia: () => ({matches: true}),
   setTimeout: fn => {timers.set(++nextTimer, fn); return nextTimer;},
   clearTimeout: id => timers.delete(id), console, URL, URLSearchParams,
@@ -99,5 +100,43 @@ async function main() {
   assert.match(get('feed').innerHTML, /&quot;files&quot;/);
   assert.match(get('feed').innerHTML, /&lt;img/);
   assert.doesNotMatch(get('feed').innerHTML, /\[object Object\]|<img/);
+  // Ordinary live comparisons disclose a skipped test and never assume equal cost.
+  run('untangle = () => {};'); // Geometry is outside this DOM fixture.
+  context.comparison = {
+    kind: 'intervention', hypothesis: 'h1', cost_usd: 0, probs: {h1:.7},
+    target: {patch: {}, description: 'drop flagged rows', metrics: [.85,.86]},
+    control: {patch: {}, description: 'drop unflagged rows', metrics: [.66,.67]},
+    result: {status: 'confirmed', effect: .19, ci_low: .16, ci_high: .23, min_effect: .06, p_value: 1/6},
+    comparison_evidence: {
+      version: 'intervention-evidence-v1', target_seeds: 2, control_seeds: 2,
+      permutation: {gate: 'skipped_unattainable', minimum_attainable_p: 1/6, alpha: .05},
+      interval: {method: 'external_sd_normal', noise_sd: .019},
+    },
+  };
+  run('reset(); showStep(comparison); showStep({kind:"verdict",status:"confirmed",hypothesis_id:"h1",evidence:[],summary:"Recorded intervention benefit."});');
+  assert.match(get('feed').innerHTML, /Permutation gate skipped/);
+  assert.match(get('feed').innerHTML, /Permutation p: 0.167/);
+  assert.match(get('feed').innerHTML, /supplied noise SD 0.0190/);
+  assert.match(get('statusProof').textContent, /unique cause and full recovery are not established/);
+  assert.match(get('board').innerHTML, /fix supported in step/);
+  assert.equal(run('probs.h1'), .7);
+  assert.match(get('board').innerHTML, /70%/);
+  assert.doesNotMatch(get('board').innerHTML, /proved in step/);
+  assert.doesNotMatch(get('feed').innerHTML + get('statusProof').textContent, /same-cost|threshold for a cause/);
+  // Saved records without metadata remain playable; do not invent their settings.
+  run('reset(); showStep({...comparison,comparison_evidence:undefined});');
+  assert.match(get('feed').innerHTML, /does not record its statistical settings/);
+  assert.doesNotMatch(get('feed').innerHTML, /Permutation gate skipped/);
+  assert.equal(run('proof.p_value'), 1/6);
+  run('showStep({...comparison,probs:undefined,comparison_evidence:undefined});');
+  assert.equal(run('probs.h1'), .7); // Legacy events do not erase the last known belief.
+  context.comparison.comparison_evidence.permutation.gate = 'applied';
+  context.comparison.comparison_evidence.interval.method = 'pooled_sd_t';
+  run('reset(); showStep(comparison);');
+  assert.match(get('feed').innerHTML, /Permutation gate applied/);
+  assert.match(get('feed').innerHTML, /estimates noise from these arms/);
+  run('reset(); showStep({...comparison,result:{...comparison.result,status:"rejected"}});');
+  assert.match(get('board').innerHTML, /fix below threshold in step/);
+  assert.doesNotMatch(get('board').innerHTML, /ruled out/);
 }
 main().catch(error => {console.error(error); process.exitCode = 1;});

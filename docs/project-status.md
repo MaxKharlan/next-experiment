@@ -1,10 +1,10 @@
 # Project status — 19 October 2026
 
-Repository baseline: main `85aeebe`, including merged PRs #82–#85. CI and Pages
-succeeded on that commit. At this review there were no open PRs or GitHub Issues.
-This follow-up adds validation/replay fixes, measured answer-cut replays and the
-fault-semantics clarification. Implementation coverage and experimental coverage
-are separate below.
+Repository baseline: main `9258ae5`, including merged PRs #82–#86. PR #86
+passed CI and was merged on 19 October at 11:03 Moscow. The present follow-up
+adds explicit comparison evidence and mode boundaries; see the
+[fault-by-fault review](fault-evidence-review.md). Implementation coverage and
+experimental coverage remain separate.
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
@@ -17,11 +17,11 @@ are separate below.
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
 | B17 | #85: SQLite reservations, REST/UI paid-step approval/resume | Billing reconciliation, retrain/Tavily scope and durable multiworker ownership; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
-| Public UI | Replay selection clears prior results and ignores stale loads; nested evidence is readable; 36 saved reports | Publish this follow-up and verify deployment; this chat |
-| Cause claims | README and new prompts distinguish intervention benefit, unique cause and full recovery; legacy reports stay intact | New competing-cause evaluation; tracks A/B |
+| Public UI | Replay selection clears prior results and ignores stale loads; nested evidence is readable; 36 saved reports | Deploy the comparison-evidence follow-up and verify it; this chat |
+| Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
 | O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
 
-The concurrent B9 chat reported 94/210 completed runs at 10:48 Moscow time,
+The concurrent B9 chat reported 112/210 completed runs at 11:11 Moscow time,
 with no final analysis or fitted model yet. This is a dated checkpoint, not a live
 counter. The local sweep has no provider charge; the B12 collection in #85 records
 eight Super calls costing $0.0135807. The active training checkout is independent
@@ -29,7 +29,7 @@ from this follow-up.
 
 ## Next work, in order
 
-1. Publish and verify the validated follow-up, including the two measured replays.
+1. Review and publish the comparison-evidence follow-up. The measured replays are already in merged PR #86.
 2. Complete B9 in its existing chat. Add final results on the current main; do not
    reapply the preliminary 37-file package already merged in #85.
 3. Use the [fresh evaluation protocol](fresh-evaluation-protocol.md) to prepare

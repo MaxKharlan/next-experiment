@@ -27,7 +27,7 @@ from typing import Any
 
 import httpx
 
-from core.agent.catalog import CATALOG_VERSION
+from core.agent.catalog import CATALOG_VERSION, allowed_classes
 from core.agent.context import InvestigationContext
 from core.agent.ensemble import sample_hypotheses
 from core.agent.known_issues import find_known_issues
@@ -38,6 +38,7 @@ from core.agent.schemas import Hypothesis, Verdict
 from core.agent.steps import interpret_probe, propose_hypotheses, write_verdict
 from core.connectors.storage import Storage
 from core.connectors.tavily import Tavily, TavilyBudgetError
+from core.interventions.evidence import comparison_evidence
 from core.interventions.pairs import BUILDERS, Intervention, make_pair
 from core.interventions.stats import causal_check
 from core.planner.causal_belief import MODEL, update_causal
@@ -127,6 +128,23 @@ def investigate(
     approve_paid_step: Callable[[dict[str, Any]], bool] | None = None,
 ) -> InvestigationResult:
     """Run the loop; on_step gets every step as soon as it is recorded."""
+    if ctx.mode not in {"A", "B"}:
+        raise ValueError("Investigation mode must be A or B")
+    supplied = initial_hypotheses
+    if resume_state is not None:
+        if resume_state.get("version") != 1:
+            raise ValueError("Unsupported investigation continuation")
+        if resume_state.get("mode", ctx.mode) != ctx.mode:
+            raise ValueError("Continuation requires the original investigation mode")
+        supplied = [Hypothesis.model_validate(h) for h in resume_state["hypotheses"]]
+    if supplied is not None:
+        unsupported = (
+            {h.fault_class for h in supplied} - allowed_classes(ctx.mode) - {"other"}
+        )
+        if unsupported:
+            raise ValueError(
+                f"Hypotheses are not supported in mode {ctx.mode}: {sorted(unsupported)}"
+            )
     if (
         isinstance(prior_temperature, bool)
         or not math.isfinite(prior_temperature)
@@ -283,8 +301,6 @@ def investigate(
     else:
         from core.telemetry.calls import LLMCall
 
-        if resume_state.get("version") != 1:
-            raise ValueError("Unsupported investigation continuation")
         hypotheses = [Hypothesis.model_validate(h) for h in resume_state["hypotheses"]]
         by_id = {h.id: h for h in hypotheses}
         classes = resume_state["classes"]
@@ -313,6 +329,7 @@ def investigate(
     while True:
         checkpoint = {
             "version": 1,
+            "mode": ctx.mode,
             "hypotheses": [h.model_dump() for h in hypotheses],
             "classes": dict(classes),
             "probs": dict(probs),
@@ -497,6 +514,9 @@ def investigate(
         check = causal_check(
             target.metrics, control.metrics, min_effect=min_effect, noise_sd=noise_sd
         )
+        comparison = comparison_evidence(
+            target, control, min_effect=min_effect, noise_sd=noise_sd
+        )
         prior_probs = dict(probs)
         probs = update_causal(probs, classes, leader.id, check.status)
         interventions += 1
@@ -510,6 +530,7 @@ def investigate(
                 "target": asdict(target),
                 "control": asdict(control),
                 "result": asdict(check),
+                "comparison_evidence": comparison,
                 "prior_probs": prior_probs,
                 "planning_probs": dict(planning_probs),
                 "probs": dict(probs),
@@ -519,7 +540,14 @@ def investigate(
         )
         if check.status == "confirmed":
             result.verdict = write_verdict(
-                router, leader, target, control, check, base_hp, list(evidence)
+                router,
+                leader,
+                target,
+                control,
+                check,
+                base_hp,
+                list(evidence),
+                comparison=comparison,
             )
             result.status = "confirmed"
             add({"kind": "verdict", **result.verdict.model_dump()})

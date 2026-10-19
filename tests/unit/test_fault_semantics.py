@@ -49,3 +49,48 @@ def test_legacy_prompt_version_remains_available():
     assert load_prompt("hypotheses", "v3").id == "hypotheses-v3"
     assert "unique root cause" in load_prompt("verdict", "v2").text
     assert "legacy outcome token" in load_prompt("interpret_probe", "v2").text
+
+
+def test_frozen_mode_b_hypothesis_cannot_drive_mode_a_intervention():
+    import pytest
+
+    from core.agent.loop import investigate
+    from tests.unit.test_loop import FakeRouter, _ctx
+
+    router = FakeRouter([])
+    with pytest.raises(ValueError, match="not supported in mode A"):
+        investigate(
+            _ctx(),
+            {},
+            router,
+            lambda *_: pytest.fail("Must not train"),
+            initial_hypotheses=[hypothesis("truncation")],
+            testable_classes={"truncation"},
+            probes=[],
+        )
+    assert router.steps == []
+
+
+def test_resume_cannot_switch_modes_or_run_legacy_mode_b_fault_in_mode_a():
+    import pytest
+
+    from core.agent.loop import investigate
+    from tests.unit.test_loop import FakeRouter, _ctx
+
+    router = FakeRouter([])
+    for state, message in [
+        ({"version": 1, "mode": "B", "hypotheses": []}, "original investigation mode"),
+        (
+            {"version": 1, "hypotheses": [hypothesis("truncation").model_dump()]},
+            "not supported in mode A",
+        ),
+    ]:
+        with pytest.raises(ValueError, match=message):
+            investigate(
+                _ctx(),
+                {},
+                router,
+                lambda *_: pytest.fail("Must not train"),
+                resume_state=state,
+            )
+    assert router.steps == []

@@ -142,7 +142,8 @@ def write_verdict(
     base_hp: dict[str, Any],
     evidence: list[str],
     metric: str = "exact match on held-out examples",
-    version: str = "v2",
+    version: str = "v3",
+    comparison: dict[str, Any] | None = None,
 ) -> Verdict:
     """Ultra writes the summary; status, evidence and patch come from the code."""
     prompt = load_prompt("verdict", version)
@@ -157,6 +158,8 @@ def write_verdict(
         "evidence": evidence,
         "patch": patch,
     }
+    if version == "v3":
+        payload["comparison_evidence"] = comparison
     messages = [{"role": "system", "content": prompt.text}, _user("Verdict", payload)]
     verdict = router.structured("verdict", messages, Verdict, prompt_version=prompt.id)
     return verdict.model_copy(

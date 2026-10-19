@@ -144,6 +144,8 @@ def context_limit(ctx: InvestigationContext) -> tuple[int, str]:
     """The job's context_length and where it came from: the job or the default."""
     value = ctx.job_config.get("hyperparameters", {}).get("context_length")
     if value is None:
+        if ctx.mode != "A":
+            raise ValueError("Mode B requires an explicit trainer context_length")
         return TOKEN_FACTORY_CONTEXT_LENGTH, "token_factory_default"
     if isinstance(value, bool) or not isinstance(value, int) or value < 1:
         raise ValueError(f"context_length must be a positive integer, got {value!r}")
@@ -171,7 +173,14 @@ class ExampleLength(Probe):
     def available(self, ctx: InvestigationContext) -> bool:
         train = ctx.files.get("train")
         return (
-            bool(ctx.job_config.get("model")) and bool(train) and Path(train).is_file()
+            bool(ctx.job_config.get("model"))
+            and bool(train)
+            and Path(train).is_file()
+            and (
+                ctx.mode == "A"
+                or ctx.job_config.get("hyperparameters", {}).get("context_length")
+                is not None
+            )
         )
 
     def estimate_cost(self, ctx: InvestigationContext) -> float:
