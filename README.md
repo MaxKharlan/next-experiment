@@ -19,21 +19,23 @@ On the saved demo case, a Qwen3-0.6B job trained with a learning rate of 1e-5 an
   <img alt="Architecture. The screen in the browser talks to the API. The API, the investigation worker with its agent loop, model router, planner and probes, the causal check and storage run in one Python process. The worker calls Tavily and Nemotron 3 Super and Ultra; the causal check trains LoRA jobs on the Post-training API of Nebius Token Factory. Numbers 1 to 6 mark the steps of one investigation." src="docs/media/architecture-light.svg" width="100%">
 </picture>
 
-Next Experiment runs on Nebius Token Factory: Nemotron 3 Super and Ultra do the reasoning, and the Post-training API trains the fix and control jobs of each causal check and the final retrain. The app itself is one Python process: the API, a worker thread for each investigation and the scoring of downloaded adapters. Artifacts go to a local folder, or to an Object Storage bucket in Nebius AI Cloud, eu-north1, with `STORAGE_BACKEND=s3`.
+Next Experiment runs on Nebius Token Factory: Nemotron 3 Super and Ultra do the reasoning, and the Post-training API trains the fix and control jobs of each causal check and the final retrain.
 
-The animation draws one investigation over the parts; its numbers are the steps in the next section.
+The API starts a background thread for each investigation and scores downloaded adapters locally. The default state backend allows one API process; SQLite state supports multiple API workers on one host, sharing a database, working directory and artifacts. Artifact storage can use a local folder or Nebius Object Storage with `STORAGE_BACKEND=s3`; execution leases and spending ledgers stay in local SQLite files.
+
+The animation shows one investigation in a single API worker; its numbers are the steps in the next section.
 
 | Part | Where it runs | Code | What it does |
 |---|---|---|---|
-| Screen | the browser; the API serves it as one static page, and GitHub Pages serves a copy that replays the saved run without a server | `apps/api/static/index.html` | starts a replay or a live run, shows each step as it streams in, asks before the retrain |
-| API | a uvicorn process on your machine | `apps/api/` | creates investigations, streams their events over server-sent events, takes the answer about the retrain |
+| Screen | the browser; the API serves it as one static page, and GitHub Pages serves a copy that replays the saved run without a server | `apps/api/static/index.html` | starts a replay or a live run, shows each step as it streams in, asks before paid probes, causal checks and the final retrain |
+| API | a uvicorn process on your machine | `apps/api/` | creates investigations, streams their events over server-sent events, records paid-step decisions and serves downloadable reports |
 | Investigation worker | a thread in the same process, one for each investigation | `core/agent/`, `core/planner/`, `core/probes/` | runs the agent loop, sends each step to its model, picks the next probe or check |
 | Causal check | the same thread; jobs on Token Factory, or local training with the `local` backend; scoring on the app's machine with CUDA, Apple MPS or the CPU | `core/interventions/`, `jobs/eval_local/` | trains fix and control pairs, downloads the adapters, scores them by exact match, applies the decision rule |
-| Storage | a local folder, or a Nebius Object Storage bucket in eu-north1 | `core/connectors/storage.py` | each investigation's status and events, results of the checks, the Tavily cache |
+| State and artifacts | SQLite for shared state; local files or Nebius Object Storage for artifacts | `apps/api/store.py`, `core/db/`, `core/connectors/storage.py` | metadata, events, execution ownership, spending reservations, check results and the Tavily cache |
 | Models and training | Nebius Token Factory | `core/connectors/token_factory.py` | Nemotron 3 Super and Ultra, the Post-training API |
 | Known issues | Tavily | `core/connectors/tavily.py` | searches for problems others reported with the model and the recipe |
 
-The project plan has three parts that are not built yet: a Next.js screen, a separate worker process with a SQLite queue, and hosting on Hugging Face Spaces. Execution remains in one process, with persisted SQLite snapshots. Finished investigations and pending paid-step approvals survive a restart; interrupted running investigations fail instead of restarting paid work.
+Finished investigations and pending paid-step approvals survive a restart. SQLite workers use execution leases and request deduplication; expired work becomes failed for operator review. Unknown paid outcomes retain budget reservations. A separate worker queue, multi-host deployment, a Next.js screen and Hugging Face Spaces hosting remain unimplemented. See [API worker coordination](docs/sqlite-investigations.md) and [paid-operation recovery](docs/paid-operation-recovery.md).
 
 ## How an investigation runs
 
@@ -41,10 +43,10 @@ The project plan has three parts that are not built yet: a Next.js screen, a sep
 2. Nemotron 3 Super ranks the possible causes from the fault catalog and gives each a probability.
 3. Free level-0 probes read the recipe, the loss per epoch and, when the job's adapter is available, the adapter's weights. The planner picks the next probe by the expected information it gives per dollar and updates the probabilities from a table of outcome likelihoods.
 4. A causal check tests the leading proposed fix against its configured control, using the protocol's seed count. The adapters are downloaded and scored locally by exact match on a separate check set. The stored `confirmed` decision means the fix beats the control by at least the minimum effect and the 95% interval is above zero; with three or more seeds per arm, a permutation test must also give p ≤ 0.05.
-5. Nemotron 3 Ultra writes the verdict: the explanation and the patch to the recipe. The status comes from the causal check, not from the model.
+5. Nemotron 3 Ultra writes the verdict explanation. The code supplies the intervention decision, evidence and recipe patch.
 6. With your approval, one job retrains the fixed recipe on the whole training file, and the three models answer the same held-out queries.
 
-Each step is streamed to the screen as it happens, and the paid steps show their cost.
+Each step is streamed to the screen as it happens. Paid probes and causal checks pause for approval before submission. Reports retain per-attempt model usage and available provider request/response IDs linked to budget reservations; see [persisted LLM usage](docs/persisted-llm-usage.md).
 
 Step 4 on the demo case: the fix and the control train two jobs each, and the effect stands far outside the noise between seeds.
 
@@ -87,28 +89,6 @@ end-to-end agent trace. Token Factory healthy/damaged references have one job
 each. The two-seed permutation gate cannot reach 0.05 and is skipped by the saved
 decision rule. See [the experiment protocol and results](docs/answer-cut.md).
 
-## What is in the repository now
-
-As of 19 October 2026. [Project status](docs/project-status.md) separates implementation from measured coverage.
-
-| Area | State |
-|---|---|
-| Token Factory and Tavily connectors, router with a call log of tokens, cost and prompt version | done |
-| Planner, level-0 probes on the recipe, loss curve and adapter weights, signature table | done |
-| Causal check on Token Factory: fix and control pairs, noise floor, decision rule | done |
-| Verdict and patch, full retrain after approval, comparison of three models | done |
-| HTTP API with server-sent events and the investigation screen; replay of the saved demo run and live runs | done |
-| Benchmark: 13 cases, four methods, scorer, runner with resume, results and error analysis | done |
-| Tools: fault sweeps on Token Factory, case builder, reference runs, noise floor, rescoring, checkpoint pruning, local LoRA simulations | done |
-| Weight probe in the API's live runner and in the benchmark | available with `NEXT_EXPERIMENT_WEIGHTS=1` after preparing job-specific measurements; historical results above exclude it |
-| Public demo page on GitHub Pages, replaying the saved run | done |
-| A2/A3 JSON extraction and function calling datasets | built and agent-reviewed; full task/model quality matrix remains open |
-| Answer-cut probe, data pair, Kaggle/Token Factory measurements | implemented; partial recovery, one task/model |
-| Spending reservations and paid-step REST/UI pause/resume | implemented in #85/#96/#97; [aggregate training usage reconciled](docs/provider-cost-reconciliation-20261019.md), invoices remain open |
-| B9 classifier transfer and B12 prior calibration | negative transfer/calibration results; classifier stays experimental and temperature stays T=1 |
-| Measured-experiment replays, validation and replay reset fixes | implemented in the follow-up package |
-| A fresh end-to-end answer-cut investigation, final video and submission | pending |
-
 ## Run it
 
 You need Python 3.11 or 3.12 and [uv](https://docs.astral.sh/uv/). Copy `.env.example` to `.env`. Replaying the saved investigation needs no keys. Live runs need `TOKEN_FACTORY_API_KEY`, and the known-issues step needs `TAVILY_API_KEY`.
@@ -124,6 +104,19 @@ With `PUBLIC_DEMO=true` the server allows only replays. Live runs from the scree
 ```bash
 uv run --group ml --group eval uvicorn apps.api.main:app
 ```
+
+For multiple API workers on one host, use SQLite state from the repository root:
+
+```bash
+INVESTIGATION_BACKEND=sqlite \
+DATABASE_URL=sqlite:///./artifacts/next_experiment.db \
+uv run --group ml --group eval uvicorn apps.api.main:app --workers 2
+```
+
+Live starts on this backend require `Idempotency-Key`; paid-step and retrain
+answers require the waiting event's `proposal_seq`. The screen sends both.
+Read [deployment and migration instructions](docs/sqlite-investigations.md)
+before changing an existing deployment.
 
 The public demo is the same screen built as a static site; `.github/workflows/pages.yml` publishes it to GitHub Pages on pushes to main. Build it, serve it, then open http://127.0.0.1:8000:
 
@@ -181,7 +174,9 @@ uv run --group eval pytest -q
 | `core/probes/` | level-0 probes and the signature table |
 | `core/interventions/` | fix and control pairs, statistics of the causal check, Token Factory runner, retrain |
 | `core/connectors/` | Token Factory, Tavily and storage |
-| `core/telemetry/` | call log |
+| `core/telemetry/` | per-attempt usage and provider request references |
+| `core/db/` | spending and Tavily credit ledgers |
+| `core/report/`, `core/eval/` | investigation and billing reports, dataset audits and local evaluation |
 | `bench/` | cases, fault recipes, comparison methods, fixes, references, scorer and runner |
 | `jobs/eval_local/` | exact-match scoring of adapters on a Mac |
 | `jobs/kaggle/` | LoRA training for the local simulation sweeps |
@@ -195,6 +190,10 @@ uv run --group eval pytest -q
 | File | Contents |
 |---|---|
 | `docs/project-status.md` | current coverage, owners and remaining acceptance criteria |
+| `docs/sqlite-investigations.md` | same-host API workers, leases, request identity and migration |
+| `docs/paid-operation-recovery.md` | budget reservations and unknown paid outcomes |
+| `docs/persisted-llm-usage.md` | per-attempt usage and provider request IDs |
+| `docs/provider-cost-reconciliation-20261019.md` | provider Usage reconciliation and outstanding invoice evidence |
 | `docs/fault-1-semantics.md` | pre-upload answer damage versus custom-trainer truncation and length preflight |
 | `docs/demo-walkthrough.md` | replay walkthrough and boundaries for the O2 demo |
 | `docs/architecture.md` | how an investigation moves through the code: model steps, modules, contracts, API, storage, configuration |

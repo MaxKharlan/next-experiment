@@ -40,9 +40,9 @@ These checks cost no provider credits. Their step is added to the evidence list,
 but it does not produce a causal verdict, patch or calibrated Bayesian update.
 The hypothesis model can use the observations when proposing hypotheses. Frozen
 initial hypotheses retain their priors. No new signature probabilities are
-invented for these checks. Mode-B intervention builders and downstream quality
-measurements remain separate work; this addition does not make an end-to-end
-mode-B repair workflow available.
+invented for these checks. The later [mode-B package](mode-b-local-package.md) adds local intervention
+builders and synthetic CPU quality measurements. Pretrained-model quality and
+a complete mode-B repair workflow remain unvalidated.
 
 ## Verification
 
@@ -55,4 +55,6 @@ oversized attachments, token misalignment and mode gating. Loop tests check
 aggregate forwarding, raw-array removal, caller nonmutation, callback delivery,
 unchanged frozen input data and absence of automatic causal confirmation. All
 inputs are synthetic; no Kaggle job, model download or provider call was used.
-The REST API and UI do not yet expose this attachment contract.
+The REST API and UI now expose a standalone persisted label audit. Supplying
+these labels to a full mode-B investigation remains a Python-entry-point contract;
+see [the mode-B package](mode-b-local-package.md).

@@ -32,9 +32,12 @@ provider billing records. Since PR #85, live inference reserves estimated input
 and maximum output usage in a durable SQLite ledger before each request. Paid
 probes and causal pairs pause for REST/UI approval and resume from saved state.
 Unknown outcomes retain reservations. These estimates do not enforce a cap at the
-provider. Approved answer-drop retraining now reserves and records its training
-estimate in the same ledger. Invoice reconciliation, Tavily dollars and the legacy
-recipe-retrain budget path remain separate. See the
+provider. Approved answer-drop and recipe retraining reserve and record their training
+estimates in the same ledger. Tavily retains credits in a separate durable ledger;
+credit counts are not dollar charges. Provider request/response references are
+saved with inference reservations for reconciliation. See
+[paid-operation recovery](paid-operation-recovery.md),
+[persisted usage](persisted-llm-usage.md) and the
 [answer-drop retrain contract](answer-data-retrain.md). See [the B17 implementation boundaries](next-batch-20261019.md).
 
 Explicit case validation rejects unsupported message roles, blank content and

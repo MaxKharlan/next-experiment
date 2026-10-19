@@ -1,6 +1,6 @@
 # Project status — 19 October 2026
 
-Repository baseline: main `2dff394`, including merged PRs #89–#92. PR #92
+Repository baseline: main `2988961`, including merged PRs through #98. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -13,6 +13,14 @@ submission at the strict base gate. Additional provider spend is $0; the $5
 budget retains its $0.2710464 historical charge estimate. Comparison evidence and mode
 boundaries remain in the [fault review](fault-evidence-review.md).
 
+A new format/content development design
+separates clean format anchors from history content. Four arms (format, healthy,
+cut and schema-valid wrong values) use three shuffled seeds each. At this
+operational update, all 12 existing jobs remain running; the collector waits for
+them, then evaluates adapters sequentially and applies the frozen gates. The
+series reserves $1.1311488 within the inherited $5 ledger. Results and final-test
+evidence remain pending; no additional jobs are needed to finish this series.
+
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
 | A2/A3 datasets | #82: JSON extraction and function calling, versioned splits and agent-reviewed references | Full task/model quality references and fresh evaluation; tracks A/B |
@@ -22,9 +30,9 @@ boundaries remain in the [fault review](fault-evidence-review.md).
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
 | B9 | #91: all 210 runs completed; local binary balanced accuracy 96.7%, historical Token Factory transfer 25% | Keep classifiers offline; independent provider-compatible transfer remains a B26 dependency |
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
-| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md), invoices and per-call inference remain open; track B |
+| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md); new calls persist [provider request references](persisted-llm-usage.md), while invoices and per-call matching remain open; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
-| Public UI | Replay selection clears prior results and ignores stale loads; nested evidence is readable; 36 saved reports | #87 deployment verified against main; fresh trace still pending; this chat |
+| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Deploy and verify the long-history layout fix; fresh trace still pending; this chat |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
 | O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
 
@@ -36,11 +44,11 @@ free before this follow-up; local evaluations run one process at a time.
 
 ## Next work, in order
 
-1. The separate development sensitivity audit is complete. Its candidate removed
-   the ceiling but failed damage-sensitivity admission. Before paid confirmation,
-   specify a new design that separates format learning from content learning and
-   measure degradation/noise on newly trained development repeats. All three
-   existing stopping decisions are terminal; their viewed checks are not final tests.
+1. Collect and evaluate the 12 already submitted format/content development jobs,
+   apply the frozen admission/noise gates, then export and independently verify
+   their results. Do not duplicate training or relax gates after seeing outcomes.
+   Previous development stopping decisions remain terminal; their viewed checks
+   are not final tests.
 2. Only after a suitable new development design passes its noise/power gates,
    freeze a new confirmation protocol: fresh reference/control comparisons,
    persisted API trace with paid approvals and restart recovery, then final test
@@ -54,7 +62,8 @@ free before this follow-up; local evaluations run one process at a time.
    224 completed training jobs match aggregate Usage ($8.0379272 before tax);
    six current-ledger costs match job receipts and 12 reservations remain pending.
    Obtain invoice evidence, resolve the $0.01 displayed-total difference and
-   match inference calls when provider records permit. SQLite worker ownership,
+   match inference calls when provider records permit. New calls now retain provider
+   request/response IDs and their reservation IDs for that matching. SQLite worker ownership,
    recipe reservations and persistent Tavily credits are implemented.
 5. Resolve supported scope for faults 2–5, embeddings/Nano/cleanlab, B24 pretrained
    confirmation and reproducible regression export with tracks A/B. B24 CPU
@@ -63,4 +72,6 @@ free before this follow-up; local evaluations run one process at a time.
    video and submit the package. The repository cannot establish those facts.
 
 Historical heldout cases have been viewed and reused; their metrics remain
-exploratory evidence. No new automation is scheduled for this continuation.
+exploratory evidence. The current development continuation has a periodic completion
+check; its handoff record is in the ignored cohort artifacts. It must be disabled
+after results are published.
