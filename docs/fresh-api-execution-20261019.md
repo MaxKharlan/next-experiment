@@ -1,69 +1,73 @@
 # Fresh API execution — 19 October 2026
 
-PR #89 is merged as `4e374a2`; runtime and execution support from PR #90 is merged
-as `9c4f0a0`. The six development jobs have succeeded. The B9 owner confirmed
-`MPS_HANDOFF_READY` at 10:07:46 UTC after exit code 0 and validation of all 210
-summaries. Development scoring is now running on MPS. No fresh reference training or final-test model evaluation
-has run yet.
+The run stopped at its prespecified development gate with **`zero_sd`**. All six
+adapters scored 102/102 (`json_fields_exact = 1.0`) on the historical development
+check. No fresh reference training, fresh final-test evaluation or full persisted
+API investigation followed. This is a completed stopping decision, not a completed
+full API trace or evidence that answer corruption is harmless.
+
+| Development arm | Seed 1101 | Seed 1102 | Seed 1103 |
+| --- | ---: | ---: | ---: |
+| Healthy | 1.0 | 1.0 | 1.0 |
+| Damaged | 1.0 | 1.0 | 1.0 |
+
+The pooled seed-level SD is zero. The frozen rule stops before power simulation
+in this case, so no pair seeds were selected and no power estimate was produced.
+All three weight digests differ within each arm: this result is not caused by
+reusing the same checkpoint. The development check reached its ceiling for both
+arms and could not distinguish them. Six perfect scores do not establish zero
+population variance or performance on the unscored fresh cohort.
+
+## Evidence and cost
+
+The [power decision](results/fresh-api-execution-20261019/power-decision.json),
+[status and spending](results/fresh-api-execution-20261019/status.json), and
+[six per-example score files](results/fresh-api-execution-20261019/scores/) retain
+job IDs, predictions, expected answers, dataset hashes, adapter hashes and runtime
+metadata. All 612 stored predictions were rescored with the frozen metric and
+matched the recorded results. The scoring process and power analysis exited with
+code 0. No evaluator or stopping-rule changes were made after observing scores.
+
+Three healthy jobs report 114,262 trained tokens each; three damaged jobs report
+111,610 each. At $0.40 per million tokens, total estimated training cost is
+**$0.2710464 before taxes**, not a provider invoice. All six reservations are
+settled; no unresolved holds remain. The $5 ledger retains $4.7289536 available.
+Verified [inference pricing](results/fresh-api-execution-20261019/inference-prices.json)
+was recorded before execution. No new paid jobs were launched after scoring.
 
 The development protocol digest is
 `32e4a4ef030c323985001327e13274576b3cf724bc2805ef9d9fd464a321acdd`.
-Its state lives in `artifacts/fresh-answer-development-20261019/`. The three healthy
-jobs report 114,262 trained tokens each; the three damaged jobs report 111,610 each.
-At the verified tariff, their total is **$0.2710464 before taxes**, not an invoice.
-All three weight digests differ within each arm. Provider model and recipe metadata
-match the requested values.
+The [protocol](results/fresh-api-execution-20261019/protocol.json) and
+[analysis lock](results/fresh-api-execution-20261019/power-analysis-lock.json)
+were fixed with zero scores present. Local working state remains in
+`artifacts/fresh-answer-development-20261019/`; its `completion.json` records the
+terminal decision. Do not rerun selection or submit the prepared fresh jobs under
+this stopped protocol.
 
-The local runtime and detailed evidence format are described in
-[pinned-evaluation-runtime.md](pinned-evaluation-runtime.md). The cohort and
-stopping rule remain those in [fresh-answer-preparation.md](fresh-answer-preparation.md).
-The [analysis lock](results/fresh-api-execution-20261019/power-analysis-lock.json)
-was recorded with zero development scores present. [Inference prices](results/fresh-api-execution-20261019/inference-prices.json)
-were checked against the authenticated provider table before API calls.
+## Integration and resources
 
-## Continue the recorded run
+PR #89 merged as `4e374a2`; runtime and execution support from PR #90 merged as
+`9c4f0a0`. Their implementation validation passed: 813 tests with ML dependencies
+(8 skipped), and CI 767 tests (15 skipped). These are software checks, not evidence
+of a completed live investigation. Real loopback HTTP preflight returned 200 for
+capabilities and an empty investigation list; the paid approval/restart trace was
+not reached.
 
-Use the same checkout, dependencies, cohort and protocol. Do not regenerate them.
-Before resuming, inspect `artifacts/fresh-answer-development-20261019/active-scoring.json`
-and its recorded process. The current scoring command runs in exec session `32934`,
-PID `82655`; do not start another scorer while it is alive. Its six result files are
-written under `scores/` as each adapter completes. If the process exits, inspect its
-exit status before running the power gate.
+B9 confirmed `MPS_HANDOFF_READY` at 10:07:46 UTC after exit code 0 and validation
+of all 210 sweep summaries. The [handoff evidence](results/fresh-api-execution-20261019/mps-handoff.json)
+is saved. This task scored the six existing adapters in one MPS process and did
+not duplicate B9 training. MPS was released back after scoring, and the recurring
+continuation check was disabled after the stopping decision.
 
-Each paid submission command retains job IDs; a missing ID after an attempted
-submission requires provider reconciliation, not a retry.
+The local base snapshot, tokenizer/template, evaluator and package versions were
+pinned as described in [pinned-evaluation-runtime.md](pinned-evaluation-runtime.md).
+Token Factory does not expose an immutable base-weight revision in these job
+records; the local pin does not establish provider/local base-weight identity.
+The fresh cohort retains the preparation boundaries in
+[fresh-answer-preparation.md](fresh-answer-preparation.md), including a synthetic
+bounded task and no independent human review.
 
-1. Confirm the B9 process exited successfully and all 210 summaries exist. Obtain
-   the owner's explicit `MPS_HANDOFF_READY` and save its evidence in the development
-   root's `mps-handoff.json` with `released: true`.
-2. Run `scripts.fresh_answer_calibration score` with `--root` and the digest above.
-   Run `scripts.fresh_answer_power` with those same arguments after all six scores
-   exist. Stop if its decision is not `passed`.
-3. Run `scripts.fresh_answer_references prepare`, providing `--development-root`,
-   `--cohort artifacts/fresh-extraction-20261019-v1`, a new `--root`, and the
-   development digest. Use the newly written reference digest for `submit` and
-   `collect`; these commands require an explicit `--env-file` for credentials.
-4. After all three references succeed, run `scripts.fresh_answer_api_case` with a
-   new `--root`, `--references` and the reference digest. It measures the strong
-   original job on check, freezes the request and reserves the API allocation in
-   the parent ledger. The final test is not scored.
-5. Start `scripts.serve_fresh_api --env-file <credentials-file> --database
-   artifacts/fresh-api-20261019.sqlite3 --port 8765`. Validate the saved request,
-   then submit it to `/api/investigations/from-case` with the frozen idempotency key.
-   Save the returned investigation ID and every approval/report response.
-6. At an idle approval boundary, save the report, stop and restart that API process,
-   and verify the same proposal survived. Approve only the prespecified answer-drop
-   pair, with unchanged data hashes, line-selection hashes, recipe and seed count.
-   Decline another paid intervention or a second pair.
-7. If a final answer-drop retrain is proposed, inspect its frozen data patch and
-   spending reservation before approval. The stopping decision and recipe must be
-   fixed before final-test scoring. Preserve an inconclusive outcome without trying
-   another seed, recipe or investigation against the same final test.
-
-Save the detailed evaluations, provider metadata, SQLite event export and actual
-request/response trace. Reconcile the API ledger with the parent allocation while
-retaining any unresolved reservations. Report token-based training estimates
-separately from invoices. Describe target/control row and token counts separately;
-equal row count is not equal compute. Report control versus the original model
-as a descriptive check, and compare the fixed model with the healthy reference
-before discussing recovery. One reference per condition does not close a 3×3 study.
+A subsequent experiment would need a separately specified development design
+that can measure variation and sensitivity, with a new protocol fixed before its
+results. This run does not authorize adapting seeds, thresholds or recipes to
+bypass the stopping rule, and its untouched fresh final test remains protected.

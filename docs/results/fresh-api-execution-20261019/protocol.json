@@ -1,0 +1,178 @@
+{
+  "cap_usd": 5.0,
+  "development_reservation_usd": 0.2808,
+  "evaluation_runtime": {
+    "files_sha256": {
+      "config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+      "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "model.safetensors": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "packages": {
+      "jinja2": "3.1.6",
+      "peft": "0.21.2",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.3",
+      "torch": "2.14.1",
+      "transformers": "5.19.0"
+    },
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "snapshot": "/Users/harlanmax/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca",
+    "template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+    "version": 1
+  },
+  "evaluator": {
+    "metric": "json_fields_exact",
+    "name": "ticket_json_v1",
+    "parameters": {
+      "max_new_tokens": 192
+    }
+  },
+  "id": "fresh-answer-development-20261019",
+  "jobs": {
+    "damaged-s1101": {
+      "examples": 390,
+      "max_tokens": 300,
+      "rendered_tokens": 112000,
+      "reservation_usd": 0.0468,
+      "seed": 1101,
+      "train": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/damaged-s1101-train.jsonl",
+      "train_sha256": "640cacda4c6f04b5bb7338aa4822187f3a98d66640c9dfc9078d64794933893f",
+      "validation": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/damaged-validation.jsonl",
+      "validation_sha256": "68a73cca42113979a87070aba984e242dcf8defe8329596fc4e20f3b65324d2b"
+    },
+    "damaged-s1102": {
+      "examples": 390,
+      "max_tokens": 300,
+      "rendered_tokens": 112000,
+      "reservation_usd": 0.0468,
+      "seed": 1102,
+      "train": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/damaged-s1102-train.jsonl",
+      "train_sha256": "6fbf07e3d1d87f28ea259d290007eb6e9b8bf80c711f04caaea92daee109bb1b",
+      "validation": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/damaged-validation.jsonl",
+      "validation_sha256": "68a73cca42113979a87070aba984e242dcf8defe8329596fc4e20f3b65324d2b"
+    },
+    "damaged-s1103": {
+      "examples": 390,
+      "max_tokens": 300,
+      "rendered_tokens": 112000,
+      "reservation_usd": 0.0468,
+      "seed": 1103,
+      "train": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/damaged-s1103-train.jsonl",
+      "train_sha256": "4526bc486a90b8ac6a9ee99cdb8cb51344361d270c46831483cf96b2adf5f1c8",
+      "validation": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/damaged-validation.jsonl",
+      "validation_sha256": "68a73cca42113979a87070aba984e242dcf8defe8329596fc4e20f3b65324d2b"
+    },
+    "healthy-s1101": {
+      "examples": 390,
+      "max_tokens": 300,
+      "rendered_tokens": 114652,
+      "reservation_usd": 0.0468,
+      "seed": 1101,
+      "train": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/healthy-s1101-train.jsonl",
+      "train_sha256": "9f4bcd48e4c45471bd888ef0f3f1fb86b4b41ebe1858c41738ca4a362272d890",
+      "validation": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/healthy-validation.jsonl",
+      "validation_sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+    },
+    "healthy-s1102": {
+      "examples": 390,
+      "max_tokens": 300,
+      "rendered_tokens": 114652,
+      "reservation_usd": 0.0468,
+      "seed": 1102,
+      "train": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/healthy-s1102-train.jsonl",
+      "train_sha256": "643dcb1fc8f8f0af4e18eaa4f0a43ff6de44d62a87fac4f1701ec153d7e505f1",
+      "validation": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/healthy-validation.jsonl",
+      "validation_sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+    },
+    "healthy-s1103": {
+      "examples": 390,
+      "max_tokens": 300,
+      "rendered_tokens": 114652,
+      "reservation_usd": 0.0468,
+      "seed": 1103,
+      "train": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/healthy-s1103-train.jsonl",
+      "train_sha256": "df64c106f2e2e83556b22667e14dbb60bb72809f21d692bc01c7a82a97289b5e",
+      "validation": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/fresh-answer-development-20261019/healthy-validation.jsonl",
+      "validation_sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+    }
+  },
+  "model": "Qwen/Qwen3-0.6B",
+  "phase": "development_only",
+  "power_rule": {
+    "anticipated_effect": 0.16,
+    "candidate_seeds": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "min_effect": 0.08,
+    "minimum_lower_mc_bound": 0.8,
+    "random_seed": 3101,
+    "trials": 1000,
+    "zero_sd": "stop and report; do not import a noise floor"
+  },
+  "price": {
+    "method": "authenticated rendered price table read before submission",
+    "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+    "source": "https://tokenfactory.nebius.com/organization/prices",
+    "tax_scope": "excluding taxes; contingency within $5 overall cap",
+    "usd_per_million": 0.4,
+    "valid_from": "2025-12-01",
+    "verified_at": "2026-10-19"
+  },
+  "provider_revision": "Provider does not expose immutable base weight revision in the documented job request; retain model ID, returned metadata and adapter hashes. Do not claim equality to local base weights.",
+  "recipe": {
+    "batch_size": 8,
+    "context_length": 8192,
+    "learning_rate": 0.0001,
+    "lora": true,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lora_r": 16,
+    "max_grad_norm": 1.0,
+    "n_epochs": 1,
+    "packing": false,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0
+  },
+  "repository_commit": "45fcf3610931f81ffcef46ef0602ceda410390f5",
+  "scoring_split": "historical check only; no fresh data",
+  "source_datasets": {
+    "check": {
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/datasets/structured-mixed-v1/json_extraction/check.jsonl",
+      "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+    },
+    "test": {
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/datasets/structured-mixed-v1/json_extraction/test.jsonl",
+      "sha256": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494"
+    },
+    "train": {
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/datasets/structured-mixed-v1/json_extraction/train.jsonl",
+      "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db"
+    },
+    "validation": {
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/datasets/structured-mixed-v1/json_extraction/validation.jsonl",
+      "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+    }
+  },
+  "source_sha256": {
+    "bench/causal_power.py": "8e7a6f684b228165c5f58dd04e014665a5a77cfb7961538a88660f2528b0132a",
+    "core/eval/__init__.py": "ae8396143a4b6ada65679ca1d33df038afd79efd6314f8e1d3fff732dfa9c2c9",
+    "core/eval/generate.py": "c03ed92207a4e0b3007fdb3c31370a1fec1d5a1a1a0973fbe8006583fb94f563",
+    "core/eval/runtime.py": "641cb1da2da83ceb3d54a2524f79de91e654086dde2b2c947079913f2467e41c",
+    "core/eval/structured.py": "eac671f1c4f537c5ad928f7aa0245cd008e889e3690c1f17a1b45e195186ad28",
+    "core/interventions/stats.py": "a36ead7db03fe78b6d475f77a9c358eacaaf4027e92df7a31ae4646261a82a9d",
+    "scripts/fresh_answer_calibration.py": "784523eb83844173aef4e56fbc4246713a1f2425315dab3a2ac1cbe0be30ec77",
+    "uv.lock": "9e530539880dc39d3d94e820e22701227e66cb2940b087a7c921ca42ae8e41e8"
+  },
+  "stopping": "Exactly six jobs. No retry after ambiguous submission, no extra repeats after metrics. Stop on source/runtime/data change or budget exhaustion.",
+  "version": 1
+}
