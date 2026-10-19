@@ -7,8 +7,10 @@ investigation or fresh final-test evaluation followed. The old protocol and its
 prepared final test remain frozen. See [the execution record](fresh-api-execution-20261019.md).
 
 The [development sensitivity follow-up](development-sensitivity-20261019.md)
-audits the ceiling and records a separate candidate design. It retains the $5
-budget and its $0.2710464 historical charge estimate. Comparison evidence and mode
+audits the ceiling and rejects a separately frozen candidate: healthy mean
+26.85%, damaged mean 39.81% on new histories. Its paid pilot stopped before
+submission at the strict base gate. Additional provider spend is $0; the $5
+budget retains its $0.2710464 historical charge estimate. Comparison evidence and mode
 boundaries remain in the [fault review](fault-evidence-review.md).
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
@@ -34,9 +36,11 @@ free before this follow-up; local evaluations run one process at a time.
 
 ## Next work, in order
 
-1. Finish the separate development sensitivity audit and obey its frozen gates.
-   The old `zero_sd` run is terminal. Candidate development outcomes cannot reopen
-   that run or its final test.
+1. The separate development sensitivity audit is complete. Its candidate removed
+   the ceiling but failed damage-sensitivity admission. Before paid confirmation,
+   specify a new design that separates format learning from content learning and
+   measure degradation/noise on newly trained development repeats. All three
+   existing stopping decisions are terminal; their viewed checks are not final tests.
 2. Only after a suitable new development design passes its noise/power gates,
    freeze a new confirmation protocol: fresh reference/control comparisons,
    persisted API trace with paid approvals and restart recovery, then final test

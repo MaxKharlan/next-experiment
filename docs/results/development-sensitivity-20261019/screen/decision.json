@@ -1,0 +1,27 @@
+{
+  "groups": {
+    "damaged": [
+      0.4027777777777778,
+      0.4583333333333333,
+      0.3333333333333333
+    ],
+    "healthy": [
+      0.3611111111111111,
+      0.2638888888888889,
+      0.18055555555555555
+    ]
+  },
+  "inference": "Exploratory sensitivity of fixed historical adapters on new development histories. No fresh causal or final-test claim.",
+  "means": {
+    "damaged": 0.39814814814814814,
+    "healthy": 0.26851851851851855
+  },
+  "paid_jobs": 0,
+  "pooled_sd": 0.07774470196179012,
+  "protocol_sha256": "ecdcc22c285db28098a957c013fb22f279f31c22fb0c9000b59c15c3daff7a11",
+  "reasons": [
+    "insufficient_damage_sensitivity"
+  ],
+  "selected_seeds": [],
+  "status": "rejected"
+}
