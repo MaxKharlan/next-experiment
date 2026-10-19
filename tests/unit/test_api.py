@@ -23,7 +23,7 @@ def client(tmp_path, monkeypatch, request):
     monkeypatch.setattr(
         main, "store", InvestigationStore(LocalStorage(tmp_path), repository)
     )
-    return TestClient(main.app)
+    return TestClient(main.app, headers={"Idempotency-Key": "test-start"})
 
 
 def _wait(client, inv_id):
@@ -136,10 +136,14 @@ def test_approved_retrain_runs_once_and_finishes(client, monkeypatch, tmp_path):
     inv_id = client.post("/api/investigations", json={"backend": "tf"}).json()["id"]
     _wait_for(client, inv_id, "awaiting_approval")
     answer = client.post(
-        f"/api/investigations/{inv_id}/retrain", json={"approve": True}
+        f"/api/investigations/{inv_id}/retrain",
+        json={"approve": True, "proposal_seq": 1},
     )
     assert answer.status_code == 200
-    again = client.post(f"/api/investigations/{inv_id}/retrain", json={"approve": True})
+    again = client.post(
+        f"/api/investigations/{inv_id}/retrain",
+        json={"approve": True, "proposal_seq": 1},
+    )
     assert again.status_code == 409
     _wait_for(client, inv_id, "finished")
     assert len(retrainer.tf.created) == 1
@@ -167,7 +171,10 @@ def test_legacy_retrain_without_protocol_fails_before_provider(client, monkeypat
     monkeypatch.setattr(TokenFactory, "from_settings", forbidden)
     inv_id = client.post("/api/investigations", json={"backend": "tf"}).json()["id"]
     _wait_for(client, inv_id, "awaiting_approval")
-    client.post(f"/api/investigations/{inv_id}/retrain", json={"approve": True})
+    client.post(
+        f"/api/investigations/{inv_id}/retrain",
+        json={"approve": True, "proposal_seq": 2},
+    )
     _wait_for(client, inv_id, "failed")
     assert "frozen protocol and budget" in _events(client, inv_id)[-1]["data"]["error"]
 
@@ -176,7 +183,10 @@ def test_declined_retrain_finishes_without_training(client, monkeypatch):
     monkeypatch.setattr(main.runners, "live", _waiting_run)
     inv_id = client.post("/api/investigations", json={"backend": "tf"}).json()["id"]
     _wait_for(client, inv_id, "awaiting_approval")
-    client.post(f"/api/investigations/{inv_id}/retrain", json={"approve": False})
+    client.post(
+        f"/api/investigations/{inv_id}/retrain",
+        json={"approve": False, "proposal_seq": 2},
+    )
     _wait_for(client, inv_id, "finished")
     last = _events(client, inv_id)[-2:]
     assert last[0]["data"] == {"kind": "retrain_declined"}
@@ -196,5 +206,7 @@ def test_public_demo_does_not_retrain(client, monkeypatch):
     monkeypatch.setattr(
         main, "get_settings", lambda: type("S", (), {"public_demo": True})()
     )
-    response = client.post("/api/investigations/x/retrain", json={"approve": True})
+    response = client.post(
+        "/api/investigations/x/retrain", json={"approve": True, "proposal_seq": 1}
+    )
     assert response.status_code == 403

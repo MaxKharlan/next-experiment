@@ -607,10 +607,10 @@ const HANDLERS = {
   llm_call: d => recordCall(d),
   step: d => { showStep(d); if (recordedCalls.size) showCost({}); },
   finished: d => { finish(d); $("reportNote").textContent = d.measured_experiment ? "Saved experiment." : "Completed investigation."; done(); },
-  awaiting_approval: d => { showCost(d.summary); askApproval(d.plan);
+  awaiting_approval: (d, seq) => { showCost(d.summary); askApproval(d.plan, seq);
     $("reportNote").textContent = "Partial report: awaiting your decision.";
     setStatus(null, null, "waiting", "needs your approval"); },
-  awaiting_paid_step: d => { askPaidStep(d.proposal);
+  awaiting_paid_step: (d, seq) => { askPaidStep(d.proposal, seq);
     $("reportNote").textContent = "Partial report: awaiting your decision.";
     setStatus(null, null, "waiting", "needs your approval"); },
   resumed: d => { setApproval(d.approved ? "Approved" : "Declined");
@@ -628,7 +628,7 @@ function watch(id) {
   $("reportDownload").href = `/api/investigations/${encodeURIComponent(id)}/report?download=true`;
   $("reportActions").hidden = false;
   source = new EventSource(`/api/investigations/${encodeURIComponent(id)}/events`);
-  for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data)));
+  for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data), Number(e.lastEventId)));
 }
 function stop() { replayVersion += 1; if (source) source.close(); source = null; clearTimeout(timer); queue = []; }
 function done() { stop(); $("start").disabled = false; $("start").textContent = "Replay"; }
@@ -1026,21 +1026,21 @@ function diffHtml(text) {
   return (text || "").split("\n").map(l => `<span class="${l.startsWith("+++") || l.startsWith("---") || l.startsWith("@@") ? "hdr" : l.startsWith("+") ? "add" : l.startsWith("-") ? "del" : ""}">${esc(l)}</span>`).join("\n");
 }
 
-function askApproval(plan) {
+function askApproval(plan, proposalSeq) {
   const box = $("approval");
   if (!box) return;
   box.innerHTML = `<button id="yes" class="btn btn-primary">Retrain for ${money(plan.cost_usd)}</button><button id="no" class="btn btn-ghost">Not now</button>`;
   const answer = async (approve) => {
     $("yes").disabled = $("no").disabled = true;
     const res = await fetch(`/api/investigations/${current}/retrain`, {method: "POST",
-      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve, proposal_seq: proposalSeq})});
     if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted small">${esc((await res.json()).detail)}</span>`);
   };
   $("yes").onclick = () => answer(true);
   $("no").onclick = () => answer(false);
 }
 
-function askPaidStep(proposal) {
+function askPaidStep(proposal, proposalSeq) {
   const box = $("approval");
   if (!box) return;
   const label = proposal.kind === "causal_check" ? "causal check" : proposal.kind;
@@ -1048,7 +1048,7 @@ function askPaidStep(proposal) {
   const answer = async (approve) => {
     $("yes").disabled = $("no").disabled = true;
     const res = await fetch(`/api/investigations/${current}/paid-step`, {method: "POST",
-      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve, proposal_seq: proposalSeq})});
     if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted small">${esc((await res.json()).detail)}</span>`);
   };
   $("yes").onclick = () => answer(true);
