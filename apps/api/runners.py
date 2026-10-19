@@ -130,6 +130,7 @@ def live(
     try:
         storage = LocalStorage("artifacts")
         tf = TokenFactory.from_settings()
+        tf.before_paid = lambda: store.assert_owner(inv_id)
         router = Router(
             tf,
             CallLog(
@@ -140,6 +141,8 @@ def live(
         tavily = (
             Tavily.from_settings(storage) if get_settings().tavily_api_key else None
         )
+        if tavily is not None:
+            tavily.before_paid = lambda: store.assert_owner(inv_id)
         protocol = None
         case_data, job_hp, job_id = CASE, JOB_HP, "local"
         if prepared is not None:
@@ -325,8 +328,10 @@ def retrain(
                 "evaluator_spec": protocol.get("evaluator"),
                 "evaluation_runtime": protocol.get("evaluation_runtime"),
             }
+            tf = TokenFactory.from_settings()
+            tf.before_paid = lambda: store.assert_owner(inv_id)
             retrainer = retrain_tf.make_retrainer(
-                TokenFactory.from_settings(),
+                tf,
                 LocalStorage("artifacts"),
                 inv_id,
                 **dataset_args,

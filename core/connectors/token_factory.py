@@ -84,6 +84,7 @@ class TokenFactory:
     def __init__(self, client: OpenAI, settings: Settings, *, spending=None):
         self.client = client
         self.spending = spending
+        self.before_paid: Callable[[], None] | None = None
         self.settings = settings
         # per model: index into JSON_FORMATS that the endpoint accepted last time
         self.format_level: dict[str, int] = {}
@@ -117,6 +118,8 @@ class TokenFactory:
         temperature: float = 0.2,
         response_format: dict[str, Any] | None = None,
     ) -> CallResult:
+        if self.before_paid is not None:
+            self.before_paid()
         extra: dict[str, Any] = {}
         if response_format is not None:
             extra["response_format"] = response_format
@@ -138,6 +141,8 @@ class TokenFactory:
             reservation = uuid.uuid4().hex
             self.spending.reserve(reservation, f"inference:{model}", amount)
             client = self.client.with_options(max_retries=0)
+        if self.before_paid is not None:
+            self.before_paid()
         reply = client.chat.completions.create(
             model=model,
             messages=messages,
@@ -272,6 +277,8 @@ class TokenFactory:
         }
         # A timeout or server error may follow an accepted, billable submission.
         # The SDK must not replay this non-idempotent request automatically.
+        if self.before_paid is not None:
+            self.before_paid()
         job = self.client.with_options(max_retries=0).fine_tuning.jobs.create(
             model=model,
             training_file=training_file,

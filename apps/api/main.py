@@ -24,7 +24,7 @@ from typing import Literal
 
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sse_starlette.sse import EventSourceResponse
 
 from apps.api import runners
@@ -42,6 +42,16 @@ app = FastAPI(title="Next Experiment")
 store = get_investigation_store()
 
 
+def _launch(target, inv_id, *args, **kwargs):
+    worker = store.worker(inv_id)
+    threading.Thread(
+        target=worker.run_owned,
+        args=(inv_id, target, args, kwargs),
+        kwargs={},
+        daemon=True,
+    ).start()
+
+
 class StartRequest(BaseModel):
     backend: Literal["replay", "local", "tf"] = "replay"
     demo: str = "fault6-tf"
@@ -50,6 +60,7 @@ class StartRequest(BaseModel):
 
 class Answer(BaseModel):
     approve: bool
+    proposal_seq: int | None = Field(default=None, ge=0, strict=True)
 
 
 @app.get("/")
@@ -98,7 +109,9 @@ def demo_cases() -> list[dict]:
 
 
 @app.post("/api/investigations")
-def start(req: StartRequest) -> dict:
+def start(
+    req: StartRequest, idempotency_key: str | None = Header(default=None)
+) -> dict:
     if req.backend != "replay" and get_settings().public_demo:
         raise HTTPException(403, "the public demo only replays saved investigations")
     if req.backend == "replay":
@@ -108,11 +121,21 @@ def start(req: StartRequest) -> dict:
         inv_id = store.create(
             "replay", cases[req.demo]["case"], cases[req.demo]["title"]
         )
-        target, args = runners.replay, (store, inv_id, req.demo, req.delay_s)
+        target, args = runners.replay, (req.demo, req.delay_s)
     else:
-        inv_id = store.create(req.backend, {}, f"Fault 6, live ({req.backend})")
-        target, args = runners.live, (store, inv_id, req.backend)
-    threading.Thread(target=target, args=args, daemon=True).start()
+        identity = _request_identity(req, idempotency_key)
+        title = f"Fault 6, live ({req.backend})"
+        if identity is None:
+            inv_id, created = store.create(req.backend, {}, title), True
+        else:
+            try:
+                inv_id, created = store.create_once(req.backend, {}, title, *identity)
+            except ValueError as err:
+                raise HTTPException(409, str(err)) from None
+        if not created:
+            return {"id": inv_id, "reused": True}
+        target, args = runners.live, (req.backend,)
+    _launch(target, inv_id, *args)
     return {"id": inv_id}
 
 
@@ -160,6 +183,28 @@ def validate_case(req: CaseStart) -> dict:
     }
 
 
+def _request_identity(req, idempotency_key):
+    if idempotency_key is None:
+        if store.repository is not None:
+            raise HTTPException(
+                422,
+                "Idempotency-Key is required for live investigations with SQLite workers",
+            )
+        return None
+    if not 1 <= len(idempotency_key) <= 128 or not all(
+        33 <= ord(char) <= 126 for char in idempotency_key
+    ):
+        raise HTTPException(
+            422, "Idempotency-Key must contain 1-128 visible ASCII characters"
+        )
+    return (
+        hashlib.sha256(idempotency_key.encode()).hexdigest(),
+        hashlib.sha256(
+            json.dumps(req.model_dump(), sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest(),
+    )
+
+
 @app.post("/api/investigations/from-case", status_code=202)
 def start_from_case(
     req: CaseStart,
@@ -167,22 +212,8 @@ def start_from_case(
 ) -> dict:
     if get_settings().public_demo:
         raise HTTPException(403, "the public demo only replays saved investigations")
-    identity = None
-    if idempotency_key is not None:
-        if not 1 <= len(idempotency_key) <= 128 or not all(
-            33 <= ord(char) <= 126 for char in idempotency_key
-        ):
-            raise HTTPException(
-                422, "Idempotency-Key must contain 1-128 visible ASCII characters"
-            )
-        identity = (
-            hashlib.sha256(idempotency_key.encode()).hexdigest(),
-            hashlib.sha256(
-                json.dumps(
-                    req.model_dump(), sort_keys=True, separators=(",", ":")
-                ).encode()
-            ).hexdigest(),
-        )
+    identity = _request_identity(req, idempotency_key)
+    if identity is not None:
         try:
             existing = store.find_request(*identity)
         except ValueError as err:
@@ -200,12 +231,7 @@ def start_from_case(
         except ValueError as err:
             raise HTTPException(409, str(err)) from None
     if created:
-        threading.Thread(
-            target=runners.live,
-            args=(store, inv_id, "tf"),
-            kwargs={"prepared": prepared},
-            daemon=True,
-        ).start()
+        _launch(runners.live, inv_id, "tf", prepared=prepared)
     return {"id": inv_id, "reused": not created}
 
 
@@ -215,15 +241,13 @@ def answer_retrain(inv_id: str, answer: Answer) -> dict:
     if get_settings().public_demo:
         raise HTTPException(403, "the public demo does not train models")
     get_investigation(inv_id)
+    if answer.proposal_seq is None:
+        raise HTTPException(409, "proposal_seq from the waiting event is required")
     try:
-        waiting = store.resume(inv_id, answer.approve)
+        waiting = store.resume(inv_id, answer.approve, answer.proposal_seq)
     except ValueError as err:
         raise HTTPException(409, str(err)) from None
-    threading.Thread(
-        target=runners.retrain,
-        args=(store, inv_id, waiting, answer.approve),
-        daemon=True,
-    ).start()
+    _launch(runners.retrain, inv_id, waiting, answer.approve)
     return {"id": inv_id, "approved": answer.approve}
 
 
@@ -232,15 +256,13 @@ def answer_paid_step(inv_id: str, answer: Answer) -> dict:
     if get_settings().public_demo:
         raise HTTPException(403, "the public demo does not run paid steps")
     get_investigation(inv_id)
+    if answer.proposal_seq is None:
+        raise HTTPException(409, "proposal_seq from the waiting event is required")
     try:
-        waiting = store.resume_paid(inv_id, answer.approve)
+        waiting = store.resume_paid(inv_id, answer.approve, answer.proposal_seq)
     except ValueError as err:
         raise HTTPException(409, str(err)) from None
-    threading.Thread(
-        target=runners.resume_paid,
-        args=(store, inv_id, waiting, answer.approve),
-        daemon=True,
-    ).start()
+    _launch(runners.resume_paid, inv_id, waiting, answer.approve)
     return {"id": inv_id, "approved": answer.approve}
 
 

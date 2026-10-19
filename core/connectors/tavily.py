@@ -15,6 +15,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -54,6 +55,7 @@ class Tavily:
 
     ledger_path: Path | None = None
     ledger: CreditLedger = field(init=False)
+    before_paid: Callable[[], None] | None = None
 
     def __post_init__(self):
         if self.ledger_path is None:
@@ -124,7 +126,11 @@ class Tavily:
         if self.storage.exists(key):
             return {**json.loads(self.storage.get_text(key)), "cached": True}
 
+        if self.before_paid is not None:
+            self.before_paid()
         self.ledger.reserve(digest, investigation_id, price)
+        if self.before_paid is not None:
+            self.before_paid()
         response = self.client.post(
             f"{API}/{endpoint}",
             json={**params, "include_usage": True},

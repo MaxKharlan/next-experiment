@@ -58,8 +58,9 @@ The Tavily ledger starts accounting when this version is deployed. Existing cach
 responses carry no historical charges into it. Limits do not reset at a calendar-month
 boundary, and changing a persisted limit is rejected. Reconcile previous usage and
 pending requests before establishing a new budget period. This change does not add
-provider invoice import, account-wide billing reconciliation, or ownership leases for
-multiple API workers.
+provider invoice import or account-wide billing reconciliation. The subsequent
+[SQLite worker ownership change](sqlite-investigations.md) adds execution leases and
+transactional approval consumption for multiple API processes.
 
 Tests use fake providers and temporary storage. They cover API approval and legacy
 rejection, changed datasets, insufficient budgets, ambiguous submissions, recovery
