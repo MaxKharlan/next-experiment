@@ -22,7 +22,7 @@ boundaries remain in the [fault review](fault-evidence-review.md).
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
 | B9 | #91: all 210 runs completed; local binary balanced accuracy 96.7%, historical Token Factory transfer 25% | Keep classifiers offline; independent provider-compatible transfer remains a B26 dependency |
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
-| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; provider billing reconciliation remains; track B |
+| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md), invoices and per-call inference remain open; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
 | Public UI | Replay selection clears prior results and ignores stale loads; nested evidence is readable; 36 saved reports | #87 deployment verified against main; fresh trace still pending; this chat |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
@@ -50,10 +50,12 @@ free before this follow-up; local evaluations run one process at a time.
    demonstrate clean-prefix false alarms and alternative JSON causes; these
    constructed counts do not estimate deployment likelihoods.
    Keep T=1 and both experimental B9 classifiers out of live diagnosis.
-4. Reconcile provider billing as a B17 operational follow-up. Recipe retraining
-   shares the investigation ledger; Tavily credits survive restarts. SQLite workers
-   now consume requests and approvals atomically, with execution leases and stale
-   payment guards. Invoice reconciliation must not be inferred from estimates.
+4. Complete the remaining [billing reconciliation](provider-cost-reconciliation-20261019.md):
+   224 completed training jobs match aggregate Usage ($8.0379272 before tax);
+   six current-ledger costs match job receipts and 12 reservations remain pending.
+   Obtain invoice evidence, resolve the $0.01 displayed-total difference and
+   match inference calls when provider records permit. SQLite worker ownership,
+   recipe reservations and persistent Tavily credits are implemented.
 5. Resolve supported scope for faults 2–5, embeddings/Nano/cleanlab, B24 pretrained
    confirmation and reproducible regression export with tracks A/B. B24 CPU
    synthetic evidence does not validate a pretrained model or a full mode-B trace.

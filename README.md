@@ -104,7 +104,7 @@ As of 19 October 2026. [Project status](docs/project-status.md) separates implem
 | Public demo page on GitHub Pages, replaying the saved run | done |
 | A2/A3 JSON extraction and function calling datasets | built and agent-reviewed; full task/model quality matrix remains open |
 | Answer-cut probe, data pair, Kaggle/Token Factory measurements | implemented; partial recovery, one task/model |
-| Spending reservations and paid-step REST/UI pause/resume | implemented in #85; invoice reconciliation and multiple workers remain open |
+| Spending reservations and paid-step REST/UI pause/resume | implemented in #85/#96/#97; [aggregate training usage reconciled](docs/provider-cost-reconciliation-20261019.md), invoices remain open |
 | B9 classifier transfer and B12 prior calibration | negative transfer/calibration results; classifier stays experimental and temperature stays T=1 |
 | Measured-experiment replays, validation and replay reset fixes | implemented in the follow-up package |
 | A fresh end-to-end answer-cut investigation, final video and submission | pending |

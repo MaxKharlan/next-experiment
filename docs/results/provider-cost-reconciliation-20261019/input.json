@@ -1,0 +1,1925 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "provenance": {
+    "usage_method": "Manual transcription of authenticated Usage full-number table; default-project, eu-north1, all ten displayed rows.",
+    "scope_note": "One project was listed in this organization. Job API credentials and selected console project were used for this comparison; no automatic account identity verification.",
+    "job_method": "Token Factory fine_tuning.jobs.list (GET)",
+    "private_sources": {
+      "transactions-console.txt": "6ff58c293c572b262e525753f4f59d18db4480b996b4eb989779a0daa6e47bb0",
+      "provider-jobs.json": "484fd3e9022afe6fc00a04201b8660ff70e20c55bf0cea2add8b653d9fd0e288",
+      "payments-console.txt": "6e034d4eb6e7a3ddf5e2b48a3f6bbf7a292e2befdabe6f2c19ccb1d1952c4106",
+      "usage-console.txt": "22ec3fe8fb0090797f641e7eeb56c1d89793ec65fef6ae95b69279b741da1ae0",
+      "usage-october-console.txt": "e3c3b241d0d4cb5741e138401a6d475854c89bd347ffeb65ecdb2c595d2ec5a6"
+    },
+    "job_identity": "SHA-256 of provider job ID; account, tenant, file and contract IDs omitted.",
+    "rates": "Displayed training price and effective inference rates cost/quantity; this does not test discounts independently."
+  },
+  "usage": {
+    "scope": "default-project",
+    "period_start": "2026-10-01T00:00:00+00:00",
+    "period_end": "2026-11-01T00:00:00+00:00",
+    "updated_at": "2026-10-19T12:22:00+00:00",
+    "products": [
+      {
+        "product": "Fine-tuning Llama-3.2-1B-Instruct LoRa 8K",
+        "kind": "training",
+        "quantity_million_tokens": "0.206450",
+        "cost_usd": "0.082580",
+        "rate_usd_per_million": "0.4"
+      },
+      {
+        "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+        "kind": "training",
+        "quantity_million_tokens": "0.279088",
+        "cost_usd": "0.1116352",
+        "rate_usd_per_million": "0.4"
+      },
+      {
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "kind": "training",
+        "quantity_million_tokens": "19.448386",
+        "cost_usd": "7.7793544",
+        "rate_usd_per_million": "0.4"
+      },
+      {
+        "product": "Fine-tuning Qwen3-1.7B LoRa 8K",
+        "kind": "training",
+        "quantity_million_tokens": "0.160894",
+        "cost_usd": "0.0643576",
+        "rate_usd_per_million": "0.4"
+      },
+      {
+        "product": "Nemotron-3-Ultra-550B-a55B Input",
+        "kind": "inference",
+        "quantity_million_tokens": "0.053763",
+        "cost_usd": "0.053763",
+        "rate_usd_per_million": "1"
+      },
+      {
+        "product": "Nemotron-3-Ultra-550B-a55B Output",
+        "kind": "inference",
+        "quantity_million_tokens": "0.060471",
+        "cost_usd": "0.181413",
+        "rate_usd_per_million": "3"
+      },
+      {
+        "product": "Nvidia-Nemotron-3-Nano-30B-A3B Input",
+        "kind": "inference",
+        "quantity_million_tokens": "0.000758",
+        "cost_usd": "0.00004548",
+        "rate_usd_per_million": "0.06"
+      },
+      {
+        "product": "Nvidia-Nemotron-3-Nano-30B-A3B Output",
+        "kind": "inference",
+        "quantity_million_tokens": "0.000986",
+        "cost_usd": "0.00023664",
+        "rate_usd_per_million": "0.24"
+      },
+      {
+        "product": "Nvidia-Nemotron-3-Super-120B-A12B Input",
+        "kind": "inference",
+        "quantity_million_tokens": "0.585650",
+        "cost_usd": "0.175695",
+        "rate_usd_per_million": "0.3"
+      },
+      {
+        "product": "Nvidia-Nemotron-3-Super-120B-A12B Output",
+        "kind": "inference",
+        "quantity_million_tokens": "0.274619",
+        "cost_usd": "0.2471571",
+        "rate_usd_per_million": "0.9"
+      }
+    ]
+  },
+  "inventory": {
+    "scope": "default-project",
+    "observed_at": "2026-10-19T13:35:18.193699+00:00",
+    "pagination_complete": true,
+    "jobs": [
+      {
+        "job_key": "98c066012155b4000f44daa394e30511c70fd0ad413da215bbbdd8b9e3303d44",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "d067ba1c29ba0ea415ba1d3e3756d7286563c027b11b08d575fbedc79ddff547",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "2d12826c45c2cb8bb99affe039b3006055b1675abb435ea01b1e1d584a09a533",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "e22cfd93cf6f4c386d0f826b24c1c67413afd04ab1b8cd2e79425a33449212e6",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "6aa4c0dd02b29d8cd5143fe13729fb983975faecce85ec9250f90643057c2b5c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "3edc22bc05ec99048e02708df292815ed5db20619b4ebd45d281a28afcafbc3b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "9c51716eab115e7042b40962c4e7a3076fab46bdaa7c011d37ba8394a6056cf1",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "dd4ac82fff34bb12735da2833e7866b7f5a376b6118e49c6c52cedd99c019e76",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "10d90878363dd849e1652fc9fd1c9ccbc2ad0e73b3f13bbb68b9e6f1ab15bde4",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "7fca74bf0afaa5f95f374ec60f2bb59acfa26b199e39e7728fce27162a160c3e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "1126ff0ded9af525109a259118eb352d53b7442beb75786265131a5931b814c1",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "c4a730571bb998171ee95f45b225d873f4f0fb8b26031404a115537a7f580e58",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "running",
+        "trained_tokens": 0,
+        "finished_at": null
+      },
+      {
+        "job_key": "30a98a831e0d4b5654035b9e1066be8ca6a7041d93e7ba431d3a567c65a30480",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 114262,
+        "finished_at": "2026-10-19T09:19:46+00:00"
+      },
+      {
+        "job_key": "3e4d5f8f5e435fae6b550d1ee7acb3b7535f2fac201dd54f93b6b79af0969cf9",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 114262,
+        "finished_at": "2026-10-19T09:19:45+00:00"
+      },
+      {
+        "job_key": "985c94f87b509c27fd94851fa76dc762c39a53c6596c93a6682feb256445db67",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 114262,
+        "finished_at": "2026-10-19T09:19:47+00:00"
+      },
+      {
+        "job_key": "fa558bb95b93f9039b22430ab55396f0deeacc262b08829ec202ae1b0477f238",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 111610,
+        "finished_at": "2026-10-19T09:19:42+00:00"
+      },
+      {
+        "job_key": "f9241d68a012a4718cb1bb68170c4ababa159cab653b41b74044e5f8233e1383",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 111610,
+        "finished_at": "2026-10-19T09:19:36+00:00"
+      },
+      {
+        "job_key": "f45494fba80ddc94b677d9623a3a5293107ed95132c3d24aa569ec0ee6e7dc2e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 111610,
+        "finished_at": "2026-10-19T09:25:41+00:00"
+      },
+      {
+        "job_key": "1485f130bd9cd7bafda0149c6f4ea785035f0b5b738b8ec1cc5c648e6a25da5d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 354394,
+        "finished_at": "2026-10-19T01:55:47+00:00"
+      },
+      {
+        "job_key": "00aa742a85ebdd773aa4f15b68682605644c8dcb15527c453e0dfc7e610e2040",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 354394,
+        "finished_at": "2026-10-19T01:59:43+00:00"
+      },
+      {
+        "job_key": "b3807b889c72d8c5dd34968ef6071b6588bc3089fff0d85134e01748e903008c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 325019,
+        "finished_at": "2026-10-19T02:08:32+00:00"
+      },
+      {
+        "job_key": "4f2eb2ac92302552e77446d7d603c379632a2cc0e3387bb7ac923a9d7bf9d602",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 325019,
+        "finished_at": "2026-10-19T01:55:40+00:00"
+      },
+      {
+        "job_key": "4dd25e78e753f774cf2c64c10ccb02d6a9029eb0ef0d164313d400d654e6795f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 476660,
+        "finished_at": "2026-10-19T02:02:49+00:00"
+      },
+      {
+        "job_key": "69564a88a25846463cc457568cb7504dfb4ab929cc6f190a3563f7929b5183c8",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 481986,
+        "finished_at": "2026-10-19T02:02:32+00:00"
+      },
+      {
+        "job_key": "d4a940ecbf341da485c2fd515521fb142d38d3a02ac0c45fcb9901509e2be4f9",
+        "product": "Fine-tuning Llama-3.2-1B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 72638,
+        "finished_at": "2026-10-18T22:17:40+00:00"
+      },
+      {
+        "job_key": "8f2e2e5396eba50bc96133b66a5eee77cd6862a831acbac3480d496bed20c837",
+        "product": "Fine-tuning Llama-3.2-1B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 43092,
+        "finished_at": "2026-10-18T22:11:24+00:00"
+      },
+      {
+        "job_key": "a9d6b9d1e58ffc0aad22dcd541b5343b36d95fc467ad518c8d1fa12f813e90c3",
+        "product": "Fine-tuning Llama-3.2-1B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 72779,
+        "finished_at": "2026-10-18T22:11:45+00:00"
+      },
+      {
+        "job_key": "eb6345448c86c6fcbfb74043c67cfd9d06f6baa42f521e1ea6413da290c31c48",
+        "product": "Fine-tuning Llama-3.2-1B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 14364,
+        "finished_at": "2026-10-18T22:06:02+00:00"
+      },
+      {
+        "job_key": "fc1194a6b8f892f08ffc7e893642f0e44fb5c97a4c98c52f6c4f9b8cdd057303",
+        "product": "Fine-tuning Llama-3.2-1B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 3577,
+        "finished_at": "2026-10-18T22:01:18+00:00"
+      },
+      {
+        "job_key": "ec23e1bfb14795bae520bf6d7bb9c22901555cd88bfb4f68cb8ed1e9971ff257",
+        "product": "Fine-tuning Qwen3-1.7B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 56656,
+        "finished_at": "2026-10-18T22:00:21+00:00"
+      },
+      {
+        "job_key": "8e2ac2c2fda0479e5fd66a7c9e8112237205805f57937a62029f3c55984eb7bd",
+        "product": "Fine-tuning Qwen3-1.7B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-18T21:58:09+00:00"
+      },
+      {
+        "job_key": "10fa5c334e96071617f429cd8bee426cf15c233e089d1d4eb46084183c470554",
+        "product": "Fine-tuning Qwen3-1.7B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 56805,
+        "finished_at": "2026-10-18T21:52:35+00:00"
+      },
+      {
+        "job_key": "829be6477c553bc2b61e2180e5355351450a7b1e9bdef3852a349d41f36caea8",
+        "product": "Fine-tuning Qwen3-1.7B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-18T21:47:51+00:00"
+      },
+      {
+        "job_key": "4770f999441626269cc6896aeb338f6a676c28af8566a864c3b964c32ddf5c24",
+        "product": "Fine-tuning Qwen3-1.7B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 2777,
+        "finished_at": "2026-10-18T21:48:13+00:00"
+      },
+      {
+        "job_key": "04194b0108c468deba067206ba0f65d8c63b7fbab0a4310d60d0936b5a97d81f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 56656,
+        "finished_at": "2026-10-18T21:40:59+00:00"
+      },
+      {
+        "job_key": "04e89226dc8445c7f75f3a9c8d39b8ec785babe0a151543992b83b3ff89072f0",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 509904,
+        "finished_at": "2026-10-18T22:07:21+00:00"
+      },
+      {
+        "job_key": "ec4ad5b8cbbc6c7bd6054b62f41d56628f7e9eaebe97f6df754f4e4d2b2ed27b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-18T21:38:16+00:00"
+      },
+      {
+        "job_key": "c59a1cda18921733e7f63b630a9b675e7d48afa87c882fab1950953e7c262c0d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 509904,
+        "finished_at": "2026-10-18T22:07:11+00:00"
+      },
+      {
+        "job_key": "1977a1c0e5f403da73787fa3652f62db566e7b6305075aa6bc9953d563544238",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 254952,
+        "finished_at": "2026-10-18T21:51:17+00:00"
+      },
+      {
+        "job_key": "3c9c072c2f63e7c51744f74f8c9910b685c67ae4a43b22b98e207d228df4ead8",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 254952,
+        "finished_at": "2026-10-18T21:51:07+00:00"
+      },
+      {
+        "job_key": "2837959b57fff1520f4e9bad75def1e853bfd88518d6c7000adbbd04260cd1d4",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 84984,
+        "finished_at": "2026-10-18T21:40:31+00:00"
+      },
+      {
+        "job_key": "b1832984af3e0e786a55175e3dd6e451537aceb6b505c498bdc7a45a3c028573",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 84984,
+        "finished_at": "2026-10-18T21:40:39+00:00"
+      },
+      {
+        "job_key": "506cd665f62107a0cf6d61975a574ab109525a23d5bf8f6854bc8ef3e14a698a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 509904,
+        "finished_at": "2026-10-18T21:54:21+00:00"
+      },
+      {
+        "job_key": "d710440a6711a500c07bee2522008604cfbd4b54e2495c47d82d56f40f691345",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 254952,
+        "finished_at": "2026-10-18T21:38:36+00:00"
+      },
+      {
+        "job_key": "a13424df60ac13eeb067e7b18bc3704ac4fde1a1fe3420cdc53d431d52e26f68",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 84984,
+        "finished_at": "2026-10-18T21:28:05+00:00"
+      },
+      {
+        "job_key": "90e636f496cb3989fd882ffe13562b2b35a0850070657475b1498cde464336b7",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 56805,
+        "finished_at": "2026-10-18T21:29:48+00:00"
+      },
+      {
+        "job_key": "d76ae725efdcc4704d92268adb0a473532f524337e0635d48ff6dac50cdd9bad",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-18T21:27:15+00:00"
+      },
+      {
+        "job_key": "82b735f11742cdd69990d471c5ce92757ff4a3b583f3d8764e1d969e693bda1d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 2777,
+        "finished_at": "2026-10-18T21:30:23+00:00"
+      },
+      {
+        "job_key": "9d50ceed37faf882ceae203d7d9b337ab8eefc016fccd5f813f3cdf18dc9251c",
+        "product": "Qwen/Qwen3-0.6B full fine-tuning",
+        "status": "failed",
+        "trained_tokens": 0,
+        "finished_at": "2026-10-18T16:43:18+00:00"
+      },
+      {
+        "job_key": "84498f146c1f5845ad6564696997c03848b619973275d9cd03257532f9fe0670",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-18T00:12:00+00:00"
+      },
+      {
+        "job_key": "69f9f58618624a8f698356692a77288657d9cce387978a1ec6d98fb8be0a7f48",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-18T00:11:50+00:00"
+      },
+      {
+        "job_key": "2d14c66587175797e42fb7d6bee06715f7edc77c08148551a67e30325b1e1e64",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-18T00:12:02+00:00"
+      },
+      {
+        "job_key": "9f5bf2c11d879420894f5409de534c2ed720785913009979f7b7e84b48a9c124",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-18T00:19:06+00:00"
+      },
+      {
+        "job_key": "ce3771ef27cb28feaa796d85378e9ffb892c63e5d5809541c709233aceb12ac3",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:50:30+00:00"
+      },
+      {
+        "job_key": "3ecdb867889490fd29ca8fc5172d8aaa852dc195aa89710419c76f44104d05af",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:50:21+00:00"
+      },
+      {
+        "job_key": "407569ff34cce536d650351322eda23c11ec18d41475f6064314e4e054b128ee",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T23:47:13+00:00"
+      },
+      {
+        "job_key": "373a0b0468a7248ecb0220e69ff2fb72c859355fa9e9561eb371b3e324f1b939",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T23:46:56+00:00"
+      },
+      {
+        "job_key": "2681511dc5027ce5ac3a407029a8535fae915a111644ec21a759a5094cef08c9",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:30:06+00:00"
+      },
+      {
+        "job_key": "6e0a91ab3bf3c98d63ee8872d643dda69efe76ecf1fa906af20203da90122694",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:33:37+00:00"
+      },
+      {
+        "job_key": "eb9a13a34ca6c350b5f9293657456017e95d013d9142556acf7eaa2bb1e63786",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:30:07+00:00"
+      },
+      {
+        "job_key": "ee7b899554c8d40e14b1f6c21c0f66307ed71ea550d999c40efed9b0b104beae",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:30:03+00:00"
+      },
+      {
+        "job_key": "1d2d51f4828ee662fffe43e60978d60caa2134114fc49d4caffe593a1ff26397",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:12:04+00:00"
+      },
+      {
+        "job_key": "0f3ee0106f4b870e9e31349ec943d7eb9f54bc36a8e0e31e2c4be50e846429a7",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:12:16+00:00"
+      },
+      {
+        "job_key": "fd624bddd0dc24a9fac25e3d1c215f992fad6556621de68f9db02c2a47c6e4b3",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:12:19+00:00"
+      },
+      {
+        "job_key": "f05ae39e51425618bdad8fc64770aedb1d21106f5c1f0f60be530ca684080824",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T23:11:59+00:00"
+      },
+      {
+        "job_key": "cf523b3f4b8921f9874bcb34ea205367fdf92ad19fc156330a043604e62ca16b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:55:35+00:00"
+      },
+      {
+        "job_key": "64dbdccf3e1a849b16a9e057cf6c1bfb199f32c7141a45f475639061147f3d3d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:55:33+00:00"
+      },
+      {
+        "job_key": "4901872e3563f499f38ea0e41eb192aedfd0ee52b887cce551dd0f80cd83dbcd",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T22:52:13+00:00"
+      },
+      {
+        "job_key": "76781c98051df69254affb3f5d90f9c2784cdaac207305c8b56ea40988840d89",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T22:52:05+00:00"
+      },
+      {
+        "job_key": "313ee2dcb27d9dfe19bdd578abea2e7d14f02d398bdde95b2631d8dfe4ff2625",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:41:35+00:00"
+      },
+      {
+        "job_key": "943ee05fc7f32a6f7c4381c8c2f36bcd708d9a782d16c18a64ccd152d5dd2d9a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:21:28+00:00"
+      },
+      {
+        "job_key": "6401666adbda1bbda1dae829529be364de5544f6ad85c22ebe714bc44994b6e2",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:25:23+00:00"
+      },
+      {
+        "job_key": "6ae331ba9bae37576724b751ced2bcb84fba516716174c15f3d7209f0e276375",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:21:18+00:00"
+      },
+      {
+        "job_key": "2ee1a0c928a88879f2817dc50909937bd68c47efe72454ea32840870aa41d2d1",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:21:10+00:00"
+      },
+      {
+        "job_key": "7155162c1c0a2a9dac66d3e4b67e85ba9660880e7c229a960de64745be21292d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:04:29+00:00"
+      },
+      {
+        "job_key": "b185ebfa340063772677b70ba336d938e83c03d66358a686590dc3aba7125926",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:00:22+00:00"
+      },
+      {
+        "job_key": "32512a841f50942b786e84e5f7185b25c9fe63463594e2b6dbca4a0b422953aa",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:00:39+00:00"
+      },
+      {
+        "job_key": "d463ce81a01dd0eca63196aab67dc02aa8bc03e93a5dd1e0cb448bba9a8c613d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T22:00:41+00:00"
+      },
+      {
+        "job_key": "6d9f10d2f9afcf10decf0e226e4b8371e1e89e73f635f5e9c9a33c3f3f23e9f5",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T21:43:50+00:00"
+      },
+      {
+        "job_key": "47c4bcf40994cc5d8e499916c96c5275e34d8e5a62080d2d5cb1688eed013029",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T21:43:55+00:00"
+      },
+      {
+        "job_key": "bb3daaf49731b0d09122de41787e0a691ad6df93f67a1e4a5853912964407c62",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T21:40:27+00:00"
+      },
+      {
+        "job_key": "0476756eb7e7663eb3815514c18b868d4db9d34d9dc1ff287c58513a6fe26a65",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T21:40:20+00:00"
+      },
+      {
+        "job_key": "d6231c547cb01e2da6714e2f0f50e18a40ab711538e9b6159ac59b014a3f1a77",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T21:29:50+00:00"
+      },
+      {
+        "job_key": "3a670025fa5a5046d4d8cdc0440ccc454a735966878e63f196af8e2bde2ba92b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T21:13:16+00:00"
+      },
+      {
+        "job_key": "108e9e5ff2dee148822328941bca5fdf0426414526201cacc1cd8991ae06c556",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T21:13:19+00:00"
+      },
+      {
+        "job_key": "78f83cb3da774a2a634e737a2e0218d43db52d2aeeb43797fc203f1e5ac002ed",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T21:13:12+00:00"
+      },
+      {
+        "job_key": "a79f36842d03319e7df6fb63569d21f6e512f34014e559241a149792510881f5",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T21:13:17+00:00"
+      },
+      {
+        "job_key": "46af2cf8e12ee78b61f4eee44d00dff5da86d9dfd6665ecd1d0cacdc9b056c2d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:54:21+00:00"
+      },
+      {
+        "job_key": "6a3d3ce51fc122ab2781eaf1a931aa3242eab22aa53a6524a62dd904fa45fc05",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:54:16+00:00"
+      },
+      {
+        "job_key": "9a64e86fd6197beeacc055feaadb66f271c73ced17ebf4cfadda67f438026262",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:54:23+00:00"
+      },
+      {
+        "job_key": "46f27ae4c5a012834cf25c652e04473539182667fb6773d420f74c0ac7dfc986",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:54:16+00:00"
+      },
+      {
+        "job_key": "4d831eea74b676c7a0e211ffb03a1ad83b584c69136ca59c50bbfab1ceb17fd8",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:30:52+00:00"
+      },
+      {
+        "job_key": "1f060c8437d288e2b94f383dd1a36f08b90411762c5f49c1acc3c69c57c730dc",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:30:54+00:00"
+      },
+      {
+        "job_key": "0b54e06ff052733fd22a7cba133560f2123c68ff7ee1ff9b015fce2ea77f3ed8",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:31:12+00:00"
+      },
+      {
+        "job_key": "8ebeb92a9fcd68234d5f848e8babfa0e756789a888ccde329e6e8d6ed75cd4fd",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:31:09+00:00"
+      },
+      {
+        "job_key": "23d803e78f00c45bb6bcc918046d1f8b6e53bedb32a078b4be8279ef2954b523",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:02:57+00:00"
+      },
+      {
+        "job_key": "2114e002e7167360f637b6203141d0b9fda1257d7317c43f25520d97b250ae50",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T20:02:49+00:00"
+      },
+      {
+        "job_key": "cf497c59315438567691ec0d99aabfaf0dee124b6f00e511485ebe9c93c91a26",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 44656,
+        "finished_at": "2026-10-17T19:56:21+00:00"
+      },
+      {
+        "job_key": "ab07b0498025bbb9a06e2642bfbb80b63b911e86ac67baeb6c8a44acdbf90358",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 44656,
+        "finished_at": "2026-10-17T19:56:12+00:00"
+      },
+      {
+        "job_key": "8553cc8a7ccc7e8dbd88b655a1fe82f660c3b32ecbd441ad5f5d2558ac322c82",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T19:38:28+00:00"
+      },
+      {
+        "job_key": "049a74c2d06f899c3a731daa1e006c0d179b9f92180890d092fe0c069fb45a15",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T19:38:23+00:00"
+      },
+      {
+        "job_key": "b3f4e73b99359afdec9cc9a4718ce33811ee8d224884c6b7e715e4acd28cb501",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T19:38:44+00:00"
+      },
+      {
+        "job_key": "622fc343ab6dbaf22becfd8b37aac63f16a063849d6ed62b5ca4db56fc43d456",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T19:38:57+00:00"
+      },
+      {
+        "job_key": "8099b3cea70a9475b965779957792526b475c81bf64968d4457bb53a831f98da",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T19:16:18+00:00"
+      },
+      {
+        "job_key": "6cb849270e8baff69d3ad2cd2ed154e68ca58c3b643fc48e208b11e89327963f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T19:16:18+00:00"
+      },
+      {
+        "job_key": "7cdd3280dd9c61ec411dcf0f8eaf78e571b03b1d62098a4265fb0958b5a93a86",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 44656,
+        "finished_at": "2026-10-17T19:09:38+00:00"
+      },
+      {
+        "job_key": "571fbe6c0d8e6746f49dcd80e87ea5f8b80188422c99a66fdb5ee3480afcf492",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 44656,
+        "finished_at": "2026-10-17T19:09:42+00:00"
+      },
+      {
+        "job_key": "d2d01dc0dc57e39b24218294cb5fb3999c2da0fd9d5abac42568b47d03976d58",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T18:56:18+00:00"
+      },
+      {
+        "job_key": "2ac5ce7291aadb35b0e29bc99d79f251d2a54e9b5d3ccb8e602a26943a60f1fe",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T17:46:35+00:00"
+      },
+      {
+        "job_key": "d6eac268bdf8a9e4f372d67652de4a1983d9027fb8d43f400117e4efd03909c9",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T17:45:30+00:00"
+      },
+      {
+        "job_key": "073b4315897b579abe1545d43265981a89361e35a96607b3bc46708d3791a06a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T17:50:49+00:00"
+      },
+      {
+        "job_key": "6135ae432ddaaa78670202867f278909d51b78a718e46742445046fda92db24d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T17:45:33+00:00"
+      },
+      {
+        "job_key": "5473d98c629ec34865baca1f1c1363ee6738324212fd3bb11dd5af758f098567",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T15:03:29+00:00"
+      },
+      {
+        "job_key": "59bf2e3c9fd24d8e972f56c6e495257c3ac504a6db749e1e2c851f50fff8e99b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T15:03:34+00:00"
+      },
+      {
+        "job_key": "92a688f336bb331a3659420a0f8ca45f8a789c0346257568bf7c7d88616d8a30",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T15:03:47+00:00"
+      },
+      {
+        "job_key": "96ab696222468334c36fe635c80db1f116de78afc19c26f6773d61423ffc9d3e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T15:03:41+00:00"
+      },
+      {
+        "job_key": "46fe7dc5d7eaf7136372a1c35ee0c2ac44ae322b8ccc7bd5db3262a8a61428d9",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T14:44:12+00:00"
+      },
+      {
+        "job_key": "b3bebfe37d88427b9fc9efb15ad64bad54c4c25b0d710069ca15567c17012c5b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T14:20:54+00:00"
+      },
+      {
+        "job_key": "e2a619cd05553d4aa734287cae47b1af5956b54609bdedc2a617602054714b9c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T14:20:56+00:00"
+      },
+      {
+        "job_key": "32ce2d2960d871274403dc11573fe5ca00a71a73b4ed5163a695732c5085c323",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T14:20:55+00:00"
+      },
+      {
+        "job_key": "d8d2ef1334e724d579e6904ad385b3a541ccbb721f1c870d4a0d61ebdb67d615",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T14:20:58+00:00"
+      },
+      {
+        "job_key": "349229a60c60b5dbe4c11f66919b14f54182b92e9c451223cad7df642f99221a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T13:58:18+00:00"
+      },
+      {
+        "job_key": "e61bd396193959edae571f236d67e78e3b27b1e60a24430fc8065588c54ce858",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T13:58:23+00:00"
+      },
+      {
+        "job_key": "856edd01ac0d7e2c0744cf2c13a12276688bb729a2c36c582f282dd43cd712c0",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 44656,
+        "finished_at": "2026-10-17T13:51:48+00:00"
+      },
+      {
+        "job_key": "14c624be4350ce322a6bfc2196416477bea784cd89d797b17790c77451248c2b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 44656,
+        "finished_at": "2026-10-17T13:51:47+00:00"
+      },
+      {
+        "job_key": "a4d75d32c128765b232af639404d43bc23460387f1f4740d52386bfd577eda49",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:36:07+00:00"
+      },
+      {
+        "job_key": "40c973f8bd0c517af0c3bebe5e87bb2eb4f8d269bcb4a4c1ecac6843795a7614",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:36:02+00:00"
+      },
+      {
+        "job_key": "5327cec68960707b294b89bf68f97e9be22470ffeafde7dd24ac8e364b93cd23",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:36:05+00:00"
+      },
+      {
+        "job_key": "ff1e53cb0c8e331aca205547e1b62eb7849f7b488e1d7447551eb3112e28d87c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:36:02+00:00"
+      },
+      {
+        "job_key": "6e8eec56aa0d329acd6f80dcbd58a889a7764a79e30536fbf29f98fada5c2262",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:21:22+00:00"
+      },
+      {
+        "job_key": "7cac2620159a4a19ae5cc7d2c2eaabc62d4d6d77314e4ef6949140e336a06d5c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:21:12+00:00"
+      },
+      {
+        "job_key": "9172fd43eaf750252eae94c908ee22f46fb3edb77f09b664fefc9c9a3d7c75fb",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-17T13:19:30+00:00"
+      },
+      {
+        "job_key": "c112d401b06cc971a58f5fe69d18b55f562dab315c4999f321d94054d961f034",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-17T13:19:27+00:00"
+      },
+      {
+        "job_key": "4a5e72db4fd0ee04c6997bab6c5be3c682f86204454bdb8a392de3218faed0a6",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:04:00+00:00"
+      },
+      {
+        "job_key": "117b9de16fbd0011e2d75c832bbb1110a0f5545d9594d6a2b16999df2f28c9ff",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:07:16+00:00"
+      },
+      {
+        "job_key": "bb20fa6e33aa2a49a02e94216cff71938eb1851f65b9865199d4f45d8dd8117a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:04:02+00:00"
+      },
+      {
+        "job_key": "193848b44b5940a4412f4e3c1746e90f68ab8cdb78ad83348901ab858c89e7c5",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T13:03:51+00:00"
+      },
+      {
+        "job_key": "5768eda95c461f6153d31c38a82bdf607ca16df1421ef81b8b5d3bfb31aa07c5",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:52:32+00:00"
+      },
+      {
+        "job_key": "3b44bdb0c173ce955f1c15ce27f272a100c86bf8bfeb90b37b36685fa0ceea56",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:35:57+00:00"
+      },
+      {
+        "job_key": "f5fac1fe2df7c75d22a96e0de2ad42aa0fd8591918713d0f00c710e55c88aadf",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:35:44+00:00"
+      },
+      {
+        "job_key": "63e1141ec4f6a04025d67b518f0b0a11d04539f99b2d26b24456e5148eec46a6",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:35:55+00:00"
+      },
+      {
+        "job_key": "8fcef56964d612971d6a19f7d25d5f266089876985dd9072fa7d6d948bf126c3",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:38:42+00:00"
+      },
+      {
+        "job_key": "56033dd8d8c6c77f2c6f45a0d69b53cbf00ead9de08fafb004e831695a9f0d2f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:21:22+00:00"
+      },
+      {
+        "job_key": "50905bdbb4f59681d5a96edede34ad6336a798c3022d8d8a4d11ba635ec91271",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:21:09+00:00"
+      },
+      {
+        "job_key": "12b2d6259e6b51761fd822831a91a6172f602ea2cb35c12a21ba44f2c9d053ac",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-17T12:19:32+00:00"
+      },
+      {
+        "job_key": "cc91244ea08193cb068f14a574bef70593274b9d53e82fb59eb9b191ff22da67",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-17T12:19:33+00:00"
+      },
+      {
+        "job_key": "7a580020f4c7dec15fa6e4f4ccf15fe4729c91217e5638407e215b28c3825497",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T12:09:51+00:00"
+      },
+      {
+        "job_key": "7fcd9ac2a69df5033656a7902404707adde901b5bb327cab31240e1971208900",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T11:56:37+00:00"
+      },
+      {
+        "job_key": "09a731fb311916068e95ee9dc6df64895e89e9a978eb1102c51963444bb427c5",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T11:51:58+00:00"
+      },
+      {
+        "job_key": "ee003bf86fd7245233f7d858e06b1016a5c3d5c2a635407f0a0654760bfa2dbb",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T11:51:49+00:00"
+      },
+      {
+        "job_key": "f760ec427d301b7b8af4dca6227ca4e239583f9a3a8e4fb2a538b7a8c4e34e3e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T11:51:53+00:00"
+      },
+      {
+        "job_key": "9daa6b4d8a7c3fa07015be0419f234021ee65f390d74ed9c29924653ab219557",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T11:31:05+00:00"
+      },
+      {
+        "job_key": "208e48593003e2fb0ef3bd4c5855080263c2ba5d4b4f7815bae3a5fcf308e64a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T11:31:13+00:00"
+      },
+      {
+        "job_key": "a41b71f4b7f52a457a5e2c17bc420b1387c8b7562e311654b36b2a9f0ed81f0a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 133968,
+        "finished_at": "2026-10-17T11:30:53+00:00"
+      },
+      {
+        "job_key": "b3c5832034a5ae88a5f023d185ef41fbb64557c62837a27e1294343c092ea3ba",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T11:02:41+00:00"
+      },
+      {
+        "job_key": "869d8bf423d5508edbf50eefb2e29b751a6b8a6c37e22d5d0c0d06e562df68f5",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T11:02:39+00:00"
+      },
+      {
+        "job_key": "e990187fcdc69bc8400bb5c993838327410077c188f7b614603268d47ef7ed8c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-17T11:02:32+00:00"
+      },
+      {
+        "job_key": "3f3e2ee34850dc965ada348be3d6596c36569ed691e2e73c32ba871dd7abf5bd",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T10:33:49+00:00"
+      },
+      {
+        "job_key": "70fa7d12a8038f1d46e7a2744363d88f7adfb8392d2e3616150255d24c8dbc8b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T10:33:46+00:00"
+      },
+      {
+        "job_key": "075c5ebb24ffb7f041c9eeeeea5d6e29950df064816045f72bb93e900d1e5c02",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T10:33:38+00:00"
+      },
+      {
+        "job_key": "532d9fe1ebdf1746d9a8ef802702352973c05596522213c09f704c3f0d630116",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T09:12:57+00:00"
+      },
+      {
+        "job_key": "9bf32771f74c82f9c8421f89ae3d7eb7f4c193c51eac3d768becb5e50c9c2ffa",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T09:12:50+00:00"
+      },
+      {
+        "job_key": "c4cb428d6c2954b6bd27a66c2ec8f7ca3f1207dc6a1b065b9f0e437bcf72b7b1",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T09:17:08+00:00"
+      },
+      {
+        "job_key": "b5d7cdb04f2c4cc586cccdd8ba64dc8fefc4d957cae368263b48854488d49a0e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T09:12:53+00:00"
+      },
+      {
+        "job_key": "28fe7bd2924600745f35a4eb16654e0bda640cd4b3d5c153e871d9a16357707f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:58:58+00:00"
+      },
+      {
+        "job_key": "2d7fc8e235652bae05215ac7ef00f4ba70ea8b71427496da2176c063521c2ebf",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:55:34+00:00"
+      },
+      {
+        "job_key": "4a7578a91689e1bfcd8434418f23e6d17d6e103006c5bf406ff874fbf165d60e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T08:52:17+00:00"
+      },
+      {
+        "job_key": "22202b6b646ec81656b85aebac58b686cea9cf0aad15dd186ce55aca0d986df9",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T08:52:03+00:00"
+      },
+      {
+        "job_key": "bafd3796f19be3ff4cc2a03ec29bc191320651c1f6cb473d80826f8bcff1b849",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:40:01+00:00"
+      },
+      {
+        "job_key": "b7aa166dd9bef796efa64097314233152c6a4d362691cdb8716fa457e3dbe19e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:40:04+00:00"
+      },
+      {
+        "job_key": "a2437426cfd7b6523df3e7ffeef07822ecba1a20e3a0fe783fbcf9ebd8e39a7f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:40:14+00:00"
+      },
+      {
+        "job_key": "dd3faf8905b631d56152eba375e08078cc1692d3a9b2b98fc95e59ecfe6bbf0a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:40:09+00:00"
+      },
+      {
+        "job_key": "79c22cd2586f0502b521faffeda2e54370ae10220cb472194f2f6d3fdf39111b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:24:08+00:00"
+      },
+      {
+        "job_key": "8c65f5b174443156e65655e1d7f147f3fd415a7955d4532288501e1d08285280",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:24:03+00:00"
+      },
+      {
+        "job_key": "2a0246d8522e6db14e5973e5d51b4fe520142bcab690fe97c8c2ee645c0ecd4a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:24:13+00:00"
+      },
+      {
+        "job_key": "0b69eba3200c0a3d9ba734b71a2000407cc7956352e279c341ad064a237f6ebf",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:24:08+00:00"
+      },
+      {
+        "job_key": "53a6ccd4a97899d66217130a59420d3f745b84c5477ba43992bc1f6bcae89ab6",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:09:30+00:00"
+      },
+      {
+        "job_key": "32e009a56bf5a7059209ac1031b37c2bc1f781eb3942196ad5f6460c53db56ac",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T08:09:29+00:00"
+      },
+      {
+        "job_key": "e66bd483f5539a3fbf6a02dc2be2971ead311f397d59090a34b7cab056ca2115",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T08:06:10+00:00"
+      },
+      {
+        "job_key": "f92a03f66dcab49dbe5c6ae7ad3015fd1bcc98fddc33849d670709dc40fefe94",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T08:06:06+00:00"
+      },
+      {
+        "job_key": "26b87ccc63b53fb294e5a3d83c9faf27c3c4893a20631f786f79b0072c911daa",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T07:54:59+00:00"
+      },
+      {
+        "job_key": "910dd945ea234650e9ed25df08bd5d378e2bf8425face193836bfefb77cbeb36",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T07:54:48+00:00"
+      },
+      {
+        "job_key": "698c772fe235640ed031c15c00ec6ebfc6452c6a77164bcbff7033f4ac45ae42",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T07:54:48+00:00"
+      },
+      {
+        "job_key": "98f782b6af25481cfa7fe02e094ba91d61617440422c4dc77deb824b7e517f42",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T07:54:47+00:00"
+      },
+      {
+        "job_key": "e4eeb0dc3119b77fdf4147436fc62cfb695e0a00e57cd81cdd66afd2f97ce3b6",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T07:26:48+00:00"
+      },
+      {
+        "job_key": "54550a3c639662e1d3a4b190ed36ce1247a96a4a131eee8e4e8ab0f3dc14c67f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T04:30:59+00:00"
+      },
+      {
+        "job_key": "1d4cfa995ce698aeb3705da1f03eec58235b1b29ea5ccbbb27207c892917867d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T04:30:59+00:00"
+      },
+      {
+        "job_key": "53e9cd0f306935ace9b14588852e17ba8ed9e93ec5ecb854b76ed72f527e0a74",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T04:30:56+00:00"
+      },
+      {
+        "job_key": "c37daf7ddde1aa4e65569eb8e014275c9b0c803ea0d6af9358646d6067e7460d",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T03:13:26+00:00"
+      },
+      {
+        "job_key": "d9d1d929ca94614056b169d6321c7ab03fdc21cb74568c84976627b027202b66",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T00:38:23+00:00"
+      },
+      {
+        "job_key": "31b9e265d51df7843f982d864bbce195d12d4b397c8e93d9a4a045e33093f38f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T00:37:54+00:00"
+      },
+      {
+        "job_key": "363fb74b35ad7764d724de58ef0f24caee55f171583ceeca7d499750f87c4f13",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-17T00:38:01+00:00"
+      },
+      {
+        "job_key": "068dc4ffa627485c32304aecdccc9ac43a8608a78687ee0ed2afdde81c19c661",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T00:32:15+00:00"
+      },
+      {
+        "job_key": "095d7c7a6c8ec6b8847da508ea1c9123ec3315c91a33f76966ac9ae4f643bb6f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 22328,
+        "finished_at": "2026-10-17T00:32:15+00:00"
+      },
+      {
+        "job_key": "8abc48d61edf0d54a2208a1e8fd944ca8fb742b7990c5376eb72ea163d9f1345",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T21:08:40+00:00"
+      },
+      {
+        "job_key": "e11dba6d7a60eb216a2b2e939443712e24060ba2bde253733a5f1d52eac4d207",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T23:02:39+00:00"
+      },
+      {
+        "job_key": "f34fd34b230dae2287c1a1e0a8a626d8bdde5cad6791fff6f633c0de581dee4b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T21:08:43+00:00"
+      },
+      {
+        "job_key": "754658a91ac1bf1eb8b19f6a63b9b1e24a57c01af57524dedcc618fc44e59825",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T21:08:25+00:00"
+      },
+      {
+        "job_key": "a37b4eb66fc91a342bed7e6424963df8200efff2935e771add436eafdd350fe0",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:51:33+00:00"
+      },
+      {
+        "job_key": "caa36a7e06f9d264fe2ee814dd9c4bd33f169c4d8b712c21ff668989e5f4cc1f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:51:29+00:00"
+      },
+      {
+        "job_key": "42f419de640a753228f329810b913d5dced7e3459a1f1be4c3e2aedc7a62df70",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:51:28+00:00"
+      },
+      {
+        "job_key": "26d31fbeda06c66edfcf1a19ad36decb756188fab74e7ce34ca4e22891172e66",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:51:24+00:00"
+      },
+      {
+        "job_key": "7fe2815a6f4967d916c67aaa8f4a97fca0359580c07794d86faf08039873deea",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:25:02+00:00"
+      },
+      {
+        "job_key": "4e6ca27e440bf0af2a00b1e117c1d42bbcc697bb7bcf48875ca4fa4ec2919467",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:25:06+00:00"
+      },
+      {
+        "job_key": "5c351b8f3a5321869377ed64ce8419da353f687d5e4181de0386c446293d6107",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:25:29+00:00"
+      },
+      {
+        "job_key": "909c33cf6f67534d2dc1da425c3ecfeda71ee7309e710d2516dcd63b24b5d33c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T20:25:18+00:00"
+      },
+      {
+        "job_key": "2f7a9b963c63e0fe83c9eb37f4b3c82e02334ce5e6200b22ced12af451caaa2b",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T19:59:47+00:00"
+      },
+      {
+        "job_key": "e25c11ba60403e7b25bfb6f3c03ba6639959ecbe96d86941616c4d6f2d6241f4",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T19:55:53+00:00"
+      },
+      {
+        "job_key": "d304c2fa6c7384e9ecf35258796accedbdea6bd2bc9defe4a6601433c49993d6",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T19:46:05+00:00"
+      },
+      {
+        "job_key": "6af8739bdef649fd290824248e2831dbe983061f221c91c9451db327479cbcf2",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T19:45:54+00:00"
+      },
+      {
+        "job_key": "42b6469a0729447576026ee33f19680895ccde09102570c91e78b62a39774aaa",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T19:26:15+00:00"
+      },
+      {
+        "job_key": "834e1143ed239531c8114510c00aca03e877439e24b54c3fc4fd5e621398a8fa",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T19:26:02+00:00"
+      },
+      {
+        "job_key": "8952655b2ee44c82037da9a3177160fe5f9f4ee8f28ed5f777df3151a7412c6f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T19:26:13+00:00"
+      },
+      {
+        "job_key": "2430d3d41f62cf40934600e553087356862c1517398d5f674f43fa365bf261dc",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T19:26:02+00:00"
+      },
+      {
+        "job_key": "b35391347aa8034c5571b24849863ee4d974ac723b41831b5811d50c24ba0a7e",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T19:14:18+00:00"
+      },
+      {
+        "job_key": "aad3d425f1a1a03a2b94ceaf5f44a2dd6f8aae1c9725246f62e38fd77c846987",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T19:14:17+00:00"
+      },
+      {
+        "job_key": "c91f7f070ac0ce3cdc07c6f6e4a0422eab84632db048006d21a269269d97ccfd",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-16T19:12:39+00:00"
+      },
+      {
+        "job_key": "6736b6ea9ffaf57d6bd0b55d096406000fae541e4dd9c5e3d4c45744f296e45f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-16T19:12:24+00:00"
+      },
+      {
+        "job_key": "d389e53a8b079766f715d0eb6f5ac24913b7feb8db2b60f639a089014d6b8cba",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 200952,
+        "finished_at": "2026-10-16T17:30:53+00:00"
+      },
+      {
+        "job_key": "fbad709462ced105da53317c453a2f54c15bc99a093fc014e2e6125896c0ed48",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T17:21:11+00:00"
+      },
+      {
+        "job_key": "3f192850d450c174d2d8527498f591aea178e1e0b1197760710887b31543fc28",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T17:21:06+00:00"
+      },
+      {
+        "job_key": "d3403b2f234e9cc9a25b7766b9e31f0761509e6281ca54386f725b5e901693e4",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T17:20:45+00:00"
+      },
+      {
+        "job_key": "f0405f39b060f36f224ef0c03cc5695f62cce46b042fcecbdb634cc218002755",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T16:59:03+00:00"
+      },
+      {
+        "job_key": "45e7a8379d95c6b77abf7b428bdb3bbd11293304b7c6bc7522936902f9385bfa",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 66984,
+        "finished_at": "2026-10-16T16:58:56+00:00"
+      },
+      {
+        "job_key": "be87179c09340d3f4ba02b530c97b3670a18fee70f9f2951cd872bf187400dd4",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T16:56:29+00:00"
+      },
+      {
+        "job_key": "8eb8185aae6767007d44ca23e6082889a80723c1f2a3d7ab945c6fb76b9bb2ad",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T16:56:23+00:00"
+      },
+      {
+        "job_key": "6143154e5e32ea3297e9a24338d99478231bb96211c8f31204c264e9413d4e85",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T16:12:23+00:00"
+      },
+      {
+        "job_key": "e37bd753870f11647778605965158f92f9591ac7d84894cbe6fc5158063b9a7f",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T09:26:38+00:00"
+      },
+      {
+        "job_key": "50e1cdbeecea6c4ec33e273127f5e277b11a69bda124b07e4c839af25d1ed839",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T09:26:26+00:00"
+      },
+      {
+        "job_key": "9a072d9ddf6ea13037400c117d5892d8d6920c16ba220db5bd62a533887e5e1a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T09:26:31+00:00"
+      },
+      {
+        "job_key": "6cefdf7c25d7d2c0c4ac1da51b3a031b12ce03eae2c7af9ffffd884ac2fa95ab",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 33492,
+        "finished_at": "2026-10-16T09:26:29+00:00"
+      },
+      {
+        "job_key": "d52aea7e6d4f86025071c76febfa7c3734f0f20fb42755586f873b611e9c928c",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 11164,
+        "finished_at": "2026-10-16T09:08:09+00:00"
+      },
+      {
+        "job_key": "1f9499970ac1f52f31ff5c5d11841bc9f40c0b41d80c811bc34a5362b5f0f7c6",
+        "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 145276,
+        "finished_at": "2026-10-15T22:01:52+00:00"
+      },
+      {
+        "job_key": "b36d0b6b06a333bfc9f8238164abc23c21a03d09e6942e70ad2796c1f4a651bb",
+        "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 43092,
+        "finished_at": "2026-10-15T19:35:11+00:00"
+      },
+      {
+        "job_key": "df7583c0ce490f256a466be6945e2d95153e1a323a95ce74d88741df268582bc",
+        "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 72779,
+        "finished_at": "2026-10-15T19:38:08+00:00"
+      },
+      {
+        "job_key": "c9e313f108cf29ad6d94c3e89e7d9d3aa55da24f7de2a937f65cb05c06b3d8b6",
+        "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 3577,
+        "finished_at": "2026-10-15T19:28:01+00:00"
+      },
+      {
+        "job_key": "99e58fec754f520626ea097615b9e065e904a084519c880a3dcd957c4fb7740f",
+        "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+        "status": "succeeded",
+        "trained_tokens": 14364,
+        "finished_at": "2026-10-15T19:17:23+00:00"
+      },
+      {
+        "job_key": "a2431b747db26580d222e7c49623804a1299f18c1571be9fad8c50abaa7fdd45",
+        "product": "Fine-tuning Meta-Llama-3.1-8B-Instruct LoRa 8K",
+        "status": "cancelled",
+        "trained_tokens": 0,
+        "finished_at": "2026-10-15T14:04:17+00:00"
+      },
+      {
+        "job_key": "366554b65a37e334482d07440ff3d693195df397b8641d756c137cdbcc77dc1a",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "cancelled",
+        "trained_tokens": 0,
+        "finished_at": "2026-10-15T13:48:05+00:00"
+      },
+      {
+        "job_key": "3b2c175ef41450dc6b1984d1c267b1f04cc622346564b9dfba2a9f7e33053f90",
+        "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+        "status": "cancelled",
+        "trained_tokens": 0,
+        "finished_at": "2026-10-15T11:23:09+00:00"
+      }
+    ]
+  },
+  "ledger": {
+    "cap_usd": "5.0",
+    "operations": [
+      {
+        "operation_id": "damaged-s1101",
+        "job_key": "f45494fba80ddc94b677d9623a3a5293107ed95132c3d24aa569ec0ee6e7dc2e",
+        "status": "settled",
+        "reserved_usd": "0.0468",
+        "actual_usd": "0.044644"
+      },
+      {
+        "operation_id": "damaged-s1102",
+        "job_key": "f9241d68a012a4718cb1bb68170c4ababa159cab653b41b74044e5f8233e1383",
+        "status": "settled",
+        "reserved_usd": "0.0468",
+        "actual_usd": "0.044644"
+      },
+      {
+        "operation_id": "damaged-s1103",
+        "job_key": "fa558bb95b93f9039b22430ab55396f0deeacc262b08829ec202ae1b0477f238",
+        "status": "settled",
+        "reserved_usd": "0.0468",
+        "actual_usd": "0.044644"
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:cut-s1301",
+        "job_key": "c4a730571bb998171ee95f45b225d873f4f0fb8b26031404a115537a7f580e58",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:cut-s1302",
+        "job_key": "1126ff0ded9af525109a259118eb352d53b7442beb75786265131a5931b814c1",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:cut-s1303",
+        "job_key": "7fca74bf0afaa5f95f374ec60f2bb59acfa26b199e39e7728fce27162a160c3e",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:format-s1301",
+        "job_key": "10d90878363dd849e1652fc9fd1c9ccbc2ad0e73b3f13bbb68b9e6f1ab15bde4",
+        "status": "pending",
+        "reserved_usd": "0.050457600000000005",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:format-s1302",
+        "job_key": "dd4ac82fff34bb12735da2833e7866b7f5a376b6118e49c6c52cedd99c019e76",
+        "status": "pending",
+        "reserved_usd": "0.050457600000000005",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:format-s1303",
+        "job_key": "9c51716eab115e7042b40962c4e7a3076fab46bdaa7c011d37ba8394a6056cf1",
+        "status": "pending",
+        "reserved_usd": "0.050457600000000005",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:healthy-s1301",
+        "job_key": "3edc22bc05ec99048e02708df292815ed5db20619b4ebd45d281a28afcafbc3b",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:healthy-s1302",
+        "job_key": "6aa4c0dd02b29d8cd5143fe13729fb983975faecce85ec9250f90643057c2b5c",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:healthy-s1303",
+        "job_key": "e22cfd93cf6f4c386d0f826b24c1c67413afd04ab1b8cd2e79425a33449212e6",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:wrong-s1301",
+        "job_key": "2d12826c45c2cb8bb99affe039b3006055b1675abb435ea01b1e1d584a09a533",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:wrong-s1302",
+        "job_key": "d067ba1c29ba0ea415ba1d3e3756d7286563c027b11b08d575fbedc79ddff547",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "format-content-development-20261019-v1:wrong-s1303",
+        "job_key": "98c066012155b4000f44daa394e30511c70fd0ad413da215bbbdd8b9e3303d44",
+        "status": "pending",
+        "reserved_usd": "0.108864",
+        "actual_usd": null
+      },
+      {
+        "operation_id": "healthy-s1101",
+        "job_key": "985c94f87b509c27fd94851fa76dc762c39a53c6596c93a6682feb256445db67",
+        "status": "settled",
+        "reserved_usd": "0.0468",
+        "actual_usd": "0.045704800000000004"
+      },
+      {
+        "operation_id": "healthy-s1102",
+        "job_key": "3e4d5f8f5e435fae6b550d1ee7acb3b7535f2fac201dd54f93b6b79af0969cf9",
+        "status": "settled",
+        "reserved_usd": "0.0468",
+        "actual_usd": "0.045704800000000004"
+      },
+      {
+        "operation_id": "healthy-s1103",
+        "job_key": "30a98a831e0d4b5654035b9e1066be8ca6a7041d93e7ba431d3a567c65a30480",
+        "status": "settled",
+        "reserved_usd": "0.0468",
+        "actual_usd": "0.045704800000000004"
+      }
+    ]
+  },
+  "display_totals": {
+    "usage_subtotal_usd": "8.70",
+    "usage_vat_usd": "0.78",
+    "usage_including_tax_usd": "9.47",
+    "transactions_including_tax_usd": "9.48",
+    "transactions_period": "2026-10-01 through 2026-10-31 UTC"
+  },
+  "invoice_evidence": {
+    "payments_view": "No documents",
+    "cost_breakdown_pdf": "Download failed with ERR_SOCKET_NOT_CONNECTED; not read."
+  }
+}
