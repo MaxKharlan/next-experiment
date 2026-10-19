@@ -88,8 +88,6 @@ def make_retrainer(
     evaluator_spec: dict | None = None,
     evaluation_runtime: dict | None = None,
 ) -> Retrainer:
-    from jobs.eval_local.exact_match import evaluate_adapter, evaluate_base
-
     metric_name = "exact_match"
     if evaluator_spec is not None:
         from core.case import EvaluatorSpec
@@ -125,6 +123,8 @@ def make_retrainer(
             )
 
         evaluate_adapter, evaluate_base = score_adapter, score_base
+    else:
+        from jobs.eval_local.exact_match import evaluate_adapter, evaluate_base
     path, note = heldout_set(heldout, valid)
     return Retrainer(
         tf=tf,

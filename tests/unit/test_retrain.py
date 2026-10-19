@@ -1,4 +1,5 @@
 import json
+import sys
 from dataclasses import asdict
 from pathlib import Path
 
@@ -198,6 +199,7 @@ def test_pinned_retrainer_retains_final_example_evidence(tmp_path, monkeypatch):
 
     from scripts.retrain_tf import make_retrainer
 
+    monkeypatch.setitem(sys.modules, "jobs.eval_local.exact_match", None)
     storage = LocalStorage(tmp_path / "artifacts")
     evidence = {"value": 0.5, "data_sha256": "test-hash", "examples": [{"score": 0}]}
     calls = []
