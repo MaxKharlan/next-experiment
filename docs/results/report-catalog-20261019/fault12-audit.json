@@ -1,0 +1,30 @@
+{
+  "causal_confirmation": false,
+  "faulty_difference_l2": 0.3535533547401428,
+  "gradients": {
+    "full_batch": [
+      0.2542521059513092,
+      0.2809920310974121,
+      -0.09578830003738403,
+      -0.4394557476043701
+    ],
+    "microbatch_mean": [
+      0.2542521059513092,
+      0.2809920310974121,
+      -0.34578830003738403,
+      -0.1894557923078537
+    ],
+    "token_weighted": [
+      0.2542521059513092,
+      0.2809920310974121,
+      -0.09578830003738403,
+      -0.4394557476043701
+    ]
+  },
+  "healthy_difference_l2": 0.0,
+  "scope": "CPU gradient mechanism; no downstream quality measurement",
+  "targets_per_microbatch": [
+    1,
+    3
+  ]
+}

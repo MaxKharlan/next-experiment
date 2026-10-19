@@ -1,5 +1,4 @@
 import json
-import sys
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -112,9 +111,10 @@ def test_retrain_proposal_keeps_the_original_job(protocol):
 def test_tf_runner_scores_on_check_and_validates_on_validation(protocol, monkeypatch):
     seen = {}
 
-    def evaluate(adapter, path):
+    def evaluate(path, spec, *, adapter):
         seen["evaluated_on"] = path
-        return 0.5
+        seen["metric"] = spec.metric
+        return SimpleNamespace(value=0.5)
 
     class PairRunner:
         def __init__(self, **kwargs):
@@ -124,11 +124,7 @@ def test_tf_runner_scores_on_check_and_validates_on_validation(protocol, monkeyp
         def __call__(self, target, control):
             self.kwargs["evaluate"](Path("adapter"))
 
-    monkeypatch.setitem(
-        sys.modules,
-        "jobs.eval_local.exact_match",
-        SimpleNamespace(evaluate_adapter=evaluate),
-    )
+    monkeypatch.setattr("core.eval.evaluate", evaluate)
     monkeypatch.setattr(
         "core.interventions.answer_check.DataAwareTFPairRunner", PairRunner
     )

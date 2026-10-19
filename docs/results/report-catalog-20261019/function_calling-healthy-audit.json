@@ -1,0 +1,121 @@
+{
+  "audit_only": true,
+  "evidence_scope": "dataset inspection; no model training or causal experiment",
+  "hypotheses": [],
+  "investigation_id": "dataset-audit",
+  "llm_calls": {},
+  "llm_cost_usd": 0.0,
+  "protocol": {
+    "datasets": {
+      "check": {
+        "examples": 102,
+        "path": "datasets/structured-mixed-v1/function_calling/check.jsonl",
+        "sha256": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45"
+      },
+      "test": {
+        "examples": 102,
+        "path": "datasets/structured-mixed-v1/function_calling/test.jsonl",
+        "sha256": "3d154a1ef988714b1369cc5cfdcee6ef52096fdec3ac47ccab053447f9acc69c"
+      },
+      "train": {
+        "examples": 390,
+        "path": "datasets/structured-mixed-v1/function_calling/train.jsonl",
+        "sha256": "8ae5e926107250410fbd7baf544c7db2811f9657a06a10443d77b8de712a71ba"
+      },
+      "validation": {
+        "examples": 102,
+        "path": "datasets/structured-mixed-v1/function_calling/validation.jsonl",
+        "sha256": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03"
+      }
+    },
+    "evaluator": {
+      "higher_is_better": true,
+      "metric": "function_call_exact",
+      "name": "order_tools_v1",
+      "parameters": {
+        "max_new_tokens": 192
+      }
+    },
+    "task": "function_calling"
+  },
+  "status": "inconclusive",
+  "steps": [
+    {
+      "cost_usd": 0.0,
+      "datasets": {
+        "check": {
+          "examples": 102,
+          "path": "datasets/structured-mixed-v1/function_calling/check.jsonl",
+          "sha256": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45"
+        },
+        "test": {
+          "examples": 102,
+          "path": "datasets/structured-mixed-v1/function_calling/test.jsonl",
+          "sha256": "3d154a1ef988714b1369cc5cfdcee6ef52096fdec3ac47ccab053447f9acc69c"
+        },
+        "train": {
+          "examples": 390,
+          "path": "datasets/structured-mixed-v1/function_calling/train.jsonl",
+          "sha256": "8ae5e926107250410fbd7baf544c7db2811f9657a06a10443d77b8de712a71ba"
+        },
+        "validation": {
+          "examples": 102,
+          "path": "datasets/structured-mixed-v1/function_calling/validation.jsonl",
+          "sha256": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03"
+        }
+      },
+      "kind": "dataset_audit",
+      "metric": "function_call_exact",
+      "raw": {
+        "check": {
+          "examples": 102,
+          "invalid_reference_lines": []
+        },
+        "test": {
+          "examples": 102,
+          "invalid_reference_lines": []
+        },
+        "train": {
+          "examples": 390,
+          "invalid_reference_lines": []
+        },
+        "validation": {
+          "examples": 102,
+          "invalid_reference_lines": []
+        }
+      }
+    },
+    {
+      "card": "Observed label integrity; this does not prove a model failure.",
+      "cost_usd": 0.0,
+      "gain_bits": 0.0,
+      "kind": "probe",
+      "outcome": "ok",
+      "probe": "answer_cut",
+      "probs": {},
+      "raw": {
+        "cut_from_share": 0.01,
+        "files": {
+          "train": {
+            "cut": 0,
+            "cut_lines": [],
+            "cut_share": 0.0,
+            "distinct": 390,
+            "examples": 390,
+            "json_file": true,
+            "shown": []
+          },
+          "validation": {
+            "cut": 0,
+            "cut_lines": [],
+            "cut_share": 0.0,
+            "distinct": 102,
+            "examples": 102,
+            "json_file": true,
+            "shown": []
+          }
+        }
+      }
+    }
+  ]
+}

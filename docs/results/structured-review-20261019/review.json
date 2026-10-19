@@ -1,0 +1,92 @@
+{
+  "human_review": false,
+  "learned_model_evaluation": false,
+  "reviewer": "Codex agent",
+  "scope": "All text/reference pairs checked by a bounded rule oracle; all 48 Super paraphrases also read by the agent",
+  "summary": {
+    "function_calling": [
+      {
+        "examples": 390,
+        "metrics": {
+          "exact_match": 1.0,
+          "name_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "train"
+      },
+      {
+        "examples": 102,
+        "metrics": {
+          "exact_match": 1.0,
+          "name_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "validation"
+      },
+      {
+        "examples": 102,
+        "metrics": {
+          "exact_match": 1.0,
+          "name_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "check"
+      },
+      {
+        "examples": 102,
+        "metrics": {
+          "exact_match": 1.0,
+          "name_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "test"
+      }
+    ],
+    "json_extraction": [
+      {
+        "examples": 390,
+        "metrics": {
+          "exact_match": 1.0,
+          "field_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "train"
+      },
+      {
+        "examples": 102,
+        "metrics": {
+          "exact_match": 1.0,
+          "field_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "validation"
+      },
+      {
+        "examples": 102,
+        "metrics": {
+          "exact_match": 1.0,
+          "field_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "check"
+      },
+      {
+        "examples": 102,
+        "metrics": {
+          "exact_match": 1.0,
+          "field_accuracy": 1.0,
+          "schema_valid": 1.0,
+          "valid_json": 1.0
+        },
+        "split": "test"
+      }
+    ]
+  }
+}

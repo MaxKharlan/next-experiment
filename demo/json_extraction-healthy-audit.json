@@ -1,0 +1,175 @@
+{
+  "case": {
+    "budget_usd": 5.0,
+    "datasets": {
+      "check": {
+        "examples": 102,
+        "format": "chat_jsonl",
+        "ref": "datasets/structured-mixed-v1/json_extraction/check.jsonl",
+        "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+      },
+      "test": {
+        "examples": 102,
+        "format": "chat_jsonl",
+        "ref": "datasets/structured-mixed-v1/json_extraction/test.jsonl",
+        "sha256": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494"
+      },
+      "train": {
+        "examples": 390,
+        "format": "chat_jsonl",
+        "ref": "datasets/structured-mixed-v1/json_extraction/train.jsonl",
+        "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db"
+      },
+      "validation": {
+        "examples": 102,
+        "format": "chat_jsonl",
+        "ref": "datasets/structured-mixed-v1/json_extraction/validation.jsonl",
+        "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+      }
+    },
+    "evaluator": {
+      "higher_is_better": true,
+      "metric": "json_fields_exact",
+      "name": "ticket_json_v1",
+      "parameters": {
+        "max_new_tokens": 192
+      }
+    },
+    "job": {
+      "checkpoints": [],
+      "hyperparameters": {},
+      "id": "local:dataset-audit",
+      "model": "not-trained"
+    },
+    "mode": "B",
+    "symptom": "Inspect this structured task dataset before training",
+    "task": "json_extraction"
+  },
+  "note": "Dataset inspection only. No model trained; no causal confirmation.",
+  "provenance": {
+    "sha256": "9421c2d855cca9072466e3f343373ce02474700d60250e53947756770cf2ecff",
+    "source": "docs/results/report-catalog-20261019/json_extraction-healthy-audit.json"
+  },
+  "report": {
+    "audit_only": true,
+    "evidence_scope": "dataset inspection; no model training or causal experiment",
+    "hypotheses": [],
+    "investigation_id": "dataset-audit",
+    "llm_calls": {},
+    "llm_cost_usd": 0.0,
+    "protocol": {
+      "datasets": {
+        "check": {
+          "examples": 102,
+          "path": "datasets/structured-mixed-v1/json_extraction/check.jsonl",
+          "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+        },
+        "test": {
+          "examples": 102,
+          "path": "datasets/structured-mixed-v1/json_extraction/test.jsonl",
+          "sha256": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494"
+        },
+        "train": {
+          "examples": 390,
+          "path": "datasets/structured-mixed-v1/json_extraction/train.jsonl",
+          "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db"
+        },
+        "validation": {
+          "examples": 102,
+          "path": "datasets/structured-mixed-v1/json_extraction/validation.jsonl",
+          "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+        }
+      },
+      "evaluator": {
+        "higher_is_better": true,
+        "metric": "json_fields_exact",
+        "name": "ticket_json_v1",
+        "parameters": {
+          "max_new_tokens": 192
+        }
+      },
+      "task": "json_extraction"
+    },
+    "status": "inconclusive",
+    "steps": [
+      {
+        "cost_usd": 0.0,
+        "datasets": {
+          "check": {
+            "examples": 102,
+            "path": "datasets/structured-mixed-v1/json_extraction/check.jsonl",
+            "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+          },
+          "test": {
+            "examples": 102,
+            "path": "datasets/structured-mixed-v1/json_extraction/test.jsonl",
+            "sha256": "3605ee5a2e2597f9ff5d32773c891041362dbd2cf3d7f3c6cb8971afd4355494"
+          },
+          "train": {
+            "examples": 390,
+            "path": "datasets/structured-mixed-v1/json_extraction/train.jsonl",
+            "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db"
+          },
+          "validation": {
+            "examples": 102,
+            "path": "datasets/structured-mixed-v1/json_extraction/validation.jsonl",
+            "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+          }
+        },
+        "kind": "dataset_audit",
+        "metric": "json_fields_exact",
+        "raw": {
+          "check": {
+            "examples": 102,
+            "invalid_reference_lines": []
+          },
+          "test": {
+            "examples": 102,
+            "invalid_reference_lines": []
+          },
+          "train": {
+            "examples": 390,
+            "invalid_reference_lines": []
+          },
+          "validation": {
+            "examples": 102,
+            "invalid_reference_lines": []
+          }
+        }
+      },
+      {
+        "card": "Observed label integrity; this does not prove a model failure.",
+        "cost_usd": 0.0,
+        "gain_bits": 0.0,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "answer_cut",
+        "probs": {},
+        "raw": {
+          "cut_from_share": 0.01,
+          "files": {
+            "train": {
+              "cut": 0,
+              "cut_lines": [],
+              "cut_share": 0.0,
+              "distinct": 390,
+              "examples": 390,
+              "json_file": true,
+              "shown": []
+            },
+            "validation": {
+              "cut": 0,
+              "cut_lines": [],
+              "cut_share": 0.0,
+              "distinct": 102,
+              "examples": 102,
+              "json_file": true,
+              "shown": []
+            }
+          }
+        }
+      }
+    ]
+  },
+  "title": "json_extraction: Healthy dataset — local audit"
+}

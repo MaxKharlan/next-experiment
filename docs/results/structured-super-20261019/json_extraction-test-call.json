@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.0008679000000000001,
+  "latency_ms": 3714,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"requests\": [\"Ticket T-400900 regarding a router, low priority, do not call back, no due date set.\", \"Ticket T-400901 about a printer, low priority, please call back, due date 2027-02-19.\", \"Ticket T-400902 for a scanner, low priority, do not call back, due date 2027-02-05.\", \"Ticket T-400903 on a router, normal priority, please call back, due date 2027-02-23.\", \"Ticket T-400904 regarding a printer, normal priority, do not call back, no due date set.\", \"Ticket T-400905 for a scanner, normal priority, please call back, due date 2027-02-19.\"]}",
+  "tokens_in": 349,
+  "tokens_out": 848
+}

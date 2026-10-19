@@ -1,0 +1,234 @@
+{
+  "case": {
+    "backend": "local Transformers/PEFT",
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.2804598808288574,
+        "valid_loss": 1.9955261101658712
+      },
+      {
+        "step": 24,
+        "train_loss": 1.84670090675354,
+        "valid_loss": 1.6704201532290286
+      },
+      {
+        "step": 36,
+        "train_loss": 1.475901484489441,
+        "valid_loss": 1.4117206397072581
+      },
+      {
+        "step": 48,
+        "train_loss": 1.1119356155395508,
+        "valid_loss": 1.2587092248785416
+      },
+      {
+        "step": 60,
+        "train_loss": 0.9118025898933411,
+        "valid_loss": 1.0787398936164458
+      },
+      {
+        "step": 63,
+        "train_loss": 0.3362853229045868,
+        "valid_loss": 1.020773428798522
+      },
+      {
+        "step": 72,
+        "train_loss": 0.6318984627723694,
+        "valid_loss": 0.9814317320417237
+      },
+      {
+        "step": 84,
+        "train_loss": 0.9057111740112305,
+        "valid_loss": 0.8814548824057483
+      },
+      {
+        "step": 96,
+        "train_loss": 0.51517653465271,
+        "valid_loss": 0.818199897172467
+      },
+      {
+        "step": 108,
+        "train_loss": 0.8166026473045349,
+        "valid_loss": 0.7228157443288189
+      },
+      {
+        "step": 120,
+        "train_loss": 0.5947449207305908,
+        "valid_loss": 0.6671778869708912
+      },
+      {
+        "step": 126,
+        "train_loss": 0.29737576842308044,
+        "valid_loss": 0.6269756683567226
+      },
+      {
+        "step": 132,
+        "train_loss": 0.2955608367919922,
+        "valid_loss": 0.6055993558776459
+      },
+      {
+        "step": 144,
+        "train_loss": 0.25821760296821594,
+        "valid_loss": 0.5766698638064749
+      },
+      {
+        "step": 156,
+        "train_loss": 0.5017372965812683,
+        "valid_loss": 0.583098540970143
+      },
+      {
+        "step": 168,
+        "train_loss": 0.15353333950042725,
+        "valid_loss": 0.5376324912145634
+      },
+      {
+        "step": 180,
+        "train_loss": 0.21846526861190796,
+        "valid_loss": 0.5260708641085848
+      },
+      {
+        "step": 189,
+        "train_loss": 0.2009270191192627,
+        "valid_loss": 0.5247308026324182
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 2,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.42,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.43
+  },
+  "note": "local-mps-banking77-500-dev. Validation exact match 0.430; matched reference 0.420. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "4f9f1061ef0aa677e7f0107d95a713c54d5bcd2c678bbf145e5a99761cb46a78",
+    "source": "docs/results/b467-20261019/detection/case-08.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h1",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.4,
+        "rationale": "LoRA rank set to 2 is very small for a 0.6B model, limiting the adapter's expressive capacity. Despite decreasing training loss, validation loss stays high and exact‑match accuracy remains at the reference level, indicating the model cannot learn the task specifics.",
+        "sources": []
+      },
+      {
+        "fault_class": "chat_template_mismatch",
+        "id": "h2",
+        "location": "data/chat_template",
+        "prior": 0.3,
+        "rationale": "If the training data were formatted with a chat template (e.g., <|im_start|>user ...) but inference uses the raw prompt, the model may ignore the intent classification instruction, resulting in performance no better than the base model. The unchanged exact‑match suggests the model is not leveraging the task signal.",
+        "sources": []
+      },
+      {
+        "fault_class": "lr_too_low",
+        "id": "h3",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.2,
+        "rationale": "Although the chosen LR (1e-4) is higher than the Token Factory default, LoRA for Qwen‑0.6B may still require a slightly larger rate to overcome the low-rank constraint; a too‑small LR yields slow adaptation, leaving validation loss above training loss and preventing gains in exact‑match.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-08",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0016425,
+        "latency_ms": 5786,
+        "tokens_in": 2469,
+        "tokens_out": 1002
+      }
+    },
+    "llm_cost_usd": 0.0016425,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h1",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.4,
+            "rationale": "LoRA rank set to 2 is very small for a 0.6B model, limiting the adapter's expressive capacity. Despite decreasing training loss, validation loss stays high and exact‑match accuracy remains at the reference level, indicating the model cannot learn the task specifics.",
+            "sources": []
+          },
+          {
+            "fault_class": "chat_template_mismatch",
+            "id": "h2",
+            "location": "data/chat_template",
+            "prior": 0.3,
+            "rationale": "If the training data were formatted with a chat template (e.g., <|im_start|>user ...) but inference uses the raw prompt, the model may ignore the intent classification instruction, resulting in performance no better than the base model. The unchanged exact‑match suggests the model is not leveraging the task signal.",
+            "sources": []
+          },
+          {
+            "fault_class": "lr_too_low",
+            "id": "h3",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.2,
+            "rationale": "Although the chosen LR (1e-4) is higher than the Token Factory default, LoRA for Qwen‑0.6B may still require a slightly larger rate to overcome the low-rank constraint; a too‑small LR yields slow adaptation, leaving validation loss above training loss and preventing gains in exact‑match.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "h3": 0.2,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "budget_left_usd": 0.0983575,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.4456,
+        "kind": "probe",
+        "outcome": "low",
+        "probe": "lora_rank",
+        "probs": {
+          "h1": 0.85,
+          "h2": 0.075,
+          "h3": 0.05,
+          "unlisted": 0.025
+        },
+        "raw": {
+          "lora_r": 2,
+          "low_up_to": 4
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.85,
+          "h2": 0.075,
+          "h3": 0.05,
+          "unlisted": 0.025
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Fault 8 recipe: lr 0.0001, rank 2, epochs 3, seed 2 — inconclusive"
+}

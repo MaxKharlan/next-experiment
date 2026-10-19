@@ -1,0 +1,227 @@
+{
+  "case": {
+    "backend": "Token Factory",
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.35642850399017334,
+        "valid_loss": 0.4343046545982361
+      },
+      {
+        "step": 126,
+        "train_loss": 0.11274219304323196,
+        "valid_loss": 0.010066111572086811
+      },
+      {
+        "step": 189,
+        "train_loss": 0.020925775170326233,
+        "valid_loss": 0.06530537456274033
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.69,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.69
+  },
+  "note": "tokenfactory-banking77-500-dev. Validation exact match 0.690; matched reference 0.690. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "d936aa458f5ee229af758f70c83b4d25fd1e42c5a6249f21e84486d80852f76c",
+    "source": "docs/results/b467-20261019/detection/case-21.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "train_val_overlap",
+        "id": "h1",
+        "location": "validation file overlaps training data",
+        "prior": 0.3,
+        "rationale": "Validation loss becomes unusually low after epoch 2 (0.01) then rises in epoch 3, a pattern typical when validation examples are also seen during training, causing the model to memorize them. The exact‑match score stays equal to the reference, suggesting the overlap does not improve generalisation.",
+        "sources": []
+      },
+      {
+        "fault_class": "too_many_epochs",
+        "id": "h2",
+        "location": "hyperparameters.n_epochs = 3",
+        "prior": 0.25,
+        "rationale": "With three epochs the validation loss reaches a minimum at epoch 2 and increases at epoch 3, indicating over‑training. Too many epochs can cause the model to repeat training answers without gaining new generalisation.",
+        "sources": []
+      },
+      {
+        "fault_class": "distribution_shift",
+        "id": "h3",
+        "location": "validation file content vs production requests",
+        "prior": 0.2,
+        "rationale": "The validation exact‑match matches the reference baseline, yet the validation loss shows over‑fitting, implying the validation set may not represent the true distribution of banking intents the model will see in practice.",
+        "sources": []
+      },
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h4",
+        "location": "hyperparameters.lora_r = 16",
+        "prior": 0.15,
+        "rationale": "A LoRA rank of 16 may be insufficient to capture the nuances of intent classification for Qwen‑0.6B, resulting in little or no improvement over the base model, which aligns with the unchanged exact‑match score.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-21",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0014799000000000001,
+        "latency_ms": 7440,
+        "tokens_in": 1540,
+        "tokens_out": 1131
+      }
+    },
+    "llm_cost_usd": 0.0014799000000000001,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "train_val_overlap",
+            "id": "h1",
+            "location": "validation file overlaps training data",
+            "prior": 0.3,
+            "rationale": "Validation loss becomes unusually low after epoch 2 (0.01) then rises in epoch 3, a pattern typical when validation examples are also seen during training, causing the model to memorize them. The exact‑match score stays equal to the reference, suggesting the overlap does not improve generalisation.",
+            "sources": []
+          },
+          {
+            "fault_class": "too_many_epochs",
+            "id": "h2",
+            "location": "hyperparameters.n_epochs = 3",
+            "prior": 0.25,
+            "rationale": "With three epochs the validation loss reaches a minimum at epoch 2 and increases at epoch 3, indicating over‑training. Too many epochs can cause the model to repeat training answers without gaining new generalisation.",
+            "sources": []
+          },
+          {
+            "fault_class": "distribution_shift",
+            "id": "h3",
+            "location": "validation file content vs production requests",
+            "prior": 0.2,
+            "rationale": "The validation exact‑match matches the reference baseline, yet the validation loss shows over‑fitting, implying the validation set may not represent the true distribution of banking intents the model will see in practice.",
+            "sources": []
+          },
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h4",
+            "location": "hyperparameters.lora_r = 16",
+            "prior": 0.15,
+            "rationale": "A LoRA rank of 16 may be insufficient to capture the nuances of intent classification for Qwen‑0.6B, resulting in little or no improvement over the base model, which aligns with the unchanged exact‑match score.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.3,
+          "h2": 0.25,
+          "h3": 0.2,
+          "h4": 0.15,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "budget_left_usd": 0.0985201,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.2561,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "lora_rank",
+        "probs": {
+          "h1": 0.3429,
+          "h2": 0.2857,
+          "h3": 0.2286,
+          "h4": 0.0286,
+          "unlisted": 0.1143
+        },
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        }
+      },
+      {
+        "budget_left_usd": 0.0985201,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.2721,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "epoch_count",
+        "probs": {
+          "h1": 0.4465,
+          "h2": 0.0698,
+          "h3": 0.2977,
+          "h4": 0.0372,
+          "unlisted": 0.1488
+        },
+        "raw": {
+          "high_from": 10,
+          "n_epochs": 3
+        }
+      },
+      {
+        "budget_left_usd": 0.0985201,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.1297,
+        "kind": "probe",
+        "outcome": "overfit",
+        "probe": "loss_curve",
+        "probs": {
+          "h1": 0.1983,
+          "h2": 0.3719,
+          "h3": 0.2645,
+          "h4": 0.0331,
+          "unlisted": 0.1322
+        },
+        "raw": {
+          "train_drop": 0.9412903992355697,
+          "train_loss": [
+            0.35642850399017334,
+            0.11274219304323196,
+            0.020925775170326233
+          ],
+          "valid_loss": [
+            0.4343046545982361,
+            0.010066111572086811,
+            0.06530537456274033
+          ]
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.1983,
+          "h2": 0.3719,
+          "h3": 0.2645,
+          "h4": 0.0331,
+          "unlisted": 0.1322
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Healthy recipe: lr 0.0001, rank 16, epochs 3, seed 2 — inconclusive"
+}

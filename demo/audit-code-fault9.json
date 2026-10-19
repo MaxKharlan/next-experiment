@@ -1,0 +1,55 @@
+{
+  "case": {
+    "job": {
+      "hyperparameters": {},
+      "model": "local mechanism fixture"
+    },
+    "mode": "B",
+    "symptom": "Prompt loss"
+  },
+  "note": "Reproducible CPU inspection. Findings do not establish a downstream quality failure.",
+  "provenance": {
+    "sha256": "6c392d263a1c89f8560490c6671f3f18d8f095ee6aaefe288ad595393dd5130c",
+    "source": "docs/results/report-catalog-20261019/fault9-audit.json"
+  },
+  "report": {
+    "audit_only": true,
+    "evidence_scope": "local mechanism inspection; no trained model diagnosis",
+    "hypotheses": [],
+    "investigation_id": "local-audit-9",
+    "llm_calls": {},
+    "llm_cost_usd": 0.0,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "cost_usd": 0.0,
+        "kind": "training_label_checks",
+        "raw": {
+          "alignment": {
+            "healthy_mismatches": 1,
+            "informative_positions": 3,
+            "observed_targets": 3,
+            "preshift_mismatches": 3,
+            "status": "other_mismatch"
+          },
+          "causal_confirmation": false,
+          "eos": {
+            "reason": "labels are not masking-only changes",
+            "status": "not_applicable"
+          },
+          "prompt": {
+            "answer_targets": 2,
+            "prompt_loss_fraction": 0.3333333333333333,
+            "prompt_positions": 1,
+            "status": "included",
+            "supervised_prompt_tokens": 1,
+            "total_targets": 3
+          },
+          "rows": 1,
+          "scope": "supplied unpadded labels; reference correctness is caller-owned"
+        }
+      }
+    ]
+  },
+  "title": "Fault 9: Prompt loss — local audit"
+}

@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.00023280000000000002,
+  "latency_ms": 1575,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"ticket_id\": \"T-200000\", \"product\": \"router\", \"priority\": \"low\", \"callback\": false, \"due_date\": null}",
+  "tokens_in": 245,
+  "tokens_out": 177
+}

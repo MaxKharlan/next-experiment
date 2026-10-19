@@ -1,0 +1,61 @@
+{
+  "case": {
+    "job": {
+      "hyperparameters": {},
+      "model": "local mechanism fixture"
+    },
+    "mode": "B",
+    "symptom": "Gradient accumulation"
+  },
+  "note": "Reproducible CPU inspection. Findings do not establish a downstream quality failure.",
+  "provenance": {
+    "sha256": "2cc266673ba8f9a91f41f0e1414f2687f2853e098635e60327cb9e12d443121d",
+    "source": "docs/results/report-catalog-20261019/fault12-audit.json"
+  },
+  "report": {
+    "audit_only": true,
+    "evidence_scope": "local mechanism inspection; no trained model diagnosis",
+    "hypotheses": [],
+    "investigation_id": "local-audit-12",
+    "llm_calls": {},
+    "llm_cost_usd": 0.0,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "cost_usd": 0.0,
+        "kind": "code_audit",
+        "raw": {
+          "causal_confirmation": false,
+          "faulty_difference_l2": 0.3535533547401428,
+          "gradients": {
+            "full_batch": [
+              0.2542521059513092,
+              0.2809920310974121,
+              -0.09578830003738403,
+              -0.4394557476043701
+            ],
+            "microbatch_mean": [
+              0.2542521059513092,
+              0.2809920310974121,
+              -0.34578830003738403,
+              -0.1894557923078537
+            ],
+            "token_weighted": [
+              0.2542521059513092,
+              0.2809920310974121,
+              -0.09578830003738403,
+              -0.4394557476043701
+            ]
+          },
+          "healthy_difference_l2": 0.0,
+          "scope": "CPU gradient mechanism; no downstream quality measurement",
+          "targets_per_microbatch": [
+            1,
+            3
+          ]
+        }
+      }
+    ]
+  },
+  "title": "Fault 12: Gradient accumulation — local audit"
+}

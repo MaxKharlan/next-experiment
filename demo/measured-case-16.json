@@ -1,0 +1,285 @@
+{
+  "case": {
+    "backend": "Token Factory",
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.40615320205688477,
+        "valid_loss": 0.8064330220222473
+      },
+      {
+        "step": 126,
+        "train_loss": 0.17004798352718353,
+        "valid_loss": 0.046003036201000214
+      },
+      {
+        "step": 189,
+        "train_loss": 0.03554387390613556,
+        "valid_loss": 0.23207592964172363
+      },
+      {
+        "step": 252,
+        "train_loss": 0.03081016056239605,
+        "valid_loss": 0.09048587083816528
+      },
+      {
+        "step": 315,
+        "train_loss": 0.00859229825437069,
+        "valid_loss": 0.11598144471645355
+      },
+      {
+        "step": 378,
+        "train_loss": 0.0012295541819185019,
+        "valid_loss": 0.13797356188297272
+      },
+      {
+        "step": 441,
+        "train_loss": 0.0002108724438585341,
+        "valid_loss": 0.07918927073478699
+      },
+      {
+        "step": 504,
+        "train_loss": 0.00010293486411683261,
+        "valid_loss": 0.004855310078710318
+      },
+      {
+        "step": 567,
+        "train_loss": 8.212162356358021e-05,
+        "valid_loss": 0.32793471217155457
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 9,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.67,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.69
+  },
+  "note": "tokenfactory-banking77-500-dev. Validation exact match 0.690; matched reference 0.670. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "2f72a6b7b7a3f1806085ded5595251549f6a5f40db018e2c692c56dc7481e363",
+    "source": "docs/results/b467-20261019/detection/case-16.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "too_many_epochs",
+        "id": "h1",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.5,
+        "rationale": "Validation loss drops to a minimum at step 504 (epoch 8) then rises sharply at step 567 (epoch 9), a classic sign of overfitting from training too many epochs.",
+        "sources": []
+      },
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h2",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.2,
+        "rationale": "If the LoRA rank is insufficient for the intent classification task, model improvements plateau; the modest gain over reference (0.69 vs 0.67) suggests the adapter may be under‑parameterized.",
+        "sources": []
+      },
+      {
+        "fault_class": "contradictory_labels",
+        "id": "h3",
+        "location": "training data (intent labels)",
+        "prior": 0.15,
+        "rationale": "Conflicting intents for similar utterances would cause unstable validation loss; the fluctuating valid_loss across checkpoints hints at label noise in the data.",
+        "sources": []
+      },
+      {
+        "fault_class": "train_val_overlap",
+        "id": "h4",
+        "location": "validation file overlapping training file",
+        "prior": 0.1,
+        "rationale": "Overlap can produce artificially low validation loss early on, followed by a rise as the model memorizes training‑specific patterns, matching the observed valid_loss dip then increase.",
+        "sources": []
+      },
+      {
+        "fault_class": "other",
+        "id": "h5",
+        "location": "unknown",
+        "prior": 0.05,
+        "rationale": "Any remaining uncaptured issue (e.g., subtle preprocessing mismatch) could explain why the fine‑tune did not yield a larger improvement.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-16",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0015861,
+        "latency_ms": 6704,
+        "tokens_in": 1939,
+        "tokens_out": 1116
+      }
+    },
+    "llm_cost_usd": 0.0015861,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "too_many_epochs",
+            "id": "h1",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.5,
+            "rationale": "Validation loss drops to a minimum at step 504 (epoch 8) then rises sharply at step 567 (epoch 9), a classic sign of overfitting from training too many epochs.",
+            "sources": []
+          },
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h2",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.2,
+            "rationale": "If the LoRA rank is insufficient for the intent classification task, model improvements plateau; the modest gain over reference (0.69 vs 0.67) suggests the adapter may be under‑parameterized.",
+            "sources": []
+          },
+          {
+            "fault_class": "contradictory_labels",
+            "id": "h3",
+            "location": "training data (intent labels)",
+            "prior": 0.15,
+            "rationale": "Conflicting intents for similar utterances would cause unstable validation loss; the fluctuating valid_loss across checkpoints hints at label noise in the data.",
+            "sources": []
+          },
+          {
+            "fault_class": "train_val_overlap",
+            "id": "h4",
+            "location": "validation file overlapping training file",
+            "prior": 0.1,
+            "rationale": "Overlap can produce artificially low validation loss early on, followed by a rise as the model memorizes training‑specific patterns, matching the observed valid_loss dip then increase.",
+            "sources": []
+          },
+          {
+            "fault_class": "other",
+            "id": "h5",
+            "location": "unknown",
+            "prior": 0.05,
+            "rationale": "Any remaining uncaptured issue (e.g., subtle preprocessing mismatch) could explain why the fine‑tune did not yield a larger improvement.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.5,
+          "h2": 0.2,
+          "h3": 0.15,
+          "h4": 0.1,
+          "h5": 0.05
+        }
+      },
+      {
+        "budget_left_usd": 0.0984139,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.3323,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "epoch_count",
+        "probs": {
+          "h1": 0.1579,
+          "h2": 0.3368,
+          "h3": 0.2526,
+          "h4": 0.1684,
+          "h5": 0.0842
+        },
+        "raw": {
+          "high_from": 10,
+          "n_epochs": 9
+        }
+      },
+      {
+        "budget_left_usd": 0.0984139,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.42,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "lora_rank",
+        "probs": {
+          "h1": 0.2195,
+          "h2": 0.078,
+          "h3": 0.3512,
+          "h4": 0.2341,
+          "h5": 0.1171
+        },
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        }
+      },
+      {
+        "budget_left_usd": 0.0984139,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.2746,
+        "kind": "probe",
+        "outcome": "overfit",
+        "probe": "loss_curve",
+        "probs": {
+          "h1": 0.665,
+          "h2": 0.0394,
+          "h3": 0.1773,
+          "h4": 0.0591,
+          "h5": 0.0591
+        },
+        "raw": {
+          "train_drop": 0.9997978062880024,
+          "train_loss": [
+            0.40615320205688477,
+            0.17004798352718353,
+            0.03554387390613556,
+            0.03081016056239605,
+            0.00859229825437069,
+            0.0012295541819185019,
+            0.0002108724438585341,
+            0.00010293486411683261,
+            8.212162356358021e-05
+          ],
+          "valid_loss": [
+            0.8064330220222473,
+            0.046003036201000214,
+            0.23207592964172363,
+            0.09048587083816528,
+            0.11598144471645355,
+            0.13797356188297272,
+            0.07918927073478699,
+            0.004855310078710318,
+            0.32793471217155457
+          ]
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.665,
+          "h2": 0.0394,
+          "h3": 0.1773,
+          "h4": 0.0591,
+          "h5": 0.0591
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Fault 7 recipe: lr 0.0001, rank 16, epochs 9, seed 0 — inconclusive"
+}

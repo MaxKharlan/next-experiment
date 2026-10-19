@@ -1,0 +1,187 @@
+{
+  "case": {
+    "backend": "Token Factory",
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.3907579183578491,
+        "valid_loss": 0.8380046486854553
+      },
+      {
+        "step": 126,
+        "train_loss": 0.14100448787212372,
+        "valid_loss": 0.008777881041169167
+      },
+      {
+        "step": 189,
+        "train_loss": 0.024205902591347694,
+        "valid_loss": 0.2673508822917938
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.67,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.67
+  },
+  "note": "tokenfactory-banking77-500-dev. Validation exact match 0.670; matched reference 0.670. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "ad4433e70077ef8ee486763880e344024ac3343bb4fd7782376bdb29738f0493",
+    "source": "docs/results/b467-20261019/detection/case-15.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "too_many_epochs",
+        "id": "h1",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.4,
+        "rationale": "Validation loss drops sharply after epoch 2 then rises at epoch 3, a classic sign of overfitting when training continues past the point of optimal validation performance.",
+        "sources": []
+      },
+      {
+        "fault_class": "contradictory_labels",
+        "id": "h2",
+        "location": "training data (BANKING77)",
+        "prior": 0.2,
+        "rationale": "The validation loss shows high‑low‑high fluctuation across epochs, indicating the model is struggling to fit conflicting labels in the data.",
+        "sources": []
+      },
+      {
+        "fault_class": "distribution_shift",
+        "id": "h3",
+        "location": "validation set vs. production requests",
+        "prior": 0.2,
+        "rationale": "Exact‑match score on validation matches the reference baseline, showing no improvement despite low training loss, suggesting the validation data does not reflect the target distribution.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-15",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0013722,
+        "latency_ms": 6329,
+        "tokens_in": 1538,
+        "tokens_out": 1012
+      }
+    },
+    "llm_cost_usd": 0.0013722,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "too_many_epochs",
+            "id": "h1",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.4,
+            "rationale": "Validation loss drops sharply after epoch 2 then rises at epoch 3, a classic sign of overfitting when training continues past the point of optimal validation performance.",
+            "sources": []
+          },
+          {
+            "fault_class": "contradictory_labels",
+            "id": "h2",
+            "location": "training data (BANKING77)",
+            "prior": 0.2,
+            "rationale": "The validation loss shows high‑low‑high fluctuation across epochs, indicating the model is struggling to fit conflicting labels in the data.",
+            "sources": []
+          },
+          {
+            "fault_class": "distribution_shift",
+            "id": "h3",
+            "location": "validation set vs. production requests",
+            "prior": 0.2,
+            "rationale": "Exact‑match score on validation matches the reference baseline, showing no improvement despite low training loss, suggesting the validation data does not reflect the target distribution.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.2,
+          "h3": 0.2,
+          "unlisted": 0.2
+        }
+      },
+      {
+        "budget_left_usd": 0.0986278,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.3183,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "epoch_count",
+        "probs": {
+          "h1": 0.1111,
+          "h2": 0.2963,
+          "h3": 0.2963,
+          "unlisted": 0.2963
+        },
+        "raw": {
+          "high_from": 10,
+          "n_epochs": 3
+        }
+      },
+      {
+        "budget_left_usd": 0.0986278,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.1334,
+        "kind": "probe",
+        "outcome": "overfit",
+        "probe": "loss_curve",
+        "probs": {
+          "h1": 0.4286,
+          "h2": 0.1905,
+          "h3": 0.1905,
+          "unlisted": 0.1905
+        },
+        "raw": {
+          "train_drop": 0.9380539678042292,
+          "train_loss": [
+            0.3907579183578491,
+            0.14100448787212372,
+            0.024205902591347694
+          ],
+          "valid_loss": [
+            0.8380046486854553,
+            0.008777881041169167,
+            0.2673508822917938
+          ]
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.4286,
+          "h2": 0.1905,
+          "h3": 0.1905,
+          "unlisted": 0.1905
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Healthy recipe: lr 0.0001, rank 16, epochs 3, seed 0 — inconclusive"
+}

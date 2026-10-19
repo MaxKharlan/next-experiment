@@ -1,0 +1,84 @@
+[
+  {
+    "description": "Get the delivery status of an order.",
+    "name": "track_order",
+    "parameters": {
+      "additionalProperties": false,
+      "properties": {
+        "order_id": {
+          "pattern": "^O-[0-9]{6}$",
+          "title": "Order Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "order_id"
+      ],
+      "title": "TrackOrder",
+      "type": "object"
+    }
+  },
+  {
+    "description": "Cancel an order for the specified reason.",
+    "name": "cancel_order",
+    "parameters": {
+      "additionalProperties": false,
+      "properties": {
+        "order_id": {
+          "pattern": "^O-[0-9]{6}$",
+          "title": "Order Id",
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "duplicate",
+            "changed_mind",
+            "wrong_item"
+          ],
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "order_id",
+        "reason"
+      ],
+      "title": "CancelOrder",
+      "type": "object"
+    }
+  },
+  {
+    "description": "Book an order pickup at a date and location.",
+    "name": "schedule_pickup",
+    "parameters": {
+      "additionalProperties": false,
+      "properties": {
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "location": {
+          "enum": [
+            "front_desk",
+            "loading_bay",
+            "locker"
+          ],
+          "title": "Location",
+          "type": "string"
+        },
+        "order_id": {
+          "pattern": "^O-[0-9]{6}$",
+          "title": "Order Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "order_id",
+        "date",
+        "location"
+      ],
+      "title": "SchedulePickup",
+      "type": "object"
+    }
+  }
+]

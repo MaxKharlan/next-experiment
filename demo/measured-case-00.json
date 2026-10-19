@@ -1,0 +1,366 @@
+{
+  "case": {
+    "backend": "local Transformers/PEFT",
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 2.5593421459198,
+        "valid_loss": 2.066251938775082
+      },
+      {
+        "step": 24,
+        "train_loss": 1.7507799863815308,
+        "valid_loss": 1.7183406048973136
+      },
+      {
+        "step": 36,
+        "train_loss": 1.6416301727294922,
+        "valid_loss": 1.4718816168356261
+      },
+      {
+        "step": 48,
+        "train_loss": 1.3929121494293213,
+        "valid_loss": 1.2307113719066518
+      },
+      {
+        "step": 60,
+        "train_loss": 1.0896062850952148,
+        "valid_loss": 1.0597716562899968
+      },
+      {
+        "step": 63,
+        "train_loss": 1.0402296781539917,
+        "valid_loss": 1.0213787341677902
+      },
+      {
+        "step": 72,
+        "train_loss": 0.8869490027427673,
+        "valid_loss": 0.9550624871814011
+      },
+      {
+        "step": 84,
+        "train_loss": 0.8230890035629272,
+        "valid_loss": 0.8404451577655421
+      },
+      {
+        "step": 96,
+        "train_loss": 0.5758604407310486,
+        "valid_loss": 0.7661327271653502
+      },
+      {
+        "step": 108,
+        "train_loss": 0.20087088644504547,
+        "valid_loss": 0.7176908445638298
+      },
+      {
+        "step": 120,
+        "train_loss": 0.5811287760734558,
+        "valid_loss": 0.6601370504038446
+      },
+      {
+        "step": 126,
+        "train_loss": 1.139545202255249,
+        "valid_loss": 0.6349179159674868
+      },
+      {
+        "step": 132,
+        "train_loss": 0.3291674852371216,
+        "valid_loss": 0.6246130558468351
+      },
+      {
+        "step": 144,
+        "train_loss": 0.23967908322811127,
+        "valid_loss": 0.5944700886139134
+      },
+      {
+        "step": 156,
+        "train_loss": 0.25068530440330505,
+        "valid_loss": 0.5628742382630406
+      },
+      {
+        "step": 168,
+        "train_loss": 0.21239720284938812,
+        "valid_loss": 0.5437090074856009
+      },
+      {
+        "step": 180,
+        "train_loss": 0.34882688522338867,
+        "valid_loss": 0.5358171827041063
+      },
+      {
+        "step": 189,
+        "train_loss": 0.4448639452457428,
+        "valid_loss": 0.531980470122907
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.43,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.43
+  },
+  "note": "local-mps-banking77-500-dev. Validation exact match 0.430; matched reference 0.430. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "4dc77074d40eacd84127e262c61254efa40ef30ad712c9c35ed04722f2bc1d89",
+    "source": "docs/results/b467-20261019/detection/case-00.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "lr_too_low",
+        "id": "h1",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.3,
+        "rationale": "The learning rate of 1e-4 is at the low end of typical LoRA ranges; combined with zero warmup, the model may receive insufficient gradient updates to deviate from the base model, which matches the observed validation performance identical to the reference.",
+        "sources": []
+      },
+      {
+        "fault_class": "answer_truncation",
+        "id": "h2",
+        "location": "training data (assistant answers)",
+        "prior": 0.2,
+        "rationale": "If intent labels were truncated during user-side preprocessing, the model would learn incomplete or corrupted targets, resulting in little to no improvement over the base model—a scenario consistent with unchanged exact-match scores.",
+        "sources": []
+      },
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h3",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.15,
+        "rationale": "A LoRA rank of 16 may be too low to capture the nuanced decision boundaries needed for BANKING77 intent classification on a 0.6B parameter model, limiting the adapter's expressive power and yielding performance similar to the unfine‑tuned baseline.",
+        "sources": []
+      },
+      {
+        "fault_class": "too_many_epochs",
+        "id": "h4",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.1,
+        "rationale": "Training loss exhibits occasional spikes (e.g., step 120→126) while validation loss plateaus after ~108 steps, hinting that further epochs could be adding noise rather than useful signal, though the overall downward trend makes this less likely.",
+        "sources": []
+      },
+      {
+        "fault_class": "distribution_shift",
+        "id": "h5",
+        "location": "validation/test split vs production data",
+        "prior": 0.1,
+        "rationale": "If the validation set does not reflect the true deployment distribution, the model could appear to perform similarly to the base model on validation while still failing on actual requests, explaining the lack of observed improvement.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-00",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0024860999999999998,
+        "latency_ms": 10608,
+        "tokens_in": 2473,
+        "tokens_out": 1938
+      }
+    },
+    "llm_cost_usd": 0.0024860999999999998,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "lr_too_low",
+            "id": "h1",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.3,
+            "rationale": "The learning rate of 1e-4 is at the low end of typical LoRA ranges; combined with zero warmup, the model may receive insufficient gradient updates to deviate from the base model, which matches the observed validation performance identical to the reference.",
+            "sources": []
+          },
+          {
+            "fault_class": "answer_truncation",
+            "id": "h2",
+            "location": "training data (assistant answers)",
+            "prior": 0.2,
+            "rationale": "If intent labels were truncated during user-side preprocessing, the model would learn incomplete or corrupted targets, resulting in little to no improvement over the base model—a scenario consistent with unchanged exact-match scores.",
+            "sources": []
+          },
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h3",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.15,
+            "rationale": "A LoRA rank of 16 may be too low to capture the nuanced decision boundaries needed for BANKING77 intent classification on a 0.6B parameter model, limiting the adapter's expressive power and yielding performance similar to the unfine‑tuned baseline.",
+            "sources": []
+          },
+          {
+            "fault_class": "too_many_epochs",
+            "id": "h4",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.1,
+            "rationale": "Training loss exhibits occasional spikes (e.g., step 120→126) while validation loss plateaus after ~108 steps, hinting that further epochs could be adding noise rather than useful signal, though the overall downward trend makes this less likely.",
+            "sources": []
+          },
+          {
+            "fault_class": "distribution_shift",
+            "id": "h5",
+            "location": "validation/test split vs production data",
+            "prior": 0.1,
+            "rationale": "If the validation set does not reflect the true deployment distribution, the model could appear to perform similarly to the base model on validation while still failing on actual requests, explaining the lack of observed improvement.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.3,
+          "h2": 0.2,
+          "h3": 0.15,
+          "h4": 0.1,
+          "h5": 0.1,
+          "unlisted": 0.15
+        }
+      },
+      {
+        "budget_left_usd": 0.0975139,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.3312,
+        "kind": "probe",
+        "outcome": "normal",
+        "probe": "loss_curve",
+        "probs": {
+          "h1": 0.1093,
+          "h2": 0.2834,
+          "h3": 0.1822,
+          "h4": 0.0709,
+          "h5": 0.1417,
+          "unlisted": 0.2126
+        },
+        "raw": {
+          "train_drop": 0.8261803542152573,
+          "train_loss": [
+            2.5593421459198,
+            1.7507799863815308,
+            1.6416301727294922,
+            1.3929121494293213,
+            1.0896062850952148,
+            1.0402296781539917,
+            0.8869490027427673,
+            0.8230890035629272,
+            0.5758604407310486,
+            0.20087088644504547,
+            0.5811287760734558,
+            1.139545202255249,
+            0.3291674852371216,
+            0.23967908322811127,
+            0.25068530440330505,
+            0.21239720284938812,
+            0.34882688522338867,
+            0.4448639452457428
+          ],
+          "valid_loss": [
+            2.066251938775082,
+            1.7183406048973136,
+            1.4718816168356261,
+            1.2307113719066518,
+            1.0597716562899968,
+            1.0213787341677902,
+            0.9550624871814011,
+            0.8404451577655421,
+            0.7661327271653502,
+            0.7176908445638298,
+            0.6601370504038446,
+            0.6349179159674868,
+            0.6246130558468351,
+            0.5944700886139134,
+            0.5628742382630406,
+            0.5437090074856009,
+            0.5358171827041063,
+            0.531980470122907
+          ]
+        }
+      },
+      {
+        "budget_left_usd": 0.0975139,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.2948,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "lora_rank",
+        "probs": {
+          "h1": 0.1289,
+          "h2": 0.3341,
+          "h3": 0.0358,
+          "h4": 0.0835,
+          "h5": 0.1671,
+          "unlisted": 0.2506
+        },
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        }
+      },
+      {
+        "budget_left_usd": 0.0975139,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.156,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "lr_range",
+        "probs": {
+          "h1": 0.0105,
+          "h2": 0.3796,
+          "h3": 0.0407,
+          "h4": 0.0949,
+          "h5": 0.1898,
+          "unlisted": 0.2847
+        },
+        "raw": {
+          "learning_rate": 0.0001,
+          "low_below": 5e-05
+        }
+      },
+      {
+        "budget_left_usd": 0.0975139,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.118,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "epoch_count",
+        "probs": {
+          "h1": 0.0113,
+          "h2": 0.4113,
+          "h3": 0.0441,
+          "h4": 0.0193,
+          "h5": 0.2056,
+          "unlisted": 0.3084
+        },
+        "raw": {
+          "high_from": 10,
+          "n_epochs": 3
+        }
+      },
+      {
+        "kind": "stop",
+        "reason": "no probe left and the likeliest testable hypothesis, h3 at 0.04, is too unlikely to pay for a causal check"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Healthy recipe: lr 0.0001, rank 16, epochs 3, seed 0 — inconclusive"
+}

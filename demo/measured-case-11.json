@@ -1,0 +1,253 @@
+{
+  "case": {
+    "backend": "local Transformers/PEFT",
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 3.050692081451416,
+        "valid_loss": 2.9795482054652784
+      },
+      {
+        "step": 24,
+        "train_loss": 3.531982660293579,
+        "valid_loss": 2.664750161586992
+      },
+      {
+        "step": 36,
+        "train_loss": 2.899088144302368,
+        "valid_loss": 2.4787928538034425
+      },
+      {
+        "step": 48,
+        "train_loss": 2.413180112838745,
+        "valid_loss": 2.3557425469360096
+      },
+      {
+        "step": 60,
+        "train_loss": 2.052062511444092,
+        "valid_loss": 2.2607966013402745
+      },
+      {
+        "step": 63,
+        "train_loss": 2.4417364597320557,
+        "valid_loss": 2.239509778534806
+      },
+      {
+        "step": 72,
+        "train_loss": 1.9584782123565674,
+        "valid_loss": 2.195100347467717
+      },
+      {
+        "step": 84,
+        "train_loss": 2.478433609008789,
+        "valid_loss": 2.149894575944683
+      },
+      {
+        "step": 96,
+        "train_loss": 2.492483615875244,
+        "valid_loss": 2.103957291817505
+      },
+      {
+        "step": 108,
+        "train_loss": 2.226369857788086,
+        "valid_loss": 2.060749780011657
+      },
+      {
+        "step": 120,
+        "train_loss": 2.487839460372925,
+        "valid_loss": 2.0282023857103897
+      },
+      {
+        "step": 126,
+        "train_loss": 1.5389536619186401,
+        "valid_loss": 2.0148596499590266
+      },
+      {
+        "step": 132,
+        "train_loss": 2.532045364379883,
+        "valid_loss": 2.0042534214538215
+      },
+      {
+        "step": 144,
+        "train_loss": 2.2255473136901855,
+        "valid_loss": 1.9876378586628294
+      },
+      {
+        "step": 156,
+        "train_loss": 2.183711528778076,
+        "valid_loss": 1.975433586627845
+      },
+      {
+        "step": 168,
+        "train_loss": 1.5885365009307861,
+        "valid_loss": 1.9670531261687312
+      },
+      {
+        "step": 180,
+        "train_loss": 2.243269681930542,
+        "valid_loss": 1.9622726046398982
+      },
+      {
+        "step": 189,
+        "train_loss": 1.507226824760437,
+        "valid_loss": 1.961137480983798
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 1e-05,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.42,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.05
+  },
+  "note": "local-mps-banking77-500-dev. Validation exact match 0.050; matched reference 0.420. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "e58a56d7569fc178d1320e1e045c9d4509e984e62de74a0b3836cf5abd598502",
+    "source": "docs/results/b467-20261019/detection/case-11.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "lr_too_low",
+        "id": "h1",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.4,
+        "rationale": "The default learning rate for Token Factory is 1e-5, but LoRA typically requires around 1e-4 to achieve noticeable updates. With LR=1e-5 the model adapts slowly, which can result in low final performance despite decreasing training loss.",
+        "sources": []
+      },
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h2",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.3,
+        "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for BANKING77 intent classification on a 0.6B model, causing the model to stall below expected quality even after several epochs.",
+        "sources": []
+      },
+      {
+        "fault_class": "chat_template_mismatch",
+        "id": "h3",
+        "location": "data/chat_template",
+        "prior": 0.2,
+        "rationale": "If the training data uses a different chat template (e.g., missing system/user tags) than the one used at inference for classification prompts, the model may ignore the instruction and produce generic outputs, leading to low exact match.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-11",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.001533,
+        "latency_ms": 5537,
+        "tokens_in": 2452,
+        "tokens_out": 886
+      }
+    },
+    "llm_cost_usd": 0.001533,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "lr_too_low",
+            "id": "h1",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.4,
+            "rationale": "The default learning rate for Token Factory is 1e-5, but LoRA typically requires around 1e-4 to achieve noticeable updates. With LR=1e-5 the model adapts slowly, which can result in low final performance despite decreasing training loss.",
+            "sources": []
+          },
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h2",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.3,
+            "rationale": "A LoRA rank of 16 may be insufficient to capture the variability needed for BANKING77 intent classification on a 0.6B model, causing the model to stall below expected quality even after several epochs.",
+            "sources": []
+          },
+          {
+            "fault_class": "chat_template_mismatch",
+            "id": "h3",
+            "location": "data/chat_template",
+            "prior": 0.2,
+            "rationale": "If the training data uses a different chat template (e.g., missing system/user tags) than the one used at inference for classification prompts, the model may ignore the instruction and produce generic outputs, leading to low exact match.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "h3": 0.2,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "budget_left_usd": 0.098467,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.3985,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "lora_rank",
+        "probs": {
+          "h1": 0.5333,
+          "h2": 0.0667,
+          "h3": 0.2667,
+          "unlisted": 0.1333
+        },
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        }
+      },
+      {
+        "budget_left_usd": 0.098467,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.373,
+        "kind": "probe",
+        "outcome": "low",
+        "probe": "lr_range",
+        "probs": {
+          "h1": 0.7835,
+          "h2": 0.0309,
+          "h3": 0.1237,
+          "unlisted": 0.0619
+        },
+        "raw": {
+          "learning_rate": 1e-05,
+          "low_below": 5e-05
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.7835,
+          "h2": 0.0309,
+          "h3": 0.1237,
+          "unlisted": 0.0619
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Fault 6 recipe: lr 1e-05, rank 16, epochs 3, seed 2 — inconclusive"
+}

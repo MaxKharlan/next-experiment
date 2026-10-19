@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.00029130000000000003,
+  "latency_ms": 1349,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"ticket_id\": \"T-200001\", \"product\": \"printer\", \"priority\": \"low\", \"callback\": true, \"due_date\": \"2027-02-04\"}",
+  "tokens_in": 251,
+  "tokens_out": 240
+}

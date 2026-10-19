@@ -1,0 +1,8 @@
+{
+  "cost_usd": 0.000285,
+  "latency_ms": 1384,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "text": "{\"ticket_id\": \"T-200002\", \"product\": \"scanner\", \"priority\": \"low\", \"callback\": false, \"due_date\": \"2027-02-01\"}",
+  "tokens_in": 254,
+  "tokens_out": 232
+}

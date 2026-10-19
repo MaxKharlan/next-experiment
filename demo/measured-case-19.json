@@ -1,0 +1,248 @@
+{
+  "case": {
+    "backend": "Token Factory",
+    "checkpoints": [
+      {
+        "step": 63,
+        "train_loss": 0.37090834975242615,
+        "valid_loss": 0.3709714114665985
+      },
+      {
+        "step": 126,
+        "train_loss": 0.15511226654052734,
+        "valid_loss": 0.008914144709706306
+      },
+      {
+        "step": 189,
+        "train_loss": 0.05499333143234253,
+        "valid_loss": 0.14543069899082184
+      },
+      {
+        "step": 252,
+        "train_loss": 0.021267259493470192,
+        "valid_loss": 0.20634570717811584
+      },
+      {
+        "step": 315,
+        "train_loss": 0.015306754037737846,
+        "valid_loss": 0.32898351550102234
+      },
+      {
+        "step": 378,
+        "train_loss": 0.0008440308156423271,
+        "valid_loss": 0.08925237506628036
+      },
+      {
+        "step": 441,
+        "train_loss": 0.00022872535919304937,
+        "valid_loss": 0.3279918432235718
+      },
+      {
+        "step": 504,
+        "train_loss": 0.0001060065915226005,
+        "valid_loss": 0.00039240537444129586
+      },
+      {
+        "step": 567,
+        "train_loss": 9.564922947902232e-05,
+        "valid_loss": 0.21982398629188538
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 9,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.66,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.63
+  },
+  "note": "tokenfactory-banking77-500-dev. Validation exact match 0.630; matched reference 0.660. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "62eec4191585b8726086559953a5cb4154e7372d1f4ae38c9f9f4e2fcebd1c9b",
+    "source": "docs/results/b467-20261019/detection/case-19.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "too_many_epochs",
+        "id": "h1",
+        "location": "hyperparameters.n_epochs",
+        "prior": 0.35,
+        "rationale": "Validation loss shows repeated spikes and drops across epochs, a pattern typical of overfitting when training too many epochs. The slight drop in exact‑match (0.63 vs reference 0.66) aligns with mild overfitting hurting generalization.",
+        "sources": []
+      },
+      {
+        "fault_class": "train_val_overlap",
+        "id": "h2",
+        "location": "data files (training/validation split)",
+        "prior": 0.25,
+        "rationale": "Some checkpoints exhibit unusually low validation loss (e.g., step 504 valid_loss ≈ 0.0004) while later checkpoints rise sharply, suggesting the validation set may contain examples seen during training, inflating early metrics and masking true performance.",
+        "sources": []
+      },
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h3",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.2,
+        "rationale": "LoRA rank of 16 may be insufficient to capture the full intent‑classification nuances of Qwen3‑0.6B, leading to a ceiling just below the reference performance. Increasing rank often yields measurable gains on similar tasks.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-19",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0014061,
+        "latency_ms": 5651,
+        "tokens_in": 1942,
+        "tokens_out": 915
+      }
+    },
+    "llm_cost_usd": 0.0014061,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "too_many_epochs",
+            "id": "h1",
+            "location": "hyperparameters.n_epochs",
+            "prior": 0.35,
+            "rationale": "Validation loss shows repeated spikes and drops across epochs, a pattern typical of overfitting when training too many epochs. The slight drop in exact‑match (0.63 vs reference 0.66) aligns with mild overfitting hurting generalization.",
+            "sources": []
+          },
+          {
+            "fault_class": "train_val_overlap",
+            "id": "h2",
+            "location": "data files (training/validation split)",
+            "prior": 0.25,
+            "rationale": "Some checkpoints exhibit unusually low validation loss (e.g., step 504 valid_loss ≈ 0.0004) while later checkpoints rise sharply, suggesting the validation set may contain examples seen during training, inflating early metrics and masking true performance.",
+            "sources": []
+          },
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h3",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.2,
+            "rationale": "LoRA rank of 16 may be insufficient to capture the full intent‑classification nuances of Qwen3‑0.6B, leading to a ceiling just below the reference performance. Increasing rank often yields measurable gains on similar tasks.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.35,
+          "h2": 0.25,
+          "h3": 0.2,
+          "unlisted": 0.2
+        }
+      },
+      {
+        "budget_left_usd": 0.09859390000000001,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.3141,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "lora_rank",
+        "probs": {
+          "h1": 0.42,
+          "h2": 0.3,
+          "h3": 0.04,
+          "unlisted": 0.24
+        },
+        "raw": {
+          "lora_r": 16,
+          "low_up_to": 4
+        }
+      },
+      {
+        "budget_left_usd": 0.09859390000000001,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.323,
+        "kind": "probe",
+        "outcome": "ok",
+        "probe": "epoch_count",
+        "probs": {
+          "h1": 0.1195,
+          "h2": 0.4554,
+          "h3": 0.0607,
+          "unlisted": 0.3643
+        },
+        "raw": {
+          "high_from": 10,
+          "n_epochs": 9
+        }
+      },
+      {
+        "budget_left_usd": 0.09859390000000001,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.1766,
+        "kind": "probe",
+        "outcome": "overfit",
+        "probe": "loss_curve",
+        "probs": {
+          "h1": 0.5235,
+          "h2": 0.1662,
+          "h3": 0.0443,
+          "unlisted": 0.2659
+        },
+        "raw": {
+          "train_drop": 0.9997421216601274,
+          "train_loss": [
+            0.37090834975242615,
+            0.15511226654052734,
+            0.05499333143234253,
+            0.021267259493470192,
+            0.015306754037737846,
+            0.0008440308156423271,
+            0.00022872535919304937,
+            0.0001060065915226005,
+            9.564922947902232e-05
+          ],
+          "valid_loss": [
+            0.3709714114665985,
+            0.008914144709706306,
+            0.14543069899082184,
+            0.20634570717811584,
+            0.32898351550102234,
+            0.08925237506628036,
+            0.3279918432235718,
+            0.00039240537444129586,
+            0.21982398629188538
+          ]
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.5235,
+          "h2": 0.1662,
+          "h3": 0.0443,
+          "unlisted": 0.2659
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Fault 7 recipe: lr 0.0001, rank 16, epochs 9, seed 1 — inconclusive"
+}

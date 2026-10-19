@@ -1,0 +1,272 @@
+{
+  "case": {
+    "backend": "local Transformers/PEFT",
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 1.9617606401443481,
+        "valid_loss": 2.0099732827820236
+      },
+      {
+        "step": 24,
+        "train_loss": 1.1236718893051147,
+        "valid_loss": 1.654733065790778
+      },
+      {
+        "step": 36,
+        "train_loss": 2.0261473655700684,
+        "valid_loss": 1.4386764230744151
+      },
+      {
+        "step": 48,
+        "train_loss": 0.6202130913734436,
+        "valid_loss": 1.2096337074001364
+      },
+      {
+        "step": 60,
+        "train_loss": 0.7488033175468445,
+        "valid_loss": 1.0190468762544977
+      },
+      {
+        "step": 63,
+        "train_loss": 0.6733156442642212,
+        "valid_loss": 0.979540562569695
+      },
+      {
+        "step": 72,
+        "train_loss": 0.4584167003631592,
+        "valid_loss": 0.9215202027519277
+      },
+      {
+        "step": 84,
+        "train_loss": 0.3747420012950897,
+        "valid_loss": 0.8187440433758217
+      },
+      {
+        "step": 96,
+        "train_loss": 0.5787947773933411,
+        "valid_loss": 0.7841770308929802
+      },
+      {
+        "step": 108,
+        "train_loss": 0.7360053062438965,
+        "valid_loss": 0.7277773573694614
+      },
+      {
+        "step": 120,
+        "train_loss": 0.597083568572998,
+        "valid_loss": 0.6374127152782159
+      },
+      {
+        "step": 126,
+        "train_loss": 0.36207881569862366,
+        "valid_loss": 0.6125554392401804
+      },
+      {
+        "step": 132,
+        "train_loss": 0.28832492232322693,
+        "valid_loss": 0.588687340285154
+      },
+      {
+        "step": 144,
+        "train_loss": 0.1893220692873001,
+        "valid_loss": 0.5606417750952227
+      },
+      {
+        "step": 156,
+        "train_loss": 0.19480924308300018,
+        "valid_loss": 0.5377426984026128
+      },
+      {
+        "step": 168,
+        "train_loss": 0.26482000946998596,
+        "valid_loss": 0.5236612627370245
+      },
+      {
+        "step": 180,
+        "train_loss": 0.24997740983963013,
+        "valid_loss": 0.521644545981548
+      },
+      {
+        "step": 189,
+        "train_loss": 0.24295279383659363,
+        "valid_loss": 0.5178743081304851
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 4,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.41,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.41
+  },
+  "note": "local-mps-banking77-500-dev. Validation exact match 0.410; matched reference 0.410. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "d68adbbbfcb4da120600c85a3b50d7d5b8642325e1054d0f40cb7257b6dc0c1f",
+    "source": "docs/results/b467-20261019/detection/case-04.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "lora_rank_too_small",
+        "id": "h1",
+        "location": "hyperparameters.lora_r",
+        "prior": 0.35,
+        "rationale": "LoRA rank of 4 may be too low to capture the nuanced intent distinctions in BANKING77, allowing loss to drop but preventing improvement in exact-match accuracy relative to the untuned reference.",
+        "sources": []
+      },
+      {
+        "fault_class": "contradictory_labels",
+        "id": "h2",
+        "location": "data/train.json",
+        "prior": 0.25,
+        "rationale": "If similar utterances map to different intents in the training data, the model receives conflicting signals, which can stabilize loss while harming discrete metric like exact match.",
+        "sources": []
+      },
+      {
+        "fault_class": "distribution_shift",
+        "id": "h3",
+        "location": "data/train.json",
+        "prior": 0.2,
+        "rationale": "Training examples may differ from the validation/intents used for exact-match evaluation (e.g., different phrasing or preprocessing), causing the model to fit the training distribution without gaining generalization to the evaluation set.",
+        "sources": []
+      },
+      {
+        "fault_class": "lr_too_low",
+        "id": "h4",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.1,
+        "rationale": "Although the loss decreased, a learning rate of 1e-4 could still be sub‑optimal for Qwen3‑0.6B with LoRA, resulting in minimal parameter updates that affect loss but not the classification decision boundary.",
+        "sources": []
+      },
+      {
+        "fault_class": "train_val_overlap",
+        "id": "h5",
+        "location": "data/val.json",
+        "prior": 0.05,
+        "rationale": "Overlap between training and validation files would depress validation loss without improving generalization to unseen intents, leaving exact‑match unchanged relative to the baseline.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-04",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0018770999999999998,
+        "latency_ms": 10703,
+        "tokens_in": 2474,
+        "tokens_out": 1261
+      }
+    },
+    "llm_cost_usd": 0.0018770999999999998,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "lora_rank_too_small",
+            "id": "h1",
+            "location": "hyperparameters.lora_r",
+            "prior": 0.35,
+            "rationale": "LoRA rank of 4 may be too low to capture the nuanced intent distinctions in BANKING77, allowing loss to drop but preventing improvement in exact-match accuracy relative to the untuned reference.",
+            "sources": []
+          },
+          {
+            "fault_class": "contradictory_labels",
+            "id": "h2",
+            "location": "data/train.json",
+            "prior": 0.25,
+            "rationale": "If similar utterances map to different intents in the training data, the model receives conflicting signals, which can stabilize loss while harming discrete metric like exact match.",
+            "sources": []
+          },
+          {
+            "fault_class": "distribution_shift",
+            "id": "h3",
+            "location": "data/train.json",
+            "prior": 0.2,
+            "rationale": "Training examples may differ from the validation/intents used for exact-match evaluation (e.g., different phrasing or preprocessing), causing the model to fit the training distribution without gaining generalization to the evaluation set.",
+            "sources": []
+          },
+          {
+            "fault_class": "lr_too_low",
+            "id": "h4",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.1,
+            "rationale": "Although the loss decreased, a learning rate of 1e-4 could still be sub‑optimal for Qwen3‑0.6B with LoRA, resulting in minimal parameter updates that affect loss but not the classification decision boundary.",
+            "sources": []
+          },
+          {
+            "fault_class": "train_val_overlap",
+            "id": "h5",
+            "location": "data/val.json",
+            "prior": 0.05,
+            "rationale": "Overlap between training and validation files would depress validation loss without improving generalization to unseen intents, leaving exact‑match unchanged relative to the baseline.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.35,
+          "h2": 0.25,
+          "h3": 0.2,
+          "h4": 0.1,
+          "h5": 0.05,
+          "unlisted": 0.05
+        }
+      },
+      {
+        "budget_left_usd": 0.0981229,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.4264,
+        "kind": "probe",
+        "outcome": "low",
+        "probe": "lora_rank",
+        "probs": {
+          "h1": 0.8207,
+          "h2": 0.069,
+          "h3": 0.0552,
+          "h4": 0.0276,
+          "h5": 0.0138,
+          "unlisted": 0.0138
+        },
+        "raw": {
+          "lora_r": 4,
+          "low_up_to": 4
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.8207,
+          "h2": 0.069,
+          "h3": 0.0552,
+          "h4": 0.0276,
+          "h5": 0.0138,
+          "unlisted": 0.0138
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Fault 8 recipe: lr 0.0001, rank 4, epochs 3, seed 1 — inconclusive"
+}

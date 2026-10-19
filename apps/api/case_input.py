@@ -11,6 +11,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from apps.api.live_protocol import ProtocolConfig, prepare_live_run, verify_datasets
 from core.case import InvestigationCase
 from core.connectors.token_factory import hyperparameter_problem
+from core.eval.data import read_examples
+from core.eval.structured import validate_answer, validate_evaluator
 from core.probes.level0.lengths import read_chat_jsonl
 
 
@@ -35,16 +37,9 @@ def prepare_case(request: CaseStart) -> dict:
     case = request.case
     if case.mode != "A":
         raise ValueError("Explicit cases currently support Token Factory mode A")
-    if case.task != "banking77" or case.job.model != "Qwen/Qwen3-0.6B":
-        raise ValueError("Supported task/model: banking77 and Qwen/Qwen3-0.6B")
-    evaluator = case.evaluator
-    if (
-        evaluator.name != "intent_label"
-        or evaluator.metric != "exact_match"
-        or not evaluator.higher_is_better
-        or evaluator.parameters
-    ):
-        raise ValueError("Supported evaluator: intent_label / exact_match")
+    if case.job.model != "Qwen/Qwen3-0.6B":
+        raise ValueError("Supported model: Qwen/Qwen3-0.6B")
+    evaluator = validate_evaluator(case.task, case.evaluator)
     if not math.isfinite(case.budget_usd):
         raise ValueError("The budget must be finite")
 
@@ -90,6 +85,17 @@ def prepare_case(request: CaseStart) -> dict:
         if any(not line.strip() for line in path.read_text().splitlines()):
             raise ValueError(f"{role}: blank JSONL lines are not supported")
 
+    # Damaged training labels remain inspectable; scoring references must be valid.
+    if case.task != "banking77":
+        for role in ("check", "test"):
+            for row in read_examples(refs[role].ref):
+                validate_answer(case.task, row.expected)
+
+    if case.task != "banking77":
+        from core.eval.audit_case import audit_case
+
+        audit_case(case)
+
     config = ProtocolConfig(
         **request.experiment.model_dump(),
         model=case.job.model,
@@ -113,6 +119,7 @@ def prepare_case(request: CaseStart) -> dict:
             raise ValueError(f"{role}: declared example count does not match")
 
     protocol["evaluator"] = evaluator.model_dump()
+    protocol["task"] = case.task
     protocol["calibration_scope"] = "caller-specified experimental settings"
     verify_datasets(protocol)
 

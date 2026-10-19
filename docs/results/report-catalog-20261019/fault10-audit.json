@@ -1,0 +1,25 @@
+{
+  "alignment": {
+    "healthy_mismatches": 1,
+    "informative_positions": 3,
+    "observed_targets": 1,
+    "preshift_mismatches": 2,
+    "status": "other_mismatch"
+  },
+  "causal_confirmation": false,
+  "eos": {
+    "eos_token_id": 2,
+    "observed_targets": 1,
+    "reference_eos_targets": 1,
+    "reference_targets": 2,
+    "removed_eos_fraction": 1.0,
+    "removed_eos_targets": 1,
+    "status": "removed"
+  },
+  "prompt": {
+    "reason": "labels are not prompt-only additions",
+    "status": "not_applicable"
+  },
+  "rows": 1,
+  "scope": "supplied unpadded labels; reference correctness is caller-owned"
+}

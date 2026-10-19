@@ -1,0 +1,56 @@
+{
+  "case": {
+    "job": {
+      "hyperparameters": {},
+      "model": "local mechanism fixture"
+    },
+    "mode": "B",
+    "symptom": "EOS label masking"
+  },
+  "note": "Reproducible CPU inspection. Findings do not establish a downstream quality failure.",
+  "provenance": {
+    "sha256": "3ced41f753a6891e649b353336f967c67c8f8c3c98877cd103a365ce0423f7b9",
+    "source": "docs/results/report-catalog-20261019/fault10-audit.json"
+  },
+  "report": {
+    "audit_only": true,
+    "evidence_scope": "local mechanism inspection; no trained model diagnosis",
+    "hypotheses": [],
+    "investigation_id": "local-audit-10",
+    "llm_calls": {},
+    "llm_cost_usd": 0.0,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "cost_usd": 0.0,
+        "kind": "training_label_checks",
+        "raw": {
+          "alignment": {
+            "healthy_mismatches": 1,
+            "informative_positions": 3,
+            "observed_targets": 1,
+            "preshift_mismatches": 2,
+            "status": "other_mismatch"
+          },
+          "causal_confirmation": false,
+          "eos": {
+            "eos_token_id": 2,
+            "observed_targets": 1,
+            "reference_eos_targets": 1,
+            "reference_targets": 2,
+            "removed_eos_fraction": 1.0,
+            "removed_eos_targets": 1,
+            "status": "removed"
+          },
+          "prompt": {
+            "reason": "labels are not prompt-only additions",
+            "status": "not_applicable"
+          },
+          "rows": 1,
+          "scope": "supplied unpadded labels; reference correctness is caller-owned"
+        }
+      }
+    ]
+  },
+  "title": "Fault 10: EOS label masking — local audit"
+}

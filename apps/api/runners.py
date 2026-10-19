@@ -43,7 +43,17 @@ def demo_cases() -> dict[str, dict[str, Any]]:
 def demo_index() -> list[dict[str, str]]:
     """Name, title and note of each saved investigation, for the case picker."""
     return [
-        {"name": name, "title": d.get("title", name), "note": d.get("note", "")}
+        {
+            "name": name,
+            "title": d.get("title", name),
+            "note": d.get("note", ""),
+            "status": d["report"]["status"],
+            "category": "Local audits"
+            if d["report"].get("audit_only")
+            else "Causally confirmed"
+            if d["report"]["status"] == "confirmed"
+            else "Unconfirmed traces",
+        }
         for name, d in demo_cases().items()
     ]
 
@@ -230,6 +240,7 @@ def retrain(
                     "train": Path(datasets["train"]["path"]),
                     "valid": Path(datasets["validation"]["path"]),
                     "heldout": Path(datasets["test"]["path"]),
+                    "evaluator_spec": protocol.get("evaluator"),
                 }
             retrainer = retrain_tf.make_retrainer(
                 TokenFactory.from_settings(),
@@ -295,8 +306,9 @@ def _pair_runner(
         train = Path(datasets["train"]["path"])
         valid = Path(datasets["validation"]["path"])
         check = Path(datasets["check"]["path"])
+        from core.case import EvaluatorSpec
+        from core.eval import evaluate
         from core.interventions.answer_check import DataAwareTFPairRunner
-        from jobs.eval_local.exact_match import evaluate_adapter
 
         def run_tf(target, control):
             verify_datasets(protocol)
@@ -308,7 +320,16 @@ def _pair_runner(
                 train_path=train,
                 valid_path=valid,
                 base_hp=job_hp,
-                evaluate=lambda adapter: evaluate_adapter(adapter, check),
+                evaluate=lambda adapter: (
+                    evaluate(
+                        check,
+                        EvaluatorSpec.model_validate(
+                            protocol.get("evaluator")
+                            or {"name": "intent_label", "metric": "exact_match"}
+                        ),
+                        adapter=adapter,
+                    ).value
+                ),
                 seeds=protocol["seeds"],
                 prefix=f"investigations/{inv_id}/tf/{target.hypothesis_id}",
             )(target, control)
@@ -337,6 +358,7 @@ def _summary(report: dict[str, Any]) -> dict[str, Any]:
         "estimated_total_cost_usd": training + report.get("llm_cost_usd", 0.0),
         "status": report["status"],
         "audit_only": report.get("audit_only", False),
+        "evidence_scope": report.get("evidence_scope"),
         "llm_cost_usd": report.get("llm_cost_usd", 0.0),
         "llm_calls": report.get("llm_calls", {}),
     }

@@ -1,0 +1,64 @@
+{
+  "datasets": {
+    "check": {
+      "ref": "check.jsonl",
+      "format": "chat_jsonl",
+      "examples": 102,
+      "sha256": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45"
+    },
+    "test": {
+      "ref": "test.jsonl",
+      "format": "chat_jsonl",
+      "examples": 102,
+      "sha256": "3d154a1ef988714b1369cc5cfdcee6ef52096fdec3ac47ccab053447f9acc69c"
+    },
+    "train": {
+      "ref": "train.jsonl",
+      "format": "chat_jsonl",
+      "examples": 390,
+      "sha256": "1122cad5fad23277aae0eef19f9ed98011bea0dccbce648e431100092d1ed44a"
+    },
+    "validation": {
+      "ref": "validation.jsonl",
+      "format": "chat_jsonl",
+      "examples": 102,
+      "sha256": "b5855687eb121898b066997a400fc22c51f026a85e7030e7d2a33c6099e4911d"
+    }
+  },
+  "evaluator": {
+    "metric": "function_call_exact",
+    "name": "order_tools_v1",
+    "parameters": {
+      "max_new_tokens": 192
+    }
+  },
+  "generator_sha256": "71bd0f8c70d24d5c93319a807b06b4248545cc0a7961577e774de61c772acfdb",
+  "human_review": "not performed; user requested agent review",
+  "license": "Apache-2.0",
+  "provenance": "Authored templates and synthetic slots plus 24 recorded Super paraphrases",
+  "schema_sha256": "453877d52c04a49d5bb36d363e73c9901de05c0d6513c6d9aa36d1b314aaf241",
+  "seed": 20261019,
+  "source_counts": {
+    "check": {
+      "local": 96,
+      "super": 6
+    },
+    "test": {
+      "local": 96,
+      "super": 6
+    },
+    "train": {
+      "local": 384,
+      "super": 6
+    },
+    "validation": {
+      "local": 96,
+      "super": 6
+    }
+  },
+  "split_policy": "Distinct entity IDs and outer wording; shared semantic templates",
+  "super_model": "nvidia/nemotron-3-super-120b-a12b",
+  "super_source_sha256": "9a76367dd41a136f8a5b8f0c75c1415bf5c5b09cfca72690c970656975304f11",
+  "task": "function_calling",
+  "version": 1
+}

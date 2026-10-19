@@ -1,0 +1,273 @@
+{
+  "case": {
+    "backend": "local Transformers/PEFT",
+    "checkpoints": [
+      {
+        "step": 12,
+        "train_loss": 3.3804078102111816,
+        "valid_loss": 3.364164102397509
+      },
+      {
+        "step": 24,
+        "train_loss": 4.196752071380615,
+        "valid_loss": 3.1767723708344784
+      },
+      {
+        "step": 36,
+        "train_loss": 3.600519895553589,
+        "valid_loss": 3.0408844207757273
+      },
+      {
+        "step": 48,
+        "train_loss": 3.030073881149292,
+        "valid_loss": 2.9345411858302635
+      },
+      {
+        "step": 60,
+        "train_loss": 2.483583927154541,
+        "valid_loss": 2.847982839049909
+      },
+      {
+        "step": 63,
+        "train_loss": 3.1122426986694336,
+        "valid_loss": 2.829429872884046
+      },
+      {
+        "step": 72,
+        "train_loss": 2.6197521686553955,
+        "valid_loss": 2.7820401767756313
+      },
+      {
+        "step": 84,
+        "train_loss": 3.3419206142425537,
+        "valid_loss": 2.7270186047426006
+      },
+      {
+        "step": 96,
+        "train_loss": 2.9681057929992676,
+        "valid_loss": 2.680663487255173
+      },
+      {
+        "step": 108,
+        "train_loss": 2.916743755340576,
+        "valid_loss": 2.6393422104368276
+      },
+      {
+        "step": 120,
+        "train_loss": 3.3743553161621094,
+        "valid_loss": 2.604142966286448
+      },
+      {
+        "step": 126,
+        "train_loss": 2.068058490753174,
+        "valid_loss": 2.589708226239121
+      },
+      {
+        "step": 132,
+        "train_loss": 3.449894905090332,
+        "valid_loss": 2.5776781635796464
+      },
+      {
+        "step": 144,
+        "train_loss": 3.1700243949890137,
+        "valid_loss": 2.557943958964124
+      },
+      {
+        "step": 156,
+        "train_loss": 2.6990511417388916,
+        "valid_loss": 2.5433486712058917
+      },
+      {
+        "step": 168,
+        "train_loss": 2.1320528984069824,
+        "valid_loss": 2.534004779870078
+      },
+      {
+        "step": 180,
+        "train_loss": 3.14080548286438,
+        "valid_loss": 2.528928962729921
+      },
+      {
+        "step": 189,
+        "train_loss": 2.398347854614258,
+        "valid_loss": 2.52765441300885
+      }
+    ],
+    "evaluation_examples": 100,
+    "job": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 3e-06,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B"
+    },
+    "model": "Qwen/Qwen3-0.6B",
+    "reference_validation_exact_match": 0.42,
+    "symptom": "Assess the recipe and validation behavior. Quality may be unchanged from the reference; do not assume a harmful fault exists.",
+    "task": "BANKING77 intent classification",
+    "validation_exact_match": 0.03
+  },
+  "note": "local-mps-banking77-500-dev. Validation exact match 0.030; matched reference 0.420. Saved pre-intervention trace; no causal confirmation. A changed recipe is not proof of a harmful fault.",
+  "provenance": {
+    "sha256": "97ef21510641c95739fd41bc48bb2565b7c7abd128c1a2b630432f3f92f404df",
+    "source": "docs/results/b467-20261019/detection/case-14.json"
+  },
+  "report": {
+    "evidence_scope": "pre-intervention ranking; no causal experiment",
+    "hypotheses": [
+      {
+        "fault_class": "lr_too_low",
+        "id": "h1",
+        "location": "hyperparameters.learning_rate",
+        "prior": 0.4,
+        "rationale": "The learning rate is set to 3e-6, far below the typical ~1e-4 needed for LoRA adaptation on a 0.6B model. Such a low rate yields minimal weight updates, leaving the model close to its base weights and resulting in poor intent classification despite the loss decreasing.",
+        "sources": []
+      },
+      {
+        "fault_class": "answer_truncation",
+        "id": "h2",
+        "location": "training data (intent labels)",
+        "prior": 0.3,
+        "rationale": "If the intent strings in the training set were truncated during user-side preprocessing, the model would learn incomplete or malformed labels. This would manifest as low exact-match accuracy while the validation loss could still decline as the model fits the truncated targets.",
+        "sources": []
+      },
+      {
+        "fault_class": "train_val_overlap",
+        "id": "h3",
+        "location": "validation file overlapping training file",
+        "prior": 0.2,
+        "rationale": "Overlap between training and validation sets can produce deceptively low validation loss while the model fails to generalize to unseen intents, matching the observed gap between validation loss improvement and the very low exact-match score.",
+        "sources": []
+      }
+    ],
+    "investigation_id": "case-14",
+    "llm_calls": {
+      "nvidia/nemotron-3-super-120b-a12b": {
+        "calls": 1,
+        "cost_usd": 0.0016122,
+        "latency_ms": 6220,
+        "tokens_in": 2452,
+        "tokens_out": 974
+      }
+    },
+    "llm_cost_usd": 0.0016122,
+    "protocol": null,
+    "retrain_plan": null,
+    "status": "inconclusive",
+    "steps": [
+      {
+        "hypotheses": [
+          {
+            "fault_class": "lr_too_low",
+            "id": "h1",
+            "location": "hyperparameters.learning_rate",
+            "prior": 0.4,
+            "rationale": "The learning rate is set to 3e-6, far below the typical ~1e-4 needed for LoRA adaptation on a 0.6B model. Such a low rate yields minimal weight updates, leaving the model close to its base weights and resulting in poor intent classification despite the loss decreasing.",
+            "sources": []
+          },
+          {
+            "fault_class": "answer_truncation",
+            "id": "h2",
+            "location": "training data (intent labels)",
+            "prior": 0.3,
+            "rationale": "If the intent strings in the training set were truncated during user-side preprocessing, the model would learn incomplete or malformed labels. This would manifest as low exact-match accuracy while the validation loss could still decline as the model fits the truncated targets.",
+            "sources": []
+          },
+          {
+            "fault_class": "train_val_overlap",
+            "id": "h3",
+            "location": "validation file overlapping training file",
+            "prior": 0.2,
+            "rationale": "Overlap between training and validation sets can produce deceptively low validation loss while the model fails to generalize to unseen intents, matching the observed gap between validation loss improvement and the very low exact-match score.",
+            "sources": []
+          }
+        ],
+        "kind": "hypotheses",
+        "probs": {
+          "h1": 0.4,
+          "h2": 0.3,
+          "h3": 0.2,
+          "unlisted": 0.1
+        }
+      },
+      {
+        "budget_left_usd": 0.09838780000000001,
+        "cost_usd": 0.0,
+        "estimated_cost_usd": 0.0,
+        "gain_bits": 0.3472,
+        "kind": "probe",
+        "outcome": "barely_moved",
+        "probe": "loss_curve",
+        "probs": {
+          "h1": 0.7805,
+          "h2": 0.1463,
+          "h3": 0.0244,
+          "unlisted": 0.0488
+        },
+        "raw": {
+          "train_drop": 0.2905152309228549,
+          "train_loss": [
+            3.3804078102111816,
+            4.196752071380615,
+            3.600519895553589,
+            3.030073881149292,
+            2.483583927154541,
+            3.1122426986694336,
+            2.6197521686553955,
+            3.3419206142425537,
+            2.9681057929992676,
+            2.916743755340576,
+            3.3743553161621094,
+            2.068058490753174,
+            3.449894905090332,
+            3.1700243949890137,
+            2.6990511417388916,
+            2.1320528984069824,
+            3.14080548286438,
+            2.398347854614258
+          ],
+          "valid_loss": [
+            3.364164102397509,
+            3.1767723708344784,
+            3.0408844207757273,
+            2.9345411858302635,
+            2.847982839049909,
+            2.829429872884046,
+            2.7820401767756313,
+            2.7270186047426006,
+            2.680663487255173,
+            2.6393422104368276,
+            2.604142966286448,
+            2.589708226239121,
+            2.5776781635796464,
+            2.557943958964124,
+            2.5433486712058917,
+            2.534004779870078,
+            2.528928962729921,
+            2.52765441300885
+          ]
+        }
+      },
+      {
+        "kind": "stop",
+        "probs": {
+          "h1": 0.7805,
+          "h2": 0.1463,
+          "h3": 0.0244,
+          "unlisted": 0.0488
+        },
+        "reason": "causal checks disabled for this ablation"
+      }
+    ],
+    "verdict": null
+  },
+  "title": "Fault 6 recipe: lr 3e-06, rank 16, epochs 3, seed 2 — inconclusive"
+}
