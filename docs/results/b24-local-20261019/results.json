@@ -1,0 +1,302 @@
+[
+  {
+    "control": {
+      "description": "Repeat the observed implementation with matched seeds and steps",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/prompt_loss/control-s0",
+        "local:docs/results/b24-local-20261019/prompt_loss/control-s1",
+        "local:docs/results/b24-local-20261019/prompt_loss/control-s2",
+        "local:docs/results/b24-local-20261019/prompt_loss/control-s3",
+        "local:docs/results/b24-local-20261019/prompt_loss/control-s4",
+        "local:docs/results/b24-local-20261019/prompt_loss/control-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "control",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": "prompt_loss"
+      }
+    },
+    "fault": "prompt_loss",
+    "result": {
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "effect": 0.0,
+      "min_effect": 0.1,
+      "p_value": 1.0,
+      "reason": "the fix gains less than the minimum effect",
+      "status": "rejected"
+    },
+    "target": {
+      "description": "Use the healthy loss_on_prompt implementation",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/prompt_loss/target-s0",
+        "local:docs/results/b24-local-20261019/prompt_loss/target-s1",
+        "local:docs/results/b24-local-20261019/prompt_loss/target-s2",
+        "local:docs/results/b24-local-20261019/prompt_loss/target-s3",
+        "local:docs/results/b24-local-20261019/prompt_loss/target-s4",
+        "local:docs/results/b24-local-20261019/prompt_loss/target-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "target",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": null
+      }
+    }
+  },
+  {
+    "control": {
+      "description": "Repeat the observed implementation with matched seeds and steps",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/eos_as_pad/control-s0",
+        "local:docs/results/b24-local-20261019/eos_as_pad/control-s1",
+        "local:docs/results/b24-local-20261019/eos_as_pad/control-s2",
+        "local:docs/results/b24-local-20261019/eos_as_pad/control-s3",
+        "local:docs/results/b24-local-20261019/eos_as_pad/control-s4",
+        "local:docs/results/b24-local-20261019/eos_as_pad/control-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "control",
+      "metrics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "patch": {
+        "code_fault": "eos_as_pad"
+      }
+    },
+    "fault": "eos_as_pad",
+    "result": {
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "effect": 1.0,
+      "min_effect": 0.1,
+      "p_value": 0.0010822510822510823,
+      "reason": "the fix beats the control beyond the noise",
+      "status": "confirmed"
+    },
+    "target": {
+      "description": "Use the healthy pad_eos_masking implementation",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/eos_as_pad/target-s0",
+        "local:docs/results/b24-local-20261019/eos_as_pad/target-s1",
+        "local:docs/results/b24-local-20261019/eos_as_pad/target-s2",
+        "local:docs/results/b24-local-20261019/eos_as_pad/target-s3",
+        "local:docs/results/b24-local-20261019/eos_as_pad/target-s4",
+        "local:docs/results/b24-local-20261019/eos_as_pad/target-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "target",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": null
+      }
+    }
+  },
+  {
+    "control": {
+      "description": "Repeat the observed implementation with matched seeds and steps",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/double_shift/control-s0",
+        "local:docs/results/b24-local-20261019/double_shift/control-s1",
+        "local:docs/results/b24-local-20261019/double_shift/control-s2",
+        "local:docs/results/b24-local-20261019/double_shift/control-s3",
+        "local:docs/results/b24-local-20261019/double_shift/control-s4",
+        "local:docs/results/b24-local-20261019/double_shift/control-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "control",
+      "metrics": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "patch": {
+        "code_fault": "double_shift"
+      }
+    },
+    "fault": "double_shift",
+    "result": {
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "effect": 1.0,
+      "min_effect": 0.1,
+      "p_value": 0.0010822510822510823,
+      "reason": "the fix beats the control beyond the noise",
+      "status": "confirmed"
+    },
+    "target": {
+      "description": "Use the healthy double_label_shift implementation",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/double_shift/target-s0",
+        "local:docs/results/b24-local-20261019/double_shift/target-s1",
+        "local:docs/results/b24-local-20261019/double_shift/target-s2",
+        "local:docs/results/b24-local-20261019/double_shift/target-s3",
+        "local:docs/results/b24-local-20261019/double_shift/target-s4",
+        "local:docs/results/b24-local-20261019/double_shift/target-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "target",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": null
+      }
+    }
+  },
+  {
+    "control": {
+      "description": "Repeat the observed implementation with matched seeds and steps",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/microbatch_mean/control-s0",
+        "local:docs/results/b24-local-20261019/microbatch_mean/control-s1",
+        "local:docs/results/b24-local-20261019/microbatch_mean/control-s2",
+        "local:docs/results/b24-local-20261019/microbatch_mean/control-s3",
+        "local:docs/results/b24-local-20261019/microbatch_mean/control-s4",
+        "local:docs/results/b24-local-20261019/microbatch_mean/control-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "control",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": "microbatch_mean"
+      }
+    },
+    "fault": "microbatch_mean",
+    "result": {
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "effect": 0.0,
+      "min_effect": 0.1,
+      "p_value": 1.0,
+      "reason": "the fix gains less than the minimum effect",
+      "status": "rejected"
+    },
+    "target": {
+      "description": "Use the healthy grad_accum_normalization implementation",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/microbatch_mean/target-s0",
+        "local:docs/results/b24-local-20261019/microbatch_mean/target-s1",
+        "local:docs/results/b24-local-20261019/microbatch_mean/target-s2",
+        "local:docs/results/b24-local-20261019/microbatch_mean/target-s3",
+        "local:docs/results/b24-local-20261019/microbatch_mean/target-s4",
+        "local:docs/results/b24-local-20261019/microbatch_mean/target-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "target",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": null
+      }
+    }
+  },
+  {
+    "control": {
+      "description": "Repeat the observed implementation with matched seeds and steps",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/healthy_negative_control/control-s0",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/control-s1",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/control-s2",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/control-s3",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/control-s4",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/control-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "control",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": null
+      }
+    },
+    "fault": "healthy_negative_control",
+    "result": {
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "effect": 0.0,
+      "min_effect": 0.1,
+      "p_value": 1.0,
+      "reason": "the fix gains less than the minimum effect",
+      "status": "rejected"
+    },
+    "target": {
+      "description": "Use the healthy pad_eos_masking implementation",
+      "ft_job_ids": [
+        "local:docs/results/b24-local-20261019/healthy_negative_control/target-s0",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/target-s1",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/target-s2",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/target-s3",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/target-s4",
+        "local:docs/results/b24-local-20261019/healthy_negative_control/target-s5"
+      ],
+      "hypothesis_id": "h1",
+      "kind": "target",
+      "metrics": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "patch": {
+        "code_fault": null
+      }
+    }
+  }
+]

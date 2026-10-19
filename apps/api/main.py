@@ -28,6 +28,7 @@ from sse_starlette.sse import EventSourceResponse
 
 from apps.api import runners
 from apps.api.case_input import CaseStart, prepare_case
+from apps.api.label_audits import LabelAuditRequest, prepare_audit
 from apps.api.store import get_investigation_store
 from core.config import get_settings
 from core.report.investigation import build_report
@@ -56,6 +57,36 @@ def screen() -> FileResponse:
 @app.get("/api/capabilities")
 def capabilities() -> dict:
     return {"explicit_cases": not get_settings().public_demo}
+
+
+@app.post("/api/investigations/label-audit", status_code=201)
+def label_audit(req: LabelAuditRequest) -> dict:
+    if get_settings().public_demo:
+        raise HTTPException(403, "the public demo only replays saved investigations")
+    try:
+        step = prepare_audit(req)
+    except ValueError as err:
+        raise HTTPException(422, str(err)) from None
+    # Persist the digest and bounded counts, not the supplied token sequences.
+    case = {
+        "mode": "B",
+        "symptom": "Caller-supplied label inspection",
+        "job": {"model": "local labels", "hyperparameters": {}},
+    }
+    inv_id = store.create("local", case, req.title)
+    store.emit(inv_id, "started", {"case": case, "backend": "local"})
+    store.emit(inv_id, "step", step)
+    store.emit(
+        inv_id,
+        "finished",
+        {
+            "status": "inconclusive",
+            "audit_only": True,
+            "llm_cost_usd": 0.0,
+            "estimated_total_cost_usd": 0.0,
+        },
+    )
+    return {"id": inv_id, "audit": step, "training_started": False}
 
 
 @app.get("/api/demo-cases")

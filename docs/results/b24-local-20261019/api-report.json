@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "source": "persisted_api_events",
+  "investigation_id": "inv-55ad5738",
+  "title": "EOS label check",
+  "backend": "local",
+  "created_at": 1792386074.1772301,
+  "execution_status": "finished",
+  "partial": false,
+  "diagnosis_status": "inconclusive",
+  "case": {
+    "mode": "B",
+    "symptom": "Caller-supplied label inspection",
+    "job": {
+      "model": "local labels",
+      "hyperparameters": {}
+    }
+  },
+  "input_case": {
+    "mode": "B",
+    "symptom": "Caller-supplied label inspection",
+    "job": {
+      "model": "local labels",
+      "hyperparameters": {}
+    }
+  },
+  "protocol": null,
+  "hypotheses": [],
+  "steps": [
+    {
+      "kind": "training_label_checks",
+      "raw": {
+        "scope": "supplied unpadded labels; reference correctness is caller-owned",
+        "rows": 1,
+        "alignment": {
+          "status": "other_mismatch",
+          "informative_positions": 3,
+          "healthy_mismatches": 1,
+          "preshift_mismatches": 2,
+          "observed_targets": 1
+        },
+        "prompt": {
+          "status": "not_applicable",
+          "reason": "labels are not prompt-only additions"
+        },
+        "eos": {
+          "eos_token_id": 2,
+          "reference_targets": 2,
+          "observed_targets": 1,
+          "reference_eos_targets": 1,
+          "removed_eos_targets": 1,
+          "removed_eos_fraction": 1.0,
+          "status": "removed"
+        },
+        "causal_confirmation": false
+      },
+      "input_sha256": "21af890ff10c069b1e2f240e47c6a8793ca8a10c611e77ac25a6e8d7d83cd93c",
+      "cost_usd": 0.0
+    }
+  ],
+  "verdict": null,
+  "retrain_plan": null,
+  "approval": null,
+  "comparison": null,
+  "summary": {
+    "status": "inconclusive",
+    "audit_only": true,
+    "llm_cost_usd": 0.0,
+    "estimated_total_cost_usd": 0.0
+  },
+  "llm_usage": null,
+  "error": null,
+  "events": [
+    {
+      "seq": 0,
+      "type": "started",
+      "data": {
+        "case": {
+          "mode": "B",
+          "symptom": "Caller-supplied label inspection",
+          "job": {
+            "model": "local labels",
+            "hyperparameters": {}
+          }
+        },
+        "backend": "local"
+      }
+    },
+    {
+      "seq": 1,
+      "type": "step",
+      "data": {
+        "kind": "training_label_checks",
+        "raw": {
+          "scope": "supplied unpadded labels; reference correctness is caller-owned",
+          "rows": 1,
+          "alignment": {
+            "status": "other_mismatch",
+            "informative_positions": 3,
+            "healthy_mismatches": 1,
+            "preshift_mismatches": 2,
+            "observed_targets": 1
+          },
+          "prompt": {
+            "status": "not_applicable",
+            "reason": "labels are not prompt-only additions"
+          },
+          "eos": {
+            "eos_token_id": 2,
+            "reference_targets": 2,
+            "observed_targets": 1,
+            "reference_eos_targets": 1,
+            "removed_eos_targets": 1,
+            "removed_eos_fraction": 1.0,
+            "status": "removed"
+          },
+          "causal_confirmation": false
+        },
+        "input_sha256": "21af890ff10c069b1e2f240e47c6a8793ca8a10c611e77ac25a6e8d7d83cd93c",
+        "cost_usd": 0.0
+      }
+    },
+    {
+      "seq": 2,
+      "type": "finished",
+      "data": {
+        "status": "inconclusive",
+        "audit_only": true,
+        "llm_cost_usd": 0.0,
+        "estimated_total_cost_usd": 0.0
+      }
+    }
+  ],
+  "last_event_seq": 2,
+  "cost_scope": "Summary costs are recorded as emitted; full retrain costs may be absent"
+}
