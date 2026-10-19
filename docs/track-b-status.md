@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #85
-(`85aeebe`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #90
+(`9c4f0a0`) and the repository implementation on October 19, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -13,13 +13,13 @@ has measured evidence.
 | B6 | This batch measures three models at five size/epoch conditions each, validates duration fits on a preselected condition, and registers accepted fits in the planner. All 15 jobs succeeded; validation errors are 2.46%, 1.21% and 0.27%. See `model-cost-validation.md`. |
 | B7 | Sensitivity curves now cover both strengths of faults 6–8 across three seeds. Low learning rate degrades quality; rank and epoch changes do not show substantial consistent degradation here. Pre-intervention top-1 recovery is 3/3 at each strength, but all healthy provider cases also rank the epoch fault first; no 80% population guarantee is established. See `recipe-sensitivity.md`. |
 | B8 | Target/control recipe builders and cost matching exist. |
-| B9 | Local LoRA runs and a frozen loss classifier with seed-grouped evaluation were added in PR #67. Hundreds of runs and a validated transfer result are still absent. |
+| B9 | The simulation study is complete: 210 local LoRA runs cover seven healthy/fault-strength recipes at 30 seeds. Seed-grouped, recipe-strength and frozen Token Factory transfer evaluations are saved in `b9-final-sweep.md`. The only measured quality failure is low learning rate. The strongest local classifier reaches 96.7% balanced accuracy but falls to 25.0% on historical heldout Token Factory cases, so it is rejected for live use. |
 | B10 | Noise measurements and a decision-power audit exist (PR #68). Empirical coverage across task/model/sample-size combinations remains incomplete. |
 | B11 | Causal statistics and decision rules are implemented; small-sample limitations are documented in the power audit. |
-| B12 | Calibration audit, temperature fitting and reliability plots exist. Independent validation and calibrated live priors remain separate work. |
+| B12 | The calibration task is complete with a negative deployment decision. Temperature fitting, reliability plots and ECE/Brier audits exist; a development-fitted temperature worsens all three heldout measures. The live default remains T=1. |
 | B13–B15 | Versioned prompts, hypothesis sampling and sourced known-issue search are implemented. One-versus-three sampling results are saved. |
 | B16 | Dev signature fitting with smoothing and provenance was added in PR #65. Coverage is limited to observed fault classes. |
-| B17–B18 | Persisted steps, usage, probe budget checks, approvals, verdicts and retraining flow exist. This follow-up adds SQLite spending reservations and persisted REST/UI paid-step approval/resume. Provider invoice reconciliation and cross-process execution ownership remain open. |
+| B17–B18 | The planned investigation cycle is implemented: persisted states, budgets, paid-step approval, statuses, verdicts and retraining flow. SQLite reservations and REST/UI resume cover process restarts. Provider invoice reconciliation and multiworker ownership are operational extensions outside the original B17 acceptance condition. |
 | B19–B20 | Baselines and ablations exist. PR #66 saves the current dev comparison and limitations. More fault classes require new evidence. |
 | B21 | Public cases were collected in PR #64. Reproduction of their reported failures remains open. |
 | B22 | API, SSE, reports and restart handling exist. SQLite state was added in PR #70; migration and multiple workers remain unsupported. |
@@ -47,12 +47,13 @@ See the [selection audit](results/eligibility-audit-20261019/README.md).
 
 ## B9/B12/B17 publication snapshot
 
-The [follow-up](next-batch-20261019.md) includes the negative frozen-classifier
-transfer baseline, development and heldout calibration audits, and spending
-reservations with REST/UI approval and resume. The fitted temperature worsens
-heldout NLL and Brier; the default remains T=1. The separate 210-run local sweep
-is still running and is excluded from this snapshot. These additions do not
-close the full B9/B12/B17 requirements.
+The [follow-up](next-batch-20261019.md) includes the final 210-run B9 analysis,
+development and heldout calibration audits, and spending reservations with
+REST/UI approval and resume. B9, B12 and the original B17 plan item now have
+measured outcomes. B9's classifier fails frozen provider transfer and stays out
+of live diagnosis. B12 keeps T=1 because fitted calibration worsens heldout NLL,
+Brier and ECE. Provider billing reconciliation and multiworker ownership remain
+separate operational work.
 
 For the current cross-track queue, publication state, fault-1 semantics and demo
 requirements, see [Project status](project-status.md). The original provider-side
