@@ -1,0 +1,111 @@
+{
+  "api_preflight": "Real single-worker loopback HTTP API, SQLite, capabilities and empty investigation list returned 200; no case started",
+  "b9_resource_policy": "MPS reserved for PID 47214 until successful exit and 210 summaries; no duplicate sweep",
+  "development_jobs": {
+    "damaged-s1101": {
+      "job_id": "ftjob-26abd6d33fc44da3a8166dd5f47586a1",
+      "status": "running"
+    },
+    "damaged-s1102": {
+      "job_id": "ftjob-ceb05dce32434a18b25ba4c2072a884b",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.044644,
+      "trained_tokens": 111610,
+      "weights_sha256": "37ca1a833192aa276ca2e4ff32e7f5c4a6f8fb374692bf30b100bfe0fa9a82f1"
+    },
+    "damaged-s1103": {
+      "job_id": "ftjob-2d3cb576f8224fd4add5447c47871587",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.044644,
+      "trained_tokens": 111610,
+      "weights_sha256": "4a55a54ad3b2929b1fecf60747aa83e0df910882302e1c6fe46a1afe10e664fa"
+    },
+    "healthy-s1101": {
+      "job_id": "ftjob-0cad3738075a439aba48813d381cb03e",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.045704800000000004,
+      "trained_tokens": 114262,
+      "weights_sha256": "af4a21dd94e3da1cd462a66a7a84bc78de7eb6213c72d4e3aba8aec0ffd84566"
+    },
+    "healthy-s1102": {
+      "job_id": "ftjob-2d3e97d11db1434cb7f20e3ee92c4b45",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.045704800000000004,
+      "trained_tokens": 114262,
+      "weights_sha256": "fcd352729f28077b734e71fc6faf2855117fd1bc6d97981b9b58d59aa748843b"
+    },
+    "healthy-s1103": {
+      "job_id": "ftjob-0691cbd501ea4b558f3f8223a9ebbadf",
+      "status": "succeeded",
+      "token_cost_estimate_usd": 0.045704800000000004,
+      "trained_tokens": 114262,
+      "weights_sha256": "a4d63a582af973156a46e075ae2b225d2211d4e8657e850e50c0b7692c76a1b8"
+    }
+  },
+  "development_protocol_sha256": "32e4a4ef030c323985001327e13274576b3cf724bc2805ef9d9fd464a321acdd",
+  "fresh_final_test_model_evaluations": 0,
+  "fresh_model_training_jobs": 0,
+  "implementation_commit": "abccf2e41a241c31954b8cae733767004a7106d6",
+  "implementation_pr": "https://github.com/MaxKharlan/next-experiment/pull/90",
+  "pr_89": {
+    "commit": "4e374a2ed8a4d870f925349e3f17717a06f7cbea",
+    "state": "merged"
+  },
+  "spending": {
+    "available_usd": 4.7267976,
+    "cap_usd": 5.0,
+    "committed_usd": 0.27320239999999996,
+    "operations": [
+      {
+        "actual_usd": null,
+        "id": "damaged-s1101",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "pending"
+      },
+      {
+        "actual_usd": 0.044644,
+        "id": "damaged-s1102",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.044644,
+        "id": "damaged-s1103",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.045704800000000004,
+        "id": "healthy-s1101",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.045704800000000004,
+        "id": "healthy-s1102",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      },
+      {
+        "actual_usd": 0.045704800000000004,
+        "id": "healthy-s1103",
+        "purpose": "development_training",
+        "reserved_usd": 0.0468,
+        "status": "settled"
+      }
+    ]
+  },
+  "status": "development_training_and_resource_wait",
+  "updated_at": "2026-10-19T09:27:58.608704+00:00",
+  "validation": {
+    "ci": "passed on abccf2e; 767 passed, 15 skipped",
+    "full_ml_suite": "813 passed, 8 skipped",
+    "latest_targeted": "22 passed",
+    "ruff": "passed"
+  }
+}
