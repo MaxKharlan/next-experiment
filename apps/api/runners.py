@@ -318,6 +318,7 @@ def retrain(
                     "valid": Path(datasets["validation"]["path"]),
                     "heldout": Path(datasets["test"]["path"]),
                     "evaluator_spec": protocol.get("evaluator"),
+                    "evaluation_runtime": protocol.get("evaluation_runtime"),
                 }
             retrainer = retrain_tf.make_retrainer(
                 TokenFactory.from_settings(),
@@ -437,6 +438,8 @@ def _pair_runner(
                             or {"name": "intent_label", "metric": "exact_match"}
                         ),
                         adapter=adapter,
+                        base_model=protocol["model"],
+                        runtime=protocol.get("evaluation_runtime"),
                     ).value
                 ),
                 seeds=protocol["seeds"],

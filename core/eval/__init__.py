@@ -54,6 +54,7 @@ def evaluate(
     base_model: str | None = None,
     template_dir: str | Path | None = None,
     device: str = "auto",
+    runtime: dict | None = None,
 ) -> EvalResult:
     """Score an adapter, or a base model alone, on every example of a chat JSONL file.
 
@@ -73,10 +74,26 @@ def evaluate(
         spec = validate_evaluator(task, spec)
     metric = get_metric(spec.metric)
     limit = max_new_tokens(spec)
+    from core.eval.runtime import file_digest
+
+    data_hash = file_digest(data)
     examples = read_examples(data)
     if task:
         for example in examples:
             validate_answer(task, example.expected)
+    frozen = None
+    adapter_hashes = {}
+    template_source = adapter if adapter is not None else template_dir
+    if runtime is not None:
+        from core.eval.runtime import verify_runtime
+
+        frozen = verify_runtime(runtime, model=base_model, template_dir=template_source)
+        base_model = frozen.snapshot
+        if adapter is not None:
+            adapter_hashes = {
+                name: file_digest(Path(adapter) / name)
+                for name in ("adapter_model.safetensors", "adapter_config.json")
+            }
     device = generate.pick_device(device)
     model, tok, base = generate.load_model(adapter, base_model, template_dir)
     model = model.to(device)
@@ -85,6 +102,14 @@ def evaluate(
     finally:
         del model
         generate.free_cache(device)
+    if file_digest(data) != data_hash:
+        raise ValueError("Evaluation dataset changed during scoring")
+    for name, expected in adapter_hashes.items():
+        if file_digest(Path(adapter) / name) != expected:
+            raise ValueError("Adapter changed during scoring")
+    if frozen is not None:
+        verify_runtime(frozen, template_dir=template_source)
+        base = frozen.model
     result = EvalResult.from_examples(
         spec.metric,
         results,
@@ -92,6 +117,9 @@ def evaluate(
         data=str(data),
         max_new_tokens=limit,
         adapter=str(adapter) if adapter is not None else None,
+        runtime=frozen.model_dump() if frozen is not None else None,
+        data_sha256=data_hash,
+        adapter_files_sha256=adapter_hashes,
     )
 
     if task:

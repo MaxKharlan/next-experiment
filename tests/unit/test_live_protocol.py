@@ -111,7 +111,7 @@ def test_retrain_proposal_keeps_the_original_job(protocol):
 def test_tf_runner_scores_on_check_and_validates_on_validation(protocol, monkeypatch):
     seen = {}
 
-    def evaluate(path, spec, *, adapter):
+    def evaluate(path, spec, *, adapter, base_model=None, runtime=None):
         seen["evaluated_on"] = path
         seen["metric"] = spec.metric
         return SimpleNamespace(value=0.5)

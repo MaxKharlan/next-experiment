@@ -86,6 +86,7 @@ def make_retrainer(
     valid: Path = VALID,
     heldout: Path = HELDOUT,
     evaluator_spec: dict | None = None,
+    evaluation_runtime: dict | None = None,
 ) -> Retrainer:
     from jobs.eval_local.exact_match import evaluate_adapter, evaluate_base
 
@@ -98,10 +99,18 @@ def make_retrainer(
         metric_name = spec.metric
 
         def score_adapter(adapter, data):
-            return evaluate(data, spec, adapter=adapter).value
+            return evaluate(
+                data, spec, adapter=adapter, runtime=evaluation_runtime
+            ).value
 
         def score_base(model, data, template):
-            return evaluate(data, spec, base_model=model, template_dir=template).value
+            return evaluate(
+                data,
+                spec,
+                base_model=model,
+                template_dir=template,
+                runtime=evaluation_runtime,
+            ).value
 
         evaluate_adapter, evaluate_base = score_adapter, score_base
     path, note = heldout_set(heldout, valid)

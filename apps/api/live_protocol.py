@@ -9,6 +9,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from core.eval.runtime import EvaluationRuntime, verify_runtime
 from core.planner.job_cost import estimate_job
 
 CONFIG_PATH = Path("config/live-tf-banking77.json")
@@ -25,6 +26,7 @@ class ProtocolConfig(BaseModel):
     seeds: list[int] = Field(min_length=2)
     tokens_per_example: float = Field(gt=0)
     budget_usd: float = Field(gt=0)
+    evaluation_runtime: EvaluationRuntime | None = None
 
     @field_validator("seeds")
     @classmethod
@@ -79,6 +81,8 @@ def inspect_datasets(paths):
 
 
 def verify_datasets(protocol):
+    if protocol.get("evaluation_runtime") is not None:
+        verify_runtime(protocol["evaluation_runtime"], model=protocol["model"])
     saved = protocol["datasets"]
     current = inspect_datasets({role: entry["path"] for role, entry in saved.items()})
     if current != saved:
@@ -101,6 +105,8 @@ def prepare_live_run(case, config_path=CONFIG_PATH, *, config=None):
             "test": case.heldout,
         }
     )
+    if config.evaluation_runtime is not None:
+        verify_runtime(config.evaluation_runtime, model=case.model)
     hp = dict(case.hyperparameters)
     epochs = hp.get("n_epochs")
     if not isinstance(epochs, int) or isinstance(epochs, bool) or epochs < 1:
@@ -114,6 +120,11 @@ def prepare_live_run(case, config_path=CONFIG_PATH, *, config=None):
         hp.get("context_length", 8192),
     )
     return {
+        **(
+            {"evaluation_runtime": config.evaluation_runtime.model_dump()}
+            if config.evaluation_runtime is not None
+            else {}
+        ),
         "version": 1,
         "name": config.name,
         "model": case.model,

@@ -12,6 +12,10 @@ from core.interventions.retrain import plan_retrain
 
 
 def _hashes(protocol):
+    if protocol.get("evaluation_runtime") is not None:
+        from core.eval.runtime import verify_runtime
+
+        verify_runtime(protocol["evaluation_runtime"], model=protocol["model"])
     datasets = protocol["datasets"]
     if set(datasets) != {"train", "validation", "check", "test"}:
         raise ValueError("Data retraining requires four frozen dataset splits")

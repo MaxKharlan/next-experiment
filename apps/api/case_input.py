@@ -12,6 +12,7 @@ from apps.api.live_protocol import ProtocolConfig, prepare_live_run, verify_data
 from core.case import InvestigationCase
 from core.connectors.token_factory import hyperparameter_problem
 from core.eval.data import read_examples
+from core.eval.runtime import EvaluationRuntime
 from core.eval.structured import validate_answer, validate_evaluator
 from core.probes.level0.lengths import read_chat_jsonl
 
@@ -24,6 +25,7 @@ class ExperimentSettings(BaseModel):
     min_effect: float = Field(gt=0)
     tokens_per_example: float = Field(gt=0)
     seeds: list[int] = Field(default_factory=lambda: [0, 1], min_length=2)
+    evaluation_runtime: EvaluationRuntime | None = None
 
 
 class CaseStart(BaseModel):
