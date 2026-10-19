@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -121,3 +122,40 @@ def test_terminal_pilot_cannot_submit(tmp_path, monkeypatch):
         pilot.submit(tmp_path, None)
     assert calls == []
     assert len(ledger.snapshot()["operations"]) == 1
+
+
+def test_paid_gate_rechecks_saved_answers(tmp_path):
+    data = build(tmp_path / "data")
+    rows = [
+        json.loads(line)
+        for line in Path(data["check"]["path"]).read_text().splitlines()
+    ]
+    record = {
+        "protocol_sha256": "digest",
+        "result": {
+            "data_sha256": data["check"]["sha256"],
+            "runtime": {},
+            "metric": "json_fields_exact",
+            "value": 1.0,
+            "examples": [
+                {
+                    "answer": r["messages"][-1]["content"],
+                    "expected": r["messages"][-1]["content"],
+                    "score": 1.0,
+                }
+                for r in rows
+            ],
+        },
+    }
+    path = tmp_path / "score.json"
+    path.write_text(json.dumps(record))
+    plan = {
+        "datasets": data,
+        "evaluation_runtime": {},
+        "evaluator": {"metric": "json_fields_exact"},
+    }
+    assert pilot.checked_score(path, plan, "digest")["result"]["value"] == 1
+    record["result"]["examples"][0]["answer"] = "{}"
+    path.write_text(json.dumps(record))
+    with pytest.raises(ValueError, match="prediction score changed"):
+        pilot.checked_score(path, plan, "digest")

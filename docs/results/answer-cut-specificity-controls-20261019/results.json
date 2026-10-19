@@ -1,0 +1,1184 @@
+{
+  "deployment": "Unchanged T=1 and heuristic signature table; controls reject treating cut as unique mechanism evidence. No model-quality or population-generalization claim.",
+  "paired_controls": [
+    {
+      "clean_outcome": "cut",
+      "damaged_outcome": "cut",
+      "prefix_count": 1,
+      "same_probe_result": true
+    },
+    {
+      "clean_outcome": "cut",
+      "damaged_outcome": "cut",
+      "prefix_count": 5,
+      "same_probe_result": true
+    },
+    {
+      "clean_outcome": "cut",
+      "damaged_outcome": "cut",
+      "prefix_count": 10,
+      "same_probe_result": true
+    },
+    {
+      "clean_outcome": "cut",
+      "damaged_outcome": "cut",
+      "prefix_count": 25,
+      "same_probe_result": true
+    },
+    {
+      "clean_outcome": "ok",
+      "damaged_outcome": "ok",
+      "prefix_count": 50,
+      "same_probe_result": true
+    }
+  ],
+  "protocol_sha256": "dad057663b78a7f21716d31b5790be5983248bec3da85fd9f3b873118a3375a0",
+  "results": {
+    "clean_json-01": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 1,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_json",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_json-05": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 5,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_json",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_json-10": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 10,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_json",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_json-25": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 25,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_json",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_json-50": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 50,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_json",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_labels-01": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 1,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 2,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_labels-05": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 5,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 2,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_labels-10": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 10,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 2,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_labels-25": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 25,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 2,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_labels-50": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 50,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 2,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "clean_prefix_labels-01": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 1,
+      "false_flagged_clean_rows": 1,
+      "kind": "clean_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 1,
+        "cut_lines": [
+          35
+        ],
+        "cut_share": 0.01,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 35,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "clean_prefix_labels-05": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 5,
+      "false_flagged_clean_rows": 5,
+      "kind": "clean_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 5,
+        "cut_lines": [
+          13,
+          31,
+          32,
+          48,
+          94
+        ],
+        "cut_share": 0.05,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 13,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 31,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 32,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 48,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 94,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "clean_prefix_labels-10": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 10,
+      "false_flagged_clean_rows": 10,
+      "kind": "clean_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 10,
+        "cut_lines": [
+          3,
+          5,
+          6,
+          12,
+          15,
+          29,
+          42,
+          45,
+          55,
+          61
+        ],
+        "cut_share": 0.1,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 3,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 5,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 6,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 12,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 15,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "clean_prefix_labels-25": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 25,
+      "false_flagged_clean_rows": 25,
+      "kind": "clean_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 25,
+        "cut_lines": [
+          5,
+          9,
+          12,
+          14,
+          15,
+          20,
+          24,
+          30,
+          32,
+          34,
+          37,
+          44,
+          46,
+          48,
+          55,
+          63,
+          67,
+          68,
+          73,
+          80,
+          88,
+          91,
+          96,
+          98,
+          99
+        ],
+        "cut_share": 0.25,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 5,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 9,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 12,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 14,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 15,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "clean_prefix_labels-50": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 50,
+      "false_flagged_clean_rows": 0,
+      "kind": "clean_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "internal_json_syntax-01": {
+      "correctly_flagged_damaged_rows": 1,
+      "count": 1,
+      "false_flagged_clean_rows": 0,
+      "kind": "internal_json_syntax",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 1,
+        "cut_lines": [
+          35
+        ],
+        "cut_share": 0.01,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 0 \"value\": \"complete\"}",
+            "line": 35,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "internal_json_syntax-05": {
+      "correctly_flagged_damaged_rows": 5,
+      "count": 5,
+      "false_flagged_clean_rows": 0,
+      "kind": "internal_json_syntax",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 5,
+        "cut_lines": [
+          13,
+          31,
+          32,
+          48,
+          94
+        ],
+        "cut_share": 0.05,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 4 \"value\": \"complete\"}",
+            "line": 13,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 1 \"value\": \"complete\"}",
+            "line": 31,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 0 \"value\": \"complete\"}",
+            "line": 32,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 3 \"value\": \"complete\"}",
+            "line": 48,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 2 \"value\": \"complete\"}",
+            "line": 94,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "internal_json_syntax-10": {
+      "correctly_flagged_damaged_rows": 10,
+      "count": 10,
+      "false_flagged_clean_rows": 0,
+      "kind": "internal_json_syntax",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 10,
+        "cut_lines": [
+          3,
+          5,
+          6,
+          12,
+          15,
+          29,
+          42,
+          45,
+          55,
+          61
+        ],
+        "cut_share": 0.1,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 9 \"value\": \"complete\"}",
+            "line": 3,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 1 \"value\": \"complete\"}",
+            "line": 5,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 3 \"value\": \"complete\"}",
+            "line": 6,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 7 \"value\": \"complete\"}",
+            "line": 12,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 4 \"value\": \"complete\"}",
+            "line": 15,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "internal_json_syntax-25": {
+      "correctly_flagged_damaged_rows": 25,
+      "count": 25,
+      "false_flagged_clean_rows": 0,
+      "kind": "internal_json_syntax",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 25,
+        "cut_lines": [
+          5,
+          9,
+          12,
+          14,
+          15,
+          20,
+          24,
+          30,
+          32,
+          34,
+          37,
+          44,
+          46,
+          48,
+          55,
+          63,
+          67,
+          68,
+          73,
+          80,
+          88,
+          91,
+          96,
+          98,
+          99
+        ],
+        "cut_share": 0.25,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 12 \"value\": \"complete\"}",
+            "line": 5,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 6 \"value\": \"complete\"}",
+            "line": 9,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 5 \"value\": \"complete\"}",
+            "line": 12,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 10 \"value\": \"complete\"}",
+            "line": 14,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 7 \"value\": \"complete\"}",
+            "line": 15,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": false
+    },
+    "internal_json_syntax-50": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 50,
+      "false_flagged_clean_rows": 0,
+      "kind": "internal_json_syntax",
+      "missed_damaged_rows": 50,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "truncated_json-01": {
+      "correctly_flagged_damaged_rows": 1,
+      "count": 1,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_json",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 1,
+        "cut_lines": [
+          35
+        ],
+        "cut_share": 0.01,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 0, \"value\": \"comple",
+            "line": 35,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_json-05": {
+      "correctly_flagged_damaged_rows": 5,
+      "count": 5,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_json",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 5,
+        "cut_lines": [
+          13,
+          31,
+          32,
+          48,
+          94
+        ],
+        "cut_share": 0.05,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 4, \"value\": \"comple",
+            "line": 13,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 1, \"value\": \"comple",
+            "line": 31,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 0, \"value\": \"comple",
+            "line": 32,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 3, \"value\": \"comple",
+            "line": 48,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 2, \"value\": \"comple",
+            "line": 94,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_json-10": {
+      "correctly_flagged_damaged_rows": 10,
+      "count": 10,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_json",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 10,
+        "cut_lines": [
+          3,
+          5,
+          6,
+          12,
+          15,
+          29,
+          42,
+          45,
+          55,
+          61
+        ],
+        "cut_share": 0.1,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 9, \"value\": \"comple",
+            "line": 3,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 1, \"value\": \"comple",
+            "line": 5,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 3, \"value\": \"comple",
+            "line": 6,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 7, \"value\": \"comple",
+            "line": 12,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 4, \"value\": \"comple",
+            "line": 15,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_json-25": {
+      "correctly_flagged_damaged_rows": 25,
+      "count": 25,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_json",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 25,
+        "cut_lines": [
+          5,
+          9,
+          12,
+          14,
+          15,
+          20,
+          24,
+          30,
+          32,
+          34,
+          37,
+          44,
+          46,
+          48,
+          55,
+          63,
+          67,
+          68,
+          73,
+          80,
+          88,
+          91,
+          96,
+          98,
+          99
+        ],
+        "cut_share": 0.25,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": [
+          {
+            "answer": "{\"id\": 12, \"value\": \"comple",
+            "line": 5,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 6, \"value\": \"comple",
+            "line": 9,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 5, \"value\": \"comple",
+            "line": 12,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 10, \"value\": \"comple",
+            "line": 14,
+            "why": "JSON that does not parse"
+          },
+          {
+            "answer": "{\"id\": 7, \"value\": \"comple",
+            "line": 15,
+            "why": "JSON that does not parse"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_json-50": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 50,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_json",
+      "missed_damaged_rows": 50,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": true
+    },
+    "truncated_prefix_labels-01": {
+      "correctly_flagged_damaged_rows": 1,
+      "count": 1,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 1,
+        "cut_lines": [
+          35
+        ],
+        "cut_share": 0.01,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 35,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_prefix_labels-05": {
+      "correctly_flagged_damaged_rows": 5,
+      "count": 5,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 5,
+        "cut_lines": [
+          13,
+          31,
+          32,
+          48,
+          94
+        ],
+        "cut_share": 0.05,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 13,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 31,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 32,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 48,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 94,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_prefix_labels-10": {
+      "correctly_flagged_damaged_rows": 10,
+      "count": 10,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 10,
+        "cut_lines": [
+          3,
+          5,
+          6,
+          12,
+          15,
+          29,
+          42,
+          45,
+          55,
+          61
+        ],
+        "cut_share": 0.1,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 3,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 5,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 6,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 12,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 15,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_prefix_labels-25": {
+      "correctly_flagged_damaged_rows": 25,
+      "count": 25,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_prefix_labels",
+      "missed_damaged_rows": 0,
+      "outcome": "cut",
+      "raw": {
+        "cut": 25,
+        "cut_lines": [
+          5,
+          9,
+          12,
+          14,
+          15,
+          20,
+          24,
+          30,
+          32,
+          34,
+          37,
+          44,
+          46,
+          48,
+          55,
+          63,
+          67,
+          68,
+          73,
+          80,
+          88,
+          91,
+          96,
+          98,
+          99
+        ],
+        "cut_share": 0.25,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": [
+          {
+            "answer": "pay",
+            "line": 5,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 9,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 12,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 14,
+            "why": "prefix of 'pay_later'"
+          },
+          {
+            "answer": "pay",
+            "line": 15,
+            "why": "prefix of 'pay_later'"
+          }
+        ]
+      },
+      "truncation_cause": true
+    },
+    "truncated_prefix_labels-50": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 50,
+      "false_flagged_clean_rows": 0,
+      "kind": "truncated_prefix_labels",
+      "missed_damaged_rows": 50,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 3,
+        "examples": 100,
+        "json_file": false,
+        "shown": []
+      },
+      "truncation_cause": true
+    },
+    "valid_wrong_json-01": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 1,
+      "false_flagged_clean_rows": 0,
+      "kind": "valid_wrong_json",
+      "missed_damaged_rows": 1,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "valid_wrong_json-05": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 5,
+      "false_flagged_clean_rows": 0,
+      "kind": "valid_wrong_json",
+      "missed_damaged_rows": 5,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "valid_wrong_json-10": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 10,
+      "false_flagged_clean_rows": 0,
+      "kind": "valid_wrong_json",
+      "missed_damaged_rows": 10,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "valid_wrong_json-25": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 25,
+      "false_flagged_clean_rows": 0,
+      "kind": "valid_wrong_json",
+      "missed_damaged_rows": 25,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    },
+    "valid_wrong_json-50": {
+      "correctly_flagged_damaged_rows": 0,
+      "count": 50,
+      "false_flagged_clean_rows": 0,
+      "kind": "valid_wrong_json",
+      "missed_damaged_rows": 50,
+      "outcome": "ok",
+      "raw": {
+        "cut": 0,
+        "cut_lines": [],
+        "cut_share": 0.0,
+        "distinct": 100,
+        "examples": 100,
+        "json_file": true,
+        "shown": []
+      },
+      "truncation_cause": false
+    }
+  }
+}

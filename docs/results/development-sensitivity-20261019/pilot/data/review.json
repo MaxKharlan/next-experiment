@@ -1,0 +1,29 @@
+{
+  "datasets": {
+    "check": {
+      "examples": 72,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/ticket-updates-development-20261019-v1/data/check.jsonl",
+      "sha256": "0c477385e1e5b24c079d6d2866745ab5451e2ca3836741f65e978d0c24ee9f0a"
+    },
+    "train": {
+      "examples": 192,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/ticket-updates-development-20261019-v1/data/train.jsonl",
+      "sha256": "21eeb950586322abb864cd42ae327ee0ec01955328e56733691efdc59990bbf6"
+    },
+    "validation": {
+      "examples": 48,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/ticket-updates-development-20261019-v1/data/validation.jsonl",
+      "sha256": "bb0310f51c9925af618a2b799d9a19a1e3a8d22b06a7e2f8b790a433486148a2"
+    }
+  },
+  "entity_overlap": 0,
+  "families": [
+    "correction",
+    "distractor",
+    "void_updates"
+  ],
+  "generator_sha256": "d077287ab7568a663c326fa47fdca9b36951f2a4dc40ea9392c7d067cd3fd113",
+  "reference_disagreements": 0,
+  "review": "All references checked by a separate text-only parser; generator and review authored by one session; no human review.",
+  "split_scope": "Development train/validation/check; shared grammar and slot vocabulary, unique histories and entity IDs. No claim of unseen grammar generalization. No final test created or read."
+}
