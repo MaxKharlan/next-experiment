@@ -36,10 +36,16 @@ def test_legacy_hypotheses_remain_readable_without_relabeling():
 
 
 def test_current_prompt_distinguishes_evidence_from_confirmation():
-    prompt = load_prompt("hypotheses", "v3")
+    prompt = load_prompt("hypotheses", "v4")
     rendered = prompt.render(catalog=catalog_text("A"))
-    assert prompt.id == "hypotheses-v3"
+    assert prompt.id == "hypotheses-v4"
     assert "answer_truncation" in rendered
     assert "fails dataset processing" in rendered
     assert "not causal proof" in rendered
     assert "- truncation (" not in rendered
+
+
+def test_legacy_prompt_version_remains_available():
+    assert load_prompt("hypotheses", "v3").id == "hypotheses-v3"
+    assert "unique root cause" in load_prompt("verdict", "v2").text
+    assert "legacy outcome token" in load_prompt("interpret_probe", "v2").text

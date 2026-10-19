@@ -1,10 +1,10 @@
 """A8: a level-0 probe on example lengths in tokens against the job's context_length.
 
 Examples longer than context_length. In mode A this is a check before a job, not
-the cause of a silent failure: Token Factory does not cut long examples, it fails
+the cause of a silent failure: the tested Token Factory configuration fails
 the job while processing the dataset ("Sequence length is too long: 9013 > 8192"),
 and it refuses a context_length below 8192 (measured on 2026-10-18). A training
-file that passed a succeeded job therefore fits; the probe matters for files about
+file used by that succeeded job fit its provider limits; the probe matters for files about
 to be trained, such as a fix or a retrain. In mode B a trainer may cut long examples
 silently, so the end of the answer never reaches the loss and the model learns to
 stop early: that is fault 1 (truncation) as the catalog describes it. Answers cut by
@@ -162,7 +162,7 @@ class ExampleLength(Probe):
     name = "example_length"
     level = 0
     outcomes = ("truncated", "ok")
-    # share of training examples over the limit; a first guess, calibrated in A14
+    # Legacy categorical threshold; not calibrated and not an upload approval.
     TRUNCATED = 0.01
 
     def __init__(self, tokenizer: Callable[[str], Any] = load_tokenizer):
@@ -191,6 +191,14 @@ class ExampleLength(Probe):
         outcome = "truncated" if train["over_share"] >= self.TRUNCATED else "ok"
         template = getattr(tokenizer, "chat_template", None) or ""
         raw = {
+            "semantics_version": "length-preflight-v1",
+            "mode": ctx.mode,
+            "over_limit_found": any(f["over"] > 0 for f in files.values()),
+            "interpretation": (
+                "Mode A: over-limit inputs risk explicit job rejection, not silent provider truncation."
+                if ctx.mode == "A"
+                else "Mode B: over-limit inputs require inspecting the trainer; length alone does not prove token removal."
+            ),
             "context_length": limit,
             "context_length_source": source,
             "truncated_from_share": self.TRUNCATED,

@@ -80,8 +80,19 @@ def prepare_case(request: CaseStart) -> dict:
     for role, ref in refs.items():
         path = Path(ref.ref)
         rows = read_chat_jsonl(path)
-        if any(messages[-1]["role"] != "assistant" for _, messages in rows):
-            raise ValueError(f"{role}: every example must end with an assistant answer")
+        for line, messages in rows:
+            location = f"{role}, line {line}"
+            for message in messages:
+                if message["role"] not in {"system", "user", "assistant"}:
+                    raise ValueError(f"{location}: unsupported message role")
+                if not message["content"].strip():
+                    raise ValueError(f"{location}: message content must not be blank")
+            if messages[-1]["role"] != "assistant":
+                raise ValueError(
+                    f"{location}: example must end with an assistant answer"
+                )
+            if not any(message["role"] == "user" for message in messages[:-1]):
+                raise ValueError(f"{location}: example must contain a user prompt")
         if any(not line.strip() for line in path.read_text().splitlines()):
             raise ValueError(f"{role}: blank JSONL lines are not supported")
 

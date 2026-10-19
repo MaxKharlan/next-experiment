@@ -1,6 +1,6 @@
 # Next Experiment
 
-An agent that finds out why your LLM fine-tune failed and proves the cause with experiments on Nebius Token Factory.
+An agent that investigates LLM fine-tune failures and tests proposed fixes against controls on Nebius Token Factory.
 
 Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser. The video below is that page, slowed down so that each step can be read.
 
@@ -8,9 +8,9 @@ https://github.com/user-attachments/assets/d46683f9-7c1d-46d0-bf82-f413ff1851ee
 
 ## What it does
 
-A fine-tuning job can finish with status `succeeded` and still give a model that does not do the task. Next Experiment takes such a job, finds the likely causes, and runs the cheapest experiments that can tell them apart. A cause counts as found only when a causal check proves it: the fix and a control of the same cost train side by side on Token Factory, and the fix has to beat the control by more than the noise between seeds. After you approve the cost, it retrains the model with the fix and compares the base, failed and retrained models on the same held-out queries.
+A fine-tuning job can finish with status `succeeded` and still give a model that does not do the task. Next Experiment takes such a job, finds the likely causes, and runs the cheapest experiments that can tell them apart. A controlled check supports a fix when it beats the specified control beyond the measured noise between seeds. That comparison alone does not establish a unique root cause. Controls must report both retained examples and training tokens; equal file size does not imply equal compute cost. After you approve the cost, it retrains the model with the fix and compares the base, failed and retrained models on the same held-out queries.
 
-On the saved demo case, a Qwen3-0.6B job trained with a learning rate of 1e-5 answers 14% of 200 held-out queries. The investigation proves the low learning rate with 4 Post-training jobs, and the retrained model answers 42.5%. The whole run, model calls and training, costs about $0.075.
+On the saved demo case, a Qwen3-0.6B job trained with a learning rate of 1e-5 answers 14% of 200 held-out queries. Four Post-training jobs support increasing the learning rate against the unchanged-recipe control, and the retrained model answers 42.5%. The whole run, model calls and training, costs about $0.075.
 
 ## Architecture
 
@@ -33,14 +33,14 @@ The animation draws one investigation over the parts; its numbers are the steps 
 | Models and training | Nebius Token Factory | `core/connectors/token_factory.py` | Nemotron 3 Super and Ultra, the Post-training API |
 | Known issues | Tavily | `core/connectors/tavily.py` | searches for problems others reported with the model and the recipe |
 
-The project plan has three parts that are not built yet: a Next.js screen, a separate worker process with a SQLite queue, and hosting on Hugging Face Spaces. Without the queue, investigations are kept in memory and written to storage, so finished ones survive a restart of the app.
+The project plan has three parts that are not built yet: a Next.js screen, a separate worker process with a SQLite queue, and hosting on Hugging Face Spaces. Execution remains in one process, with persisted SQLite snapshots. Finished investigations and pending paid-step approvals survive a restart; interrupted running investigations fail instead of restarting paid work.
 
 ## How an investigation runs
 
 1. Tavily searches for problems others reported with the model and recipe. Results are cached, and every investigation has a credit limit.
 2. Nemotron 3 Super ranks the possible causes from the fault catalog and gives each a probability.
 3. Free level-0 probes read the recipe, the loss per epoch and, when the job's adapter is available, the adapter's weights. The planner picks the next probe by the expected information it gives per dollar and updates the probabilities from a table of outcome likelihoods.
-4. A causal check tests the leading cause: the fix and a same-cost control each train as two Post-training jobs. The adapters are downloaded and scored locally by exact match on a separate check set. The cause is confirmed when the fix beats the control by at least the minimum effect and the 95% interval is above zero; with three or more seeds per arm, a permutation test must also give p ≤ 0.05.
+4. A causal check tests the leading proposed fix against its configured control, using the protocol's seed count. The adapters are downloaded and scored locally by exact match on a separate check set. The stored `confirmed` decision means the fix beats the control by at least the minimum effect and the 95% interval is above zero; with three or more seeds per arm, a permutation test must also give p ≤ 0.05.
 5. Nemotron 3 Ultra writes the verdict: the explanation and the patch to the recipe. The status comes from the causal check, not from the model.
 6. With your approval, one job retrains the fixed recipe on the whole training file, and the three models answer the same held-out queries.
 
@@ -64,13 +64,32 @@ The benchmark compares four methods on 13 Token Factory jobs with a known cause:
 | Checklist, every check | 9/9 | 0/4 | 6 | 6/9 | 0.417 | 12.0 |
 | Next Experiment | 9/9 | 0/4 | 0 | 6/9 | 0.144 | 3.7 |
 
-Next Experiment finds the same causes as the ReAct agent at 30% lower cost; the saving comes from the healthy cases, where it stops after fewer checks. The checklist also finds every cause, but it proves a second, wrong cause on 6 of the 9 fault cases. `docs/benchmark.md` has both splits, the results case by case, the error analysis and the limits.
+On these historical low-learning-rate cases, Next Experiment ranks the same planted fault as the ReAct agent at 30% lower cost; the saving comes from the healthy cases, where it stops after fewer checks. The checklist also finds every cause, but it proves a second, wrong cause on 6 of the 9 fault cases. `docs/benchmark.md` has both splits, the results case by case, the error analysis and the limits.
 
 The weight probe (B25) separates a too-low learning rate from healthy jobs on Token Factory: with a threshold set on the dev cases, 9 of 9 held-out jobs and 84 of 86 causal-check adapters land on the right side (`docs/b25-lora-weights.md`).
 
+The historical held-out cases have since been reused for diagnosis and calibration
+analysis. They are no longer an untouched evaluation set. Random-order ablations
+also confirm a small-rank intervention on some low-learning-rate cases: a useful
+change can be attributed to the wrong cause. See [the ablation results](docs/results/ablations-dev-20261018/summary.json).
+
+Answer cuts before upload now have measured results on BANKING77 / Qwen3-0.6B:
+
+| Environment | Healthy | Damaged | Target | Control | Target minus control |
+|---|---:|---:|---:|---:|---:|
+| Kaggle T4, 3 seeds per arm | 0.883 | 0.658 | 0.804 | 0.621 | +0.183 |
+| Token Factory, 2 seeds per target/control arm | 0.926 | 0.681 | 0.859 | 0.662 | +0.197 |
+
+These are scores on 770 check examples. The target drops flagged answers and the
+control drops the same number of random unflagged examples. The control trains
+about 9% more tokens. Recovery is partial; these saved experiments contain no
+end-to-end agent trace. Token Factory healthy/damaged references have one job
+each. The two-seed permutation gate cannot reach 0.05 and is skipped by the saved
+decision rule. See [the experiment protocol and results](docs/answer-cut.md).
+
 ## What is in the repository now
 
-As of 18 October 2026:
+As of 19 October 2026. [Project status](docs/project-status.md) separates implementation from measured coverage.
 
 | Area | State |
 |---|---|
@@ -83,7 +102,12 @@ As of 18 October 2026:
 | Tools: fault sweeps on Token Factory, case builder, reference runs, noise floor, rescoring, checkpoint pruning, local LoRA simulations | done |
 | Weight probe in the API's live runner and in the benchmark | available with `NEXT_EXPERIMENT_WEIGHTS=1` after preparing job-specific measurements; historical results above exclude it |
 | Public demo page on GitHub Pages, replaying the saved run | done |
-| A fresh demo run with the Tavily step, video | not yet |
+| A2/A3 JSON extraction and function calling datasets | built and agent-reviewed; full task/model quality matrix remains open |
+| Answer-cut probe, data pair, Kaggle/Token Factory measurements | implemented; partial recovery, one task/model |
+| Spending reservations and paid-step REST/UI pause/resume | implemented in #85; invoice reconciliation and multiple workers remain open |
+| B9 classifier transfer and B12 prior calibration | negative transfer/calibration results; classifier stays experimental and temperature stays T=1 |
+| Measured-experiment replays, validation and replay reset fixes | implemented in the follow-up package |
+| A fresh end-to-end answer-cut investigation, final video and submission | pending |
 
 ## Run it
 
@@ -170,6 +194,9 @@ uv run --group eval pytest -q
 
 | File | Contents |
 |---|---|
+| `docs/project-status.md` | current coverage, owners and remaining acceptance criteria |
+| `docs/fault-1-semantics.md` | pre-upload answer damage versus custom-trainer truncation and length preflight |
+| `docs/demo-walkthrough.md` | replay walkthrough and boundaries for the O2 demo |
 | `docs/architecture.md` | how an investigation moves through the code: model steps, modules, contracts, API, storage, configuration |
 | `docs/benchmark.md` | dev and held-out results, case by case, error analysis, limits |
 | `docs/b25-lora-weights.md` | the weight probe: measurements, threshold, why rank is not used |
@@ -189,7 +216,7 @@ uv run --group eval pytest -q
 ## Limits
 
 - Every fault case in the benchmark has the same cause, a learning rate that is too low. In our sweeps the other planted faults, a small LoRA rank and too many epochs, did not hurt this task.
-- One task (BANKING77 intent labels), one model (Qwen3-0.6B), two seeds per arm.
+- Historical agent benchmark: BANKING77 and Qwen3-0.6B with two seeds per arm. Answer-cut experiments add a second fault family on the same task/model, with three Kaggle seeds and two Token Factory seeds per intervention arm.
 - Training costs in the tables are estimates from token counts and Token Factory's price per million tokens.
 
 ## Task labels

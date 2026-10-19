@@ -16,7 +16,7 @@ from string import Template
 from typing import Any
 from urllib.parse import urlsplit
 
-from core.agent.catalog import allowed_classes, catalog_text
+from core.agent.catalog import CATALOG_VERSION, allowed_classes, catalog_text
 from core.agent.router import Router
 from core.agent.schemas import (
     Hypothesis,
@@ -89,14 +89,19 @@ def clean_hypotheses(
 
 
 def propose_hypotheses(
-    router: Router, case: dict[str, Any], mode: str = "A", version: str = "v3"
+    router: Router, case: dict[str, Any], mode: str = "A", version: str = "v4"
 ) -> list[Hypothesis]:
     """Super lists hypotheses for a case: symptom, job config, metrics, findings
     and known issues found by Tavily."""
     prompt = load_prompt("hypotheses", version)
     messages = [
         {"role": "system", "content": prompt.render(catalog=catalog_text(mode))},
-        _user("Case", case),
+        _user(
+            "Case",
+            {**case, "mode": mode, "catalog_version": CATALOG_VERSION}
+            if version == "v4"
+            else case,
+        ),
     ]
     found = router.structured(
         "hypotheses", messages, HypothesisList, prompt_version=prompt.id
@@ -111,7 +116,7 @@ def interpret_probe(
     probe_name: str,
     outcome: str,
     summary: dict[str, Any],
-    version: str = "v1",
+    version: str = "v2",
 ) -> ProbeInterpretation:
     """Super explains a probe outcome for its card; the code does the Bayes update."""
     prompt = load_prompt("interpret_probe", version)
@@ -137,7 +142,7 @@ def write_verdict(
     base_hp: dict[str, Any],
     evidence: list[str],
     metric: str = "exact match on held-out examples",
-    version: str = "v1",
+    version: str = "v2",
 ) -> Verdict:
     """Ultra writes the summary; status, evidence and patch come from the code."""
     prompt = load_prompt("verdict", version)

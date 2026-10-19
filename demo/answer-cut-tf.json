@@ -1,0 +1,283 @@
+{
+  "title": "Answer cuts on Token Factory \u2014 measured experiment",
+  "note": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+  "case": {
+    "kind": "measured_experiment",
+    "task": "banking77",
+    "symptom": "30% of training answers were cut before training.",
+    "job": {
+      "model": "Qwen/Qwen3-0.6B"
+    }
+  },
+  "report": {
+    "investigation_id": "answer-cut-tf",
+    "status": "measured",
+    "hypotheses": [],
+    "llm_calls": {},
+    "llm_cost_usd": 0.0,
+    "evidence_scope": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+    "measured_experiment": {
+      "backend": "Token Factory",
+      "model": "Qwen/Qwen3-0.6B",
+      "task": "banking77",
+      "evaluation": {
+        "split": "check",
+        "sha256": "5a3e4f7fb46dcb95555c8e01fbb4d84b121e1f54fe152c0019952b742fe2401a",
+        "examples": 770,
+        "metric": "exact_match"
+      },
+      "evaluation_provenance": "Shared A1 check file per the saved experiment protocol; the TF score file does not independently record its hash.",
+      "runs": [
+        {
+          "run_id": "healthy-s0",
+          "role": "healthy",
+          "seed": 0,
+          "metric": 0.925974025974026,
+          "job_id": "ftjob-4bf0420943394282bcb8062c8b8b08b8",
+          "train_sha256": "b2c8214885c09edaab23a7be12b78c818ed749ebba9a76576d3fdcf9d5276277",
+          "adapter_sha256": "81d2202157d9a7d3a5c03233a7fa91d28b8d5772f34717af46b9fd69ab4459e2",
+          "trained_tokens": 481986
+        },
+        {
+          "run_id": "damaged-s0",
+          "role": "damaged",
+          "seed": 0,
+          "metric": 0.6805194805194805,
+          "job_id": "ftjob-7d71914ce4354f6fa0b89208913d8052",
+          "train_sha256": "628e833711dc55f87ec15245f51a9883b1580e78496a07fda6e9324bbf532258",
+          "adapter_sha256": "915f8ea4dcd60246bf57a82bbbe0178e717d7764a86c86031ed130a135bae8aa",
+          "trained_tokens": 476660
+        },
+        {
+          "run_id": "target-s0",
+          "role": "target",
+          "seed": 0,
+          "metric": 0.8584415584415584,
+          "job_id": "ftjob-7cdfb67f667348c2aa8939a65d8f0be9",
+          "train_sha256": "d48e0f05c0c181aac0e5b10f27be257d4483877eef9c2fef7324debb376c58b5",
+          "adapter_sha256": "c7859ad38f4d6318dee1dff0e34037336acacf3addee6f43449f72ed38f34077",
+          "trained_tokens": 325019
+        },
+        {
+          "run_id": "target-s1",
+          "role": "target",
+          "seed": 1,
+          "metric": 0.8597402597402597,
+          "job_id": "ftjob-cc36f7d1119b44d5a18441e2ce11566c",
+          "train_sha256": "05ab0da8d672dd6d1dedd19a0a7c78301c6dd46b3beaa56970b326e209898e8e",
+          "adapter_sha256": "dad498112316ed513890fad9067351843eb5fe43cba429db47491af5a696a76f",
+          "trained_tokens": 325019
+        },
+        {
+          "run_id": "control-s0",
+          "role": "control",
+          "seed": 0,
+          "metric": 0.6610389610389611,
+          "job_id": "ftjob-e6d0894c966b49c58f468daebec623f9",
+          "train_sha256": "01a331bc4b427e50ed2d992d0437e5cc0c69c887e496d611ce034161397af001",
+          "adapter_sha256": "5fe92795b99aefb79c9f65b661998f9ad7157cb3089a356b6071ad66e8f18186",
+          "trained_tokens": 354394
+        },
+        {
+          "run_id": "control-s1",
+          "role": "control",
+          "seed": 1,
+          "metric": 0.6623376623376623,
+          "job_id": "ftjob-058c6f78bf104a33a3d3dbf098451c16",
+          "train_sha256": "b3bc2de9a0f2790badcadd00ae4c7ecae62e60019bbde6bae8dde4a1eeeb9b03",
+          "adapter_sha256": "c9487f89eaac83f4431f5015801123c3c8fc3f8576c57b679ac2d439a5154456",
+          "trained_tokens": 354394
+        }
+      ],
+      "means": {
+        "healthy": 0.925974025974026,
+        "damaged": 0.6805194805194805,
+        "target": 0.8590909090909091,
+        "control": 0.6616883116883117
+      },
+      "causal_result": {
+        "status": "confirmed",
+        "effect": 0.19740259740259747,
+        "ci_low": 0.16016328169633645,
+        "ci_high": 0.23464191310885849,
+        "p_value": 0.16666666666666666,
+        "min_effect": 0.06,
+        "reason": "the fix beats the control beyond the noise"
+      },
+      "noise_sd": 0.019,
+      "permutation_gate_applied": false,
+      "quality_drop": 0.24545454545454548,
+      "gap_to_healthy": 0.06688311688311688,
+      "estimated_training_cost_usd": 0.9269888000000001,
+      "scope": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+      "limitations": [
+        "One task and one model; unique root-cause specificity is not established.",
+        "Target and control keep 6144 examples each; control uses about 9% more training tokens.",
+        "Healthy and damaged references have one job each.",
+        "Permutation p cannot reach 0.05 with two seeds; the saved rule uses the interval alone.",
+        "Check-set results; no final untouched test-set evaluation or full agent trace."
+      ],
+      "sources": [
+        {
+          "path": "docs/results/answer-cut-tf-20261019/results.json",
+          "sha256": "c27739f1871e358d331df1b6e381e824596c13756d8b324b0af5f9044898bd48",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-tf-20261019/results.json"
+        },
+        {
+          "path": "docs/results/answer-cut-tf-20261019/jobs.json",
+          "sha256": "f970dd26294d66d3f3d7a807788cd9ea319ddfdcb6ae7c70ae62296858e110a6",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-tf-20261019/jobs.json"
+        },
+        {
+          "path": "docs/results/answer-cut-tf-20261019/plan.json",
+          "sha256": "f56cf749c34aa8608ace868c8fce263967313b68375aa5dd0538a20862ffcfc6",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-tf-20261019/plan.json"
+        },
+        {
+          "path": "docs/answer-cut.md",
+          "sha256": "e9dcdd6e1472dc2419e77fc17e54e2370b95e1e5503641fc211852061f8a169d",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/answer-cut.md"
+        },
+        {
+          "path": "scripts/answer_cut_tf.py",
+          "sha256": "a42caba233033fa468b02132477bd881c90d43302b9f98d60fc3370b9aeb59d4",
+          "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/scripts/answer_cut_tf.py"
+        }
+      ]
+    },
+    "steps": [
+      {
+        "kind": "measured_experiment",
+        "measurement": {
+          "backend": "Token Factory",
+          "model": "Qwen/Qwen3-0.6B",
+          "task": "banking77",
+          "evaluation": {
+            "split": "check",
+            "sha256": "5a3e4f7fb46dcb95555c8e01fbb4d84b121e1f54fe152c0019952b742fe2401a",
+            "examples": 770,
+            "metric": "exact_match"
+          },
+          "evaluation_provenance": "Shared A1 check file per the saved experiment protocol; the TF score file does not independently record its hash.",
+          "runs": [
+            {
+              "run_id": "healthy-s0",
+              "role": "healthy",
+              "seed": 0,
+              "metric": 0.925974025974026,
+              "job_id": "ftjob-4bf0420943394282bcb8062c8b8b08b8",
+              "train_sha256": "b2c8214885c09edaab23a7be12b78c818ed749ebba9a76576d3fdcf9d5276277",
+              "adapter_sha256": "81d2202157d9a7d3a5c03233a7fa91d28b8d5772f34717af46b9fd69ab4459e2",
+              "trained_tokens": 481986
+            },
+            {
+              "run_id": "damaged-s0",
+              "role": "damaged",
+              "seed": 0,
+              "metric": 0.6805194805194805,
+              "job_id": "ftjob-7d71914ce4354f6fa0b89208913d8052",
+              "train_sha256": "628e833711dc55f87ec15245f51a9883b1580e78496a07fda6e9324bbf532258",
+              "adapter_sha256": "915f8ea4dcd60246bf57a82bbbe0178e717d7764a86c86031ed130a135bae8aa",
+              "trained_tokens": 476660
+            },
+            {
+              "run_id": "target-s0",
+              "role": "target",
+              "seed": 0,
+              "metric": 0.8584415584415584,
+              "job_id": "ftjob-7cdfb67f667348c2aa8939a65d8f0be9",
+              "train_sha256": "d48e0f05c0c181aac0e5b10f27be257d4483877eef9c2fef7324debb376c58b5",
+              "adapter_sha256": "c7859ad38f4d6318dee1dff0e34037336acacf3addee6f43449f72ed38f34077",
+              "trained_tokens": 325019
+            },
+            {
+              "run_id": "target-s1",
+              "role": "target",
+              "seed": 1,
+              "metric": 0.8597402597402597,
+              "job_id": "ftjob-cc36f7d1119b44d5a18441e2ce11566c",
+              "train_sha256": "05ab0da8d672dd6d1dedd19a0a7c78301c6dd46b3beaa56970b326e209898e8e",
+              "adapter_sha256": "dad498112316ed513890fad9067351843eb5fe43cba429db47491af5a696a76f",
+              "trained_tokens": 325019
+            },
+            {
+              "run_id": "control-s0",
+              "role": "control",
+              "seed": 0,
+              "metric": 0.6610389610389611,
+              "job_id": "ftjob-e6d0894c966b49c58f468daebec623f9",
+              "train_sha256": "01a331bc4b427e50ed2d992d0437e5cc0c69c887e496d611ce034161397af001",
+              "adapter_sha256": "5fe92795b99aefb79c9f65b661998f9ad7157cb3089a356b6071ad66e8f18186",
+              "trained_tokens": 354394
+            },
+            {
+              "run_id": "control-s1",
+              "role": "control",
+              "seed": 1,
+              "metric": 0.6623376623376623,
+              "job_id": "ftjob-058c6f78bf104a33a3d3dbf098451c16",
+              "train_sha256": "b3bc2de9a0f2790badcadd00ae4c7ecae62e60019bbde6bae8dde4a1eeeb9b03",
+              "adapter_sha256": "c9487f89eaac83f4431f5015801123c3c8fc3f8576c57b679ac2d439a5154456",
+              "trained_tokens": 354394
+            }
+          ],
+          "means": {
+            "healthy": 0.925974025974026,
+            "damaged": 0.6805194805194805,
+            "target": 0.8590909090909091,
+            "control": 0.6616883116883117
+          },
+          "causal_result": {
+            "status": "confirmed",
+            "effect": 0.19740259740259747,
+            "ci_low": 0.16016328169633645,
+            "ci_high": 0.23464191310885849,
+            "p_value": 0.16666666666666666,
+            "min_effect": 0.06,
+            "reason": "the fix beats the control beyond the noise"
+          },
+          "noise_sd": 0.019,
+          "permutation_gate_applied": false,
+          "quality_drop": 0.24545454545454548,
+          "gap_to_healthy": 0.06688311688311688,
+          "estimated_training_cost_usd": 0.9269888000000001,
+          "scope": "Saved training experiment, not an end-to-end agent investigation. Dropping flagged examples beats the same-size random-drop control; quality remains below the healthy recipe.",
+          "limitations": [
+            "One task and one model; unique root-cause specificity is not established.",
+            "Target and control keep 6144 examples each; control uses about 9% more training tokens.",
+            "Healthy and damaged references have one job each.",
+            "Permutation p cannot reach 0.05 with two seeds; the saved rule uses the interval alone.",
+            "Check-set results; no final untouched test-set evaluation or full agent trace."
+          ],
+          "sources": [
+            {
+              "path": "docs/results/answer-cut-tf-20261019/results.json",
+              "sha256": "c27739f1871e358d331df1b6e381e824596c13756d8b324b0af5f9044898bd48",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-tf-20261019/results.json"
+            },
+            {
+              "path": "docs/results/answer-cut-tf-20261019/jobs.json",
+              "sha256": "f970dd26294d66d3f3d7a807788cd9ea319ddfdcb6ae7c70ae62296858e110a6",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-tf-20261019/jobs.json"
+            },
+            {
+              "path": "docs/results/answer-cut-tf-20261019/plan.json",
+              "sha256": "f56cf749c34aa8608ace868c8fce263967313b68375aa5dd0538a20862ffcfc6",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/results/answer-cut-tf-20261019/plan.json"
+            },
+            {
+              "path": "docs/answer-cut.md",
+              "sha256": "e9dcdd6e1472dc2419e77fc17e54e2370b95e1e5503641fc211852061f8a169d",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/docs/answer-cut.md"
+            },
+            {
+              "path": "scripts/answer_cut_tf.py",
+              "sha256": "a42caba233033fa468b02132477bd881c90d43302b9f98d60fc3370b9aeb59d4",
+              "url": "https://github.com/MaxKharlan/next-experiment/blob/0b0db5feba473e78cfce4a4af926fb33e2ceb540/scripts/answer_cut_tf.py"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

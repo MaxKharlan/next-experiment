@@ -171,3 +171,52 @@ def test_original_job_is_checked(payload):
     job.status = "failed"
     with pytest.raises(ValueError, match="succeeded"):
         verify_original_job(tf, prepared)
+
+
+@pytest.mark.parametrize("task", ["banking77", "json_extraction", "function_calling"])
+@pytest.mark.parametrize("route", ["validate", "from-case"])
+@pytest.mark.parametrize("split", ["train", "validation", "check", "test"])
+@pytest.mark.parametrize(
+    "problem", ["unknown_role", "empty_answer", "blank_prompt", "no_prompt"]
+)
+def test_invalid_messages_never_start_a_worker(
+    client, payload, monkeypatch, route, split, problem, task
+):
+    from pathlib import Path
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Invalid messages must be rejected before worker creation")
+
+    from core.eval.structured import TASK_EVALUATORS
+
+    payload["case"]["task"] = task
+    name, metric, _ = TASK_EVALUATORS[task]
+    payload["case"]["evaluator"] = {"name": name, "metric": metric}
+    monkeypatch.setattr(main.runners, "live", forbidden)
+    path = Path(payload["case"]["datasets"][split]["ref"])
+    rows = [json.loads(line) for line in path.read_text().splitlines()]
+    messages = rows[0]["messages"]
+    if problem == "unknown_role":
+        messages[0]["role"] = "not_a_role"
+    elif problem == "empty_answer":
+        messages[-1]["content"] = " \t"
+    elif problem == "blank_prompt":
+        messages[0]["content"] = ""
+    else:
+        rows[0]["messages"] = messages[1:]
+    path.write_text("".join(json.dumps(row) + "\n" for row in rows))
+    response = client.post(f"/api/investigations/{route}", json=payload)
+    assert response.status_code == 422
+    assert f"{split}, line 1" in response.json()["detail"]
+    assert main.store.list() == []
+
+
+def test_nonempty_damaged_training_label_remains_inspectable(payload):
+    from pathlib import Path
+
+    path = Path(payload["case"]["datasets"]["train"]["ref"])
+    path.write_text(path.read_text().replace("card_arrival", "card_arr"))
+    assert (
+        prepare_case(CaseStart.model_validate(payload))["protocol"]["task"]
+        == "banking77"
+    )

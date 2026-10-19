@@ -40,8 +40,8 @@ lora_weights:
 
 example_length:
   # A8: at least 1% of training examples longer in tokens than context_length. The
-  # probe measures the cause of fault 1 (truncation by a mode-B trainer) directly,
-  # so a truncated outcome is likely with it and rare without it. In mode A Token
+  # probe measures over-limit inputs, not whether a trainer actually removes tokens,
+  # so these likelihoods are heuristic. In mode A Token
   # Factory fails such a job instead of cutting the examples, so a succeeded job's
   # file comes out ok; answers cut before the upload are another fault the probe does
   # not see. First guesses, not calibrated yet (A14, O3).
@@ -50,9 +50,8 @@ example_length:
 
 answer_cut:
   # At least 1% of training answers look cut: a prefix of a more frequent answer, or
-  # broken JSON in a JSON file. The probe sees the damage of answer_truncation
-  # directly, so a cut outcome is likely with it; without it a few rare labels that
-  # are prefixes of others can still trip it. answer_truncation is not in the agent's
-  # catalog yet. First guesses, not calibrated yet (A14, O3).
+  # broken JSON in a JSON file. Legitimate rare prefix labels can also trigger it.
+  # answer_truncation is in the mode-A/B catalog. These likelihoods remain
+  # first guesses, not calibrated transfer estimates (A14, O3).
   answer_truncation: {cut: 0.90, ok: 0.10}
   default: {cut: 0.03, ok: 0.97}

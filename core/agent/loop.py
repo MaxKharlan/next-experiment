@@ -27,6 +27,7 @@ from typing import Any
 
 import httpx
 
+from core.agent.catalog import CATALOG_VERSION
 from core.agent.context import InvestigationContext
 from core.agent.ensemble import sample_hypotheses
 from core.agent.known_issues import find_known_issues
@@ -271,6 +272,7 @@ def investigate(
         add(
             {
                 "kind": "hypotheses",
+                "catalog_version": CATALOG_VERSION,
                 "hypotheses": [h.model_dump() for h in hypotheses],
                 "probs": _rounded(probs),
             }

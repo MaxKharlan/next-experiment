@@ -61,7 +61,7 @@ def _run(ctx, tokenizer=None):
     return result, json.loads(result.summary)
 
 
-def test_an_example_at_the_limit_fits_and_one_token_more_is_cut(tmp_path):
+def test_an_example_at_the_limit_fits_and_one_token_more_is_over_limit(tmp_path):
     limit = _tokens(10)
     train = _write(tmp_path / "train.jsonl", [_example(10)] * 99 + [_example(11)])
     result, raw = _run(_ctx({"train": train}, context_length=limit))
@@ -81,7 +81,12 @@ def test_a_share_below_the_threshold_is_ok(tmp_path):
     train = _write(tmp_path / "train.jsonl", [_example(1)] * 199 + [_example(50)])
     result, raw = _run(_ctx({"train": train}, context_length=_tokens(1)))
     assert raw["files"]["train"]["over"] == 1
-    assert result.outcome == "ok"  # 0.5% is below 1%
+    assert (
+        result.outcome == "ok"
+    )  # Legacy categorical threshold, not preflight approval.
+    assert raw["over_limit_found"] is True
+    assert raw["semantics_version"] == "length-preflight-v1"
+    assert "explicit job rejection" in raw["interpretation"]
 
 
 def test_outcome_rests_on_train_and_validation_is_reported(tmp_path):
