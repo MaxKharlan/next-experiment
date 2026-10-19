@@ -1,0 +1,15 @@
+Base commit: 9c4f0a0bde1f62f0ef1be59d3a0e113bc89625be
+Sweep exec session 5676: exit code 0
+Sweep matrix: 210 summaries; 7 recipes x 30 seeds; no missing, unexpected or invalid cells
+Targeted tests: 14 passed in 0.30s
+Full tests: 817 passed, 8 skipped in 119.64s
+Ruff lint: passed
+Ruff format check: 337 files already formatted
+Git diff whitespace check: passed
+Deterministic reproduction: all four generated JSON artifacts matched byte-for-byte
+observed-failure-model.json sha256 e90eca2f139fee10236feca45adab027e237164bc7a5de0d0f8998bc5ee9c15b
+recipe-model.json sha256 f2e919c46e5dad1e47b8620573cab795e5d1ce3c7658e9dcebd5e10d33b586ee
+report.json sha256 d204f629353ce3919d63d343eddb2a99abf333323eeb5f784e600d4e317a4a23
+token-factory-transfer.json sha256 e7b8be8c478b6de214a0c5a5a66c15ed706dc7b3856e5b5a6dd419fe449c2d78
+New provider spend for sweep and analysis: USD 0
+MPS handoff: released after successful sweep and assigned to the separate fresh answer-cut trace

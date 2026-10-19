@@ -1,10 +1,8 @@
 # Track B follow-up: B9, B12 and B17
 
 The original package was developed on `618db22` (PR #78) and integrated
-with `0b0db5f` (PR #84) on October 19, 2026 in a separate clone.
-The active 210-run local LoRA sweep belongs to a separate checkout; its inputs,
-process and evolving artifacts were left untouched. Its final results are not
-in this publication snapshot.
+with `0b0db5f` (PR #84) on October 19, 2026 in a separate clone. A later local
+sweep completed 210 LoRA runs and is analyzed in `b9-final-sweep.md`.
 
 ## Selection and completion boundaries
 
@@ -14,18 +12,36 @@ B8 intentionally uses a more expensive unchanged-epoch control for fault 7.
 B14 sampling is implemented and has a saved dev comparison. The first remaining
 items selected here are B9, B12 and B17.
 
-This package does **not** close all three plan items. The original plan's
-checkboxes are not used as evidence of completion.
-
 | Item | Delivered and exercised | Still required for full completion |
 | --- | --- | --- |
-| B9 | Frozen local classifier evaluated on 13 saved real Token Factory jobs, with reproducible input/model hashes and failure analysis | Hundreds of actual simulations, excess-epoch class, verified rank/epoch quality failures, and useful transfer on independent cases |
-| B12 | Full proposed-class prior temperature fitting, ECE/Brier reliability plot, leave-one-case-out and eight-case heldout audits, opt-in Python loop integration | Independent evidence supporting deployment; the measured temperature must remain experimental |
-| B17 | SQLite spending reservations in live inference and causal/probe execution, retained uncertain charges, Python approval hook, persisted REST/UI paid-step approval and resume, failure snapshots | Tavily dollar accounting, training invoice reconciliation and cross-process investigation ownership |
+| B9 | 210 simulations, exact-match and loss analysis, grouped classifiers and frozen Token Factory transfer | Transfer fails; keep the classifier offline. A publishable B26 model needs new provider-compatible evidence. |
+| B12 | Prior temperature fitting, ECE/Brier reliability plots, leave-one-case-out and eight-case heldout audits | Heldout metrics reject the fitted temperature; keep T=1 until a new independent audit supports a change. |
+| B17 | SQLite spending reservations, retained uncertain charges, Python and REST/UI paid-step approval/resume, persisted states and failure snapshots | Provider invoice reconciliation and multiworker ownership remain operational extensions. |
 
-## B9: transfer fails on healthy jobs
+## B9: completed sweep rejects provider transfer
 
-The local model was frozen before this evaluation; it was neither refitted nor
+The final study has 210 runs: seven recipes at 30 seeds, with 50 BANKING77
+training rows and 16 validation rows. Low learning rate scores zero exact match
+on all 60 runs. Rank 2 and rank 4 do not lower quality. Three and six epochs
+improve mean exact match over the one-epoch healthy recipe.
+
+The four-family recipe classifier reaches 63.8% balanced accuracy under
+leave-one-seed-out evaluation and 59.6% when both seed half and strength change.
+A binary classifier for the only observed failure, low learning rate, reaches
+96.7% balanced accuracy locally.
+
+Frozen transfer reverses that result. The binary model scores 41.7% balanced
+accuracy on five development Token Factory cases and 25.0% on eight historical
+heldout cases. It misses all six heldout low-LR cases. See
+[`b9-final-sweep.md`](b9-final-sweep.md) and the saved
+[`report.json`](results/b9-sweep-50-20261019/report.json).
+
+The classifier remains offline. B9's experiment is complete with a negative
+transfer result; B26 publication still lacks a provider-compatible model.
+
+### Earlier transfer baseline
+
+The earlier 15-run local model was frozen before this evaluation; it was neither refitted nor
 selected using these predictions. The same 13 cases were inspected historically,
 so this is exploratory transfer, not a new untouched test.
 
