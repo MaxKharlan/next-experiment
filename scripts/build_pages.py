@@ -35,7 +35,13 @@ def build(out: Path) -> list[str]:
         raise ValueError(f"no saved investigations in {runners.DEMO_DIR}")
     (out / "replays").mkdir(parents=True, exist_ok=True)
     (out / "demo").mkdir(exist_ok=True)
-    (out / "index.html").write_text(html.replace(LIVE, STATIC), encoding="utf-8")
+    (out / "index.html").write_text(
+        html.replace(LIVE, STATIC).replace(
+            "<script>", '<script src="label-audit.js"></script>\n<script>', 1
+        ),
+        encoding="utf-8",
+    )
+    shutil.copyfile(SCREEN.parent / "label-audit.js", out / "label-audit.js")
     _write_json(out / "demo-cases.json", runners.demo_index())
     for name in names:
         events = [
