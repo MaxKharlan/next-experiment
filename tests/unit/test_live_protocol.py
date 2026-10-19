@@ -108,13 +108,23 @@ def test_retrain_proposal_keeps_the_original_job(protocol):
     assert plan["jobs"] == ["fixed"]
 
 
-def test_tf_runner_scores_on_check_and_validates_on_validation(protocol, monkeypatch):
+@pytest.mark.parametrize("pinned", [False, True])
+def test_tf_runner_scores_on_check_and_validates_on_validation(
+    protocol, monkeypatch, tmp_path, pinned
+):
+    from core.connectors.storage import LocalStorage
+
     seen = {}
+    storage = LocalStorage(tmp_path / "results")
+    evidence = {"value": 0.5, "data_sha256": "check-hash", "examples": [{"score": 0}]}
+    if pinned:
+        protocol["evaluation_runtime"] = {"version": "test"}
+        monkeypatch.setattr(runners, "verify_datasets", lambda protocol: None)
 
     def evaluate(path, spec, *, adapter, base_model=None, runtime=None):
         seen["evaluated_on"] = path
         seen["metric"] = spec.metric
-        return SimpleNamespace(value=0.5)
+        return SimpleNamespace(value=0.5, to_dict=lambda: evidence)
 
     class PairRunner:
         def __init__(self, **kwargs):
@@ -132,7 +142,7 @@ def test_tf_runner_scores_on_check_and_validates_on_validation(protocol, monkeyp
         "tf",
         "inv-test",
         None,
-        None,
+        storage,
         protocol["hyperparameters"],
         protocol,
     )
@@ -144,6 +154,10 @@ def test_tf_runner_scores_on_check_and_validates_on_validation(protocol, monkeyp
     assert seen["valid_path"] == Path(datasets["validation"]["path"])
     assert seen["evaluated_on"] == Path(datasets["check"]["path"])
     assert seen["seeds"] == [0, 1]
+    key = "investigations/inv-test/evaluations/check/adapter.json"
+    assert storage.exists(key) == pinned
+    if pinned:
+        assert json.loads(storage.get_text(key)) == evidence
 
 
 def test_actual_pair_cost_blocks_training_before_submission():

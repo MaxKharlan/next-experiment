@@ -173,7 +173,10 @@ def live(
             },
             budget_left_usd=protocol["budget_usd"] if protocol else 1.0,
             files=(
-                {role: entry["path"] for role, entry in protocol["datasets"].items()}
+                {
+                    role: protocol["datasets"][role]["path"]
+                    for role in ("train", "validation")
+                }
                 if protocol
                 else {}
             ),
@@ -420,6 +423,24 @@ def _pair_runner(
         from core.eval import evaluate
         from core.interventions.answer_check import DataAwareTFPairRunner
 
+        def score_adapter(adapter):
+            result = evaluate(
+                check,
+                EvaluatorSpec.model_validate(
+                    protocol.get("evaluator")
+                    or {"name": "intent_label", "metric": "exact_match"}
+                ),
+                adapter=adapter,
+                base_model=protocol["model"],
+                runtime=protocol.get("evaluation_runtime"),
+            )
+            if protocol.get("evaluation_runtime"):
+                storage.put_text(
+                    f"investigations/{inv_id}/evaluations/check/{Path(adapter).name}.json",
+                    json.dumps(result.to_dict(), indent=2),
+                )
+            return result.value
+
         def run_tf(target, control):
             verify_datasets(protocol)
             DataAwareTFPairRunner(
@@ -430,18 +451,7 @@ def _pair_runner(
                 train_path=train,
                 valid_path=valid,
                 base_hp=job_hp,
-                evaluate=lambda adapter: (
-                    evaluate(
-                        check,
-                        EvaluatorSpec.model_validate(
-                            protocol.get("evaluator")
-                            or {"name": "intent_label", "metric": "exact_match"}
-                        ),
-                        adapter=adapter,
-                        base_model=protocol["model"],
-                        runtime=protocol.get("evaluation_runtime"),
-                    ).value
-                ),
+                evaluate=score_adapter,
                 seeds=protocol["seeds"],
                 prefix=f"investigations/{inv_id}/tf/{target.hypothesis_id}",
             )(target, control)

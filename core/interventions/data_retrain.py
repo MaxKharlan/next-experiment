@@ -182,6 +182,7 @@ def retrain_data(retrainer, plan, protocol, spending, on_step=None):
         "model": plan.model,
         "hyperparameters": plan.hyperparameters,
         "evaluator": protocol.get("evaluator"),
+        "evaluation_runtime": protocol.get("evaluation_runtime"),
         "data_patch": patch,
     }
     spending.settle(operation_id, plan.cost_usd)

@@ -98,19 +98,31 @@ def make_retrainer(
         spec = EvaluatorSpec.model_validate(evaluator_spec)
         metric_name = spec.metric
 
+        def keep_result(name, result):
+            if evaluation_runtime:
+                storage.put_text(
+                    f"investigations/{investigation_id}/evaluations/final/{name}.json",
+                    json.dumps(result.to_dict(), indent=2),
+                )
+            return result.value
+
         def score_adapter(adapter, data):
-            return evaluate(
-                data, spec, adapter=adapter, runtime=evaluation_runtime
-            ).value
+            return keep_result(
+                Path(adapter).name,
+                evaluate(data, spec, adapter=adapter, runtime=evaluation_runtime),
+            )
 
         def score_base(model, data, template):
-            return evaluate(
-                data,
-                spec,
-                base_model=model,
-                template_dir=template,
-                runtime=evaluation_runtime,
-            ).value
+            return keep_result(
+                "base",
+                evaluate(
+                    data,
+                    spec,
+                    base_model=model,
+                    template_dir=template,
+                    runtime=evaluation_runtime,
+                ),
+            )
 
         evaluate_adapter, evaluate_base = score_adapter, score_base
     path, note = heldout_set(heldout, valid)

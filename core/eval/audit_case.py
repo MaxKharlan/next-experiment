@@ -43,7 +43,11 @@ def audit_case(case):
         if role in {"check", "test"} and invalid:
             raise ValueError(f"{role}: invalid scoring references")
     context = InvestigationContext(
-        "dataset-audit", case.mode, case.job.id, case.job.model_dump(), files=paths
+        "dataset-audit",
+        case.mode,
+        case.job.id,
+        case.job.model_dump(),
+        files={role: paths[role] for role in ("train", "validation")},
     )
     probe = AnswerCut().run(context)
     return {
