@@ -5,8 +5,10 @@ PRs #105–#110 publish the automatic semantic audit, neutral logit diagnostics,
 semantic controls, verified FT-Fail Hub release and bounded cloud/reference
 execution. The owner authorized separate
 $25 additional Token Factory and $30 AI Cloud limits and confirmed submission
-eligibility, registration and representation. Prospective model scoring and
-the REST study are running. The
+eligibility, registration and representation. Reference-model scoring is moving
+to [bounded Cloud jobs](reference-evaluation-acceleration-20261020.md).
+The [REST study](rest-code-trace-20261020.md) completed with saved events and
+verified restart/idempotency behavior; its diagnosis is inconclusive. The
 [fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete
 and verified. The [data cohort](data-fault-quality-20261020.md) stopped at its
 frozen timeout with 29/36 cells verified. The [ticket-ledger evaluation](ticket-ledger-outcome-20261020.md)
@@ -50,10 +52,10 @@ are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
 | B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md); new calls persist [provider request references](persisted-llm-usage.md), while invoices and per-call matching remain open; track B |
 | B21 | [Historical Trainer CPU experiment](transformers-38837-reproduction-20261020.md): 4/6 comparisons agree; accumulation-3 controls fail; frozen status `stopped` | Full original-case reproduction and downstream quality; track B |
-| B24 | Four fault injections, label audits, 60 synthetic CPU runs and fifteen verified pretrained CUDA runs; two faults reduced quality in this setting | Complete mode-B REST investigation; track B |
-| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Published desktop checks and silent demo capture complete; fresh REST trace and video publication pending |
+| B24 | Four fault injections, label audits, 60 synthetic CPU runs, fifteen verified pretrained CUDA runs and a completed mode-B REST investigation with eight new adapters | REST lifecycle verified; diagnosis inconclusive; broader code-fault evidence remains separate |
+| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Published desktop checks and silent demo capture complete; video publication pending |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
-| O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
+| O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay; fresh REST trace verified | Public video and submission package; submission owner |
 
 B9 analysis and publication are complete; do not repeat its 210 trainings or
 reapply its earlier package. Its local sweep used no provider service. The B12
@@ -105,13 +107,13 @@ four false positives and four missed paraphrases; it has no live fault signature
    its frozen timeout with 29/36 completed cells; missing cells remain unmeasured.
    Semantic
    controls, the automatic Nano/embedding/cleanlab audit and logit probes are
-   implemented and measured. The pretrained B24 comparison is complete; the
-   full mode-B REST trace waits for its MPS dependency.
+   implemented and measured. The pretrained B24 comparison and full mode-B REST
+   trace are complete; their negative and inconclusive results are preserved.
 6. The owner confirmed eligibility and registration. The silent video and caption
    PDF are in Downloads; public video publication and final submission remain.
    The updated feedback file stays local for the owner to send.
 
 Historical heldout cases have been viewed and reused; their metrics remain
-exploratory evidence. The earlier local MPS series is complete; the current ledger
-study has separate data and is still being scored. The periodic completion check
+exploratory evidence. The earlier local MPS series and the separate ledger
+study are complete. The periodic completion check
 for the earlier series was disabled after publication in PR #100.

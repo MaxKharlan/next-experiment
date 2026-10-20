@@ -16,7 +16,9 @@ The public demo replays a saved Token Factory investigation. In that historical 
 
 The application uses Python, FastAPI and a browser interface with server-sent events. NVIDIA Nemotron 3 Super ranks hypotheses; Ultra explains supported verdicts. Token Factory provides inference and LoRA training through an OpenAI-compatible client. Tavily supplies linked reports of known issues. Local PyTorch evaluates downloaded adapters.
 
-State, execution ownership and budgets use SQLite. Every paid operation reserves its estimated maximum cost before dispatch; uncertain outcomes retain their reservation. Reports store available provider request IDs. Artifact storage supports local files and Nebius Object Storage. Serverless Jobs have also executed a pinned CUDA diagnostic and returned its result through Object Storage; backend equivalence is still under investigation.
+State, execution ownership and budgets use SQLite. Every paid operation reserves its estimated maximum cost before dispatch; uncertain outcomes retain their reservation. Reports store available provider request IDs. Artifact storage supports local files and Nebius Object Storage. A pinned base checkpoint produced identical records on 64 development queries across MacBook MPS, AI Cloud L40S and Kaggle T4. Equivalence of trained adapters across those backends remains unverified.
+
+A fresh REST investigation completed eight local adapter runs, saved its event stream and report, and verified recovery after an API restart. Repeating its POST reused the same investigation. Its diagnosis remained inconclusive.
 
 We separately measured Nano on 200 constructed semantic-audit examples. Its failure to flag the planted label contradictions is published alongside stronger embedding and cleanlab baselines. Those measurements are not presented as a calibrated live classifier.
 
@@ -38,7 +40,7 @@ A strong model can often name a likely cause without an experiment. Experiments 
 
 ## What's next
 
-Complete the prospective data and code comparisons, measure additional task/model combinations, and calibrate diagnostic probabilities on independently sampled failures. Broader deployment depends on those measurements; the existing benchmark does not establish that coverage.
+Finish the Qwen task references and calibrate diagnostic probabilities on independently sampled failures. The Cloud study completed all fifteen code comparisons and 29 of 36 data comparisons before its frozen timeout; seven cells remain unmeasured. Broader deployment needs evidence beyond the existing development tasks.
 
 ## Links and track
 
@@ -48,4 +50,3 @@ Recommended track: Coding and Agentic Engineering.
 - [Source and setup](https://github.com/MaxKharlan/next-experiment)
 - [FT-Fail dataset](https://huggingface.co/datasets/MakHH/FT-Fail)
 - [Detailed benchmark](https://github.com/MaxKharlan/next-experiment/blob/main/docs/benchmark.md)
-- [Provider feedback](https://github.com/MaxKharlan/next-experiment/blob/main/docs/feedback.md)
