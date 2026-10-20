@@ -1,13 +1,16 @@
 # Project status — 20 October 2026
 
 Current continuation: [execution queue](remaining-queue-execution-20261020.md).
-PRs #105–#108 publish the automatic semantic audit, neutral logit diagnostics,
-semantic controls and verified FT-Fail Hub release. The owner authorized separate
+PRs #105–#110 publish the automatic semantic audit, neutral logit diagnostics,
+semantic controls, verified FT-Fail Hub release and bounded cloud/reference
+execution. The owner authorized separate
 $25 additional Token Factory and $30 AI Cloud limits and confirmed submission
 eligibility, registration and representation. Prospective model scoring and
-REST/cloud studies are running; their uncompleted outcomes are not benchmark
-results. [Submission materials](submission/readiness.md) track the remaining
-video and final submission.
+REST/cloud studies are running. The
+[fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete
+and verified; the data cohort remains active. [Submission materials](submission/readiness.md)
+track the silent captioned video saved outside the project and the remaining
+publication and submission steps.
 
 The historical baseline below is main `1350564`, through #103. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
@@ -34,7 +37,7 @@ are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
 | A2/A3 datasets | #82: JSON extraction and function calling, versioned splits and agent-reviewed references | Full task/model quality references and fresh evaluation; tracks A/B |
-| A4 validation | Explicit-case API validates roles, nonblank text and user prompts before worker creation; tests cover all three tasks and four splits | [Lexical overlap audit](lexical-overlap-audit-20261020.md) is separate; semantic validation and fault-4 quality evidence remain open; track A |
+| A4 validation | Explicit-case API validates roles, nonblank text and user prompts before worker creation; tests cover all three tasks and four splits | [Semantic controls](semantic-data-controls-20261020.md) are measured; downstream fault-4 validation optimism is in the running data cohort |
 | A7/A8/fault 1 | [Semantic record](fault-1-semantics.md), answer-cut probe and observed-row drop pair; length preflight is distinct | [Clean-prefix and alternative-malformation controls](answer-cut-specificity-controls-20261019.md) measured; independent likelihood calibration, causal specificity and multi-task evidence; tracks A/B |
 | Measured fault 1 | #84: Kaggle and Token Factory target/control results with incomplete recovery; two new public experiment replays | Fresh complete API investigation and untouched final test; tracks A/B |
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
@@ -42,8 +45,8 @@ are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
 | B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md); new calls persist [provider request references](persisted-llm-usage.md), while invoices and per-call matching remain open; track B |
 | B21 | [Historical Trainer CPU experiment](transformers-38837-reproduction-20261020.md): 4/6 comparisons agree; accumulation-3 controls fail; frozen status `stopped` | Full original-case reproduction and downstream quality; track B |
-| B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
-| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Published desktop Safari long-history and replay-switch checks passed on 20 October; fresh trace/video still pending; this chat |
+| B24 | Four fault injections, label audits, 60 synthetic CPU runs and fifteen verified pretrained CUDA runs; two faults reduced quality in this setting | Complete mode-B REST investigation; track B |
+| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Published desktop checks and silent demo capture complete; fresh REST trace and video publication pending |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
 | O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
 
@@ -55,8 +58,10 @@ free before this follow-up; local evaluations run one process at a time.
 
 The [ticket-ledger preparation](ticket-ledger-development-20261020.md) now freezes
 504 fresh histories, complete-object endpoints and new development gates.
-Two offline oracles agree; tokenizer context checks pass. Model admission remains
-`not_measured`; no new paid series is authorized.
+Two offline oracles agree; tokenizer context checks pass. The user subsequently
+authorized the paid LoRA admission study under the separate additional budget.
+Its twelve jobs succeeded, and serial model scoring is running. The result remains
+pending until all twelve score files are complete and the frozen gates are applied.
 
 The [3×3 matrix plan](reference-matrix-plan-20261020.md) records all nine cells,
 missing comparable metrics and a separate prospective budget scenario.
@@ -90,13 +95,15 @@ four false positives and four missed paraphrases; it has no live fault signature
    match inference calls when provider records permit. New calls now retain provider
    request/response IDs and their reservation IDs for that matching. SQLite worker ownership,
    recipe reservations and persistent Tavily credits are implemented.
-5. Implement the remaining faults 2–5 probes and controls, A29 logit probes, and
-   embeddings/Nano/cleanlab research from the reconciled scope. Continue B24
-   pretrained confirmation under a separate frozen protocol with tracks A/B. B24 CPU
-   synthetic evidence does not validate a pretrained model or a full mode-B trace.
-6. The submission owner must confirm eligibility/registration, make the public
-   video and submit the package. The repository cannot establish those facts.
+5. Finish the running faults 2–5 quality cohort and reference grid. Semantic
+   controls, the automatic Nano/embedding/cleanlab audit and logit probes are
+   implemented and measured. The pretrained B24 comparison is complete; the
+   full mode-B REST trace waits for its MPS dependency.
+6. The owner confirmed eligibility and registration. The silent video and caption
+   PDF are in Downloads; public video publication and final submission remain.
+   The updated feedback file stays local for the owner to send.
 
 Historical heldout cases have been viewed and reused; their metrics remain
-exploratory evidence. Local MPS evaluation is complete. The periodic completion
-check was disabled after publication in PR #100.
+exploratory evidence. The earlier local MPS series is complete; the current ledger
+study has separate data and is still being scored. The periodic completion check
+for the earlier series was disabled after publication in PR #100.

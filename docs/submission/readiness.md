@@ -20,7 +20,7 @@ establish residence. Submission accepts binding terms and has not been performed
 | Demo URL | Public saved replay; not advertised as a public paid endpoint |
 | Dataset | [MakHH/FT-Fail](https://huggingface.co/datasets/MakHH/FT-Fail), published and verified |
 | Video | Silent 2:06 demo with English captions and a separate caption PDF saved in the owner's Downloads folder, outside the project; YouTube publication pending |
-| Feedback | Repository feedback log; final submission excerpt pending |
+| Feedback | Consolidated local `docs/feedback.md`; owner will send it. New feedback edits are excluded from publication |
 | Track | Coding and Agentic Engineering recommended; owner selection pending |
 | Eligibility and registration | Confirmed by owner on 20 October; confirmation recorded below |
 | Final submission | Not submitted |
