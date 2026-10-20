@@ -74,4 +74,4 @@ free before this follow-up; local evaluations run one process at a time.
 
 Historical heldout cases have been viewed and reused; their metrics remain
 exploratory evidence. Local MPS evaluation is complete. The periodic completion
-check is to be disabled when this result PR is published.
+check was disabled after publication in PR #100.
