@@ -42,6 +42,7 @@ def build(out: Path) -> list[str]:
         encoding="utf-8",
     )
     shutil.copyfile(SCREEN.parent / "label-audit.js", out / "label-audit.js")
+    shutil.copyfile(SCREEN.parent / "label-examples.json", out / "label-examples.json")
     _write_json(out / "demo-cases.json", runners.demo_index())
     for name in names:
         events = [

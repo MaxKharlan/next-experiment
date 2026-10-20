@@ -10,7 +10,7 @@ A training job can finish successfully while the resulting model still fails its
 
 Next Experiment inspects a fine-tuning case, ranks possible causes and chooses checks by their expected information per dollar. A proposed repair is compared with a declared control on separate check examples. The report records the effect, uncertainty, decision rule and cost. Inconclusive results remain inconclusive. An approved final retrain is evaluated alongside the base and failed models.
 
-The public demo replays a saved Token Factory investigation. In that historical case, Qwen3-0.6B improved from 14% to 42.5% exact match on 200 held-out queries. Estimated inference and training cost was about $0.075. This result concerns one task and recipe, not a general recovery rate.
+The public application lets testers run training-label checks on editable examples or their own inputs, entirely in the browser without keys or payment. It also replays a saved Token Factory investigation. In that historical case, Qwen3-0.6B improved from 14% to 42.5% exact match on 200 held-out queries. Estimated inference and training cost was about $0.075. This result concerns one task and recipe, not a general recovery rate. Fresh provider inference and training are separate self-hosted operations.
 
 ## How we built it
 
