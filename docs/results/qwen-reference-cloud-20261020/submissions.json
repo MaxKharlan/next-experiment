@@ -1,0 +1,43 @@
+{
+  "status": "both_submitted",
+  "jobs": {
+    "Qwen3-0.6B": {
+      "job_id": "aijob-e00j5a5mejfq7bhd4x",
+      "job_name": "next-experiment-qwen-06b-eval-20261020",
+      "platform": "gpu-l40s-a",
+      "preset": "1gpu-8vcpu-32gb",
+      "timeout_hours": 2,
+      "reservation_usd": 6,
+      "protocol_sha256": "9bd2d511d90c69344c55ed5ebf085579d4ce049179dbf9ee8cd8dd8dbeb61b8b",
+      "staged_input": {
+        "bucket": "next-experiment-artifacts",
+        "key": "runs/next-experiment-qwen-06b-eval-20261020/input.zip",
+        "sha256": "bd7ab6b0c2b0ac1ea348314a7b57434f855fcd00c9ef5ad79626e48c248e2dad",
+        "bytes": 193349751,
+        "files": 52,
+        "job_name": "next-experiment-qwen-06b-eval-20261020",
+        "launcher_sha256": "ad4962cc5e16ee6c479b48f4f6c32658373f98385661c844d72b2e8ab3f69bcb"
+      }
+    },
+    "Qwen3-1.7B": {
+      "job_id": "aijob-e00vvqte6xzjfmrz5w",
+      "job_name": "next-experiment-qwen-17b-eval-20261020",
+      "platform": "gpu-l40s-a",
+      "preset": "1gpu-8vcpu-32gb",
+      "timeout_hours": 2,
+      "reservation_usd": 6,
+      "protocol_sha256": "088ce04ece1fd4fef77f5c4a5874d50c57de2e30119a8fd1ed5c4e591942f991",
+      "staged_input": {
+        "bucket": "next-experiment-artifacts",
+        "key": "runs/next-experiment-qwen-17b-eval-20261020/input.zip",
+        "sha256": "140276f026bf04468df30c591a45eb91532fa14fe53320972464047551cb7da8",
+        "bytes": 332279007,
+        "files": 52,
+        "job_name": "next-experiment-qwen-17b-eval-20261020",
+        "launcher_sha256": "2a705222d0126df89d4472b98ce6f728313ba87f201923cc0079856825db9a5c"
+      }
+    }
+  },
+  "total_reserved_usd": 12,
+  "comparison_scope": "Prospective CUDA evaluation; no assertion of exact adapter equivalence with MPS."
+}
