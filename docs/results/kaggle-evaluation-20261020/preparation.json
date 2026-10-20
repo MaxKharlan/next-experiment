@@ -1,0 +1,8 @@
+{
+  "notebook_sha256": "23f57286e545cea97e0976081d4484823f0ae2bb1fe108bb9fc05836efd28af1",
+  "protocol_sha256": "25eeb3952ca089cb36c176a0adbd9a49fde105c2f66a32d5a696962fe715e666",
+  "payload_bytes": 13292,
+  "status": "prepared_not_executed",
+  "credentials": "Kaggle account authorization not available in supplied environment",
+  "pre_execution_formatting": "Notebook wrapper formatted by Ruff; embedded payload unchanged."
+}

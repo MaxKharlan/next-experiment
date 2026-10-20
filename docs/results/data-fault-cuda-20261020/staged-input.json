@@ -1,0 +1,9 @@
+{
+  "bucket": "next-experiment-artifacts",
+  "key": "runs/next-experiment-data-cuda-20261020/input.zip",
+  "sha256": "2108ec7260ca23817a18178e7713b60cdfd80984f29fdcd2104e442ac489297c",
+  "bytes": 144324,
+  "files": 37,
+  "job_name": "next-experiment-data-cuda-20261020",
+  "launcher_sha256": "c2f2d30fa55dddb47ee9631b866b1ee79dea8dcfc801d66d02eb62a6524ff1e8"
+}

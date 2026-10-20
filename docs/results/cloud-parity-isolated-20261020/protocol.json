@@ -1,0 +1,77 @@
+{
+  "id": "cloud-parity-isolated-20261020",
+  "created_at": "2026-10-20T13:28:39.010524+00:00",
+  "scope": "A15 serverless execution and A20 teacher-forced runtime comparison only; no training backend equivalence claim. Existing MPS results were observed before this protocol.",
+  "attempts": 1,
+  "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+  "platform": "gpu-l40s-a",
+  "preset": "1gpu-8vcpu-32gb",
+  "project": "project-e00d05kzpr00n7e8p79fw0",
+  "timeout": "1h",
+  "disk_size": "120Gi",
+  "storage": "Existing bucket next-experiment-artifacts, dedicated runs/name prefix; result JSON only.",
+  "pricing_sources": [
+    "https://nebius.com/prices",
+    "https://docs.nebius.com/serverless/pricing-quotas"
+  ],
+  "compute_hourly_usd": 1.55,
+  "reserve_usd": 4,
+  "reservation_basis": "One hour compute plus 30 minute startup/teardown allowance, 120Gi disk at upper listed .118/Gi-month, 20% tax allowance; rounded up to $4. Provider timeout plus local monitoring.",
+  "gates": {
+    "all_model_file_hashes_equal": true,
+    "all_token_hashes_equal": true,
+    "all_package_versions_equal_ignoring_cuda_build_suffix": true,
+    "maximum_absolute_per_example_region_mean_nll_difference": 0.0001,
+    "maximum_absolute_eos_probability_difference": 0.0001
+  },
+  "local_token_hashes": [
+    "244f36ef561373a81f3ce8ed7e20a770bd349cd87d46885cd9ff6e632a05420a",
+    "ff0a6c68856d3e0012ca51bd4915b734d34b4ef4d48d0e654c99cd73f6abad41",
+    "6ba12439c3dc062eb0123876dec6e060b6394081c8ab5dc57f065f69de4c3bd8",
+    "4c180d84cb026d6a8f1ba18441f5fe4602541bb00148c1663ddacfc0865ecf29",
+    "5979f025656c2a9af0e6d120919c2703fc130b1262a97e0a2e73ead643a8b21d",
+    "cf82588c3f7f9d27f51cdd26b9c6acc4d48a0df63a29c270c8f1a36cffd5362b",
+    "4c758a8dcbff0c99d4415f06a3becf573fdece427035e2562ac468b568ab43fc",
+    "974f668ddeee0c6ec70ff77915505b058c9e47c949cd9136160f186230781b42",
+    "302cb4ee501d92f47e5564fc90209a28769bc666c8d3bbf955fb9641f189a7e5",
+    "18cc9cb7a6f54d326adf1bb74951d3a8f6f07a4f120ee3eb711153c44ac5b9a4",
+    "0195f519395aa6539fc5cdef4fba9a48a01983cf8178fffe220dba24ee5bb20f",
+    "c595e41737601470df78aa13ae6987798d3bf75218a8ef822ae4e8592b143b16"
+  ],
+  "bundle_sha256": {
+    "worker.py": "ae4437eb792f897330ca6e1a51858cf5d52c7fbc814ae079a953cbe6dda0f748",
+    "local-protocol.json": "06c5860bfb0fb1496ed98083f6ebce354c377ebd8525ff0474b409fb02837e3f",
+    "dependencies.txt": "d25dcabb9e314864fef3a21ab46f0d4c21d70c39d815dcc8e8ba6be89fae0bcc",
+    "development.jsonl": "eb04f2856679029a780bb135ce8f5fc427fae41b9acaa1440c182f5ad421d93c",
+    "main.py": "fcf808ff61a48f75900fd9a4b25f461d20a4ade439f7294b833ef8d3ed989204",
+    "core/probes/level1/logits.py": "2e0105a6ef98dadbdbeac7c1d7a07e5bf36990401c38d6c5e5c6081b598de50c",
+    "core/eval/data.py": "5618acdbd8bac665b71d99b8c3b72e9a07e2d8f17701e78ca673b71aaccbeaa7"
+  },
+  "predecessor": "cloud-parity-20261020",
+  "correction": "Use isolated venv with no system packages; preinstalled torchvision caused original import failure before any metrics. Same data, model and gates. Retrieve result.json from existing bucket.",
+  "job_spec": {
+    "name": "next-experiment-parity-isolated-20261020",
+    "project": "project-e00d05kzpr00n7e8p79fw0",
+    "entry": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/cloud-parity-isolated-20261020/bundle/main.py",
+    "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+    "platform": "gpu-l40s-a",
+    "preset": "1gpu-8vcpu-32gb",
+    "bundle_sha256": {
+      "worker.py": "ae4437eb792f897330ca6e1a51858cf5d52c7fbc814ae079a953cbe6dda0f748",
+      "local-protocol.json": "06c5860bfb0fb1496ed98083f6ebce354c377ebd8525ff0474b409fb02837e3f",
+      "dependencies.txt": "d25dcabb9e314864fef3a21ab46f0d4c21d70c39d815dcc8e8ba6be89fae0bcc",
+      "development.jsonl": "eb04f2856679029a780bb135ce8f5fc427fae41b9acaa1440c182f5ad421d93c",
+      "main.py": "fcf808ff61a48f75900fd9a4b25f461d20a4ade439f7294b833ef8d3ed989204",
+      "core/probes/level1/logits.py": "2e0105a6ef98dadbdbeac7c1d7a07e5bf36990401c38d6c5e5c6081b598de50c",
+      "core/eval/data.py": "5618acdbd8bac665b71d99b8c3b72e9a07e2d8f17701e78ca673b71aaccbeaa7"
+    },
+    "output_bucket": "next-experiment-artifacts",
+    "timeout_hours": 1,
+    "disk_gib": 120,
+    "output_bucket_id": "storagebucket-e0018072464185852935047"
+  },
+  "pre_submission_validation_corrections": [
+    "Bare bucket name rejected as volume source type next; no job created",
+    "s3 URI requires separate AWS credentials; use observed native Nebius bucket resource ID; no job created"
+  ]
+}

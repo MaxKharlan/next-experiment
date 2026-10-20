@@ -1,0 +1,9 @@
+{
+  "bucket": "next-experiment-artifacts",
+  "key": "runs/next-experiment-data-fp32-20261020/input.zip",
+  "sha256": "1cddbe1931a807cf0e071b44cba4e9d3be875e8c94ae21638c2d6c2099d49779",
+  "bytes": 144838,
+  "files": 37,
+  "job_name": "next-experiment-data-fp32-20261020",
+  "launcher_sha256": "a42cb1cc62a8d22381391842ea51fcf3aa494081ed7241fc816c81fdfd521488"
+}

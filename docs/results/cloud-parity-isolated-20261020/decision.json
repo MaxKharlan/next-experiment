@@ -1,0 +1,12 @@
+{
+  "decision": "fail",
+  "max_absolute_region_mean_nll_difference": 0.0033648740032727886,
+  "max_absolute_eos_probability_difference": 1.7881393432617188e-07,
+  "token_counts_equal": true,
+  "token_hashes_equal": true,
+  "model_and_package_hash_gates": "worker assertions passed before metrics",
+  "scope": "A15 serverless execution and A20 teacher-forced runtime comparison only; no training backend equivalence claim. Existing MPS results were observed before this protocol.",
+  "result_sha256": "6488a2ec32dd407e3bea676fa6df89ba3b516f3de8e535eef4a2dae23765dac8",
+  "billing": "$4 reserve retained pending provider billing",
+  "cleanup": "Compute get returned ResourceNotFound after terminal completion; output remains in Object Storage."
+}

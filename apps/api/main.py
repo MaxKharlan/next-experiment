@@ -29,6 +29,7 @@ from sse_starlette.sse import EventSourceResponse
 
 from apps.api import runners
 from apps.api.case_input import CaseStart, prepare_case
+from apps.api.code_investigations import CodeInvestigationStart
 from apps.api.label_audits import LabelAuditRequest, prepare_audit
 from apps.api.store import get_investigation_store
 from core.case import InvestigationCase
@@ -106,6 +107,33 @@ def label_audit(req: LabelAuditRequest) -> dict:
 @app.get("/api/demo-cases")
 def demo_cases() -> list[dict]:
     return runners.demo_index()
+
+
+@app.post("/api/investigations/code", status_code=202)
+def start_code(
+    req: CodeInvestigationStart, idempotency_key: str | None = Header(default=None)
+) -> dict:
+    from apps.api import code_investigations
+
+    if get_settings().public_demo:
+        raise HTTPException(403, "the public demo only replays saved investigations")
+    identity = _request_identity(req, idempotency_key)
+    if identity is None:
+        raise HTTPException(422, "Local training requires an Idempotency-Key")
+    try:
+        existing = store.find_request(*identity)
+        if existing is not None:
+            return {"id": existing, "reused": True}
+        code_investigations.configured_ledger()
+        prepared = code_investigations.prepare(req)
+        inv_id, created = store.create_once(
+            "local", {"mode": "B", "request": req.model_dump()}, req.title, *identity
+        )
+    except (OSError, ValueError, TypeError) as error:
+        raise HTTPException(422, str(error)) from None
+    if created:
+        _launch(code_investigations.run, inv_id, prepared)
+    return {"id": inv_id, "reused": not created}
 
 
 @app.post("/api/investigations")

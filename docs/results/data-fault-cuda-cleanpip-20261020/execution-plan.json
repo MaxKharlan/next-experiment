@@ -1,0 +1,20 @@
+{
+  "spec": {
+    "name": "next-experiment-data-cleanpip-20261020",
+    "project": "project-e00d05kzpr00n7e8p79fw0",
+    "entry": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/data-fault-cuda-cleanpip-20261020/launcher/main.py",
+    "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+    "platform": "gpu-l40s-a",
+    "preset": "1gpu-8vcpu-32gb",
+    "bundle_sha256": {
+      "main.py": "ab58d9a117d748b6ddcac97d274022cd465e41ff399014ac7a5beae8a2afa46a"
+    },
+    "output_bucket": "next-experiment-artifacts",
+    "output_bucket_id": "storagebucket-e0018072464185852935047",
+    "timeout_hours": 2,
+    "disk_gib": 120
+  },
+  "reservation_usd": 6,
+  "submitted": false,
+  "reserve_basis": "Two hours L40S plus 30 minutes startup/teardown, 120Gi disk, 20% allowance. Prior failed reserves retained."
+}

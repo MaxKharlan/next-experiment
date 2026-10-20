@@ -1,0 +1,9 @@
+{
+  "bucket": "next-experiment-artifacts",
+  "key": "runs/next-experiment-data-cleanpip-20261020/input.zip",
+  "sha256": "57ccfd10ed0752bd4f9ad41eff95eaf45462d3fd0cb8d134d416c29b83b79d18",
+  "bytes": 145231,
+  "files": 37,
+  "job_name": "next-experiment-data-cleanpip-20261020",
+  "launcher_sha256": "ab58d9a117d748b6ddcac97d274022cd465e41ff399014ac7a5beae8a2afa46a"
+}

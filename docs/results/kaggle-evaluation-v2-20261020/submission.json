@@ -1,0 +1,15 @@
+{
+  "status": "submitted",
+  "kernel": "maximkharlan/next-experiment-evaluation-v2-20261020",
+  "attempts": 1,
+  "timeout_seconds": 1800,
+  "accelerator": "NvidiaTeslaT4",
+  "private": true,
+  "notebook_sha256": "d502ac9fe1100559ca219a27730eabc10d7e1ed11b69d11c9b2b9e9b775d27ee",
+  "provider_charge_usd": 0,
+  "predecessor": "kaggle-evaluation-20261020",
+  "reason": "Bootstrap-only correction after ensurepip failure; no predecessor model measurement",
+  "exit_code": 0,
+  "stdout": "Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/maximkharlan/next-experiment-evaluation-v2-20261020\n",
+  "stderr": ""
+}

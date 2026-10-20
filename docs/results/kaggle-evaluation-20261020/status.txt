@@ -1,0 +1,1 @@
+maximkharlan/next-experiment-frozen-evaluation-20261020 has status "KernelWorkerStatus.ERROR"

@@ -1,0 +1,118 @@
+[{"stream_name":"stderr","time":7.225240304,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.225299394,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.2253071030000005,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.225312439,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.865916522,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.86594737,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.865952184,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.865955838,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":9.163127953,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":9.163699056,"data":"  File \"/kaggle/working/frozen-eval/main.py\", line 10, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":9.163712252,"data":"    venv.EnvBuilder(with_pip=True, system_site_packages=False).create(environment)\n"}
+,{"stream_name":"stderr","time":9.163717088,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.163721479,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 82, in create\n"}
+,{"stream_name":"stderr","time":9.163725401,"data":"    self._setup_pip(context)\n"}
+,{"stream_name":"stderr","time":9.163728958,"data":"    ~~~~~~~~~~~~~~~^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.163732429,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 446, in _setup_pip\n"}
+,{"stream_name":"stderr","time":9.163736096,"data":"    self._call_new_python(context, '-m', 'ensurepip', '--upgrade',\n"}
+,{"stream_name":"stderr","time":9.163739762,"data":"    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.163743329,"data":"                          '--default-pip', stderr=subprocess.STDOUT)\n"}
+,{"stream_name":"stderr","time":9.163747195,"data":"                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.163751249,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 442, in _call_new_python\n"}
+,{"stream_name":"stderr","time":9.163755112,"data":"    subprocess.check_output(args, **kwargs)\n"}
+,{"stream_name":"stderr","time":9.163758595000001,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.163762232,"data":"  File \"/usr/lib/python3.13/subprocess.py\", line 472, in check_output\n"}
+,{"stream_name":"stderr","time":9.163765811,"data":"    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n"}
+,{"stream_name":"stderr","time":9.163769495,"data":"           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.163812892,"data":"               **kwargs).stdout\n"}
+,{"stream_name":"stderr","time":9.163822906,"data":"               ^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.16382657,"data":"  File \"/usr/lib/python3.13/subprocess.py\", line 577, in run\n"}
+,{"stream_name":"stderr","time":9.163830318,"data":"    raise CalledProcessError(retcode, process.args,\n"}
+,{"stream_name":"stderr","time":9.163833851,"data":"                             output=stdout, stderr=stderr)\n"}
+,{"stream_name":"stderr","time":9.163852818,"data":"subprocess.CalledProcessError: Command '['/tmp/next-experiment-runtime/bin/python3', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.\n"}
+,{"stream_name":"stderr","time":9.185688896,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":9.185719122,"data":"  File \"/kaggle/working/frozen-eval/main.py\", line 10, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":9.185724608,"data":"    venv.EnvBuilder(with_pip=True, system_site_packages=False).create(environment)\n"}
+,{"stream_name":"stderr","time":9.185728574,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185732204,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 82, in create\n"}
+,{"stream_name":"stderr","time":9.185735702,"data":"    self._setup_pip(context)\n"}
+,{"stream_name":"stderr","time":9.185740381,"data":"    ~~~~~~~~~~~~~~~^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185744176,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 446, in _setup_pip\n"}
+,{"stream_name":"stderr","time":9.185748124,"data":"    self._call_new_python(context, '-m', 'ensurepip', '--upgrade',\n"}
+,{"stream_name":"stderr","time":9.185752269,"data":"    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185755964,"data":"                          '--default-pip', stderr=subprocess.STDOUT)\n"}
+,{"stream_name":"stderr","time":9.185759603,"data":"                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185763606,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 442, in _call_new_python\n"}
+,{"stream_name":"stderr","time":9.185767994,"data":"    subprocess.check_output(args, **kwargs)\n"}
+,{"stream_name":"stderr","time":9.18577177,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.18579543,"data":"  File \"/usr/lib/python3.13/subprocess.py\", line 472, in check_output\n"}
+,{"stream_name":"stderr","time":9.185800009,"data":"    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n"}
+,{"stream_name":"stderr","time":9.185803848,"data":"           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185807526,"data":"               **kwargs).stdout\n"}
+,{"stream_name":"stderr","time":9.185811193,"data":"               ^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185814814,"data":"  File \"/usr/lib/python3.13/subprocess.py\", line 577, in run\n"}
+,{"stream_name":"stderr","time":9.185818974,"data":"    raise CalledProcessError(retcode, process.args,\n"}
+,{"stream_name":"stderr","time":9.185822672,"data":"                             output=stdout, stderr=stderr)\n"}
+,{"stream_name":"stderr","time":9.185827181,"data":"subprocess.CalledProcessError: Command '['/tmp/next-experiment-runtime/bin/python3', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.\n"}
+,{"stream_name":"stderr","time":9.185831484,"data":"\n"}
+,{"stream_name":"stderr","time":9.185835662,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":9.185839744,"data":"  File \"/kaggle/working/frozen-eval/main.py\", line 10, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":9.18584384,"data":"    venv.EnvBuilder(with_pip=True, system_site_packages=False).create(environment)\n"}
+,{"stream_name":"stderr","time":9.185847874,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185864892,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 82, in create\n"}
+,{"stream_name":"stderr","time":9.185869125,"data":"    self._setup_pip(context)\n"}
+,{"stream_name":"stderr","time":9.185872748,"data":"    ~~~~~~~~~~~~~~~^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185876274,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 446, in _setup_pip\n"}
+,{"stream_name":"stderr","time":9.185880144,"data":"    self._call_new_python(context, '-m', 'ensurepip', '--upgrade',\n"}
+,{"stream_name":"stderr","time":9.185886007,"data":"    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.18589022,"data":"                          '--default-pip', stderr=subprocess.STDOUT)\n"}
+,{"stream_name":"stderr","time":9.185893648,"data":"                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185897124,"data":"  File \"/usr/lib/python3.13/venv/__init__.py\", line 442, in _call_new_python\n"}
+,{"stream_name":"stderr","time":9.185900691,"data":"    subprocess.check_output(args, **kwargs)\n"}
+,{"stream_name":"stderr","time":9.18590405,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185907674,"data":"  File \"/usr/lib/python3.13/subprocess.py\", line 472, in check_output\n"}
+,{"stream_name":"stderr","time":9.185911267,"data":"    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n"}
+,{"stream_name":"stderr","time":9.185914718,"data":"           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185918267,"data":"               **kwargs).stdout\n"}
+,{"stream_name":"stderr","time":9.185921618,"data":"               ^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.185925193,"data":"  File \"/usr/lib/python3.13/subprocess.py\", line 577, in run\n"}
+,{"stream_name":"stderr","time":9.185928979,"data":"    raise CalledProcessError(retcode, process.args,\n"}
+,{"stream_name":"stderr","time":9.185932761,"data":"                             output=stdout, stderr=stderr)\n"}
+,{"stream_name":"stderr","time":9.185936225,"data":"subprocess.CalledProcessError: Command '['/tmp/next-experiment-runtime/bin/python3', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.\n"}
+,{"stream_name":"stderr","time":9.510608766,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":9.511283721,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":9.511299901,"data":"    import sys;import papermill as pm;pm.execute_notebook(\"__notebook__.ipynb\",\"__notebook__.ipynb\",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=1800)\n"}
+,{"stream_name":"stderr","time":9.511306851,"data":"                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.511311498,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":9.511315522,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":9.511320856,"data":"    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":9.511328653,"data":"  File \"/usr/local/lib/python3.13/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":9.511331295,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":9.511342564,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":9.511345128,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":9.511347586,"data":"Exception encountered at \"In [1]\":\n"}
+,{"stream_name":"stderr","time":9.511350128,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":9.51137209,"data":"CalledProcessError                        Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":9.51137653,"data":"/tmp/ipykernel_23/750927449.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":9.511380415,"data":"     23     archive.extractall(root)\n"}
+,{"stream_name":"stderr","time":9.511384712,"data":"     24 os.environ[\"NEBIUS_OUTPUT_DIR\"] = \"/kaggle/working/evaluation\"\n"}
+,{"stream_name":"stderr","time":9.511389164,"data":"---\u003e 25 subprocess.run([sys.executable, str(root / \"main.py\")], check=True)\n"}
+,{"stream_name":"stderr","time":9.511393464,"data":"\n"}
+,{"stream_name":"stderr","time":9.511396877,"data":"/usr/lib/python3.13/subprocess.py in run(input, capture_output, timeout, check, *popenargs, **kwargs)\n"}
+,{"stream_name":"stderr","time":9.511400618,"data":"    575         retcode = process.poll()\n"}
+,{"stream_name":"stderr","time":9.511404165,"data":"    576         if check and retcode:\n"}
+,{"stream_name":"stderr","time":9.511407606,"data":"--\u003e 577             raise CalledProcessError(retcode, process.args,\n"}
+,{"stream_name":"stderr","time":9.511411285,"data":"    578                                      output=stdout, stderr=stderr)\n"}
+,{"stream_name":"stderr","time":9.511414951999999,"data":"    579     return CompletedProcess(process.args, retcode, stdout, stderr)\n"}
+,{"stream_name":"stderr","time":9.51142033,"data":"\n"}
+,{"stream_name":"stderr","time":9.511427782,"data":"CalledProcessError: Command '['/usr/bin/python3', '/kaggle/working/frozen-eval/main.py']' returned non-zero exit status 1.\n"}
+,{"stream_name":"stderr","time":9.51143042,"data":"\n"}
+,{"stream_name":"stderr","time":12.029805298,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":12.029866805,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":12.205317922,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":12.20534683,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":13.014234904,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":13.098413597,"data":"[NbConvertApp] Writing 25578 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":15.806546033,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":16.353493727,"data":"[NbConvertApp] Writing 299656 bytes to __results__.html\n"}
+]

@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-20T14:14:43.529661+00:00",
+  "budgets": {
+    "spending": {
+      "cap_usd": 25.0,
+      "committed_usd": 4.2613228199999975,
+      "available_usd": 20.738677180000003
+    },
+    "ai-cloud-spending": {
+      "cap_usd": 30.0,
+      "committed_usd": 24.0,
+      "available_usd": 6.0
+    }
+  },
+  "ledger_scores": {
+    "format-s2402": {
+      "rows": 104,
+      "complete": false
+    },
+    "cut-s2401": {
+      "rows": 180,
+      "complete": true
+    },
+    "cut-s2402": {
+      "rows": 180,
+      "complete": true
+    },
+    "cut-s2403": {
+      "rows": 180,
+      "complete": true
+    },
+    "format-s2401": {
+      "rows": 180,
+      "complete": true
+    }
+  },
+  "rest": {
+    "status": "waiting_for_twelve_mps_scores"
+  },
+  "cloud_code_job": "aijob-e00s96et8m5pkns9m0",
+  "kaggle": "queued"
+}

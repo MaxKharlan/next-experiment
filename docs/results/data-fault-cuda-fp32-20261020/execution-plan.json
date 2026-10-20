@@ -1,0 +1,20 @@
+{
+  "spec": {
+    "name": "next-experiment-data-fp32-20261020",
+    "project": "project-e00d05kzpr00n7e8p79fw0",
+    "entry": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/data-fault-cuda-fp32-20261020/launcher/main.py",
+    "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+    "platform": "gpu-l40s-a",
+    "preset": "1gpu-8vcpu-32gb",
+    "bundle_sha256": {
+      "main.py": "a42cb1cc62a8d22381391842ea51fcf3aa494081ed7241fc816c81fdfd521488"
+    },
+    "output_bucket": "next-experiment-artifacts",
+    "output_bucket_id": "storagebucket-e0018072464185852935047",
+    "timeout_hours": 2,
+    "disk_gib": 120
+  },
+  "reservation_usd": 6,
+  "reserve_basis": "Two hours L40S at $1.55/h plus 30 minutes startup/teardown, 120Gi disk and 20% allowance; full $6 retained pending billing.",
+  "submitted": false
+}

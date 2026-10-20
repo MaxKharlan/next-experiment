@@ -1,0 +1,8 @@
+{
+  "status": "infrastructure_failed_before_training",
+  "job_id": "aijob-e00f6pqn9j8qsps20h",
+  "cause": "Inherited PIP_CONSTRAINT forces NumPy 1.26.4, conflicting with frozen NumPy 2.4.6. Isolated venv alone does not remove installer environment constraints.",
+  "training_cells_started": 0,
+  "generation_started": false,
+  "reservation_usd_retained": 6
+}

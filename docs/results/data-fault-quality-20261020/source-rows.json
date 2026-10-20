@@ -1,0 +1,2248 @@
+{
+  "train": [
+    {
+      "text": "Why have I been charged a small fee to use my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2673
+    },
+    {
+      "text": "My ATM withdrawal is taking forever",
+      "label": "pending_cash_withdrawal",
+      "source_line": 812
+    },
+    {
+      "text": "There is a withdrawal waiting.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 863
+    },
+    {
+      "text": "When I tried to access my cash, I wasn't allowed!",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4981
+    },
+    {
+      "text": "When I was abroad the exchange rate for me was wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8289
+    },
+    {
+      "text": "what is going on with my cash withdrawal? the exchange rate is wrong",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8288
+    },
+    {
+      "text": "Hi, Could you please help me as someone has stolen my wallet few hours ago. And a withdrawal is made, please help immediately. As i don't want to suffer more.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8815
+    },
+    {
+      "text": "When I went to withdraw cash today the ATM gave me the wrong amount of cash. The app is showing a larger amount.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2339
+    },
+    {
+      "text": "Please tell me why I would have to pay a fee for a recent payment. Thanks.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2670
+    },
+    {
+      "text": "Why is this fee being charged to me after using my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2551
+    },
+    {
+      "text": "The ATM didn't give me enough money! I asked for more than it gave. What do I do?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2435
+    },
+    {
+      "text": "Why is the app showing a still pending message on a withdraw that has already been done?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 759
+    },
+    {
+      "text": "Why am I being charged to make cash withdrawals? I thought they were supposed to be free!",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9405
+    },
+    {
+      "text": "My card isn't here yet.",
+      "label": "card_arrival",
+      "source_line": 25
+    },
+    {
+      "text": "Why do I see a random withdrawal in my app?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8791
+    },
+    {
+      "text": "What's the expected wait time to recieve my new card?",
+      "label": "card_arrival",
+      "source_line": 73
+    },
+    {
+      "text": "There are multiple instances where you added a fee to the payment, as well as some where you didn't. Do you have an outline of when a fee will be added?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2579
+    },
+    {
+      "text": "My card appears to have never arrived?",
+      "label": "card_arrival",
+      "source_line": 153
+    },
+    {
+      "text": "Why was my atm withdrawl declined",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5062
+    },
+    {
+      "text": "I think I was charged a different exchange rate than what was posted at the time.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8226
+    },
+    {
+      "text": "I think that there was an error in calculating the exchange rate.  I recently withdrew cash and received much less than expected.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8334
+    },
+    {
+      "text": "ATM apparently not working?  Couldn't access funds in my account?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5051
+    },
+    {
+      "text": "The atm didn'y give me all the cash",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2479
+    },
+    {
+      "text": "What should I do if I see an unauthorized withdrawal on my statement?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8816
+    },
+    {
+      "text": "Since when do you charge to make a withdrawal? I've always done it for free. So how much is it now?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9361
+    },
+    {
+      "text": "I tried to get money out of an ATM in Notting Hill earlier, but it didn't work. Is my card actually working? It's the first time I tried using it",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4987
+    },
+    {
+      "text": "When I went to $100, all the machine would give me was $20.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2445
+    },
+    {
+      "text": "There are funds showing in my app that I did not receive.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8931
+    },
+    {
+      "text": "Hello, I tried to take some cash out of the ATM but I looked at my statement and it still shows that it's pending. Is the machine broken? Will I receive my money back or will I be charged for this?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 867
+    },
+    {
+      "text": "The transaction for the cash I pulled out of the ATM earlier is pending in the app, but how if I already have the cash?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 751
+    },
+    {
+      "text": "Please tell my why I was charged a fee for using my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2656
+    },
+    {
+      "text": "Explain the extra fee on my card when paying.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2596
+    },
+    {
+      "text": "Somebody is taking money out of my account without my approval in another town separate from me. Please place a freeze on my account until I can make it to the bank.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8876
+    },
+    {
+      "text": "My new card has not been delivered to my home yet. What is going on?",
+      "label": "card_arrival",
+      "source_line": 20
+    },
+    {
+      "text": "My app says I withdraw money from my account from an ATM.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8877
+    },
+    {
+      "text": "Why did I get charged extra?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2630
+    },
+    {
+      "text": "I haven't received my card and am worried it is lost.",
+      "label": "card_arrival",
+      "source_line": 40
+    },
+    {
+      "text": "The ATM will not let me get cash, WHY?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5060
+    },
+    {
+      "text": "Can the exchange rate change while I am in the process of making a withdrawal?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8291
+    },
+    {
+      "text": "Is my card working? It's the first time I tried using it I tried to get money out of an ATM, but got nothing.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4965
+    },
+    {
+      "text": "When will I recieve my new card?",
+      "label": "card_arrival",
+      "source_line": 29
+    },
+    {
+      "text": "My new card hasn't came in.",
+      "label": "card_arrival",
+      "source_line": 35
+    },
+    {
+      "text": "Why is my cash withdrawal pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 771
+    },
+    {
+      "text": "I got cash and was charged a fee that shouldn't be there!",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9412
+    },
+    {
+      "text": "I didnt get the correct exchange rate for getting cash",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8248
+    },
+    {
+      "text": "I was declined when I tried to take out cash!",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5092
+    },
+    {
+      "text": "I got less cash than what I specified for through the ATM.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2458
+    },
+    {
+      "text": "What is wrong with the exchange rate? This should have been a much higher amount of cash for that to apply.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8330
+    },
+    {
+      "text": "When do i get charged a fee for using the card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2639
+    },
+    {
+      "text": "I am confused why there is cash I did not accept in my account",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8865
+    },
+    {
+      "text": "I paid with my card and was charged extra",
+      "label": "card_payment_fee_charged",
+      "source_line": 2594
+    },
+    {
+      "text": "Somebody stole my wallet and is using my card! Can you do something so they can't keep taking my money?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8811
+    },
+    {
+      "text": "The bank charged me fees for withdrawing cash!",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9422
+    },
+    {
+      "text": "Why wouldn't the ATM give me my money?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4951
+    },
+    {
+      "text": "Why was i charged for making a withdrawal? After i went grocery shopping i withdrew some money from my account and now there is another charge.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9369
+    },
+    {
+      "text": "Explain pending transactions.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 835
+    },
+    {
+      "text": "Why and I being charged this fee?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2564
+    },
+    {
+      "text": "What is the strange cash withdrawal on my statement?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8924
+    },
+    {
+      "text": "I was declined when trying to withdrawal cash!",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4961
+    },
+    {
+      "text": "Why wont the ATM give me cash?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5036
+    },
+    {
+      "text": "ATM only gave me $20 instead of $100",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2482
+    },
+    {
+      "text": "The app says I made a cash withdrawal even though I didn't.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8826
+    },
+    {
+      "text": "What is this withdrawal as I do not remember making it.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8903
+    },
+    {
+      "text": "I have a fee showing from last time I used my card.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2550
+    },
+    {
+      "text": "Why did I get charged when getting cash?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9447
+    },
+    {
+      "text": "The ATM would not give me cash,why?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4945
+    },
+    {
+      "text": "I removed cash from an ATM earlier but it shows up as pending in the app. How can this still be pending, I already received the cash?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 844
+    },
+    {
+      "text": "I have a withdrawal waiting to go through.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 779
+    },
+    {
+      "text": "Can i get money in my home currency at my ATM ?I am on holiday and bit concerned because i do not have any cash with me .Is it possible to withdraw without any additional cost.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8325
+    },
+    {
+      "text": "help, I see money missing I didn't take out.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8797
+    },
+    {
+      "text": "Hi, I used an ATM today to take money out of my account, but the amount it gave me is not the amount I requested. What should I do?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2342
+    },
+    {
+      "text": "I did not have the right exchange rate applied to my situation of pulling out cash",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8300
+    },
+    {
+      "text": "When I got cash, the exchange rate applied was wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8224
+    },
+    {
+      "text": "I am inquiring about why there was an extra fee charged when I used an ATM.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9343
+    },
+    {
+      "text": "The app says I got cash from an ATM but I didn't",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8808
+    },
+    {
+      "text": "Why would the app show a withdrawal that I did not make?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8925
+    },
+    {
+      "text": "I can't get money out of the ATM. Is my card actually working? It's the first time I tried using it",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4939
+    },
+    {
+      "text": "Why is there some cash that I did not deposit in my account?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8887
+    },
+    {
+      "text": "I don't recognize this withdrawal on my statement",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8885
+    },
+    {
+      "text": "Is there a fee for paying by card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2548
+    },
+    {
+      "text": "Why hasn't my withdrawal shown on my statement?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 765
+    },
+    {
+      "text": "Why was I not able to get cash from the ATM?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5030
+    },
+    {
+      "text": "Why was I declined from getting cash?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4973
+    },
+    {
+      "text": "I believe i was charged for making a withdrawal after i went grocery shopping. Are you guys charging for this now?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9467
+    },
+    {
+      "text": "I believe my card has been compromised because of a strange withdrawal",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8861
+    },
+    {
+      "text": "Where can I check to see if there will be a fee added to my payment? Are there specific instances that will result in a fee added?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2635
+    },
+    {
+      "text": "How can I get cash back? The ATM just gave me the wrong amount that I've been actually charged though...",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2462
+    },
+    {
+      "text": "The ATM didn't give me what I asked for but my balance says it did",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2457
+    },
+    {
+      "text": "I got some cash in the ATM but its still pending",
+      "label": "pending_cash_withdrawal",
+      "source_line": 774
+    },
+    {
+      "text": "Why was I charged for getting cash?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9404
+    },
+    {
+      "text": "My wallet was just stolen, and they've already used my card! Please help, I can't afford to lose more money!",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8934
+    },
+    {
+      "text": "My withdrawal is pending, why?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 854
+    },
+    {
+      "text": "Is there a way I can check on the card on route to me?",
+      "label": "card_arrival",
+      "source_line": 104
+    },
+    {
+      "text": "Am I able to track the card that was just sent to me?",
+      "label": "card_arrival",
+      "source_line": 45
+    },
+    {
+      "text": "I tried to withdraw some money from an ATM this morning but wasn't able to get the amount of cash I needed. The amount in the app says what I was trying to withdraw was deducted, but I don't have any money. What do I do about this?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2412
+    },
+    {
+      "text": "Can you check the exchange rate on a cash transaction I did overseas",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8240
+    },
+    {
+      "text": "I was charged a fee with my cash withdrawal that I shouldn't have been charged.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9476
+    },
+    {
+      "text": "I see an unauthorized withdraw.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8893
+    },
+    {
+      "text": "I was trying to use my card and it was declined, when I tried to find out what happened I found cash withdraw for $500 that I didn't do.  Can you please help figure this out?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8860
+    },
+    {
+      "text": "Can I track the card you sent to me?",
+      "label": "card_arrival",
+      "source_line": 65
+    },
+    {
+      "text": "The exchange rate was wrong in the foreign country I got cash in.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8362
+    },
+    {
+      "text": "I see a fee that I think was charged because I paid by card.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2652
+    },
+    {
+      "text": "Hello, I didn't receive the right amount on my ATM transaction,  the app shows the correct amount how can we fix this",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2394
+    },
+    {
+      "text": "My card still hasn't arrived after two weeks, now what?",
+      "label": "card_arrival",
+      "source_line": 152
+    },
+    {
+      "text": "I still haven't received my card in the mail",
+      "label": "card_arrival",
+      "source_line": 114
+    },
+    {
+      "text": "Can I make a withdraw in my home currency at an ATM? I'm on vacation and am a bit worried because I don't have cash with me. Is it possible to withdraw here without any additional costs or fees?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8298
+    },
+    {
+      "text": "I got a strange cash withdrawal in my statement",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8835
+    },
+    {
+      "text": "what is the exchange rate when i get cash",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8266
+    },
+    {
+      "text": "I made an ATM withdraw it didn't give me the amount I asked for but is showing a withdraw for that amount.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2507
+    },
+    {
+      "text": "my cash out is still pending",
+      "label": "pending_cash_withdrawal",
+      "source_line": 824
+    },
+    {
+      "text": "Why was I charged an extra fee when using an ATM?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9372
+    },
+    {
+      "text": "what is this extra charge with my purchase?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2684
+    },
+    {
+      "text": "Why am I being charged for withdrawing cash but haven't in the past?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9444
+    },
+    {
+      "text": "I needed some cash while abroad, and I'm pretty sure the wrong exchange rate was applied.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8276
+    },
+    {
+      "text": "I don't think the exchange rate was right.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8264
+    },
+    {
+      "text": "totally unacceptable.  I'm stranded with no cash because the ATM wouldn't give me any money!",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5005
+    },
+    {
+      "text": "i did not get any money but still was charged",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2447
+    },
+    {
+      "text": "I didn't get all the cash I asked for",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2346
+    },
+    {
+      "text": "Where did my money go? I'm not able to withdraw it from my ATM.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4931
+    },
+    {
+      "text": "I was issued a new card a week ago but still haven't received it. How long will it be until I receive it?",
+      "label": "card_arrival",
+      "source_line": 139
+    },
+    {
+      "text": "How can I request cash back? The ATM just gave me the wrong amount that I've been charged though...",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2358
+    },
+    {
+      "text": "While abroad I got cash, and a wrong exchange rate was applied.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8312
+    },
+    {
+      "text": "I was using foreign currency at an ATM, but the rate was typed in wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8338
+    },
+    {
+      "text": "Please check my Card. As Withdrawal was working fine so far, but this morning suddenly got declined. Can you please check the problem?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5080
+    },
+    {
+      "text": "I attempted to get cash in the ATM but I was denied",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5089
+    },
+    {
+      "text": "How can I get money in my home currency while I'm traveling internationally? I wanted to take it out of a local ATM but am worried that I will get charged extra fees.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8295
+    },
+    {
+      "text": "Can you tell me if I can track the card you sent me?",
+      "label": "card_arrival",
+      "source_line": 141
+    },
+    {
+      "text": "The ATM won't let me take out cash",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5024
+    },
+    {
+      "text": "Please help me figure out the reason for the odd withdrawal amount from my account?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8851
+    },
+    {
+      "text": "What's the card you sent me's tracking number?",
+      "label": "card_arrival",
+      "source_line": 123
+    },
+    {
+      "text": "why hasnt my card come in yet?",
+      "label": "card_arrival",
+      "source_line": 55
+    },
+    {
+      "text": "What's up with the fee for getting cash?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9391
+    },
+    {
+      "text": "Do you have a tracking number for the card I was sent?",
+      "label": "card_arrival",
+      "source_line": 117
+    },
+    {
+      "text": "I asked for $40 and I only received $20, what happened?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2433
+    },
+    {
+      "text": "When will my new card arrive?",
+      "label": "card_arrival",
+      "source_line": 105
+    },
+    {
+      "text": "How come I got charged extra for withdrawing cash?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9455
+    },
+    {
+      "text": "Is there something wrong with the ATM? It would not let me pull cash out of my account.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5055
+    },
+    {
+      "text": "Why was my withdrawal declined",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4932
+    },
+    {
+      "text": "I was recently charged for withdrawing money from my bank ATM. How can that be possible when I haven't been charged for using it before?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9472
+    },
+    {
+      "text": "I can't withdraw any money from my account. Ive tried a couple different ATM machines and both of them wouldn't give me my money. What's going on? Is my account frozen or something?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5061
+    },
+    {
+      "text": "I have a cash withdrawal that says it's pending, why?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 856
+    },
+    {
+      "text": "I made a cash withdraw and it shows up as pending why is that?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 868
+    },
+    {
+      "text": "Did a WD earlier at an ATM.  The amount showing in the App is more than I got though.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2343
+    },
+    {
+      "text": "Do you have info about the card on delivery?",
+      "label": "card_arrival",
+      "source_line": 8
+    },
+    {
+      "text": "I paid with a card and there is an extra charge. Why?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2577
+    },
+    {
+      "text": "My withdrawal from the ATM was cancelled.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4989
+    },
+    {
+      "text": "I only got $20 of the $100 that I attempted to withdraw.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2371
+    },
+    {
+      "text": "Is my new bank card on the way and is there a way to track it?",
+      "label": "card_arrival",
+      "source_line": 119
+    },
+    {
+      "text": "Why is my withdrawal from the ATM still showing as pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 860
+    },
+    {
+      "text": "I selected to withdrawal 30 pounds but only received 10. I'm still standing in front of the ATM. The app shows i took out 30 pounds also. How do i fix this?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2427
+    },
+    {
+      "text": "Are there charges for cash withdrawals?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9470
+    },
+    {
+      "text": "Why was I charged for cash withdrawal?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9358
+    },
+    {
+      "text": "I withdrew  money from the ATM and was overcharged.  It said nothing about an extra fee.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8231
+    },
+    {
+      "text": "Why is my withdrawl to cash still pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 815
+    },
+    {
+      "text": "withdrawal pending meaning?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 793
+    },
+    {
+      "text": "What is the reason my cash withdrawal is still pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 821
+    },
+    {
+      "text": "Help me!  When I was abroad, the exchange rate was wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8310
+    },
+    {
+      "text": "I only received $20, but I requested $100.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2397
+    },
+    {
+      "text": "There's a $200 withdrawal on my statement that seems fishy to me.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8910
+    },
+    {
+      "text": "According to the app, I got cash from an ATM but I haven't made any transactions.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8863
+    },
+    {
+      "text": "I have made a withdraw from an ATM this last holiday, why is there such a high charge from this transaction?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8221
+    },
+    {
+      "text": "Why is there a fee for cash withdrawal?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9477
+    },
+    {
+      "text": "Why did you charge me for taking out cash?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9494
+    },
+    {
+      "text": "I have withdrawn cash from the ATM but it is showing in my account as a pending transation. Why is this?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 766
+    },
+    {
+      "text": "Why do I have to pay extra for using my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2592
+    },
+    {
+      "text": "My card still hasn't been delivered",
+      "label": "card_arrival",
+      "source_line": 41
+    },
+    {
+      "text": "Can you explain to me why a cash withdrawal shows up as pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 789
+    },
+    {
+      "text": "I think I am having an issue with withdraws on my card. It was declined on the way to work this morning. This hasn't happened in the past.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5076
+    },
+    {
+      "text": "What on earth is up with the exchange rate! This should have been a much higher amount of cash",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8290
+    },
+    {
+      "text": "I tried to withdraw $100 but only got $20. What happened?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2347
+    },
+    {
+      "text": "I tried using a foreign currency at an ATM, but the ATM provided me an incorrect rate. Why is that?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8215
+    },
+    {
+      "text": "Do cash withdrawals cost anything?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9515
+    },
+    {
+      "text": "Why am I charged whenever I withdraw cash?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9499
+    },
+    {
+      "text": "What is the fee charged for using my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2660
+    },
+    {
+      "text": "Why am I being charged for getting cash?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9456
+    },
+    {
+      "text": "The atm wouldn't give out cash",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5034
+    },
+    {
+      "text": "A wrong amount of cash we sent to me.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2460
+    },
+    {
+      "text": "I see cash in my app but I did not get it.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8831
+    },
+    {
+      "text": "I was the victim of someone stealing my wallet.  My card is being used and it isn't me.  What should I do?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8855
+    },
+    {
+      "text": "Why won't cash come out of the ATM?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4927
+    },
+    {
+      "text": "What is this cash withdrawal I don't recognize?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8819
+    },
+    {
+      "text": "The amount of cash i have received is not correct.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2487
+    },
+    {
+      "text": "Hi, It's urgent, please freeze my card. As someone has withdrawn money using my card in odd remote town. Since i have not done this withdrawal. Do it fast.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8849
+    },
+    {
+      "text": "When do you charge fees on accounts? I just saw a charge on my statement.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2687
+    },
+    {
+      "text": "my cash withdrawal has not come out of my account yet.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 878
+    },
+    {
+      "text": "I entered the correct pin but I still couldnt get funds.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5068
+    },
+    {
+      "text": "My ATM transaction was cancelled.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4946
+    },
+    {
+      "text": "I tried to withdraw cash, but got declined!",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5059
+    },
+    {
+      "text": "The wrong exchange rate was applied to me while pulling out cash.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8210
+    },
+    {
+      "text": "How long will it take for me to get my card?",
+      "label": "card_arrival",
+      "source_line": 77
+    },
+    {
+      "text": "When will I get my new card?",
+      "label": "card_arrival",
+      "source_line": 30
+    },
+    {
+      "text": "Can I track the card that you sent me in the mail?",
+      "label": "card_arrival",
+      "source_line": 140
+    },
+    {
+      "text": "Why is the cash withdraw I made shown as pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 754
+    },
+    {
+      "text": "I have a question about fee for cash withdraw.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9375
+    },
+    {
+      "text": "Why is my cash withdrawal still pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 760
+    },
+    {
+      "text": "I don't understand why I was charged an additional fee for this service. Can you clarify?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2531
+    },
+    {
+      "text": "I just lost my wallet and I think someone is using my card to withdraw my money. Can you please cancel or freeze my card?!!",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8802
+    },
+    {
+      "text": "Why are fees charged for cash withdrawals? I went to withdraw some money earlier today after shopping. There's a new fee that there.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9393
+    },
+    {
+      "text": "How are cash withdrawals pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 782
+    },
+    {
+      "text": "Do you charge for making a withdrawal? I took some money out of my account earlier and I was charged for this.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9370
+    },
+    {
+      "text": "Why did I only get $20 now the full amount I wanted?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2379
+    },
+    {
+      "text": "The exchange rate for my cash withdrawal was incorrect",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8344
+    },
+    {
+      "text": "Why has my new card still not come?",
+      "label": "card_arrival",
+      "source_line": 12
+    },
+    {
+      "text": "Why was there an extra charge with the withdrawal of my money?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9503
+    },
+    {
+      "text": "I made a cash withdrawal at an ATM but it still says pending in my account.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 763
+    },
+    {
+      "text": "I see money go out that I didn't withdraw.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8809
+    },
+    {
+      "text": "How can I fix this? The ATM gave me more cash than I'd asked for.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2468
+    },
+    {
+      "text": "I didn't realize that there were any fees for withdrawing money from my account--this has never happened to me before.  What exactly are the fees?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9438
+    },
+    {
+      "text": "I was made to pay a fee for making a transaction with card.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2560
+    },
+    {
+      "text": "I think a fee was applied for paying with a card.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2543
+    },
+    {
+      "text": "Why was there an additional fee on the payment I just made? I don't usually have additional fees applied to my payments.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2683
+    },
+    {
+      "text": "Why did I not get the amount of money I requested?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2363
+    },
+    {
+      "text": "Why, when paying with the card, was I charged an extra fee?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2561
+    },
+    {
+      "text": "Money was taken out without my consent,",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8884
+    },
+    {
+      "text": "Do you offer free ATM withdrawals of ones hometown currency while on holiday?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8249
+    },
+    {
+      "text": "Why haven't I gotten my new card?",
+      "label": "card_arrival",
+      "source_line": 147
+    },
+    {
+      "text": "I think I was wrongly charged in a recent transaction when I used my card.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2603
+    },
+    {
+      "text": "The exchange rate for case abroad is applied wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8315
+    },
+    {
+      "text": "Is there a problem with my account? When I tried to withdraw cash at an ATM I was denied.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5050
+    },
+    {
+      "text": "Let me know when applying extra charges for payments. I just checked the app and saw a fee that I wasn't warned about.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2628
+    },
+    {
+      "text": "What is the extra fee that showed up on my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2538
+    },
+    {
+      "text": "Why have i been charged a fee for using my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2636
+    },
+    {
+      "text": "Why was there a fee with my cash withdrawal?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9489
+    },
+    {
+      "text": "I took out money and there is a fee.  Why?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9383
+    },
+    {
+      "text": "I tried using my ATM card at your Notting Hill location today.  It did not work.  Am I doing something wrong?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4986
+    },
+    {
+      "text": "There was an extra fee when I was at the ATM.  Why?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9399
+    },
+    {
+      "text": "What's the reason my new card hasn't come?",
+      "label": "card_arrival",
+      "source_line": 57
+    },
+    {
+      "text": "My account shows up as pending after I received cash from the ATM earlier.  How can this be still pending? I've got the cash already.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 749
+    },
+    {
+      "text": "I was charged a fee for using my card. Can I check that in any way? It seems like there are occasions that I am charge for fees. Can you elaborate this?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2541
+    },
+    {
+      "text": "Looking at my account I've noticed a charge that appears to still be in progress. I had attempted to get money out of the machine earlier but the machine seemed to have been broken. I never received my money so will you please look into this for me? I don't want to be charged for money I never actually received.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 808
+    },
+    {
+      "text": "I would like to track a card sent to me, how do I do that?",
+      "label": "card_arrival",
+      "source_line": 100
+    },
+    {
+      "text": "I did not receive my full withdrawal amount",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2395
+    },
+    {
+      "text": "I am reluctant to use ATMs international because I don't get an accurate exchange rate",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8321
+    },
+    {
+      "text": "Why is a transaction still pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 827
+    },
+    {
+      "text": "Someone has access to my card info.  I still have the card, but someone just withdrew cash.  How do I get this corrected/stopped?!",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8920
+    },
+    {
+      "text": "An overseas cash transfer did not work correctly",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8274
+    },
+    {
+      "text": "In a recent withdrawal I received less cash than I expected to receive.  Did someone make an error with the exchange rate?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8354
+    },
+    {
+      "text": "I tried to get some money but the machine was not working .The transaction still seems in progress! Can you please check what's going on.I don't want to be charged for money that I did not received.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 795
+    },
+    {
+      "text": "I tried withdrawing money in another country and the exchange rate was wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8317
+    },
+    {
+      "text": "Machines make mistakes too! The ATM gave me the wrong amount of money. Too much!",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2391
+    },
+    {
+      "text": "How long will my ATM withdrawal be pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 845
+    },
+    {
+      "text": "Why are you charging for cash withdrawals? I went to withdraw some money earlier today after getting my groceries, and it appears there is a fee that wasn't there before",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9390
+    },
+    {
+      "text": "How long until my new card gets here?",
+      "label": "card_arrival",
+      "source_line": 127
+    },
+    {
+      "text": "What should I do if I see a withdrawal is pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 870
+    },
+    {
+      "text": "What is this extra fee that I got when I used my card to pay?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2626
+    },
+    {
+      "text": "Please explain the extra fee when I paid with the card.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2686
+    },
+    {
+      "text": "my cash balance less than what I thought",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2368
+    },
+    {
+      "text": "Why am I unable to withdraw money even though in the past I've done it just fine?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5091
+    },
+    {
+      "text": "i havent got my card",
+      "label": "card_arrival",
+      "source_line": 124
+    },
+    {
+      "text": "What happened! I asked for 30 pounds at your ATM and only go 10. The machine lied about it too. It said I received the full 30 pounds. Someone better help me asap on this.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2459
+    },
+    {
+      "text": "I haven't gotten my new card.",
+      "label": "card_arrival",
+      "source_line": 66
+    },
+    {
+      "text": "Why am I being charged certain fees? I noticed a fee after I withdrew some money for groceries earlier today.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9463
+    },
+    {
+      "text": "My card hasn't shown up yet.",
+      "label": "card_arrival",
+      "source_line": 78
+    },
+    {
+      "text": "I tried pulling out money at the ATM and it gave me an incorrect amount back.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2485
+    },
+    {
+      "text": "Please tell me why I was charged additionally when I used the card.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2558
+    },
+    {
+      "text": "My cash withdrawal was short.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2442
+    }
+  ],
+  "validation": [
+    {
+      "text": "Why would a cash withdrawal still be pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 834
+    },
+    {
+      "text": "Today I noticed a charge for an ATM withdrawal on my account. Can you please fix this? It's supposed to be no charge.",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9428
+    },
+    {
+      "text": "I can't get cash from the ATM!",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4980
+    },
+    {
+      "text": "I was not able to use the ATM to get cash",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4948
+    },
+    {
+      "text": "Do any of your machines provide cash from my home country? I don't have any money on me and I'm on holiday so I'm concerned. Also, will I be charged anything to do this?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8238
+    },
+    {
+      "text": "Why am I charged to get money from the ATM?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9345
+    },
+    {
+      "text": "It seems I've suddenly been charged for my recent ATM cash withdrawal. What's up with that? I though withdrawals are free, you never charged me so far!",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9466
+    },
+    {
+      "text": "It's been two weeks and I haven't gotten my card, what do I do?",
+      "label": "card_arrival",
+      "source_line": 136
+    },
+    {
+      "text": "There is a cash withdrawal from an ATM listed but I don't remember making this withdrawal.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8824
+    },
+    {
+      "text": "how can i track card you sent",
+      "label": "card_arrival",
+      "source_line": 132
+    },
+    {
+      "text": "Can I withdraw money in my hometown currency while on holiday without any additional fees?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8285
+    },
+    {
+      "text": "How long until I see a cash withdrawal?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 823
+    },
+    {
+      "text": "Why was there an extra charge because I used my card to pay?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2591
+    },
+    {
+      "text": "Why was my cash withdrawal cancelled at the ATM?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5064
+    },
+    {
+      "text": "Why would the ATM machine fail to give me the cash withdrawal I requested?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5018
+    },
+    {
+      "text": "Why was my cash withdrawal given the wrong exchange rate?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8371
+    },
+    {
+      "text": "Why was I charged a fee for withdrawing money off my card?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9509
+    },
+    {
+      "text": "Some cash shows up on my app.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8840
+    },
+    {
+      "text": "Why did I only receive this much currency?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8272
+    },
+    {
+      "text": "I think the exchange rate for the cash I withdrew was wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8324
+    },
+    {
+      "text": "Help! I think someone has a copy of my card - I still have my card, but a five hundred pound cash withdrawal that I didn't authorize is shown on my account.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8812
+    },
+    {
+      "text": "I made a purchase but never expected to see a fee charged for the transaction.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2632
+    },
+    {
+      "text": "How long will it take for my cash withdrawal to stop pending",
+      "label": "pending_cash_withdrawal",
+      "source_line": 819
+    },
+    {
+      "text": "I got cash from an ATM earlier but it shows up as pending in the app. How can this still be pending, I already received the cash?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 791
+    },
+    {
+      "text": "The ATM didn't give me the full requested amount",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2356
+    },
+    {
+      "text": "My app statement shows I took out cash from an ATM but I did not. What can I do?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8832
+    },
+    {
+      "text": "I see in the app some cash was withdrawn, but it's not mine.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8922
+    },
+    {
+      "text": "It's been a week since you sent my card and I still don't have it.",
+      "label": "card_arrival",
+      "source_line": 27
+    },
+    {
+      "text": "Why am I unable to withdraw my money through this card?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5049
+    },
+    {
+      "text": "Someone else used my card to withdraw cash from an ATM",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8906
+    },
+    {
+      "text": "Why was an extra charge added when I used my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2672
+    },
+    {
+      "text": "I paid with card and was charged a fee that shouldn't be there!",
+      "label": "card_payment_fee_charged",
+      "source_line": 2528
+    },
+    {
+      "text": "Some cash I didn't get shows in my app",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8945
+    },
+    {
+      "text": "i asked for 100 only got 80",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2449
+    },
+    {
+      "text": "How long will it be to get this new card?",
+      "label": "card_arrival",
+      "source_line": 131
+    },
+    {
+      "text": "I wasn't applied the correct exchange rate when getting cash",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8283
+    },
+    {
+      "text": "Why was my withdrawal requested cancelled by the ATM?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4967
+    },
+    {
+      "text": "I have never been charged a card payment fee before. Why did this change?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2562
+    },
+    {
+      "text": "My atm withdraw is stillpending",
+      "label": "pending_cash_withdrawal",
+      "source_line": 865
+    },
+    {
+      "text": "Why am I being charged to withdrawal money?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9506
+    },
+    {
+      "text": "I want to get some cash from the ATM using my card but I dont want to be charged any fees. Ive taken some money out before with no fees, but recently Ive been getting charged. Why?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9409
+    },
+    {
+      "text": "Why was my cash withdrawal declined by the ATM?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5003
+    },
+    {
+      "text": "Foreign currency rates were put in wrong at an ATM i used.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8227
+    },
+    {
+      "text": "maximum how many days get the courier?",
+      "label": "card_arrival",
+      "source_line": 81
+    },
+    {
+      "text": "Why did I get charged a fee for my card payment?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2536
+    },
+    {
+      "text": "I asked for a certain amount of money from the ATM, but it gave me a different amount. Less than what I asked for.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2432
+    },
+    {
+      "text": "Hello, Please look into this matter urgently. As i have lost my wallet and i can see one withdrawal, now i do not want to loose more money.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8792
+    },
+    {
+      "text": "I pulled cash from the ATM earlier. Why is it still pending if I already have the cash?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 877
+    },
+    {
+      "text": "Hello, I'm having trouble with my card, I don't understand what's happening, I tried using the ATM machine earlier but it wasn't working but seems like the transactions is still in progress, can you cancel it for me?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 807
+    },
+    {
+      "text": "Why did you charge me extra for withdrawing money?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9432
+    },
+    {
+      "text": "I need an accurate exchange rate, when I make my withdrawals.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8284
+    },
+    {
+      "text": "So much time has gone by, the pending status shouldn't still be there shouldn't it?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 775
+    },
+    {
+      "text": "Why is my withdrawal wrong? I took out $100 but only received $20.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2493
+    },
+    {
+      "text": "What is this fee showing up in my account for?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2676
+    },
+    {
+      "text": "The ATM I'm standing in front of only gave me 10 pounds rather than the 30 pounds I wanted. The app shows I took out 30 pounds also. What do I need to do to fix this?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2495
+    },
+    {
+      "text": "I might need a new card because it's not working at any of the ATMs. I don't think ive used all my money. Why is it doing this?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5079
+    },
+    {
+      "text": "Why haven't I received my new card yet?",
+      "label": "card_arrival",
+      "source_line": 106
+    },
+    {
+      "text": "The amount of cash I received was not the full amount",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2357
+    },
+    {
+      "text": "I ordered a card and would like to know how to track the delivery progress of it.",
+      "label": "card_arrival",
+      "source_line": 76
+    },
+    {
+      "text": "Why am I being charged for ATM cash withdrawals? The only reason I use it is because it's been free! Now you expect me to pay for them, and how much is that going to cost me?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9365
+    },
+    {
+      "text": "can you share card tracking number?",
+      "label": "card_arrival",
+      "source_line": 102
+    },
+    {
+      "text": "The cash I wanted wasn't there.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2353
+    },
+    {
+      "text": "Unbeknownst to me, there was an additional charge on my prior transaction. A notification of sorts should be required and explained before future payments are made.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2593
+    },
+    {
+      "text": "The amount of money I pushed at the atm machine did not come out of the machine.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2509
+    }
+  ],
+  "check": [
+    {
+      "text": "I'm upset because I got charged a ridiculous fee when making an ATM withdrawal over a holiday weekend.  It didn't notify me beforehand either or I wouldn't have ever done it.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8336
+    },
+    {
+      "text": "I needed cash from the ATM but I couldn't get it.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4962
+    },
+    {
+      "text": "My ATM withdrawal was cancelled",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5078
+    },
+    {
+      "text": "My new card isn't here and it was issued a week ago.",
+      "label": "card_arrival",
+      "source_line": 144
+    },
+    {
+      "text": "The machine only paid me a hundred when I wanted 20",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2512
+    },
+    {
+      "text": "Why can I not take out cash?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5021
+    },
+    {
+      "text": "How come my cash withdrawal came with an unnecessary fee?!",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9417
+    },
+    {
+      "text": "Can the card was sen to me be tracked?",
+      "label": "card_arrival",
+      "source_line": 133
+    },
+    {
+      "text": "Why is there a fee associated with card use?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2675
+    },
+    {
+      "text": "Is there a fee associated with using foreign exchange ATMs?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8260
+    },
+    {
+      "text": "My card has not been delivered yet and its been a week since I ordered it, please help",
+      "label": "card_arrival",
+      "source_line": 72
+    },
+    {
+      "text": "Is a tracking number available for the card that was just sent?",
+      "label": "card_arrival",
+      "source_line": 146
+    },
+    {
+      "text": "Hi there, earlier today I tried to take money out of an ATM machine, and something wasn't working.  I didn't actually receive the money, but I just checked and it says that the transaction is still pending.  Can you tell me what's going on here? Am I still being charged for the withdrawal even though I didn't end up getting any money?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 773
+    },
+    {
+      "text": "Is my card broken? I can't get cash out of the ATM",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4956
+    },
+    {
+      "text": "I requested a higher amount for my cash withdrawal",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2354
+    },
+    {
+      "text": "I was unaware of the additional charge that was added onto my previous payment. A notification of extra charges would be appreciated in the future.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2647
+    },
+    {
+      "text": "My card shows a cash withdrawal I don't recognize.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8834
+    },
+    {
+      "text": "Hello, I tried to take out some money out of the ATM, but it's still showing that it's pending? I really don't want to be charged for this.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 873
+    },
+    {
+      "text": "How long does it take to recieve my new card?",
+      "label": "card_arrival",
+      "source_line": 121
+    },
+    {
+      "text": "I withdrew money and got a fee, please explain",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9511
+    },
+    {
+      "text": "Why do I get declined when I try to withdraw cash?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5037
+    },
+    {
+      "text": "Do you charge for cash withdrawals?  I want to get my hands on my own money and you appear to be charging me for the pleasure! Why is this, you'd never get this with my high street bank!",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9440
+    },
+    {
+      "text": "I got the incorrect amount of money given to me from my account",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2498
+    },
+    {
+      "text": "My withdrawals were going smooth until I got declined today. What is going on?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4928
+    },
+    {
+      "text": "There has been an unusual withdrawal from my account, can you help?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8944
+    },
+    {
+      "text": "Can I get money in my home currency at an ATM? I'm on vacation and don't have cash with me. This is cause for a bit of concern. Is it possible to withdraw here without additional cost?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8297
+    },
+    {
+      "text": "You applied the wrong exchange rate while I was traveling outside the country.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8370
+    },
+    {
+      "text": "If I have already completed a cash withdrawal at an ATM, is it normal for it to show as a pending transaction on the app?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 832
+    },
+    {
+      "text": "how come my withdrawal rate is wrong for my cash withdrawal",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8302
+    },
+    {
+      "text": "Has my account been frozen?  I tried to use my card but the ATM would not dispense cash.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4983
+    },
+    {
+      "text": "Why is the pending status on my cash withdrawal taking so long?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 816
+    },
+    {
+      "text": "I went tot the ATM earlier today and didn't realize this till now but I did not get all the money I requested.  I believe my account was charged for 100 but I only got 80.  Is there any way we can solve this problem?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2361
+    },
+    {
+      "text": "I was charged a fee when withdrawing cash, can you explain why?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9426
+    },
+    {
+      "text": "I looked on the app and it says I withdrew cash.  I didn't!",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8786
+    },
+    {
+      "text": "I am travelling and I tried to withdraw cash but didn't get what I was supposed to get.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8360
+    },
+    {
+      "text": "I tried to access money earlier but the machine seems not to be working. After looking, the transaction actually shows to still being process. Can you find out what is going on here? I don't want to be charged for some money I never got.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 770
+    },
+    {
+      "text": "Can you tell me what this cash withdrawal is?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8917
+    },
+    {
+      "text": "Why was there a fee on my cash withdrawal?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9359
+    },
+    {
+      "text": "I am unable to get cash from the ATM",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5083
+    },
+    {
+      "text": "Is there an extra fee for using an ATM?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9347
+    },
+    {
+      "text": "Where can I find out the fee structure for my account? I have been charged fees for some transactions, but not for other ones. I can't find a pattern in these fees.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2534
+    },
+    {
+      "text": "There is a cash withdrawl I don't remember.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8929
+    },
+    {
+      "text": "Why is the exchange rate different than expected on my transaction?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8258
+    },
+    {
+      "text": "I didn't withdraw the amount of cash that is showing up in the app.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8787
+    },
+    {
+      "text": "My card didn't work at the ATM in Notting Hill.  Is my card working?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5012
+    },
+    {
+      "text": "What caused my cash withdrawal to be declined?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5035
+    },
+    {
+      "text": "Why does a cash withdrawal show as pending?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 833
+    },
+    {
+      "text": "There was just a withdrawal but it wasn't me, I've never even visited the town where the withdrawal happened.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8880
+    },
+    {
+      "text": "Can you explain why I am now getting charged a fee for using my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2578
+    },
+    {
+      "text": "When will the cash that I put in the ATM be cleared from pending status?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 875
+    },
+    {
+      "text": "My card hasn't arrived in the mail yet. I ordered it two weeks ago. What can I do?",
+      "label": "card_arrival",
+      "source_line": 80
+    },
+    {
+      "text": "I cant get money out of the ATM with my card.  I just put my card in the ATM but it will not allow me to take any money out.  What do I need to do to fix this?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5015
+    },
+    {
+      "text": "I have my card here with me and someone has just made a withdrawal for 500. Please help!",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8904
+    },
+    {
+      "text": "It is urgency. Please freeze my card now. As someone in some odd remote town has withdrawn some money by using my card. As i did not withdraw any money.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8864
+    },
+    {
+      "text": "Help!  The app says I took out cash but I didn't!",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8889
+    },
+    {
+      "text": "WHAT IS THE SOLUTION OF THIS PROBLEM",
+      "label": "card_arrival",
+      "source_line": 95
+    },
+    {
+      "text": "Why is the exchange rate so high? This should have been a much higher amount of cash for that to apply.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8268
+    },
+    {
+      "text": "Is there an allowance on cards?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2689
+    },
+    {
+      "text": "The rate of exchange for my cash withdrawal is wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8366
+    },
+    {
+      "text": "The ATM wouldn't let me have my money.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5053
+    },
+    {
+      "text": "My cash withdrawal shows pending, why?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 798
+    },
+    {
+      "text": "Why did I only receive a partial amount of what I tried to withdraw?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2333
+    },
+    {
+      "text": "I received less cash than the amount I specified in the ATM.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2360
+    },
+    {
+      "text": "What do I do if I see a cash withdrawal on my account that I don't remember making?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8857
+    },
+    {
+      "text": "There's a cash withdrawal that  didn't make that is showing up.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8892
+    },
+    {
+      "text": "What does pending mean on a cash withdrawal?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 785
+    },
+    {
+      "text": "I think there's been an unauthorized cash withdrawal from my account.",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8856
+    },
+    {
+      "text": "Why am I being charged fees on some transactions but not on others? What am I missing here? I cannot find where to see the fee structure on my account. Help!",
+      "label": "card_payment_fee_charged",
+      "source_line": 2553
+    },
+    {
+      "text": "I tried to get money out of the Notting Hill ATM earlier, but I wasn't able to get it to work. Is my card with issue? It's the first time I tried using it.",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5008
+    },
+    {
+      "text": "I received the wrong amount of cash.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2436
+    },
+    {
+      "text": "Is there a tracking number for the card?",
+      "label": "card_arrival",
+      "source_line": 101
+    },
+    {
+      "text": "The exchange rate for foreign ATM currency is wrong.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8363
+    },
+    {
+      "text": "Is it possible to track the card you sent me?",
+      "label": "card_arrival",
+      "source_line": 130
+    },
+    {
+      "text": "Why did using an ATM cause me to be charged an additional fee?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9478
+    },
+    {
+      "text": "On my last trip, I received the incorrect exchange rate.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8339
+    },
+    {
+      "text": "what are weekend rates for getting cash",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8235
+    },
+    {
+      "text": "why has a cash withdrawal charged me?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9350
+    },
+    {
+      "text": "Why have I been charged a fee for cash withdrawal?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9341
+    },
+    {
+      "text": "I took out money, and didn't get all of it.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2461
+    },
+    {
+      "text": "Is there a reason my new card hasn't arrived yet?",
+      "label": "card_arrival",
+      "source_line": 82
+    },
+    {
+      "text": "Can you tell me why I was charged extra when I withdrew money?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9465
+    },
+    {
+      "text": "Why is there extra cash in my account?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8818
+    },
+    {
+      "text": "Why does it still charge me even though I was unable to withdraw money from the ATM?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 825
+    },
+    {
+      "text": "Why did withdrawing money cost me extra?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9508
+    },
+    {
+      "text": "I payed with the card and there was an extra fee?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2554
+    },
+    {
+      "text": "Is it possible to use an ATM when I am not in the country and make a withdraw with out extra fees?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8269
+    },
+    {
+      "text": "What was I charged a fee for card payment?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2584
+    },
+    {
+      "text": "I asked for cash but I did not receive all the funds",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2494
+    },
+    {
+      "text": "Why am I being charged a fee on a card payment?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2678
+    },
+    {
+      "text": "There's a cash withdrawal on my account that I didn't make",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8911
+    },
+    {
+      "text": "I didn't receive the correct exchange rate when I got cash.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8322
+    },
+    {
+      "text": "I thought I would have received my new card at this point.",
+      "label": "card_arrival",
+      "source_line": 126
+    },
+    {
+      "text": "I tempted to get some money out of the machine earlier and it did not work.Looking now, the transaction actually shows to still be in progress. I would certainly appreciate someone look into this and let me know what's going on. I definitely do not want to be charged for money I never received.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 872
+    },
+    {
+      "text": "Why is the ATM not allowing me to get cash?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5020
+    },
+    {
+      "text": "My account was charged a fee. When did you start charging extra for card payments?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2595
+    },
+    {
+      "text": "Why is there a fee on a card payment?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2646
+    },
+    {
+      "text": "tell me why I was charged more with my card?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2600
+    },
+    {
+      "text": "There was an unexpected fee for my cash withdrawal!",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9451
+    },
+    {
+      "text": "I made a cash withdrawal and was charged a fee incorrectly can you help with this?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9448
+    },
+    {
+      "text": "Why is my card being declined at the ATM? I have tried multiple ATMs and i keep running into the same problem. Could you verify that everything is okay with my account?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 5052
+    },
+    {
+      "text": "Why was there a fee for my cash withdrawal?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9354
+    },
+    {
+      "text": "I was supposed to receive my new card by now, but it hasn't came in.",
+      "label": "card_arrival",
+      "source_line": 145
+    },
+    {
+      "text": "I couldn't get the money I needed.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2505
+    },
+    {
+      "text": "When using my card I was charged a fee for doing so, why?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2583
+    },
+    {
+      "text": "What does it mean if my cash withdrawal does not show up properly?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 744
+    },
+    {
+      "text": "Was there a number to track that I could get?",
+      "label": "card_arrival",
+      "source_line": 148
+    },
+    {
+      "text": "The ATM shows a withdraw of the amount of money I requested but I didn't revieve that amount in cash.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2444
+    },
+    {
+      "text": "If my cash withdrawal is still not showing, is something wrong?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 761
+    },
+    {
+      "text": "Can you tell me what the cash withdrawal is in my statement?",
+      "label": "cash_withdrawal_not_recognised",
+      "source_line": 8878
+    },
+    {
+      "text": "I'm looking for a machine of yours that will provide me cash from my home country. I went on holiday and don't have any cash on me. Will your machine charge me extra to do this?",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8346
+    },
+    {
+      "text": "I'm expecting to see a cash withdrawal but I'm still waiting.",
+      "label": "pending_cash_withdrawal",
+      "source_line": 786
+    },
+    {
+      "text": "I was given less cash then I wanted.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2393
+    },
+    {
+      "text": "How long does it take to verify a cash withdraw?",
+      "label": "pending_cash_withdrawal",
+      "source_line": 750
+    },
+    {
+      "text": "Why do I have a charge for an ATM withdrawal? I thought these were free?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9486
+    },
+    {
+      "text": "My rate is not right when I used my card in a different country's money.",
+      "label": "wrong_exchange_rate_for_cash_withdrawal",
+      "source_line": 8294
+    },
+    {
+      "text": "My cash withdrawal isnt showing on my account",
+      "label": "pending_cash_withdrawal",
+      "source_line": 784
+    },
+    {
+      "text": "A fee that shouldn't be there is there after using my card!",
+      "label": "card_payment_fee_charged",
+      "source_line": 2649
+    },
+    {
+      "text": "I am tired of getting charged fees, and I have no idea why, please let me know what/when you charge fees for.",
+      "label": "card_payment_fee_charged",
+      "source_line": 2573
+    },
+    {
+      "text": "I was not able to receive the correct amount of cash.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2409
+    },
+    {
+      "text": "i needed money for a night out with the girls but i was declined, why?",
+      "label": "declined_cash_withdrawal",
+      "source_line": 4924
+    },
+    {
+      "text": "Is there a reason my new card hasn't arrived?",
+      "label": "card_arrival",
+      "source_line": 99
+    },
+    {
+      "text": "The ATM only gave me 10 pounds when I withdrew 30. What do I do?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2390
+    },
+    {
+      "text": "On the card that is coming, what's the tracking info?",
+      "label": "card_arrival",
+      "source_line": 22
+    },
+    {
+      "text": "I was charged for a cash withdrawal, why?",
+      "label": "cash_withdrawal_charge",
+      "source_line": 9411
+    },
+    {
+      "text": "What do I do if I still have not received my new card?",
+      "label": "card_arrival",
+      "source_line": 9
+    },
+    {
+      "text": "Who should I contact if the amount of my withdrawal doesn't correspond to the amount that I tried to take out of my account?",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2506
+    },
+    {
+      "text": "What are these fees i am paying?",
+      "label": "card_payment_fee_charged",
+      "source_line": 2606
+    },
+    {
+      "text": "I could only take the amount of money that was available to me which was less then I expected.",
+      "label": "wrong_amount_of_cash_received",
+      "source_line": 2392
+    }
+  ]
+}
