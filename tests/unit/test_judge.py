@@ -63,6 +63,7 @@ def test_upload_boundaries_and_split_leakage(tmp_path):
     for change in (
         {"model": "evil/path"},
         {"n_epochs": 100},
+        {"lora_r": 4},
         {"train": []},
         {"learning_rate": float("nan")},
     ):

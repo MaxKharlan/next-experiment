@@ -69,7 +69,7 @@ class Upload(BaseModel):
     test: list[Row] = Field(min_length=4, max_length=8)
     learning_rate: float = Field(default=0.00001, ge=0.000001, le=0.0003)
     n_epochs: int = Field(default=3, ge=1, le=12)
-    lora_r: Literal[4, 8, 16, 32] = 16
+    lora_r: Literal[8, 16, 32] = 16
     checkpoints: list[Checkpoint] = Field(default_factory=list, max_length=12)
 
     @model_validator(mode="after")
