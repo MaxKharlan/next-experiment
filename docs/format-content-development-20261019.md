@@ -69,8 +69,8 @@ estimates; these are not invoices.
 A cohort process lock prevents concurrent commands. Every paid attempt is
 recorded before upload/submission. Unknown outcomes retain their ledger hold and
 must be reconciled before any retry. Source, runtime, datasets, candidate choices
-and injection records are hash-bound before evaluation. Existing complete scores
-are checked rather than regenerated on resume. No service/UI classifier changes
+and injection records are hash-bound before evaluation. On resume, existing complete scores
+are verified and reused. No service/UI classifier changes
 are part of this experiment.
 
 ## Execution result
@@ -230,3 +230,8 @@ holds still prevent export. The exporter cannot use the option to accept missing
 models, pending successful-job costs or unproven cancelled attempts. Export was
 completed before merging main; subsequent verification uses the portable bundle
 and needs neither the model cache nor provider credentials.
+
+Publication validation: 922 tests passed and 8 were skipped after integrating
+main through #99; Ruff lint and formatting passed for 367 Python files. A separate
+JSON/object and maximum-logprob audit also reproduced all 936 answer decisions and
+624 choice decisions. The chart was rendered and visually checked.

@@ -14,11 +14,11 @@ clean-prefix false alarms and alternative causes of broken JSON; they do not
 calibrate deployment likelihoods.
 
 The [format/content development series](format-content-development-20261019.md)
-is complete:12models after one infrastructure retry, plus the base evaluation.
-Healthy history exact is100%, cut94.44% and wrong76.39%; all trained models have
-100% direct exact. The healthy-choice ceiling,6.94pp healthy/wrong choice gap and
-5.56pp healthy/cut strict gap fail three frozen gates. No confirmation sample size
-is selected. B5 remains incomplete beyond this task/model, and B10's5.58pp
+is complete: 12 models after one infrastructure retry, plus the base evaluation.
+Healthy history exact is 100%, cut 94.44% and wrong 76.39%; all trained models have
+100% direct exact. The healthy-choice ceiling, 6.94 pp healthy/wrong choice gap and
+5.56 pp healthy/cut strict gap fail three frozen gates. No confirmation sample size
+is selected. B5 remains incomplete beyond this task/model, and B10's 5.58 pp
 strict-score SD is descriptive. T=1 and offline classifiers remain unchanged.
 The current operational changes add provider request/response IDs linked to
 spending reservations and contain long-history replay charts within their cards.

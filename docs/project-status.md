@@ -14,13 +14,13 @@ budget retained its $0.2710464 historical charge estimate at that stop. Comparis
 boundaries remain in the [fault review](fault-evidence-review.md).
 
 The [format/content development series](format-content-development-20261019.md)
-completed twelve replacements after twelve original jobs were cancelled. All13
-models (including base),936answers and624choice decisions are exported and verified.
-Mean history exact is12.50% format,100% healthy,94.44% cut and76.39% wrong. Three
+completed twelve replacements after twelve original jobs were cancelled. All 13
+models (including base), 936 answers and 624 choice decisions are exported and verified.
+Mean history exact is 12.50% format, 100% healthy, 94.44% cut and 76.39% wrong. Three
 frozen gates fail: healthy choice ceiling, insufficient healthy/wrong choice gap,
 and insufficient healthy/cut strict gap. This is a terminal development stop;
 no confirmation seeds or fresh final test are selected. New training token estimates
-are$0.8469312, with$1.1311488 cancelled-job holds retained pending billing.
+are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
