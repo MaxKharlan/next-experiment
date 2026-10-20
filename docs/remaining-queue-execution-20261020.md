@@ -18,15 +18,15 @@ See the timestamped progress JSON for current committed amounts.
 The owner subsequently supplied a current $25 Cloud balance and requested faster
 Qwen evaluation. A separate [$12 acceleration allocation](reference-evaluation-acceleration-20261020.md)
 funds two bounded L40S evaluation jobs. Earlier holds are preserved pending billing.
-The waiting MPS scorer was stopped before generation; training continues under its
-original protocol. Current acceleration receipts are under
+The waiting MPS scorer was stopped before generation; all training completed under
+its original protocol. Current acceleration receipts are under
 `artifacts/remaining-queue-20261020/qwen-acceleration`.
 
 | Work | Current state | Next evidence |
 | --- | --- | --- |
 | Ticket-ledger evaluation | [All twelve adapters and 2,160 records verified](ticket-ledger-outcome-20261020.md) | Evaluation complete |
 | Initial ledger execution | Twelve unintended Full SFT jobs cancelled; $2.3597568 reserve retained | Provider cancellation billing; invalid adapters excluded |
-| A13/B5/B10 | [All 24 Qwen trainings verified, 24 distinct adapter hashes](results/clean-reference-grid-20261020/training-verification.json); both Cloud evaluation jobs submitted | Validation selection, selected-check quality; Llama inference route and noise study |
+| A13/B5/B10 | [All 24 Qwen trainings verified, 24 distinct adapter hashes](results/clean-reference-grid-20261020/training-verification.json); [all 2,506 Qwen3-0.6B answers and selection verified](qwen-reference-quality-20261020.md); Qwen3-1.7B running | Qwen3-1.7B results; Llama inference route and noise study |
 | Faults 2–5 | [29/36 CUDA cells verified](data-fault-quality-20261020.md); frozen data timeout reached; all seven healthy-adapter validation evaluations completed for three seeds | Seven seed-6103 cells remain missing; no automatic retry or additional Cloud launch |
 | A10/A12 | Semantic overlap and distribution controls measured in #106 | Downstream quality and independent validation remain distinct |
 | A19/A30/A31 | Automatic 200-example comparison complete in #105 | User replaced human review; failures and API errors retained |

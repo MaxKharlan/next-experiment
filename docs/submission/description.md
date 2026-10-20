@@ -34,6 +34,8 @@ The historical benchmark contains 13 cases and four methods. On its nine low-lea
 
 FT-Fail is published on Hugging Face with the 13 cases, 52 saved method results, 200 automatic audit examples and 400 reference examples. The package includes hashes, provenance and source licenses.
 
+A separate Qwen3-0.6B reference study verified 2,506 saved answers on AI Cloud. Adapters selected on validation scored 104/154 on Banking77, 100/102 on function calling and 102/102 on JSON extraction. These are development results on previously inspected structured splits. All base structured answers used Markdown fences and failed the strict JSON contract, so the comparison includes format compliance. Qwen3-1.7B evaluation is still running.
+
 ## What we learned
 
 A strong model can often name a likely cause without an experiment. Experiments matter when deciding whether the proposed change actually helps. Negative results also matter: some planted faults did not reduce quality, and a classifier that looked useful on local runs failed to transfer reliably to provider runs.

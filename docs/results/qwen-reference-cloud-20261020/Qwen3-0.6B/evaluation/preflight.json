@@ -1,0 +1,554 @@
+{
+  "status": "passed",
+  "python": "3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0]",
+  "platform": "Linux-6.11.0-1016-nvidia-x86_64-with-glibc2.39",
+  "pythonpath": null,
+  "pythonhome": null,
+  "checks": [
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g0/adapter_config.json",
+      "ok": true,
+      "detail": "ec1e2965b8ada933b6ab54399a6af9996fdcc5c34be25003ee4b8fdb046131be"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g0/adapter_model.safetensors",
+      "ok": true,
+      "detail": "6cb71cdf63234fd626aee41bb0b794ddb36db986dade5a77417ef50c0f09b9c0"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g0/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g1/adapter_config.json",
+      "ok": true,
+      "detail": "6d3d54e9d61f9339f266d9e2f7bd45b6a91526b088d85bd4e6bd73d2fbdb0603"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g1/adapter_model.safetensors",
+      "ok": true,
+      "detail": "24a815cc9eaab4f38d3a770781de09344ae122e9a08641b9f00eb7085e3e7027"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g1/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g2/adapter_config.json",
+      "ok": true,
+      "detail": "75982bb866dae24c053f4a757d3249e9157841758f2097b694bbea1cbece3f6d"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g2/adapter_model.safetensors",
+      "ok": true,
+      "detail": "d82849d45407012e8383eb9bb84a5f9625364d4a65734f10ea60ea8155e34218"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g2/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g3/adapter_config.json",
+      "ok": true,
+      "detail": "3bbf0dac44384a0c571a55fe8f268da465bfdcbf3953840159a4360310b9eec0"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g3/adapter_model.safetensors",
+      "ok": true,
+      "detail": "91447524fd28ddc65c9227c72b6cac0d5e98dabb0f80088f2e9632fb3d58ce24"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-banking77-g3/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g0/adapter_config.json",
+      "ok": true,
+      "detail": "b3ac823b9e61543b439522c26602203293161e5da860439b5911a2bf526d9d21"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g0/adapter_model.safetensors",
+      "ok": true,
+      "detail": "9dd11c7d356f217b639c7cd931cded6987fa60093098c931be55cd358719528d"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g0/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g1/adapter_config.json",
+      "ok": true,
+      "detail": "e726fd3d22ff552a572c399edab650ff6ae3f1ac4fb719df4c5176dc267179b7"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g1/adapter_model.safetensors",
+      "ok": true,
+      "detail": "b50febb4d3c3a2665ffcc454f1cd416d69af706bca7db8c88f5a7eff40ae4ac5"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g1/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g2/adapter_config.json",
+      "ok": true,
+      "detail": "f78e03f2131c56822414fa0759a1358397f2abcfde594b5299a563816943af2f"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g2/adapter_model.safetensors",
+      "ok": true,
+      "detail": "01cba95f975bf383f40832a14d3027155c742c36f057215d9be6251dee82d77e"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g2/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g3/adapter_config.json",
+      "ok": true,
+      "detail": "8c9cc514e6bde49d7896a9cfb6d0c767b9966bcc1d770873c8656e166f520fd8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g3/adapter_model.safetensors",
+      "ok": true,
+      "detail": "09e004488fb077a131e6e0b1c844f41826dd0de8d7c54d0080ba0de48b8ea08a"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-function_calling-g3/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g0/adapter_config.json",
+      "ok": true,
+      "detail": "43c2b49bd120ba79b8a86bd390546093da6ddb30f9cf92e42a09f3570352c113"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g0/adapter_model.safetensors",
+      "ok": true,
+      "detail": "6d826109244e40d67e55ab7641355f807493d1fdc3ddac83527d7037900f7232"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g0/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g1/adapter_config.json",
+      "ok": true,
+      "detail": "7d371f632996de6a7c356c4ec94b8758597321af8bc7b5a7e2a77f26f0243d1d"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g1/adapter_model.safetensors",
+      "ok": true,
+      "detail": "906ecdbbfc0840668b64a4ddae499b3802c8450aeea8df37f27f53254d2eb38a"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g1/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g2/adapter_config.json",
+      "ok": true,
+      "detail": "306f86a74a8c122d95917b9f1fbb5148a1006bbffa4b31f5fac0a42c5fb251e9"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g2/adapter_model.safetensors",
+      "ok": true,
+      "detail": "64eb10670b57de32a2eee69f9eee45e26592a7a56b718522169951a043ce7972"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g2/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g3/adapter_config.json",
+      "ok": true,
+      "detail": "a70b72b3690f28576052d8776d613327d0919744e862c407eed59a81ee07e309"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g3/adapter_model.safetensors",
+      "ok": true,
+      "detail": "90805b9b89af0cfe7e38c7a2a1266f34fd30649678ee72aa88cd99edfad4d0b0"
+    },
+    {
+      "name": "sha256:adapters/Qwen3-0.6B-json_extraction-g3/chat_template.jinja",
+      "ok": true,
+      "detail": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+      "name": "sha256:core/eval/data.py",
+      "ok": true,
+      "detail": "5618acdbd8bac665b71d99b8c3b72e9a07e2d8f17701e78ca673b71aaccbeaa7"
+    },
+    {
+      "name": "sha256:core/eval/generate.py",
+      "ok": true,
+      "detail": "c03ed92207a4e0b3007fdb3c31370a1fec1d5a1a1a0973fbe8006583fb94f563"
+    },
+    {
+      "name": "sha256:core/eval/metrics.py",
+      "ok": true,
+      "detail": "33d4222f4c4c065faba313bedc30354fea2aacd430c180677cfaf9b6e607d269"
+    },
+    {
+      "name": "sha256:core/eval/records.py",
+      "ok": true,
+      "detail": "37bef47c8c40248337651ec2fb0aad3bb8eac040cc13e0fe112fa35cf3e844ec"
+    },
+    {
+      "name": "sha256:core/eval/structured.py",
+      "ok": true,
+      "detail": "eac671f1c4f537c5ad928f7aa0245cd008e889e3690c1f17a1b45e195186ad28"
+    },
+    {
+      "name": "sha256:data/banking77/check.jsonl",
+      "ok": true,
+      "detail": "eac7084b4562e3e09bc56a22f24df71c69910ebad14aa17a0fbc478af4a099af"
+    },
+    {
+      "name": "sha256:data/banking77/validation.jsonl",
+      "ok": true,
+      "detail": "5f000cc04fe8e57ae1f6ea811bfcdff63a8c1909f32014bc8ab00262578bd779"
+    },
+    {
+      "name": "sha256:data/function_calling/check.jsonl",
+      "ok": true,
+      "detail": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45"
+    },
+    {
+      "name": "sha256:data/function_calling/validation.jsonl",
+      "ok": true,
+      "detail": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03"
+    },
+    {
+      "name": "sha256:data/json_extraction/check.jsonl",
+      "ok": true,
+      "detail": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+    },
+    {
+      "name": "sha256:data/json_extraction/validation.jsonl",
+      "ok": true,
+      "detail": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+    },
+    {
+      "name": "sha256:dependencies.txt",
+      "ok": true,
+      "detail": "dbf4aea7a88ac94731713c24e671ded85ed2ba204f11203fe7e76578a2e9e7e1"
+    },
+    {
+      "name": "sha256:main.py",
+      "ok": true,
+      "detail": "3d26bf49f3b7b40d398f5cd7daef53b43f4f2f604f72af88a90d8d6b1d90033f"
+    },
+    {
+      "name": "sha256:preflight.py",
+      "ok": true,
+      "detail": "8db0bd8bee939b6bd861f35f1768ac459b79415a2e43255f0017f86633a5a867"
+    },
+    {
+      "name": "sha256:worker.py",
+      "ok": true,
+      "detail": "7d69848dd0aec641c210cf563ddc03dd6cf70a4d59afdd815fe276f71f0de0b8"
+    },
+    {
+      "name": "version:jinja2",
+      "ok": true,
+      "detail": "3.1.6"
+    },
+    {
+      "name": "version:peft",
+      "ok": true,
+      "detail": "0.21.2"
+    },
+    {
+      "name": "version:safetensors",
+      "ok": true,
+      "detail": "0.8.0"
+    },
+    {
+      "name": "version:tokenizers",
+      "ok": true,
+      "detail": "0.23.3"
+    },
+    {
+      "name": "version:torch",
+      "ok": true,
+      "detail": "2.14.1"
+    },
+    {
+      "name": "version:transformers",
+      "ok": true,
+      "detail": "5.19.0"
+    },
+    {
+      "name": "version:pydantic",
+      "ok": true,
+      "detail": "2.14.1"
+    },
+    {
+      "name": "version:numpy",
+      "ok": true,
+      "detail": "2.4.6"
+    },
+    {
+      "name": "version:huggingface_hub",
+      "ok": true,
+      "detail": "1.33.0"
+    },
+    {
+      "name": "version:accelerate",
+      "ok": true,
+      "detail": "1.15.0"
+    },
+    {
+      "name": "pip_check",
+      "ok": true,
+      "detail": "No broken requirements found."
+    },
+    {
+      "name": "nvidia_smi",
+      "ok": true,
+      "detail": "NVIDIA L40S, 580.173.02, 46068 MiB"
+    },
+    {
+      "name": "import:accelerate",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:collections.abc",
+      "ok": true,
+      "detail": [
+        "Callable",
+        "Iterable"
+      ]
+    },
+    {
+      "name": "import:core.eval.data",
+      "ok": true,
+      "detail": [
+        "Example"
+      ]
+    },
+    {
+      "name": "import:core.eval.generate",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:core.eval.metrics",
+      "ok": true,
+      "detail": [
+        "Metric"
+      ]
+    },
+    {
+      "name": "import:core.eval.records",
+      "ok": true,
+      "detail": [
+        "ExampleResult"
+      ]
+    },
+    {
+      "name": "import:core.eval.structured",
+      "ok": true,
+      "detail": [
+        "function_call_exact",
+        "json_fields_exact",
+        "json_valid"
+      ]
+    },
+    {
+      "name": "import:dataclasses",
+      "ok": true,
+      "detail": [
+        "asdict",
+        "dataclass",
+        "field"
+      ]
+    },
+    {
+      "name": "import:datetime",
+      "ok": true,
+      "detail": [
+        "date"
+      ]
+    },
+    {
+      "name": "import:huggingface_hub",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:jinja2",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:json",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:numpy",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:pathlib",
+      "ok": true,
+      "detail": [
+        "Path"
+      ]
+    },
+    {
+      "name": "import:peft",
+      "ok": true,
+      "detail": [
+        "LoraConfig",
+        "get_peft_model",
+        "set_peft_model_state_dict"
+      ]
+    },
+    {
+      "name": "import:pydantic",
+      "ok": true,
+      "detail": [
+        "BaseModel",
+        "ConfigDict",
+        "Field",
+        "StrictBool",
+        "field_validator"
+      ]
+    },
+    {
+      "name": "import:safetensors.torch",
+      "ok": true,
+      "detail": [
+        "load_file"
+      ]
+    },
+    {
+      "name": "import:tokenizers",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:torch",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:transformers",
+      "ok": true,
+      "detail": [
+        "AutoModelForCausalLM",
+        "AutoTokenizer"
+      ]
+    },
+    {
+      "name": "import:transformers.models.qwen2.tokenization_qwen2",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:transformers.models.qwen3.modeling_qwen3",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:typing",
+      "ok": true,
+      "detail": [
+        "Any",
+        "Literal"
+      ]
+    },
+    {
+      "name": "cuda_float32_matmul_and_math_sdpa",
+      "ok": true,
+      "detail": {
+        "device": "NVIDIA L40S",
+        "capability": [
+          8,
+          9
+        ],
+        "torch_cuda": "13.0",
+        "precision": "IEEE float32; math SDPA"
+      }
+    }
+  ],
+  "installed_packages": {
+    "Jinja2": "3.1.6",
+    "MarkupSafe": "3.0.4",
+    "PyYAML": "6.0.3",
+    "Pygments": "2.21.0",
+    "accelerate": "1.15.0",
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "anyio": "4.15.1",
+    "certifi": "2026.10.19",
+    "click": "8.5.0",
+    "cuda-bindings": "13.4.4",
+    "cuda-pathfinder": "1.8.3",
+    "cuda-toolkit": "13.0.3.0",
+    "filelock": "4.2.4",
+    "fsspec": "2026.9.0",
+    "h11": "0.16.0",
+    "hf-xet": "1.7.0",
+    "httpcore": "1.0.9",
+    "httpx": "0.28.1",
+    "huggingface_hub": "1.33.0",
+    "idna": "3.20",
+    "markdown-it-py": "4.2.0",
+    "mdurl": "0.1.2",
+    "mpmath": "1.3.0",
+    "networkx": "3.7",
+    "numpy": "2.4.6",
+    "nvidia-cublas": "13.1.1.3",
+    "nvidia-cuda-cupti": "13.0.85",
+    "nvidia-cuda-nvrtc": "13.0.88",
+    "nvidia-cuda-runtime": "13.0.96",
+    "nvidia-cudnn-cu13": "9.24.0.43",
+    "nvidia-cufft": "12.0.0.61",
+    "nvidia-cufile": "1.15.1.6",
+    "nvidia-curand": "10.4.0.35",
+    "nvidia-cusolver": "12.0.4.66",
+    "nvidia-cusparse": "12.6.3.3",
+    "nvidia-cusparselt-cu13": "0.8.1",
+    "nvidia-nccl-cu13": "2.30.7",
+    "nvidia-nvjitlink": "13.4.92",
+    "nvidia-nvshmem-cu13": "3.4.5",
+    "nvidia-nvtx": "13.0.85",
+    "packaging": "26.3",
+    "peft": "0.21.2",
+    "pip": "24.0",
+    "psutil": "7.2.2",
+    "pydantic": "2.14.1",
+    "pydantic_core": "2.50.1",
+    "regex": "2026.9.29",
+    "rich": "15.0.0",
+    "safetensors": "0.8.0",
+    "setuptools": "84.2.0",
+    "shellingham": "1.5.4",
+    "sympy": "1.14.0",
+    "tokenizers": "0.23.3",
+    "torch": "2.14.1",
+    "tqdm": "4.70.1",
+    "transformers": "5.19.0",
+    "triton": "3.8.0",
+    "typer": "0.27.3",
+    "typing-inspection": "0.4.4",
+    "typing_extensions": "4.16.0"
+  }
+}
