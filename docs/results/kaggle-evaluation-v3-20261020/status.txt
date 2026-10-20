@@ -1,1 +1,1 @@
-maximkharlan/next-experiment-evaluation-v3-20261020 has status "KernelWorkerStatus.RUNNING"
+maximkharlan/next-experiment-evaluation-v3-20261020 has status "KernelWorkerStatus.COMPLETE"
