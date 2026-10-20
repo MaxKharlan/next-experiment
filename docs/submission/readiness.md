@@ -17,7 +17,7 @@ establish residence. Submission accepts binding terms and has not been performed
 | --- | --- |
 | English description | [Prepared](description.md), including verified results for both Qwen models and the completed REST study |
 | Source and license | Public GitHub repository, Apache-2.0 |
-| Demo URL | Public saved replay; not advertised as a public paid endpoint |
+| Demo URL | [Free browser testing](../judging.md) of editable/user-supplied training labels, with downloadable results; recorded provider investigations available as replays. Fresh paid inference/training is outside this public mode |
 | Dataset | [MakHH/FT-Fail](https://huggingface.co/datasets/MakHH/FT-Fail), published and verified |
 | Video | Silent 2:06 demo with English captions and a separate caption PDF saved in the owner's Downloads folder, outside the project; YouTube publication pending |
 | Feedback | Consolidated local `docs/feedback.md`; owner will send it. New feedback edits are excluded from publication |

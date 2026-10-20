@@ -15,6 +15,8 @@ JS = Path(__file__).resolve().parents[2] / "apps/api/static/label-audit.js"
 def test_browser_python_parity():
     rng = random.Random(42)
     cases = []
+    examples = json.loads((JS.parent / "label-examples.json").read_text())
+    cases.extend(example["request"] for example in examples)
     for _ in range(250):
         tokens = [rng.randrange(5) for _ in range(rng.randrange(12))]
         labels = [t if rng.random() > 0.4 else -100 for t in tokens]
@@ -92,3 +94,26 @@ def test_browser_python_parity():
         except ValueError:
             expected = None
         assert browser == expected, case
+
+
+def test_public_examples_detect_fault_and_verify_repaired_labels():
+    examples = json.loads((JS.parent / "label-examples.json").read_text())
+    statuses = {
+        "healthy": ("alignment", "aligned"),
+        "eos": ("eos", "removed"),
+        "prompt": ("prompt", "included"),
+        "shift": ("alignment", "double_shift"),
+    }
+    assert {example["id"] for example in examples} == set(statuses)
+    for example in examples:
+        payload = example["request"]["training_labels"]
+        result = check_training_labels(payload)
+        check, expected = statuses[example["id"]]
+        assert result[check]["status"] == expected
+        repaired = copy.deepcopy(payload)
+        repaired["observed"] = copy.deepcopy(repaired["reference"])
+        result = check_training_labels(repaired)
+        assert result["alignment"]["status"] == "aligned"
+        assert result["prompt"]["status"] == "masked"
+        assert result["eos"]["status"] == "preserved"
+        assert result["causal_confirmation"] is False

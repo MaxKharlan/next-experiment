@@ -12,6 +12,9 @@ def test_static_site_plays_what_the_server_replay_streams(tmp_path):
     assert (tmp_path / "label-audit.js").read_bytes() == (
         build_pages.SCREEN.parent / "label-audit.js"
     ).read_bytes()
+    assert (tmp_path / "label-examples.json").read_bytes() == (
+        build_pages.SCREEN.parent / "label-examples.json"
+    ).read_bytes()
     listed = json.loads((tmp_path / "demo-cases.json").read_text(encoding="utf-8"))
     assert listed == runners.demo_index()
 

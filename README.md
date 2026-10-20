@@ -4,6 +4,12 @@ An agent that investigates LLM fine-tune failures and tests proposed fixes again
 
 Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser.
 
+[Test without keys or payment](https://maxkharlan.github.io/next-experiment/#labelAudit):
+load an editable example or your own training-label JSON, run the checks in your
+browser, change the labels and download the result. See the
+[testing walkthrough](docs/judging.md). Fresh provider inference and training
+remain available separately in the self-hosted application.
+
 ## What it does
 
 A fine-tuning job can finish with status `succeeded` and still give a model that does not do the task. Next Experiment takes such a job, finds the likely causes, and runs the cheapest experiments that can tell them apart. A controlled check supports a fix when it beats the specified control beyond the measured noise between seeds. That comparison alone does not establish a unique root cause. Controls must report both retained examples and training tokens; equal file size does not imply equal compute cost. After you approve the cost, it retrains the model with the fix and compares the base, failed and retrained models on the same held-out queries.

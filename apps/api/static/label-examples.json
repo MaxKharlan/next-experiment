@@ -1,0 +1,26 @@
+[
+  {
+    "id": "healthy",
+    "title": "Correct answer-only labels",
+    "description": "Prompt tokens are ignored; answer tokens and EOS remain supervised. Try changing an observed label and run the check again.",
+    "request": {"title": "Correct answer-only labels", "training_labels": {"reference": [{"input_ids": [10, 11, 20, 21, 99], "labels": [-100, -100, 20, 21, 99]}], "observed": [{"input_ids": [10, 11, 20, 21, 99], "labels": [-100, -100, 20, 21, 99]}], "eos_token_id": 99}}
+  },
+  {
+    "id": "eos",
+    "title": "EOS accidentally masked",
+    "description": "The observed labels ignore the final EOS token (99). Change the last observed -100 back to 99 and rerun to check the repair.",
+    "request": {"title": "EOS accidentally masked", "training_labels": {"reference": [{"input_ids": [10, 11, 20, 21, 99], "labels": [-100, -100, 20, 21, 99]}], "observed": [{"input_ids": [10, 11, 20, 21, 99], "labels": [-100, -100, 20, 21, -100]}], "eos_token_id": 99}}
+  },
+  {
+    "id": "prompt",
+    "title": "Prompt included in the loss",
+    "description": "The observed labels supervise prompt tokens too. Replace the first two observed labels with -100 to restore answer-only supervision.",
+    "request": {"title": "Prompt included in the loss", "training_labels": {"reference": [{"input_ids": [10, 11, 20, 21, 99], "labels": [-100, -100, 20, 21, 99]}], "observed": [{"input_ids": [10, 11, 20, 21, 99], "labels": [10, 11, 20, 21, 99]}], "eos_token_id": 99}}
+  },
+  {
+    "id": "shift",
+    "title": "Labels shifted twice",
+    "description": "The observed labels have an extra shift before the model applies its causal shift. Restore the reference labels to remove it.",
+    "request": {"title": "Labels shifted twice", "training_labels": {"reference": [{"input_ids": [10, 11, 20, 21, 99], "labels": [-100, -100, 20, 21, 99]}], "observed": [{"input_ids": [10, 11, 20, 21, 99], "labels": [-100, 20, 21, 99, -100]}], "eos_token_id": 99}}
+  }
+]

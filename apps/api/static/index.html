@@ -285,6 +285,11 @@
   .case-start textarea { display: block; width: 100%; box-sizing: border-box; min-height: 180px; margin: 12px 0; padding: 12px; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; font-family: var(--font-mono); }
   .case-start .controls { flex-wrap: wrap; }
   .case-start pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  #freeTesting { gap: 12px; }
+  #freeTesting > * { margin: 0; }
+  #freeTesting .btn { justify-self: start; }
+  #labelTestControls .controls { margin: 8px 0; }
+  #labelPayload { min-height: 300px; }
 .experiment-table { width:100%; border-collapse:collapse; font-size:13px; margin:16px 0; }
 .experiment-table th, .experiment-table td { text-align:left; padding:9px; border-bottom:1px solid var(--line, #34413d); }
 </style>
@@ -307,15 +312,35 @@
 </header>
 
 <main class="content">
+  <section class="card case-start" id="freeTesting" hidden>
+    <h2>Test Next Experiment for free</h2>
+    <p>Run training-label checks on your own inputs below. Results are computed in your browser: no account, API key, upload or payment. Start with an example, change its labels, and rerun to see the result change.</p>
+    <p class="muted small">Use Replay above to inspect recorded Nebius investigations and download their reports. Fresh Nemotron calls and fine-tuning are available in the self-hosted application; they are not run by this browser test.</p>
+    <a class="btn btn-ghost" href="#labelAudit">Try an editable example</a>
+  </section>
   <details class="card case-start" id="labelAudit" hidden>
     <summary>Inspect local training labels · free</summary>
     <p class="muted small">Paste reference and observed unpadded token rows. The reference must use correct answer-only labels. This checks prompt loss, EOS masking and label alignment. It does not train a model or confirm a cause.</p>
+    <div id="labelTestControls" hidden>
+      <label for="labelExample">Start from an example</label>
+      <div class="controls">
+        <select id="labelExample">
+          <option value="">Choose an example</option>
+        </select>
+        <button id="loadLabelExample" class="btn btn-ghost" type="button">Load example</button>
+      </div>
+      <p id="labelExampleNote" class="muted small"></p>
+      <label for="labelFile">Or load your own JSON request (up to 2 MB)</label>
+      <input id="labelFile" type="file" accept=".json,application/json">
+    </div>
     <label for="labelPayload">Label audit request (JSON)</label>
     <textarea id="labelPayload" spellcheck="false">{"training_labels":{"reference":[{"input_ids":[1,2,3],"labels":[-100,2,3]}],"observed":[{"input_ids":[1,2,3],"labels":[-100,2,-100]}],"eos_token_id":3}}</textarea>
     <button id="runLabelAudit" class="btn btn-primary" type="button">Save label audit</button>
     <p class="muted small">On this static site, pasted data stays in your browser. Supply unpadded rows: reference -100 positions must be prompt tokens only. Position 0 is excluded from causal loss. The reference is yours; this audit cannot judge its semantic correctness or prove a cause of model behavior.</p>
     <p class="muted small">Limits: 1–1024 rows per side, 32768 positions per row, 131072 positions across both sides. Token IDs are nonnegative integers; labels may also be -100. Both sides must describe identical token sequences. Optional eos_token_id must be a nonnegative integer or null.</p>
     <pre id="labelFeedback" role="status" aria-live="polite"></pre>
+    <p id="labelSummary" hidden></p>
+    <a id="labelDownload" class="btn btn-ghost" download="next-experiment-label-audit.json" hidden>Download audit and inputs (JSON)</a>
     <details id="labelResult" hidden open><summary>Computed audit details</summary>
       <p class="muted small">double_shift means the supplied labels match one extra shift. other_mismatch means neither alignment pattern matches. not_applicable means the changes do not fit that check. no_eos_targets and inconclusive provide no conclusion for that check. EOS removal is observable; whether padding caused it is not established.</p>
       <pre id="labelDetails" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre>
@@ -414,9 +439,12 @@ const STATIC = document.documentElement.dataset.mode === "static";
 async function init() {
   showMethod();
   if (STATIC) {
+  $("freeTesting").hidden = false;
+  $("labelTestControls").hidden = false;
   $("labelAudit").hidden = false;
   $("labelAudit").open = true;
   $("runLabelAudit").textContent = "Run audit in this browser";
+  initLabelExamples();
   }
   const cases = await (await fetch(STATIC ? "demo-cases.json" : "/api/demo-cases")).json();
   const catalogs = {};
@@ -523,16 +551,80 @@ $("launchCase").onclick = async () => {
   } finally { caseControls(false); }
 };
 
+let labelExamples = [], labelDownloadUrl = null, labelFileVersion = 0;
+const LABEL_FILE_LIMIT = 2 * 1024 * 1024;
+function invalidateLabelAudit() {
+  $("labelResult").hidden = true;
+  $("labelSummary").hidden = true;
+  $("labelDownload").hidden = true;
+  $("labelDownload").removeAttribute("href");
+  if (labelDownloadUrl) URL.revokeObjectURL(labelDownloadUrl);
+  labelDownloadUrl = null;
+  $("labelFeedback").textContent = "Input changed. Run the audit to compute a new result.";
+}
+async function initLabelExamples() {
+  const initialText = $("labelPayload").value;
+  try {
+    const response = await fetch("label-examples.json");
+    if (!response.ok) throw new Error("Examples could not be loaded. You can still paste your own request.");
+    labelExamples = await response.json();
+    $("labelExample").innerHTML += labelExamples.map(e => `<option value="${esc(e.id)}">${esc(e.title)}</option>`).join("");
+    $("labelExample").value = "eos";
+    if ($("labelPayload").value === initialText && labelFileVersion === 0) $("loadLabelExample").click();
+  } catch (error) { $("labelExampleNote").textContent = error.message; }
+}
+$("loadLabelExample").onclick = () => {
+  const example = labelExamples.find(e => e.id === $("labelExample").value);
+  if (!example) return;
+  labelFileVersion++;
+  invalidateLabelAudit();
+  $("labelPayload").value = JSON.stringify(example.request, null, 2).replace(
+    /\[\s+(-?\d+(?:,\s*-?\d+)*)\s+\]/g, (_, values) => `[${values.replace(/\s+/g, " ")}]`
+  );
+  $("labelFile").value = "";
+  $("labelExampleNote").textContent = example.description;
+};
+$("labelPayload").oninput = () => { labelFileVersion++; invalidateLabelAudit(); };
+$("labelFile").onchange = async () => {
+  const file = $("labelFile").files[0];
+  if (!file) return;
+  const version = ++labelFileVersion;
+  invalidateLabelAudit();
+  $("labelPayload").value = "";
+  $("labelExampleNote").textContent = "Reading your local file…";
+  try {
+    if (file.size > LABEL_FILE_LIMIT) throw new Error("Choose a JSON file no larger than 2 MB.");
+    const text = await file.text();
+    if (version !== labelFileVersion) return;
+    $("labelPayload").value = text;
+    $("labelExample").value = "";
+    $("labelExampleNote").textContent = `Loaded ${file.name}. The file stays in this browser.`;
+  } catch (error) { if (version === labelFileVersion) $("labelFeedback").textContent = error.message; }
+};
+function labelSummary(result) {
+  const alignment = {aligned: "Labels match the supplied reference.", double_shift: "Labels have an extra causal shift.", other_mismatch: "Labels differ from the reference.", inconclusive: "Too few informative positions to assess alignment."};
+  const prompt = result.prompt.status === "included" ? `${result.prompt.supervised_prompt_tokens} prompt token(s) contribute to the loss.` : result.prompt.status === "masked" ? "Prompt tokens are masked." : "The prompt-loss check has no applicable conclusion.";
+  const eos = result.eos.status === "removed" ? `${result.eos.removed_eos_targets} EOS target(s) are masked.` : result.eos.status === "preserved" ? "EOS targets are preserved." : "The EOS check has no applicable conclusion.";
+  return [alignment[result.alignment.status], prompt, eos].join(" ");
+}
 $("runLabelAudit").onclick = async () => {
   const button = $("runLabelAudit");
   button.disabled = true;
   try {
     if (STATIC) {
-      $("labelResult").hidden = true;
-      const result = LabelAudit.request($("labelPayload").value);
+      invalidateLabelAudit();
+      const text = $("labelPayload").value;
+      if (new Blob([text]).size > LABEL_FILE_LIMIT) throw new Error("Paste a JSON request no larger than 2 MB.");
+      const result = LabelAudit.request(text);
       $("labelFeedback").textContent = `Completed locally · ${result.rows} row(s). Alignment: ${result.alignment.status}; prompt: ${result.prompt.status}; EOS: ${result.eos.status}.`;
+      $("labelSummary").textContent = labelSummary(result);
+      $("labelSummary").hidden = false;
       $("labelDetails").textContent = LabelAudit.stringify(result);
       $("labelResult").hidden = false;
+      const report = {schema_version: 1, kind: "browser_label_audit", request_json: text, result};
+      labelDownloadUrl = URL.createObjectURL(new Blob([LabelAudit.stringify(report)], {type: "application/json"}));
+      $("labelDownload").href = labelDownloadUrl;
+      $("labelDownload").hidden = false;
       return;
     }
     const payload = JSON.parse($("labelPayload").value);
