@@ -1,0 +1,213 @@
+{
+  "base": {
+    "content": {
+      "choice_exact": 0.875,
+      "schema_valid": 0.0,
+      "strict_exact": 0.0,
+      "unwrapped_exact": 0.5416666666666666
+    },
+    "format": {
+      "schema_valid": 0.0,
+      "strict_exact": 0.0,
+      "unwrapped_exact": 1.0
+    }
+  },
+  "failures": [
+    "healthy_choice_floor_or_ceiling",
+    "insufficient_choice_gap_wrong",
+    "insufficient_cut_sensitivity"
+  ],
+  "groups": {
+    "cut": {
+      "content": {
+        "choice_exact": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "schema_valid": [
+          0.8541666666666666,
+          0.9791666666666666,
+          1.0
+        ],
+        "strict_exact": [
+          0.8541666666666666,
+          0.9791666666666666,
+          1.0
+        ],
+        "unwrapped_exact": [
+          0.8541666666666666,
+          0.9791666666666666,
+          1.0
+        ]
+      },
+      "format": {
+        "schema_valid": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "strict_exact": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unwrapped_exact": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "format": {
+      "content": {
+        "choice_exact": [
+          0.6458333333333334,
+          0.9166666666666666,
+          0.5
+        ],
+        "schema_valid": [
+          0.6666666666666666,
+          0.9583333333333334,
+          0.0
+        ],
+        "strict_exact": [
+          0.020833333333333332,
+          0.3541666666666667,
+          0.0
+        ],
+        "unwrapped_exact": [
+          0.020833333333333332,
+          0.3541666666666667,
+          0.0
+        ]
+      },
+      "format": {
+        "schema_valid": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "strict_exact": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unwrapped_exact": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "healthy": {
+      "content": {
+        "choice_exact": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "schema_valid": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "strict_exact": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unwrapped_exact": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "format": {
+        "schema_valid": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "strict_exact": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unwrapped_exact": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "wrong": {
+      "content": {
+        "choice_exact": [
+          1.0,
+          0.8125,
+          0.9791666666666666
+        ],
+        "schema_valid": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "strict_exact": [
+          0.9791666666666666,
+          0.375,
+          0.9375
+        ],
+        "unwrapped_exact": [
+          0.9791666666666666,
+          0.375,
+          0.9375
+        ]
+      },
+      "format": {
+        "schema_valid": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "strict_exact": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "unwrapped_exact": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "next_phase": "New confirmatory protocol only if all gates pass; historical final test stays protected.",
+  "power": null,
+  "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+  "selected_seeds": [],
+  "status": "stopped",
+  "weight_digests": {
+    "cut": [
+      "281c8ab242dd280fc43085f1430be9077efbdc80e0d3b260309192c4783ad72f",
+      "f565d2c2d70e4cdda362d1f5ff2de5f8989707ce949a031957b4d3ee562d08ac",
+      "500504e2b4ddbc120e50d42d0b79ce312c9d5300a2efc8c666feb7dc1a34ffce"
+    ],
+    "format": [
+      "f19ae8b29541f1b53165567cf8fbe6bd7bc6b753205d1ad57044957f1f69836e",
+      "42c3a64c992ca6ba886afb74c109d107df42da0a8adf04f5e80e026641536455",
+      "dc43aac232dae3a1a35e6cb96d78f3d0f5d07cc0ccff72763ccab03d82358a97"
+    ],
+    "healthy": [
+      "51fc4cf9473220e880d147d691e54e6f693f498f5df470098b7843598ff58f17",
+      "76fc8ea016f333e12a5c009c7a6a081e517c51aa75526e08be8c03b6ca3ce1d9",
+      "dec531a341a9a33299e4761aee7b981ac951a926e8941c665425b51c82b6e590"
+    ],
+    "wrong": [
+      "2347df9ac27e09b01e6ffc39a90d7ef505af35fd4192db23f28a140e7642e848",
+      "4135b9f83288761e41f8065306b0ec5979f1eb621df63520b0ab604d79890859",
+      "09a49a5ff904f726340160666cb4a7f3137d69985baaa97550bddd4bbff17b39"
+    ]
+  }
+}

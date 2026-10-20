@@ -1,0 +1,25 @@
+{
+  "cancelled_originals": 12,
+  "committed_including_holds_usd": 2.2491263999999997,
+  "experimental_slots": 12,
+  "invoice_reconciled": false,
+  "new_training_token_estimate_usd": 0.8469311999999999,
+  "pending_operation_ids": [
+    "format-content-development-20261019-v1:cut-s1301",
+    "format-content-development-20261019-v1:cut-s1302",
+    "format-content-development-20261019-v1:cut-s1303",
+    "format-content-development-20261019-v1:format-s1301",
+    "format-content-development-20261019-v1:format-s1302",
+    "format-content-development-20261019-v1:format-s1303",
+    "format-content-development-20261019-v1:healthy-s1301",
+    "format-content-development-20261019-v1:healthy-s1302",
+    "format-content-development-20261019-v1:healthy-s1303",
+    "format-content-development-20261019-v1:wrong-s1301",
+    "format-content-development-20261019-v1:wrong-s1302",
+    "format-content-development-20261019-v1:wrong-s1303"
+  ],
+  "provider_submissions": 24,
+  "retained_holds_usd": 1.1311488,
+  "settled_token_estimate_including_inherited_usd": 1.1179776,
+  "status": "cancelled_holds_pending"
+}

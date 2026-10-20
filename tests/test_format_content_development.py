@@ -221,7 +221,9 @@ def test_paid_settlement_resume_uses_existing_actual(tmp_path, monkeypatch):
 def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_path):
     from bench.tasks.structured import sha
     from scripts.fresh_answer_calibration import save
-    from scripts.report_format_content import verify_export
+    from scripts.report_format_content import accounting, model_summary, verify_export
+    from dataclasses import asdict
+    from core.interventions.stats import noise_floor
 
     data = build(tmp_path / "data", CharTokenizer())
     state, jobs = {}, {}
@@ -231,12 +233,16 @@ def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_
             path = tmp_path / f"{name}-train.jsonl"
             path.write_bytes((tmp_path / "data" / f"{arm}-train.jsonl").read_bytes())
             jobs[name] = {
+                "reservation_usd": 0,
                 "train": f"/old/{path.name}",
                 "train_sha256": sha(path),
                 "validation": f"/old/data/{arm}-validation.jsonl",
                 "validation_sha256": data[f"{arm}_validation"]["sha256"],
             }
             state[name] = {
+                "operation_id": name,
+                "trained_tokens": 0,
+                "estimated_cost_usd": 0,
                 "job_id": name,
                 "weights_sha256": name,
                 "status": "succeeded",
@@ -250,12 +256,23 @@ def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_
         "healthy_minus_wrong_choice": 0.1,
         "healthy_minus_cut_strict": 0.08,
     }
-    plan = {"datasets": data, "jobs": jobs, "evaluation_runtime": {}, "gates": rule}
+    plan = {
+        "datasets": data,
+        "jobs": jobs,
+        "evaluation_runtime": {},
+        "gates": rule,
+        "protected_sha256": {},
+        "price": {"usd_per_million": 0.4},
+        "cap_usd": 5,
+    }
     for entry in data.values():
         entry["path"] = "/old/data/" + entry["path"].split("/")[-1]
     save(tmp_path / "protocol.json", plan)
     digest = sha(tmp_path / "protocol.json")
     (tmp_path / "protocol.sha256").write_text(digest + "\n")
+    for entry in state.values():
+        entry["protocol_sha256"] = digest
+    summaries = {}
     choices = json.loads((tmp_path / "data/choices.json").read_text())
     groups = {
         a: {k: {} for k in ("format", "content")}
@@ -275,6 +292,8 @@ def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_
             ):
                 expected = json.loads(line)["messages"][-1]["content"]
                 row = {
+                    "source": "fixture",
+                    "hit_limit": False,
                     "line": i + 1,
                     "expected": expected,
                     "answer": expected,
@@ -305,7 +324,9 @@ def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_
                         value
                     )
         save(tmp_path / "scores" / f"{name}.json", record)
+        summaries[name] = model_summary(record)
     decision = {
+        "protocol_sha256": digest,
         "base": {k: record[k]["summary"] for k in ("format", "content")},
         "groups": groups,
         "failures": gate_failures(groups, rule),
@@ -316,6 +337,51 @@ def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_
     }
     save(tmp_path / "state.json", state)
     save(tmp_path / "decision.json", decision)
+
+    ledger = {
+        "cap_usd": 5,
+        "committed_usd": 0,
+        "available_usd": 5,
+        "operations": [
+            {"id": name, "status": "settled", "reserved_usd": 0, "actual_usd": 0}
+            for name in state
+        ],
+    }
+    inherited = {"operations": []}
+    account = accounting(plan, state, ledger, inherited, None, digest)
+    save(tmp_path / "spending.json", ledger)
+    save(tmp_path / "inherited-spending.json", inherited)
+    save(tmp_path / "accounting.json", account)
+    save(
+        tmp_path / "completion.json",
+        {
+            "protocol_sha256": digest,
+            "status": "stopped",
+            "paid_jobs": 12,
+            "scored_models": 13,
+        },
+    )
+    save(
+        tmp_path / "summary.json",
+        {
+            "protocol_sha256": digest,
+            "decision": decision,
+            "spending": ledger,
+            "accounting": account,
+            "models": summaries,
+            "healthy_cut_descriptive_noise": {
+                metric: asdict(
+                    noise_floor(
+                        {
+                            arm: groups[arm]["content"][metric]
+                            for arm in ("healthy", "cut")
+                        }
+                    )
+                )
+                for metric in ("strict_exact", "choice_exact")
+            },
+        },
+    )
 
     def manifest():
         save(
