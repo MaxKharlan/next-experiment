@@ -15,6 +15,13 @@ adds up to $5.917018 of TF reservations to the previous $4.261323 commitments;
 each job reserves before dispatch. This leaves room for the separate $1 REST trace.
 See the timestamped progress JSON for current committed amounts.
 
+The owner subsequently supplied a current $25 Cloud balance and requested faster
+Qwen evaluation. A separate [$12 acceleration allocation](reference-evaluation-acceleration-20261020.md)
+funds two bounded L40S evaluation jobs. Earlier holds are preserved pending billing.
+The waiting MPS scorer was stopped before generation; training continues under its
+original protocol. Current acceleration receipts are under
+`artifacts/remaining-queue-20261020/qwen-acceleration`.
+
 | Work | Current state | Next evidence |
 | --- | --- | --- |
 | Ticket-ledger evaluation | [All twelve adapters and 2,160 records verified](ticket-ledger-outcome-20261020.md) | Evaluation complete |
