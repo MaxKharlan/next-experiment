@@ -1,0 +1,610 @@
+{
+  "protocol_sha256": "21997ae4660637bb3cd3a063b7cbc154e7fc409e98fecb33ae146e5a95a7e19f",
+  "results": {
+    "nvidia-local": {
+      "metrics": {
+        "accuracy": 0.6363636363636364,
+        "examples": 22,
+        "fn": 4,
+        "fp": 4,
+        "precision": 0.6363636363636364,
+        "recall": 0.6363636363636364,
+        "tn": 7,
+        "tp": 7
+      },
+      "paraphrases": {
+        "accuracy": 0.0,
+        "examples": 4,
+        "fn": 4,
+        "fp": 0,
+        "precision": null,
+        "recall": 0.0,
+        "tn": 0,
+        "tp": 0
+      },
+      "rows": [
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-01",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-02",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-03",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-04",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9924175559517262
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-05",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9899139409348678
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-06",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9887987699996763
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-07",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9945977158065138
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-08",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.5971150786839816
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-09",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.6568575792832969
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-10",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.7329054824399224
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-11",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.8418816544922938
+        },
+        {
+          "candidate": true,
+          "category": "different_number",
+          "id": "lexical-12",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9471010311665531
+        },
+        {
+          "candidate": true,
+          "category": "different_number",
+          "id": "lexical-13",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9396872549299534
+        },
+        {
+          "candidate": true,
+          "category": "different_entity",
+          "id": "lexical-14",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.93518333813511
+        },
+        {
+          "candidate": true,
+          "category": "negation",
+          "id": "lexical-15",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9215065449829484
+        },
+        {
+          "candidate": false,
+          "category": "negation",
+          "id": "lexical-16",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9195874602740168
+        },
+        {
+          "candidate": false,
+          "category": "different_system",
+          "id": "lexical-17",
+          "kind": "context_guard",
+          "same_request": false,
+          "similarity": null
+        },
+        {
+          "candidate": false,
+          "category": "different_system",
+          "id": "lexical-18",
+          "kind": "context_guard",
+          "same_request": false,
+          "similarity": null
+        },
+        {
+          "candidate": false,
+          "category": "short_distinct",
+          "id": "lexical-19",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.8980678327893945
+        },
+        {
+          "candidate": false,
+          "category": "short_distinct",
+          "id": "lexical-20",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.7835774771506286
+        },
+        {
+          "candidate": false,
+          "category": "unrelated",
+          "id": "lexical-21",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.3266615431318229
+        },
+        {
+          "candidate": false,
+          "category": "unrelated",
+          "id": "lexical-22",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.5254371014008588
+        }
+      ]
+    },
+    "qwen-local": {
+      "metrics": {
+        "accuracy": 0.5454545454545454,
+        "examples": 22,
+        "fn": 4,
+        "fp": 6,
+        "precision": 0.5384615384615384,
+        "recall": 0.6363636363636364,
+        "tn": 5,
+        "tp": 7
+      },
+      "paraphrases": {
+        "accuracy": 0.0,
+        "examples": 4,
+        "fn": 4,
+        "fp": 0,
+        "precision": null,
+        "recall": 0.0,
+        "tn": 0,
+        "tp": 0
+      },
+      "rows": [
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-01",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-02",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-03",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-04",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9972049702016608
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-05",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9934919728295788
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-06",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9979688164138155
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-07",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9979586874939498
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-08",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.6638929696161983
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-09",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.6890014785890604
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-10",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.7964140135816743
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-11",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.7825292482558207
+        },
+        {
+          "candidate": true,
+          "category": "different_number",
+          "id": "lexical-12",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9849254118132409
+        },
+        {
+          "candidate": true,
+          "category": "different_number",
+          "id": "lexical-13",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9971047381291668
+        },
+        {
+          "candidate": true,
+          "category": "different_entity",
+          "id": "lexical-14",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9253167753995755
+        },
+        {
+          "candidate": true,
+          "category": "negation",
+          "id": "lexical-15",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9876207024814881
+        },
+        {
+          "candidate": true,
+          "category": "negation",
+          "id": "lexical-16",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9357903999380861
+        },
+        {
+          "candidate": false,
+          "category": "different_system",
+          "id": "lexical-17",
+          "kind": "context_guard",
+          "same_request": false,
+          "similarity": null
+        },
+        {
+          "candidate": false,
+          "category": "different_system",
+          "id": "lexical-18",
+          "kind": "context_guard",
+          "same_request": false,
+          "similarity": null
+        },
+        {
+          "candidate": true,
+          "category": "short_distinct",
+          "id": "lexical-19",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9506878438213262
+        },
+        {
+          "candidate": false,
+          "category": "short_distinct",
+          "id": "lexical-20",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.7414993664292395
+        },
+        {
+          "candidate": false,
+          "category": "unrelated",
+          "id": "lexical-21",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.46352886935226023
+        },
+        {
+          "candidate": false,
+          "category": "unrelated",
+          "id": "lexical-22",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.6471120665612302
+        }
+      ]
+    },
+    "qwen-provider": {
+      "metrics": {
+        "accuracy": 0.6818181818181818,
+        "examples": 22,
+        "fn": 4,
+        "fp": 3,
+        "precision": 0.7,
+        "recall": 0.6363636363636364,
+        "tn": 8,
+        "tp": 7
+      },
+      "paraphrases": {
+        "accuracy": 0.0,
+        "examples": 4,
+        "fn": 4,
+        "fp": 0,
+        "precision": null,
+        "recall": 0.0,
+        "tn": 0,
+        "tp": 0
+      },
+      "rows": [
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-01",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-02",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "normalized_exact",
+          "id": "lexical-03",
+          "kind": "normalized_exact",
+          "same_request": true,
+          "similarity": 1.0
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-04",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9918993206818707
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-05",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9837423634144129
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-06",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9934149506354506
+        },
+        {
+          "candidate": true,
+          "category": "surface",
+          "id": "lexical-07",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.9849746222977681
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-08",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.7669660085900161
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-09",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.7320729868375411
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-10",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.855241815823004
+        },
+        {
+          "candidate": false,
+          "category": "paraphrase",
+          "id": "lexical-11",
+          "kind": "embedding_cosine",
+          "same_request": true,
+          "similarity": 0.8702020408794737
+        },
+        {
+          "candidate": true,
+          "category": "different_number",
+          "id": "lexical-12",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9253297227319903
+        },
+        {
+          "candidate": true,
+          "category": "different_number",
+          "id": "lexical-13",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9940321843746589
+        },
+        {
+          "candidate": true,
+          "category": "different_entity",
+          "id": "lexical-14",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.9414550356949636
+        },
+        {
+          "candidate": false,
+          "category": "negation",
+          "id": "lexical-15",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.864700077004991
+        },
+        {
+          "candidate": false,
+          "category": "negation",
+          "id": "lexical-16",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.8813849590647458
+        },
+        {
+          "candidate": false,
+          "category": "different_system",
+          "id": "lexical-17",
+          "kind": "context_guard",
+          "same_request": false,
+          "similarity": null
+        },
+        {
+          "candidate": false,
+          "category": "different_system",
+          "id": "lexical-18",
+          "kind": "context_guard",
+          "same_request": false,
+          "similarity": null
+        },
+        {
+          "candidate": false,
+          "category": "short_distinct",
+          "id": "lexical-19",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.915563692938891
+        },
+        {
+          "candidate": false,
+          "category": "short_distinct",
+          "id": "lexical-20",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.7981615958544508
+        },
+        {
+          "candidate": false,
+          "category": "unrelated",
+          "id": "lexical-21",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.380868047073358
+        },
+        {
+          "candidate": false,
+          "category": "unrelated",
+          "id": "lexical-22",
+          "kind": "embedding_cosine",
+          "same_request": false,
+          "similarity": 0.5733410804642324
+        }
+      ]
+    }
+  },
+  "scope": "Same 22 authored stress controls as lexical baseline. No independent semantic truth or deployed accuracy; no threshold tuning.",
+  "source_sha256": {
+    "core/probes/level0/semantic_overlap.py": "4bdf9a6a3615128eed1b40fb8bb40bf8c2201100d2ab1ef41b96ae72cb3347ec",
+    "scripts/analyze_semantic_overlap.py": "86c947b0dee810a4c724de48a72b5199cad75cfc1f0b3f81c63dc8d6cf4481a1"
+  }
+}

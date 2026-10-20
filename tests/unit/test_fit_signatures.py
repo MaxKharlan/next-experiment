@@ -27,7 +27,16 @@ def test_counts_smoothing_and_unobserved_rows():
     for rows in table.values():
         for probabilities in rows.values():
             assert sum(probabilities.values()) == pytest.approx(1)
-            assert all(0 < p < 1 for p in probabilities.values())
+            if len(probabilities) == 1:
+                assert list(probabilities.values()) == [1.0]
+            else:
+                assert all(0 < p < 1 for p in probabilities.values())
+
+
+def test_uncalibrated_logit_measurement_is_neutral_for_all_faults():
+    probs = {"a": 0.2, "b": 0.3, "c": 0.5}
+    classes = {"a": "answer_truncation", "b": "prompt_loss", "c": "healthy"}
+    assert update(probs, classes, "teacher_forced_logits", "measured") == probs
 
 
 @pytest.mark.parametrize("alpha", [0, -1, float("nan"), float("inf"), True])

@@ -1,0 +1,18 @@
+{
+  "cosine_min": 0.92,
+  "data_sha256": {
+    "audit.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "controls.json": "1adb039fbdc50ca9649a07b6bcae375ba017403299f5e355db778c5a28d47771",
+    "reference.json": "6e656e430a08322e6db1dbc3f92c9882ac23ca7d1d7fe7cd2a54b85d924691ee"
+  },
+  "embedding": {
+    "batch_size": 8,
+    "max_length": 512,
+    "provider": "Qwen/Qwen3-Embedding-8B"
+  },
+  "id": "semantic-overlap-20261020-v1",
+  "original_controls_sha256": "ee3b28ac3ff621179827699adc63ffca633cb51e363d7725358e640248b08d67",
+  "representation": "Normalized non-system role/content joined by newline; symmetric document embeddings.",
+  "rule": "Normalized exact messages match; otherwise roles and normalized system messages must match, then cosine >= .92. No minimum character length.",
+  "scope": "Same 22 authored stress controls as lexical baseline. No independent semantic truth or deployed accuracy; no threshold tuning."
+}

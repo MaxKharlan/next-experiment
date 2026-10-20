@@ -1,0 +1,178 @@
+[
+  {
+    "id": "lexical-01-train",
+    "text": "user: check abc"
+  },
+  {
+    "id": "lexical-01-validation",
+    "text": "user: check abc"
+  },
+  {
+    "id": "lexical-02-train",
+    "text": "user: \u043f\u0440\u043e\u0432\u0435\u0440\u044c \u043f\u0435\u0440\u0435\u0432\u043e\u0434"
+  },
+  {
+    "id": "lexical-02-validation",
+    "text": "user: \u043f\u0440\u043e\u0432\u0435\u0440\u044c \u043f\u0435\u0440\u0435\u0432\u043e\u0434"
+  },
+  {
+    "id": "lexical-03-train",
+    "text": "user: which account?"
+  },
+  {
+    "id": "lexical-03-validation",
+    "text": "user: which account?"
+  },
+  {
+    "id": "lexical-04-train",
+    "text": "user: please check the delivery status of my replacement payment card."
+  },
+  {
+    "id": "lexical-04-validation",
+    "text": "user: please check the delivery status of my replacement payment card!"
+  },
+  {
+    "id": "lexical-05-train",
+    "text": "user: the application crashes whenever i attempt to open my monthly statement."
+  },
+  {
+    "id": "lexical-05-validation",
+    "text": "user: the application crashes whenever i attempt to open my monthly statement"
+  },
+  {
+    "id": "lexical-06-train",
+    "text": "user: please cancel the scheduled payment that is due on the first day of november."
+  },
+  {
+    "id": "lexical-06-validation",
+    "text": "user: please cancel the scheduled payment that is due on the first day of november!"
+  },
+  {
+    "id": "lexical-07-train",
+    "text": "user: \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u043e\u043a\u0430\u0436\u0438\u0442\u0435 \u0438\u0441\u0442\u043e\u0440\u0438\u044e \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0439 \u043f\u043e \u043c\u043e\u0435\u0439 \u043a\u0430\u0440\u0442\u0435 \u0437\u0430 \u043f\u0440\u043e\u0448\u043b\u0443\u044e \u043d\u0435\u0434\u0435\u043b\u044e."
+  },
+  {
+    "id": "lexical-07-validation",
+    "text": "user: \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u043e\u043a\u0430\u0436\u0438\u0442\u0435 \u0438\u0441\u0442\u043e\u0440\u0438\u044e \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0439 \u043f\u043e \u043c\u043e\u0435\u0439 \u043a\u0430\u0440\u0442\u0435 \u0437\u0430 \u043f\u0440\u043e\u0448\u043b\u0443\u044e \u043d\u0435\u0434\u0435\u043b\u044e!"
+  },
+  {
+    "id": "lexical-08-train",
+    "text": "user: how can i stop a recurring charge on my card?"
+  },
+  {
+    "id": "lexical-08-validation",
+    "text": "user: cancel this subscription payment for me."
+  },
+  {
+    "id": "lexical-09-train",
+    "text": "user: i cannot remember the secret number used at the cash machine."
+  },
+  {
+    "id": "lexical-09-validation",
+    "text": "user: where do i reset my atm pin?"
+  },
+  {
+    "id": "lexical-10-train",
+    "text": "user: the transfer i sent yesterday has not reached the recipient."
+  },
+  {
+    "id": "lexical-10-validation",
+    "text": "user: yesterday\u2019s outgoing bank payment is still missing at the destination."
+  },
+  {
+    "id": "lexical-11-train",
+    "text": "user: \u043a\u0430\u043a \u0432\u0435\u0440\u043d\u0443\u0442\u044c \u0434\u0435\u043d\u044c\u0433\u0438 \u0437\u0430 \u043e\u0442\u043c\u0435\u043d\u0451\u043d\u043d\u044b\u0439 \u0437\u0430\u043a\u0430\u0437?"
+  },
+  {
+    "id": "lexical-11-validation",
+    "text": "user: \u043c\u043d\u0435 \u043d\u0443\u0436\u0435\u043d \u0432\u043e\u0437\u0432\u0440\u0430\u0442 \u043e\u043f\u043b\u0430\u0442\u044b \u043f\u043e\u043a\u0443\u043f\u043a\u0438, \u043a\u043e\u0442\u043e\u0440\u0443\u044e \u044f \u0430\u043d\u043d\u0443\u043b\u0438\u0440\u043e\u0432\u0430\u043b."
+  },
+  {
+    "id": "lexical-12-train",
+    "text": "user: please transfer exactly 100 dollars from my savings account to my checking account."
+  },
+  {
+    "id": "lexical-12-validation",
+    "text": "user: please transfer exactly 200 dollars from my savings account to my checking account."
+  },
+  {
+    "id": "lexical-13-train",
+    "text": "user: please schedule the account balance notification for the first day of november at 09:00."
+  },
+  {
+    "id": "lexical-13-validation",
+    "text": "user: please schedule the account balance notification for the first day of november at 19:00."
+  },
+  {
+    "id": "lexical-14-train",
+    "text": "user: please send the monthly account statement to the registered contact named alice smith."
+  },
+  {
+    "id": "lexical-14-validation",
+    "text": "user: please send the monthly account statement to the registered contact named maria smith."
+  },
+  {
+    "id": "lexical-15-train",
+    "text": "user: please include the pending card transactions in the monthly summary that you send by email."
+  },
+  {
+    "id": "lexical-15-validation",
+    "text": "user: please do not include the pending card transactions in the monthly summary that you send by email."
+  },
+  {
+    "id": "lexical-16-train",
+    "text": "user: i want to cancel the automatic monthly payment from my current account to the electricity supplier."
+  },
+  {
+    "id": "lexical-16-validation",
+    "text": "user: i do not want to cancel the automatic monthly payment from my current account to the electricity supplier."
+  },
+  {
+    "id": "lexical-17-train",
+    "text": "user: please calculate the total cost for the transaction described in the previous message."
+  },
+  {
+    "id": "lexical-17-validation",
+    "text": "user: please calculate the total cost for the transaction described in the previous message."
+  },
+  {
+    "id": "lexical-18-train",
+    "text": "user: please calculate the total cost for the transaction described in the previous message."
+  },
+  {
+    "id": "lexical-18-validation",
+    "text": "user: please calculate the total cost for the transaction described in the previous message."
+  },
+  {
+    "id": "lexical-19-train",
+    "text": "user: refund 100"
+  },
+  {
+    "id": "lexical-19-validation",
+    "text": "user: refund 200"
+  },
+  {
+    "id": "lexical-20-train",
+    "text": "user: close card"
+  },
+  {
+    "id": "lexical-20-validation",
+    "text": "user: freeze card"
+  },
+  {
+    "id": "lexical-21-train",
+    "text": "user: my cash withdrawal was declined at the station."
+  },
+  {
+    "id": "lexical-21-validation",
+    "text": "user: how do i change the postal address on my profile?"
+  },
+  {
+    "id": "lexical-22-train",
+    "text": "user: the exchange rate on this card payment looks incorrect."
+  },
+  {
+    "id": "lexical-22-validation",
+    "text": "user: i need another physical card for a family member."
+  }
+]

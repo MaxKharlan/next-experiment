@@ -1,0 +1,31 @@
+{
+  "device": "mps",
+  "protocol_sha256": "06c5860bfb0fb1496ed98083f6ebce354c377ebd8525ff0474b409fb02837e3f",
+  "provider_cost_usd": 0,
+  "summary": {
+    "answer": {
+      "mean_nll": 0.6575875282482677,
+      "perplexity": 1.930130328289925,
+      "perplexity_overflow": false,
+      "tokens": 494,
+      "total_nll": 324.8482389546443
+    },
+    "examples": 12,
+    "mean_eos_probability_after_reference": 0.7499909351285817,
+    "prompt": {
+      "mean_nll": 1.660473858280376,
+      "perplexity": 5.261803603000108,
+      "perplexity_overflow": false,
+      "tokens": 5775,
+      "total_nll": 9589.236531569171
+    },
+    "scope": "Teacher-forced references; special-template tokens only. No generated-EOS frequency or calibrated fault likelihood.",
+    "template_special": {
+      "mean_nll": 8.29782351174653,
+      "perplexity": 4015.124006658145,
+      "perplexity_overflow": false,
+      "tokens": 60,
+      "total_nll": 497.8694107047918
+    }
+  }
+}
