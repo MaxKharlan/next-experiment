@@ -1,0 +1,41 @@
+name: next-experiment
+services:
+  api:
+    image: next-experiment-judge:20261020
+    restart: unless-stopped
+    init: true
+    env_file: /opt/next-experiment/env
+    environment:
+      JUDGE_DATA: /data/runs
+      HF_HOME: /cache/huggingface
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    ports: ['127.0.0.1:18090:7860']
+    networks:
+      next_proxy:
+        aliases: [next-experiment-api]
+    volumes:
+      - /opt/next-experiment/data:/data
+      - /opt/next-experiment/cache:/cache
+    mem_limit: 4g
+    memswap_limit: 4g
+    cpus: 1.5
+    cpu_shares: 256
+    pids_limit: 128
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=128m']
+    logging:
+      driver: json-file
+      options: {max-size: 10m, max-file: '3'}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:7860/', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  next_proxy:
+    external: true
+    name: next-experiment-proxy

@@ -1,0 +1,51 @@
+{
+  "purpose": "Hosted service integration smoke; not a benchmark claim",
+  "status": "complete",
+  "investigation_status": "inconclusive",
+  "model": "Qwen/Qwen3-0.6B",
+  "events": 28,
+  "llm_calls": {
+    "nvidia/nemotron-3-super-120b-a12b": {
+      "calls": 2,
+      "tokens_in": 2354,
+      "tokens_out": 1104,
+      "cost_usd": 0.0016998,
+      "latency_ms": 22639
+    }
+  },
+  "training_jobs": [
+    "ftjob-1638d7e67c3a494ebc46a8adda8602e1",
+    "ftjob-4fffe402247a4d31b422f01119698bc6",
+    "ftjob-5f50f86d92a449cca891b669a0f31d88",
+    "ftjob-f38ec46d75f84788b3e59444b62314d4"
+  ],
+  "evaluations": [
+    {
+      "adapter": "ftckpt_a0fed086-5171-4511-8532-eb7ace49b2e8",
+      "value": 1.0,
+      "rows": 4
+    },
+    {
+      "adapter": "ftckpt_17168764-275b-4c92-a283-ff4826cb14ad",
+      "value": 1.0,
+      "rows": 4
+    },
+    {
+      "adapter": "ftckpt_273b1ec0-65e7-4e4a-8ac9-8f119c238c23",
+      "value": 1.0,
+      "rows": 4
+    },
+    {
+      "adapter": "ftckpt_fc1012a6-ba25-431f-bb17-a0638adb4748",
+      "value": 1.0,
+      "rows": 4
+    }
+  ],
+  "estimated_committed_usd": 0.04012860000000001,
+  "cost_basis": "Inference usage plus conservative training token estimates; not provider billing",
+  "initial_allocation_usd": 15,
+  "local_tests": {
+    "passed": 1016,
+    "skipped": 8
+  }
+}
