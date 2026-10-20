@@ -1,0 +1,14 @@
+{
+  "status": "reproduction_not_achieved",
+  "error": "Optimizer update count differs",
+  "reason": "With one epoch and default max_steps, Trainer 4.51.3 stops before the final remainder group. This preflight cannot measure the stated mechanism.",
+  "observed_final_epoch_by_examples_and_accumulation": {
+    "8,2": 1.0,
+    "10,2": 0.8,
+    "10,3": 0.6
+  },
+  "raw_gradients_retained": false,
+  "raw_gradient_limitation": "The first runner validated before saving, so failed-run gradients were not retained. No numbers are reconstructed.",
+  "next_revision": "Set max_steps=ceil(microbatches/accumulation) prospectively to ensure one complete data pass; retain failure outputs before raising. Keep model, cases, rates and tolerance fixed.",
+  "paid_calls": 0
+}

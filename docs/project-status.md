@@ -1,6 +1,6 @@
 # Project status — 20 October 2026
 
-Repository baseline: main `4ef01eb`, including merged PRs through #100. PR #92
+Repository baseline: main `8e827b6`, including merged PRs through #102. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -32,6 +32,7 @@ are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 | B9 | #91: all 210 runs completed; local binary balanced accuracy 96.7%, historical Token Factory transfer 25% | Keep classifiers offline; independent provider-compatible transfer remains a B26 dependency |
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
 | B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md); new calls persist [provider request references](persisted-llm-usage.md), while invoices and per-call matching remain open; track B |
+| B21 | [Historical Trainer CPU experiment](transformers-38837-reproduction-20261020.md): 4/6 comparisons agree; accumulation-3 controls fail; frozen status `stopped` | Full original-case reproduction and downstream quality; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
 | Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Published desktop Safari long-history and replay-switch checks passed on 20 October; fresh trace/video still pending; this chat |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
@@ -76,8 +77,9 @@ A19/A30/A31 requirements from optional extensions and lists remaining offline wo
    match inference calls when provider records permit. New calls now retain provider
    request/response IDs and their reservation IDs for that matching. SQLite worker ownership,
    recipe reservations and persistent Tavily credits are implemented.
-5. Resolve supported scope for faults 2–5, embeddings/Nano/cleanlab, B24 pretrained
-   confirmation and reproducible regression export with tracks A/B. B24 CPU
+5. Implement the remaining faults 2–5 probes and controls, A29 logit probes, and
+   embeddings/Nano/cleanlab research from the reconciled scope. Continue B24
+   pretrained confirmation under a separate frozen protocol with tracks A/B. B24 CPU
    synthetic evidence does not validate a pretrained model or a full mode-B trace.
 6. The submission owner must confirm eligibility/registration, make the public
    video and submit the package. The repository cannot establish those facts.

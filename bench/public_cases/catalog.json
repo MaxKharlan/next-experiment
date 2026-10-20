@@ -40,12 +40,21 @@
       "caveat": "The maintainer distinguishes models using num_items_in_batch. This report does not establish a downstream fine-tuning quality drop for our models.",
       "reproduction_plan": "Use the supplied synthetic example on transformers 4.51.3. Compare gradients and parameter updates with an equivalent full batch, including remainder batches; assess quality separately.",
       "missing": [
-        "Project reproduction and downstream quality measurement"
+        "Successful full prespecified mechanism reproduction; accumulation-3 controls failed",
+        "Original BERT/GPU case reproduction and downstream quality measurement"
       ],
       "priority": 2,
-      "reviewed_on": "2026-10-18",
+      "reviewed_on": "2026-10-20",
       "project_reproduced": false,
-      "benchmark_eligible": false
+      "benchmark_eligible": false,
+      "project_evidence": {
+        "status": "partial_mechanism_evidence_experiment_stopped",
+        "report": "docs/transformers-38837-reproduction-20261020.md",
+        "analysis": "docs/results/transformers-38837-analysis-20261020/report.json",
+        "matching_case_rate_combinations": 4,
+        "total_case_rate_combinations": 6,
+        "downstream_quality_measured": false
+      }
     },
     {
       "id": "hf-68899",
