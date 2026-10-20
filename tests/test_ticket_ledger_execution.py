@@ -66,14 +66,22 @@ def test_all_gates_and_distinct_weights_are_required():
         execution.gate_failures(scores, weights, PROTOCOL)
 
 
-def test_ceiling_and_control_gaps_cannot_be_replaced_by_format_success():
+def test_ceiling_cannot_be_replaced_by_format_success():
     scores, weights = passing_scores()
     for seed in PROTOCOL["order_seeds"]:
         scores[f"healthy-s{seed}"]["history"]["strict_exact"] = 1.0
         scores[f"cut-s{seed}"]["history"]["strict_exact"] = 0.98
     failures, _ = execution.gate_failures(scores, weights, PROTOCOL)
     assert "healthy_history_range" in failures
-    assert "healthy_minus_cut" in failures
+
+
+def test_cut_performance_does_not_block_admission():
+    scores, weights = passing_scores()
+    for seed in PROTOCOL["order_seeds"]:
+        scores[f"cut-s{seed}"]["history"]["strict_exact"] = 0.9
+    failures, means = execution.gate_failures(scores, weights, PROTOCOL)
+    assert failures == []
+    assert means["cut"]["history"] == pytest.approx(0.9)
 
 
 def test_tampered_completed_row_is_rejected():

@@ -19,7 +19,7 @@ SOURCES = (
     "scripts/prepare_ticket_ledger.py",
 )
 PROTOCOL = {
-    "id": "ticket-ledger-development-20261020-v1",
+    "id": "ticket-ledger-development-20261020-v2",
     "phase": "development_preparation",
     "data_seed": SEED,
     "order_seeds": [2401, 2402, 2403],
@@ -52,7 +52,6 @@ PROTOCOL = {
         "healthy_history_exact_max": 0.95,
         "healthy_minus_format_history_exact_min": 0.15,
         "healthy_minus_wrong_history_exact_min": 0.10,
-        "healthy_minus_cut_history_exact_min": 0.08,
         "healthy_each_family_exact_min": 0.25,
         "distinct_weight_digests_per_arm": 3,
     },

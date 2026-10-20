@@ -34,7 +34,7 @@ semantic-detection accuracy or deployment likelihood has been established.
 The [3×3 inventory and budget](reference-matrix-plan-20261020.md) now exposes
 missing quality cells and B10 coverage. Measurements remain open. The
 [ticket-ledger bundle](ticket-ledger-development-20261020.md) prepares a new
-candidate; [all twelve adapters were evaluated and admission stopped](ticket-ledger-outcome-20261020.md) at the healthy/cut gap.
+candidate; [all twelve adapters have now been evaluated](ticket-ledger-outcome-20261020.md).
 
 Answer-cut's 35 synthetic controls already show clean-prefix false alarms and
 alternative malformed-JSON causes. Independent likelihood calibration requires

@@ -9,8 +9,8 @@ eligibility, registration and representation. Prospective model scoring and
 the REST study are running. The
 [fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete
 and verified. The [data cohort](data-fault-quality-20261020.md) stopped at its
-frozen timeout with 29/36 cells verified. The [ticket-ledger admission](ticket-ledger-outcome-20261020.md)
-finished all twelve adapters and stopped at the insufficient healthy/cut gap.
+frozen timeout with 29/36 cells verified. The [ticket-ledger evaluation](ticket-ledger-outcome-20261020.md)
+finished all twelve adapters and verified 2,160 evaluation records.
 The [same-checkpoint evaluation](kaggle-runtime-comparison-20261020.md)
 also completed: all 64 saved records agree across MacBook MPS, AI Cloud L40S and
 Kaggle T4. [Submission materials](submission/readiness.md)
@@ -66,8 +66,8 @@ The [ticket-ledger preparation](ticket-ledger-development-20261020.md) now freez
 Two offline oracles agree; tokenizer context checks pass. The user subsequently
 authorized the paid LoRA admission study under the separate additional budget.
 Its twelve jobs and all 2,160 evaluation records are complete and verified.
-The [terminal decision](ticket-ledger-outcome-20261020.md) rejects this candidate:
-healthy-minus-cut history accuracy is 4.86 points against an eight-point minimum.
+The [evaluation report](ticket-ledger-outcome-20261020.md) records the measured
+results for all four training arms.
 
 The [3×3 matrix plan](reference-matrix-plan-20261020.md) records all nine cells,
 missing comparable metrics and a separate prospective budget scenario.

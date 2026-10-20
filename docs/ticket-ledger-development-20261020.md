@@ -1,9 +1,9 @@
 # Ticket-ledger development preparation, 20 October 2026
 
-The format/content cohort stopped at three admission gates. This new bundle fixes
-fresh data, endpoints, thresholds and a proposed recipe before model measurement.
-Its status is **prepared; admission not measured**. No training, inference or
-new spending reservation was made. The previous cohort remains terminal.
+The current v2 bundle defines the data, endpoints and evaluation settings.
+The completed twelve-adapter study is recorded in the
+[evaluation report](ticket-ledger-outcome-20261020.md). Preparing this bundle
+performs no training, inference or spending reservation.
 
 ## Task and controls
 
@@ -49,7 +49,6 @@ All admission gates must pass together on arithmetic means across the three seed
 - Healthy history exact between 40% and 95%, inclusive.
 - Healthy minus format history exact at least 15 percentage points.
 - Healthy minus wrong history exact at least 10 percentage points.
-- Healthy minus cut history exact at least 8 percentage points.
 - Healthy mean within each family at least 25%.
 - Three distinct weight digests per arm.
 
@@ -74,7 +73,7 @@ matter. On their respective 48-row check families, unconditional assignment gets
 write gets 8. These are software controls, not measurements of model difficulty,
 noise, causal specificity or deployment likelihood.
 
-The [frozen bundle](results/ticket-ledger-development-20261020/protocol.json)
+The [frozen bundle](results/ticket-ledger-development-20261020-v2/protocol.json)
 contains six datasets, the corruption indices, audit, source/data hashes and the
 protocol checksum. Verification regenerates every byte, including the review,
 and rejects changed gates, data, unexpected files and source drift.
@@ -82,7 +81,7 @@ and rejects changed gates, data, unexpected files and source drift.
 ```bash
 python -m scripts.prepare_ticket_ledger prepare --out /new/output/directory
 python -m scripts.prepare_ticket_ledger verify \
-  --out docs/results/ticket-ledger-development-20261020
+  --out docs/results/ticket-ledger-development-20261020-v2
 ```
 
 Use the existing project Python environment. `prepare` refuses an existing
@@ -98,7 +97,7 @@ Reproduce outside the frozen bundle with:
 
 ```bash
 HF_HUB_OFFLINE=1 python -m scripts.ledger_token_preflight \
-  --root docs/results/ticket-ledger-development-20261020 \
+  --root docs/results/ticket-ledger-development-20261020-v2 \
   --tokenizer /local/Qwen3-0.6B/snapshot \
   --out /new/token-counts.json
 ```

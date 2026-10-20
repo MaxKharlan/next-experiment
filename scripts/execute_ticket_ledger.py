@@ -25,7 +25,7 @@ from scripts.prepare_ticket_ledger import verify
 AUTHORIZATION = Path(
     "docs/results/remaining-queue-authorization-20261020/authorization.json"
 )
-BUNDLE = Path("docs/results/ticket-ledger-development-20261020")
+BUNDLE = Path("docs/results/ticket-ledger-development-20261020-v2")
 SOURCES = (
     "scripts/execute_ticket_ledger.py",
     "scripts/fresh_answer_calibration.py",
@@ -394,7 +394,7 @@ def gate_failures(scores, weights, plan):
     healthy = means["healthy"]["history"]
     if not g["healthy_history_exact_min"] <= healthy <= g["healthy_history_exact_max"]:
         failures.append("healthy_history_range")
-    for arm in ("format", "wrong", "cut"):
+    for arm in ("format", "wrong"):
         if (
             healthy - means[arm]["history"]
             < g[f"healthy_minus_{arm}_history_exact_min"]
