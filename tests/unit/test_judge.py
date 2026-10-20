@@ -29,11 +29,25 @@ def payload():
     return result
 
 
+class StubBalance:
+    def __init__(self, value=100):
+        self.value = value
+        self.forced = 0
+
+    def read(self, *, force=False):
+        self.forced += int(force)
+        return self.value
+
+    def exhausted(self):
+        self.value = 0
+
+
 class MemoryHub(s.HubStore):
-    def __init__(self, cap=15):
+    def __init__(self, cap=20):
         self.lock = threading.RLock()
         self.files = {"wallet.json": {"cap_usd": cap, "runs": {}}}
         self.head = 0
+        self.balance = StubBalance()
 
     def read(self, name, revision=None):
         return copy.deepcopy(self.files[name])

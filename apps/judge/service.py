@@ -17,6 +17,7 @@ from huggingface_hub import CommitOperationAdd, HfApi, hf_hub_download
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from apps.api.live_protocol import estimate_pair_cost, inspect_datasets, verify_datasets
+from apps.judge.balance import ProviderBalance, public_availability
 from core.config import Settings
 from core.connectors.storage import LocalStorage
 from core.db.spending import BudgetExceeded, SpendingLedger
@@ -151,6 +152,7 @@ class HubStore:
         if not self.api.repo_info(self.repo, repo_type="dataset").private:
             raise RuntimeError("Judge storage must be private")
         self.lock = threading.RLock()
+        self.balance = ProviderBalance()
 
     def read(self, name, revision=None):
         path = hf_hub_download(
@@ -185,14 +187,7 @@ class HubStore:
     def available(self):
         with self.lock:
             _, wallet = self.wallet()
-            used = sum(r["reserved_usd"] for r in wallet["runs"].values())
-            active = any(r["status"] == "running" for r in wallet["runs"].values())
-            return {
-                "available": not active and wallet["cap_usd"] - used >= RUN_CAP,
-                "busy": active,
-                "run_allowance_usd": RUN_CAP,
-                "funded_remaining_usd": max(0, round(wallet["cap_usd"] - used, 4)),
-            }
+            return public_availability(wallet, self.balance.read(), RUN_CAP)
 
     def claim(self, run_id, key, payload_hash):
         with self.lock:
@@ -215,6 +210,13 @@ class HubStore:
             ):
                 raise BudgetExceeded(
                     "The live-run budget is exhausted. No charge was made."
+                )
+            status = public_availability(w, self.balance.read(force=True), RUN_CAP)
+            if not status["available"]:
+                raise BudgetExceeded(
+                    "Live investigations are temporarily unavailable. Please try later."
+                    if status["status"] == "unavailable"
+                    else "The free investigation budget has been exhausted."
                 )
             w["runs"][run_id] = {
                 "key_hash": digest(key),
@@ -288,9 +290,31 @@ class MirroredStorage(LocalStorage):
         return result
 
 
+class BalanceCheckedLedger(SpendingLedger):
+    def __init__(self, path, cap_usd, balance):
+        self.balance = balance
+        super().__init__(path, cap_usd)
+
+    def ensure_available(self, amount=0):
+        available = self.balance.read(force=True)
+        if available is None or available < amount or available <= 0:
+            raise BudgetExceeded("The free investigation budget is unavailable.")
+
+    def reserve(self, operation_id, purpose, amount):
+        self.ensure_available(amount)
+        super().reserve(operation_id, purpose, amount)
+
+    def record_provider_receipt(self, operation_id, **receipt):
+        super().record_provider_receipt(operation_id, **receipt)
+        if receipt["http_status"] == 402:
+            self.balance.exhausted()
+
+
 def execute(store, run_id, upload, protocol):
     state = {"id": run_id, "status": "running", "events": [], "protocol": protocol}
-    spending = SpendingLedger(ROOT / run_id / "spending.sqlite3", RUN_CAP)
+    spending = BalanceCheckedLedger(
+        ROOT / run_id / "spending.sqlite3", RUN_CAP, store.balance
+    )
 
     def emit(event):
         state["events"].append({"at": time.time(), **event})
@@ -312,6 +336,7 @@ def execute(store, run_id, upload, protocol):
         storage = MirroredStorage(ROOT / run_id / "artifacts", emit)
         tf = TokenFactory.from_settings(Settings(_env_file=None))
         tf.spending = spending
+        tf.before_paid = spending.ensure_available
         original_job = tf.job
         seen_jobs = {}
 
@@ -407,7 +432,12 @@ def execute(store, run_id, upload, protocol):
                     "control": asdict(control),
                 }
             )
-            pair(target, control)
+            try:
+                pair(target, control)
+            except Exception as error:
+                if getattr(error, "status_code", None) == 402:
+                    store.balance.exhausted()
+                raise
 
         run_pair.supports_answer_drop = True
 
@@ -451,6 +481,8 @@ def execute(store, run_id, upload, protocol):
         # Exception text and tracebacks may contain provider URLs or internal data.
         import traceback
 
+        if getattr(error, "status_code", None) == 402:
+            store.balance.exhausted()
         diagnostic = ROOT / run_id / "diagnostic.txt"
         diagnostic.write_text(traceback.format_exc())
         diagnostic.chmod(0o600)

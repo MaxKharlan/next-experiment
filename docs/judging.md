@@ -2,7 +2,7 @@
 
 [Open Next Experiment](https://maxkharlan.github.io/next-experiment/).
 
-$15 is allocated to additional live investigations. Testing is free and requires no
+$20 is allocated to additional live investigations. Testing is free and requires no
 API key. Choose **Run with Nemotron**, or open the
 [hosted investigation form](https://next.46-17-103-231.sslip.io/) directly. It shows
 the remaining budget before starting. Recorded
@@ -27,7 +27,7 @@ job. Small uploaded samples and inherited benchmark thresholds make this an
 exploratory investigation. An inconclusive or failed run retains its partial
 evidence. There are no automatic paid retries.
 
-The shared $15 allocation persists across hosting restarts. Each active run
+The shared $20 allocation persists across hosting restarts. Each active run
 reserves $1 and can execute one diagnostic pair. Completed, accounted operations
 release unused allowance; ambiguous failures retain their reservation. One run
 executes at a time. Training may wait for provider capacity. Keep the tab open and
