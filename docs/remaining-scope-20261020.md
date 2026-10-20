@@ -1,7 +1,7 @@
 # Remaining scope reconciled to the original plan
 
 This reconciliation uses the project document dated 16 October 2026, pages
-30–34 (A1–A32 and B1–B26), and repository main through #102. The document's
+30–34 (A1–A32 and B1–B26), and repository main through #103. The document's
 checkboxes are planning history. Implementations, measurements and publication
 are separate acceptance conditions.
 
@@ -12,7 +12,7 @@ are separate acceptance conditions.
 | A4 message validation | Roles, nonempty text, user prompts, structured contracts | Semantic duplicate detection belongs to A10; it does not block A4's stated format contract |
 | Fault 2 / A5,A7,A9 | Catalog hypothesis and tokenizer/template fingerprinting | Deterministic mismatch injection, observed template comparison, repair and matched control, measured quality effect |
 | Fault 3 / A5,A7,A11 | Catalog hypothesis | Equivalent-intent labels and valid-ambiguity controls; neighboring examples plus Nano review; observed-data repair/control pair |
-| Fault 4 / A5,A7,A10 | Exact row/prompt overlap audit | Near-duplicate detection, measured validation optimism versus clean check, deduplication/control pair |
+| Fault 4 / A5,A7,A10 | [Lexical near-duplicate audit](lexical-overlap-audit-20261020.md) and 22 constructed controls (4 false positives, 4 missed paraphrases) | Independent semantic validation, measured validation optimism versus clean check, deduplication/control pair |
 | Fault 5 / A5,A7,A12 | Catalog hypothesis | Declared target distribution, label distribution and embedding classifier AUC checks, quality effect and matched repair |
 | A18 sensitivity | Answer-cut evidence for one task/model | Faults 2–5 and justified strength curves; a planted setting alone is not a harmful fault |
 | A19 Nano audit | Router/client exist | 200 reviewed examples, precision/recall and cost comparison with Super |
@@ -23,9 +23,9 @@ are separate acceptance conditions.
 A19/A30/A31 are explicit research requirements in the original plan. They are
 not newly invented extensions. They remain absent from the demonstrated product
 scope. Installing a dependency or listing a hypothesis does not close them.
-A new near-duplicate implementation can be developed offline, but must declare
-its representation, similarity threshold, paraphrase controls and false-positive
-behavior before being described as semantic detection.
+The lexical baseline now declares its representation and threshold and publishes
+paraphrase misses and false positives. It remains a candidate review tool; no
+semantic-detection accuracy or deployment likelihood has been established.
 
 ## Research and transfer
 
@@ -92,8 +92,8 @@ No registration or submission claim is inferred from repository state.
 ## Work still possible offline
 
 The queue is not wholly externally blocked. Remaining independent work includes
-faults 2–5 injection/probe/control implementations, a specified near-duplicate
-baseline, A29 probes,
+faults 2–5 injection/probe/control implementations, semantic validation of the
+lexical overlap candidates, A29 probes,
 and local pretrained B24 experiments under a frozen protocol. These are distinct
 implementation/measurement packages, not tasks completed by this reconciliation.
 Paid multi-model studies, live Nemotron/embedding comparisons, invoice closure

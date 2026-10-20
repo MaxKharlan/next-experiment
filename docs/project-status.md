@@ -1,6 +1,6 @@
 # Project status — 20 October 2026
 
-Repository baseline: main `8e827b6`, including merged PRs through #102. PR #92
+Repository baseline: main `1350564`, including merged PRs through #103. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -25,7 +25,7 @@ are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
 | A2/A3 datasets | #82: JSON extraction and function calling, versioned splits and agent-reviewed references | Full task/model quality references and fresh evaluation; tracks A/B |
-| A4 validation | Explicit-case API validates roles, nonblank text and user prompts before worker creation; tests cover all three tasks and four splits | Semantic duplicate detection remains outside this validation; track A |
+| A4 validation | Explicit-case API validates roles, nonblank text and user prompts before worker creation; tests cover all three tasks and four splits | [Lexical overlap audit](lexical-overlap-audit-20261020.md) is separate; semantic validation and fault-4 quality evidence remain open; track A |
 | A7/A8/fault 1 | [Semantic record](fault-1-semantics.md), answer-cut probe and observed-row drop pair; length preflight is distinct | [Clean-prefix and alternative-malformation controls](answer-cut-specificity-controls-20261019.md) measured; independent likelihood calibration, causal specificity and multi-task evidence; tracks A/B |
 | Measured fault 1 | #84: Kaggle and Token Factory target/control results with incomplete recovery; two new public experiment replays | Fresh complete API investigation and untouched final test; tracks A/B |
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
@@ -53,6 +53,10 @@ The [3×3 matrix plan](reference-matrix-plan-20261020.md) records all nine cells
 missing comparable metrics and a separate prospective budget scenario.
 The [scope reconciliation](remaining-scope-20261020.md) distinguishes original
 A19/A30/A31 requirements from optional extensions and lists remaining offline work.
+
+The [A10 lexical audit](lexical-overlap-audit-20261020.md) now emits train/validation
+candidates with source hashes and line numbers. Its 22 authored controls expose
+four false positives and four missed paraphrases; it has no live fault signature.
 
 ## Next work, in order
 
