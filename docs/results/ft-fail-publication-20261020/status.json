@@ -1,0 +1,10 @@
+{
+  "status": "published_and_verified",
+  "previous_attempt": {
+    "http_status": 403,
+    "credential_role": "read"
+  },
+  "resolved_by": "User supplied HF_TOKEN_WRITE; no credential included in artifacts",
+  "publication": "publication.json",
+  "verification": "verification.json"
+}
