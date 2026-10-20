@@ -1,0 +1,19 @@
+{
+  "controls_sha256": "ee3b28ac3ff621179827699adc63ffca633cb51e363d7725358e640248b08d67",
+  "decision": "Publish all confusion counts at the fixed threshold; no tuning or deployment gate",
+  "fuzzy_context_guard": "Same role layout and normalized system messages",
+  "gram_size": 5,
+  "id": "lexical-overlap-controls-v1",
+  "method": "lexical-overlap-v1",
+  "min_characters": 40,
+  "provider_calls": 0,
+  "reference_answers": "Excluded from candidate detection",
+  "representation": "NFKC/casefold/whitespace normalization, message-indexed character sets",
+  "scope": "Constructed stress controls with author labels, not independent semantic accuracy",
+  "source_sha256": {
+    "bench/lexical_overlap_controls.py": "fd92d169b11df7d38a61105200a6b5bb545b7d70a37303b85dd4587c6739dcd8",
+    "core/eval/data.py": "5618acdbd8bac665b71d99b8c3b72e9a07e2d8f17701e78ca673b71aaccbeaa7",
+    "core/probes/level0/overlap.py": "67b2c6054031a1313c3b787466c662dd29cc862ef40275da0b34a3a6ba0dabbd"
+  },
+  "threshold": 0.85
+}

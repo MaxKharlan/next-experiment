@@ -1,0 +1,278 @@
+{
+  "confusion": {
+    "fn": 4,
+    "fp": 4,
+    "tn": 7,
+    "tp": 7
+  },
+  "pairs": [
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "normalized_exact",
+          "reference_answers_equal": false,
+          "similarity": 1.0,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "normalized_exact",
+      "confusion": "tp",
+      "id": "lexical-01",
+      "same_request": true
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "normalized_exact",
+          "reference_answers_equal": false,
+          "similarity": 1.0,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "normalized_exact",
+      "confusion": "tp",
+      "id": "lexical-02",
+      "same_request": true
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "normalized_exact",
+          "reference_answers_equal": false,
+          "similarity": 1.0,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "normalized_exact",
+      "confusion": "tp",
+      "id": "lexical-03",
+      "same_request": true
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.9666666666666667,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "surface",
+      "confusion": "tp",
+      "id": "lexical-04",
+      "same_request": true
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.9852941176470589,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "surface",
+      "confusion": "tp",
+      "id": "lexical-05",
+      "same_request": true
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.9726027397260274,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "surface",
+      "confusion": "tp",
+      "id": "lexical-06",
+      "same_request": true
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.9701492537313433,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "surface",
+      "confusion": "tp",
+      "id": "lexical-07",
+      "same_request": true
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "paraphrase",
+      "confusion": "fn",
+      "id": "lexical-08",
+      "same_request": true
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "paraphrase",
+      "confusion": "fn",
+      "id": "lexical-09",
+      "same_request": true
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "paraphrase",
+      "confusion": "fn",
+      "id": "lexical-10",
+      "same_request": true
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "paraphrase",
+      "confusion": "fn",
+      "id": "lexical-11",
+      "same_request": true
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.875,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "different_number",
+      "confusion": "fp",
+      "id": "lexical-12",
+      "same_request": false
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.8863636363636364,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "different_number",
+      "confusion": "fp",
+      "id": "lexical-13",
+      "same_request": false
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "different_entity",
+      "confusion": "tn",
+      "id": "lexical-14",
+      "same_request": false
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.8645833333333334,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "negation",
+      "confusion": "fp",
+      "id": "lexical-15",
+      "same_request": false
+    },
+    {
+      "candidate_detected": true,
+      "candidate_pairs": [
+        {
+          "kind": "character_5gram",
+          "reference_answers_equal": false,
+          "similarity": 0.91,
+          "train_line": 1,
+          "validation_line": 1
+        }
+      ],
+      "category": "negation",
+      "confusion": "fp",
+      "id": "lexical-16",
+      "same_request": false
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "different_system",
+      "confusion": "tn",
+      "id": "lexical-17",
+      "same_request": false
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "different_system",
+      "confusion": "tn",
+      "id": "lexical-18",
+      "same_request": false
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "short_distinct",
+      "confusion": "tn",
+      "id": "lexical-19",
+      "same_request": false
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "short_distinct",
+      "confusion": "tn",
+      "id": "lexical-20",
+      "same_request": false
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "unrelated",
+      "confusion": "tn",
+      "id": "lexical-21",
+      "same_request": false
+    },
+    {
+      "candidate_detected": false,
+      "candidate_pairs": [],
+      "category": "unrelated",
+      "confusion": "tn",
+      "id": "lexical-22",
+      "same_request": false
+    }
+  ],
+  "protocol_id": "lexical-overlap-controls-v1",
+  "provider_calls": 0,
+  "scope": "Authored controls only; no independent semantic or quality claim",
+  "service_spend_usd": 0
+}
