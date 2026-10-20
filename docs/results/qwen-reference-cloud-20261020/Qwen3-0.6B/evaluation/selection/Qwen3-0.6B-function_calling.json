@@ -1,0 +1,15 @@
+{
+  "protocol_sha256": "9bd2d511d90c69344c55ed5ebf085579d4ce049179dbf9ee8cd8dd8dbeb61b8b",
+  "base": {
+    "validation": 0.0,
+    "check": 0.0
+  },
+  "validation": {
+    "Qwen3-0.6B-function_calling-g0": 1.0,
+    "Qwen3-0.6B-function_calling-g1": 1.0,
+    "Qwen3-0.6B-function_calling-g2": 1.0,
+    "Qwen3-0.6B-function_calling-g3": 1.0
+  },
+  "selected": "Qwen3-0.6B-function_calling-g0",
+  "selection_rule": "Evaluate all four final recipe checkpoints on validation exact match. Select highest score, ties by grid index. Evaluate only the selected checkpoint once on check. Record base quality separately before selection. No final test."
+}

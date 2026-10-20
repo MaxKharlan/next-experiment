@@ -1,0 +1,15 @@
+{
+  "protocol_sha256": "9bd2d511d90c69344c55ed5ebf085579d4ce049179dbf9ee8cd8dd8dbeb61b8b",
+  "base": {
+    "validation": 0.0,
+    "check": 0.0
+  },
+  "validation": {
+    "Qwen3-0.6B-banking77-g0": 0.6168831168831169,
+    "Qwen3-0.6B-banking77-g1": 0.6688311688311688,
+    "Qwen3-0.6B-banking77-g2": 0.6168831168831169,
+    "Qwen3-0.6B-banking77-g3": 0.6753246753246753
+  },
+  "selected": "Qwen3-0.6B-banking77-g3",
+  "selection_rule": "Evaluate all four final recipe checkpoints on validation exact match. Select highest score, ties by grid index. Evaluate only the selected checkpoint once on check. Record base quality separately before selection. No final test."
+}

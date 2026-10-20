@@ -7,7 +7,10 @@ execution. The owner authorized separate
 $25 additional Token Factory and $30 AI Cloud limits and confirmed submission
 eligibility, registration and representation. All 24 reference training jobs are
 verified, and both [bounded Cloud evaluation jobs](reference-evaluation-acceleration-20261020.md)
-have been submitted.
+have been submitted. [Qwen3-0.6B completed all 2,506 evaluation records](qwen-reference-quality-20261020.md);
+Qwen3-1.7B is running. The 0.6B selected check scores are 104/154 for Banking77,
+100/102 for function calling and 102/102 for JSON extraction. The base model's
+structured answers all used Markdown fences, which the frozen strict metrics reject.
 The [REST study](rest-code-trace-20261020.md) completed with saved events and
 verified restart/idempotency behavior; its diagnosis is inconclusive. The
 [fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete
