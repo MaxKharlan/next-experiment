@@ -5,7 +5,7 @@ An agent that investigates LLM fine-tune failures and tests proposed fixes again
 Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) offers live Nemotron investigations on uploaded data and recorded replays.
 
 [Test without keys or payment](https://maxkharlan.github.io/next-experiment/):
-$15 is allocated to additional live investigations on uploaded data, with Nemotron
+$20 is allocated to additional live investigations on uploaded data, with Nemotron
 hypotheses, probes and a targeted/control training comparison. The page shows the
 remaining live budget. Editable local label checks and saved replays do not spend
 it. See the [testing walkthrough](docs/judging.md) and
