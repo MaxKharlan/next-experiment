@@ -177,3 +177,25 @@ def test_semantic_tampering_rejected_even_with_updated_manifest(
     manifest_path.write_text(json.dumps(manifest))
     with pytest.raises(ValueError):
         verify_export(dest)
+
+
+@pytest.mark.parametrize("material_change", [False, True])
+def test_embedded_accounting_tolerates_only_float_roundoff(tmp_path, material_change):
+    dest = tmp_path / "bundle"
+    shutil.copytree(BUNDLE, dest)
+    path = dest / "summary.json"
+    data = json.loads(path.read_text())
+    value = data["accounting"]["retained_holds_usd"]
+    data["accounting"]["retained_holds_usd"] = (
+        value + 1e-8 if material_change else math.nextafter(value, math.inf)
+    )
+    path.write_text(json.dumps(data))
+    manifest_path = dest / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["summary.json"] = sha(path)
+    manifest_path.write_text(json.dumps(manifest))
+    if material_change:
+        with pytest.raises(ValueError, match="Published summary mismatch"):
+            verify_export(dest)
+    else:
+        verify_export(dest)
