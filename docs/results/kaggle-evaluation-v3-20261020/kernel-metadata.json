@@ -1,0 +1,14 @@
+{
+  "id": "maximkharlan/next-experiment-evaluation-v3-20261020",
+  "title": "Next Experiment Evaluation V3 20261020",
+  "code_file": "frozen_evaluation_v3.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

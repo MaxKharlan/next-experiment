@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-20T15:33:39.500206+00:00",
+  "status": "submitted",
+  "kernel": "maximkharlan/next-experiment-evaluation-v3-20261020",
+  "attempts": 1,
+  "timeout_seconds": 1800,
+  "accelerator": "NvidiaTeslaT4",
+  "private": true,
+  "notebook_sha256": "7bd7d258734dc2e05d1d5a1c525b519c87556fa7adb1122645d57b6b2c86a79f",
+  "provider_charge_usd": 0,
+  "predecessor": "kaggle-evaluation-v2-20261020",
+  "reason": "Complete import/version/pip/CUDA preflight after pre-generation pydantic failure",
+  "exit_code": 0,
+  "stdout": "Kernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/maximkharlan/next-experiment-evaluation-v3-20261020\n",
+  "stderr": ""
+}

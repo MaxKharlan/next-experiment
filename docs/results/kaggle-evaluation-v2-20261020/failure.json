@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-20T15:33:03.304321+00:00",
+  "state": "ERROR",
+  "stage": "worker_import_before_model_download",
+  "fatal_error": "ModuleNotFoundError: No module named 'pydantic'",
+  "nonfatal_warnings": [
+    "Inherited Kaggle sitecustomize could not import wrapt in the isolated venv"
+  ],
+  "generation_started": false,
+  "log_sha256": "979e3d453d7d6426976529d14754c462f644a710bfdacdc7973686e3472ae2bc",
+  "next_attempt": "kaggle-evaluation-v3-20261020",
+  "rationale": "Complete the evaluator dependency graph and batch all checks before model loading. The model, check set, six original package pins and generation recipe remain unchanged."
+}
