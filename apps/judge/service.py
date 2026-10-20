@@ -69,7 +69,7 @@ class Upload(BaseModel):
     test: list[Row] = Field(min_length=4, max_length=8)
     learning_rate: float = Field(default=0.00001, ge=0.000001, le=0.0003)
     n_epochs: int = Field(default=3, ge=1, le=12)
-    lora_r: Literal[4, 8, 16, 32] = 16
+    lora_r: Literal[8, 16, 32] = 16
     checkpoints: list[Checkpoint] = Field(default_factory=list, max_length=12)
 
     @model_validator(mode="after")
@@ -138,10 +138,10 @@ def prepare(upload: Upload, run_id: str, root: Path):
 
 
 class HubStore:
-    """A private repository holds wallet state across free Space restarts.
+    """A private repository holds wallet state across hosting restarts.
 
     Commits use the observed parent hash: a concurrent claim fails closed.
-    The wallet must be provisioned by the owner; the server cannot reset it.
+    The wallet must be provisioned separately; the server cannot reset it.
     """
 
     def __init__(self):
@@ -301,9 +301,7 @@ def execute(store, run_id, upload, protocol):
 
         from core.agent.context import InvestigationContext
         from core.agent.router import Router
-        from core.case import EvaluatorSpec
         from core.connectors.token_factory import TokenFactory
-        from core.eval import evaluate
         from core.interventions.answer_check import (
             DataAwareTFPairRunner,
             investigate_with_answers,
@@ -352,19 +350,39 @@ def execute(store, run_id, upload, protocol):
             files={r: d["path"] for r, d in protocol["datasets"].items()},
             budget_left_usd=RUN_CAP,
         )
-        spec = EvaluatorSpec.model_validate(protocol["evaluator"])
 
         def score(adapter):
             emit({"kind": "evaluation_started", "adapter": Path(adapter).name})
-            result = evaluate(
-                protocol["datasets"]["check"]["path"],
-                spec,
-                adapter=adapter,
-                base_model=MODEL,
-                device="cpu",
+            import subprocess
+            import sys
+
+            request_path = ROOT / run_id / "evaluation-request.json"
+            output_path = ROOT / run_id / "evaluation-result.json"
+            output_path.unlink(missing_ok=True)
+            request_path.write_text(
+                json.dumps(
+                    {
+                        "data": protocol["datasets"]["check"]["path"],
+                        "evaluator": protocol["evaluator"],
+                        "adapter": str(adapter),
+                        "output": str(output_path),
+                    }
+                )
             )
-            emit({"kind": "evaluation", "result": result.to_dict()})
-            return result.value
+            env = {
+                k: v
+                for k, v in os.environ.items()
+                if k not in {"TOKEN_FACTORY_API_KEY", "JUDGE_HF_TOKEN"}
+            }
+            subprocess.run(
+                [sys.executable, "-m", "apps.judge.score", str(request_path)],
+                env=env,
+                check=True,
+                timeout=900,
+            )
+            result = json.loads(output_path.read_text())
+            emit({"kind": "evaluation", "result": result})
+            return result["value"]
 
         pair = DataAwareTFPairRunner(
             tf=tf,
@@ -473,12 +491,24 @@ async def bounded_body(request: Request, call_next):
     response.headers["Cache-Control"] = "no-store"
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; script-src 'self' 'unsafe-inline'; "
+        "style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
+        "frame-ancestors 'self' https://maxkharlan.github.io; base-uri 'none'"
+    )
     return response
 
 
 @app.get("/")
 def index():
     return FileResponse(Path(__file__).with_name("index.html"))
+
+
+@app.get("/example.zip")
+def example():
+    return FileResponse(
+        Path(__file__).with_name("example.zip"), filename="next-experiment-example.zip"
+    )
 
 
 @app.get("/api/status")

@@ -1,0 +1,46 @@
+{
+  "purpose": "Resource preflight for sharing the existing VPS; no paid calls or benchmark rerun",
+  "status": "passed",
+  "scope": "FastAPI and one CPU inference child in the same cgroup; long synthetic prompt with rank-64 LoRA",
+  "limits": {
+    "memory_mib": 4608,
+    "swap_mib": 0,
+    "cpus": 1.5
+  },
+  "inference": {
+    "status": "passed",
+    "lora_rank": 64,
+    "context_repetitions": 1800,
+    "max_rss_kib": 4393000,
+    "seconds": 136.77461631293409,
+    "answer": "ready."
+  },
+  "monitor": {
+    "samples": 27,
+    "interval_seconds": 5,
+    "minimum_host_available_mib": 3136.046875,
+    "maximum_host_swap_growth_kib": 768,
+    "maximum_memory_psi_full_avg10": 0.48,
+    "cgroup_peak_bytes": 4218478592,
+    "final_memory_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+    "all_existing_application_health_checks_passed": true
+  },
+  "earlier_attempts": [
+    {
+      "status": "stopped_before_generation",
+      "reason": "Guard compared pre-existing 268 KiB host swap against zero"
+    },
+    {
+      "status": "stopped_before_generation",
+      "reason": "Guard stopped on 256 KiB host swap growth with 4267 MiB available and zero PSI/OOM"
+    }
+  ],
+  "accepted_stop_conditions": {
+    "swap_growth_mib": 16,
+    "memory_psi_full_avg10": 2,
+    "psi_consecutive_samples": 3,
+    "minimum_available_mib": 900,
+    "any_oom": true,
+    "any_existing_application_health_failure": true
+  }
+}

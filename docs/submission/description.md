@@ -10,7 +10,7 @@ A training job can finish successfully while the resulting model still fails its
 
 Next Experiment inspects a fine-tuning case, ranks possible causes and chooses checks by their expected information per dollar. A proposed repair is compared with a declared control on separate check examples. The report records the effect, uncertainty, decision rule and cost. Inconclusive results remain inconclusive. An approved final retrain is evaluated alongside the base and failed models.
 
-The public application lets testers run training-label checks on editable examples or their own inputs, entirely in the browser without keys or payment. It also replays a saved Token Factory investigation. In that historical case, Qwen3-0.6B improved from 14% to 42.5% exact match on 200 held-out queries. Estimated inference and training cost was about $0.075. This result concerns one task and recipe, not a general recovery rate. Fresh provider inference and training are separate self-hosted operations.
+The public application offers live Nemotron investigations on uploaded chat datasets, without an API key or payment from testers. A shared $15 allocation covers these additional runs, with the remaining budget shown before starting. The hosted runner supports Qwen3-0.6B, short-answer exact match and one target/control comparison with two seeds per arm. Uploaded recipes are unverified, and small-sample findings are exploratory. Local training-label checks and recorded replays remain available without spending this allocation. In that historical case, Qwen3-0.6B improved from 14% to 42.5% exact match on 200 held-out queries. Estimated inference and training cost was about $0.075. This result concerns one task and recipe, not a general recovery rate.
 
 ## How we built it
 
@@ -48,7 +48,7 @@ Extend the completed Qwen clean references to missing model/fault comparisons an
 
 Recommended track: Coding and Agentic Engineering.
 
-- [Working public replay](https://maxkharlan.github.io/next-experiment/)
+- [Live testing and recorded investigations](https://maxkharlan.github.io/next-experiment/)
 - [Source and setup](https://github.com/MaxKharlan/next-experiment)
 - [FT-Fail dataset](https://huggingface.co/datasets/MakHH/FT-Fail)
 - [Detailed benchmark](https://github.com/MaxKharlan/next-experiment/blob/main/docs/benchmark.md)

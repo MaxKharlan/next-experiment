@@ -63,6 +63,7 @@ def test_upload_boundaries_and_split_leakage(tmp_path):
     for change in (
         {"model": "evil/path"},
         {"n_epochs": 100},
+        {"lora_r": 4},
         {"train": []},
         {"learning_rate": float("nan")},
     ):
@@ -134,3 +135,27 @@ def test_api_idempotence_and_no_public_list(monkeypatch, tmp_path):
             ).status_code
             == 422
         )
+
+
+def test_worker_failure_retains_hold_and_keeps_details_private(monkeypatch, tmp_path):
+    from core.connectors.token_factory import TokenFactory
+
+    hub = MemoryHub(cap=1)
+    run_id = "c" * 32
+    hub.claim(run_id, "key", "payload")
+    monkeypatch.setattr(s, "ROOT", tmp_path)
+    upload = s.Upload.model_validate(payload())
+    protocol = s.prepare(upload, run_id, tmp_path)
+
+    def unavailable(*args, **kwargs):
+        raise RuntimeError("private diagnostic sentinel")
+
+    monkeypatch.setattr(TokenFactory, "from_settings", unavailable)
+    s.execute(hub, run_id, upload, protocol)
+    saved = hub.authenticated(run_id, "key")
+    assert saved["status"] == "failed"
+    assert "sentinel" not in str(saved)
+    assert not hub.available()["available"]
+    diagnostic = tmp_path / run_id / "diagnostic.txt"
+    assert "sentinel" in diagnostic.read_text()
+    assert diagnostic.stat().st_mode & 0o777 == 0o600

@@ -17,8 +17,8 @@ services:
     volumes:
       - /opt/next-experiment/data:/data
       - /opt/next-experiment/cache:/cache
-    mem_limit: 4g
-    memswap_limit: 4g
+    mem_limit: 4608m
+    memswap_limit: 4608m
     cpus: 1.5
     cpu_shares: 256
     pids_limit: 128

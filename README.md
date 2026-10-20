@@ -2,7 +2,7 @@
 
 An agent that investigates LLM fine-tune failures and tests proposed fixes against controls on Nebius Token Factory.
 
-Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser.
+Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) offers live Nemotron investigations on uploaded data and recorded replays.
 
 [Test without keys or payment](https://maxkharlan.github.io/next-experiment/):
 $15 is allocated to additional live investigations on uploaded data, with Nemotron

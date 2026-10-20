@@ -379,7 +379,7 @@ def verify_export(output):
     if (
         report["protocol_sha256"] != digest
         or report["decision"] != decision
-        or report["accounting"] != account
+        or not same_accounting(report["accounting"], account)
         or report["spending"] != ledger
         or set(report["models"]) != {"base", *state}
     ):

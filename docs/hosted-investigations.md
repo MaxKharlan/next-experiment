@@ -7,10 +7,12 @@ entry page. This service has its own upload contract and does not expose the
 self-hosted API's path-based inputs, code execution or investigation listing.
 
 The deployment uses an existing VPS with a separate Compose project. Its hard
-limits are 4 GiB memory, no swap, 1.5 CPU and 128 processes. CPU shares are 256.
+limits are 4.5 GiB memory, no swap, 1.5 CPU and 128 processes. CPU shares are 256.
 The API has no Docker socket or access to the other application's volumes. Caddy
 and this API share a dedicated proxy network. Training and Nemotron inference
-use Token Factory. Adapters are evaluated sequentially on CPU.
+use Token Factory. Adapters are evaluated sequentially on CPU, each in a child process that releases
+its model memory before the next starts. The same container limit covers the API
+and every child process.
 
 `deploy/judge/Dockerfile` installs a CPU-only PyTorch wheel. The source package
 must include `core`, `apps`, `bench/faults` and `jobs/sandbox`: the latter two are
@@ -62,3 +64,18 @@ The test split stays out of diagnosis and scoring. A full retrain remains an
 exported proposal. Generated code, arbitrary filesystem paths and model URLs
 cannot be supplied through this endpoint. The browser renders model text as text.
 Reports are private and require the access key; there is no public report list.
+
+## Deployment verification
+
+The [VPS preflight](results/hosted-judge-vps-preflight-20261020.json) completed
+with the API and an inference child in the same 4.5 GiB cgroup. Peak usage was
+3.93 GiB, no OOM events occurred, and the existing application's health checks
+passed throughout. Host available memory stayed above 3.06 GiB. This checks one
+long synthetic prompt with rank-64 LoRA; it does not guarantee every uploaded
+case will complete. Two earlier checks stopped before generation because their
+host-swap guard was too sensitive; those outcomes are retained in the receipt.
+
+The [integration smoke](results/hosted-judge-smoke-20261020.json) completed two
+Nemotron calls, four Token Factory training jobs and four adapter evaluations.
+Its diagnosis was inconclusive. Estimated usage was $0.0401286 from the shared
+$15 allocation. This is a service check, not a benchmark result or an invoice.

@@ -1,1 +1,1 @@
-"""Public, owner-funded investigations with isolated uploads and durable reservations."""
+"""Public, funded investigations with isolated uploads and durable reservations."""
