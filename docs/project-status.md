@@ -5,8 +5,9 @@ PRs #105–#110 publish the automatic semantic audit, neutral logit diagnostics,
 semantic controls, verified FT-Fail Hub release and bounded cloud/reference
 execution. The owner authorized separate
 $25 additional Token Factory and $30 AI Cloud limits and confirmed submission
-eligibility, registration and representation. Reference-model scoring is moving
-to [bounded Cloud jobs](reference-evaluation-acceleration-20261020.md).
+eligibility, registration and representation. All 24 reference training jobs are
+verified, and both [bounded Cloud evaluation jobs](reference-evaluation-acceleration-20261020.md)
+have been submitted.
 The [REST study](rest-code-trace-20261020.md) completed with saved events and
 verified restart/idempotency behavior; its diagnosis is inconclusive. The
 [fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete

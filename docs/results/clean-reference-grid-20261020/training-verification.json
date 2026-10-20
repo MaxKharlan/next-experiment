@@ -1,0 +1,230 @@
+{
+  "status": "training_verified",
+  "at_utc": "2026-10-20T16:50:58.409814+00:00",
+  "protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65",
+  "jobs": {
+    "Qwen3-0.6B-banking77-g0": {
+      "job_id": "ftjob-e6a2468fce1a4b5ead7a43de63a77bf0",
+      "weights_sha256": "6cb71cdf63234fd626aee41bb0b794ddb36db986dade5a77417ef50c0f09b9c0",
+      "trained_tokens": 65658,
+      "token_cost_estimate_usd": 0.0262632,
+      "provider_duration_seconds": 640,
+      "accepted_sha256": "fe08da9609c020a6b4c9a3f560ef7854bc783efe44d0d228e1b5aa017f8368a5",
+      "provider_sha256": "f1a3880ab7403e678ab6668937e4d163c4b248c04d45aae0308efdacbe352bee"
+    },
+    "Qwen3-0.6B-banking77-g1": {
+      "job_id": "ftjob-90bbd54e199247f4aed29520fb2d3c7c",
+      "weights_sha256": "24a815cc9eaab4f38d3a770781de09344ae122e9a08641b9f00eb7085e3e7027",
+      "trained_tokens": 131316,
+      "token_cost_estimate_usd": 0.0525264,
+      "provider_duration_seconds": 897,
+      "accepted_sha256": "692c915149dc8f96e0fab5fa0ae0f9cbfa840c832725339ce5f93e7207926f3d",
+      "provider_sha256": "d0a81b3c60d174768af38d60250f8ab0651eb63ac8c2a631c0e0888c967628c7"
+    },
+    "Qwen3-0.6B-banking77-g2": {
+      "job_id": "ftjob-3cb3ba6e1ac44ce197be824ca23be989",
+      "weights_sha256": "d82849d45407012e8383eb9bb84a5f9625364d4a65734f10ea60ea8155e34218",
+      "trained_tokens": 65658,
+      "token_cost_estimate_usd": 0.0262632,
+      "provider_duration_seconds": 659,
+      "accepted_sha256": "8f0e3f5541c4f91fad560ce019256c218aaed69fe5b8d27f588b9c9996708c9e",
+      "provider_sha256": "358725e63bb96eaac3b4efeed7daee35b0715d88e9eff2505697eb85fc861d87"
+    },
+    "Qwen3-0.6B-banking77-g3": {
+      "job_id": "ftjob-03d04987684643a48dd6f21afc928789",
+      "weights_sha256": "91447524fd28ddc65c9227c72b6cac0d5e98dabb0f80088f2e9632fb3d58ce24",
+      "trained_tokens": 131316,
+      "token_cost_estimate_usd": 0.0525264,
+      "provider_duration_seconds": 895,
+      "accepted_sha256": "b84778fe36a0c19d8667da1d3991c4c77c18443b75da786a044635756eb79b32",
+      "provider_sha256": "4a10a8ba333d67bf54d56e1b42024bcd1002babe7672cb6eaab192e92318b3b8"
+    },
+    "Qwen3-0.6B-function_calling-g0": {
+      "job_id": "ftjob-299f31765f2b464d9f14c2a2ed4e2f08",
+      "weights_sha256": "9dd11c7d356f217b639c7cd931cded6987fa60093098c931be55cd358719528d",
+      "trained_tokens": 505956,
+      "token_cost_estimate_usd": 0.20238240000000002,
+      "provider_duration_seconds": 645,
+      "accepted_sha256": "42e36e658e1710432b4fdacdd808ce70a7a7ba4243438b9c8fc351a44e346b88",
+      "provider_sha256": "32b2bd161efe7367ebec2fcdf8343999fdadc954c44eccdcf739f8ea6fd2e4fb"
+    },
+    "Qwen3-0.6B-function_calling-g1": {
+      "job_id": "ftjob-6fda436d3e2e4b1cb1d08f44f4abbd6c",
+      "weights_sha256": "b50febb4d3c3a2665ffcc454f1cd416d69af706bca7db8c88f5a7eff40ae4ac5",
+      "trained_tokens": 1011912,
+      "token_cost_estimate_usd": 0.40476480000000004,
+      "provider_duration_seconds": 906,
+      "accepted_sha256": "bcbfe4916e4ce828c2fb899dbe1af1e01bbe156be79ba844c196971cd25a78d7",
+      "provider_sha256": "61d1091212f43c316b6acf57c31ee041d6eb706d72541d49c1e941c4f7343577"
+    },
+    "Qwen3-0.6B-function_calling-g2": {
+      "job_id": "ftjob-bce0dd53917140beb45ef9ef66287e87",
+      "weights_sha256": "01cba95f975bf383f40832a14d3027155c742c36f057215d9be6251dee82d77e",
+      "trained_tokens": 505956,
+      "token_cost_estimate_usd": 0.20238240000000002,
+      "provider_duration_seconds": 658,
+      "accepted_sha256": "21e045538ee5797bae41e38ceb4b25a1bd7488b3dd4c9dac752cefd77749f5ed",
+      "provider_sha256": "90079621b4a05467eb20eb7e95bc91776fdd7b2a282b325bcbd4743f8edef7d4"
+    },
+    "Qwen3-0.6B-function_calling-g3": {
+      "job_id": "ftjob-de8e22d90aa5430aa3b61caaeb789ac2",
+      "weights_sha256": "09e004488fb077a131e6e0b1c844f41826dd0de8d7c54d0080ba0de48b8ea08a",
+      "trained_tokens": 1011912,
+      "token_cost_estimate_usd": 0.40476480000000004,
+      "provider_duration_seconds": 891,
+      "accepted_sha256": "f697e21c87ceb1ab0e715810730958f9fc16de245b7250e6da0cec89c1d59c13",
+      "provider_sha256": "37f3709609a91868d76838734e6a559463ff55db575ed274ade35864d7e25dae"
+    },
+    "Qwen3-0.6B-json_extraction-g0": {
+      "job_id": "ftjob-f0591d77831f40f2abd03a9e1fe26e44",
+      "weights_sha256": "6d826109244e40d67e55ab7641355f807493d1fdc3ddac83527d7037900f7232",
+      "trained_tokens": 342786,
+      "token_cost_estimate_usd": 0.1371144,
+      "provider_duration_seconds": 639,
+      "accepted_sha256": "c693c90b973c4f2eb57035055dd542bef066fcc6493078f67e5984bb3223ab88",
+      "provider_sha256": "8a54a9c5dcbbe32b67426621a4924a813a5184a60580581bbcf587424f1259bb"
+    },
+    "Qwen3-0.6B-json_extraction-g1": {
+      "job_id": "ftjob-6a192f4e5e274a2d851c6b6282bb0027",
+      "weights_sha256": "906ecdbbfc0840668b64a4ddae499b3802c8450aeea8df37f27f53254d2eb38a",
+      "trained_tokens": 685572,
+      "token_cost_estimate_usd": 0.2742288,
+      "provider_duration_seconds": 899,
+      "accepted_sha256": "cbe616ceb686ed31fad6fd496bc80d5f97e66aaac94c0c7f5a21fb9a509dedaf",
+      "provider_sha256": "bf74fb18d136e06012cfc2b333c8f8e553b9a099f47c19c4dc1419c2ef7b8357"
+    },
+    "Qwen3-0.6B-json_extraction-g2": {
+      "job_id": "ftjob-6119529bd95a4977b3fc7da766e2d9ef",
+      "weights_sha256": "64eb10670b57de32a2eee69f9eee45e26592a7a56b718522169951a043ce7972",
+      "trained_tokens": 342786,
+      "token_cost_estimate_usd": 0.1371144,
+      "provider_duration_seconds": 631,
+      "accepted_sha256": "c32acf0064c15063e4d0554b3412d6daa7ff5f3cf3006364b928086200860332",
+      "provider_sha256": "d3412c482f38a0f0dc090436a8b8cead8d06ed8083ed22a94e5e02edf090a090"
+    },
+    "Qwen3-0.6B-json_extraction-g3": {
+      "job_id": "ftjob-570efe116f92453aa9e91eaab89876bb",
+      "weights_sha256": "90805b9b89af0cfe7e38c7a2a1266f34fd30649678ee72aa88cd99edfad4d0b0",
+      "trained_tokens": 685572,
+      "token_cost_estimate_usd": 0.2742288,
+      "provider_duration_seconds": 888,
+      "accepted_sha256": "668f1c3ac68c2b0f981a5a002e020deed136a4b19f293bbd4a4fafabfcb37282",
+      "provider_sha256": "2cfbb3823841ab6477a742f6adb7e17a356d91b53adfbe78e9d6c1a68c24657d"
+    },
+    "Qwen3-1.7B-banking77-g0": {
+      "job_id": "ftjob-4702b22f521741b199a6245b94483fb9",
+      "weights_sha256": "dfc38e92aa4b716ce5ee71d44028661bd5ae82f05f322347f16cf1ea5ac79451",
+      "trained_tokens": 65658,
+      "token_cost_estimate_usd": 0.0262632,
+      "provider_duration_seconds": 663,
+      "accepted_sha256": "7376b3f6b3f903517656b0c141fc006ac05321594e9c66cce39ade186d8c12d4",
+      "provider_sha256": "3057ab9be1d7b93de9516a2f41ddbf88fb01a8fb03abb4ff52c0467be7d85da1"
+    },
+    "Qwen3-1.7B-banking77-g1": {
+      "job_id": "ftjob-2057d0ed2ec146c68a2fa60d83b944c2",
+      "weights_sha256": "6c50faa5a9a68dfc8d4b8be1c4b9c113e2187d9b40de00e4a9b466f39e4346c5",
+      "trained_tokens": 131316,
+      "token_cost_estimate_usd": 0.0525264,
+      "provider_duration_seconds": 901,
+      "accepted_sha256": "f10a384ccb6d81d6ad7d36d1bd122f6980337ba9ecc082f45aea7fc4caaae0f0",
+      "provider_sha256": "e485b93e15f4ac0cb1c147e11622b1a531f5e1517e876e3ec82f68c87ee3a8cd"
+    },
+    "Qwen3-1.7B-banking77-g2": {
+      "job_id": "ftjob-bd30d2d81a2f4142ba2d2e2f180dc14a",
+      "weights_sha256": "a2227b33764b1cf581aca1ba0b02e5d9daad77a1e16267784f4544dcec63e849",
+      "trained_tokens": 65658,
+      "token_cost_estimate_usd": 0.0262632,
+      "provider_duration_seconds": 654,
+      "accepted_sha256": "c2e532c4cf0a713a3d467f5ec75c1a7921994cbeaa2f2343f85b6592a31b244c",
+      "provider_sha256": "8e984c26bf29dbbb82eb438a29550cb6d1fafc047d40be561cb2e11a0a0b78c6"
+    },
+    "Qwen3-1.7B-banking77-g3": {
+      "job_id": "ftjob-3cf5832292e74c49a39651b50c24ed4c",
+      "weights_sha256": "a32087257c85ed670bd179a1fb0bf6ddca3d2c53b154ed4749be6ca22a9ba57c",
+      "trained_tokens": 131316,
+      "token_cost_estimate_usd": 0.0525264,
+      "provider_duration_seconds": 905,
+      "accepted_sha256": "abd132b2185123dbd769afb0807b4983b7333a155d0e37e4a0aba85080448090",
+      "provider_sha256": "a0820b1b4f04a2e0888df03ed058d4cadb011865435e66dff4332bc9f755a9b3"
+    },
+    "Qwen3-1.7B-function_calling-g0": {
+      "job_id": "ftjob-997e0176684648e0bc122adc3f43400b",
+      "weights_sha256": "b7ee8fb64033925b28652af260db17cc884dafb7e7f66dcaaefde8cfbffa54ed",
+      "trained_tokens": 505956,
+      "token_cost_estimate_usd": 0.20238240000000002,
+      "provider_duration_seconds": 667,
+      "accepted_sha256": "962fdedf39c4a98e268f9be30634124b2e4b5e59de1005f7b319b93322d94692",
+      "provider_sha256": "95387a0904935aa31d9d67d880b7e2a8d245ab287809f946ae0bff525c73df66"
+    },
+    "Qwen3-1.7B-function_calling-g1": {
+      "job_id": "ftjob-c9720793446546bdaf235d12711cec28",
+      "weights_sha256": "75d2614aeeea03b523a5f1239572d9785f67935b00c251511f5d2a0a46f09924",
+      "trained_tokens": 1011912,
+      "token_cost_estimate_usd": 0.40476480000000004,
+      "provider_duration_seconds": 909,
+      "accepted_sha256": "f02fe32644249911e7d2fbca856b2ff7e6f11ddb02a4ca4b18dcb93a7e426bb1",
+      "provider_sha256": "35937659fcf615921ec405719f8093ac77f76668fc8996e704a9f78848a2dd91"
+    },
+    "Qwen3-1.7B-function_calling-g2": {
+      "job_id": "ftjob-584f8be8bd2e4e75917695abda5b4b97",
+      "weights_sha256": "8202a12d26975c7aaef0f6e219ee19373715fb6e5b8935050bd1e61c9cc14b0a",
+      "trained_tokens": 505956,
+      "token_cost_estimate_usd": 0.20238240000000002,
+      "provider_duration_seconds": 666,
+      "accepted_sha256": "1815e9631ef2973cac05ab94f6a02ee5228744f2aa9efdb441b7db94ba3f735c",
+      "provider_sha256": "171e5de125ef77c6869230ec1866b1ca3a82443e168b4445b8ab5ab76cb68790"
+    },
+    "Qwen3-1.7B-function_calling-g3": {
+      "job_id": "ftjob-b60ac8b0e5a8410e9db66acf79c6feb4",
+      "weights_sha256": "ffefd315ba08c27065460d4a04824c96134048bc3a7e668950fbf3f5e352456b",
+      "trained_tokens": 1011912,
+      "token_cost_estimate_usd": 0.40476480000000004,
+      "provider_duration_seconds": 912,
+      "accepted_sha256": "33ce2e229f480fc7c0b8af922de0acef128fc8890cfd896989347cf4c6157cb6",
+      "provider_sha256": "a089f9d54976fecdd264f76ed28cd709885e4e3180d4d84d89421f0788112cdb"
+    },
+    "Qwen3-1.7B-json_extraction-g0": {
+      "job_id": "ftjob-970335a123cd4424b0c4c15602525bca",
+      "weights_sha256": "25c5be8291417f458ae695b192038039d8d4e3a5003a18b187734b3a8ad0c4ff",
+      "trained_tokens": 342786,
+      "token_cost_estimate_usd": 0.1371144,
+      "provider_duration_seconds": 646,
+      "accepted_sha256": "5b411b42908846d66e4257b517f2bcff2238875fd380379188f8b8f2c44c2652",
+      "provider_sha256": "e5a37be5f767b24aa812bbf61ba0cdd814d8d970bfb12c1b0a088882131cfa45"
+    },
+    "Qwen3-1.7B-json_extraction-g1": {
+      "job_id": "ftjob-1ef62b2e03df4c3f9b0f15a924b2b45a",
+      "weights_sha256": "567e99e69cfa7bf2f6f00b3497dc3c6bdb7c3f57e9344b48a2250d72cb6c30c1",
+      "trained_tokens": 685572,
+      "token_cost_estimate_usd": 0.2742288,
+      "provider_duration_seconds": 914,
+      "accepted_sha256": "3a427aa415cb6c487812ba937b3af71be5b5850f79d55903d58a0cda22841e59",
+      "provider_sha256": "d3d5a7ffaf80c7938b2b90182e291143881798b093c6d932d3ae55ea894cfeea"
+    },
+    "Qwen3-1.7B-json_extraction-g2": {
+      "job_id": "ftjob-932ef884954748ae962847bf51e6cafb",
+      "weights_sha256": "731e9a345eb70f09e1c2e9331e02ef59c72982729c6512736ae35b2f14cf2020",
+      "trained_tokens": 342786,
+      "token_cost_estimate_usd": 0.1371144,
+      "provider_duration_seconds": 657,
+      "accepted_sha256": "981bff567be270f708650fb34baad5d8bbd1dc02df240a80131f92e71088a1ae",
+      "provider_sha256": "23d2b584c9fb579c2e68d8b0a7b54f43a39f2ebadc70f0ced9cf2acd42a899cd"
+    },
+    "Qwen3-1.7B-json_extraction-g3": {
+      "job_id": "ftjob-2035474f9c6745e086184766dcb41bd7",
+      "weights_sha256": "cb701e128101be6e1d3a781777f4b3159b78acf80a2e97951312d42a19ff27d3",
+      "trained_tokens": 685572,
+      "token_cost_estimate_usd": 0.2742288,
+      "provider_duration_seconds": 922,
+      "accepted_sha256": "0f3439144e4bfda94b06cebeb2ad0af4571fcc18943a5543a986db42faf05719",
+      "provider_sha256": "6eac9512eded29d7ef116a3002f4eb092706e12716b7d361cf80efd87000cd2e"
+    }
+  },
+  "completed_jobs": 24,
+  "distinct_weight_hashes": 24,
+  "trained_tokens": 10972800,
+  "token_cost_estimate_usd": 4.38912,
+  "ledger_commitment_with_allowance_usd": 5.266943999999999,
+  "billing_scope": "Provider token counts times frozen price; not invoice reconciliation. Historical holds remain.",
+  "scoring_scope": "All models now transferred to separately frozen CUDA evaluations; original MPS scoring did not start. Quality selection remains pending."
+}

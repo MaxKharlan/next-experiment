@@ -35,3 +35,15 @@ Execution:
 
 The one- to two-hour estimate is provisional until the first measured throughput
 is available; provisioning and dependency installation add time.
+
+All 24 training jobs have now succeeded, and all 24 downloaded adapter hashes
+are distinct. Verification matched the accepted and terminal provider recipes,
+files, seeds and LoRA settings to the original protocol. The provider recorded
+10,972,800 training tokens, giving a $4.38912 estimate at the frozen token price.
+The ledger records $5.266944 including its 20% allowance; this is not an invoice.
+See the [training verification](results/clean-reference-grid-20261020/training-verification.json).
+
+Both Cloud evaluation jobs were submitted once. Their
+[submission receipts](results/qwen-reference-cloud-20261020/submissions.json)
+bind each job to its separate CUDA protocol and uploaded payload hash.
+Quality selection and verified evaluation results are still pending.

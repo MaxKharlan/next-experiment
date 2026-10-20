@@ -1,0 +1,62 @@
+{
+  "benchmark_mode": false,
+  "created_at": 1792512606,
+  "error": null,
+  "estimated_finish": null,
+  "fine_tuned_model": null,
+  "finished_at": null,
+  "from_checkpoint": null,
+  "hyperparameters": {
+    "batch_size": 8,
+    "context_length": 8192,
+    "learning_rate": 0.0002,
+    "learning_rate_multiplier": null,
+    "lora": true,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lora_r": 16,
+    "max_grad_norm": 1.0,
+    "n_epochs": 3,
+    "packing": false,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0
+  },
+  "id": "ftjob-584f8be8bd2e4e75917695abda5b4b97",
+  "integrations": null,
+  "metadata": null,
+  "method": {
+    "dpo": null,
+    "reinforcement": null,
+    "supervised": {
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "learning_rate_multiplier": null,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      }
+    },
+    "type": "supervised"
+  },
+  "model": "Qwen/Qwen3-1.7B",
+  "object": "fine_tuning.job",
+  "organization_id": "",
+  "profile_mode": true,
+  "result_files": [],
+  "seed": 7101,
+  "status": "running",
+  "suffix": "ne-reference-2",
+  "total_steps": null,
+  "trained_steps": 0,
+  "trained_tokens": 0,
+  "training_file": "file-01a15a13-b7da-7c6d-ab39-53e8326dec42",
+  "validation_file": "file-01a15a13-bc9f-7f9c-92cf-dbb8f4ba08f7"
+}
