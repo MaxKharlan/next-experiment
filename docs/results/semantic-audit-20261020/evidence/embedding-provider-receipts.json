@@ -1,0 +1,192 @@
+[
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "e2c9dbdeb84c74b8aa7ba4ad9e405082",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 438,
+      "prompt_tokens_details": null,
+      "total_tokens": 438
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "08fdf5f15b327eefc3e90434e2e5f917",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 513,
+      "prompt_tokens_details": null,
+      "total_tokens": 513
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "1622321728b9581300adcb17b60cd721",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 492,
+      "prompt_tokens_details": null,
+      "total_tokens": 492
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "52218f2db52189890335991f7a2f3be1",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 567,
+      "prompt_tokens_details": null,
+      "total_tokens": 567
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "99a497902e99d7151b57442f0cf70e74",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 579,
+      "prompt_tokens_details": null,
+      "total_tokens": 579
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "c79a587a946dca6596af8c441a61e207",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 584,
+      "prompt_tokens_details": null,
+      "total_tokens": 584
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "de24d5ddd65eb68a3df9f657ba91c925",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 529,
+      "prompt_tokens_details": null,
+      "total_tokens": 529
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "abc16fcbce77d03c32b0eb5dd9e9e9f5",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 578,
+      "prompt_tokens_details": null,
+      "total_tokens": 578
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "1430ca6886c8ceaa3ec5d4e371f0e77a",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 612,
+      "prompt_tokens_details": null,
+      "total_tokens": 612
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "f335809cda7eb6da05a0a6866e3a6fe1",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 634,
+      "prompt_tokens_details": null,
+      "total_tokens": 634
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "b31a7bdbac6890a6fc2128a9f4ede04b",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 584,
+      "prompt_tokens_details": null,
+      "total_tokens": 584
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "aec91ad3431eec48019842569b6beee1",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 483,
+      "prompt_tokens_details": null,
+      "total_tokens": 483
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "3e4fc09e7a2d1ae6a4f647f609b54899",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 552,
+      "prompt_tokens_details": null,
+      "total_tokens": 552
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "10e1539c04c3f0a3ae9cdfa9b262e59b",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 514,
+      "prompt_tokens_details": null,
+      "total_tokens": 514
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "36d8ea13350f68e827c0d9a1c1f23e24",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 628,
+      "prompt_tokens_details": null,
+      "total_tokens": 628
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "ac26f36c36757cfeda8faaedf4692b50",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 586,
+      "prompt_tokens_details": null,
+      "total_tokens": 586
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "787fb71cbc66cd08ff6f46ef2290c5d3",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 593,
+      "prompt_tokens_details": null,
+      "total_tokens": 593
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "89fbf3828d1256ca18c4f2ff31468554",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 610,
+      "prompt_tokens_details": null,
+      "total_tokens": 610
+    }
+  },
+  {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "request_id": "da4e8e8cbc909e836482fa2793ef6bb4",
+    "usage": {
+      "completion_tokens": 0,
+      "prompt_tokens": 481,
+      "prompt_tokens_details": null,
+      "total_tokens": 481
+    }
+  }
+]

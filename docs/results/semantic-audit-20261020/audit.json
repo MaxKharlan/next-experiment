@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "audit-001",
+    "observed_label": "{\"intent\": \"declined_cash_withdrawal\"}",
+    "text": "I tried to withdraw some funds from my card, but was declined. How can I get my money?"
+  },
+  {
+    "id": "audit-002",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "I traded some of my money from my native country into an ATM to exchange for foreign currency, and the money I received was a different equating amount!"
+  },
+  {
+    "id": "audit-003",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "I tried to get funds in hard cash but it was rejected!"
+  },
+  {
+    "id": "audit-004",
+    "observed_label": "card_arrival",
+    "text": "Does the package with my card have tracking?"
+  },
+  {
+    "id": "audit-005",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "The amount of cash I received did not match the amount I requested"
+  },
+  {
+    "id": "audit-006",
+    "observed_label": "card_payment_fee_charged",
+    "text": "I didn't withdraw cash but I see that transaction on my app"
+  },
+  {
+    "id": "audit-007",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Why did I get less from the ATM?"
+  },
+  {
+    "id": "audit-008",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "I draw out money from your ATM during holidays, and was charged insanely. I wouldn't have done it, if i had a little sense about the shocking charges."
+  },
+  {
+    "id": "audit-009",
+    "observed_label": "card_payment_fee_charged",
+    "text": "Why was I charged extra when paying with card?"
+  },
+  {
+    "id": "audit-010",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "What was the cause for my card to be declined?"
+  },
+  {
+    "id": "audit-011",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "Is there a way I can get my card expedited?"
+  },
+  {
+    "id": "audit-012",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "When did you start charging to make a withdrawal? How much is it now? I always thought it was free."
+  },
+  {
+    "id": "audit-013",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Hello, I have a pending transaction in my account due to an ATM machine that wasn't working. In any case if the transaction goes through, after how long can I get my money back?"
+  },
+  {
+    "id": "audit-014",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "This past holiday I made a withdraw at the ATM machine, and it seems I've been charged too much."
+  },
+  {
+    "id": "audit-015",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "This is not right, I was told I could take out cash at the ATM for free?"
+  },
+  {
+    "id": "audit-016",
+    "observed_label": "{\"intent\": \"card_payment_fee_charged\"}",
+    "text": "I paid with card and I was charged a fee"
+  },
+  {
+    "id": "audit-017",
+    "observed_label": "{\"intent\": \"cash_withdrawal_charge\"}",
+    "text": "Anytime I've made an ATM withdrawal before it has always been free. I now say that I have been charged for my most recent ATM withdrawal. What's going on here?"
+  },
+  {
+    "id": "audit-018",
+    "observed_label": "card_payment_fee_charged",
+    "text": "Hae there, I have a transaction that is in progress despite the fact that the ATM was not working, what do I do to avoid being charged?"
+  },
+  {
+    "id": "audit-019",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "Help, the ATM didn't give me all the money I requested"
+  },
+  {
+    "id": "audit-020",
+    "observed_label": "card_arrival",
+    "text": "Where is my card?"
+  },
+  {
+    "id": "audit-021",
+    "observed_label": "card_payment_fee_charged",
+    "text": "How was I charged extra when I used my card to pay?"
+  },
+  {
+    "id": "audit-022",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "Explain the extra ATM fees."
+  },
+  {
+    "id": "audit-023",
+    "observed_label": "{\"intent\": \"pending_cash_withdrawal\"}",
+    "text": "I didn't receive my money earlier and it says the transaction is still in progress. Can you fix it?"
+  },
+  {
+    "id": "audit-024",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "Why did I get charged more for using my card?"
+  },
+  {
+    "id": "audit-025",
+    "observed_label": "{\"intent\": \"card_arrival\"}",
+    "text": "What can I do to track the card you sent me?"
+  },
+  {
+    "id": "audit-026",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "I am not seeing recent cash withdrawal on my account."
+  },
+  {
+    "id": "audit-027",
+    "observed_label": "card_payment_fee_charged",
+    "text": "How come I was charged an extra fee when paying with the card?"
+  },
+  {
+    "id": "audit-028",
+    "observed_label": "card_arrival",
+    "text": "How can I track my card's delivery?"
+  },
+  {
+    "id": "audit-029",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "The ATM cancelled a transaction on me when I was trying to get some cash out."
+  },
+  {
+    "id": "audit-030",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "What is the expected delivery date for my card?"
+  },
+  {
+    "id": "audit-031",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Is there a fee for a cash withdrawal?"
+  },
+  {
+    "id": "audit-032",
+    "observed_label": "{\"intent\": \"declined_cash_withdrawal\"}",
+    "text": "Tried using my ATM card earlier at one of your locations for the first time.  It didn't work.  What is going on?"
+  },
+  {
+    "id": "audit-033",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "Is there a fee for making a payment? If so, let me know why."
+  },
+  {
+    "id": "audit-034",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "Could you tell me why my cash withdrawal was declined?"
+  },
+  {
+    "id": "audit-035",
+    "observed_label": "card_arrival",
+    "text": "Where is my new card if I haven't received it yet?"
+  },
+  {
+    "id": "audit-036",
+    "observed_label": "{\"intent\": \"card_payment_fee_charged\"}",
+    "text": "I received a fee I should not have."
+  },
+  {
+    "id": "audit-037",
+    "observed_label": "{\"intent\": \"cash_withdrawal_charge\"}",
+    "text": "What is the extra fee I was charged when using an ATM?"
+  },
+  {
+    "id": "audit-038",
+    "observed_label": "card_payment_fee_charged",
+    "text": "Hi, I draw out some money from the ATM today. The ATM has given me wrong amount and the application is displaying more amount than i withdraw."
+  },
+  {
+    "id": "audit-039",
+    "observed_label": "card_arrival",
+    "text": "Have you sent out my card yet?"
+  },
+  {
+    "id": "audit-040",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "I am still waiting on my card?"
+  },
+  {
+    "id": "audit-041",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "While on vacation I used an ATM to get cash and was overcharged. These charges are ridiculous and had I known about them I would have never used it."
+  },
+  {
+    "id": "audit-042",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "why isnt my cash withdrawal showing"
+  },
+  {
+    "id": "audit-043",
+    "observed_label": "{\"intent\": \"wrong_amount_of_cash_received\"}",
+    "text": "The atm didn't give me all my cash"
+  },
+  {
+    "id": "audit-044",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "Is there a reason why my card was declined when I attempted to withdraw money?"
+  },
+  {
+    "id": "audit-045",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "I made a cash withdrawal earlier and it's showing as pending.  What does that mean?"
+  },
+  {
+    "id": "audit-046",
+    "observed_label": "card_payment_fee_charged",
+    "text": "I have been charged an extra fee when buying from your store. Why is this?"
+  },
+  {
+    "id": "audit-047",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "My app says I made a withdrawal, but I didn't."
+  },
+  {
+    "id": "audit-048",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "There is a withdrawal on my account I didn't make."
+  },
+  {
+    "id": "audit-049",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "I believe that the rate of exchange for my cash withdrawl is incorrect."
+  },
+  {
+    "id": "audit-050",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "I am using the app, and I see cash withdrawals that I did not authorize."
+  },
+  {
+    "id": "audit-051",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "I could not get money from an ATM"
+  },
+  {
+    "id": "audit-052",
+    "observed_label": "card_payment_fee_charged",
+    "text": "i made a payment with my card and was charged a fee, why would you do that"
+  },
+  {
+    "id": "audit-053",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "There should be a cash withdrawal that I haven't seen yet."
+  },
+  {
+    "id": "audit-054",
+    "observed_label": "card_payment_fee_charged",
+    "text": "I had to pay a fee when buying items with my card."
+  },
+  {
+    "id": "audit-055",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I'm at the ATM right now and it only allowed me to withdraw 10 pounds instead of my requested 30. What's going on? How can I fix this?"
+  },
+  {
+    "id": "audit-056",
+    "observed_label": "{\"intent\": \"cash_withdrawal_charge\"}",
+    "text": "Tell me why there is an extra charge when I used an ATM?"
+  },
+  {
+    "id": "audit-057",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "Why couldn't I get cash from an ATM?"
+  },
+  {
+    "id": "audit-058",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I tried to withdraw $100, all it gave me was $20."
+  },
+  {
+    "id": "audit-059",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I tried taking out 30 pounds from the ATM just now and it only gave me 10. Why would it do that? I need the 30 pounds now!"
+  },
+  {
+    "id": "audit-060",
+    "observed_label": "card_arrival",
+    "text": "I would like to track the card you sent to me."
+  },
+  {
+    "id": "audit-061",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I wanted $100 but only got $20"
+  },
+  {
+    "id": "audit-062",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "Why can I not get cash from the ATM?"
+  },
+  {
+    "id": "audit-063",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "I noticed on my online statement that an ATM withdrawal I made early is still pending.  Is this accurate?"
+  },
+  {
+    "id": "audit-064",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "My bank app said that I got cash from an ATM, but that's a mistake."
+  },
+  {
+    "id": "audit-065",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "What's going on? I was just recently charged for an ATM withdrawal. I've never seen this charge before and before it's always been free."
+  },
+  {
+    "id": "audit-066",
+    "observed_label": "card_payment_fee_charged",
+    "text": "My card was charged more than expected."
+  },
+  {
+    "id": "audit-067",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I withdrew money from an ATM today, and now my account is showing a different amount than what I withdrew. I checked the amount the ATM gave me, and it looks like it gave me the wrong amount of money. What is the best thin for me to do to get this fixed?"
+  },
+  {
+    "id": "audit-068",
+    "observed_label": "card_payment_fee_charged",
+    "text": "Was I charged extra for using my card?"
+  },
+  {
+    "id": "audit-069",
+    "observed_label": "card_payment_fee_charged",
+    "text": "Why was I charged a fee? I thought shopping was free?"
+  },
+  {
+    "id": "audit-070",
+    "observed_label": "{\"intent\": \"cash_withdrawal_charge\"}",
+    "text": "Why have I all of a sudden been charged for my ATM withdrawal? I thought the withdrawals were free because this is the first time I've ever had this problem."
+  },
+  {
+    "id": "audit-071",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Why is my cash withdrawal still showing as pending?"
+  },
+  {
+    "id": "audit-072",
+    "observed_label": "{\"intent\": \"declined_cash_withdrawal\"}",
+    "text": "I couldn't get money from the ATM"
+  },
+  {
+    "id": "audit-073",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "Why is my app showing me taking money that I did not take out?"
+  },
+  {
+    "id": "audit-074",
+    "observed_label": "{\"intent\": \"card_payment_fee_charged\"}",
+    "text": "I noticed a new fee on my account. I didn't know there were fees for these payments. What is the policy?"
+  },
+  {
+    "id": "audit-075",
+    "observed_label": "card_arrival",
+    "text": "There is a withdrawal on my account that I don't remember initiating."
+  },
+  {
+    "id": "audit-076",
+    "observed_label": "card_arrival",
+    "text": "I'm still waiting for my new card."
+  },
+  {
+    "id": "audit-077",
+    "observed_label": "card_payment_fee_charged",
+    "text": "This fee shouldn't be there after I paid with a card."
+  },
+  {
+    "id": "audit-078",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "Some cash withdrawal that I didn't make showed up in the app."
+  },
+  {
+    "id": "audit-079",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "atm refused to give me money"
+  },
+  {
+    "id": "audit-080",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Hi, I tried to withdraw some money from an ATM and the machine was broken.  It says that the transaction is still in progress.  Can you double check to see what's happening? I don't want to be charged since I was not able to withdraw the money."
+  },
+  {
+    "id": "audit-081",
+    "observed_label": "card_arrival",
+    "text": "My card has been declined by two separate ATM, and I'm worried something is wrong with my account. Would you please see if my account is okay?"
+  },
+  {
+    "id": "audit-082",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "I am perplexed. Why is it that I received an extremely wrong rate when I tried to use an ATM using a foreign currency?"
+  },
+  {
+    "id": "audit-083",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "Why did the ATM give me less money than what I requested?"
+  },
+  {
+    "id": "audit-084",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "Where is the card I ordered 2 weeks ago?"
+  },
+  {
+    "id": "audit-085",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "I got money overseas and the exchange rate was wrong"
+  },
+  {
+    "id": "audit-086",
+    "observed_label": "card_arrival",
+    "text": "Is there a tracking number for the card you sent me?"
+  },
+  {
+    "id": "audit-087",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "When I withdrew money from my account the other day, I noticed that there was a fee.  I didn't think that there were any fees for withdrawals...?  How much will I be charged?"
+  },
+  {
+    "id": "audit-088",
+    "observed_label": "{\"intent\": \"declined_cash_withdrawal\"}",
+    "text": "When going to the ATM to take out some cash today my withdrawal was  declined.  I need to fix this problem as soon as possible. whats going on?"
+  },
+  {
+    "id": "audit-089",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "Is there extra fees for making a withdraw in a different country at a cash machine."
+  },
+  {
+    "id": "audit-090",
+    "observed_label": "card_payment_fee_charged",
+    "text": "My wallet was just stolen and I see my account already has a withdrawal. Can you please help me."
+  },
+  {
+    "id": "audit-091",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "There has a recent suspicious withdrawal on my bank account. Is it possible to freeze my card?"
+  },
+  {
+    "id": "audit-092",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "The ATM I used for foreign currency provided the wrong exchange rate."
+  },
+  {
+    "id": "audit-093",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "How much money can I withdraw before fees? I noticed a fee on my card but I didn't think I had hit the limit of how much I could withdraw in a month."
+  },
+  {
+    "id": "audit-094",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "Do you have charges now when you pay with a card?"
+  },
+  {
+    "id": "audit-095",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "Please tell me how the exchange rate is determined. I was expecting more money for the transaction."
+  },
+  {
+    "id": "audit-096",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "The app is saying I made a withdrawl but I didn't."
+  },
+  {
+    "id": "audit-097",
+    "observed_label": "{\"intent\": \"pending_cash_withdrawal\"}",
+    "text": "What does it mean to have a pending cash withdrawal?"
+  },
+  {
+    "id": "audit-098",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "I went to the Notting Hill ATM to use my card the first time for a cash withdrawal but it didn't work. Does this mean that my card isn't working yet?"
+  },
+  {
+    "id": "audit-099",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "My app is showing a cash balance that I did not receive."
+  },
+  {
+    "id": "audit-100",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I was not given the amount of cash I withdrew"
+  },
+  {
+    "id": "audit-101",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "I just had my card get declined at the ATM! I need to get money out but I am unable to.  Why has this happened?"
+  },
+  {
+    "id": "audit-102",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "THere is some cash that is showing up on my app."
+  },
+  {
+    "id": "audit-103",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "When I got cash, my exchange rate was off."
+  },
+  {
+    "id": "audit-104",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "Have you started charging for cash withdrawals? I always thought it was free until I noticed this fee. How much is the fee?"
+  },
+  {
+    "id": "audit-105",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "There is a cash withdrawal on my statement that I did not make"
+  },
+  {
+    "id": "audit-106",
+    "observed_label": "card_payment_fee_charged",
+    "text": "Why does it cost more to pay with my card?"
+  },
+  {
+    "id": "audit-107",
+    "observed_label": "{\"intent\": \"card_payment_fee_charged\"}",
+    "text": "I paid with my card and ended up being charged a fee."
+  },
+  {
+    "id": "audit-108",
+    "observed_label": "{\"intent\": \"card_arrival\"}",
+    "text": "Can you track my card for me?"
+  },
+  {
+    "id": "audit-109",
+    "observed_label": "card_arrival",
+    "text": "ATM withdrawal not working."
+  },
+  {
+    "id": "audit-110",
+    "observed_label": "{\"intent\": \"pending_cash_withdrawal\"}",
+    "text": "My cash withdrawal is showing as pending, why?"
+  },
+  {
+    "id": "audit-111",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "Will I be charged for a cash withdrawal?"
+  },
+  {
+    "id": "audit-112",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "The exchange rate was wrong?"
+  },
+  {
+    "id": "audit-113",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "Is it normal to get charged extra when i use my card?"
+  },
+  {
+    "id": "audit-114",
+    "observed_label": "{\"intent\": \"card_arrival\"}",
+    "text": "Where is the tracking number for the card?"
+  },
+  {
+    "id": "audit-115",
+    "observed_label": "{\"intent\": \"pending_cash_withdrawal\"}",
+    "text": "What does it mean when a cash withdrawal is pending?"
+  },
+  {
+    "id": "audit-116",
+    "observed_label": "card_payment_fee_charged",
+    "text": "Why do I still have a pending cash withdrawal?"
+  },
+  {
+    "id": "audit-117",
+    "observed_label": "{\"intent\": \"wrong_amount_of_cash_received\"}",
+    "text": "I did not receive the right amount of cash I requested"
+  },
+  {
+    "id": "audit-118",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "Can I track the card that was just sent to me?"
+  },
+  {
+    "id": "audit-119",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I requested money from the ATM and it didn't give me as much as I requested."
+  },
+  {
+    "id": "audit-120",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I got some cash but it wasn't the right amount."
+  },
+  {
+    "id": "audit-121",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "What is this fee for card payment?"
+  },
+  {
+    "id": "audit-122",
+    "observed_label": "card_payment_fee_charged",
+    "text": "What do I do if I got the wrong amount at the ATM?"
+  },
+  {
+    "id": "audit-123",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I did not receive the correct amount of cash."
+  },
+  {
+    "id": "audit-124",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "I'm stuck here at your broken ATM and I don't know what to do next. Asked for 30 pounds, got 10. ATM said I got 30. Something very wrong here and I want my money now!"
+  },
+  {
+    "id": "audit-125",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "Can i get money back in my home currency at  ATM? As I am on holiday and bit concerned because i do not have any cash with me . Is it possible to withdraw without any additional cost."
+  },
+  {
+    "id": "audit-126",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "Please help me, its urgent. Someone has withdrawn money from my account as few hours before my wallet has been. Now i want to stop withdrawal of more money."
+  },
+  {
+    "id": "audit-127",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "how come when i got cash the exchange rate was different than it should be"
+  },
+  {
+    "id": "audit-128",
+    "observed_label": "card_payment_fee_charged",
+    "text": "What is this extra fee?"
+  },
+  {
+    "id": "audit-129",
+    "observed_label": "card_arrival",
+    "text": "Hello. I have a transaction in my account listed as pending. I tried to use an ATM at the city centre, but the machine declined my card, and I did not receive the money. Why is the transaction still pending if I did not receive the money."
+  },
+  {
+    "id": "audit-130",
+    "observed_label": "card_arrival",
+    "text": "How can I check on the status of my new card?"
+  },
+  {
+    "id": "audit-131",
+    "observed_label": "card_arrival",
+    "text": "I still haven't received my card after two weeks, is it lost?"
+  },
+  {
+    "id": "audit-132",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "Why was a fee added to my bill when I used my card?"
+  },
+  {
+    "id": "audit-133",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "A percentage fee was charged to my withdrawal."
+  },
+  {
+    "id": "audit-134",
+    "observed_label": "card_arrival",
+    "text": "I need to track the card sent to me."
+  },
+  {
+    "id": "audit-135",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "There's a cash withdrawal I am certain I did not make"
+  },
+  {
+    "id": "audit-136",
+    "observed_label": "card_arrival",
+    "text": "Why have I not gotten my new card?"
+  },
+  {
+    "id": "audit-137",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "This morning I wanted to make a withdrawal before work, but my card was declined! Please double check it for me as this is the first time it was declined."
+  },
+  {
+    "id": "audit-138",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "I think somebody made an unauthorized copy of my card.  My account has a cash withdrawal for 500\u00a3 that I did not make.  Please help."
+  },
+  {
+    "id": "audit-139",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "What do I need to do to get cash back? The ATM gave me the wrong amount that I requested but the app is showing the amount to be correct."
+  },
+  {
+    "id": "audit-140",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "Why was I charged for withdrawing cash?"
+  },
+  {
+    "id": "audit-141",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "I would like to know why a withdraw I made for some cash shows up as pending."
+  },
+  {
+    "id": "audit-142",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "While getting cash, I was charged a fee."
+  },
+  {
+    "id": "audit-143",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "My card has not come in the mail yet."
+  },
+  {
+    "id": "audit-144",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "I was given the wrong exchange rate when getting cash"
+  },
+  {
+    "id": "audit-145",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "Is it normal to be charged an extra fee when paying with my card?"
+  },
+  {
+    "id": "audit-146",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "what is this extra charge for a withdrawal?"
+  },
+  {
+    "id": "audit-147",
+    "observed_label": "{\"intent\": \"cash_withdrawal_charge\"}",
+    "text": "Why am I charged a fee for withdrawing cash?"
+  },
+  {
+    "id": "audit-148",
+    "observed_label": "declined_cash_withdrawal",
+    "text": "What do I do if I do not recognise a cash withdrawal?"
+  },
+  {
+    "id": "audit-149",
+    "observed_label": "card_arrival",
+    "text": "Hey I am standing in front of an ATM here, it only gave me 10 pounds even though I wanted to withdraw 30! Seems like the app has 30 pounds, what do I do??"
+  },
+  {
+    "id": "audit-150",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "Help! I think someone has made a cash withdrawal with my card!"
+  },
+  {
+    "id": "audit-151",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "Why was I charged when taking out money?"
+  },
+  {
+    "id": "audit-152",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "Yikes!  I didn't get the amount of money that I requested.  What do I do now?"
+  },
+  {
+    "id": "audit-153",
+    "observed_label": "{\"intent\": \"wrong_amount_of_cash_received\"}",
+    "text": "The app is showing that I received alot more money than I actually received from the ATM. This occurred earlier today."
+  },
+  {
+    "id": "audit-154",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "I got some cash out of the ATM over the holiday and it seems that I've been grossly overcharged. I wouldn't have done that if I knew of these outrageous charges!"
+  },
+  {
+    "id": "audit-155",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "While abroad, I got cash, and the exchange rate applied is wrong."
+  },
+  {
+    "id": "audit-156",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "Someone stole my account, there's a withdrawal but it wasn't me, can we put a stop to it please?"
+  },
+  {
+    "id": "audit-157",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "How long does it take for cash withdrawals to hit my account?"
+  },
+  {
+    "id": "audit-158",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "i didnt put that money in my account"
+  },
+  {
+    "id": "audit-159",
+    "observed_label": "{\"intent\": \"card_payment_fee_charged\"}",
+    "text": "I wanted to know why i got an additional fee when i use my card."
+  },
+  {
+    "id": "audit-160",
+    "observed_label": "{\"intent\": \"declined_cash_withdrawal\"}",
+    "text": "Why was I declined when I tried to get my money?"
+  },
+  {
+    "id": "audit-161",
+    "observed_label": "{\"intent\": \"wrong_amount_of_cash_received\"}",
+    "text": "What do I need to do to request cash back? The ATM actually just gave me the wrong amount. The app I actually chose the right amount."
+  },
+  {
+    "id": "audit-162",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "what is the exchange rate for foreign ATMs"
+  },
+  {
+    "id": "audit-163",
+    "observed_label": "card_arrival",
+    "text": "Could I get tracking on the card?"
+  },
+  {
+    "id": "audit-164",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Why was I charged a fee for my withdrawal?"
+  },
+  {
+    "id": "audit-165",
+    "observed_label": "card_arrival",
+    "text": "The ATM keeps rejecting my Payment. I tried two different ATMs but did not work .Can you please check if everything is okay with my account?"
+  },
+  {
+    "id": "audit-166",
+    "observed_label": "{\"intent\": \"pending_cash_withdrawal\"}",
+    "text": "My cash withdrawal shows as pending still."
+  },
+  {
+    "id": "audit-167",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "There is a pending transaction on my account for when I tried to get money from the ATM earlier and it did not work. Can you fix this?"
+  },
+  {
+    "id": "audit-168",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "I need your help immediately.  There is a 500\u00a3 cash withdrawal that I know nothing about.  I think my account has become compromised."
+  },
+  {
+    "id": "audit-169",
+    "observed_label": "{\"intent\": \"pending_cash_withdrawal\"}",
+    "text": "I tried to withdraw money, but was unable to. Still says that the transaction is pending? Will this money disappear??"
+  },
+  {
+    "id": "audit-170",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "My account says a withdrawal is pending - why can't I take cash out of the ATM?"
+  },
+  {
+    "id": "audit-171",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "How long will my cash withdrawal take"
+  },
+  {
+    "id": "audit-172",
+    "observed_label": "card_arrival",
+    "text": "I attempted to get money in cash but it was refused!"
+  },
+  {
+    "id": "audit-173",
+    "observed_label": "{\"intent\": \"card_arrival\"}",
+    "text": "I don't have my card in 1 week.  Should I be worried?"
+  },
+  {
+    "id": "audit-174",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "The ATM didn't give me the amount I asked for"
+  },
+  {
+    "id": "audit-175",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "I made a cash withdrawl and there is a charge.  What is this?"
+  },
+  {
+    "id": "audit-176",
+    "observed_label": "{\"intent\": \"wrong_exchange_rate_for_cash_withdrawal\"}",
+    "text": "I used the ATM to get money out and did not realize I would be charged as much as I was or I would not have done that!"
+  },
+  {
+    "id": "audit-177",
+    "observed_label": "{\"intent\": \"declined_cash_withdrawal\"}",
+    "text": "I couldnt get cash in an ATM"
+  },
+  {
+    "id": "audit-178",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "There is a withdrawal in my account I didn't make."
+  },
+  {
+    "id": "audit-179",
+    "observed_label": "card_payment_fee_charged",
+    "text": "How do I get my cash withdrawal to show?"
+  },
+  {
+    "id": "audit-180",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Can you help me track my card?"
+  },
+  {
+    "id": "audit-181",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "Why won't the ATM let me withdraw money?"
+  },
+  {
+    "id": "audit-182",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "I withdrew cash abroad and the exchange rate applied is wrong."
+  },
+  {
+    "id": "audit-183",
+    "observed_label": "card_arrival",
+    "text": "Whats wrong with my currency exchange?"
+  },
+  {
+    "id": "audit-184",
+    "observed_label": "{\"intent\": \"declined_cash_withdrawal\"}",
+    "text": "Hello, is there any way to double check my card? I have never had issues with withdraws in the past, but this morning on the way to work it was unexpectedly declined."
+  },
+  {
+    "id": "audit-185",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "What does a pending cash withdrawal mean?"
+  },
+  {
+    "id": "audit-186",
+    "observed_label": "wrong_amount_of_cash_received",
+    "text": "Why is there now a charge for making cash withdrawals? I wanted some cash after I went to the grocery store, and there's a new fee!"
+  },
+  {
+    "id": "audit-187",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "Can i get money in my home currency at some ATM ? As I am on holiday and bit concerned because i do not have any cash with me . Is it possible to withdraw without any additional cost."
+  },
+  {
+    "id": "audit-188",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "Hello, in these holidays i have been overcharged on the amount i have withdrawn on one of your ATMs. I did not had any clue about the horrible charges otherwise i would not have withdrawn."
+  },
+  {
+    "id": "audit-189",
+    "observed_label": "{\"intent\": \"cash_withdrawal_charge\"}",
+    "text": "How come I got to pay to get my money from the ATM?"
+  },
+  {
+    "id": "audit-190",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "My exchange rate is wrong when I get cash."
+  },
+  {
+    "id": "audit-191",
+    "observed_label": "{\"intent\": \"wrong_amount_of_cash_received\"}",
+    "text": "$20 came out instead of $100"
+  },
+  {
+    "id": "audit-192",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "I withdrew cash and was charged. Why?"
+  },
+  {
+    "id": "audit-193",
+    "observed_label": "{\"intent\": \"cash_withdrawal_not_recognised\"}",
+    "text": "I believe my card has been compromised as there's a cash withdrawal I don't recognize."
+  },
+  {
+    "id": "audit-194",
+    "observed_label": "cash_withdrawal_charge",
+    "text": "What's up with the extra fee I got?"
+  },
+  {
+    "id": "audit-195",
+    "observed_label": "{\"intent\": \"card_payment_fee_charged\"}",
+    "text": "I have been charged a fee that I didn't know about. Why have you charged me extra for card payments?"
+  },
+  {
+    "id": "audit-196",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "I see cash withdrawal activity in the app that is not mine."
+  },
+  {
+    "id": "audit-197",
+    "observed_label": "pending_cash_withdrawal",
+    "text": "I needed cash today, so I used another provider's ATM, and when I attempted to withdraw, it declined. I just checked it out and I'm still showing my account with that amount pending! I didn't take any money out, it was declined, so I don't want that to be processed as a withdrawal."
+  },
+  {
+    "id": "audit-198",
+    "observed_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "text": "Over the holiday I withdrew cash from the ATM and it seems that I was severely overcharged. Had I known that I would be charged those fees, I would not have used the ATM!"
+  },
+  {
+    "id": "audit-199",
+    "observed_label": "cash_withdrawal_not_recognised",
+    "text": "Can you tell me why I haven't received my new card yet?"
+  },
+  {
+    "id": "audit-200",
+    "observed_label": "card_arrival",
+    "text": "I wasn't able to withdraw money at an ATM"
+  }
+]

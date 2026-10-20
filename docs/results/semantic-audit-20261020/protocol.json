@@ -1,0 +1,63 @@
+{
+  "attribution": "PolyAI / Casanueva et al. (2020), BANKING77, CC BY 4.0. Selected train rows; planted modifications recorded separately.",
+  "audit_examples": 200,
+  "cleanlab": {
+    "data": "400 references + valid audit labels, out-of-fold probabilities; invalid-format audit rows excluded",
+    "filter_by": "prune_by_noise_rate",
+    "folds": 5,
+    "logistic_C": 1.0,
+    "max_iter": 1000,
+    "shuffle_seed": 3103
+  },
+  "data_sha256": {
+    "audit.json": "776f0f9f9af7421d78d02436a09e983d636ebeae8d1baa3aa37705553e6413ba",
+    "constructed-truth.json": "9a0ba6f846462415b6923a3d358cc0cab5a043cb516756f436bfc0944ed60f72",
+    "reference.json": "103393f933f744e025cb189ba41271d05bc048fa96166463c2bf960d6f64db3e"
+  },
+  "embedding": {
+    "batch_size": 8,
+    "local_nvidia": "nvidia/Nemotron-3-Embed-1B-BF16",
+    "local_qwen": "Qwen/Qwen3-Embedding-0.6B",
+    "max_length": 512,
+    "provider": "Qwen/Qwen3-Embedding-8B",
+    "representation": "Symmetric document embeddings, model document prompt, L2 normalized; no query instruction"
+  },
+  "human_requirement": "Independent human completes all 200 rows, identity/date and uncertainty. Constructed-truth results are preliminary controls, not human accuracy. No adaptive threshold changes.",
+  "id": "semantic-audit-20261020-v1",
+  "injections": {
+    "invalid_format": 50,
+    "none": 100,
+    "wrong_label": 50
+  },
+  "labels": [
+    "card_arrival",
+    "card_payment_fee_charged",
+    "cash_withdrawal_charge",
+    "cash_withdrawal_not_recognised",
+    "declined_cash_withdrawal",
+    "pending_cash_withdrawal",
+    "wrong_amount_of_cash_received",
+    "wrong_exchange_rate_for_cash_withdrawal"
+  ],
+  "model_review": {
+    "attempts_per_example": 1,
+    "context": "Same three Qwen local neighbors, query, observed label and allowed labels only. No source truth or injection type.",
+    "max_tokens": 2048,
+    "nano": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "super": "nvidia/nemotron-3-super-120b-a12b",
+    "temperature": 0
+  },
+  "near_duplicate_cosine_min": 0.92,
+  "neighbor_rule": {
+    "k": 3,
+    "rule": "Flag when at least two eligible neighbors disagree with a valid observed label. Invalid format flagged separately.",
+    "similarity_min": 0.8
+  },
+  "primary_human_metrics": null,
+  "reference_examples": 400,
+  "selection": "SHA256 seeded ordering within class; first 50 reference, next 25 audit; normalized exact texts disjoint. No test data.",
+  "source": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/57ec275d8078af65b7731c2a98be812d844a6d6b/banking_data/train.csv",
+  "source_card": "https://huggingface.co/datasets/PolyAI/banking77",
+  "source_code_sha256": "d9cead8c2182d4418f371259e601ad5e69867980245f1ae4e63228def5547174",
+  "source_sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b"
+}

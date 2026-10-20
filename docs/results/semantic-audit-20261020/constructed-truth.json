@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "audit-001",
+    "injection": "invalid_format",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5081
+  },
+  {
+    "id": "audit-002",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8243
+  },
+  {
+    "id": "audit-003",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4926
+  },
+  {
+    "id": "audit-004",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 10
+  },
+  {
+    "id": "audit-005",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2355
+  },
+  {
+    "id": "audit-006",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8932
+  },
+  {
+    "id": "audit-007",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2389
+  },
+  {
+    "id": "audit-008",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8353
+  },
+  {
+    "id": "audit-009",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2619
+  },
+  {
+    "id": "audit-010",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5038
+  },
+  {
+    "id": "audit-011",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 53
+  },
+  {
+    "id": "audit-012",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9474
+  },
+  {
+    "id": "audit-013",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 745
+  },
+  {
+    "id": "audit-014",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8270
+  },
+  {
+    "id": "audit-015",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9387
+  },
+  {
+    "id": "audit-016",
+    "injection": "invalid_format",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2631
+  },
+  {
+    "id": "audit-017",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9458
+  },
+  {
+    "id": "audit-018",
+    "injection": "wrong_label",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 842
+  },
+  {
+    "id": "audit-019",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2471
+  },
+  {
+    "id": "audit-020",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 89
+  },
+  {
+    "id": "audit-021",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2638
+  },
+  {
+    "id": "audit-022",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9420
+  },
+  {
+    "id": "audit-023",
+    "injection": "invalid_format",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 801
+  },
+  {
+    "id": "audit-024",
+    "injection": "wrong_label",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2665
+  },
+  {
+    "id": "audit-025",
+    "injection": "invalid_format",
+    "source_label": "card_arrival",
+    "source_line": 54
+  },
+  {
+    "id": "audit-026",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 828
+  },
+  {
+    "id": "audit-027",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2608
+  },
+  {
+    "id": "audit-028",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 84
+  },
+  {
+    "id": "audit-029",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5039
+  },
+  {
+    "id": "audit-030",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 31
+  },
+  {
+    "id": "audit-031",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9425
+  },
+  {
+    "id": "audit-032",
+    "injection": "invalid_format",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4970
+  },
+  {
+    "id": "audit-033",
+    "injection": "wrong_label",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2669
+  },
+  {
+    "id": "audit-034",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4944
+  },
+  {
+    "id": "audit-035",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 88
+  },
+  {
+    "id": "audit-036",
+    "injection": "invalid_format",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2514
+  },
+  {
+    "id": "audit-037",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9498
+  },
+  {
+    "id": "audit-038",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2372
+  },
+  {
+    "id": "audit-039",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 24
+  },
+  {
+    "id": "audit-040",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 2
+  },
+  {
+    "id": "audit-041",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8329
+  },
+  {
+    "id": "audit-042",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 881
+  },
+  {
+    "id": "audit-043",
+    "injection": "invalid_format",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2417
+  },
+  {
+    "id": "audit-044",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4977
+  },
+  {
+    "id": "audit-045",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 767
+  },
+  {
+    "id": "audit-046",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2625
+  },
+  {
+    "id": "audit-047",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8939
+  },
+  {
+    "id": "audit-048",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8800
+  },
+  {
+    "id": "audit-049",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8277
+  },
+  {
+    "id": "audit-050",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8881
+  },
+  {
+    "id": "audit-051",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5075
+  },
+  {
+    "id": "audit-052",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2520
+  },
+  {
+    "id": "audit-053",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 758
+  },
+  {
+    "id": "audit-054",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2522
+  },
+  {
+    "id": "audit-055",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2364
+  },
+  {
+    "id": "audit-056",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9431
+  },
+  {
+    "id": "audit-057",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4993
+  },
+  {
+    "id": "audit-058",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2337
+  },
+  {
+    "id": "audit-059",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2373
+  },
+  {
+    "id": "audit-060",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 33
+  },
+  {
+    "id": "audit-061",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2473
+  },
+  {
+    "id": "audit-062",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5029
+  },
+  {
+    "id": "audit-063",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 762
+  },
+  {
+    "id": "audit-064",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8870
+  },
+  {
+    "id": "audit-065",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9459
+  },
+  {
+    "id": "audit-066",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2634
+  },
+  {
+    "id": "audit-067",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2452
+  },
+  {
+    "id": "audit-068",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2627
+  },
+  {
+    "id": "audit-069",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2565
+  },
+  {
+    "id": "audit-070",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9414
+  },
+  {
+    "id": "audit-071",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 740
+  },
+  {
+    "id": "audit-072",
+    "injection": "invalid_format",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5043
+  },
+  {
+    "id": "audit-073",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8921
+  },
+  {
+    "id": "audit-074",
+    "injection": "invalid_format",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2530
+  },
+  {
+    "id": "audit-075",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8794
+  },
+  {
+    "id": "audit-076",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 47
+  },
+  {
+    "id": "audit-077",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2663
+  },
+  {
+    "id": "audit-078",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8928
+  },
+  {
+    "id": "audit-079",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5041
+  },
+  {
+    "id": "audit-080",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 811
+  },
+  {
+    "id": "audit-081",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4982
+  },
+  {
+    "id": "audit-082",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8358
+  },
+  {
+    "id": "audit-083",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2453
+  },
+  {
+    "id": "audit-084",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 36
+  },
+  {
+    "id": "audit-085",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8313
+  },
+  {
+    "id": "audit-086",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 32
+  },
+  {
+    "id": "audit-087",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9394
+  },
+  {
+    "id": "audit-088",
+    "injection": "invalid_format",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5057
+  },
+  {
+    "id": "audit-089",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8246
+  },
+  {
+    "id": "audit-090",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8822
+  },
+  {
+    "id": "audit-091",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8891
+  },
+  {
+    "id": "audit-092",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8307
+  },
+  {
+    "id": "audit-093",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9386
+  },
+  {
+    "id": "audit-094",
+    "injection": "wrong_label",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2693
+  },
+  {
+    "id": "audit-095",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8332
+  },
+  {
+    "id": "audit-096",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8830
+  },
+  {
+    "id": "audit-097",
+    "injection": "invalid_format",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 794
+  },
+  {
+    "id": "audit-098",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4957
+  },
+  {
+    "id": "audit-099",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8837
+  },
+  {
+    "id": "audit-100",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2429
+  },
+  {
+    "id": "audit-101",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5067
+  },
+  {
+    "id": "audit-102",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8821
+  },
+  {
+    "id": "audit-103",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8331
+  },
+  {
+    "id": "audit-104",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9464
+  },
+  {
+    "id": "audit-105",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8868
+  },
+  {
+    "id": "audit-106",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2616
+  },
+  {
+    "id": "audit-107",
+    "injection": "invalid_format",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2645
+  },
+  {
+    "id": "audit-108",
+    "injection": "invalid_format",
+    "source_label": "card_arrival",
+    "source_line": 14
+  },
+  {
+    "id": "audit-109",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4985
+  },
+  {
+    "id": "audit-110",
+    "injection": "invalid_format",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 837
+  },
+  {
+    "id": "audit-111",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9419
+  },
+  {
+    "id": "audit-112",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8292
+  },
+  {
+    "id": "audit-113",
+    "injection": "wrong_label",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2662
+  },
+  {
+    "id": "audit-114",
+    "injection": "invalid_format",
+    "source_label": "card_arrival",
+    "source_line": 138
+  },
+  {
+    "id": "audit-115",
+    "injection": "invalid_format",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 813
+  },
+  {
+    "id": "audit-116",
+    "injection": "wrong_label",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 778
+  },
+  {
+    "id": "audit-117",
+    "injection": "invalid_format",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2401
+  },
+  {
+    "id": "audit-118",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 85
+  },
+  {
+    "id": "audit-119",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2465
+  },
+  {
+    "id": "audit-120",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2501
+  },
+  {
+    "id": "audit-121",
+    "injection": "wrong_label",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2567
+  },
+  {
+    "id": "audit-122",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2400
+  },
+  {
+    "id": "audit-123",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2499
+  },
+  {
+    "id": "audit-124",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2511
+  },
+  {
+    "id": "audit-125",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8262
+  },
+  {
+    "id": "audit-126",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8935
+  },
+  {
+    "id": "audit-127",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8293
+  },
+  {
+    "id": "audit-128",
+    "injection": "none",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2585
+  },
+  {
+    "id": "audit-129",
+    "injection": "wrong_label",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 802
+  },
+  {
+    "id": "audit-130",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 51
+  },
+  {
+    "id": "audit-131",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 13
+  },
+  {
+    "id": "audit-132",
+    "injection": "wrong_label",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2655
+  },
+  {
+    "id": "audit-133",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9418
+  },
+  {
+    "id": "audit-134",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 135
+  },
+  {
+    "id": "audit-135",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8902
+  },
+  {
+    "id": "audit-136",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 142
+  },
+  {
+    "id": "audit-137",
+    "injection": "none",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4972
+  },
+  {
+    "id": "audit-138",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8895
+  },
+  {
+    "id": "audit-139",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2381
+  },
+  {
+    "id": "audit-140",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9381
+  },
+  {
+    "id": "audit-141",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 739
+  },
+  {
+    "id": "audit-142",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9453
+  },
+  {
+    "id": "audit-143",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 122
+  },
+  {
+    "id": "audit-144",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8327
+  },
+  {
+    "id": "audit-145",
+    "injection": "wrong_label",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2555
+  },
+  {
+    "id": "audit-146",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9490
+  },
+  {
+    "id": "audit-147",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9353
+  },
+  {
+    "id": "audit-148",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8852
+  },
+  {
+    "id": "audit-149",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2466
+  },
+  {
+    "id": "audit-150",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8914
+  },
+  {
+    "id": "audit-151",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9468
+  },
+  {
+    "id": "audit-152",
+    "injection": "wrong_label",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2425
+  },
+  {
+    "id": "audit-153",
+    "injection": "invalid_format",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2421
+  },
+  {
+    "id": "audit-154",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8361
+  },
+  {
+    "id": "audit-155",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8225
+  },
+  {
+    "id": "audit-156",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8930
+  },
+  {
+    "id": "audit-157",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 788
+  },
+  {
+    "id": "audit-158",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8927
+  },
+  {
+    "id": "audit-159",
+    "injection": "invalid_format",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2668
+  },
+  {
+    "id": "audit-160",
+    "injection": "invalid_format",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4922
+  },
+  {
+    "id": "audit-161",
+    "injection": "invalid_format",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2382
+  },
+  {
+    "id": "audit-162",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8308
+  },
+  {
+    "id": "audit-163",
+    "injection": "none",
+    "source_label": "card_arrival",
+    "source_line": 96
+  },
+  {
+    "id": "audit-164",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9507
+  },
+  {
+    "id": "audit-165",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4996
+  },
+  {
+    "id": "audit-166",
+    "injection": "invalid_format",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 804
+  },
+  {
+    "id": "audit-167",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 817
+  },
+  {
+    "id": "audit-168",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8916
+  },
+  {
+    "id": "audit-169",
+    "injection": "invalid_format",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 862
+  },
+  {
+    "id": "audit-170",
+    "injection": "wrong_label",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 848
+  },
+  {
+    "id": "audit-171",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 777
+  },
+  {
+    "id": "audit-172",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5077
+  },
+  {
+    "id": "audit-173",
+    "injection": "invalid_format",
+    "source_label": "card_arrival",
+    "source_line": 18
+  },
+  {
+    "id": "audit-174",
+    "injection": "none",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2474
+  },
+  {
+    "id": "audit-175",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9342
+  },
+  {
+    "id": "audit-176",
+    "injection": "invalid_format",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8251
+  },
+  {
+    "id": "audit-177",
+    "injection": "invalid_format",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4935
+  },
+  {
+    "id": "audit-178",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8923
+  },
+  {
+    "id": "audit-179",
+    "injection": "wrong_label",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 800
+  },
+  {
+    "id": "audit-180",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 97
+  },
+  {
+    "id": "audit-181",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4991
+  },
+  {
+    "id": "audit-182",
+    "injection": "wrong_label",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8369
+  },
+  {
+    "id": "audit-183",
+    "injection": "wrong_label",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8342
+  },
+  {
+    "id": "audit-184",
+    "injection": "invalid_format",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 5011
+  },
+  {
+    "id": "audit-185",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 829
+  },
+  {
+    "id": "audit-186",
+    "injection": "wrong_label",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9505
+  },
+  {
+    "id": "audit-187",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8250
+  },
+  {
+    "id": "audit-188",
+    "injection": "wrong_label",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8219
+  },
+  {
+    "id": "audit-189",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9388
+  },
+  {
+    "id": "audit-190",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8271
+  },
+  {
+    "id": "audit-191",
+    "injection": "invalid_format",
+    "source_label": "wrong_amount_of_cash_received",
+    "source_line": 2467
+  },
+  {
+    "id": "audit-192",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9485
+  },
+  {
+    "id": "audit-193",
+    "injection": "invalid_format",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8813
+  },
+  {
+    "id": "audit-194",
+    "injection": "none",
+    "source_label": "cash_withdrawal_charge",
+    "source_line": 9402
+  },
+  {
+    "id": "audit-195",
+    "injection": "invalid_format",
+    "source_label": "card_payment_fee_charged",
+    "source_line": 2580
+  },
+  {
+    "id": "audit-196",
+    "injection": "none",
+    "source_label": "cash_withdrawal_not_recognised",
+    "source_line": 8799
+  },
+  {
+    "id": "audit-197",
+    "injection": "none",
+    "source_label": "pending_cash_withdrawal",
+    "source_line": 879
+  },
+  {
+    "id": "audit-198",
+    "injection": "none",
+    "source_label": "wrong_exchange_rate_for_cash_withdrawal",
+    "source_line": 8216
+  },
+  {
+    "id": "audit-199",
+    "injection": "wrong_label",
+    "source_label": "card_arrival",
+    "source_line": 90
+  },
+  {
+    "id": "audit-200",
+    "injection": "wrong_label",
+    "source_label": "declined_cash_withdrawal",
+    "source_line": 4999
+  }
+]

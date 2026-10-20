@@ -1,0 +1,16 @@
+{
+  "authorization": "User explicitly requested replacing the human review with automated checking on 2026-10-20.",
+  "human_required": false,
+  "id": "semantic-audit-automatic-acceptance-20261020",
+  "original_protocol_sha256": "85be161f9f3547dfe9046ecce41bb7d62a136c2cb2a90600206a034ab5f390f6",
+  "reference_status": "Automatic constructed reference, not independent human adjudication. Source-label ambiguity can remain.",
+  "replacement": "Evaluate 200 audit rows against original BANKING77 intent labels plus the frozen injection log; deterministic exact-label format check, Nano/Super reviews, embedding neighbor and cleanlab baselines.",
+  "required_outputs": [
+    "all 200 examples scored or failures retained in denominator",
+    "per-method format and contradiction confusion matrices",
+    "Nano/Super disagreement list",
+    "provider usage and estimated cost",
+    "combined detector metrics with frozen union rule"
+  ],
+  "threshold_changes": false
+}

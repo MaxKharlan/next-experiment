@@ -1,0 +1,4204 @@
+{
+  "combined": [
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-001"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-002"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-003"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-004"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-005"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-006"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-007"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-008"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-009"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-010"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-011"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-012"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-013"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-014"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-015"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-016"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-017"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-018"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-019"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-020"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-021"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-022"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-023"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-024"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-025"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-026"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-027"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-028"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-029"
+    },
+    {
+      "contradiction": true,
+      "format_error": true,
+      "id": "audit-030"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-031"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-032"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-033"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-034"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-035"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-036"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-037"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-038"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-039"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-040"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-041"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-042"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-043"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-044"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-045"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-046"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-047"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-048"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-049"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-050"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-051"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-052"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-053"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-054"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-055"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-056"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-057"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-058"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-059"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-060"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-061"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-062"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-063"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-064"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-065"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-066"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-067"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-068"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-069"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-070"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-071"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-072"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-073"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-074"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-075"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-076"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-077"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-078"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-079"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-080"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-081"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-082"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-083"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-084"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-085"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-086"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-087"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-088"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-089"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-090"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-091"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-092"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-093"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-094"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-095"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-096"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-097"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-098"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-099"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-100"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-101"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-102"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-103"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-104"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-105"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-106"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-107"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-108"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-109"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-110"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-111"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-112"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-113"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-114"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-115"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-116"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-117"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-118"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-119"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-120"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-121"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-122"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-123"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-124"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-125"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-126"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-127"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-128"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-129"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-130"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-131"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-132"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-133"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-134"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-135"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-136"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-137"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-138"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-139"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-140"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-141"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-142"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-143"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-144"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-145"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-146"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-147"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-148"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-149"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-150"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-151"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-152"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-153"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-154"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-155"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-156"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-157"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-158"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-159"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-160"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-161"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-162"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-163"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-164"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-165"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-166"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-167"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-168"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-169"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-170"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-171"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-172"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-173"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-174"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-175"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-176"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-177"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-178"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-179"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-180"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-181"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-182"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-183"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-184"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-185"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-186"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-187"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-188"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-189"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-190"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-191"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-192"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-193"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-194"
+    },
+    {
+      "contradiction": false,
+      "format_error": true,
+      "id": "audit-195"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-196"
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-197"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-198"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-199"
+    },
+    {
+      "contradiction": true,
+      "format_error": false,
+      "id": "audit-200"
+    }
+  ],
+  "nano": [
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-001",
+      "reason": "intent matches",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-002",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-003",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-004",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-005",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-006",
+      "reason": "cash_withdrawal_not_recognised",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-007",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-008",
+      "reason": "matches observed_label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-009",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-010",
+      "reason": "query intent matches observed label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-011",
+      "reason": "query asks about card arrival",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-012",
+      "reason": "consistent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-013",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-014",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-015",
+      "reason": "matches observed label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-016",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-017",
+      "reason": "consistent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-018",
+      "reason": "query seeks to stop a pending ATM transaction that was declined",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-019",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-020",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-021",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-022",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-023",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-024",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-025",
+      "reason": "intent matches tracking request",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-026",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-027",
+      "reason": "fee charged on card payment",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-028",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-029",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": true,
+      "id": "audit-030",
+      "reason": "format_error",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-031",
+      "reason": "fee question",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-032",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-033",
+      "reason": "query asks about payment fee, matches fee-charged label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-034",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-035",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-036",
+      "reason": "fee charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-037",
+      "reason": "fee charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-038",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-039",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-040",
+      "reason": "card_arrival",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-041",
+      "reason": "overcharged ATM withdrawal",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-042",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-043",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-044",
+      "reason": "withdrawal declined",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-045",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-046",
+      "reason": "matches fee complaint",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-047",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-048",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-049",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-050",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-051",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-052",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-053",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-054",
+      "reason": "fee charged on card purchase",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-055",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-056",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-057",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-058",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-059",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-060",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-061",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-062",
+      "reason": "consistent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-063",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-064",
+      "reason": "matches observed label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-065",
+      "reason": "consistent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-066",
+      "reason": "matches fee complaint",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-067",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-068",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-069",
+      "reason": "fee charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-070",
+      "reason": "consistent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-071",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-072",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-073",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-074",
+      "reason": "fee inquiry",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-075",
+      "reason": "withdrawal not recognized",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-076",
+      "reason": "matches arrival delay",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-077",
+      "reason": "fee shouldn't be there after paying with card",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-078",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-079",
+      "reason": "withdrawn cash not received",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-080",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-081",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-082",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-083",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-084",
+      "reason": "query asks about card arrival",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-085",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-086",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-087",
+      "reason": "withdrawal fee question",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-088",
+      "reason": "intent matches query",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-089",
+      "reason": "withdrawal fee question",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-090",
+      "reason": "wallet stolen",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-091",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-092",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-093",
+      "reason": "fee inquiry",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-094",
+      "reason": "fee_charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-095",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-096",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-097",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-098",
+      "reason": "consistent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-099",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-100",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-101",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-102",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-103",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-104",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-105",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-106",
+      "reason": "matches fee concern",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-107",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-108",
+      "reason": "intent matches tracking request",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-109",
+      "reason": "withdrawal",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-110",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-111",
+      "reason": "consistent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-112",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-113",
+      "reason": "charge extra when using card",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-114",
+      "reason": "intent matches tracking query",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-115",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-116",
+      "reason": "query asks about pending cash withdrawal",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-117",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-118",
+      "reason": "query intent matches card tracking",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-119",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-120",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-121",
+      "reason": "fee on card payment",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-122",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-123",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-124",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-125",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-126",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-127",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-128",
+      "reason": "fee",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-129",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-130",
+      "reason": "matches arrival intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-131",
+      "reason": "matches arrival delay",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-132",
+      "reason": "fee added to bill when using card",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-133",
+      "reason": "fee charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-134",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-135",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-136",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-137",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-138",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-139",
+      "reason": "cash back request",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-140",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-141",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-142",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-143",
+      "reason": "card_arrival",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-144",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-145",
+      "reason": "fee charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-146",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-147",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-148",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-149",
+      "reason": "withdrawal amount mismatch",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-150",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-151",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-152",
+      "reason": "The query describes not receiving the requested cash amount, matching cash_withdrawal_not_recognised and similar neighbor labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-153",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-154",
+      "reason": "charge",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-155",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-156",
+      "reason": "matches",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-157",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-158",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-159",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-160",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-161",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-162",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-163",
+      "reason": "intent matches tracking request",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-164",
+      "reason": "fee charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-165",
+      "reason": "query describes card being declined at ATMs",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-166",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-167",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-168",
+      "reason": "cash_withdrawal_not_recognised",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-169",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-170",
+      "reason": "query asks why withdrawal shows pending despite having cash",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-171",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-172",
+      "reason": "cash declined",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-173",
+      "reason": "matches arrival concern",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-174",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-175",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-176",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-177",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-178",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-179",
+      "reason": "cash withdrawal",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-180",
+      "reason": "query intent matches card_arrival",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-181",
+      "reason": "withdrawal intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-182",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-183",
+      "reason": "exchange rate issue",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-184",
+      "reason": "intent matches query",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-185",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-186",
+      "reason": "charge for cash withdrawal",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-187",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-188",
+      "reason": "overcharged on withdrawal",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-189",
+      "reason": "fee question",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-190",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-191",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-192",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-193",
+      "reason": "intent matches",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-194",
+      "reason": "fee",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-195",
+      "reason": "fee charged",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-196",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-197",
+      "reason": "matches intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-198",
+      "reason": "matches observed_label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-199",
+      "reason": "query asks about missing card, matches arrival intent",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-200",
+      "reason": "withdrawal issue",
+      "uncertain": false
+    }
+  ],
+  "super": [
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-001",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-002",
+      "reason": "The user describes receiving a different amount than expected due to exchange rate mismatch during foreign currency withdrawal via ATM.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-003",
+      "reason": "The text clearly indicates an attempt to withdraw cash that was rejected, matching 'declined_cash_withdrawal'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-004",
+      "reason": "The user asks about tracking a card in a package, which matches the card_arrival label used in similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-005",
+      "reason": "Observed label 'cash_withdrawal_not_recognised' does not match user text about mismatched cash amount; neighbors consistently indicate wrong amount received.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-006",
+      "reason": "User states they 'didn't withdraw cash' but sees a transaction \u2014 this indicates an unrecognised cash withdrawal, not a card payment fee.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-007",
+      "reason": "The user's text 'Why did I get less from the ATM?' clearly indicates receiving less cash than expected, matching the wrong_amount_of_cash_received label. Observed label pending_cash_withdrawal does not fit the intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-008",
+      "reason": "The user describes being charged 'insanely' high fees during a holiday ATM withdrawal due to lack of awareness, which matches the label's focus on unexpected exchange rate costs in cash withdrawals.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-009",
+      "reason": "The user's question matches the label 'card_payment_fee_charged' and aligns with high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-010",
+      "reason": "The text asks about why a card was declined during withdrawal attempt, which matches the 'declined_cash_withdrawal' label used in both observed_label and all neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-011",
+      "reason": "The user asks about expediting their card, which relates to card delivery/arrival, not declined cash withdrawal.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-012",
+      "reason": "The user asks about new fees for withdrawals they previously believed were free, which matches the 'cash_withdrawal_charge' label used in similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-013",
+      "reason": "The user's text describes a pending ATM withdrawal transaction, which directly matches the label 'pending_cash_withdrawal' used consistently across similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-014",
+      "reason": "Observed label is malformed JSON string instead of plain text label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-015",
+      "reason": "User expresses confusion about expected free ATM withdrawal, indicating they did not recognize or expect the charge, matching 'cash_withdrawal_not_recognised'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-016",
+      "reason": "Observed label is malformed JSON-like text instead of a plain string from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-017",
+      "reason": "Observed label is malformed JSON string instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": false,
+      "id": "audit-018",
+      "reason": "The user's text describes a transaction 'in progress' due to a non-working ATM and asks how to avoid being charged\u2014this suggests uncertainty about whether it\u2019s a fee issue or a withdrawal problem. While 'card_payment_fee_charged' is plausible, the mention of ATM malfunction and avoiding charges could also align with cash withdrawal issues like pending or declined transactions. Neighbors show mixed signals (pending, declined, charge), making intent ambiguous.",
+      "uncertain": true
+    },
+    {
+      "contradiction": true,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-019",
+      "reason": "Observed label 'cash_withdrawal_not_recognised' does not match user's description of receiving partial funds; neighbors consistently indicate wrong amount received.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-020",
+      "reason": "The text 'Where is my card?' clearly matches the card_arrival intent, consistent with neighbors.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-021",
+      "reason": "The user's question about being charged extra when paying by card clearly matches the 'card_payment_fee_charged' label, which is consistently supported by high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-022",
+      "reason": "The query 'Explain the extra ATM fees.' clearly refers to charges associated with cash withdrawals via ATM, matching the label 'cash_withdrawal_charge' and supported by high-similarity neighbors.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-023",
+      "reason": "Observed label is malformed JSON string instead of plain label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-024",
+      "reason": "The user's text asks about being 'charged more' for using their card, which aligns with card_payment_fee_charged, not declined_cash_withdrawal.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-025",
+      "reason": "Observed label is malformed JSON-like text instead of plain allowed label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-026",
+      "reason": "The user states they do not see a recent cash withdrawal, which aligns with a transaction showing as pending but not yet posted.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-027",
+      "reason": "The user's question about being charged an extra fee when paying with a card clearly matches the 'card_payment_fee_charged' label, which is consistent with all high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-028",
+      "reason": "The user asks about tracking card delivery, which matches the 'card_arrival' label used in all similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-029",
+      "reason": "Observed label matches neighbor labels and fits text describing ATM cancelling withdrawal attempt.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-030",
+      "reason": "The user asks about card delivery timing, which matches 'card_arrival' intent; the observed label 'cash_withdrawal_charge' incorrectly refers to ATM fees.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-031",
+      "reason": "The user asks about fees for cash withdrawal, which matches 'cash_withdrawal_charge' label. Observed label 'pending_cash_withdrawal' refers to transaction status, not fee inquiry.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-032",
+      "reason": "Observed label is malformed JSON-like text instead of a plain string from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-033",
+      "reason": "The user asks about fees for making a payment, which matches 'card_payment_fee_charged'. Observed label 'wrong_amount_of_cash_received' refers to incorrect cash amounts received, unrelated to payment fees, creating a contradiction.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-034",
+      "reason": "The user's text clearly asks about a declined cash withdrawal, matching the label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-035",
+      "reason": "The user's text clearly asks about not receiving a new card, which matches the 'card_arrival' label used in all similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-036",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-037",
+      "reason": "Observed label is malformed JSON-like text instead of a plain string from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-038",
+      "reason": "The user reports receiving less cash than displayed by the app after an ATM withdrawal, which matches 'wrong_amount_of_cash_received'. The observed label 'card_payment_fee_charged' does not fit the scenario.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-039",
+      "reason": "The user asks about whether their card has been sent, which clearly indicates they are inquiring about the arrival/delivery status of a card.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-040",
+      "reason": "The user text 'I am still waiting on my card?' clearly indicates they are awaiting delivery of their card, which matches the card_arrival label. Although the observed_label is pending_cash_withdrawal, this does not align with the actual intent expressed in the query.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-041",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-042",
+      "reason": "The user's question 'why isnt my cash withdrawal showing' clearly indicates they are asking about a cash withdrawal that has been initiated but not yet completed or visible in their account, which matches the definition of 'pending_cash_withdrawal'. The observed label is correct and consistent with both the query and similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-043",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-044",
+      "reason": "The text describes a declined cash withdrawal attempt, which matches 'declined_cash_withdrawal' label, not 'wrong_amount_of_cash_received'. Neighbors confirm similar phrasing maps to declined withdrawal.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-045",
+      "reason": "The user explicitly states their cash withdrawal is showing as pending and asks what it means, which directly matches the intent of the pending_cash_withdrawal label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-046",
+      "reason": "The user's text clearly describes being charged an extra fee during a purchase, which matches the label 'card_payment_fee_charged'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-047",
+      "reason": "Observed label matches neighbor labels and user text describes an unrecognized withdrawal in the app.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-048",
+      "reason": "The text clearly describes an unrecognized cash withdrawal, matching the label and neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-049",
+      "reason": "The user's text clearly states they believe the exchange rate for their cash withdrawal is incorrect, which directly matches the label 'wrong_exchange_rate_for_cash_withdrawal'. All neighbors confirm this label with high similarity, supporting consistency.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-050",
+      "reason": "Observed label is malformed JSON string instead of plain label from allowed list",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-051",
+      "reason": "The text 'I could not get money from an ATM' clearly indicates a declined transaction attempt, matching the label 'declined_cash_withdrawal'. Neighbors strongly support this interpretation.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-052",
+      "reason": "The user's text clearly describes being charged a fee after making a card payment, which directly matches the label 'card_payment_fee_charged'. All neighbors confirm this label with high similarity.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-053",
+      "reason": "The text describes an expected but unseen cash withdrawal, matching 'pending_cash_withdrawal' intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-054",
+      "reason": "The text clearly describes incurring a fee during a card transaction, which matches the label 'card_payment_fee_charged' and is consistent with high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-055",
+      "reason": "The user reports receiving less cash than requested at an ATM, which directly matches the definition of wrong_amount_of_cash_received.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-056",
+      "reason": "Observed label is malformed JSON-like string instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-057",
+      "reason": "The text clearly indicates a failed attempt to withdraw cash due to decline, matching the label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-058",
+      "reason": "The text clearly describes receiving less cash than requested during withdrawal, matching the label definition.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-059",
+      "reason": "The user reports receiving less cash than requested from an ATM, which directly matches the definition of wrong_amount_of_cash_received.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-060",
+      "reason": "The user's request to track a sent card matches the label 'card_arrival' and is consistent with high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-061",
+      "reason": "The text clearly describes receiving less cash than requested, matching the label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-062",
+      "reason": "The user's question about inability to get cash from an ATM clearly indicates a declined transaction, matching the label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-063",
+      "reason": "The user describes an ATM withdrawal that is still pending in their online statement, which directly matches the definition of 'pending_cash_withdrawal'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-064",
+      "reason": "User states they did not receive cash from ATM despite app showing transaction, matching label definition.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-065",
+      "reason": "The user reports being unexpectedly charged for an ATM withdrawal that was previously free, which directly matches the definition of 'cash_withdrawal_charge'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-066",
+      "reason": "The text 'My card was charged more than expected.' clearly indicates an unexpected fee on a card transaction, matching the label 'card_payment_fee_charged' and consistent with high-similarity neighbors.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-067",
+      "reason": "The user explicitly states they received the wrong amount of cash from an ATM, which directly matches the label 'wrong_amount_of_cash_received'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-068",
+      "reason": "The user's question about being charged extra for card use matches the label 'card_payment_fee_charged' and is consistent with high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-069",
+      "reason": "The user's text clearly expresses confusion about being charged a fee despite expecting no cost during shopping, which directly matches the 'card_payment_fee_charged' label. This is consistent with multiple high-similarity neighbors also labeled as such.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-070",
+      "reason": "Observed label is malformed JSON-like text instead of a plain string from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-071",
+      "reason": "The user's question directly matches the intent of checking on a pending cash withdrawal status.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-072",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-073",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-074",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-075",
+      "reason": "The text describes an unrecognized withdrawal, which matches 'cash_withdrawal_not_recognised', but the observed label is 'card_arrival'\u2014a card receipt event, contradicting the withdrawal context.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-076",
+      "reason": "The text expresses expectation about receiving a new card, matching the card_arrival label and consistent with neighbors.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-077",
+      "reason": "The text clearly indicates dissatisfaction with a card payment fee, matching the label and neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-078",
+      "reason": "Observed label is malformed JSON string instead of plain label from allowed list",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-079",
+      "reason": "Observed label matches neighbor reference-332 which describes receiving less cash than requested.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-080",
+      "reason": "User describes ATM withdrawal attempt where machine failed and transaction shows 'in progress' \u2014 matches pending_cash_withdrawal label and neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-081",
+      "reason": "User reports card declined at multiple ATMs, which matches 'declined_cash_withdrawal' label; 'card_arrival' does not fit.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-082",
+      "reason": "Observed label matches neighbor labels and fits user complaint about incorrect exchange rate on foreign ATM withdrawal.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-083",
+      "reason": "Observed label matches neighbor labels and fits user complaint about receiving less cash than requested.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-084",
+      "reason": "The user asks about missing card delivery after ordering 2 weeks ago, which matches card_arrival intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-085",
+      "reason": "Observed label matches text meaning and neighbor labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-086",
+      "reason": "The user asks about a tracking number for a sent card, which matches the card_arrival label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-087",
+      "reason": "The user mentions noticing a fee after withdrawing money and asks how much they will be charged, which aligns with 'cash_withdrawal_charge' rather than 'pending_cash_withdrawal', as the issue is about a fee, not transaction status.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-088",
+      "reason": "Observed label is malformed JSON containing extra text instead of a plain string from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-089",
+      "reason": "The user asks about 'extra fees' when withdrawing money abroad via ATM, which aligns with exchange rate markup rather than standard withdrawal fees. Neighbors show similar phrasing labeled as cash_withdrawal_charge, but those refer to flat fees, not FX-related charges. The observed label correctly captures foreign exchange cost concerns.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-090",
+      "reason": "The text describes a stolen wallet and unauthorized withdrawal, matching cash_withdrawal_not_recognised. Observed label card_payment_fee_charged does not fit the scenario.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-091",
+      "reason": "The user reports a suspicious withdrawal they do not recognize and requests card freezing, which matches the definition of cash_withdrawal_not_recognised.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-092",
+      "reason": "Observed label matches text meaning and neighbor labels; clear case of wrong exchange rate during foreign cash withdrawal via ATM.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-093",
+      "reason": "The user asks about fees related to cash withdrawal limits, which matches the 'cash_withdrawal_charge' label used in similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-094",
+      "reason": "The user asks about charges when paying with a card, which matches 'card_payment_fee_charged', but the observed label is 'declined_cash_withdrawal'\u2014a cash withdrawal issue unrelated to card payments.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-095",
+      "reason": "The user's text expresses concern about receiving less money due to an unexpected exchange rate, which directly matches the label 'wrong_exchange_rate_for_cash_withdrawal' used in both the observed label and all retrieved neighbors.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-096",
+      "reason": "Observed label matches neighbor labels and user text describes an unrecognized withdrawal in the app.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-097",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-098",
+      "reason": "The user describes a failed first-time ATM cash withdrawal attempt, which matches the definition of declined_cash_withdrawal.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-099",
+      "reason": "Observed label matches neighbor labels and fits text about unreceived cash shown in app.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-100",
+      "reason": "The text 'I was not given the amount of cash I withdrew' clearly indicates receiving less cash than requested during a withdrawal, which matches the label wrong_amount_of_cash_received.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-101",
+      "reason": "The user's text clearly describes a declined ATM transaction, matching the label 'declined_cash_withdrawal'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-102",
+      "reason": "Observed label matches neighbor labels and fits user text about unexpected cash appearing in app.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-103",
+      "reason": "Observed label is malformed JSON string instead of plain label from allowed list",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-104",
+      "reason": "The user explicitly asks about being charged for cash withdrawals after previously thinking they were free, which directly matches the 'cash_withdrawal_charge' label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": true,
+      "id": "audit-105",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-106",
+      "reason": "The user's question about increased cost when paying with card matches the label 'card_payment_fee_charged' and aligns with high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-107",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-108",
+      "reason": "Observed label is malformed JSON-like text instead of plain allowed label",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-109",
+      "reason": "Observed label 'card_arrival' does not match text about non-working ATM withdrawal; neighbors consistently indicate 'declined_cash_withdrawal'",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-110",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-111",
+      "reason": "The user's question 'Will I be charged for a cash withdrawal?' clearly matches the label 'cash_withdrawal_charge', which is supported by high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-112",
+      "reason": "Observed label is malformed JSON string instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-113",
+      "reason": "The user's question about being charged extra when using their card aligns with neighbors labeled 'card_payment_fee_charged', indicating a payment-related fee, not a cash withdrawal charge.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-114",
+      "reason": "Observed label is malformed JSON-like text instead of plain allowed label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-115",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-116",
+      "reason": "Query asks about pending cash withdrawal but label is card_payment_fee_charged - clear mismatch",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-117",
+      "uncertain": true
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-118",
+      "reason": "The user asks about tracking a recently sent card, which matches 'card_arrival' intent based on neighbor examples. Observed label 'wrong_amount_of_cash_received' refers to incorrect cash amounts received, unrelated to card tracking.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-119",
+      "reason": "Observed label matches text describing receiving less cash than requested at an ATM.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-120",
+      "reason": "Observed label matches text meaning and neighbor labels; clear case of incorrect cash amount received.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "format_error": false,
+      "id": "audit-121",
+      "uncertain": true
+    },
+    {
+      "contradiction": true,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-122",
+      "reason": "The user's text asks about receiving the wrong amount at an ATM, which matches 'wrong_amount_of_cash_received'. The observed label 'card_payment_fee_charged' refers to fees on card payments, not ATM cash discrepancies, so it contradicts the query intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-123",
+      "reason": "Observed label matches text meaning and neighbor labels consistently.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-124",
+      "reason": "The user received less cash than requested (10 instead of 30 pounds) and the ATM displayed an incorrect amount, which matches 'wrong_amount_of_cash_received' rather than 'cash_withdrawal_not_recognised'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-125",
+      "reason": "The user's concern about withdrawing money in home currency while on holiday aligns with wrong exchange rate issues during cash withdrawal.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-126",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-127",
+      "reason": "Observed label is malformed JSON string instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-128",
+      "reason": "The user's question 'What is this extra fee?' aligns with card payment fees, matching observed label and neighbor consensus.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-129",
+      "reason": "The user describes a declined ATM withdrawal with no money received but transaction still pending, which matches 'pending_cash_withdrawal' intent, not 'card_arrival'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-130",
+      "reason": "The user asks about checking the status of their new card, which aligns with tracking its arrival.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-131",
+      "reason": "The user explicitly states they haven't received their card after two weeks and asks if it's lost, which directly matches the card_arrival intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-132",
+      "reason": "The user's text asks about a fee added when using their card, which matches 'card_payment_fee_charged'. The observed label refers to cash withdrawal exchange rates, contradicting the actual query.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-133",
+      "reason": "The text describes a fee applied to a cash withdrawal, which matches the label 'cash_withdrawal_charge' and is consistent with neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-134",
+      "reason": "The user's request 'I need to track the card sent to me' clearly matches the intent of tracking a received card, which aligns with the label 'card_arrival'. All neighbors confirm this label with high similarity.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-135",
+      "reason": "Observed label matches neighbors and expresses user certainty about unauthorized withdrawal.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-136",
+      "reason": "The user's question about not receiving a new card clearly matches the 'card_arrival' label, which is consistently supported by high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-137",
+      "reason": "The user's text clearly describes a declined cash withdrawal attempt, matching the observed label and neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-138",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-139",
+      "reason": "The user reports receiving less cash than requested while the app shows the correct amount, which matches 'wrong_amount_of_cash_received' rather than declined transaction.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-140",
+      "reason": "The user's question 'Why was I charged for withdrawing cash?' clearly matches the label 'cash_withdrawal_charge', which is consistent with all high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-141",
+      "reason": "The user's text clearly indicates a cash withdrawal showing as pending, which matches the label 'pending_cash_withdrawal' and is consistent with high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-142",
+      "reason": "The text describes being charged a fee while withdrawing cash, which matches 'cash_withdrawal_charge' label and is consistent with high-similarity neighbors.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-143",
+      "reason": "The text 'My card has not come in the mail yet.' clearly indicates a missing card arrival issue, which matches the label 'card_arrival'. The observed label 'cash_withdrawal_not_recognised' refers to unrecognized ATM withdrawals, which contradicts the actual intent. Neighbors strongly support 'card_arrival'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-144",
+      "reason": "The text clearly describes receiving an incorrect exchange rate during a cash withdrawal, matching the label and all neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": false,
+      "id": "audit-145",
+      "reason": "The user's text asks about being charged an extra fee when paying with a card, which matches 'card_payment_fee_charged'. The observed label 'wrong_amount_of_cash_received' refers to receiving incorrect cash amounts during withdrawal, unrelated to card payment fees.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-146",
+      "reason": "The user's question about an extra charge for a withdrawal clearly matches the 'cash_withdrawal_charge' label, which is consistently supported by high-similarity neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-147",
+      "reason": "Observed label is malformed JSON-like text instead of a plain allowed label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-148",
+      "reason": "The user's question 'What do I do if I do not recognise a cash withdrawal?' clearly indicates they want to report an unrecognised transaction, which matches 'cash_withdrawal_not_recognised'. The observed label 'declined_cash_withdrawal' refers to a failed ATM attempt, not an unrecognised transaction, so it contradicts the intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-149",
+      "reason": "The user reports receiving less cash than requested at an ATM, which matches the definition of wrong_amount_of_cash_received.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-150",
+      "reason": "The user reports an unauthorized cash withdrawal they did not make, which matches the definition of 'cash_withdrawal_not_recognised'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-151",
+      "reason": "The user's question about being charged when withdrawing cash directly matches the label 'cash_withdrawal_charge' and is consistent with all retrieved examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-152",
+      "reason": "The user reports receiving less cash than requested, which matches 'wrong_amount_of_cash_received'. Observed label does not match this intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-153",
+      "reason": "Observed label is malformed JSON-like text instead of a plain string from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-154",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-155",
+      "reason": "Observed label is malformed JSON string instead of plain text from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-156",
+      "reason": "The text describes an unauthorized withdrawal due to theft, matching the label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-157",
+      "reason": "The user's question about timing of cash withdrawals appearing in their account clearly matches the 'pending_cash_withdrawal' label, which is consistently used across similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-158",
+      "reason": "The user states they did not deposit money into their account, which implies an unexpected or unrecognized withdrawal\u2014consistent with 'cash_withdrawal_not_recognised'. Neighbors confirm this label pattern.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_payment_fee_charged",
+      "format_error": true,
+      "id": "audit-159",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-160",
+      "reason": "Observed label is malformed JSON instead of a plain string from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-161",
+      "reason": "Observed label is malformed JSON string instead of plain text",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": false,
+      "id": "audit-162",
+      "reason": "Query asks about exchange rate info, not necessarily an issue; could be informational rather than wrong rate.",
+      "uncertain": true
+    },
+    {
+      "contradiction": false,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-163",
+      "reason": "The user asks about tracking their card, which matches the card_arrival label used in all similar neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-164",
+      "reason": "The text asks about being charged a fee for a withdrawal, which matches 'cash_withdrawal_charge'. The observed label 'pending_cash_withdrawal' refers to a transaction awaiting processing, not a fee charge.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-165",
+      "reason": "User reports ATM rejection/card decline at multiple machines, matching 'declined_cash_withdrawal' intent; 'card_arrival' refers to receiving a new card, which contradicts the issue described.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-166",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-167",
+      "reason": "The text describes a failed ATM attempt resulting in a pending transaction, which matches the label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-168",
+      "reason": "The user describes an unknown cash withdrawal, indicating they did not authorize it, which matches 'cash_withdrawal_not_recognised', not 'cash_withdrawal_charge' (which implies a known fee).",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-169",
+      "reason": "Observed label is malformed JSON instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-170",
+      "reason": "The user's text describes a pending withdrawal status despite having received cash, which matches 'pending_cash_withdrawal' intent, not exchange rate issues.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-171",
+      "reason": "The user's question 'How long will my cash withdrawal take' clearly refers to the duration until a cash withdrawal becomes available, which aligns precisely with the 'pending_cash_withdrawal' label. All neighbors confirm this interpretation with high similarity.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-172",
+      "reason": "The text describes an attempt to withdraw cash being refused, which matches 'declined_cash_withdrawal' more accurately than 'card_arrival'. The neighbors support this interpretation.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-173",
+      "reason": "Observed label is malformed JSON string instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_amount_of_cash_received",
+      "format_error": false,
+      "id": "audit-174",
+      "reason": "Observed label matches neighbor labels and user text describes receiving less cash than requested.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-175",
+      "reason": "The user's text clearly describes being charged after making a cash withdrawal, which directly matches the label 'cash_withdrawal_charge'. All neighbors confirm this interpretation.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-176",
+      "reason": "Observed label is malformed JSON string instead of plain text from allowed labels.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-177",
+      "reason": "Observed label is malformed JSON string instead of raw label value",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-178",
+      "reason": "Observed label is malformed JSON string instead of plain label from allowed list",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-179",
+      "reason": "Query asks about timing/visibility of cash withdrawal, matching neighbors' pending_cash_withdrawal label; observed card_payment_fee_charged contradicts intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-180",
+      "reason": "The user's text 'Can you help me track my card?' clearly indicates an intent to track a card delivery status, which matches the label 'card_arrival'. The observed label 'pending_cash_withdrawal' refers to a cash withdrawal transaction awaiting processing, which is unrelated to card tracking. This creates a clear contradiction between the observed label and the actual user intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-181",
+      "reason": "Query describes inability to withdraw due to ATM refusal, matching declined_cash_withdrawal label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-182",
+      "reason": "The text describes an incorrect exchange rate during cash withdrawal, which matches 'wrong_exchange_rate_for_cash_withdrawal', not 'wrong_amount_of_cash_received'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-183",
+      "reason": "Query about currency exchange issue matches neighbor labels indicating wrong exchange rate, not card arrival.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-184",
+      "reason": "Observed label is malformed JSON instead of a plain string from allowed labels",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-185",
+      "reason": "The user's question 'What does a pending cash withdrawal mean?' clearly seeks an explanation of the status 'pending' in the context of a cash withdrawal, which directly matches the intent of the label 'pending_cash_withdrawal'. All neighbors confirm this label with high similarity.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-186",
+      "reason": "The user complains about a new charge for cash withdrawals, which matches 'cash_withdrawal_charge', not 'wrong_amount_of_cash_received'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-187",
+      "reason": "The user's concern about withdrawing money in home currency while on holiday aligns with wrong exchange rate issues during cash withdrawal, matching the label and neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-188",
+      "reason": "The user describes being 'overcharged' on an ATM withdrawal due to unexpected fees, which matches cash_withdrawal_charge. pending_cash_withdrawal refers to a transaction still processing, not a fee dispute.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-189",
+      "reason": "Observed label is malformed JSON-like text instead of plain allowed label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-190",
+      "reason": "The text clearly describes an issue with the exchange rate during a cash withdrawal, matching the label and neighbor examples.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-191",
+      "reason": "Observed label is malformed JSON string, not a plain label from allowed list.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-192",
+      "reason": "The text clearly describes being charged after withdrawing cash, matching the label.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-193",
+      "reason": "Observed label is malformed JSON instead of plain text",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_charge",
+      "format_error": false,
+      "id": "audit-194",
+      "reason": "The text 'What's up with the extra fee I got?' aligns with cash withdrawal charge, consistent with neighbors showing similar fee-related confusion.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": null,
+      "format_error": true,
+      "id": "audit-195",
+      "reason": "Observed label is malformed JSON string instead of plain label",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "cash_withdrawal_not_recognised",
+      "format_error": false,
+      "id": "audit-196",
+      "reason": "The user explicitly states they see cash withdrawal activity in the app that is not theirs, which directly matches the definition of 'cash_withdrawal_not_recognised'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "pending_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-197",
+      "reason": "The user describes a declined ATM withdrawal attempt where funds remain pending in their account despite not receiving cash, which directly matches the definition of 'pending_cash_withdrawal'.",
+      "uncertain": false
+    },
+    {
+      "contradiction": false,
+      "correct_label": "wrong_exchange_rate_for_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-198",
+      "reason": "The user describes being 'severely overcharged' on an ATM withdrawal due to unexpected fees, which aligns with wrong exchange rate or excessive fee labeling. Observed label matches neighbor with high similarity and fits intent.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "card_arrival",
+      "format_error": false,
+      "id": "audit-199",
+      "reason": "The user's text asks about not receiving a new card, which matches 'card_arrival' intent based on high-similarity neighbors. Observed label 'cash_withdrawal_not_recognised' incorrectly refers to ATM cash issues, contradicting the actual query.",
+      "uncertain": false
+    },
+    {
+      "contradiction": true,
+      "correct_label": "declined_cash_withdrawal",
+      "format_error": false,
+      "id": "audit-200",
+      "reason": "Observed label 'card_arrival' does not match user's inability to withdraw cash; neighbors consistently indicate declined withdrawal.",
+      "uncertain": false
+    }
+  ]
+}

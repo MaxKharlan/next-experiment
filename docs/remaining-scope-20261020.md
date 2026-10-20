@@ -15,14 +15,15 @@ are separate acceptance conditions.
 | Fault 4 / A5,A7,A10 | [Lexical near-duplicate audit](lexical-overlap-audit-20261020.md) and 22 constructed controls (4 false positives, 4 missed paraphrases) | Independent semantic validation, measured validation optimism versus clean check, deduplication/control pair |
 | Fault 5 / A5,A7,A12 | Catalog hypothesis | Declared target distribution, label distribution and embedding classifier AUC checks, quality effect and matched repair |
 | A18 sensitivity | Answer-cut evidence for one task/model | Faults 2–5 and justified strength curves; a planted setting alone is not a harmful fault |
-| A19 Nano audit | Router/client exist | 200 reviewed examples, precision/recall and cost comparison with Super |
+| A19 Nano audit | [200-example automatic comparison](semantic-audit-20261020.md); manual review replaced by user instruction | Complete under revised acceptance; preserve Nano failure and Super HTTP errors |
 | A29 logit probes | Evaluation infrastructure | Prompt/answer loss, EOS probability and template-token perplexity probes with development signatures |
-| A30 embeddings | Dependencies and connector infrastructure | Local/Token Factory outcome agreement on development cases; NVIDIA embedding model identity/license/quality review |
-| A31 cleanlab | Dependency declared | Logistic-regression/confident-learning baseline on A19 labels, comparison with Nano and combined method |
+| A30 embeddings | [Local Qwen, NVIDIA and provider Qwen measured](semantic-audit-20261020.md), licenses and outcome agreement recorded | Complete for the frozen development cases |
+| A31 cleanlab | [Five-fold logistic regression + cleanlab comparison](semantic-audit-20261020.md), including Nano union | Complete on the revised automatic reference |
 
-A19/A30/A31 are explicit research requirements in the original plan. They are
-not newly invented extensions. They remain absent from the demonstrated product
-scope. Installing a dependency or listing a hypothesis does not close them.
+A19/A30/A31 now have a [measured automatic audit](semantic-audit-20261020.md).
+The user replaced human annotation with automated checking; the original
+requirement and acceptance amendment remain visible. These research results
+do not introduce calibrated live fault likelihoods.
 The lexical baseline now declares its representation and threshold and publishes
 paraphrase misses and false positives. It remains a candidate review tool; no
 semantic-detection accuracy or deployment likelihood has been established.
