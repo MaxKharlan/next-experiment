@@ -14,6 +14,39 @@ from pathlib import Path
 
 from core.eval.runtime import file_digest
 
+BOOTSTRAP = """import os
+import subprocess
+import sys
+import venv
+from pathlib import Path
+
+root = Path(__file__).parent
+environment = Path("/tmp/next-experiment-runtime")
+venv.EnvBuilder(with_pip=False, system_site_packages=False).create(environment)
+python = str(environment / "bin/python")
+env = dict(os.environ)
+env.pop("PYTHONPATH", None)
+env.pop("PYTHONHOME", None)
+env["PYTHONNOUSERSITE"] = "1"
+env["KAGGLE_BOOTSTRAP_PYTHON"] = sys.executable
+env["NVIDIA_TF32_OVERRIDE"] = "0"
+env["TORCH_ALLOW_TF32_CUBLAS_OVERRIDE"] = "0"
+output = Path(env["NEBIUS_OUTPUT_DIR"])
+output.mkdir(parents=True, exist_ok=True)
+with (output / "dependency-install.log").open("w") as log:
+    installed = subprocess.run(
+        [sys.executable, "-m", "pip", "--python", python, "install",
+         "--no-cache-dir", "--report", str(output / "dependency-install.json"),
+         "-r", str(root / "dependencies.txt")],
+        env=env, stdout=log, stderr=subprocess.STDOUT, timeout=1200,
+    )
+# Still collect all import/version/CUDA failures if installation failed.
+preflight = subprocess.run([python, str(root / "preflight.py")], env=env, timeout=300)
+if installed.returncode or preflight.returncode:
+    raise SystemExit("Dependency preflight failed; see evaluation/preflight.json and dependency-install.log")
+os.execve(python, [python, str(root / "worker.py")], env)
+"""
+
 WORKER = """import os
 os.environ["NVIDIA_TF32_OVERRIDE"] = "0"
 os.environ["TORCH_ALLOW_TF32_CUBLAS_OVERRIDE"] = "0"
@@ -68,6 +101,7 @@ def main():
     parser.add_argument("--destination", type=Path, required=True)
     parser.add_argument("--notebook", type=Path, required=True)
     parser.add_argument("--without-ensurepip", action="store_true")
+    parser.add_argument("--dependency-preflight", action="store_true")
     args = parser.parse_args()
     destination = args.destination
     bundle = destination / "bundle"
@@ -93,18 +127,35 @@ def main():
                 '[sys.executable, "-m", "pip", "--python", python, "install",',
             )
         )
+    dependencies = dict(runtime["packages"])
+    if args.dependency_preflight:
+        dependencies.update(
+            {
+                "pydantic": "2.14.1",
+                "numpy": "2.4.6",
+                "huggingface_hub": "1.33.0",
+                "accelerate": "1.15.0",
+            }
+        )
+        (bundle / "main.py").write_text(BOOTSTRAP)
+        shutil.copyfile("jobs/kaggle/evaluation_preflight.py", bundle / "preflight.py")
     (bundle / "worker.py").write_text(WORKER)
     (bundle / "dependencies.txt").write_text(
-        "".join(f"{name}=={value}\n" for name, value in runtime["packages"].items())
+        "".join(f"{name}=={value}\n" for name, value in dependencies.items())
     )
     plan = {
         "id": destination.name,
         "bootstrap_amendment": (
-            "The predecessor failed in ensurepip before dependency installation or model loading. Use the notebook's pip with --python to install into an empty isolated venv; all model, data, generation and package pins are unchanged."
-            if args.without_ensurepip
-            else None
+            "V2 failed importing the metric dependency pydantic before model loading or generation. Add pydantic, numpy, huggingface_hub and accelerate pins from the local runtime. Remove inherited Python paths; check every bundled import including lazy loader symbols, pip compatibility and float32 CUDA/math SDPA before model download. Record all failures together. Python 3.13 is checked for this standalone evaluator only; the application's supported Python range is unchanged."
+            if args.dependency_preflight
+            else (
+                "The predecessor failed in ensurepip before dependency installation or model loading. Use the notebook's pip with --python to install into an empty isolated venv; all model, data, generation and package pins are unchanged."
+                if args.without_ensurepip
+                else None
+            )
         ),
         "runtime": runtime,
+        "dependency_pins": dependencies,
         "model_checkpoint": "Pinned base model, no adapter",
         "generation": {"greedy": True, "thinking": False, "max_new_tokens": 32},
         "scope": "Prospective Kaggle comparison against existing MPS 64-example predictions; development data, no training or final test.",

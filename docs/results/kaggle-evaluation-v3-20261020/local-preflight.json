@@ -1,0 +1,395 @@
+{
+  "status": "failed",
+  "python": "3.11.15 (main, Apr  7 2026, 20:41:15) [Clang 22.1.1 ]",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "pythonpath": null,
+  "pythonhome": null,
+  "checks": [
+    {
+      "name": "sha256:worker.py",
+      "ok": true,
+      "detail": "3ea19a369e13c7e1019d685029033cac369c1ec0088ecc5137f2547ca41cc6ce"
+    },
+    {
+      "name": "sha256:check.jsonl",
+      "ok": true,
+      "detail": "bed327b70ef971f34f131ae2ba13bc7b713e362d63dc3ec790ae410e6d8979c2"
+    },
+    {
+      "name": "sha256:dependencies.txt",
+      "ok": true,
+      "detail": "dbf4aea7a88ac94731713c24e671ded85ed2ba204f11203fe7e76578a2e9e7e1"
+    },
+    {
+      "name": "sha256:main.py",
+      "ok": true,
+      "detail": "fd6880201ca16a7b0e9dccaa3ed9f64bc9038f15f7f6af3aee356821adba14bb"
+    },
+    {
+      "name": "sha256:preflight.py",
+      "ok": true,
+      "detail": "8db0bd8bee939b6bd861f35f1768ac459b79415a2e43255f0017f86633a5a867"
+    },
+    {
+      "name": "sha256:core/eval/metrics.py",
+      "ok": true,
+      "detail": "33d4222f4c4c065faba313bedc30354fea2aacd430c180677cfaf9b6e607d269"
+    },
+    {
+      "name": "sha256:core/eval/generate.py",
+      "ok": true,
+      "detail": "c03ed92207a4e0b3007fdb3c31370a1fec1d5a1a1a0973fbe8006583fb94f563"
+    },
+    {
+      "name": "sha256:core/eval/records.py",
+      "ok": true,
+      "detail": "37bef47c8c40248337651ec2fb0aad3bb8eac040cc13e0fe112fa35cf3e844ec"
+    },
+    {
+      "name": "sha256:core/eval/structured.py",
+      "ok": true,
+      "detail": "eac671f1c4f537c5ad928f7aa0245cd008e889e3690c1f17a1b45e195186ad28"
+    },
+    {
+      "name": "sha256:core/eval/data.py",
+      "ok": true,
+      "detail": "5618acdbd8bac665b71d99b8c3b72e9a07e2d8f17701e78ca673b71aaccbeaa7"
+    },
+    {
+      "name": "version:jinja2",
+      "ok": true,
+      "detail": "3.1.6"
+    },
+    {
+      "name": "version:peft",
+      "ok": true,
+      "detail": "0.21.2"
+    },
+    {
+      "name": "version:safetensors",
+      "ok": true,
+      "detail": "0.8.0"
+    },
+    {
+      "name": "version:tokenizers",
+      "ok": true,
+      "detail": "0.23.3"
+    },
+    {
+      "name": "version:torch",
+      "ok": true,
+      "detail": "2.14.1"
+    },
+    {
+      "name": "version:transformers",
+      "ok": true,
+      "detail": "5.19.0"
+    },
+    {
+      "name": "version:pydantic",
+      "ok": true,
+      "detail": "2.14.1"
+    },
+    {
+      "name": "version:numpy",
+      "ok": true,
+      "detail": "2.4.6"
+    },
+    {
+      "name": "version:huggingface_hub",
+      "ok": true,
+      "detail": "1.33.0"
+    },
+    {
+      "name": "version:accelerate",
+      "ok": true,
+      "detail": "1.15.0"
+    },
+    {
+      "name": "pip_check",
+      "ok": true,
+      "detail": "No broken requirements found."
+    },
+    {
+      "name": "nvidia_smi",
+      "ok": false,
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: 'nvidia-smi'"
+    },
+    {
+      "name": "import:accelerate",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:collections.abc",
+      "ok": true,
+      "detail": [
+        "Callable",
+        "Iterable"
+      ]
+    },
+    {
+      "name": "import:core.eval.data",
+      "ok": true,
+      "detail": [
+        "Example"
+      ]
+    },
+    {
+      "name": "import:core.eval.generate",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:core.eval.metrics",
+      "ok": true,
+      "detail": [
+        "Metric"
+      ]
+    },
+    {
+      "name": "import:core.eval.records",
+      "ok": true,
+      "detail": [
+        "ExampleResult"
+      ]
+    },
+    {
+      "name": "import:core.eval.structured",
+      "ok": true,
+      "detail": [
+        "function_call_exact",
+        "json_fields_exact",
+        "json_valid"
+      ]
+    },
+    {
+      "name": "import:dataclasses",
+      "ok": true,
+      "detail": [
+        "asdict",
+        "dataclass",
+        "field"
+      ]
+    },
+    {
+      "name": "import:datetime",
+      "ok": true,
+      "detail": [
+        "date"
+      ]
+    },
+    {
+      "name": "import:huggingface_hub",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:jinja2",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:json",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:numpy",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:pathlib",
+      "ok": true,
+      "detail": [
+        "Path"
+      ]
+    },
+    {
+      "name": "import:peft",
+      "ok": true,
+      "detail": [
+        "LoraConfig",
+        "get_peft_model",
+        "set_peft_model_state_dict"
+      ]
+    },
+    {
+      "name": "import:pydantic",
+      "ok": true,
+      "detail": [
+        "BaseModel",
+        "ConfigDict",
+        "Field",
+        "StrictBool",
+        "field_validator"
+      ]
+    },
+    {
+      "name": "import:safetensors.torch",
+      "ok": true,
+      "detail": [
+        "load_file"
+      ]
+    },
+    {
+      "name": "import:tokenizers",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:torch",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:transformers",
+      "ok": true,
+      "detail": [
+        "AutoModelForCausalLM",
+        "AutoTokenizer"
+      ]
+    },
+    {
+      "name": "import:transformers.models.qwen2.tokenization_qwen2",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:transformers.models.qwen3.modeling_qwen3",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "import:typing",
+      "ok": true,
+      "detail": [
+        "Any",
+        "Literal"
+      ]
+    },
+    {
+      "name": "cuda_float32_matmul_and_math_sdpa",
+      "ok": false,
+      "error": "RuntimeError: CUDA is unavailable; no CPU fallback"
+    }
+  ],
+  "installed_packages": {
+    "Jinja2": "3.1.6",
+    "Mako": "1.4.3",
+    "MarkupSafe": "3.0.4",
+    "PyYAML": "6.0.3",
+    "Pygments": "2.21.0",
+    "SQLAlchemy": "2.1.4",
+    "Werkzeug": "3.1.9",
+    "accelerate": "1.15.0",
+    "aiohappyeyeballs": "2.7.1",
+    "aiohttp": "3.14.5",
+    "aiosignal": "1.4.0",
+    "alembic": "1.20.0",
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "boto3": "1.43.114",
+    "botocore": "1.43.114",
+    "certifi": "2026.7.22",
+    "cffi": "2.1.1",
+    "cfgv": "3.5.0",
+    "charset-normalizer": "3.5.2",
+    "cleanlab": "2.9.0",
+    "click": "8.5.0",
+    "cloudpickle": "3.1.2",
+    "cryptography": "50.0.2",
+    "datasets": "5.1.0",
+    "dill": "0.4.1",
+    "distlib": "0.4.3",
+    "fastapi": "0.143.0",
+    "filelock": "4.1.1",
+    "frozenlist": "1.8.0",
+    "fsspec": "2026.7.0",
+    "h11": "0.16.0",
+    "hf-xet": "1.7.0",
+    "httpcore": "1.0.9",
+    "httpcore2": "2.13.1",
+    "httptools": "0.9.0",
+    "httpx": "0.28.1",
+    "httpx2": "2.13.1",
+    "huggingface_hub": "1.33.0",
+    "identify": "2.6.20",
+    "idna": "3.20",
+    "iniconfig": "2.3.1",
+    "jiter": "0.17.0",
+    "jmespath": "1.1.0",
+    "joblib": "1.6.0",
+    "markdown-it-py": "4.2.0",
+    "mdurl": "0.1.2",
+    "moto": "5.2.4",
+    "mpmath": "1.3.0",
+    "multidict": "7.1.0",
+    "multiprocess": "0.70.19",
+    "narwhals": "2.27.1",
+    "networkx": "3.6.1",
+    "nodeenv": "1.11.0",
+    "numpy": "2.4.6",
+    "openai": "3.31.0",
+    "opentelemetry-api": "1.45.1",
+    "packaging": "26.3",
+    "pandas": "3.0.6",
+    "peft": "0.21.2",
+    "platformdirs": "4.13.0",
+    "pluggy": "1.6.0",
+    "pre_commit": "4.7.0",
+    "propcache": "0.5.4",
+    "psutil": "7.2.2",
+    "py-partiql-parser": "0.6.3",
+    "pyarrow": "26.0.0",
+    "pycparser": "3.11",
+    "pydantic": "2.14.1",
+    "pydantic-settings": "2.15.0",
+    "pydantic_core": "2.50.1",
+    "pytest": "9.1.1",
+    "python-dateutil": "2.9.0.post0",
+    "python-discovery": "1.6.2",
+    "python-dotenv": "1.2.4",
+    "regex": "2026.9.29",
+    "requests": "2.34.2",
+    "responses": "0.26.3",
+    "rich": "15.0.0",
+    "ruff": "0.17.0",
+    "s3transfer": "0.19.2",
+    "safetensors": "0.8.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.17.1",
+    "sentence-transformers": "6.1.0",
+    "setuptools": "84.0.0",
+    "shellingham": "1.5.4",
+    "six": "1.17.0",
+    "sniffio": "1.3.1",
+    "sse-starlette": "3.5.0",
+    "starlette": "1.8.0",
+    "sympy": "1.14.0",
+    "tenacity": "9.2.1",
+    "termcolor": "3.3.0",
+    "threadpoolctl": "3.7.0",
+    "tokenizers": "0.23.3",
+    "torch": "2.14.1",
+    "tqdm": "4.70.1",
+    "transformers": "5.19.0",
+    "truststore": "0.10.5",
+    "typer": "0.27.3",
+    "typing-inspection": "0.4.4",
+    "typing_extensions": "4.16.0",
+    "urllib3": "2.8.0",
+    "uvicorn": "0.54.0",
+    "uvloop": "0.23.0",
+    "virtualenv": "21.14.7",
+    "watchfiles": "1.3.0",
+    "websockets": "17.2",
+    "xmltodict": "1.0.4",
+    "xxhash": "4.0.1",
+    "yarl": "1.25.1"
+  },
+  "scope": "Local import and pin audit, no model loading. CUDA checks fail as expected on macOS; remote GPU compatibility remains unverified."
+}

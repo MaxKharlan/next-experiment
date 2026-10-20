@@ -2,9 +2,7 @@
 
 An agent that investigates LLM fine-tune failures and tests proposed fixes against controls on Nebius Token Factory.
 
-Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser. The video below is that page, slowed down so that each step can be read.
-
-https://github.com/user-attachments/assets/d46683f9-7c1d-46d0-bf82-f413ff1851ee
+Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser.
 
 ## What it does
 

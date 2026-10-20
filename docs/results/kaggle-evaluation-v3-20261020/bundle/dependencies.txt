@@ -1,0 +1,10 @@
+jinja2==3.1.6
+peft==0.21.2
+safetensors==0.8.0
+tokenizers==0.23.3
+torch==2.14.1
+transformers==5.19.0
+pydantic==2.14.1
+numpy==2.4.6
+huggingface_hub==1.33.0
+accelerate==1.15.0
