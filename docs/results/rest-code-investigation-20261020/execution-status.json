@@ -1,3 +1,6 @@
 {
-  "status": "waiting_for_twelve_mps_scores"
+  "status": "trace_complete",
+  "id": "inv-1f6c0581",
+  "outcome": "inconclusive",
+  "restart_verified": true
 }

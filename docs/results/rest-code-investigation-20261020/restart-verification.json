@@ -1,0 +1,8 @@
+{
+  "report_equal": true,
+  "idempotent_post": {
+    "id": "inv-1f6c0581",
+    "reused": true
+  },
+  "reused_without_launch": true
+}

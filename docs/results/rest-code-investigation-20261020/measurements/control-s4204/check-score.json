@@ -1,0 +1,10 @@
+{
+  "exact_match": 0.875,
+  "seed": 4204,
+  "code_fault": "eos_as_pad",
+  "datasets": {
+    "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/pretrained-code-audit-20261020/train.jsonl": "c8c5b59aae6c4f4bc6cdbf6f9bf9826969144e2df807a45459ab6dc89a6dee77",
+    "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/pretrained-code-audit-20261020/validation.jsonl": "4ae5fd7e0c108c084b175bdc2e4267811d6a71f62573d1f0ac8fc9bca5507aab",
+    "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/pretrained-code-audit-20261020/check.jsonl": "bed327b70ef971f34f131ae2ba13bc7b713e362d63dc3ec790ae410e6d8979c2"
+  }
+}

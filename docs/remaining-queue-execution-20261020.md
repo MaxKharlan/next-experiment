@@ -32,11 +32,11 @@ original protocol. Current acceleration receipts are under
 | A19/A30/A31 | Automatic 200-example comparison complete in #105 | User replaced human review; failures and API errors retained |
 | A29 | Base diagnostic in #106 and sixteen-reference measurements for fifteen code and 29 data CUDA adapters complete | Independent calibration remains open; live likelihoods remain unfitted |
 | A15/A20 | Serverless creation and S3 retrieval work; [all 64 base-model records agree across MPS, Cloud L40S and Kaggle T4](kaggle-runtime-comparison-20261020.md); all 46 Kaggle preflight checks passed | Same-checkpoint development comparison complete; training/backend equivalence is outside this result |
-| B24 | Two supplemental MPS adapters and [all fifteen CUDA code cells](pretrained-code-quality-20261020.md) verified; fresh REST study `inv-1f6c0581` started after ledger scoring | Saved report, SSE and restart/idempotency verification pending |
+| B24 | Two supplemental MPS adapters, [all fifteen CUDA code cells](pretrained-code-quality-20261020.md) and the [completed REST study](rest-code-trace-20261020.md) verified | REST lifecycle complete; inconclusive diagnosis preserved |
 | A32 | FT-Fail published and verified; #107 merged, publication receipts in #108 | Complete for historical cases and automatic audit package |
 | B21/B25/B26 | Published partial reproduction and negative transfer results retained | Missing original setups and independent provider-compatible transfer data |
 | Billing | October billing export contains Object Storage usage through 12:00 UTC; GPU charges are absent | Later provider billing; no release of unresolved reserves |
-| Submission | English description prepared; owner confirmed eligibility/registration/representation; silent captioned video and text PDF saved in Downloads; updated feedback stays local for owner submission | Fresh trace, public YouTube link and final submission |
+| Submission | English description prepared; owner confirmed eligibility/registration/representation; silent captioned video and text PDF saved in Downloads; updated feedback stays local for owner submission | Qwen results, public YouTube link and final submission |
 
 The original CUDA qualification failed at maximum NLL difference 0.003365 versus
 its 0.0001 limit. A subsequent engineering diagnostic explicitly disabled TF32
@@ -53,9 +53,10 @@ verified. The provider's terminal job status is `FAILED`; the data worker's
 last `running` snapshot is preserved as historical state.
 
 The REST trace uses four new seeds per arm, a $1 request budget within the global
-TF cap, saved SSE events and restart/idempotency verification. It starts only
-after all twelve ledger score files are complete and their MPS lock is released.
-An inconclusive diagnosis is a valid outcome; there are no automatic paid retries.
+TF cap, saved SSE events and restart/idempotency verification. All eight adapters
+completed after ledger scoring released MPS. The report survived an API restart,
+and the repeated POST reused the same investigation. Its diagnosis is
+`inconclusive`; no automatic paid retry followed.
 
 Custom weights beta is optional. The current path downloads adapters and evaluates
 them locally, with cloud evaluation as a separately qualified backend. This path
