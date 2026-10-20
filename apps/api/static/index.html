@@ -315,7 +315,11 @@
   <section class="card case-start" id="freeTesting" hidden>
     <h2>Test Next Experiment for free</h2>
     <p>Run training-label checks on your own inputs below. Results are computed in your browser: no account, API key, upload or payment. Start with an example, change its labels, and rerun to see the result change.</p>
-    <p class="muted small">Use Replay above to inspect recorded Nebius investigations and download their reports. Fresh Nemotron calls and fine-tuning are available in the self-hosted application; they are not run by this browser test.</p>
+    <p><strong>$15 is allocated to additional live investigations.</strong> Upload your data to follow Nemotron’s hypotheses, evidence from checks, and targeted/control training results. Testing is free and requires no API key. Live runs use the remaining shared budget; availability is shown before starting.</p>
+    <button class="btn btn-primary" id="openLive" type="button">Run with Nemotron</button>
+    <a class="btn btn-ghost" href="https://next.46-17-103-231.sslip.io/" target="_blank" rel="noopener">Open live access in a new tab</a>
+    <div id="livePanel" hidden style="margin-top:20px"><iframe id="liveFrame" title="Live Nemotron investigation" style="width:100%;height:2450px;border:1px solid var(--line);border-radius:8px" sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups allow-popups-to-escape-sandbox"></iframe></div>
+    <p class="muted small">Replay above and the local checks below remain available without using the live-run budget.</p>
     <a class="btn btn-ghost" href="#labelAudit">Try an editable example</a>
   </section>
   <details class="card case-start" id="labelAudit" hidden>
@@ -1205,6 +1209,20 @@ function showCost(f) {
 }
 
 init();
+</script>
+<script>
+document.getElementById('openLive').addEventListener('click', () => {
+  const frame = document.getElementById('liveFrame');
+  if (!frame.src) frame.src = 'https://next.46-17-103-231.sslip.io/';
+  document.getElementById('livePanel').hidden = false;
+  frame.scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+window.addEventListener('message', event => {
+  const frame = document.getElementById('liveFrame');
+  if (event.origin === 'https://next.46-17-103-231.sslip.io' && event.source === frame.contentWindow && event.data?.type === 'next-experiment-height' && Number.isFinite(event.data.height)) {
+    frame.style.height = Math.max(500, Math.min(9000, event.data.height + 20)) + 'px';
+  }
+});
 </script>
 </body>
 </html>

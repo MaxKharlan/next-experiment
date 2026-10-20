@@ -4,11 +4,12 @@ An agent that investigates LLM fine-tune failures and tests proposed fixes again
 
 Demo: [maxkharlan.github.io/next-experiment](https://maxkharlan.github.io/next-experiment/) replays a saved investigation in your browser.
 
-[Test without keys or payment](https://maxkharlan.github.io/next-experiment/#labelAudit):
-load an editable example or your own training-label JSON, run the checks in your
-browser, change the labels and download the result. See the
-[testing walkthrough](docs/judging.md). Fresh provider inference and training
-remain available separately in the self-hosted application.
+[Test without keys or payment](https://maxkharlan.github.io/next-experiment/):
+$15 is allocated to additional live investigations on uploaded data, with Nemotron
+hypotheses, probes and a targeted/control training comparison. The page shows the
+remaining live budget. Editable local label checks and saved replays do not spend
+it. See the [testing walkthrough](docs/judging.md) and
+[hosted service](docs/hosted-investigations.md).
 
 ## What it does
 

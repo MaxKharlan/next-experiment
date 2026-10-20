@@ -1,33 +1,46 @@
-# Free testing
+# Testing Next Experiment
 
-Open [Next Experiment](https://maxkharlan.github.io/next-experiment/#labelAudit).
-No registration, API key or payment is needed. The public browser application
-computes training-label checks on inputs you can edit or load from your device.
-Its audit runs locally; inputs are not sent to a server.
+[Open Next Experiment](https://maxkharlan.github.io/next-experiment/).
 
-1. Load **EOS accidentally masked** and click **Run audit in this browser**.
-   The result reports one masked EOS target.
-2. In the observed labels, replace the final `-100` with `99`. Rerun.
-   Labels now align with the reference and EOS is preserved.
-3. Try **Prompt included in the loss** and **Labels shifted twice**, or load
-   your own JSON request. The page explains the input format and limits.
-4. Download the audit and original input as JSON. Editing the input clears
-   the previous result so it cannot be mistaken for a new check.
-5. Select a saved investigation above and press **Replay** to inspect its
-   provider calls, experiments and outcome. Download its original report.
+$15 is allocated to additional live investigations. Testing is free and requires no
+API key. Public live access is being connected; it is not available yet. The
+prepared live interface shows the remaining budget before starting. Recorded
+investigations and local label checks do not spend it.
 
-The three label checks use the same logic as the Python application. Tests
-compare the browser and Python results on more than 1,250 valid and invalid
-requests. They inspect alignment, prompt supervision and EOS masking against
-the reference supplied by the tester. They do not validate that reference's
-meaning or establish a cause of model behavior.
+## Run an investigation
 
-Replay shows recorded results. Browser label audits compute new results.
-Fresh Nemotron inference, Tavily searches and fine-tuning require the
-self-hosted application and provider credentials; those paid operations are
-not offered by the free browser test. The public site contains no credentials
-and cannot submit paid work.
+Describe a failed fine-tuning run, enter its recipe, and upload four chat JSONL
+splits: 16–64 training rows, 4–16 validation rows, 4–8 check rows and 4–8 test rows.
+Every row contains a `messages` array ending in an assistant answer. Use distinct
+records across splits. This hosted runner supports Qwen3-0.6B and short answers
+scored by exact match, with at most 32 generated tokens.
 
-The application and saved reports are served by GitHub Pages without a
-session expiry or per-user allowance. Keep the repository and Pages deployment
-public through the judging period ending 15 December 2026.
+Nemotron proposes hypotheses and interprets probes. The investigation loop can
+submit a targeted fix and its control to Token Factory, with two shuffled seeds
+per arm, then evaluate the downloaded adapters on CPU. The selected comparison,
+per-example answers and model-call receipts appear in the run evidence. A confirmed
+fix includes a recipe proposal; full retraining is a separate operation.
+
+The supplied recipe and loss history are not verified against an original provider
+job. Small uploaded samples and inherited benchmark thresholds make this an
+exploratory investigation. An inconclusive or failed run retains its partial
+evidence. There are no automatic paid retries.
+
+The shared $15 allocation persists across hosting restarts. Each active run
+reserves $1 and can execute one diagnostic pair. Completed, accounted operations
+release unused allowance; ambiguous failures retain their reservation. One run
+executes at a time. Training may wait for provider capacity. Keep the tab open and
+download its evidence when finished. The browser stores a private access key to
+reconnect after refreshing.
+
+Uploads are processed by the service and sent to Nebius for training. Probe
+summaries can send data excerpts to Nemotron. Reports are kept privately on Hugging Face;
+there is no public listing of investigations. Do not submit secrets or personal
+data.
+
+## Explore without spending the live budget
+
+Replay streams saved investigations and exports their reports. The editable
+training-label examples and local JSON upload run entirely in the browser. They
+check prompt loss, EOS masking and label alignment. They do not call Nemotron or
+train a model.
