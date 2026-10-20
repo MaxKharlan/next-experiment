@@ -96,7 +96,7 @@
     "device": "mps"
   },
   "source_sha256": {
-    "apps/api/code_investigations.py": "e0cccc4690810aa8182e5837b68bd5cf613969ecc085c35e5aad2d7d0c995dea",
+    "apps/api/code_investigations.py": "ac0e937cd0e853749ba35f7277ebea9e80656c46f85086f5d4ad42a80aab479b",
     "core/interventions/code_faults.py": "1dbd27b530b7bb7dc8a0bb4300dafbcb4de9ba3925f7b862a8c608073f9b2d4e",
     "jobs/kaggle/train_lora.py": "acff0f1d328aff5af805b1c9aa3da8208d5d830bfd8d9b585f83a1fd6d97e668",
     "jobs/eval_local/exact_match.py": "727c9e559dd2f206aee11e32b990380303c2e2b92bc229da6032ed5a58f498bd",
@@ -104,7 +104,8 @@
     "core/eval/metrics.py": "33d4222f4c4c065faba313bedc30354fea2aacd430c180677cfaf9b6e607d269",
     "core/training/gradients.py": "0d89cd07727c303a48ef4a0da497668fc652c310daf8251df585f75ade012058",
     "core/training/parameters.py": "cc3e453ed32cc7024e145728d03eb9fefab8716c8a989a9a6ed3ca94483a6db0",
-    "bench/faults/labels.py": "bad8941e6a58c3fa6469dcaf24db9c98c7f2644c62684b9df239396f4a9101c0"
+    "bench/faults/labels.py": "bad8941e6a58c3fa6469dcaf24db9c98c7f2644c62684b9df239396f4a9101c0",
+    "core/probes/level0/lengths.py": "86155e75b55472a0a9ad9d9b96c7a0d6dd0b15c285d8f890343487978638db67"
   },
   "scope": "Local supported code switches; new target/control training, no final-test data. Three-seed defaults are exploratory, not a population recovery guarantee."
 }

@@ -17,6 +17,7 @@ from core.connectors.token_factory import TokenFactory
 from core.eval.data import read_examples
 from core.eval.runtime import EvaluationRuntime, file_digest, verify_runtime
 from core.interventions.code_faults import CODE_FAULTS
+from core.probes.level0.lengths import count_tokens
 from core.probes.level0.overlap import normalize
 
 SOURCES = (
@@ -29,6 +30,7 @@ SOURCES = (
     "core/training/gradients.py",
     "core/training/parameters.py",
     "bench/faults/labels.py",
+    "core/probes/level0/lengths.py",
 )
 
 
@@ -114,8 +116,7 @@ def prepare(req):
     for role, entry in datasets.items():
         for line in Path(entry["path"]).read_text().splitlines():
             messages = json.loads(line)["messages"]
-            ids = tokenizer.apply_chat_template(messages, tokenize=True)
-            if len(ids) > req.recipe.context_length:
+            if count_tokens(tokenizer, messages) > req.recipe.context_length:
                 raise ValueError(f"{role} example would be truncated")
             encode(tokenizer, messages, req.recipe.context_length)
     return {

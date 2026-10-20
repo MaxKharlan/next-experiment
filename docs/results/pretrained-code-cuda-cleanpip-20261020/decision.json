@@ -1,0 +1,8 @@
+{
+  "status": "infrastructure_failed_after_base_before_training",
+  "training_cells_started": 0,
+  "base_generation": "64 predictions and evaluation persisted and verified; reused by the successor, not regenerated",
+  "cause": "S3 object mount rejects POSIX copytree metadata operations",
+  "reservation_usd_retained": 6,
+  "successor_job": "aijob-e00emdv72kgz55nqqh"
+}

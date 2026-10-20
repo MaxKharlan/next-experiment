@@ -1,0 +1,65 @@
+{
+  "Qwen3-0.6B-banking77-g0": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/checkpoints/ftckpt_dc44fe04-00fc-46af-add3-2ed84970fe39",
+    "job_id": "ftjob-e6a2468fce1a4b5ead7a43de63a77bf0",
+    "operation_id": "clean-reference-grid-20261020:Qwen3-0.6B-banking77-g0",
+    "protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65",
+    "settled": true,
+    "status": "succeeded",
+    "token_cost_estimate_usd": 0.0262632,
+    "trained_tokens": 65658,
+    "training_file": "file-01a159c9-475c-79cd-9808-63001c6dc1d5",
+    "validation_file": "file-01a159c9-4ad1-7fd4-8133-bfd20d695b26",
+    "weights_sha256": "6cb71cdf63234fd626aee41bb0b794ddb36db986dade5a77417ef50c0f09b9c0"
+  },
+  "Qwen3-0.6B-banking77-g1": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/checkpoints/ftckpt_49468f2a-a5bb-490d-8bb5-4d94dac0d7e0",
+    "job_id": "ftjob-90bbd54e199247f4aed29520fb2d3c7c",
+    "operation_id": "clean-reference-grid-20261020:Qwen3-0.6B-banking77-g1",
+    "protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65",
+    "settled": true,
+    "status": "succeeded",
+    "token_cost_estimate_usd": 0.0525264,
+    "trained_tokens": 131316,
+    "training_file": "file-01a159c9-5ee5-7a39-9b3b-de803de57391",
+    "validation_file": "file-01a159c9-61da-7986-b42f-2477e85fa4b8",
+    "weights_sha256": "24a815cc9eaab4f38d3a770781de09344ae122e9a08641b9f00eb7085e3e7027"
+  },
+  "Qwen3-0.6B-banking77-g2": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/checkpoints/ftckpt_224f3fc6-c453-4393-85a8-17b65ab3ba89",
+    "job_id": "ftjob-3cb3ba6e1ac44ce197be824ca23be989",
+    "operation_id": "clean-reference-grid-20261020:Qwen3-0.6B-banking77-g2",
+    "protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65",
+    "settled": true,
+    "status": "succeeded",
+    "token_cost_estimate_usd": 0.0262632,
+    "trained_tokens": 65658,
+    "training_file": "file-01a159c9-75a2-70e6-b594-b2dced119007",
+    "validation_file": "file-01a159c9-7900-7496-83bf-d3d1c6d27af8",
+    "weights_sha256": "d82849d45407012e8383eb9bb84a5f9625364d4a65734f10ea60ea8155e34218"
+  },
+  "Qwen3-0.6B-banking77-g3": {
+    "job_id": "ftjob-03d04987684643a48dd6f21afc928789",
+    "operation_id": "clean-reference-grid-20261020:Qwen3-0.6B-banking77-g3",
+    "protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65",
+    "status": "running",
+    "training_file": "file-01a159d3-cf9b-75c2-8efc-8ed5561e57e2",
+    "validation_file": "file-01a159d3-d359-7f20-a715-d5df49c27243"
+  },
+  "Qwen3-0.6B-function_calling-g0": {
+    "job_id": "ftjob-299f31765f2b464d9f14c2a2ed4e2f08",
+    "operation_id": "clean-reference-grid-20261020:Qwen3-0.6B-function_calling-g0",
+    "protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65",
+    "status": "running",
+    "training_file": "file-01a159d4-864d-747d-8c3e-726e29fd9f82",
+    "validation_file": "file-01a159d4-89ea-78f3-a67c-bd3d55719902"
+  },
+  "Qwen3-0.6B-function_calling-g1": {
+    "job_id": "ftjob-6fda436d3e2e4b1cb1d08f44f4abbd6c",
+    "operation_id": "clean-reference-grid-20261020:Qwen3-0.6B-function_calling-g1",
+    "protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65",
+    "status": "running",
+    "training_file": "file-01a159d8-9b52-7279-ba27-206201a01dbe",
+    "validation_file": "file-01a159d8-9f84-7bb6-9911-b53ab144f1ee"
+  }
+}

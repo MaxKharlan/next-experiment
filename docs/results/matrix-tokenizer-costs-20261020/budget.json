@@ -1,0 +1,100 @@
+{
+  "scope": "Prospective training scenario, not submitted. Structured data frozen existing development; banking budget sample only. Each real job must reserve its own actual corruption and tokens. Three seeds remain illustrative, not power-derived.",
+  "cells": [
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "task": "json_extraction",
+      "train_tokens_per_epoch": 114652,
+      "maximum_row_tokens": 300,
+      "reference_grid_training_usd": 0.8254944000000001,
+      "comparison_scenario_training_usd": 3.3019776000000003,
+      "additional_b10_scenario_training_usd": 1.058256
+    },
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "task": "function_calling",
+      "train_tokens_per_epoch": 169042,
+      "maximum_row_tokens": 457,
+      "reference_grid_training_usd": 1.2171024000000001,
+      "comparison_scenario_training_usd": 4.868409600000001,
+      "additional_b10_scenario_training_usd": 1.5598656000000002
+    },
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "task": "banking77",
+      "train_tokens_per_epoch": 22242,
+      "maximum_row_tokens": 121,
+      "reference_grid_training_usd": 0.16014240000000002,
+      "comparison_scenario_training_usd": 0.6405696000000001,
+      "additional_b10_scenario_training_usd": 0.2042496
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "task": "json_extraction",
+      "train_tokens_per_epoch": 114652,
+      "maximum_row_tokens": 300,
+      "reference_grid_training_usd": 0.8254944000000001,
+      "comparison_scenario_training_usd": 3.3019776000000003,
+      "additional_b10_scenario_training_usd": 1.058256
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "task": "function_calling",
+      "train_tokens_per_epoch": 169042,
+      "maximum_row_tokens": 457,
+      "reference_grid_training_usd": 1.2171024000000001,
+      "comparison_scenario_training_usd": 4.868409600000001,
+      "additional_b10_scenario_training_usd": 1.5598656000000002
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "task": "banking77",
+      "train_tokens_per_epoch": 22242,
+      "maximum_row_tokens": 121,
+      "reference_grid_training_usd": 0.16014240000000002,
+      "comparison_scenario_training_usd": 0.6405696000000001,
+      "additional_b10_scenario_training_usd": 0.2042496
+    },
+    {
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "task": "json_extraction",
+      "train_tokens_per_epoch": 115826,
+      "maximum_row_tokens": 301,
+      "reference_grid_training_usd": 0.8339472000000001,
+      "comparison_scenario_training_usd": 3.3357888000000004,
+      "additional_b10_scenario_training_usd": 1.0691136
+    },
+    {
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "task": "function_calling",
+      "train_tokens_per_epoch": 171512,
+      "maximum_row_tokens": 458,
+      "reference_grid_training_usd": 1.2348864000000002,
+      "comparison_scenario_training_usd": 4.939545600000001,
+      "additional_b10_scenario_training_usd": 1.5828192
+    },
+    {
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "task": "banking77",
+      "train_tokens_per_epoch": 28473,
+      "maximum_row_tokens": 134,
+      "reference_grid_training_usd": 0.2050056,
+      "comparison_scenario_training_usd": 0.8200224,
+      "additional_b10_scenario_training_usd": 0.26180640000000005
+    }
+  ],
+  "totals": {
+    "reference_grid_training_usd": 6.679317599999999,
+    "comparison_scenario_training_usd": 26.717270399999997,
+    "additional_b10_scenario_training_usd": 8.558481599999999,
+    "all_training_with_20_percent_allowance": 50.34608351999999
+  },
+  "exclusions": [
+    "generation/inference",
+    "evaluation hardware",
+    "automatic retries",
+    "historic unresolved holds"
+  ],
+  "tokenizers_sha256": "9bcb654fb17a29b33eed3cd12d2d539dc410f0255d68ddbdbbd8a93832ba4129",
+  "prices_sha256": "388e7b1c649ef9573f9f73957c178a469c3a88b4a48ca86065a7110815c060f5"
+}

@@ -1,0 +1,1213 @@
+{
+  "allowance": 1.2,
+  "amendment": "B5 clean-reference selection can proceed independently of answer-cut admission. This runs only the existing four-point healthy grid; no damaged/fixed/control or confirmation series is admitted by this protocol.",
+  "cap_usd": 25,
+  "concurrency": 3,
+  "generation": {
+    "greedy": true,
+    "max_new_tokens": {
+      "banking77": 32,
+      "function_calling": 192,
+      "json_extraction": 192
+    },
+    "thinking": false
+  },
+  "id": "clean-reference-grid-20261020",
+  "jobs": {
+    "Qwen3-0.6B-banking77-g0": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 0,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.06795359999999999,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-0.6B-banking77-g1": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 1,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.13590719999999998,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-0.6B-banking77-g2": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 2,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.06795359999999999,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-0.6B-banking77-g3": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 3,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.13590719999999998,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-0.6B-function_calling-g0": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 0,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.2566512,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-0.6B-function_calling-g1": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 1,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.5133024,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-0.6B-function_calling-g2": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 2,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.2566512,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-0.6B-function_calling-g3": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 3,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.5133024,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-0.6B-json_extraction-g0": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 0,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.16848,
+      "seed": 7101,
+      "task": "json_extraction"
+    },
+    "Qwen3-0.6B-json_extraction-g1": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 1,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.33696,
+      "seed": 7101,
+      "task": "json_extraction"
+    },
+    "Qwen3-0.6B-json_extraction-g2": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 2,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.16848,
+      "seed": 7101,
+      "task": "json_extraction"
+    },
+    "Qwen3-0.6B-json_extraction-g3": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 3,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "reservation_usd": 0.33696,
+      "seed": 7101,
+      "task": "json_extraction"
+    },
+    "Qwen3-1.7B-banking77-g0": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 0,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.06795359999999999,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-1.7B-banking77-g1": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 1,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.13590719999999998,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-1.7B-banking77-g2": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 2,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.06795359999999999,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-1.7B-banking77-g3": {
+      "counts": {
+        "check": {
+          "max": 93,
+          "rows": 154,
+          "tokens": 8710
+        },
+        "train": {
+          "max": 121,
+          "rows": 390,
+          "tokens": 22276
+        },
+        "validation": {
+          "max": 114,
+          "rows": 154,
+          "tokens": 8797
+        }
+      },
+      "grid_index": 3,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.13590719999999998,
+      "seed": 7101,
+      "task": "banking77"
+    },
+    "Qwen3-1.7B-function_calling-g0": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 0,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.2566512,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-1.7B-function_calling-g1": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 1,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.5133024,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-1.7B-function_calling-g2": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 2,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.2566512,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-1.7B-function_calling-g3": {
+      "counts": {
+        "check": {
+          "max": 459,
+          "rows": 102,
+          "tokens": 44372
+        },
+        "train": {
+          "max": 457,
+          "rows": 390,
+          "tokens": 169042
+        },
+        "validation": {
+          "max": 458,
+          "rows": 102,
+          "tokens": 44325
+        }
+      },
+      "grid_index": 3,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.5133024,
+      "seed": 7101,
+      "task": "function_calling"
+    },
+    "Qwen3-1.7B-json_extraction-g0": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 0,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.16848,
+      "seed": 7101,
+      "task": "json_extraction"
+    },
+    "Qwen3-1.7B-json_extraction-g1": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 1,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0001,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.33696,
+      "seed": 7101,
+      "task": "json_extraction"
+    },
+    "Qwen3-1.7B-json_extraction-g2": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 2,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 3,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.16848,
+      "seed": 7101,
+      "task": "json_extraction"
+    },
+    "Qwen3-1.7B-json_extraction-g3": {
+      "counts": {
+        "check": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30124
+        },
+        "train": {
+          "max": 300,
+          "rows": 390,
+          "tokens": 114652
+        },
+        "validation": {
+          "max": 301,
+          "rows": 102,
+          "tokens": 30088
+        }
+      },
+      "grid_index": 3,
+      "hyperparameters": {
+        "batch_size": 8,
+        "context_length": 8192,
+        "learning_rate": 0.0002,
+        "lora": true,
+        "lora_alpha": 16,
+        "lora_dropout": 0.05,
+        "lora_r": 16,
+        "max_grad_norm": 1.0,
+        "n_epochs": 6,
+        "packing": false,
+        "warmup_ratio": 0.0,
+        "weight_decay": 0.0
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "reservation_usd": 0.33696,
+      "seed": 7101,
+      "task": "json_extraction"
+    }
+  },
+  "ledger": "artifacts/remaining-queue-20261020/spending.sqlite3",
+  "llama": "User selected Token Factory. Existing provider tokenizer is accessible, but the LoRA export lacks base weights and no 1B inference endpoint is listed. Keep its new quality grid unsubmitted until an evaluation route is available.",
+  "price_observation_sha256": "388e7b1c649ef9573f9f73957c178a469c3a88b4a48ca86065a7110815c060f5",
+  "runtimes": {
+    "Qwen/Qwen3-0.6B": {
+      "files_sha256": {
+        "config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "model": "Qwen/Qwen3-0.6B",
+      "packages": {
+        "jinja2": "3.1.6",
+        "peft": "0.21.2",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.23.3",
+        "torch": "2.14.1",
+        "transformers": "5.19.0"
+      },
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "snapshot": "/Users/harlanmax/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca",
+      "template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    "Qwen/Qwen3-1.7B": {
+      "files_sha256": {
+        "config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model-00001-of-00002.safetensors": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+        "model-00002-of-00002.safetensors": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+        "model.safetensors.index.json": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "model": "Qwen/Qwen3-1.7B",
+      "packages": {
+        "jinja2": "3.1.6",
+        "peft": "0.21.2",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.23.3",
+        "torch": "2.14.1",
+        "transformers": "5.19.0"
+      },
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "snapshot": "/Users/harlanmax/.cache/huggingface/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    }
+  },
+  "scope": "Development references for existing structured integration tasks and a new 77-intent subset. Existing structured splits have already been inspected. No independent final-test or broad recovery claim.",
+  "selection": "Evaluate all four final recipe checkpoints on validation exact match. Select highest score, ties by grid index. Evaluate only the selected checkpoint once on check. Record base quality separately before selection. No final test.",
+  "source_banking77": "PolyAI task-specific-datasets; Casanueva et al. 2020; CC BY 4.0. Official training pool only.",
+  "source_banking77_sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b",
+  "source_sha256": {
+    "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/scripts/execute_reference_grid.py": "751a72e23cd0638c886677a2e38952ac62882232c92c49fc43835df29d6b0be7",
+    "core/connectors/token_factory.py": "29e968c7a5876dcc45d8db9feb9e27be347870997b1cbfdbaa8a215b9bc0fdf5",
+    "core/db/spending.py": "a42c0f226767a1052a01f9a31d8ed6114de0d4f095574d97f9de1c7af34a947f",
+    "core/eval/generate.py": "c03ed92207a4e0b3007fdb3c31370a1fec1d5a1a1a0973fbe8006583fb94f563",
+    "core/eval/runtime.py": "641cb1da2da83ceb3d54a2524f79de91e654086dde2b2c947079913f2467e41c",
+    "core/eval/structured.py": "eac671f1c4f537c5ad928f7aa0245cd008e889e3690c1f17a1b45e195186ad28",
+    "core/interventions/tf_runner.py": "4e0bbe13b4e0a12a2c91c3b2c98de39a604cd7145a7490f477fed8867c283816",
+    "core/probes/level0/lengths.py": "86155e75b55472a0a9ad9d9b96c7a0d6dd0b15c285d8f890343487978638db67",
+    "scripts/execute_ticket_ledger_v2.py": "115f77b90e482ab3fb40eda8dfadce6deb4f9f4d33ac1b1e3ff55a3e5b57a7ce",
+    "scripts/fresh_answer_calibration.py": "784523eb83844173aef4e56fbc4246713a1f2425315dab3a2ac1cbe0be30ec77",
+    "scripts/score_reference_grid.py": "36d72605eb256b153971afcf649e10a25d49bce329075bbb2889ad30ff4eaf43"
+  },
+  "stopping": "One submission per grid point. Stop new submissions after any failed, cancelled, mismatched or ambiguous attempt. Keep completed jobs and all reservations. Do not automatically repeat training.",
+  "tasks": {
+    "banking77": {
+      "check": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/banking77/check.jsonl",
+        "sha256": "eac7084b4562e3e09bc56a22f24df71c69910ebad14aa17a0fbc478af4a099af"
+      },
+      "train": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/banking77/train.jsonl",
+        "sha256": "a1ef8533c9eccf2c050f6e11c863ee5bcfc3b09587aa98056227d3ec6cc925ee"
+      },
+      "validation": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/banking77/validation.jsonl",
+        "sha256": "5f000cc04fe8e57ae1f6ea811bfcdff63a8c1909f32014bc8ab00262578bd779"
+      }
+    },
+    "function_calling": {
+      "check": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/function_calling/check.jsonl",
+        "sha256": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45"
+      },
+      "train": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/function_calling/train.jsonl",
+        "sha256": "8ae5e926107250410fbd7baf544c7db2811f9657a06a10443d77b8de712a71ba"
+      },
+      "validation": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/function_calling/validation.jsonl",
+        "sha256": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03"
+      }
+    },
+    "json_extraction": {
+      "check": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/json_extraction/check.jsonl",
+        "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42"
+      },
+      "train": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/json_extraction/train.jsonl",
+        "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db"
+      },
+      "validation": {
+        "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/clean-reference-grid-20261020/datasets/json_extraction/validation.jsonl",
+        "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b"
+      }
+    }
+  },
+  "tokenizer_provenance": {
+    "Qwen/Qwen3-0.6B": {
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "tasks": {
+        "banking77": {
+          "nested_training_tokens": {
+            "200": 11315,
+            "390": 22242,
+            "50": 2869
+          },
+          "train": {
+            "max_tokens": 121,
+            "path": "docs/results/matrix-tokenizer-costs-20261020/banking77-budget-sample.jsonl",
+            "rows": 390,
+            "scope": "Budget-only source-train sample; task-quality execution needs separate frozen splits and admission.",
+            "sha256": "92183b7ccec30515aae1e6a889986659e4bc33ef0c05e1641fb0a50a8d9795b2",
+            "tokens": 22242
+          }
+        },
+        "function_calling": {
+          "check": {
+            "max_tokens": 459,
+            "path": "datasets/structured-mixed-v1/function_calling/check.jsonl",
+            "rows": 102,
+            "sha256": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45",
+            "tokens": 44372
+          },
+          "nested_training_tokens": {
+            "200": 86671,
+            "390": 169042,
+            "50": 21653
+          },
+          "train": {
+            "max_tokens": 457,
+            "path": "datasets/structured-mixed-v1/function_calling/train.jsonl",
+            "rows": 390,
+            "sha256": "8ae5e926107250410fbd7baf544c7db2811f9657a06a10443d77b8de712a71ba",
+            "tokens": 169042
+          },
+          "validation": {
+            "max_tokens": 458,
+            "path": "datasets/structured-mixed-v1/function_calling/validation.jsonl",
+            "rows": 102,
+            "sha256": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03",
+            "tokens": 44325
+          }
+        },
+        "json_extraction": {
+          "check": {
+            "max_tokens": 301,
+            "path": "datasets/structured-mixed-v1/json_extraction/check.jsonl",
+            "rows": 102,
+            "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+            "tokens": 30124
+          },
+          "nested_training_tokens": {
+            "200": 58800,
+            "390": 114652,
+            "50": 14690
+          },
+          "train": {
+            "max_tokens": 300,
+            "path": "datasets/structured-mixed-v1/json_extraction/train.jsonl",
+            "rows": 390,
+            "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db",
+            "tokens": 114652
+          },
+          "validation": {
+            "max_tokens": 301,
+            "path": "datasets/structured-mixed-v1/json_extraction/validation.jsonl",
+            "rows": 102,
+            "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b",
+            "tokens": 30088
+          }
+        }
+      },
+      "tokenizer_files_sha256": {
+        "config.json": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd",
+        "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "Qwen/Qwen3-1.7B": {
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "tasks": {
+        "banking77": {
+          "nested_training_tokens": {
+            "200": 11315,
+            "390": 22242,
+            "50": 2869
+          },
+          "train": {
+            "max_tokens": 121,
+            "path": "docs/results/matrix-tokenizer-costs-20261020/banking77-budget-sample.jsonl",
+            "rows": 390,
+            "scope": "Budget-only source-train sample; task-quality execution needs separate frozen splits and admission.",
+            "sha256": "92183b7ccec30515aae1e6a889986659e4bc33ef0c05e1641fb0a50a8d9795b2",
+            "tokens": 22242
+          }
+        },
+        "function_calling": {
+          "check": {
+            "max_tokens": 459,
+            "path": "datasets/structured-mixed-v1/function_calling/check.jsonl",
+            "rows": 102,
+            "sha256": "7502051f7c4e24f3f0339624fa6d68040c1454e0c01a52360793fc435f62ba45",
+            "tokens": 44372
+          },
+          "nested_training_tokens": {
+            "200": 86671,
+            "390": 169042,
+            "50": 21653
+          },
+          "train": {
+            "max_tokens": 457,
+            "path": "datasets/structured-mixed-v1/function_calling/train.jsonl",
+            "rows": 390,
+            "sha256": "8ae5e926107250410fbd7baf544c7db2811f9657a06a10443d77b8de712a71ba",
+            "tokens": 169042
+          },
+          "validation": {
+            "max_tokens": 458,
+            "path": "datasets/structured-mixed-v1/function_calling/validation.jsonl",
+            "rows": 102,
+            "sha256": "38d752222578936c565ba3b929ce8d0558a68ed08909b44a2473232fff73dd03",
+            "tokens": 44325
+          }
+        },
+        "json_extraction": {
+          "check": {
+            "max_tokens": 301,
+            "path": "datasets/structured-mixed-v1/json_extraction/check.jsonl",
+            "rows": 102,
+            "sha256": "1555fa024857736a172fabf13f4a66c6ab99292dece2a1e91fd7798ad4bb7b42",
+            "tokens": 30124
+          },
+          "nested_training_tokens": {
+            "200": 58800,
+            "390": 114652,
+            "50": 14690
+          },
+          "train": {
+            "max_tokens": 300,
+            "path": "datasets/structured-mixed-v1/json_extraction/train.jsonl",
+            "rows": 390,
+            "sha256": "f99832aa4119a1102af1d1753a10eb5e34f54af3faa4d7fd44eb69ba7b1e71db",
+            "tokens": 114652
+          },
+          "validation": {
+            "max_tokens": 301,
+            "path": "datasets/structured-mixed-v1/json_extraction/validation.jsonl",
+            "rows": 102,
+            "sha256": "cd3438fe689c01ae2573f394bb3980c0238e90446083eb72ce013ad0b8a6669b",
+            "tokens": 30088
+          }
+        }
+      },
+      "tokenizer_files_sha256": {
+        "config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+      }
+    }
+  },
+  "usd_per_million": 0.4
+}

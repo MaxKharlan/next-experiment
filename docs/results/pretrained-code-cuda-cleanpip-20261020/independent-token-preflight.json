@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-20T14:25:57.958846+00:00",
+  "reason": "The frozen worker length guard counted BatchEncoding keys on transformers 5.19.0. Recounted input_ids independently before training; all inputs fit 512. Trainer itself tokenizes correctly. Submitted scientific payload remains unchanged.",
+  "protocol_sha256": "4c04845d5f757afa485aa9abcf2d08547741d985dd62671417f4a1aa5662f55e",
+  "counter_source_sha256": "86155e75b55472a0a9ad9d9b96c7a0d6dd0b15c285d8f890343487978638db67",
+  "files": {
+    "data/check.jsonl": {
+      "rows": 64,
+      "max_tokens": 152,
+      "total_tokens": 7060,
+      "sha256": "bed327b70ef971f34f131ae2ba13bc7b713e362d63dc3ec790ae410e6d8979c2"
+    },
+    "data/logit-validation.jsonl": {
+      "rows": 16,
+      "max_tokens": 128,
+      "total_tokens": 1736,
+      "sha256": "76272f801e8d27231772701bc0c7910785a82e17ff81b322552bd8a9f339c319"
+    },
+    "data/train.jsonl": {
+      "rows": 96,
+      "max_tokens": 150,
+      "total_tokens": 10418,
+      "sha256": "c8c5b59aae6c4f4bc6cdbf6f9bf9826969144e2df807a45459ab6dc89a6dee77"
+    },
+    "data/validation.jsonl": {
+      "rows": 32,
+      "max_tokens": 134,
+      "total_tokens": 3513,
+      "sha256": "4ae5fd7e0c108c084b175bdc2e4267811d6a71f62573d1f0ac8fc9bca5507aab"
+    }
+  }
+}

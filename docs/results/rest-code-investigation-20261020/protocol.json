@@ -14,10 +14,15 @@
   "acceptance": "Persist actual HTTP acceptance, streamed events, paid usage, finished report, restart read and idempotent POST without a second execution. Preserve all inconclusive and failed outcomes.",
   "stopping": "One investigation, no paid retry or extra seeds. Local MPS starts only after all twelve ongoing ledger adapters finish scoring.",
   "budget": "Global additional TF ledger cap $25; per-request cap $1 including 20% allowance. Local training has no provider training charge.",
-  "prepared_sha256": "55d0baa533809ceb1955b7ab6db8116629de2fe5e9ee9f4798cbf8d04148c90b",
+  "prepared_sha256": "c52fc4e2b9450f1c3ea6753eff00aa0560a9f55c0891b1362e8f6184f459a30e",
   "preexecution_amendment": {
     "at": "2026-10-20T14:12:45.632610+00:00",
     "reason": "Enforce one structured-output attempt as well as zero SDK retries before any paid dispatch. Data, seeds, recipe and statistical decision unchanged. Previous frozen files preserved.",
     "previous_prepared_sha256": "510d2e997573f0b754f4e60763f7b08015df8b950145b6b4a1bfb65de0834783"
+  },
+  "context_guard_amendment": {
+    "at": "2026-10-20T14:26:03.649347+00:00",
+    "reason": "Use existing count_tokens which handles BatchEncoding; bind its source hash. Same data, recipes, model, seeds, stopping and decisions. No REST paid call or training has started.",
+    "previous_prepared_sha256": "55d0baa533809ceb1955b7ab6db8116629de2fe5e9ee9f4798cbf8d04148c90b"
   }
 }

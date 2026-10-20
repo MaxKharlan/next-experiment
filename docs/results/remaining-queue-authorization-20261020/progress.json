@@ -1,21 +1,25 @@
 {
-  "at": "2026-10-20T14:14:43.529661+00:00",
+  "at": "2026-10-20T15:09:13.397220+00:00",
   "budgets": {
     "spending": {
       "cap_usd": 25.0,
-      "committed_usd": 4.2613228199999975,
-      "available_usd": 20.738677180000003
+      "committed_usd": 5.2932469799999975,
+      "available_usd": 19.70675302
     },
     "ai-cloud-spending": {
       "cap_usd": 30.0,
-      "committed_usd": 24.0,
-      "available_usd": 6.0
+      "committed_usd": 30.0,
+      "available_usd": 0
     }
   },
   "ledger_scores": {
+    "format-s2403": {
+      "rows": 180,
+      "complete": true
+    },
     "format-s2402": {
-      "rows": 104,
-      "complete": false
+      "rows": 180,
+      "complete": true
     },
     "cut-s2401": {
       "rows": 180,
@@ -32,11 +36,20 @@
     "format-s2401": {
       "rows": 180,
       "complete": true
+    },
+    "healthy-s2401": {
+      "rows": 135,
+      "complete": false
     }
   },
   "rest": {
     "status": "waiting_for_twelve_mps_scores"
   },
-  "cloud_code_job": "aijob-e00s96et8m5pkns9m0",
-  "kaggle": "queued"
+  "cloud_combined_job": "aijob-e00emdv72kgz55nqqh",
+  "reference_grid": "docs/results/clean-reference-grid-20261020",
+  "kaggle": "queued_at_2026-10-20T15:09:13.397220+00:00",
+  "verification": {
+    "pytest_passed": 1002,
+    "pytest_skipped": 8
+  }
 }

@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-20T14:22:00Z",
+  "source": "https://tokenfactory.nebius.com/organization/prices",
+  "method": "Authenticated console Prices filters for each named model; read only through Safari accessibility.",
+  "region": "eu-north1",
+  "valid_from": "2025-12-01",
+  "context": 8192,
+  "fine_tuning_type": "LoRa",
+  "usd_per_million_tokens": {
+    "Qwen/Qwen3-0.6B": 0.4,
+    "Qwen/Qwen3-1.7B": 0.4,
+    "meta-llama/Llama-3.2-1B-Instruct": 0.4
+  },
+  "taxes": "Prices exclude applicable taxes; execution reserves add 20% allowance."
+}

@@ -1,0 +1,5 @@
+{
+  "status": "not_submitted",
+  "reason": "Local auto-submitter failed JSON serialization before submit; code exporter also failed before training. Superseded by shared bounded job.",
+  "successor_job": "aijob-e00emdv72kgz55nqqh"
+}

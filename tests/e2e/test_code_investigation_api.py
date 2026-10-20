@@ -1,3 +1,4 @@
+import json
 from types import SimpleNamespace
 
 import pytest
@@ -139,3 +140,39 @@ def test_source_changes_fail_before_execution(tmp_path, monkeypatch):
     source.write_text("changed")
     with pytest.raises(ValueError, match="source changed"):
         code_investigations.verify_prepared(prepared)
+
+
+def test_context_guard_counts_batch_encoding_tokens(tmp_path, monkeypatch):
+    transformers = pytest.importorskip("transformers")
+    pytest.importorskip("torch")
+    monkeypatch.setattr(code_investigations, "verify_runtime", lambda *a, **kw: None)
+    paths = {}
+    for role in ("train", "validation", "check"):
+        path = tmp_path / f"{role}.jsonl"
+        path.write_text(
+            json.dumps(
+                {
+                    "messages": [
+                        {"role": "user", "content": role},
+                        {"role": "assistant", "content": "label"},
+                    ]
+                }
+            )
+            + "\n"
+        )
+        paths[role] = str(path)
+    monkeypatch.setattr(
+        transformers.AutoTokenizer,
+        "from_pretrained",
+        lambda *a, **kw: SimpleNamespace(
+            apply_chat_template=lambda *a, **kw: {
+                "input_ids": [1] * 513,
+                "attention_mask": [1] * 513,
+            }
+        ),
+    )
+    request = code_investigations.CodeInvestigationStart.model_validate(
+        {**payload(), **paths}
+    )
+    with pytest.raises(ValueError, match="would be truncated"):
+        code_investigations.prepare(request)
