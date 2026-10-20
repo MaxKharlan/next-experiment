@@ -1,0 +1,106 @@
+{
+  "cut-history": {
+    "answer": {
+      "mean_nll": 1.3005720575820572,
+      "perplexity": 3.671396317101717,
+      "perplexity_overflow": false,
+      "tokens": 71,
+      "total_nll": 92.34061608832606
+    },
+    "examples": 3,
+    "mean_eos_probability_after_reference": 6.565192018608746e-12,
+    "prompt": {
+      "mean_nll": 1.5679697282023068,
+      "perplexity": 4.796899291315535,
+      "perplexity_overflow": false,
+      "tokens": 1851,
+      "total_nll": 2902.31196690247
+    },
+    "scope": "Teacher-forced references; special-template tokens only. No generated-EOS frequency or calibrated fault likelihood.",
+    "template_special": {
+      "mean_nll": 13.752060703378326,
+      "perplexity": 938521.1806538994,
+      "perplexity_overflow": false,
+      "tokens": 15,
+      "total_nll": 206.2809105506749
+    }
+  },
+  "healthy-history": {
+    "answer": {
+      "mean_nll": 0.6827334207375901,
+      "perplexity": 1.9792805512820424,
+      "perplexity_overflow": false,
+      "tokens": 141,
+      "total_nll": 96.26541232400021
+    },
+    "examples": 3,
+    "mean_eos_probability_after_reference": 0.9999868075052897,
+    "prompt": {
+      "mean_nll": 1.5679697256834138,
+      "perplexity": 4.796899279232659,
+      "perplexity_overflow": false,
+      "tokens": 1851,
+      "total_nll": 2902.311962239999
+    },
+    "scope": "Teacher-forced references; special-template tokens only. No generated-EOS frequency or calibrated fault likelihood.",
+    "template_special": {
+      "mean_nll": 7.248778641132655,
+      "perplexity": 1406.3860966820537,
+      "perplexity_overflow": false,
+      "tokens": 15,
+      "total_nll": 108.73167961698982
+    }
+  },
+  "healthy-serialization": {
+    "answer": {
+      "mean_nll": 0.10022971037776472,
+      "perplexity": 1.1054248164651643,
+      "perplexity_overflow": false,
+      "tokens": 141,
+      "total_nll": 14.132389163264826
+    },
+    "examples": 3,
+    "mean_eos_probability_after_reference": 0.9999929269154867,
+    "prompt": {
+      "mean_nll": 3.974327208048217,
+      "perplexity": 53.21430270475396,
+      "perplexity_overflow": false,
+      "tokens": 222,
+      "total_nll": 882.3006401867042
+    },
+    "scope": "Teacher-forced references; special-template tokens only. No generated-EOS frequency or calibrated fault likelihood.",
+    "template_special": {
+      "mean_nll": 4.9416754970936685,
+      "perplexity": 140.00463050438634,
+      "perplexity_overflow": false,
+      "tokens": 15,
+      "total_nll": 74.12513245640503
+    }
+  },
+  "wrong-history": {
+    "answer": {
+      "mean_nll": 0.8660271019791005,
+      "perplexity": 2.3774467126000527,
+      "perplexity_overflow": false,
+      "tokens": 141,
+      "total_nll": 122.10982137905317
+    },
+    "examples": 3,
+    "mean_eos_probability_after_reference": 0.9999840060869852,
+    "prompt": {
+      "mean_nll": 1.5679697256834138,
+      "perplexity": 4.796899279232659,
+      "perplexity_overflow": false,
+      "tokens": 1851,
+      "total_nll": 2902.311962239999
+    },
+    "scope": "Teacher-forced references; special-template tokens only. No generated-EOS frequency or calibrated fault likelihood.",
+    "template_special": {
+      "mean_nll": 7.24877920538147,
+      "perplexity": 1406.3868902339657,
+      "perplexity_overflow": false,
+      "tokens": 15,
+      "total_nll": 108.73168808072205
+    }
+  }
+}

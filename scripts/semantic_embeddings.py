@@ -114,7 +114,7 @@ def run(root, output, *, metadata=None, env=None):
         vectors = []
         for start in range(0, len(texts), 32):
             batch = texts[start : start + 32]
-            operation = f"semantic-audit-20261020-v1-embedding-{start}"
+            operation = f"{plan['id']}-embedding-{start}"
             reserve = (sum(len(t.encode()) for t in batch) + 4096) * 0.01 / 1e6 * 1.2
             ledger.reserve(operation, "A30 Qwen3-Embedding-8B", reserve)
             save(

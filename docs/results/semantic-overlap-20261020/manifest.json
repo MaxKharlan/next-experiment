@@ -1,0 +1,13 @@
+{
+  "audit.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "controls.json": "1adb039fbdc50ca9649a07b6bcae375ba017403299f5e355db778c5a28d47771",
+  "evidence/nvidia-local-embeddings.npy": "9b394ec10dd6efa6fe2c301fc821a139583d28311b721a43e4867c5f12471fd6",
+  "evidence/nvidia-local-execution.json": "9d42db504f40fb96d7043733f7f0dc2e74a67d6822ef06a2f32c849acb4705bd",
+  "evidence/qwen-local-embeddings.npy": "3c54d61f3fb0eb872859aa9d9996637016aef6a742c121211073b33a22675694",
+  "evidence/qwen-local-execution.json": "b7bf0e593fe4287f263d03472fa70855c69682d20ddfbedbf811f79fde07238d",
+  "evidence/qwen-provider-embeddings.npy": "a10a00b22253889334ac8b218dabf24ea1bbf8c2955236d6c86a4c9f7bcf8ce2",
+  "evidence/qwen-provider-execution.json": "528dd5407d6be4889ab131d370be10c2a9b0f52c283a780c62bbb9c707db6e64",
+  "protocol.json": "21997ae4660637bb3cd3a063b7cbc154e7fc409e98fecb33ae146e5a95a7e19f",
+  "reference.json": "6e656e430a08322e6db1dbc3f92c9882ac23ca7d1d7fe7cd2a54b85d924691ee",
+  "report.json": "c99deae8b344748e46643f5e466a197a7ec7fe5709e96139eaf661d3cf20d970"
+}

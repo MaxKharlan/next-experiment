@@ -55,3 +55,9 @@ answer_cut:
   # first guesses, not calibrated transfer estimates (A14, O3).
   answer_truncation: {cut: 0.90, ok: 0.10}
   default: {cut: 0.03, ok: 0.97}
+
+# A29: an opt-in measurement with no calibrated diagnostic classes. This neutral
+# row prevents the raw NLL/EOS measurements from changing a fault posterior.
+# It is not added to automatic probe selection; see docs/logit-audit-20261020.md.
+teacher_forced_logits:
+  default: {measured: 1.0}

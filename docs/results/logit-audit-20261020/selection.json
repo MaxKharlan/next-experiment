@@ -1,0 +1,12 @@
+{
+  "data_sha256": "eb04f2856679029a780bb135ce8f5fc427fae41b9acaa1440c182f5ad421d93c",
+  "indices": [
+    78,
+    76,
+    77
+  ],
+  "purpose": "Development mechanism illustration; no fitted diagnosis thresholds or deployment signature.",
+  "rows": 12,
+  "selection": "First three anchors, first prospectively changed history in each family, same prompts across healthy/cut/wrong. Training rows only; no check or final.",
+  "source_bundle_protocol_sha256": "291d597dbd6478f1ee40128634aa058c9ed23e15afa2edb547763ed704268f3d"
+}

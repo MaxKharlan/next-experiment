@@ -1,0 +1,418 @@
+{
+  "pairs": [
+    {
+      "category": "normalized_exact",
+      "id": "lexical-01",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "Check \uff21\uff22\uff23",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "CHECK  abc",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "normalized_exact",
+      "id": "lexical-02",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "\u041f\u0440\u043e\u0432\u0435\u0440\u044c \u043f\u0435\u0440\u0435\u0432\u043e\u0434",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "  \u041f\u0420\u041e\u0412\u0415\u0420\u042c\n\u043f\u0435\u0440\u0435\u0432\u043e\u0434 ",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "normalized_exact",
+      "id": "lexical-03",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "Which account?",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Which account?",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "surface",
+      "id": "lexical-04",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "Please check the delivery status of my replacement payment card.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Please check the delivery status of my replacement payment card!",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "surface",
+      "id": "lexical-05",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "The application crashes whenever I attempt to open my monthly statement.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "The application crashes whenever I attempt to open my monthly statement",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "surface",
+      "id": "lexical-06",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "Please cancel the scheduled payment that is due on the first day of November.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Please cancel the scheduled payment that is due on the first day of November!",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "surface",
+      "id": "lexical-07",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u043e\u043a\u0430\u0436\u0438\u0442\u0435 \u0438\u0441\u0442\u043e\u0440\u0438\u044e \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0439 \u043f\u043e \u043c\u043e\u0435\u0439 \u043a\u0430\u0440\u0442\u0435 \u0437\u0430 \u043f\u0440\u043e\u0448\u043b\u0443\u044e \u043d\u0435\u0434\u0435\u043b\u044e.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u043e\u043a\u0430\u0436\u0438\u0442\u0435 \u0438\u0441\u0442\u043e\u0440\u0438\u044e \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0439 \u043f\u043e \u043c\u043e\u0435\u0439 \u043a\u0430\u0440\u0442\u0435 \u0437\u0430 \u043f\u0440\u043e\u0448\u043b\u0443\u044e \u043d\u0435\u0434\u0435\u043b\u044e!",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "paraphrase",
+      "id": "lexical-08",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "How can I stop a recurring charge on my card?",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Cancel this subscription payment for me.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "paraphrase",
+      "id": "lexical-09",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "I cannot remember the secret number used at the cash machine.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Where do I reset my ATM PIN?",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "paraphrase",
+      "id": "lexical-10",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "The transfer I sent yesterday has not reached the recipient.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Yesterday\u2019s outgoing bank payment is still missing at the destination.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "paraphrase",
+      "id": "lexical-11",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": true,
+      "train_prompt": [
+        {
+          "content": "\u041a\u0430\u043a \u0432\u0435\u0440\u043d\u0443\u0442\u044c \u0434\u0435\u043d\u044c\u0433\u0438 \u0437\u0430 \u043e\u0442\u043c\u0435\u043d\u0451\u043d\u043d\u044b\u0439 \u0437\u0430\u043a\u0430\u0437?",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "\u041c\u043d\u0435 \u043d\u0443\u0436\u0435\u043d \u0432\u043e\u0437\u0432\u0440\u0430\u0442 \u043e\u043f\u043b\u0430\u0442\u044b \u043f\u043e\u043a\u0443\u043f\u043a\u0438, \u043a\u043e\u0442\u043e\u0440\u0443\u044e \u044f \u0430\u043d\u043d\u0443\u043b\u0438\u0440\u043e\u0432\u0430\u043b.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "different_number",
+      "id": "lexical-12",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "Please transfer exactly 100 dollars from my savings account to my checking account.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Please transfer exactly 200 dollars from my savings account to my checking account.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "different_number",
+      "id": "lexical-13",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "Please schedule the account balance notification for the first day of November at 09:00.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Please schedule the account balance notification for the first day of November at 19:00.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "different_entity",
+      "id": "lexical-14",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "Please send the monthly account statement to the registered contact named Alice Smith.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Please send the monthly account statement to the registered contact named Maria Smith.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "negation",
+      "id": "lexical-15",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "Please include the pending card transactions in the monthly summary that you send by email.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Please do not include the pending card transactions in the monthly summary that you send by email.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "negation",
+      "id": "lexical-16",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "I want to cancel the automatic monthly payment from my current account to the electricity supplier.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "I do not want to cancel the automatic monthly payment from my current account to the electricity supplier.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "different_system",
+      "id": "lexical-17",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "The transaction amount is 100.",
+          "role": "system"
+        },
+        {
+          "content": "Please calculate the total cost for the transaction described in the previous message.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "The transaction amount is 200.",
+          "role": "system"
+        },
+        {
+          "content": "Please calculate the total cost for the transaction described in the previous message.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "different_system",
+      "id": "lexical-18",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "Report amounts in USD.",
+          "role": "system"
+        },
+        {
+          "content": "Please calculate the total cost for the transaction described in the previous message.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "Report amounts in EUR.",
+          "role": "system"
+        },
+        {
+          "content": "Please calculate the total cost for the transaction described in the previous message.",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "short_distinct",
+      "id": "lexical-19",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "refund 100",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "refund 200",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "short_distinct",
+      "id": "lexical-20",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "close card",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "freeze card",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "unrelated",
+      "id": "lexical-21",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "My cash withdrawal was declined at the station.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "How do I change the postal address on my profile?",
+          "role": "user"
+        }
+      ]
+    },
+    {
+      "category": "unrelated",
+      "id": "lexical-22",
+      "label_basis": "Constructed author label; not independently reviewed",
+      "same_request": false,
+      "train_prompt": [
+        {
+          "content": "The exchange rate on this card payment looks incorrect.",
+          "role": "user"
+        }
+      ],
+      "validation_prompt": [
+        {
+          "content": "I need another physical card for a family member.",
+          "role": "user"
+        }
+      ]
+    }
+  ],
+  "scope": "Authored stress controls, not deployment accuracy or benchmark truth",
+  "version": 1
+}
