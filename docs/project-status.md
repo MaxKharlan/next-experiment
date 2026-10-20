@@ -8,7 +8,9 @@ $25 additional Token Factory and $30 AI Cloud limits and confirmed submission
 eligibility, registration and representation. Prospective model scoring and
 REST/cloud studies are running. The
 [fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete
-and verified; the data cohort remains active. [Submission materials](submission/readiness.md)
+and verified; the data cohort remains active. The [same-checkpoint evaluation](kaggle-runtime-comparison-20261020.md)
+also completed: all 64 saved records agree across MacBook MPS, AI Cloud L40S and
+Kaggle T4. [Submission materials](submission/readiness.md)
 track the silent captioned video saved outside the project and the remaining
 publication and submission steps.
 

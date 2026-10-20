@@ -1,0 +1,19 @@
+{
+  "examples": 64,
+  "exact_match": 0.140625,
+  "eos_share": 1.0,
+  "limit_share": 0.0,
+  "gpu": "Tesla T4",
+  "cuda": "13.0",
+  "packages": {
+    "jinja2": "3.1.6",
+    "peft": "0.21.2",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.23.3",
+    "torch": "2.14.1",
+    "transformers": "5.19.0"
+  },
+  "attention": "sdpa",
+  "precision": "IEEE float32; math SDPA",
+  "protocol_sha256": "57e8b58884ca842cfe399ac528302e8fb26081cfd3762f8234bd432d8d1c61b3"
+}

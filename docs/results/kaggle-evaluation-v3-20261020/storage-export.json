@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-20T15:45:05.043523+00:00",
+  "bucket": "next-experiment-artifacts",
+  "prefix": "kaggle/kaggle-base-generation-20261020/v3/",
+  "files": {
+    "protocol.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/protocol.json",
+      "sha256": "57e8b58884ca842cfe399ac528302e8fb26081cfd3762f8234bd432d8d1c61b3",
+      "bytes": 3727,
+      "readback_verified": true
+    },
+    "comparison.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/comparison.json",
+      "sha256": "afa42b768eb519e4796e304453f9ac656ddc590cb329f2d8c81e56922c269ea5",
+      "bytes": 3935,
+      "readback_verified": true
+    },
+    "submission.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/submission.json",
+      "sha256": "cc988333897b0092bfaf625c2057e90f31bb1f716a785fa3d3166644cdab59f0",
+      "bytes": 694,
+      "readback_verified": true
+    },
+    "measurements/cloud-predictions.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/measurements/cloud-predictions.json",
+      "sha256": "38b47528924019941cce4ded21ca93e1c2da4daee32d25f7bb73ab2f47e17c1a",
+      "bytes": 17481,
+      "readback_verified": true
+    },
+    "measurements/cloud-runtime.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/measurements/cloud-runtime.json",
+      "sha256": "d61a3b9fb235c7024ecee34c4bc2fcc02487bec1277e427f1397f930e6bce352",
+      "bytes": 571,
+      "readback_verified": true
+    },
+    "measurements/mps-predictions.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/measurements/mps-predictions.json",
+      "sha256": "832a0a37f8882337f5be3ed7ac2ad636ce6ef5a903ebb7470aaf67a2537b996b",
+      "bytes": 17481,
+      "readback_verified": true
+    },
+    "measurements/predictions.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/measurements/predictions.json",
+      "sha256": "38b47528924019941cce4ded21ca93e1c2da4daee32d25f7bb73ab2f47e17c1a",
+      "bytes": 17481,
+      "readback_verified": true
+    },
+    "measurements/preflight.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/measurements/preflight.json",
+      "sha256": "b046e1933837814c831d16b66ac35a1fec926c8ef16a105eeb527610358cab38",
+      "bytes": 7604,
+      "readback_verified": true
+    },
+    "measurements/result.json": {
+      "key": "kaggle/kaggle-base-generation-20261020/v3/measurements/result.json",
+      "sha256": "4da65103599b3bc03570418ab31392b23dfa15d05422018be30cf1e87bd4b9c6",
+      "bytes": 457,
+      "readback_verified": true
+    }
+  },
+  "credentials": "Used only by the local client; absent from the Kaggle notebook and export"
+}

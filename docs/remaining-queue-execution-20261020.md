@@ -24,7 +24,7 @@ See the timestamped progress JSON for current committed amounts.
 | A10/A12 | Semantic overlap and distribution controls measured in #106 | Downstream quality and independent validation remain distinct |
 | A19/A30/A31 | Automatic 200-example comparison complete in #105 | User replaced human review; failures and API errors retained |
 | A29 | Base diagnostic in #106 and sixteen-reference measurements for fifteen CUDA adapters complete | Data-cohort diagnostics and independent calibration; live likelihoods remain unfitted |
-| A15/A20 | Serverless creation and S3 retrieval work; explicit FP32/math SDPA passed the numerical gate | Kaggle generation notebook queued; full generation comparison remains open |
+| A15/A20 | Serverless creation and S3 retrieval work; [all 64 base-model records agree across MPS, Cloud L40S and Kaggle T4](kaggle-runtime-comparison-20261020.md); all 46 Kaggle preflight checks passed | Same-checkpoint development comparison complete; training/backend equivalence is outside this result |
 | B24 | Two supplemental MPS adapters and [all fifteen CUDA code cells](pretrained-code-quality-20261020.md) verified; REST route implemented and tested | REST study waits for MPS and then runs once |
 | A32 | FT-Fail published and verified; #107 merged, publication receipts in #108 | Complete for historical cases and automatic audit package |
 | B21/B25/B26 | Published partial reproduction and negative transfer results retained | Missing original setups and independent provider-compatible transfer data |
