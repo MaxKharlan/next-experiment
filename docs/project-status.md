@@ -6,9 +6,12 @@ semantic controls, verified FT-Fail Hub release and bounded cloud/reference
 execution. The owner authorized separate
 $25 additional Token Factory and $30 AI Cloud limits and confirmed submission
 eligibility, registration and representation. Prospective model scoring and
-REST/cloud studies are running. The
+the REST study are running. The
 [fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete
-and verified; the data cohort remains active. The [same-checkpoint evaluation](kaggle-runtime-comparison-20261020.md)
+and verified. The [data cohort](data-fault-quality-20261020.md) stopped at its
+frozen timeout with 29/36 cells verified. The [ticket-ledger admission](ticket-ledger-outcome-20261020.md)
+finished all twelve adapters and stopped at the insufficient healthy/cut gap.
+The [same-checkpoint evaluation](kaggle-runtime-comparison-20261020.md)
 also completed: all 64 saved records agree across MacBook MPS, AI Cloud L40S and
 Kaggle T4. [Submission materials](submission/readiness.md)
 track the silent captioned video saved outside the project and the remaining
@@ -39,7 +42,7 @@ are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
 | A2/A3 datasets | #82: JSON extraction and function calling, versioned splits and agent-reviewed references | Full task/model quality references and fresh evaluation; tracks A/B |
-| A4 validation | Explicit-case API validates roles, nonblank text and user prompts before worker creation; tests cover all three tasks and four splits | [Semantic controls](semantic-data-controls-20261020.md) are measured; downstream fault-4 validation optimism is in the running data cohort |
+| A4 validation | Explicit-case API validates roles, nonblank text and user prompts before worker creation; tests cover all three tasks and four splits | [Semantic controls](semantic-data-controls-20261020.md) and [fault-4 validation optimism](data-fault-quality-20261020.md) measured on frozen development cases |
 | A7/A8/fault 1 | [Semantic record](fault-1-semantics.md), answer-cut probe and observed-row drop pair; length preflight is distinct | [Clean-prefix and alternative-malformation controls](answer-cut-specificity-controls-20261019.md) measured; independent likelihood calibration, causal specificity and multi-task evidence; tracks A/B |
 | Measured fault 1 | #84: Kaggle and Token Factory target/control results with incomplete recovery; two new public experiment replays | Fresh complete API investigation and untouched final test; tracks A/B |
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
@@ -62,8 +65,9 @@ The [ticket-ledger preparation](ticket-ledger-development-20261020.md) now freez
 504 fresh histories, complete-object endpoints and new development gates.
 Two offline oracles agree; tokenizer context checks pass. The user subsequently
 authorized the paid LoRA admission study under the separate additional budget.
-Its twelve jobs succeeded, and serial model scoring is running. The result remains
-pending until all twelve score files are complete and the frozen gates are applied.
+Its twelve jobs and all 2,160 evaluation records are complete and verified.
+The [terminal decision](ticket-ledger-outcome-20261020.md) rejects this candidate:
+healthy-minus-cut history accuracy is 4.86 points against an eight-point minimum.
 
 The [3×3 matrix plan](reference-matrix-plan-20261020.md) records all nine cells,
 missing comparable metrics and a separate prospective budget scenario.
@@ -97,7 +101,9 @@ four false positives and four missed paraphrases; it has no live fault signature
    match inference calls when provider records permit. New calls now retain provider
    request/response IDs and their reservation IDs for that matching. SQLite worker ownership,
    recipe reservations and persistent Tavily credits are implemented.
-5. Finish the running faults 2–5 quality cohort and reference grid. Semantic
+5. Finish the running reference grid. The faults 2–5 quality cohort stopped at
+   its frozen timeout with 29/36 completed cells; missing cells remain unmeasured.
+   Semantic
    controls, the automatic Nano/embedding/cleanlab audit and logit probes are
    implemented and measured. The pretrained B24 comparison is complete; the
    full mode-B REST trace waits for its MPS dependency.

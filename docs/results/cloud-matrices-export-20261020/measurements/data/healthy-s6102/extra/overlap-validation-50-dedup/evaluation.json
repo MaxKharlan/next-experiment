@@ -1,0 +1,40 @@
+{
+  "examples": 32,
+  "exact_match": 0.9375,
+  "eos_share": 1.0,
+  "limit_share": 0.0,
+  "by_source": {
+    "card_arrival": {
+      "examples": 6,
+      "exact_match": 1.0
+    },
+    "card_payment_fee_charged": {
+      "examples": 5,
+      "exact_match": 1.0
+    },
+    "cash_withdrawal_charge": {
+      "examples": 2,
+      "exact_match": 1.0
+    },
+    "cash_withdrawal_not_recognised": {
+      "examples": 4,
+      "exact_match": 1.0
+    },
+    "declined_cash_withdrawal": {
+      "examples": 4,
+      "exact_match": 0.75
+    },
+    "pending_cash_withdrawal": {
+      "examples": 2,
+      "exact_match": 1.0
+    },
+    "wrong_amount_of_cash_received": {
+      "examples": 2,
+      "exact_match": 1.0
+    },
+    "wrong_exchange_rate_for_cash_withdrawal": {
+      "examples": 7,
+      "exact_match": 0.8571428571428571
+    }
+  }
+}

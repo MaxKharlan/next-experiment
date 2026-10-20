@@ -1,0 +1,434 @@
+[
+  {
+    "line": 1,
+    "source": "pending_cash_withdrawal",
+    "prompt": {
+      "tokens": 91,
+      "total_nll": 414.77963869875566,
+      "mean_nll": 4.558018007678633,
+      "perplexity": 95.39422172300618,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.00020264511965706333,
+      "mean_nll": 4.052902393141267e-05,
+      "perplexity": 1.0000405298452435,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 27.53208556366735,
+      "mean_nll": 5.5064171127334705,
+      "perplexity": 246.26719689820905,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999868273735046,
+    "total_input_tokens": 103
+  },
+  {
+    "line": 2,
+    "source": "cash_withdrawal_charge",
+    "prompt": {
+      "tokens": 109,
+      "total_nll": 464.6169538238664,
+      "mean_nll": 4.262540860769417,
+      "perplexity": 70.99013053071953,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.03020932048092817,
+      "mean_nll": 0.006041864096185634,
+      "perplexity": 1.0060601529714779,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 30.16261210256198,
+      "mean_nll": 6.032522420512396,
+      "perplexity": 416.7649611274042,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9998694658279419,
+    "total_input_tokens": 121
+  },
+  {
+    "line": 3,
+    "source": "declined_cash_withdrawal",
+    "prompt": {
+      "tokens": 91,
+      "total_nll": 423.85336928422385,
+      "mean_nll": 4.657729332793669,
+      "perplexity": 105.39648988919677,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 6,
+      "total_nll": 0.000518508424306674,
+      "mean_nll": 8.6418070717779e-05,
+      "perplexity": 1.0000864218048668,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 35.30545357100891,
+      "mean_nll": 7.061090714201782,
+      "perplexity": 1165.7159355496494,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999836683273315,
+    "total_input_tokens": 104
+  },
+  {
+    "line": 4,
+    "source": "declined_cash_withdrawal",
+    "prompt": {
+      "tokens": 93,
+      "total_nll": 425.3359884258257,
+      "mean_nll": 4.573505251890599,
+      "perplexity": 96.8831149983989,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 6,
+      "total_nll": 0.0018990720514011628,
+      "mean_nll": 0.00031651200856686046,
+      "perplexity": 1.0003165621037777,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 43.60763694835259,
+      "mean_nll": 8.721527389670518,
+      "perplexity": 6133.540243238184,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999472498893738,
+    "total_input_tokens": 106
+  },
+  {
+    "line": 5,
+    "source": "wrong_exchange_rate_for_cash_withdrawal",
+    "prompt": {
+      "tokens": 123,
+      "total_nll": 506.444467914936,
+      "mean_nll": 4.117434698495415,
+      "perplexity": 61.40152662819678,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 8,
+      "total_nll": 0.9103849490078915,
+      "mean_nll": 0.11379811862598643,
+      "perplexity": 1.1205258887424527,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 36.727518411631536,
+      "mean_nll": 7.345503682326307,
+      "perplexity": 1549.2150810485068,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999710321426392,
+    "total_input_tokens": 138
+  },
+  {
+    "line": 6,
+    "source": "cash_withdrawal_charge",
+    "prompt": {
+      "tokens": 93,
+      "total_nll": 426.96497908004585,
+      "mean_nll": 4.591021280430601,
+      "perplexity": 98.59507197900548,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.0007286236850561068,
+      "mean_nll": 0.00014572473701122136,
+      "perplexity": 1.0001457353553764,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 30.08273273028317,
+      "mean_nll": 6.016546546056634,
+      "perplexity": 410.1596794933855,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.999566912651062,
+    "total_input_tokens": 105
+  },
+  {
+    "line": 7,
+    "source": "card_arrival",
+    "prompt": {
+      "tokens": 100,
+      "total_nll": 426.86742891505673,
+      "mean_nll": 4.268674289150567,
+      "perplexity": 71.42688143311355,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 3,
+      "total_nll": 0.0013118758764107952,
+      "mean_nll": 0.0004372919588035984,
+      "perplexity": 1.0004373875848704,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 31.50265880625375,
+      "mean_nll": 6.30053176125075,
+      "perplexity": 544.8615693739373,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999688267707825,
+    "total_input_tokens": 110
+  },
+  {
+    "line": 8,
+    "source": "cash_withdrawal_not_recognised",
+    "prompt": {
+      "tokens": 100,
+      "total_nll": 449.8846918951085,
+      "mean_nll": 4.498846918951085,
+      "perplexity": 89.91339407255138,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 8,
+      "total_nll": 0.0006747546130938531,
+      "mean_nll": 8.434432663673164e-05,
+      "perplexity": 1.0000843478837194,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 33.76793409318634,
+      "mean_nll": 6.7535868186372685,
+      "perplexity": 857.1276168346819,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999397993087769,
+    "total_input_tokens": 115
+  },
+  {
+    "line": 9,
+    "source": "card_arrival",
+    "prompt": {
+      "tokens": 89,
+      "total_nll": 416.6303834172968,
+      "mean_nll": 4.681240263115694,
+      "perplexity": 107.90381874046207,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 3,
+      "total_nll": 0.011017889114555146,
+      "mean_nll": 0.0036726297048517154,
+      "perplexity": 1.0036793820731118,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 39.050484954816056,
+      "mean_nll": 7.810096990963212,
+      "perplexity": 2465.3695422563574,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999217987060547,
+    "total_input_tokens": 99
+  },
+  {
+    "line": 10,
+    "source": "wrong_exchange_rate_for_cash_withdrawal",
+    "prompt": {
+      "tokens": 98,
+      "total_nll": 430.0933902827569,
+      "mean_nll": 4.388708064109764,
+      "perplexity": 80.536303998415,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 8,
+      "total_nll": 0.3126415854476363,
+      "mean_nll": 0.03908019818095454,
+      "perplexity": 1.0398538746954171,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 28.260962314656354,
+      "mean_nll": 5.6521924629312705,
+      "perplexity": 284.91544810347386,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9998722076416016,
+    "total_input_tokens": 113
+  },
+  {
+    "line": 11,
+    "source": "pending_cash_withdrawal",
+    "prompt": {
+      "tokens": 91,
+      "total_nll": 409.9364077590644,
+      "mean_nll": 4.504795689660049,
+      "perplexity": 90.44986231881023,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.15169968968803005,
+      "mean_nll": 0.03033993793760601,
+      "perplexity": 1.030804884087863,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 31.086715828132583,
+      "mean_nll": 6.217343165626517,
+      "perplexity": 501.36940545647553,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999923706054688,
+    "total_input_tokens": 103
+  },
+  {
+    "line": 12,
+    "source": "card_payment_fee_charged",
+    "prompt": {
+      "tokens": 96,
+      "total_nll": 442.81067097943196,
+      "mean_nll": 4.61261115603575,
+      "perplexity": 100.74687228585233,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.0011501263379614102,
+      "mean_nll": 0.00023002526759228204,
+      "perplexity": 1.0002300517254328,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 27.905013360832527,
+      "mean_nll": 5.581002672166505,
+      "perplexity": 265.3375189970892,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999213814735413,
+    "total_input_tokens": 108
+  },
+  {
+    "line": 13,
+    "source": "cash_withdrawal_not_recognised",
+    "prompt": {
+      "tokens": 90,
+      "total_nll": 428.50885193248087,
+      "mean_nll": 4.761209465916454,
+      "perplexity": 116.8872115401105,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 8,
+      "total_nll": 0.010390492453183242,
+      "mean_nll": 0.0012988115566479053,
+      "perplexity": 1.0012996553776596,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 38.82076599876018,
+      "mean_nll": 7.764153199752036,
+      "perplexity": 2354.6637142375753,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999423623085022,
+    "total_input_tokens": 105
+  },
+  {
+    "line": 14,
+    "source": "card_payment_fee_charged",
+    "prompt": {
+      "tokens": 98,
+      "total_nll": 443.8395624958498,
+      "mean_nll": 4.528975127508671,
+      "perplexity": 92.6635440829946,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.00668116334475144,
+      "mean_nll": 0.0013362326689502879,
+      "perplexity": 1.0013371258256005,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 38.23816505126888,
+      "mean_nll": 7.6476330102537755,
+      "perplexity": 2095.6792627903837,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999555945396423,
+    "total_input_tokens": 110
+  },
+  {
+    "line": 15,
+    "source": "wrong_amount_of_cash_received",
+    "prompt": {
+      "tokens": 92,
+      "total_nll": 423.8672865927929,
+      "mean_nll": 4.607253115139053,
+      "perplexity": 100.20850999548341,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.0009387788743424608,
+      "mean_nll": 0.00018775577486849216,
+      "perplexity": 1.0001877734020872,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 40.163401375531976,
+      "mean_nll": 8.032680275106395,
+      "perplexity": 3079.9858293800266,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9999012351036072,
+    "total_input_tokens": 104
+  },
+  {
+    "line": 16,
+    "source": "wrong_amount_of_cash_received",
+    "prompt": {
+      "tokens": 94,
+      "total_nll": 417.08414437359033,
+      "mean_nll": 4.437065365676493,
+      "perplexity": 84.52652290762111,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 5,
+      "total_nll": 0.022957289878718257,
+      "mean_nll": 0.004591457975743651,
+      "perplexity": 1.0046020148699097,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 5,
+      "total_nll": 37.96927547827363,
+      "mean_nll": 7.593855095654726,
+      "perplexity": 1985.9548210984108,
+      "perplexity_overflow": false
+    },
+    "eos_probability_after_reference": 0.9996116757392883,
+    "total_input_tokens": 106
+  }
+]
