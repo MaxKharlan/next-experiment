@@ -7,7 +7,6 @@ import hashlib
 import importlib.metadata
 import json
 import os
-import shutil
 import time
 from dataclasses import asdict
 from pathlib import Path
@@ -20,6 +19,7 @@ from core.eval.data import read_examples
 from core.eval.generate import answer, load_model
 from core.eval.metrics import exact_match
 from core.probes.level1.logits import aggregate, inspect_example
+from jobs.cloud.export import export_tree
 from jobs.kaggle.train_lora import encode, train
 
 
@@ -106,12 +106,14 @@ def main():
         for line in path.read_text().splitlines():
             messages = json.loads(line)["messages"]
             tokens = tokenizer.apply_chat_template(messages, tokenize=True)
+            if hasattr(tokens, "keys"):
+                tokens = tokens["input_ids"]
             assert len(tokens) <= plan["hp"]["context_length"], "Truncation forbidden"
             encode(tokenizer, messages, plan["hp"]["context_length"])
     del tokenizer
     destination = Path(os.environ["NEBIUS_OUTPUT_DIR"])
-    work = Path("/tmp/next-experiment-training")
-    work.mkdir(exist_ok=False)
+    work = Path("/tmp/next-experiment-training") / plan["id"]
+    work.mkdir(parents=True, exist_ok=False)
     runtime = {
         "packages": packages,
         "cuda": torch.version.cuda,
@@ -129,11 +131,17 @@ def main():
     save(destination / "runtime.json", runtime)
     result = {"id": plan["id"], "status": "running", "runtime": runtime, "cells": {}}
     started = time.monotonic()
-    if plan.get("evaluate_base"):
+    if plan.get("reuse_base"):
+        previous = root / plan["reuse_base"]
+        result["base"] = json.loads((previous / "evaluation.json").read_text())
+        export_tree(previous, destination / "base")
+        result["base_reused_from"] = plan["base_reused_from"]
+        save(destination / "result.json", result)
+    elif plan.get("evaluate_base"):
         result["base"] = evaluate(
             snapshot, None, root / "data/check.jsonl", work / "base"
         )
-        shutil.copytree(work / "base", destination / "base", dirs_exist_ok=True)
+        export_tree(work / "base", destination / "base")
         save(destination / "result.json", result)
     for seed in plan["seeds"]:
         for arm in plan["arms"]:
@@ -183,14 +191,14 @@ def main():
                         if path.is_file()
                     },
                 )
-                shutil.copytree(output, destination / name, dirs_exist_ok=True)
+                export_tree(output, destination / name)
                 result["wall_seconds"] = time.monotonic() - started
                 save(destination / "result.json", result)
                 print("completed", name, json.dumps(metrics), flush=True)
             except Exception as error:
                 result.update(status="failed", failed_cell=name, error=str(error))
                 save(destination / "result.json", result)
-                shutil.copytree(output, destination / name, dirs_exist_ok=True)
+                export_tree(output, destination / name)
                 raise
     result.update(status="complete", wall_seconds=time.monotonic() - started)
     save(destination / "result.json", result)

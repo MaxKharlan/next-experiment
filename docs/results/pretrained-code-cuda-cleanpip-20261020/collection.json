@@ -1,0 +1,8 @@
+{
+  "files_sha256": {
+    "base/evaluation.json": "d88c588dace96374867ed9cbd12bcfb519c6df22a9f9f38ba4872b8c5307846c",
+    "base/predictions.json": "38b47528924019941cce4ded21ca93e1c2da4daee32d25f7bb73ab2f47e17c1a",
+    "runtime.json": "d61a3b9fb235c7024ecee34c4bc2fcc02487bec1277e427f1397f930e6bce352"
+  },
+  "job_id": "aijob-e00s96et8m5pkns9m0"
+}

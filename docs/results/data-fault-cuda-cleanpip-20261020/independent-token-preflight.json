@@ -1,0 +1,140 @@
+{
+  "at": "2026-10-20T14:26:00.094275+00:00",
+  "reason": "The frozen worker length guard counted BatchEncoding keys on transformers 5.19.0. Recounted input_ids independently before training; all inputs fit 512. Trainer itself tokenizes correctly. Submitted scientific payload remains unchanged.",
+  "protocol_sha256": "4cb3459f2456ab678e3f41680ca4d165ac6e0b1e2a4c0a2bae9a6477848058b9",
+  "counter_source_sha256": "86155e75b55472a0a9ad9d9b96c7a0d6dd0b15c285d8f890343487978638db67",
+  "files": {
+    "data/check.jsonl": {
+      "rows": 128,
+      "max_tokens": 169,
+      "total_tokens": 14312,
+      "sha256": "a768b1669fc3e9a7f06b5df7c0d739f450e0b5c3da461fd5ac034024723182ec"
+    },
+    "data/logit-validation.jsonl": {
+      "rows": 16,
+      "max_tokens": 138,
+      "total_tokens": 1750,
+      "sha256": "0d6340763e85deaf52285c6790fdfbdc4b12c5d31dc600fd9984176b46f09f69"
+    },
+    "data/overlap-validation-25-control.jsonl": {
+      "rows": 48,
+      "max_tokens": 141,
+      "total_tokens": 5370,
+      "sha256": "ab7410ea55a5bc795e71d43be149d5fafee272c7039f26fe9e662a4d2958018f"
+    },
+    "data/overlap-validation-25-dedup.jsonl": {
+      "rows": 48,
+      "max_tokens": 141,
+      "total_tokens": 5398,
+      "sha256": "dc6f597bc073d916b46d4126681a5df1295201e35495cc4d4f4e15ecde36aaa7"
+    },
+    "data/overlap-validation-25.jsonl": {
+      "rows": 64,
+      "max_tokens": 141,
+      "total_tokens": 7175,
+      "sha256": "bed1b7067511acb7312ddabbb00bd828045e272f0837969815c126d5ebb6e8e5"
+    },
+    "data/overlap-validation-50-control.jsonl": {
+      "rows": 32,
+      "max_tokens": 138,
+      "total_tokens": 3632,
+      "sha256": "413de8408992f4527c47e9bf8a6b6e18e5c93b57e4c2465287253ad03cf1362e"
+    },
+    "data/overlap-validation-50-dedup.jsonl": {
+      "rows": 32,
+      "max_tokens": 141,
+      "total_tokens": 3620,
+      "sha256": "e9cb5d0d0e7e9c09d36387e765546ff3ab6e61c4abf4b3447eb42b5dba913fd7"
+    },
+    "data/overlap-validation-50.jsonl": {
+      "rows": 64,
+      "max_tokens": 141,
+      "total_tokens": 7158,
+      "sha256": "a7127d79d28599f7ea0ec46f8b7f99e533e50a5361fba84e030b642fbd75d8ad"
+    },
+    "data/train.jsonl": {
+      "rows": 256,
+      "max_tokens": 160,
+      "total_tokens": 28374,
+      "sha256": "3d8a3e440c4449f83d4d89ba5c15b72d94bad3e268a7be82f78b5a335127e870"
+    },
+    "data/training/foreign-25.jsonl": {
+      "rows": 256,
+      "max_tokens": 160,
+      "total_tokens": 28753,
+      "sha256": "7c855dfff5125cf386f8d1368e55a8343a49f30438249e91a6d0707730e88810"
+    },
+    "data/training/foreign-50.jsonl": {
+      "rows": 256,
+      "max_tokens": 160,
+      "total_tokens": 29137,
+      "sha256": "f85eb79763430b9689b7d81227df033398dc7cab0ddaf5e9ae38906fc8627607"
+    },
+    "data/training/foreign-control.jsonl": {
+      "rows": 256,
+      "max_tokens": 160,
+      "total_tokens": 29137,
+      "sha256": "b02c6668d060c9e8a83f6de034fb1e29047687265882cd42e35159380ff9c8f3"
+    },
+    "data/training/healthy.jsonl": {
+      "rows": 256,
+      "max_tokens": 160,
+      "total_tokens": 28374,
+      "sha256": "3d8a3e440c4449f83d4d89ba5c15b72d94bad3e268a7be82f78b5a335127e870"
+    },
+    "data/training/labels-25.jsonl": {
+      "rows": 256,
+      "max_tokens": 160,
+      "total_tokens": 28360,
+      "sha256": "d50723e513c50d05c79e8a2546846eaeb37c3a46e52579b002c70ea423a21f56"
+    },
+    "data/training/labels-50.jsonl": {
+      "rows": 256,
+      "max_tokens": 160,
+      "total_tokens": 28384,
+      "sha256": "28ebe9470f224365e43dca877207e6d9a5560bbfbbbc5b0dee7cafd585e47806"
+    },
+    "data/training/labels-control.jsonl": {
+      "rows": 141,
+      "max_tokens": 160,
+      "total_tokens": 15544,
+      "sha256": "348e3256cf047cd59feef98b338bfb7eb18f87821b748a8c5a6c9f3c5dffb29b"
+    },
+    "data/training/labels-repair.jsonl": {
+      "rows": 141,
+      "max_tokens": 160,
+      "total_tokens": 15664,
+      "sha256": "2b9e4ddbad34c4d4bbec726cb757b3e13b57bf646a1b7640aad5e27eb060e873"
+    },
+    "data/training/shift-control.jsonl": {
+      "rows": 256,
+      "max_tokens": 141,
+      "total_tokens": 26995,
+      "sha256": "8be6cd9bd81ef07b0d982d587e26247713028c36ed8043d424425dae5a9fca09"
+    },
+    "data/training/shift-mild.jsonl": {
+      "rows": 256,
+      "max_tokens": 141,
+      "total_tokens": 27620,
+      "sha256": "fdac9dbd5549e841e0873b75586157eb052725c2d0b42bf47951742d9aefde17"
+    },
+    "data/training/shift-repair.jsonl": {
+      "rows": 256,
+      "max_tokens": 141,
+      "total_tokens": 28056,
+      "sha256": "dff426980c87e2d409a7fe0ff5a5e40d81b0c1e559c6516f75522eeefee51ba8"
+    },
+    "data/training/shift-strong.jsonl": {
+      "rows": 256,
+      "max_tokens": 141,
+      "total_tokens": 26995,
+      "sha256": "651c35f9f616905c54749d45334fcadf277a83bfffe5925e21bb83d66f7dfbe4"
+    },
+    "data/validation.jsonl": {
+      "rows": 64,
+      "max_tokens": 141,
+      "total_tokens": 7162,
+      "sha256": "2710181d9f73fb622aa41ccd25d1b848d67a514a668bc944a53a78c6d9a4a975"
+    }
+  }
+}

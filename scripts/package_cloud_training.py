@@ -15,6 +15,7 @@ from scripts.prepare_data_fault_quality import save, write_rows
 
 SOURCES = (
     "jobs/kaggle/train_lora.py",
+    "jobs/cloud/export.py",
     "bench/faults/labels.py",
     "bench/faults/recipe.py",
     "core/training/gradients.py",

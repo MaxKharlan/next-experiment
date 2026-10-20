@@ -1,0 +1,23 @@
+{
+  "id": "rest-code-investigation-20261020",
+  "created_at": "2026-10-20T13:49:45.582021+00:00",
+  "idempotency_key": "rest-code-investigation-20261020-v1",
+  "endpoint": "http://127.0.0.1:8767/api/investigations/code",
+  "seeds": [
+    4201,
+    4202,
+    4203,
+    4204
+  ],
+  "seed_reason": "Four per arm is the smallest count that allows a two-sided unpaired exact permutation p below 0.05; selection before this study outcomes, no changes to implemented rule. No power claim.",
+  "scope": "New end-to-end REST execution on development data already used in the earlier B24 cohort. New seeds; not an independent task or untouched held-out benchmark. No final retrain/test.",
+  "acceptance": "Persist actual HTTP acceptance, streamed events, paid usage, finished report, restart read and idempotent POST without a second execution. Preserve all inconclusive and failed outcomes.",
+  "stopping": "One investigation, no paid retry or extra seeds. Local MPS starts only after all twelve ongoing ledger adapters finish scoring.",
+  "budget": "Global additional TF ledger cap $25; per-request cap $1 including 20% allowance. Local training has no provider training charge.",
+  "prepared_sha256": "55d0baa533809ceb1955b7ab6db8116629de2fe5e9ee9f4798cbf8d04148c90b",
+  "preexecution_amendment": {
+    "at": "2026-10-20T14:12:45.632610+00:00",
+    "reason": "Enforce one structured-output attempt as well as zero SDK retries before any paid dispatch. Data, seeds, recipe and statistical decision unchanged. Previous frozen files preserved.",
+    "previous_prepared_sha256": "510d2e997573f0b754f4e60763f7b08015df8b950145b6b4a1bfb65de0834783"
+  }
+}

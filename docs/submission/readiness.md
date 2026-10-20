@@ -19,7 +19,7 @@ establish residence. Submission accepts binding terms and has not been performed
 | Source and license | Public GitHub repository, Apache-2.0 |
 | Demo URL | Public saved replay; not advertised as a public paid endpoint |
 | Dataset | [MakHH/FT-Fail](https://huggingface.co/datasets/MakHH/FT-Fail), published and verified |
-| Video | Existing GitHub demo MP4 is not the required public YouTube link; new capture pending |
+| Video | Silent 2:06 demo with English captions and a separate caption PDF saved in the owner's Downloads folder, outside the project; YouTube publication pending |
 | Feedback | Repository feedback log; final submission excerpt pending |
 | Track | Coding and Agentic Engineering recommended; owner selection pending |
 | Eligibility and registration | Confirmed by owner on 20 October; confirmation recorded below |

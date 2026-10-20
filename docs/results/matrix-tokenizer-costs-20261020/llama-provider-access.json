@@ -1,0 +1,45 @@
+{
+  "model": "meta-llama/Llama-3.2-1B-Instruct",
+  "job_id": "ftjob-820c72abb1814c2da596103bc39c2fa8",
+  "status": "succeeded",
+  "fine_tuned_model": null,
+  "inference_catalog_match": false,
+  "checkpoints": [
+    {
+      "id": "ftckpt_0e3ec086-1335-48b8-8e15-14cc54e247c0",
+      "files": [
+        {
+          "id": "file-2deb7a19090a59a98a055eb0c2f77518",
+          "filename": "ftckpt_0e3ec086-1335-48b8-8e15-14cc54e247c0/adapter_config.json",
+          "bytes": 1149
+        },
+        {
+          "id": "file-290b50dcf05854eabc18e3d091e583eb",
+          "filename": "ftckpt_0e3ec086-1335-48b8-8e15-14cc54e247c0/adapter_model.safetensors",
+          "bytes": 22570344
+        },
+        {
+          "id": "file-227e8b2cdb205e6c8989926aca309f6e",
+          "filename": "ftckpt_0e3ec086-1335-48b8-8e15-14cc54e247c0/chat_template.jinja",
+          "bytes": 3827
+        },
+        {
+          "id": "file-2597913fbc7254229c0320dd905aaed5",
+          "filename": "ftckpt_0e3ec086-1335-48b8-8e15-14cc54e247c0/checkpoint.meta",
+          "bytes": 177
+        },
+        {
+          "id": "file-6939ce7995bc5462903b81746883b866",
+          "filename": "ftckpt_0e3ec086-1335-48b8-8e15-14cc54e247c0/tokenizer.json",
+          "bytes": 17209920
+        },
+        {
+          "id": "file-4c17b3e3f23c5d66bf170b6cffffbd61",
+          "filename": "ftckpt_0e3ec086-1335-48b8-8e15-14cc54e247c0/tokenizer_config.json",
+          "bytes": 325
+        }
+      ]
+    }
+  ],
+  "user_instruction": "Use Llama through Token Factory, not Hugging Face access."
+}

@@ -1,0 +1,21 @@
+{
+  "spec": {
+    "name": "next-experiment-matrices-export-20261020",
+    "project": "project-e00d05kzpr00n7e8p79fw0",
+    "entry": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/cloud-matrices-export-20261020/launcher/main.py",
+    "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+    "platform": "gpu-l40s-a",
+    "preset": "1gpu-8vcpu-32gb",
+    "bundle_sha256": {
+      "main.py": "fe42fae5552c4f2e9b25ce7270af28cfdc97424b7a602ec6edb3b527ee1997df"
+    },
+    "output_bucket": "next-experiment-artifacts",
+    "output_bucket_id": "storagebucket-e0018072464185852935047",
+    "timeout_hours": 2,
+    "disk_gib": 120
+  },
+  "reservation_usd": 6,
+  "submitted": true,
+  "reserve_basis": "Two hours plus 30 minutes startup/teardown at $1.55/L40S-hour; 120Gi disk and 20% allowance. All prior reservations retained.",
+  "job_id": "aijob-e00emdv72kgz55nqqh"
+}

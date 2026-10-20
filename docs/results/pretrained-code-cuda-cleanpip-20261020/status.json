@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "id": "aijob-e00s96et8m5pkns9m0",
+    "parent_id": "project-e00d05kzpr00n7e8p79fw0",
+    "name": "next-experiment-code-cleanpip-20261020",
+    "resource_version": "1",
+    "created_at": "2026-10-20T14:13:56.189775Z",
+    "updated_at": "2026-10-20T14:13:56.189775Z"
+  },
+  "spec": {
+    "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+    "environment_variables": [
+      {
+        "name": "NEBIUS_OUTPUT_DIR",
+        "value": "/outputs"
+      }
+    ],
+    "container_command": "/bin/sh",
+    "args": "/app/.nebius-run.sh",
+    "volumes": [
+      {
+        "source": "storagebucket-e0018072464185852935047",
+        "source_path": "runs/next-experiment-code-cleanpip-20261020/",
+        "container_path": "/outputs",
+        "mode": "READ_WRITE"
+      }
+    ],
+    "platform": "gpu-l40s-a",
+    "preset": "1gpu-8vcpu-32gb",
+    "shm_size_bytes": "17179869184",
+    "disk": {
+      "type": "NETWORK_SSD",
+      "size_bytes": "128849018880"
+    },
+    "subnet_id": "vpcsubnet-e00sfb4ewqmx2rd5qj",
+    "timeout": "7200s",
+    "injected_files": [
+      {
+        "container_path": "/app/.nebius-code.tar.gz"
+      },
+      {
+        "container_path": "/app/.nebius-run.sh"
+      }
+    ]
+  },
+  "status": {
+    "instances": [
+      {
+        "state": "FAILED",
+        "compute_instance_id": "computeinstance-e00tv34eat3qhdz9th",
+        "compute_instance_state": "RUNNING",
+        "private_ip": "10.0.0.10"
+      }
+    ],
+    "state": "FAILED",
+    "state_details": {
+      "code": "ContainerFailed",
+      "message": "Container exited with non-zero exit code."
+    },
+    "started_at": "2026-10-20T14:24:19.311647457Z",
+    "finished_at": "2026-10-20T14:28:26.770400926Z"
+  }
+}

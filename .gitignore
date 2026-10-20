@@ -248,3 +248,5 @@ demo.mp4
 
 # Process locks for durable cloud submission receipts
 docs/results/**/receipts/*.lock
+docs/results/reference-grid.lock
+docs/results/reference-scoring.lock
