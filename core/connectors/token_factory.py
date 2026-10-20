@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, TypeVar
 
-from openai import BadRequestError, OpenAI, UnprocessableEntityError
+from openai import APIStatusError, BadRequestError, OpenAI, UnprocessableEntityError
 from pydantic import BaseModel, ValidationError
 
 from core.config import Settings, get_settings
@@ -60,6 +60,14 @@ class CallResult:
     tokens_out: int
     cost_usd: float
     latency_ms: int
+    provider_request_id: str | None = None
+    provider_response_id: str | None = None
+    spending_operation_id: str | None = None
+
+
+def provider_identifier(value):
+    """Keep an optional opaque ID, never a response/header object."""
+    return value if isinstance(value, str) and value.strip() else None
 
 
 class StructuredOutputError(RuntimeError):
@@ -84,6 +92,7 @@ class TokenFactory:
     def __init__(self, client: OpenAI, settings: Settings, *, spending=None):
         self.client = client
         self.spending = spending
+        self.before_paid: Callable[[], None] | None = None
         self.settings = settings
         # per model: index into JSON_FORMATS that the endpoint accepted last time
         self.format_level: dict[str, int] = {}
@@ -117,6 +126,8 @@ class TokenFactory:
         temperature: float = 0.2,
         response_format: dict[str, Any] | None = None,
     ) -> CallResult:
+        if self.before_paid is not None:
+            self.before_paid()
         extra: dict[str, Any] = {}
         if response_format is not None:
             extra["response_format"] = response_format
@@ -138,13 +149,37 @@ class TokenFactory:
             reservation = uuid.uuid4().hex
             self.spending.reserve(reservation, f"inference:{model}", amount)
             client = self.client.with_options(max_retries=0)
-        reply = client.chat.completions.create(
-            model=model,
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            **extra,
-        )
+        if self.before_paid is not None:
+            self.before_paid()
+        try:
+            reply = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                **extra,
+            )
+        except APIStatusError as error:
+            if reservation is not None:
+                self.spending.record_provider_receipt(
+                    reservation,
+                    request_id=provider_identifier(error.request_id),
+                    response_id=None,
+                    outcome="http_error",
+                    http_status=error.status_code,
+                )
+            raise
+        request_id = provider_identifier(getattr(reply, "_request_id", None))
+        response_id = provider_identifier(getattr(reply, "id", None))
+        if reservation is not None:
+            # Persist references before usage validation/settlement can fail.
+            self.spending.record_provider_receipt(
+                reservation,
+                request_id=request_id,
+                response_id=response_id,
+                outcome="response",
+                http_status=None,
+            )
         usage = reply.usage
         if reservation is not None and usage is None:
             raise RuntimeError(
@@ -163,6 +198,9 @@ class TokenFactory:
             tokens_out=tokens_out,
             cost_usd=cost,
             latency_ms=int((time.monotonic() - started) * 1000),
+            provider_request_id=request_id,
+            provider_response_id=response_id,
+            spending_operation_id=reservation,
         )
 
     def structured(
@@ -272,6 +310,8 @@ class TokenFactory:
         }
         # A timeout or server error may follow an accepted, billable submission.
         # The SDK must not replay this non-idempotent request automatically.
+        if self.before_paid is not None:
+            self.before_paid()
         job = self.client.with_options(max_retries=0).fine_tuning.jobs.create(
             model=model,
             training_file=training_file,

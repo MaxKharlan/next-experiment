@@ -216,7 +216,13 @@ def test_answer_cut_investigation_survives_restart(
                 break
             time.sleep(0.01)
         assert status == "awaiting_paid_step"
-        response = client.post(f"{root}/paid-step", json={"approve": True})
+        response = client.post(
+            f"{root}/paid-step",
+            json={
+                "approve": True,
+                "proposal_seq": main.store.events_since(inv_id, 0)[-1]["seq"],
+            },
+        )
         assert response.status_code == 200, response.text
         deadline = time.monotonic() + 5
         while time.monotonic() < deadline:
@@ -236,7 +242,11 @@ def test_answer_cut_investigation_survives_restart(
             # The full retrain proposal survives loss of the original in-memory store.
             monkeypatch.setattr(main, "store", InvestigationStore(storage))
             response = client.post(
-                f"{root}/retrain", json={"approve": retrain_approved}
+                f"{root}/retrain",
+                json={
+                    "approve": retrain_approved,
+                    "proposal_seq": main.store.events_since(inv_id, 0)[-1]["seq"],
+                },
             )
             assert response.status_code == 200, response.text
             deadline = time.monotonic() + 5

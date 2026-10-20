@@ -34,3 +34,31 @@ O2 still needs a fresh complete answer-cut API investigation with persisted
 hypotheses, probe outputs, approval, intervention and final report; a public demo
 video and submission packaging are also pending. These replays do not close those
 requirements. Any paid run needs its explicit budget and a frozen evaluation plan.
+
+## Long-history replay check
+
+The 18-epoch recipe replay previously expanded its case card to 690 px inside a
+360 px sidebar at a 1280 px viewport, overlapping the experiment log. The chart
+now labels the first, middle and last epochs and offers all values in a disclosure
+table. Grid children can shrink to their allotted column width.
+
+The [original Figma design](https://www.figma.com/design/qSmrm8hTAQLe3WDAD2XaU1/Next-Experiment-%E2%80%94-investigation-screen?node-id=22-268)
+uses a 360 px case card and a 318 × 76 px chart. Those desktop dimensions remain.
+Browser checks on 19 October 2026 covered the 18-epoch replay at 1280 px and
+embedded 390/320 px viewports, the 18-row table and switching to the measured
+Token Factory answer-cut replay. The latter clears the previous graph and shows
+one measured-experiment step. These checks replay saved data without API calls.
+
+To reproduce, select **Fault 7 recipe: lr 0.0001, rank 16, epochs 18, seed 0 —
+inconclusive**, press Replay, then expand **All 18 epochs**. Check that the card
+and chart stay inside the sidebar and that the log remains separate.
+
+![18-epoch replay after the layout fix](media/replay-long-history.png)
+
+## Development sensitivity result, 20 October
+
+The [format/content report](format-content-development-20261019.md) adds a completed
+four-arm study with13scored models. Direct serialization reaches100% for every
+trained model, but the choice task saturates and two required effect gaps are too
+small. Present this as a rejected development design. It does not supply the
+fresh complete API trace or final-test evidence still required by O2.

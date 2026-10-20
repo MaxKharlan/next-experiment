@@ -35,6 +35,41 @@ for usage displays or ignore it. Investigation status and causal step ordering
 are unchanged. This supports B17 cost accounting; it does not implement a hard
 spending cap, a durable worker queue, or automatic recovery of in-flight jobs.
 
+## Provider references and budget reservations
+
+Each new call has three nullable fields:
+
+| Field | Source and purpose |
+|---|---|
+| `provider_request_id` | SDK response `_request_id`, populated from the provider's request-ID header |
+| `provider_response_id` | Completion response `id`; a separate reference from the HTTP request ID |
+| `spending_operation_id` | Local reservation ID linking this call to its spending ledger; null when no ledger is attached |
+
+The same fields survive the call JSONL, `llm_call` event, resumed call log and
+report export. Each structured-output correction has its own references and
+reservation. Older records and responses without identifiers retain null values;
+no IDs are reconstructed from timestamps or costs.
+
+Before validating usage or settling a reservation, the connector saves a receipt
+in `provider_receipts` in the investigation's `spending.sqlite3`. The receipt
+records the reservation ID, available provider IDs, outcome (`response` or
+`http_error`), HTTP error status when present and receipt time. HTTP errors use
+the SDK exception's request ID. A response without usage can therefore leave
+identifiable evidence while its reservation stays pending. Spending snapshots
+include these receipts, including the snapshot attached to a failed run.
+
+Recording the same receipt twice is harmless; replacing it with conflicting
+references fails. A receipt write failure stops the request sequence before a
+structured-output retry. No headers, credentials, prompts or response text are
+stored in this table. If transport fails before any provider identifier arrives,
+the pending reservation remains the only local evidence. Operators still need
+the provider's records to establish whether it was charged.
+
+Use these identifiers when matching provider request exports or support records.
+They improve traceability for new calls; they do not backfill historical calls,
+represent provider idempotency keys or prove invoice reconciliation. See the
+[current reconciliation record](provider-cost-reconciliation-20261019.md).
+
 ## Investigation screen
 
 The cost card updates as `llm_call` events arrive, grouping calls and tokens by

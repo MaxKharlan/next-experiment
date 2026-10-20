@@ -219,11 +219,12 @@ def test_paid_settlement_resume_uses_existing_actual(tmp_path, monkeypatch):
 
 
 def test_export_verifier_rescores_after_relocation_and_detects_metric_drift(tmp_path):
+    from dataclasses import asdict
+
     from bench.tasks.structured import sha
+    from core.interventions.stats import noise_floor
     from scripts.fresh_answer_calibration import save
     from scripts.report_format_content import accounting, model_summary, verify_export
-    from dataclasses import asdict
-    from core.interventions.stats import noise_floor
 
     data = build(tmp_path / "data", CharTokenizer())
     state, jobs = {}, {}

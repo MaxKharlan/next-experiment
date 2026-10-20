@@ -1,6 +1,6 @@
-# Project status — 19 October 2026
+# Project status — 20 October 2026
 
-Repository baseline: main `aa3009a`, including merged PRs #89–#95. PR #92
+Repository baseline: main `c521180`, including merged PRs through #99. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -10,11 +10,17 @@ The [development sensitivity follow-up](development-sensitivity-20261019.md)
 audits the ceiling and rejects a separately frozen candidate: healthy mean
 26.85%, damaged mean 39.81% on new histories. Its paid pilot stopped before
 submission at the strict base gate. Additional provider spend is $0; the $5
-budget retained its $0.2710464 historical charge estimate at that stop. A new
-[format/content development series](format-content-development-20261019.md) now
-separates direct serialization, history learning, answer cuts and schema-valid
-wrong values in twelve new trainings. Its protocol is frozen before measurements;
-results are pending. Comparison evidence and mode boundaries remain in the [fault review](fault-evidence-review.md).
+budget retained its $0.2710464 historical charge estimate at that stop. Comparison evidence and mode
+boundaries remain in the [fault review](fault-evidence-review.md).
+
+The [format/content development series](format-content-development-20261019.md)
+completed twelve replacements after twelve original jobs were cancelled. All13
+models (including base),936answers and624choice decisions are exported and verified.
+Mean history exact is12.50% format,100% healthy,94.44% cut and76.39% wrong. Three
+frozen gates fail: healthy choice ceiling, insufficient healthy/wrong choice gap,
+and insufficient healthy/cut strict gap. This is a terminal development stop;
+no confirmation seeds or fresh final test are selected. New training token estimates
+are$0.8469312, with$1.1311488 cancelled-job holds retained pending billing.
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
@@ -25,9 +31,9 @@ results are pending. Comparison evidence and mode boundaries remain in the [faul
 | B5 / A13 | Reference tooling and three datasets exist | Full three-task × three-model matrix; baseline/healthy/damaged/fixed metrics and budgeted plan; tracks A/B |
 | B9 | #91: all 210 runs completed; local binary balanced accuracy 96.7%, historical Token Factory transfer 25% | Keep classifiers offline; independent provider-compatible transfer remains a B26 dependency |
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
-| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume | Answer-drop retrain now reserves its estimate; billing reconciliation, recipe retrain/Tavily scope and durable multiworker ownership remain; track B |
+| B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md); new calls persist [provider request references](persisted-llm-usage.md), while invoices and per-call matching remain open; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
-| Public UI | Replay selection clears prior results and ignores stale loads; nested evidence is readable; 36 saved reports | #87 deployment verified against main; fresh trace still pending; this chat |
+| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Deploy and verify the long-history layout fix; fresh trace still pending; this chat |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
 | O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
 
@@ -39,11 +45,10 @@ free before this follow-up; local evaluations run one process at a time.
 
 ## Next work, in order
 
-1. Complete the frozen twelve-training format/content development series and
-   apply its gates without adaptive repeats. It measures both free generation
-   and bounded content discrimination. The earlier sensitivity candidate failed
-   admission; all historical stopping decisions stay terminal and their viewed
-   checks are not final tests.
+1. The format/content series is complete and rejected for confirmation. Use its
+   exported diagnostics for a separately preregistered development data design
+   that tests harder, fresh histories before any new paid series. Do not adapt
+   this cohort's thresholds or repeat seeds. Its viewed checks are not final tests.
 2. Only after a suitable new development design passes its noise/power gates,
    freeze a new confirmation protocol: fresh reference/control comparisons,
    persisted API trace with paid approvals and restart recovery, then final test
@@ -53,9 +58,14 @@ free before this follow-up; local evaluations run one process at a time.
    demonstrate clean-prefix false alarms and alternative JSON causes; these
    constructed counts do not estimate deployment likelihoods.
    Keep T=1 and both experimental B9 classifiers out of live diagnosis.
-4. Reconcile provider billing and durable multiworker ownership as B17 operational
-   follow-ups. The existing persistence/approval implementation is already merged;
-   invoice reconciliation must not be inferred from token estimates.
+4. Complete the remaining [billing reconciliation](provider-cost-reconciliation-20261019.md):
+   224 completed training jobs match aggregate Usage ($8.0379272 before tax);
+   the new series adds $0.8469312 in token estimates, while 12 cancelled originals
+   retain $1.1311488 in holds. Their newer aggregate Usage match remains open.
+   Obtain invoice evidence, resolve the $0.01 displayed-total difference and
+   match inference calls when provider records permit. New calls now retain provider
+   request/response IDs and their reservation IDs for that matching. SQLite worker ownership,
+   recipe reservations and persistent Tavily credits are implemented.
 5. Resolve supported scope for faults 2–5, embeddings/Nano/cleanlab, B24 pretrained
    confirmation and reproducible regression export with tracks A/B. B24 CPU
    synthetic evidence does not validate a pretrained model or a full mode-B trace.
@@ -63,4 +73,5 @@ free before this follow-up; local evaluations run one process at a time.
    video and submit the package. The repository cannot establish those facts.
 
 Historical heldout cases have been viewed and reused; their metrics remain
-exploratory evidence. No new automation is scheduled for this continuation.
+exploratory evidence. Local MPS evaluation is complete. The periodic completion
+check is to be disabled when this result PR is published.

@@ -24,6 +24,21 @@ const context = vm.createContext({
 });
 vm.runInContext(script.replace(/\ninit\(\);\s*$/, ''), context);
 const run = code => vm.runInContext(code, context);
+// Long histories keep every observation without forcing eighteen axis labels
+// into the 318px chart. Browser geometry checks cover the accompanying CSS.
+const longCurve = run('sparkline(Array.from({length:18}, (_,i) => ({epoch:i+1,train_loss:2-i/20,valid_loss:2.1-i/30})))');
+assert.equal((longCurve.match(/<span><b>/g) || []).length, 3);
+assert.match(longCurve, /epoch 1<\/span>/);
+assert.match(longCurve, /epoch 18<\/span>/);
+assert.match(longCurve, /All 18 epochs/);
+assert.equal((longCurve.match(/<tr><td>/g) || []).length, 18);
+for (const polyline of longCurve.matchAll(/<polyline points="([^"]+)"/g)) {
+  assert.equal(polyline[1].split(' ').length, 18);
+}
+const shortCurve = run('sparkline([{epoch:"<img>",train_loss:1,valid_loss:1}])');
+assert.match(shortCurve, /epoch &lt;img&gt;/);
+assert.equal((shortCurve.match(/<span><b>/g) || []).length, 1);
+assert.doesNotMatch(shortCurve, /<details|<img>/);
 get('demo').value = 'first';
 run('staticMode([{name:"first"},{name:"second"}]);');
 run('proof = {}; finish({});');

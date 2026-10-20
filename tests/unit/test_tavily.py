@@ -110,3 +110,144 @@ def test_sources_outside_the_search_are_dropped():
     )
     (kept,) = clean_hypotheses([hyp], "A", {"https://a.example/lr"})
     assert kept.sources == ["https://a.example/lr"]
+
+
+def test_limits_survive_new_clients(tmp_path):
+    calls = []
+    limits = {"credit_budget": 2, "max_credits_per_investigation": 1}
+    _tavily(tmp_path, calls, **limits).search("one", investigation_id="a")
+    fresh = _tavily(tmp_path, calls, **limits)
+    with pytest.raises(TavilyBudgetError):
+        fresh.search("two", investigation_id="a")
+    fresh.search("two", investigation_id="b")
+    with pytest.raises(TavilyBudgetError):
+        _tavily(tmp_path, calls, **limits).search("three", investigation_id="c")
+    assert len(calls) == 2 and fresh.total_credits == 2
+
+
+def test_timeout_retains_reservation_and_blocks_duplicate_after_restart(tmp_path):
+    calls = []
+
+    def timeout(request):
+        calls.append(request)
+        raise httpx.ReadTimeout("Response lost", request=request)
+
+    tavily = Tavily(
+        "test",
+        LocalStorage(tmp_path),
+        client=httpx.Client(transport=httpx.MockTransport(timeout)),
+    )
+    with pytest.raises(httpx.ReadTimeout):
+        tavily.search("one", investigation_id="a")
+    fresh = _tavily(tmp_path, calls)
+    with pytest.raises(TavilyBudgetError, match="reconcile"):
+        fresh.search("one", investigation_id="b")
+    assert len(calls) == 1 and fresh.total_credits == 1
+    assert fresh.ledger.snapshot()["operations"][0]["status"] == "pending"
+
+
+def test_concurrent_clients_cannot_spend_the_last_credit_twice(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier
+
+    calls = []
+    clients = [_tavily(tmp_path, calls, credit_budget=1) for _ in range(2)]
+    barrier = Barrier(2)
+
+    def run(i):
+        barrier.wait(timeout=5)
+        try:
+            clients[i].search(str(i), investigation_id=str(i))
+            return True
+        except TavilyBudgetError:
+            return False
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        assert sorted(pool.map(run, range(2))) == [False, True]
+    assert len(calls) == 1 and clients[0].total_credits == 1
+
+
+@pytest.mark.parametrize(
+    "usage,expected", [(None, 2), ({"credits": 0}, 0), ({"credits": 3}, 3)]
+)
+def test_usage_records_zero_fallback_and_overruns(tmp_path, usage, expected):
+    calls = []
+
+    def reply(request):
+        calls.append(request)
+        return httpx.Response(200, json={"results": [], "usage": usage})
+
+    tavily = Tavily(
+        "test",
+        LocalStorage(tmp_path),
+        credit_budget=2,
+        client=httpx.Client(transport=httpx.MockTransport(reply)),
+    )
+    tavily.search("one", investigation_id="a", search_depth="advanced")
+    assert tavily.total_credits == expected
+    if expected >= 2:
+        with pytest.raises(TavilyBudgetError):
+            tavily.search("two", investigation_id="b")
+        assert len(calls) == 1
+
+
+@pytest.mark.parametrize("credits", [-1, True, "1"])
+def test_invalid_usage_keeps_hold(tmp_path, credits):
+    tavily = Tavily(
+        "test",
+        LocalStorage(tmp_path),
+        client=httpx.Client(
+            transport=httpx.MockTransport(
+                lambda request: httpx.Response(
+                    200, json={"usage": {"credits": credits}}
+                )
+            )
+        ),
+    )
+    with pytest.raises(ValueError, match="finite"):
+        tavily.search("one", investigation_id="a")
+    assert tavily.ledger.snapshot()["operations"][0]["status"] == "pending"
+
+
+def test_lost_cache_write_does_not_repeat_payment(tmp_path, monkeypatch):
+    calls = []
+    tavily = _tavily(tmp_path, calls)
+
+    def fail(*args):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(tavily.storage, "put_text", fail)
+    with pytest.raises(OSError):
+        tavily.search("one", investigation_id="a")
+    fresh = _tavily(tmp_path, calls)
+    with pytest.raises(TavilyBudgetError, match="reconcile"):
+        fresh.search("one", investigation_id="a")
+    assert len(calls) == 1 and fresh.total_credits == 1
+
+
+def test_limit_change_and_automatic_depth_fail_before_request(tmp_path):
+    calls = []
+    tavily = _tavily(tmp_path, calls, credit_budget=1)
+    with pytest.raises(ValueError, match="refusing to reset"):
+        _tavily(tmp_path, calls, credit_budget=2)
+    with pytest.raises(ValueError, match="Automatic"):
+        tavily.search("one", investigation_id="a", auto_parameters=True)
+    assert not calls
+
+
+def test_nonlocal_storage_requires_explicit_shared_ledger(tmp_path):
+    from unittest.mock import Mock
+
+    from core.config import Settings
+    from core.connectors.storage import Storage
+
+    storage = Mock(spec=Storage)
+    with pytest.raises(ValueError, match="shared ledger_path"):
+        Tavily("test", storage)
+    settings = Settings(
+        _env_file=None,
+        tavily_api_key="test",
+        tavily_ledger_path=str(tmp_path / "credits.db"),
+    )
+    tavily = Tavily.from_settings(storage, settings)
+    assert tavily.total_credits == 0

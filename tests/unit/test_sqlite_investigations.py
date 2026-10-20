@@ -18,10 +18,10 @@ def settings(tmp_path):
 
 def test_snapshot_write_failure_keeps_previous_state(tmp_path):
     repo = SQLiteInvestigations(settings(tmp_path).database_url)
-    repo.save({"id": "one", "status": "running"}, [])
+    repo.save({"id": "one", "status": "awaiting_approval"}, [])
     with pytest.raises(StatementError):
         repo.save({"id": "one", "status": "finished"}, [{"invalid": object()}])
-    assert repo.load("one") == ({"id": "one", "status": "running"}, [])
+    assert repo.load("one") == ({"id": "one", "status": "awaiting_approval"}, [])
 
 
 def test_waiting_restart_and_one_answer(tmp_path):
@@ -46,11 +46,13 @@ def test_interrupted_run_recovers_once_and_keeps_events(tmp_path):
     store.emit(inv_id, "started", {})
     store.emit(inv_id, "usage", {"cost_usd": 0.1})
     fresh = get_investigation_store(cfg)
+    assert fresh.list()[0]["status"] == "running"
+    fresh.repository.clock = lambda: store.repository.clock() + 61
     assert fresh.list()[0]["status"] == "failed"
     again = get_investigation_store(cfg)
     events = again.snapshot(inv_id)["events"]
     assert [e["seq"] for e in events] == [0, 1, 2]
-    assert events[-1]["data"]["reason"] == "process_restart"
+    assert events[-1]["data"]["reason"] == "lease_expired"
     assert events[1]["data"]["cost_usd"] == 0.1
 
 

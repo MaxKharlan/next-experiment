@@ -68,9 +68,9 @@
 
   /* layout */
   .content { max-width: 1440px; margin: 0 auto; padding: 28px 32px 48px; display: grid; gap: 24px; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; display: grid; gap: 16px; align-content: start; }
+  .card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; display: grid; gap: 16px; align-content: start; }
   .main { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 24px; align-items: start; }
-  .side { display: grid; gap: 16px; }
+  .side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
   body.idle .main { grid-template-columns: minmax(0, 1fr); }
   body.idle .side, body.idle .metrics, body.idle #statusBadge { display: none; }
 
@@ -100,18 +100,23 @@
 
   /* case */
   .quote { margin: 0; border-left: 3px solid var(--line-strong); padding-left: 12px; }
-  .kv { display: grid; grid-template-columns: 104px 1fr; gap: 8px 12px; margin: 0; font-size: 12.5px; }
+  .kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 8px 12px; margin: 0; font-size: 12.5px; }
   .kv dt { color: var(--muted); }
-  .kv dd { margin: 0; font: 12px/18px var(--font-mono); }
+  .kv dd { margin: 0; overflow-wrap: anywhere; font: 12px/18px var(--font-mono); }
   .fix { color: var(--accent); font-weight: 500; }
   .was { color: var(--muted); font-weight: 400; }
-  .spark { display: grid; gap: 8px; }
-  .spark-legend { display: flex; gap: 14px; align-items: center; font-size: 12.5px; }
+  .spark { display: grid; gap: 8px; min-width: 0; }
+  .spark-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 12.5px; }
   .spark-legend .sw { display: inline-flex; align-items: center; gap: 6px; }
-  .spark svg { width: 100%; height: 76px; display: block; overflow: visible; }
-  .spark-legend svg { width: 18px; height: 8px; }
+  .spark > svg { width: 100%; height: 76px; display: block; overflow: visible; }
+  .spark-legend svg { display: block; flex: none; width: 18px; height: 8px; }
   .spark-axis { display: flex; justify-content: space-between; font: 12px/17px var(--font-mono); color: var(--muted); }
-  .spark-axis span { display: grid; }
+  .spark-axis span { display: grid; white-space: nowrap; }
+  .spark-values { min-width: 0; font-size: 12.5px; }
+  .spark-values summary { cursor: pointer; color: var(--muted); }
+  .spark-values table { width: 100%; table-layout: fixed; border-collapse: collapse; margin-top: 8px; }
+  .spark-values th, .spark-values td { padding: 4px; text-align: right; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+  .spark-values th:first-child, .spark-values td:first-child { text-align: left; }
   .spark-axis span:nth-child(n+2):not(:last-child) { text-align: center; }
   .spark-axis span:last-child:not(:first-child) { text-align: right; }
   .spark-axis b { font-weight: 500; color: var(--ink); }
@@ -607,10 +612,10 @@ const HANDLERS = {
   llm_call: d => recordCall(d),
   step: d => { showStep(d); if (recordedCalls.size) showCost({}); },
   finished: d => { finish(d); $("reportNote").textContent = d.measured_experiment ? "Saved experiment." : "Completed investigation."; done(); },
-  awaiting_approval: d => { showCost(d.summary); askApproval(d.plan);
+  awaiting_approval: (d, seq) => { showCost(d.summary); askApproval(d.plan, seq);
     $("reportNote").textContent = "Partial report: awaiting your decision.";
     setStatus(null, null, "waiting", "needs your approval"); },
-  awaiting_paid_step: d => { askPaidStep(d.proposal);
+  awaiting_paid_step: (d, seq) => { askPaidStep(d.proposal, seq);
     $("reportNote").textContent = "Partial report: awaiting your decision.";
     setStatus(null, null, "waiting", "needs your approval"); },
   resumed: d => { setApproval(d.approved ? "Approved" : "Declined");
@@ -628,7 +633,7 @@ function watch(id) {
   $("reportDownload").href = `/api/investigations/${encodeURIComponent(id)}/report?download=true`;
   $("reportActions").hidden = false;
   source = new EventSource(`/api/investigations/${encodeURIComponent(id)}/events`);
-  for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data)));
+  for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data), Number(e.lastEventId)));
 }
 function stop() { replayVersion += 1; if (source) source.close(); source = null; clearTimeout(timer); queue = []; }
 function done() { stop(); $("start").disabled = false; $("start").textContent = "Replay"; }
@@ -772,6 +777,10 @@ function sparkline(points) {
   const lo = Math.min(...all), hi = Math.max(...all), span = hi - lo || 1;
   const x = (i) => 6 + i * (288 / Math.max(1, points.length - 1));
   const y = (v) => 6 + (1 - (v - lo) / span) * 62;
+  // Keep the original three-label design, including first/last epochs. All
+  // observations remain in the curve and the expandable data table.
+  const ticks = [...new Set([0, Math.floor((points.length - 1) / 2), points.length - 1])];
+  const value = v => v == null || !Number.isFinite(Number(v)) ? "—" : Number(v).toFixed(2);
   const line = (vals) => vals.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
   return `<div class="spark">
     <div class="spark-legend"><span class="label">Loss per epoch</span>
@@ -782,7 +791,10 @@ function sparkline(points) {
       <polyline points="${line(valid)}" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
       <polyline points="${line(train)}" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
     </svg>
-    <div class="spark-axis">${points.map((p, i) => `<span><b>${Number(p.train_loss).toFixed(2)}</b>epoch ${p.epoch ?? i + 1}</span>`).join("")}</div>
+    <div class="spark-axis">${ticks.map(i => `<span><b>${value(points[i].train_loss)}</b>epoch ${esc(points[i].epoch ?? i + 1)}</span>`).join("")}</div>
+    ${points.length > 3 ? `<details class="spark-values"><summary>All ${points.length} epochs</summary>
+      <table><thead><tr><th scope="col">Epoch</th><th scope="col">Train loss</th><th scope="col">Validation loss</th></tr></thead>
+      <tbody>${points.map((p, i) => `<tr><td>${esc(p.epoch ?? i + 1)}</td><td>${value(p.train_loss)}</td><td>${value(p.valid_loss)}</td></tr>`).join("")}</tbody></table></details>` : ""}
   </div>`;
 }
 
@@ -1026,21 +1038,21 @@ function diffHtml(text) {
   return (text || "").split("\n").map(l => `<span class="${l.startsWith("+++") || l.startsWith("---") || l.startsWith("@@") ? "hdr" : l.startsWith("+") ? "add" : l.startsWith("-") ? "del" : ""}">${esc(l)}</span>`).join("\n");
 }
 
-function askApproval(plan) {
+function askApproval(plan, proposalSeq) {
   const box = $("approval");
   if (!box) return;
   box.innerHTML = `<button id="yes" class="btn btn-primary">Retrain for ${money(plan.cost_usd)}</button><button id="no" class="btn btn-ghost">Not now</button>`;
   const answer = async (approve) => {
     $("yes").disabled = $("no").disabled = true;
     const res = await fetch(`/api/investigations/${current}/retrain`, {method: "POST",
-      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve, proposal_seq: proposalSeq})});
     if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted small">${esc((await res.json()).detail)}</span>`);
   };
   $("yes").onclick = () => answer(true);
   $("no").onclick = () => answer(false);
 }
 
-function askPaidStep(proposal) {
+function askPaidStep(proposal, proposalSeq) {
   const box = $("approval");
   if (!box) return;
   const label = proposal.kind === "causal_check" ? "causal check" : proposal.kind;
@@ -1048,7 +1060,7 @@ function askPaidStep(proposal) {
   const answer = async (approve) => {
     $("yes").disabled = $("no").disabled = true;
     const res = await fetch(`/api/investigations/${current}/paid-step`, {method: "POST",
-      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve})});
+      headers: {"Content-Type": "application/json"}, body: JSON.stringify({approve, proposal_seq: proposalSeq})});
     if (!res.ok) box.insertAdjacentHTML("beforeend", `<span class="muted small">${esc((await res.json()).detail)}</span>`);
   };
   $("yes").onclick = () => answer(true);
