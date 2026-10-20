@@ -1,0 +1,13 @@
+{
+  "observed_date": "2026-10-20",
+  "method": "Read-only Safari accessibility inspection of Token Factory Usage and Payments",
+  "usage_url": "https://tokenfactory.nebius.com/organization/usage",
+  "displayed_updated_at": "11:58 UTC",
+  "subtotal_usd": 9.54,
+  "vat_usd": 0.86,
+  "total_usd": 10.40,
+  "account_balance_usd": 45.80,
+  "payments_url": "https://tokenfactory.nebius.com/organization/payments",
+  "payments_state": "No documents; all dates",
+  "decision": "No newer billing evidence for the afternoon jobs. Retain cancellation and ambiguous reserves. Account balance and aggregate Usage are not per-job invoice reconciliation."
+}

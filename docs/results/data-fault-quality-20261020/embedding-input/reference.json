@@ -1,0 +1,1026 @@
+[
+  {
+    "id": "train-000",
+    "text": "Why have I been charged a small fee to use my card?"
+  },
+  {
+    "id": "train-001",
+    "text": "My ATM withdrawal is taking forever"
+  },
+  {
+    "id": "train-002",
+    "text": "There is a withdrawal waiting."
+  },
+  {
+    "id": "train-003",
+    "text": "When I tried to access my cash, I wasn't allowed!"
+  },
+  {
+    "id": "train-004",
+    "text": "When I was abroad the exchange rate for me was wrong."
+  },
+  {
+    "id": "train-005",
+    "text": "what is going on with my cash withdrawal? the exchange rate is wrong"
+  },
+  {
+    "id": "train-006",
+    "text": "Hi, Could you please help me as someone has stolen my wallet few hours ago. And a withdrawal is made, please help immediately. As i don't want to suffer more."
+  },
+  {
+    "id": "train-007",
+    "text": "When I went to withdraw cash today the ATM gave me the wrong amount of cash. The app is showing a larger amount."
+  },
+  {
+    "id": "train-008",
+    "text": "Please tell me why I would have to pay a fee for a recent payment. Thanks."
+  },
+  {
+    "id": "train-009",
+    "text": "Why is this fee being charged to me after using my card?"
+  },
+  {
+    "id": "train-010",
+    "text": "The ATM didn't give me enough money! I asked for more than it gave. What do I do?"
+  },
+  {
+    "id": "train-011",
+    "text": "Why is the app showing a still pending message on a withdraw that has already been done?"
+  },
+  {
+    "id": "train-012",
+    "text": "Why am I being charged to make cash withdrawals? I thought they were supposed to be free!"
+  },
+  {
+    "id": "train-013",
+    "text": "My card isn't here yet."
+  },
+  {
+    "id": "train-014",
+    "text": "Why do I see a random withdrawal in my app?"
+  },
+  {
+    "id": "train-015",
+    "text": "What's the expected wait time to recieve my new card?"
+  },
+  {
+    "id": "train-016",
+    "text": "There are multiple instances where you added a fee to the payment, as well as some where you didn't. Do you have an outline of when a fee will be added?"
+  },
+  {
+    "id": "train-017",
+    "text": "My card appears to have never arrived?"
+  },
+  {
+    "id": "train-018",
+    "text": "Why was my atm withdrawl declined"
+  },
+  {
+    "id": "train-019",
+    "text": "I think I was charged a different exchange rate than what was posted at the time."
+  },
+  {
+    "id": "train-020",
+    "text": "I think that there was an error in calculating the exchange rate.  I recently withdrew cash and received much less than expected."
+  },
+  {
+    "id": "train-021",
+    "text": "ATM apparently not working?  Couldn't access funds in my account?"
+  },
+  {
+    "id": "train-022",
+    "text": "The atm didn'y give me all the cash"
+  },
+  {
+    "id": "train-023",
+    "text": "What should I do if I see an unauthorized withdrawal on my statement?"
+  },
+  {
+    "id": "train-024",
+    "text": "Since when do you charge to make a withdrawal? I've always done it for free. So how much is it now?"
+  },
+  {
+    "id": "train-025",
+    "text": "I tried to get money out of an ATM in Notting Hill earlier, but it didn't work. Is my card actually working? It's the first time I tried using it"
+  },
+  {
+    "id": "train-026",
+    "text": "When I went to $100, all the machine would give me was $20."
+  },
+  {
+    "id": "train-027",
+    "text": "There are funds showing in my app that I did not receive."
+  },
+  {
+    "id": "train-028",
+    "text": "Hello, I tried to take some cash out of the ATM but I looked at my statement and it still shows that it's pending. Is the machine broken? Will I receive my money back or will I be charged for this?"
+  },
+  {
+    "id": "train-029",
+    "text": "The transaction for the cash I pulled out of the ATM earlier is pending in the app, but how if I already have the cash?"
+  },
+  {
+    "id": "train-030",
+    "text": "Please tell my why I was charged a fee for using my card?"
+  },
+  {
+    "id": "train-031",
+    "text": "Explain the extra fee on my card when paying."
+  },
+  {
+    "id": "train-032",
+    "text": "Somebody is taking money out of my account without my approval in another town separate from me. Please place a freeze on my account until I can make it to the bank."
+  },
+  {
+    "id": "train-033",
+    "text": "My new card has not been delivered to my home yet. What is going on?"
+  },
+  {
+    "id": "train-034",
+    "text": "My app says I withdraw money from my account from an ATM."
+  },
+  {
+    "id": "train-035",
+    "text": "Why did I get charged extra?"
+  },
+  {
+    "id": "train-036",
+    "text": "I haven't received my card and am worried it is lost."
+  },
+  {
+    "id": "train-037",
+    "text": "The ATM will not let me get cash, WHY?"
+  },
+  {
+    "id": "train-038",
+    "text": "Can the exchange rate change while I am in the process of making a withdrawal?"
+  },
+  {
+    "id": "train-039",
+    "text": "Is my card working? It's the first time I tried using it I tried to get money out of an ATM, but got nothing."
+  },
+  {
+    "id": "train-040",
+    "text": "When will I recieve my new card?"
+  },
+  {
+    "id": "train-041",
+    "text": "My new card hasn't came in."
+  },
+  {
+    "id": "train-042",
+    "text": "Why is my cash withdrawal pending?"
+  },
+  {
+    "id": "train-043",
+    "text": "I got cash and was charged a fee that shouldn't be there!"
+  },
+  {
+    "id": "train-044",
+    "text": "I didnt get the correct exchange rate for getting cash"
+  },
+  {
+    "id": "train-045",
+    "text": "I was declined when I tried to take out cash!"
+  },
+  {
+    "id": "train-046",
+    "text": "I got less cash than what I specified for through the ATM."
+  },
+  {
+    "id": "train-047",
+    "text": "What is wrong with the exchange rate? This should have been a much higher amount of cash for that to apply."
+  },
+  {
+    "id": "train-048",
+    "text": "When do i get charged a fee for using the card?"
+  },
+  {
+    "id": "train-049",
+    "text": "I am confused why there is cash I did not accept in my account"
+  },
+  {
+    "id": "train-050",
+    "text": "I paid with my card and was charged extra"
+  },
+  {
+    "id": "train-051",
+    "text": "Somebody stole my wallet and is using my card! Can you do something so they can't keep taking my money?"
+  },
+  {
+    "id": "train-052",
+    "text": "The bank charged me fees for withdrawing cash!"
+  },
+  {
+    "id": "train-053",
+    "text": "Why wouldn't the ATM give me my money?"
+  },
+  {
+    "id": "train-054",
+    "text": "Why was i charged for making a withdrawal? After i went grocery shopping i withdrew some money from my account and now there is another charge."
+  },
+  {
+    "id": "train-055",
+    "text": "Explain pending transactions."
+  },
+  {
+    "id": "train-056",
+    "text": "Why and I being charged this fee?"
+  },
+  {
+    "id": "train-057",
+    "text": "What is the strange cash withdrawal on my statement?"
+  },
+  {
+    "id": "train-058",
+    "text": "I was declined when trying to withdrawal cash!"
+  },
+  {
+    "id": "train-059",
+    "text": "Why wont the ATM give me cash?"
+  },
+  {
+    "id": "train-060",
+    "text": "ATM only gave me $20 instead of $100"
+  },
+  {
+    "id": "train-061",
+    "text": "The app says I made a cash withdrawal even though I didn't."
+  },
+  {
+    "id": "train-062",
+    "text": "What is this withdrawal as I do not remember making it."
+  },
+  {
+    "id": "train-063",
+    "text": "I have a fee showing from last time I used my card."
+  },
+  {
+    "id": "train-064",
+    "text": "Why did I get charged when getting cash?"
+  },
+  {
+    "id": "train-065",
+    "text": "The ATM would not give me cash,why?"
+  },
+  {
+    "id": "train-066",
+    "text": "I removed cash from an ATM earlier but it shows up as pending in the app. How can this still be pending, I already received the cash?"
+  },
+  {
+    "id": "train-067",
+    "text": "I have a withdrawal waiting to go through."
+  },
+  {
+    "id": "train-068",
+    "text": "Can i get money in my home currency at my ATM ?I am on holiday and bit concerned because i do not have any cash with me .Is it possible to withdraw without any additional cost."
+  },
+  {
+    "id": "train-069",
+    "text": "help, I see money missing I didn't take out."
+  },
+  {
+    "id": "train-070",
+    "text": "Hi, I used an ATM today to take money out of my account, but the amount it gave me is not the amount I requested. What should I do?"
+  },
+  {
+    "id": "train-071",
+    "text": "I did not have the right exchange rate applied to my situation of pulling out cash"
+  },
+  {
+    "id": "train-072",
+    "text": "When I got cash, the exchange rate applied was wrong."
+  },
+  {
+    "id": "train-073",
+    "text": "I am inquiring about why there was an extra fee charged when I used an ATM."
+  },
+  {
+    "id": "train-074",
+    "text": "The app says I got cash from an ATM but I didn't"
+  },
+  {
+    "id": "train-075",
+    "text": "Why would the app show a withdrawal that I did not make?"
+  },
+  {
+    "id": "train-076",
+    "text": "I can't get money out of the ATM. Is my card actually working? It's the first time I tried using it"
+  },
+  {
+    "id": "train-077",
+    "text": "Why is there some cash that I did not deposit in my account?"
+  },
+  {
+    "id": "train-078",
+    "text": "I don't recognize this withdrawal on my statement"
+  },
+  {
+    "id": "train-079",
+    "text": "Is there a fee for paying by card?"
+  },
+  {
+    "id": "train-080",
+    "text": "Why hasn't my withdrawal shown on my statement?"
+  },
+  {
+    "id": "train-081",
+    "text": "Why was I not able to get cash from the ATM?"
+  },
+  {
+    "id": "train-082",
+    "text": "Why was I declined from getting cash?"
+  },
+  {
+    "id": "train-083",
+    "text": "I believe i was charged for making a withdrawal after i went grocery shopping. Are you guys charging for this now?"
+  },
+  {
+    "id": "train-084",
+    "text": "I believe my card has been compromised because of a strange withdrawal"
+  },
+  {
+    "id": "train-085",
+    "text": "Where can I check to see if there will be a fee added to my payment? Are there specific instances that will result in a fee added?"
+  },
+  {
+    "id": "train-086",
+    "text": "How can I get cash back? The ATM just gave me the wrong amount that I've been actually charged though..."
+  },
+  {
+    "id": "train-087",
+    "text": "The ATM didn't give me what I asked for but my balance says it did"
+  },
+  {
+    "id": "train-088",
+    "text": "I got some cash in the ATM but its still pending"
+  },
+  {
+    "id": "train-089",
+    "text": "Why was I charged for getting cash?"
+  },
+  {
+    "id": "train-090",
+    "text": "My wallet was just stolen, and they've already used my card! Please help, I can't afford to lose more money!"
+  },
+  {
+    "id": "train-091",
+    "text": "My withdrawal is pending, why?"
+  },
+  {
+    "id": "train-092",
+    "text": "Is there a way I can check on the card on route to me?"
+  },
+  {
+    "id": "train-093",
+    "text": "Am I able to track the card that was just sent to me?"
+  },
+  {
+    "id": "train-094",
+    "text": "I tried to withdraw some money from an ATM this morning but wasn't able to get the amount of cash I needed. The amount in the app says what I was trying to withdraw was deducted, but I don't have any money. What do I do about this?"
+  },
+  {
+    "id": "train-095",
+    "text": "Can you check the exchange rate on a cash transaction I did overseas"
+  },
+  {
+    "id": "train-096",
+    "text": "I was charged a fee with my cash withdrawal that I shouldn't have been charged."
+  },
+  {
+    "id": "train-097",
+    "text": "I see an unauthorized withdraw."
+  },
+  {
+    "id": "train-098",
+    "text": "I was trying to use my card and it was declined, when I tried to find out what happened I found cash withdraw for $500 that I didn't do.  Can you please help figure this out?"
+  },
+  {
+    "id": "train-099",
+    "text": "Can I track the card you sent to me?"
+  },
+  {
+    "id": "train-100",
+    "text": "The exchange rate was wrong in the foreign country I got cash in."
+  },
+  {
+    "id": "train-101",
+    "text": "I see a fee that I think was charged because I paid by card."
+  },
+  {
+    "id": "train-102",
+    "text": "Hello, I didn't receive the right amount on my ATM transaction,  the app shows the correct amount how can we fix this"
+  },
+  {
+    "id": "train-103",
+    "text": "My card still hasn't arrived after two weeks, now what?"
+  },
+  {
+    "id": "train-104",
+    "text": "I still haven't received my card in the mail"
+  },
+  {
+    "id": "train-105",
+    "text": "Can I make a withdraw in my home currency at an ATM? I'm on vacation and am a bit worried because I don't have cash with me. Is it possible to withdraw here without any additional costs or fees?"
+  },
+  {
+    "id": "train-106",
+    "text": "I got a strange cash withdrawal in my statement"
+  },
+  {
+    "id": "train-107",
+    "text": "what is the exchange rate when i get cash"
+  },
+  {
+    "id": "train-108",
+    "text": "I made an ATM withdraw it didn't give me the amount I asked for but is showing a withdraw for that amount."
+  },
+  {
+    "id": "train-109",
+    "text": "my cash out is still pending"
+  },
+  {
+    "id": "train-110",
+    "text": "Why was I charged an extra fee when using an ATM?"
+  },
+  {
+    "id": "train-111",
+    "text": "what is this extra charge with my purchase?"
+  },
+  {
+    "id": "train-112",
+    "text": "Why am I being charged for withdrawing cash but haven't in the past?"
+  },
+  {
+    "id": "train-113",
+    "text": "I needed some cash while abroad, and I'm pretty sure the wrong exchange rate was applied."
+  },
+  {
+    "id": "train-114",
+    "text": "I don't think the exchange rate was right."
+  },
+  {
+    "id": "train-115",
+    "text": "totally unacceptable.  I'm stranded with no cash because the ATM wouldn't give me any money!"
+  },
+  {
+    "id": "train-116",
+    "text": "i did not get any money but still was charged"
+  },
+  {
+    "id": "train-117",
+    "text": "I didn't get all the cash I asked for"
+  },
+  {
+    "id": "train-118",
+    "text": "Where did my money go? I'm not able to withdraw it from my ATM."
+  },
+  {
+    "id": "train-119",
+    "text": "I was issued a new card a week ago but still haven't received it. How long will it be until I receive it?"
+  },
+  {
+    "id": "train-120",
+    "text": "How can I request cash back? The ATM just gave me the wrong amount that I've been charged though..."
+  },
+  {
+    "id": "train-121",
+    "text": "While abroad I got cash, and a wrong exchange rate was applied."
+  },
+  {
+    "id": "train-122",
+    "text": "I was using foreign currency at an ATM, but the rate was typed in wrong."
+  },
+  {
+    "id": "train-123",
+    "text": "Please check my Card. As Withdrawal was working fine so far, but this morning suddenly got declined. Can you please check the problem?"
+  },
+  {
+    "id": "train-124",
+    "text": "I attempted to get cash in the ATM but I was denied"
+  },
+  {
+    "id": "train-125",
+    "text": "How can I get money in my home currency while I'm traveling internationally? I wanted to take it out of a local ATM but am worried that I will get charged extra fees."
+  },
+  {
+    "id": "train-126",
+    "text": "Can you tell me if I can track the card you sent me?"
+  },
+  {
+    "id": "train-127",
+    "text": "The ATM won't let me take out cash"
+  },
+  {
+    "id": "train-128",
+    "text": "Please help me figure out the reason for the odd withdrawal amount from my account?"
+  },
+  {
+    "id": "train-129",
+    "text": "What's the card you sent me's tracking number?"
+  },
+  {
+    "id": "train-130",
+    "text": "why hasnt my card come in yet?"
+  },
+  {
+    "id": "train-131",
+    "text": "What's up with the fee for getting cash?"
+  },
+  {
+    "id": "train-132",
+    "text": "Do you have a tracking number for the card I was sent?"
+  },
+  {
+    "id": "train-133",
+    "text": "I asked for $40 and I only received $20, what happened?"
+  },
+  {
+    "id": "train-134",
+    "text": "When will my new card arrive?"
+  },
+  {
+    "id": "train-135",
+    "text": "How come I got charged extra for withdrawing cash?"
+  },
+  {
+    "id": "train-136",
+    "text": "Is there something wrong with the ATM? It would not let me pull cash out of my account."
+  },
+  {
+    "id": "train-137",
+    "text": "Why was my withdrawal declined"
+  },
+  {
+    "id": "train-138",
+    "text": "I was recently charged for withdrawing money from my bank ATM. How can that be possible when I haven't been charged for using it before?"
+  },
+  {
+    "id": "train-139",
+    "text": "I can't withdraw any money from my account. Ive tried a couple different ATM machines and both of them wouldn't give me my money. What's going on? Is my account frozen or something?"
+  },
+  {
+    "id": "train-140",
+    "text": "I have a cash withdrawal that says it's pending, why?"
+  },
+  {
+    "id": "train-141",
+    "text": "I made a cash withdraw and it shows up as pending why is that?"
+  },
+  {
+    "id": "train-142",
+    "text": "Did a WD earlier at an ATM.  The amount showing in the App is more than I got though."
+  },
+  {
+    "id": "train-143",
+    "text": "Do you have info about the card on delivery?"
+  },
+  {
+    "id": "train-144",
+    "text": "I paid with a card and there is an extra charge. Why?"
+  },
+  {
+    "id": "train-145",
+    "text": "My withdrawal from the ATM was cancelled."
+  },
+  {
+    "id": "train-146",
+    "text": "I only got $20 of the $100 that I attempted to withdraw."
+  },
+  {
+    "id": "train-147",
+    "text": "Is my new bank card on the way and is there a way to track it?"
+  },
+  {
+    "id": "train-148",
+    "text": "Why is my withdrawal from the ATM still showing as pending?"
+  },
+  {
+    "id": "train-149",
+    "text": "I selected to withdrawal 30 pounds but only received 10. I'm still standing in front of the ATM. The app shows i took out 30 pounds also. How do i fix this?"
+  },
+  {
+    "id": "train-150",
+    "text": "Are there charges for cash withdrawals?"
+  },
+  {
+    "id": "train-151",
+    "text": "Why was I charged for cash withdrawal?"
+  },
+  {
+    "id": "train-152",
+    "text": "I withdrew  money from the ATM and was overcharged.  It said nothing about an extra fee."
+  },
+  {
+    "id": "train-153",
+    "text": "Why is my withdrawl to cash still pending?"
+  },
+  {
+    "id": "train-154",
+    "text": "withdrawal pending meaning?"
+  },
+  {
+    "id": "train-155",
+    "text": "What is the reason my cash withdrawal is still pending?"
+  },
+  {
+    "id": "train-156",
+    "text": "Help me!  When I was abroad, the exchange rate was wrong."
+  },
+  {
+    "id": "train-157",
+    "text": "I only received $20, but I requested $100."
+  },
+  {
+    "id": "train-158",
+    "text": "There's a $200 withdrawal on my statement that seems fishy to me."
+  },
+  {
+    "id": "train-159",
+    "text": "According to the app, I got cash from an ATM but I haven't made any transactions."
+  },
+  {
+    "id": "train-160",
+    "text": "I have made a withdraw from an ATM this last holiday, why is there such a high charge from this transaction?"
+  },
+  {
+    "id": "train-161",
+    "text": "Why is there a fee for cash withdrawal?"
+  },
+  {
+    "id": "train-162",
+    "text": "Why did you charge me for taking out cash?"
+  },
+  {
+    "id": "train-163",
+    "text": "I have withdrawn cash from the ATM but it is showing in my account as a pending transation. Why is this?"
+  },
+  {
+    "id": "train-164",
+    "text": "Why do I have to pay extra for using my card?"
+  },
+  {
+    "id": "train-165",
+    "text": "My card still hasn't been delivered"
+  },
+  {
+    "id": "train-166",
+    "text": "Can you explain to me why a cash withdrawal shows up as pending?"
+  },
+  {
+    "id": "train-167",
+    "text": "I think I am having an issue with withdraws on my card. It was declined on the way to work this morning. This hasn't happened in the past."
+  },
+  {
+    "id": "train-168",
+    "text": "What on earth is up with the exchange rate! This should have been a much higher amount of cash"
+  },
+  {
+    "id": "train-169",
+    "text": "I tried to withdraw $100 but only got $20. What happened?"
+  },
+  {
+    "id": "train-170",
+    "text": "I tried using a foreign currency at an ATM, but the ATM provided me an incorrect rate. Why is that?"
+  },
+  {
+    "id": "train-171",
+    "text": "Do cash withdrawals cost anything?"
+  },
+  {
+    "id": "train-172",
+    "text": "Why am I charged whenever I withdraw cash?"
+  },
+  {
+    "id": "train-173",
+    "text": "What is the fee charged for using my card?"
+  },
+  {
+    "id": "train-174",
+    "text": "Why am I being charged for getting cash?"
+  },
+  {
+    "id": "train-175",
+    "text": "The atm wouldn't give out cash"
+  },
+  {
+    "id": "train-176",
+    "text": "A wrong amount of cash we sent to me."
+  },
+  {
+    "id": "train-177",
+    "text": "I see cash in my app but I did not get it."
+  },
+  {
+    "id": "train-178",
+    "text": "I was the victim of someone stealing my wallet.  My card is being used and it isn't me.  What should I do?"
+  },
+  {
+    "id": "train-179",
+    "text": "Why won't cash come out of the ATM?"
+  },
+  {
+    "id": "train-180",
+    "text": "What is this cash withdrawal I don't recognize?"
+  },
+  {
+    "id": "train-181",
+    "text": "The amount of cash i have received is not correct."
+  },
+  {
+    "id": "train-182",
+    "text": "Hi, It's urgent, please freeze my card. As someone has withdrawn money using my card in odd remote town. Since i have not done this withdrawal. Do it fast."
+  },
+  {
+    "id": "train-183",
+    "text": "When do you charge fees on accounts? I just saw a charge on my statement."
+  },
+  {
+    "id": "train-184",
+    "text": "my cash withdrawal has not come out of my account yet."
+  },
+  {
+    "id": "train-185",
+    "text": "I entered the correct pin but I still couldnt get funds."
+  },
+  {
+    "id": "train-186",
+    "text": "My ATM transaction was cancelled."
+  },
+  {
+    "id": "train-187",
+    "text": "I tried to withdraw cash, but got declined!"
+  },
+  {
+    "id": "train-188",
+    "text": "The wrong exchange rate was applied to me while pulling out cash."
+  },
+  {
+    "id": "train-189",
+    "text": "How long will it take for me to get my card?"
+  },
+  {
+    "id": "train-190",
+    "text": "When will I get my new card?"
+  },
+  {
+    "id": "train-191",
+    "text": "Can I track the card that you sent me in the mail?"
+  },
+  {
+    "id": "train-192",
+    "text": "Why is the cash withdraw I made shown as pending?"
+  },
+  {
+    "id": "train-193",
+    "text": "I have a question about fee for cash withdraw."
+  },
+  {
+    "id": "train-194",
+    "text": "Why is my cash withdrawal still pending?"
+  },
+  {
+    "id": "train-195",
+    "text": "I don't understand why I was charged an additional fee for this service. Can you clarify?"
+  },
+  {
+    "id": "train-196",
+    "text": "I just lost my wallet and I think someone is using my card to withdraw my money. Can you please cancel or freeze my card?!!"
+  },
+  {
+    "id": "train-197",
+    "text": "Why are fees charged for cash withdrawals? I went to withdraw some money earlier today after shopping. There's a new fee that there."
+  },
+  {
+    "id": "train-198",
+    "text": "How are cash withdrawals pending?"
+  },
+  {
+    "id": "train-199",
+    "text": "Do you charge for making a withdrawal? I took some money out of my account earlier and I was charged for this."
+  },
+  {
+    "id": "train-200",
+    "text": "Why did I only get $20 now the full amount I wanted?"
+  },
+  {
+    "id": "train-201",
+    "text": "The exchange rate for my cash withdrawal was incorrect"
+  },
+  {
+    "id": "train-202",
+    "text": "Why has my new card still not come?"
+  },
+  {
+    "id": "train-203",
+    "text": "Why was there an extra charge with the withdrawal of my money?"
+  },
+  {
+    "id": "train-204",
+    "text": "I made a cash withdrawal at an ATM but it still says pending in my account."
+  },
+  {
+    "id": "train-205",
+    "text": "I see money go out that I didn't withdraw."
+  },
+  {
+    "id": "train-206",
+    "text": "How can I fix this? The ATM gave me more cash than I'd asked for."
+  },
+  {
+    "id": "train-207",
+    "text": "I didn't realize that there were any fees for withdrawing money from my account--this has never happened to me before.  What exactly are the fees?"
+  },
+  {
+    "id": "train-208",
+    "text": "I was made to pay a fee for making a transaction with card."
+  },
+  {
+    "id": "train-209",
+    "text": "I think a fee was applied for paying with a card."
+  },
+  {
+    "id": "train-210",
+    "text": "Why was there an additional fee on the payment I just made? I don't usually have additional fees applied to my payments."
+  },
+  {
+    "id": "train-211",
+    "text": "Why did I not get the amount of money I requested?"
+  },
+  {
+    "id": "train-212",
+    "text": "Why, when paying with the card, was I charged an extra fee?"
+  },
+  {
+    "id": "train-213",
+    "text": "Money was taken out without my consent,"
+  },
+  {
+    "id": "train-214",
+    "text": "Do you offer free ATM withdrawals of ones hometown currency while on holiday?"
+  },
+  {
+    "id": "train-215",
+    "text": "Why haven't I gotten my new card?"
+  },
+  {
+    "id": "train-216",
+    "text": "I think I was wrongly charged in a recent transaction when I used my card."
+  },
+  {
+    "id": "train-217",
+    "text": "The exchange rate for case abroad is applied wrong."
+  },
+  {
+    "id": "train-218",
+    "text": "Is there a problem with my account? When I tried to withdraw cash at an ATM I was denied."
+  },
+  {
+    "id": "train-219",
+    "text": "Let me know when applying extra charges for payments. I just checked the app and saw a fee that I wasn't warned about."
+  },
+  {
+    "id": "train-220",
+    "text": "What is the extra fee that showed up on my card?"
+  },
+  {
+    "id": "train-221",
+    "text": "Why have i been charged a fee for using my card?"
+  },
+  {
+    "id": "train-222",
+    "text": "Why was there a fee with my cash withdrawal?"
+  },
+  {
+    "id": "train-223",
+    "text": "I took out money and there is a fee.  Why?"
+  },
+  {
+    "id": "train-224",
+    "text": "I tried using my ATM card at your Notting Hill location today.  It did not work.  Am I doing something wrong?"
+  },
+  {
+    "id": "train-225",
+    "text": "There was an extra fee when I was at the ATM.  Why?"
+  },
+  {
+    "id": "train-226",
+    "text": "What's the reason my new card hasn't come?"
+  },
+  {
+    "id": "train-227",
+    "text": "My account shows up as pending after I received cash from the ATM earlier.  How can this be still pending? I've got the cash already."
+  },
+  {
+    "id": "train-228",
+    "text": "I was charged a fee for using my card. Can I check that in any way? It seems like there are occasions that I am charge for fees. Can you elaborate this?"
+  },
+  {
+    "id": "train-229",
+    "text": "Looking at my account I've noticed a charge that appears to still be in progress. I had attempted to get money out of the machine earlier but the machine seemed to have been broken. I never received my money so will you please look into this for me? I don't want to be charged for money I never actually received."
+  },
+  {
+    "id": "train-230",
+    "text": "I would like to track a card sent to me, how do I do that?"
+  },
+  {
+    "id": "train-231",
+    "text": "I did not receive my full withdrawal amount"
+  },
+  {
+    "id": "train-232",
+    "text": "I am reluctant to use ATMs international because I don't get an accurate exchange rate"
+  },
+  {
+    "id": "train-233",
+    "text": "Why is a transaction still pending?"
+  },
+  {
+    "id": "train-234",
+    "text": "Someone has access to my card info.  I still have the card, but someone just withdrew cash.  How do I get this corrected/stopped?!"
+  },
+  {
+    "id": "train-235",
+    "text": "An overseas cash transfer did not work correctly"
+  },
+  {
+    "id": "train-236",
+    "text": "In a recent withdrawal I received less cash than I expected to receive.  Did someone make an error with the exchange rate?"
+  },
+  {
+    "id": "train-237",
+    "text": "I tried to get some money but the machine was not working .The transaction still seems in progress! Can you please check what's going on.I don't want to be charged for money that I did not received."
+  },
+  {
+    "id": "train-238",
+    "text": "I tried withdrawing money in another country and the exchange rate was wrong."
+  },
+  {
+    "id": "train-239",
+    "text": "Machines make mistakes too! The ATM gave me the wrong amount of money. Too much!"
+  },
+  {
+    "id": "train-240",
+    "text": "How long will my ATM withdrawal be pending?"
+  },
+  {
+    "id": "train-241",
+    "text": "Why are you charging for cash withdrawals? I went to withdraw some money earlier today after getting my groceries, and it appears there is a fee that wasn't there before"
+  },
+  {
+    "id": "train-242",
+    "text": "How long until my new card gets here?"
+  },
+  {
+    "id": "train-243",
+    "text": "What should I do if I see a withdrawal is pending?"
+  },
+  {
+    "id": "train-244",
+    "text": "What is this extra fee that I got when I used my card to pay?"
+  },
+  {
+    "id": "train-245",
+    "text": "Please explain the extra fee when I paid with the card."
+  },
+  {
+    "id": "train-246",
+    "text": "my cash balance less than what I thought"
+  },
+  {
+    "id": "train-247",
+    "text": "Why am I unable to withdraw money even though in the past I've done it just fine?"
+  },
+  {
+    "id": "train-248",
+    "text": "i havent got my card"
+  },
+  {
+    "id": "train-249",
+    "text": "What happened! I asked for 30 pounds at your ATM and only go 10. The machine lied about it too. It said I received the full 30 pounds. Someone better help me asap on this."
+  },
+  {
+    "id": "train-250",
+    "text": "I haven't gotten my new card."
+  },
+  {
+    "id": "train-251",
+    "text": "Why am I being charged certain fees? I noticed a fee after I withdrew some money for groceries earlier today."
+  },
+  {
+    "id": "train-252",
+    "text": "My card hasn't shown up yet."
+  },
+  {
+    "id": "train-253",
+    "text": "I tried pulling out money at the ATM and it gave me an incorrect amount back."
+  },
+  {
+    "id": "train-254",
+    "text": "Please tell me why I was charged additionally when I used the card."
+  },
+  {
+    "id": "train-255",
+    "text": "My cash withdrawal was short."
+  }
+]

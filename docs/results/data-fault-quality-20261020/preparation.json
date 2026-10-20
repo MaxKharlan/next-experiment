@@ -1,0 +1,68 @@
+{
+  "id": "data-fault-quality-6100",
+  "source_sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b",
+  "attribution": "PolyAI / Casanueva et al. (2020), BANKING77, CC BY 4.0. Selected train rows; planted modifications recorded separately.",
+  "splits": {
+    "train": 256,
+    "validation": 64,
+    "check": 128
+  },
+  "exclusion": "All 600 prior semantic-audit queries; normalized text disjoint. Original BANKING77 train only. No final data.",
+  "seeds": [
+    6101,
+    6102,
+    6103
+  ],
+  "hp": {
+    "n_epochs": 3,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 0.0002,
+    "warmup_ratio": 0,
+    "weight_decay": 0,
+    "max_grad_norm": 1,
+    "lora_r": 16,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "context_length": 512
+  },
+  "backend": "CUDA float32, isolated runtime; launch only after environment qualification. Freeze runtime and all training source hashes before submission.",
+  "generation": {
+    "max_new_tokens": 32,
+    "greedy": true,
+    "thinking": false
+  },
+  "quality": "Exact label on same clean 128-query check. Per-seed differences, EOS/limit share and per-class results; descriptive three-seed development comparison.",
+  "label_repair": "Reused provider embeddings of 400 external references plus new 256 train vectors. Logistic C=1 max_iter=1000 five-fold shuffled OOF seed 6110; cleanlab prune_by_noise_rate on observed labels. Drop flagged training rows versus equal-count seeded random removal. Original source labels/injected indices forbidden as repair input. Empty/all-row flags recorded as unavailable repair, no threshold retuning.",
+  "foreign_repair": "Exact declared role-lines producer reconstruction; healthy training file is identical and reused. Control shuffles the original wrapped rows. No arbitrary quoted-text repair.",
+  "overlap": "Training unchanged: reuse healthy adapters. Measure contaminated validation versus clean validation and check; remove observed prompt overlaps versus seeded random equal-count removal from validation. Do not claim a training-quality change.",
+  "shift_repair": "Resample observed strong-skew data to declared uniform distribution versus shuffled skew. Fixed examples and epochs; report input/supervised token counts and wall times, not an equal-cost assertion.",
+  "stopping": "Measure all frozen arms even when effects are absent. No adaptive data, thresholds, epochs or seeds. No new calibrated fault signatures or 80% power claim from this constructed study.",
+  "source_code_sha256": {
+    "scripts/prepare_data_fault_quality.py": "0dd20bb072c86b1d0a5867925a5dfec843117242c94d7e2782435eff4a7dc5dc",
+    "bench/faults/semantic_data.py": "7112bdd962c3f2b065236169b5b60f2eedd7bd35988b1dbd2421d496830bbbab",
+    "bench/faults/foreign_template.py": "149fa4e24117476a2707eb19051abce33752c3ae50bd85ea90d106ec2f206688"
+  },
+  "files_sha256": {
+    "check.jsonl": "a768b1669fc3e9a7f06b5df7c0d739f450e0b5c3da461fd5ac034024723182ec",
+    "embedding-input/audit.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "embedding-input/protocol.json": "4ee8c73d2138d0b62ffc089cb303238e48a00d0eb698775094dd004d455d3abc",
+    "embedding-input/reference.json": "1f17c446c737dc6b7076fbbeb1a64987b8f89431848e075fe235030a3db50d85",
+    "injections.json": "4a1429fb2f554daa3f639353604a5f5234f4556d5f3a2ccf94250d0fbd60fe90",
+    "overlap-validation-25.jsonl": "bed1b7067511acb7312ddabbb00bd828045e272f0837969815c126d5ebb6e8e5",
+    "overlap-validation-50.jsonl": "a7127d79d28599f7ea0ec46f8b7f99e533e50a5361fba84e030b642fbd75d8ad",
+    "source-rows.json": "b26ed95a50794d9d1b786a9639e8ceb492f5cf3e30e10881bbe7019e937cac42",
+    "train.jsonl": "3d8a3e440c4449f83d4d89ba5c15b72d94bad3e268a7be82f78b5a335127e870",
+    "training/foreign-25.jsonl": "7c855dfff5125cf386f8d1368e55a8343a49f30438249e91a6d0707730e88810",
+    "training/foreign-50.jsonl": "f85eb79763430b9689b7d81227df033398dc7cab0ddaf5e9ae38906fc8627607",
+    "training/foreign-control.jsonl": "b02c6668d060c9e8a83f6de034fb1e29047687265882cd42e35159380ff9c8f3",
+    "training/healthy.jsonl": "3d8a3e440c4449f83d4d89ba5c15b72d94bad3e268a7be82f78b5a335127e870",
+    "training/labels-25.jsonl": "d50723e513c50d05c79e8a2546846eaeb37c3a46e52579b002c70ea423a21f56",
+    "training/labels-50.jsonl": "28ebe9470f224365e43dca877207e6d9a5560bbfbbbc5b0dee7cafd585e47806",
+    "training/shift-control.jsonl": "8be6cd9bd81ef07b0d982d587e26247713028c36ed8043d424425dae5a9fca09",
+    "training/shift-mild.jsonl": "fdac9dbd5549e841e0873b75586157eb052725c2d0b42bf47951742d9aefde17",
+    "training/shift-repair.jsonl": "dff426980c87e2d409a7fe0ff5a5e40d81b0c1e559c6516f75522eeefee51ba8",
+    "training/shift-strong.jsonl": "651c35f9f616905c54749d45334fcadf277a83bfffe5925e21bb83d66f7dfbe4",
+    "validation.jsonl": "2710181d9f73fb622aa41ccd25d1b848d67a514a668bc944a53a78c6d9a4a975"
+  }
+}

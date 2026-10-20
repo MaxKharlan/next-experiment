@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "id": "aijob-e00mgrf16jhgmtae6s",
+    "parent_id": "project-e00d05kzpr00n7e8p79fw0",
+    "name": "next-experiment-parity-isolated-20261020",
+    "resource_version": "1",
+    "created_at": "2026-10-20T13:29:58.061473Z",
+    "updated_at": "2026-10-20T13:29:58.061473Z"
+  },
+  "spec": {
+    "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+    "environment_variables": [
+      {
+        "name": "NEBIUS_OUTPUT_DIR",
+        "value": "/outputs"
+      }
+    ],
+    "container_command": "/bin/sh",
+    "args": "/app/.nebius-run.sh",
+    "volumes": [
+      {
+        "source": "storagebucket-e0018072464185852935047",
+        "source_path": "runs/next-experiment-parity-isolated-20261020/",
+        "container_path": "/outputs",
+        "mode": "READ_WRITE"
+      }
+    ],
+    "platform": "gpu-l40s-a",
+    "preset": "1gpu-8vcpu-32gb",
+    "shm_size_bytes": "17179869184",
+    "disk": {
+      "type": "NETWORK_SSD",
+      "size_bytes": "128849018880"
+    },
+    "subnet_id": "vpcsubnet-e00sfb4ewqmx2rd5qj",
+    "timeout": "3600s",
+    "injected_files": [
+      {
+        "container_path": "/app/.nebius-code.tar.gz"
+      },
+      {
+        "container_path": "/app/.nebius-run.sh"
+      }
+    ]
+  },
+  "status": {
+    "instances": [
+      {
+        "state": "COMPLETED",
+        "compute_instance_id": "computeinstance-e00a7416jw0640j88q",
+        "compute_instance_state": "RUNNING",
+        "private_ip": "10.0.0.50"
+      }
+    ],
+    "state": "COMPLETED",
+    "started_at": "2026-10-20T13:39:02.089498227Z",
+    "finished_at": "2026-10-20T13:42:49.886471333Z"
+  }
+}

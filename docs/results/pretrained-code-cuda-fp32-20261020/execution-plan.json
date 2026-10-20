@@ -1,0 +1,38 @@
+{
+  "spec": {
+    "name": "next-experiment-code-fp32-20261020",
+    "project": "project-e00d05kzpr00n7e8p79fw0",
+    "entry": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/development-ledger-protocol/docs/results/pretrained-code-cuda-fp32-20261020/bundle/main.py",
+    "image": "nvcr.io/nvidia/pytorch:25.05-py3",
+    "platform": "gpu-l40s-a",
+    "preset": "1gpu-8vcpu-32gb",
+    "bundle_sha256": {
+      "worker.py": "102f73f4f4e22247cb75e932b614956709edd752053a2aa0855dd59411fb8498",
+      "dependencies.txt": "adfadf919cc2b3ce628732a17e0d89a6616019ed3cc55ff80d6a5856d09653d9",
+      "experiment.json": "6e69a41494f682e29583323270cfe023bcc57fb2e3e7164aa652bec73be5e2d2",
+      "main.py": "247fd13aaef9703743df9baf824f31d52657c6a7c03095cae9b623abaec551c4",
+      "bench/faults/labels.py": "bad8941e6a58c3fa6469dcaf24db9c98c7f2644c62684b9df239396f4a9101c0",
+      "bench/faults/recipe.py": "4b6f8a6a1397c3628e745f8046638daeb0a4aa51bb573ff49d6aa200b52ddf0d",
+      "core/probes/level1/logits.py": "2e0105a6ef98dadbdbeac7c1d7a07e5bf36990401c38d6c5e5c6081b598de50c",
+      "core/training/gradients.py": "0d89cd07727c303a48ef4a0da497668fc652c310daf8251df585f75ade012058",
+      "core/training/parameters.py": "cc3e453ed32cc7024e145728d03eb9fefab8716c8a989a9a6ed3ca94483a6db0",
+      "core/eval/metrics.py": "33d4222f4c4c065faba313bedc30354fea2aacd430c180677cfaf9b6e607d269",
+      "core/eval/generate.py": "c03ed92207a4e0b3007fdb3c31370a1fec1d5a1a1a0973fbe8006583fb94f563",
+      "core/eval/records.py": "37bef47c8c40248337651ec2fb0aad3bb8eac040cc13e0fe112fa35cf3e844ec",
+      "core/eval/structured.py": "eac671f1c4f537c5ad928f7aa0245cd008e889e3690c1f17a1b45e195186ad28",
+      "core/eval/data.py": "5618acdbd8bac665b71d99b8c3b72e9a07e2d8f17701e78ca673b71aaccbeaa7",
+      "jobs/kaggle/train_lora.py": "acff0f1d328aff5af805b1c9aa3da8208d5d830bfd8d9b585f83a1fd6d97e668",
+      "data/train.jsonl": "c8c5b59aae6c4f4bc6cdbf6f9bf9826969144e2df807a45459ab6dc89a6dee77",
+      "data/check.jsonl": "bed327b70ef971f34f131ae2ba13bc7b713e362d63dc3ec790ae410e6d8979c2",
+      "data/validation.jsonl": "4ae5fd7e0c108c084b175bdc2e4267811d6a71f62573d1f0ac8fc9bca5507aab",
+      "data/logit-validation.jsonl": "76272f801e8d27231772701bc0c7910785a82e17ff81b322552bd8a9f339c319"
+    },
+    "output_bucket": "next-experiment-artifacts",
+    "output_bucket_id": "storagebucket-e0018072464185852935047",
+    "timeout_hours": 2,
+    "disk_gib": 120
+  },
+  "reservation_usd": 6,
+  "reserve_basis": "Two hours L40S at $1.55/h plus 30 minutes startup/teardown, 120Gi disk and 20% allowance; full $6 retained pending billing.",
+  "submitted": true
+}

@@ -1,0 +1,3 @@
+# These are byte-preserved execution bundles bound by published SHA-256 hashes.
+# Lint the maintained source modules; do not reformat frozen evidence snapshots.
+extend-exclude = ["**/bundle/**", "**/launcher/**"]

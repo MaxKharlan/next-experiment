@@ -1,0 +1,23 @@
+{
+  "mps": {
+    "max_absolute_region_mean_nll_difference": 2.0766316265685703e-05,
+    "max_absolute_eos_probability_difference": 2.384185791015625e-07,
+    "token_counts_equal": true,
+    "pass": true
+  },
+  "cpu": {
+    "max_absolute_region_mean_nll_difference": 1.9431160762195532e-05,
+    "max_absolute_eos_probability_difference": 2.384185791015625e-07,
+    "token_counts_equal": true,
+    "pass": true
+  },
+  "token_hashes_equal": true,
+  "decision": "pass",
+  "precision": {
+    "matmul": "highest",
+    "tf32": false,
+    "NVIDIA_TF32_OVERRIDE": "0",
+    "sdpa": "math only"
+  },
+  "scope": "Numerical qualification for explicit IEEE float32 / math SDPA only. Original default CUDA failure retained. No training equivalence or adapter-generation claim."
+}

@@ -1,0 +1,7 @@
+{
+  "notebook_sha256": "d502ac9fe1100559ca219a27730eabc10d7e1ed11b69d11c9b2b9e9b775d27ee",
+  "protocol_sha256": "ebaaaf5b8ca7e48fd11303e70c0bd2fd1a6f2c5df9dec29d5e076b2f08983406",
+  "payload_bytes": 13452,
+  "status": "prepared_not_executed",
+  "credentials": "Account credential is used only by the local Kaggle client; no credential enters this notebook"
+}

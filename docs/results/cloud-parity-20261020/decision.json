@@ -1,0 +1,9 @@
+{
+  "status": "failed_before_measurement",
+  "reason": "Preinstalled torchvision from NGC image is incompatible with the explicitly pinned replacement torch; torchvision::nms operator is absent.",
+  "metric_rows": 0,
+  "reservation_usd": 4,
+  "reservation_status": "retained_pending_billing",
+  "cleanup": "Compute instance get returned ResourceNotFound after job terminal failure; job record and logs retained.",
+  "next_execution": "Separate isolated virtualenv correction; same fixed data/model/thresholds, adds S3 result retrieval. No original result is replaced."
+}

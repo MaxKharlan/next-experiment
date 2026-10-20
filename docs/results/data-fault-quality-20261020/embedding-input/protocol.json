@@ -1,0 +1,15 @@
+{
+  "id": "data-fault-quality-6100",
+  "embedding": {
+    "batch_size": 8,
+    "local_nvidia": "nvidia/Nemotron-3-Embed-1B-BF16",
+    "local_qwen": "Qwen/Qwen3-Embedding-0.6B",
+    "max_length": 512,
+    "provider": "Qwen/Qwen3-Embedding-8B",
+    "representation": "Symmetric document embeddings, model document prompt, L2 normalized; no query instruction"
+  },
+  "data_sha256": {
+    "reference.json": "1f17c446c737dc6b7076fbbeb1a64987b8f89431848e075fe235030a3db50d85",
+    "audit.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  }
+}

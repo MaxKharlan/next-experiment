@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-20",
+  "source": "User explicitly authorized continuing the entire remaining queue, paid runs, and up to USD 25 additional spend in this chat.",
+  "additional_cap_usd": 25,
+  "ledger": "artifacts/remaining-queue-20261020/spending.sqlite3",
+  "historical_ledger_policy": "Separate additional budget; historical USD 5 ledger and unresolved cancellation holds remain unchanged.",
+  "training_price_observation": {
+    "source": "https://tokenfactory.nebius.com/organization/prices",
+    "observed_date": "2026-10-20",
+    "product": "Fine-tuning Qwen3-0.6B LoRa 8K",
+    "region": "eu-north1",
+    "usd_per_million_tokens_excluding_tax": 0.4,
+    "valid_from": "2025-12-01"
+  },
+  "budget_charge_multiplier": 1.2,
+  "budget_charge_scope": "Reserve and charge token estimates with 20 percent tax/rounding allowance; not an invoice or claimed actual tax rate."
+}

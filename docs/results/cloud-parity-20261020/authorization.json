@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-20",
+  "user_authorization": "общий баланс для AI Cloud - $30 можешь использовать его",
+  "cap_usd": 30,
+  "scope": "AI Cloud compute and associated storage, separate from Token Factory additional $25",
+  "tax_allowance_multiplier": 1.2,
+  "retention": "Uncertain charges retain their full reservations; no balance reset."
+}

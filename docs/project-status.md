@@ -1,6 +1,15 @@
 # Project status — 20 October 2026
 
-Repository baseline: main `1350564`, including merged PRs through #103. PR #92
+Current continuation: [execution queue](remaining-queue-execution-20261020.md).
+PRs #105–#108 publish the automatic semantic audit, neutral logit diagnostics,
+semantic controls and verified FT-Fail Hub release. The owner authorized separate
+$25 additional Token Factory and $30 AI Cloud limits and confirmed submission
+eligibility, registration and representation. Prospective model scoring and
+REST/cloud studies are running; their uncompleted outcomes are not benchmark
+results. [Submission materials](submission/readiness.md) track the remaining
+video and final submission.
+
+The historical baseline below is main `1350564`, through #103. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -9,7 +18,7 @@ prepared final test remain frozen. See [the execution record](fresh-api-executio
 The [development sensitivity follow-up](development-sensitivity-20261019.md)
 audits the ceiling and rejects a separately frozen candidate: healthy mean
 26.85%, damaged mean 39.81% on new histories. Its paid pilot stopped before
-submission at the strict base gate. Additional provider spend is $0; the $5
+submission at the strict base gate. That pilot added $0 provider spend; the historical $5
 budget retained its $0.2710464 historical charge estimate at that stop. Comparison evidence and mode
 boundaries remain in the [fault review](fault-evidence-review.md).
 

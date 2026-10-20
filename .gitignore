@@ -245,3 +245,6 @@ _site/
 
 # README video recorded by scripts/record_demo_video.py
 demo.mp4
+
+# Process locks for durable cloud submission receipts
+docs/results/**/receipts/*.lock

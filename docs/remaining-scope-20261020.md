@@ -1,7 +1,8 @@
 # Remaining scope reconciled to the original plan
 
 This reconciliation uses the project document dated 16 October 2026, pages
-30–34 (A1–A32 and B1–B26), and repository main through #103. The document's
+30–34 (A1–A32 and B1–B26), and repository main through #108, with ongoing studies tracked in
+[the execution queue](remaining-queue-execution-20261020.md). The document's
 checkboxes are planning history. Implementations, measurements and publication
 are separate acceptance conditions.
 
@@ -16,7 +17,7 @@ are separate acceptance conditions.
 | Fault 5 / A5,A7,A12 | Catalog hypothesis | Declared target distribution, label distribution and embedding classifier AUC checks, quality effect and matched repair |
 | A18 sensitivity | Answer-cut evidence for one task/model | Faults 2–5 and justified strength curves; a planted setting alone is not a harmful fault |
 | A19 Nano audit | [200-example automatic comparison](semantic-audit-20261020.md); manual review replaced by user instruction | Complete under revised acceptance; preserve Nano failure and Super HTTP errors |
-| A29 logit probes | Evaluation infrastructure | Prompt/answer loss, EOS probability and template-token perplexity probes with development signatures |
+| A29 logit probes | Teacher-forced prompt/answer/template NLL and EOS measured on twelve references; neutral live likelihoods | Additional adapter measurements and independent calibration |
 | A30 embeddings | [Local Qwen, NVIDIA and provider Qwen measured](semantic-audit-20261020.md), licenses and outcome agreement recorded | Complete for the frozen development cases |
 | A31 cleanlab | [Five-fold logistic regression + cleanlab comparison](semantic-audit-20261020.md), including Nano union | Complete on the revised automatic reference |
 
@@ -73,7 +74,9 @@ extra universal regression-export product requirement. Portable deterministic
 exports exist for the published format/content series and new ledger preparation.
 A broad cross-suite export remains useful implementation work if required by a
 specific regression workflow; it should not be silently added to the original
-acceptance criteria. A32/B26 Hub publications remain distinct deliverables.
+acceptance criteria. A32 is published as [MakHH/FT-Fail](https://huggingface.co/datasets/MakHH/FT-Fail),
+with all 35 package files verified from the pinned Hub revision. B26 classifier
+publication remains a distinct deliverable with unmet transfer validation.
 
 The long-history fix was verified on the published desktop demo on 20 October;
 see [the walkthrough](demo-walkthrough.md). Fresh full API evidence, video and
@@ -87,15 +90,15 @@ and inference per-call matching. The sole historical ledger stays at
 execution checkout. No preparation or plan here moves its holds, copies its
 balance or treats an estimate as an invoice.
 
-Eligibility, registration and final submission require the owner's confirmation.
-No registration or submission claim is inferred from repository state.
+The owner confirmed eligibility, registration and authority to submit on
+20 October. Final submission has not been performed; the remaining materials
+are tracked in [submission readiness](submission/readiness.md).
 
 ## Work still possible offline
 
-The queue is not wholly externally blocked. Remaining independent work includes
-faults 2–5 injection/probe/control implementations, semantic validation of the
-lexical overlap candidates, A29 probes,
-and local pretrained B24 experiments under a frozen protocol. These are distinct
-implementation/measurement packages, not tasks completed by this reconciliation.
-Paid multi-model studies, live Nemotron/embedding comparisons, invoice closure
-and final submission retain their explicit dependencies.
+The queue continues with fault-quality and code-quality experiments, the ledger
+admission study, a fresh REST trace and runtime comparisons. A19/A30/A31, semantic
+controls and the first A29 measurements are already published. Model-quality
+experiments, invoice closure and final submission retain their explicit
+dependencies. Custom weights beta is optional: downloading adapters for local
+or qualified cloud evaluation supplies the current execution path.

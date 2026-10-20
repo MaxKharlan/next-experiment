@@ -1,0 +1,7 @@
+{
+  "status": "failed_before_model_loading",
+  "reason": "Kaggle Python 3.13 ensurepip exits with status 1 while constructing venv. Dependencies and model generation never started.",
+  "rows": 0,
+  "preserved": true,
+  "next": "Separately frozen bootstrap correction using system pip --python against a venv created without pip; same package/model/data/decoding pins."
+}

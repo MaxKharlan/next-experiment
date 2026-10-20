@@ -1,0 +1,16 @@
+{
+  "status": "submitted",
+  "kernel": "maximkharlan/next-experiment-frozen-eval-20261020",
+  "attempts": 1,
+  "timeout_seconds": 1800,
+  "accelerator": "NvidiaTeslaT4",
+  "private": true,
+  "notebook_sha256": "23f57286e545cea97e0976081d4484823f0ae2bb1fe108bb9fc05836efd28af1",
+  "provider_charge_usd": 0,
+  "uses": "Existing Kaggle GPU quota; no new subscription or payment",
+  "exit_code": 0,
+  "stdout": "Your kernel title does not resolve to the specified id. This may result in surprising behavior. We suggest making your title something that resolves to the specified id. See https://en.wikipedia.org/wiki/Clean_URL#Slug for more information on how slugs are determined.\nKernel version 1 successfully pushed.  Please check progress at https://www.kaggle.com/code/maximkharlan/next-experiment-frozen-evaluation-20261020\n",
+  "stderr": "",
+  "actual_kernel": "maximkharlan/next-experiment-frozen-evaluation-20261020",
+  "note": "Kaggle derived the final slug from the title; use the returned URL for status/output. No duplicate push."
+}

@@ -1,0 +1,7 @@
+{
+  "status": "not_submitted",
+  "reason": "Frozen launch gate requires isolated parity pass. It failed; original bundle remains unchanged.",
+  "qualification": "../cloud-parity-isolated-20261020/decision.json",
+  "training_started": false,
+  "reserved_usd": 0
+}
