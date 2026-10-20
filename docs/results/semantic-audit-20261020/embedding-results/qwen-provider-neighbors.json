@@ -1,0 +1,5002 @@
+[
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-001",
+    "neighbors": [
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9137782896494873,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      },
+      {
+        "id": "reference-222",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9019014465622991,
+        "text": "I tried to get cash but it was declined!"
+      },
+      {
+        "id": "reference-219",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8779062439515867,
+        "text": "My cash withdrawal was declined.  Why?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-002",
+    "neighbors": [
+      {
+        "id": "reference-364",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8977277825940037,
+        "text": "The exchange rate was messed up from the ATM"
+      },
+      {
+        "id": "reference-355",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8942989466384187,
+        "text": "When I got my cash, the amount was not what it should have been, based on the exchange rate."
+      },
+      {
+        "id": "reference-380",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8926369723382547,
+        "text": "I didn't receive the correct amount of cash when I exchanged it overseas."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-003",
+    "neighbors": [
+      {
+        "id": "reference-222",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8952708084305494,
+        "text": "I tried to get cash but it was declined!"
+      },
+      {
+        "id": "reference-203",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.870584945177011,
+        "text": "When I went to get cash, it was declined!"
+      },
+      {
+        "id": "reference-227",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8272608781266806,
+        "text": "I can't withdraw money"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-004",
+    "neighbors": [
+      {
+        "id": "reference-038",
+        "label": "card_arrival",
+        "similarity": 0.9352571882942342,
+        "text": "Does the card you sent have a tracking number?"
+      },
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.8990239992782403,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-009",
+        "label": "card_arrival",
+        "similarity": 0.8521142825900753,
+        "text": "How do I track the card you sent me?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-005",
+    "neighbors": [
+      {
+        "id": "reference-345",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.948987439647002,
+        "text": "I didn't receive the correct amount of cash"
+      },
+      {
+        "id": "reference-333",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9245046271489249,
+        "text": "I requested $100 but only got $20"
+      },
+      {
+        "id": "reference-306",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9137617814843921,
+        "text": "HELP! I tried to get cash and it gave me some, but not the right amount!"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-006",
+    "neighbors": [
+      {
+        "id": "reference-160",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8821978675787968,
+        "text": "The app says I made a cash withdrawal that I didn't make"
+      },
+      {
+        "id": "reference-175",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8657235690984311,
+        "text": "The app says that I got cash in an ATM and I didn't"
+      },
+      {
+        "id": "reference-193",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8636294749696816,
+        "text": "In the app, I see a withdrawal I didn't make."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-007",
+    "neighbors": [
+      {
+        "id": "reference-315",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9645889657885797,
+        "text": "Why did I get less cash than what I asked in the ATM?"
+      },
+      {
+        "id": "reference-303",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9581408620820222,
+        "text": "I visited the ATM but got less money than what I requested. Why?"
+      },
+      {
+        "id": "reference-314",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9546087022937526,
+        "text": "I got less than what i asked for in the ATM, why?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-008",
+    "neighbors": [
+      {
+        "id": "reference-353",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8690629356012793,
+        "text": "I made an ATM withdrawal over the holiday and then later realized I was charged an exorbitant fee!  I never would've made this withdrawal if I'd known I'd be charged so much."
+      },
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7650270210486135,
+        "text": "I used an ATM and there was an extra charge."
+      },
+      {
+        "id": "reference-147",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7420063618265756,
+        "text": "extra fees on a cash withdrawal, not cool."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-009",
+    "neighbors": [
+      {
+        "id": "reference-055",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9825966927316254,
+        "text": "Why was I charged an extra fee when paying with card?"
+      },
+      {
+        "id": "reference-077",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9688169679980134,
+        "text": "Why was I charged an additional fee when paying with card?"
+      },
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9458263531097101,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-010",
+    "neighbors": [
+      {
+        "id": "reference-213",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8554654266418195,
+        "text": "how come i was declined"
+      },
+      {
+        "id": "reference-219",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8431440553434177,
+        "text": "My cash withdrawal was declined.  Why?"
+      },
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8229356700976879,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-011",
+    "neighbors": [
+      {
+        "id": "reference-047",
+        "label": "card_arrival",
+        "similarity": 0.7673050468895648,
+        "text": "How much longer is it going to take to get my new card?"
+      },
+      {
+        "id": "reference-013",
+        "label": "card_arrival",
+        "similarity": 0.7640457648228002,
+        "text": "What is the expected delivery date of my card?"
+      },
+      {
+        "id": "reference-042",
+        "label": "card_arrival",
+        "similarity": 0.755798410732647,
+        "text": "Could you send me and up date on the arrival of my card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-012",
+    "neighbors": [
+      {
+        "id": "reference-136",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.851396084295763,
+        "text": "I thought it was free to make a withdrawal. So how much does it cost now?"
+      },
+      {
+        "id": "reference-109",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.833611942203393,
+        "text": "Is there a charge for cash withdrawals? I always thought it was free."
+      },
+      {
+        "id": "reference-141",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8212855413419496,
+        "text": "Since when were there charges for taking out cash from my account? It's always been free for me to do this before.  How much are the charges going to be?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-013",
+    "neighbors": [
+      {
+        "id": "reference-291",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8053024389720947,
+        "text": "When I used one of the ATMs in the city centre today, I tried to take out some money, but for whatever reason, the machine declined my card. Just checked it out in my account and that amount is still showing as pending! Is there any way that you can cancel this transaction, because I did not receive any money whatsoever from the ATM"
+      },
+      {
+        "id": "reference-279",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.7992093028939228,
+        "text": "I took out some cash from the ATM but it is still showing the transaction is pending."
+      },
+      {
+        "id": "reference-299",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.7975986017628555,
+        "text": "I tried to take out some money from an ATM earlier today and it was declined. Looking on my screen now, I still see that it's pending for that amount. I didn't actually get that money, so I don't want it processed on my account."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-014",
+    "neighbors": [
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8987480168656472,
+        "text": "I used an ATM and there was an extra charge."
+      },
+      {
+        "id": "reference-105",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8463075458151585,
+        "text": "I saw I was charged extra for money I withdrew?"
+      },
+      {
+        "id": "reference-118",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8402398536836881,
+        "text": "Is there a reason I was charged an extra fee for using the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-015",
+    "neighbors": [
+      {
+        "id": "reference-102",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8781561817950285,
+        "text": "I was under the impression ATM cash withdrawals were free. Why was I suddenly charged for my most recent ATM transaction?"
+      },
+      {
+        "id": "reference-109",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8570480739330225,
+        "text": "Is there a charge for cash withdrawals? I always thought it was free."
+      },
+      {
+        "id": "reference-124",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8567349953875457,
+        "text": "I should not have been charged a fee for cash withdrawal."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-016",
+    "neighbors": [
+      {
+        "id": "reference-089",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9603689290360583,
+        "text": "I got a fee when paying with my card"
+      },
+      {
+        "id": "reference-060",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9564431295810247,
+        "text": "I got charged for with a fee for paying with my card."
+      },
+      {
+        "id": "reference-056",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.947455070705639,
+        "text": "I bought something with my card and I was charged a fee"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-017",
+    "neighbors": [
+      {
+        "id": "reference-116",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9300385429718283,
+        "text": "So, I was just charged for my recent ATM withdrawal and any withdrawal prior to this has been free. What is the issue here?"
+      },
+      {
+        "id": "reference-102",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9262431888295211,
+        "text": "I was under the impression ATM cash withdrawals were free. Why was I suddenly charged for my most recent ATM transaction?"
+      },
+      {
+        "id": "reference-146",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9093405754630005,
+        "text": "I just saw a charge for a cash withdrawal that I made! ATM withdrawals have always been free in the past, so why is there suddenly a charge? What is it going to cost me now?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-018",
+    "neighbors": [
+      {
+        "id": "reference-253",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8487114667928528,
+        "text": "I tried to get some with-drawls but the machine didn't work. The transaction still seems in progress.Seems like  something is wrong,I don't want to be charged for Transaction i did not make."
+      },
+      {
+        "id": "reference-271",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.7937542393696111,
+        "text": "I tried to get cash at some ATM in the city centre earlier but the machine declined my card. I've seen it still shows up as pending in my account. Please cancel it immediately as I definitely have not received that money!"
+      },
+      {
+        "id": "reference-274",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.786195885772079,
+        "text": "I tried to withdraw cash at an ATM in the city center but my card was declined. The transaction is still showing up as pending - please cancel it!"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-019",
+    "neighbors": [
+      {
+        "id": "reference-339",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9489217244914682,
+        "text": "The ATM gave me less cash than requested"
+      },
+      {
+        "id": "reference-308",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9407168367242186,
+        "text": "I didn't get the correct amount of money from the ATM machine"
+      },
+      {
+        "id": "reference-342",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9405397457115677,
+        "text": "I didn't get the all the cash i wanted from the atm"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-020",
+    "neighbors": [
+      {
+        "id": "reference-043",
+        "label": "card_arrival",
+        "similarity": 0.9578045712634248,
+        "text": "where is my new card?"
+      },
+      {
+        "id": "reference-006",
+        "label": "card_arrival",
+        "similarity": 0.9206679352005837,
+        "text": "Can you please tell me where my card is? I ordered it 2 weeks ago!"
+      },
+      {
+        "id": "reference-025",
+        "label": "card_arrival",
+        "similarity": 0.9075189982212064,
+        "text": "I need to find out where the card is that I ordered."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-021",
+    "neighbors": [
+      {
+        "id": "reference-088",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9375547636568582,
+        "text": "Why did I have to pay an additional amount when using my card to pay?"
+      },
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9362676830081071,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-055",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9332795787101177,
+        "text": "Why was I charged an extra fee when paying with card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-022",
+    "neighbors": [
+      {
+        "id": "reference-118",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9113751955247541,
+        "text": "Is there a reason I was charged an extra fee for using the ATM?"
+      },
+      {
+        "id": "reference-131",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9038957116700317,
+        "text": "WHY IS THERE AN EXTRA FEE FOR USING THE ATM??!!!"
+      },
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9029297545446257,
+        "text": "I used an ATM and there was an extra charge."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-023",
+    "neighbors": [
+      {
+        "id": "reference-157",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8287092878651965,
+        "text": "Cash I did not get showed up in my account"
+      },
+      {
+        "id": "reference-273",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8222448733482693,
+        "text": "Why is the cash transaction still showing as not completed?"
+      },
+      {
+        "id": "reference-275",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8083958558422549,
+        "text": "Its been several days and my cash withdrawal is still pending. Why?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-024",
+    "neighbors": [
+      {
+        "id": "reference-067",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9362140710303278,
+        "text": "Can you explain why I was charged extra when I used the card?"
+      },
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9189620625845323,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-096",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9116176629198627,
+        "text": "I see I was charged extra when I used the card.  I am not sure why, please tell me why."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-025",
+    "neighbors": [
+      {
+        "id": "reference-009",
+        "label": "card_arrival",
+        "similarity": 0.9867171653588568,
+        "text": "How do I track the card you sent me?"
+      },
+      {
+        "id": "reference-020",
+        "label": "card_arrival",
+        "similarity": 0.9844116805842196,
+        "text": "How do I track the card you sent to me?"
+      },
+      {
+        "id": "reference-041",
+        "label": "card_arrival",
+        "similarity": 0.9327039985554623,
+        "text": "how to track the card you sent"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-026",
+    "neighbors": [
+      {
+        "id": "reference-261",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9188804808738458,
+        "text": "i withdrew cash and dont see it reflected on the balance"
+      },
+      {
+        "id": "reference-305",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.883318673169897,
+        "text": "I tried withdrawing but my cash is not showing up?"
+      },
+      {
+        "id": "reference-297",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8763710548367857,
+        "text": "My account says I have money but I withdrew it in cash."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-027",
+    "neighbors": [
+      {
+        "id": "reference-055",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9823001047700938,
+        "text": "Why was I charged an extra fee when paying with card?"
+      },
+      {
+        "id": "reference-077",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9713834812719454,
+        "text": "Why was I charged an additional fee when paying with card?"
+      },
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9682831157699034,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-028",
+    "neighbors": [
+      {
+        "id": "reference-045",
+        "label": "card_arrival",
+        "similarity": 0.9579144853011566,
+        "text": "Can I track when my card will be delivered?"
+      },
+      {
+        "id": "reference-019",
+        "label": "card_arrival",
+        "similarity": 0.9388767143915573,
+        "text": "What is the status of my card's delivery?"
+      },
+      {
+        "id": "reference-014",
+        "label": "card_arrival",
+        "similarity": 0.9182371744499004,
+        "text": "How can I periodically check the delivery of the card you sent?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-029",
+    "neighbors": [
+      {
+        "id": "reference-244",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9486098173374161,
+        "text": "I tried to make a withdrawal from the ATM, but it was cancelled."
+      },
+      {
+        "id": "reference-216",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9462540267778857,
+        "text": "I tried to withdraw cash from your ATM but my transaction was cancelled."
+      },
+      {
+        "id": "reference-245",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9366826049402097,
+        "text": "I was getting some cash out of the ATM but it cancelled on me without warning."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-030",
+    "neighbors": [
+      {
+        "id": "reference-013",
+        "label": "card_arrival",
+        "similarity": 0.9989962180195573,
+        "text": "What is the expected delivery date of my card?"
+      },
+      {
+        "id": "reference-016",
+        "label": "card_arrival",
+        "similarity": 0.9433673785044419,
+        "text": "When will my new card be delivered?"
+      },
+      {
+        "id": "reference-027",
+        "label": "card_arrival",
+        "similarity": 0.9002494756115238,
+        "text": "How do I know when my new card is going to arrive?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-031",
+    "neighbors": [
+      {
+        "id": "reference-123",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9367785387025473,
+        "text": "is there a charge on withdrawals?"
+      },
+      {
+        "id": "reference-150",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9283040117559259,
+        "text": "Do I get charged for withdrawals?"
+      },
+      {
+        "id": "reference-109",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9258513282869684,
+        "text": "Is there a charge for cash withdrawals? I always thought it was free."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-032",
+    "neighbors": [
+      {
+        "id": "reference-243",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.887526335902354,
+        "text": "My card wont work at an ATM"
+      },
+      {
+        "id": "reference-207",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8805653626682973,
+        "text": "My card doesn't work. I can't get cash out at an ATM"
+      },
+      {
+        "id": "reference-208",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8727921583650141,
+        "text": "I tried to use the ATM today but it would not accept my card."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-033",
+    "neighbors": [
+      {
+        "id": "reference-098",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8655321659255232,
+        "text": "Why was there a fee for paying by card?"
+      },
+      {
+        "id": "reference-054",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8608099529741278,
+        "text": "What are the fees imposed when I make a transaction?"
+      },
+      {
+        "id": "reference-063",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8564741085916836,
+        "text": "Let me know when you charge for payments. I just checked the app and saw a fee that I wasn't warned about."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-034",
+    "neighbors": [
+      {
+        "id": "reference-219",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9640645433926995,
+        "text": "My cash withdrawal was declined.  Why?"
+      },
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9537485040998991,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      },
+      {
+        "id": "reference-222",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9326054021287853,
+        "text": "I tried to get cash but it was declined!"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-035",
+    "neighbors": [
+      {
+        "id": "reference-017",
+        "label": "card_arrival",
+        "similarity": 0.9463564438861056,
+        "text": "What's go on, where is my new card?"
+      },
+      {
+        "id": "reference-043",
+        "label": "card_arrival",
+        "similarity": 0.9451065083066733,
+        "text": "where is my new card?"
+      },
+      {
+        "id": "reference-012",
+        "label": "card_arrival",
+        "similarity": 0.9326118977770987,
+        "text": "Can you tell me why I haven't received my new card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-036",
+    "neighbors": [
+      {
+        "id": "reference-059",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8616678640103871,
+        "text": "I was mistakenly charged a fee for using my card."
+      },
+      {
+        "id": "reference-072",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8500280536654322,
+        "text": "I shouldn't have been charged but I see a fee, why?"
+      },
+      {
+        "id": "reference-124",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8439444186522547,
+        "text": "I should not have been charged a fee for cash withdrawal."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-037",
+    "neighbors": [
+      {
+        "id": "reference-103",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9575269749492942,
+        "text": "Why is it I am charged an extra fee when I use the ATM?"
+      },
+      {
+        "id": "reference-118",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9540773792661938,
+        "text": "Is there a reason I was charged an extra fee for using the ATM?"
+      },
+      {
+        "id": "reference-130",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9330509961248669,
+        "text": "Why did using an ATM cause me to have an extra fee charged?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-038",
+    "neighbors": [
+      {
+        "id": "reference-348",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9452154904164128,
+        "text": "Please help me with the amount that i have withdrawn from the ATM today, the ATM has given me wrong sum of amount, and i could see that the app is displaying the greater amount than taken out."
+      },
+      {
+        "id": "reference-324",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9218309874395099,
+        "text": "I received the wrong amount of cash from the ATM. Can you help?"
+      },
+      {
+        "id": "reference-307",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9173617289173428,
+        "text": "Cash withdrawal was incorrect at ATM."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-039",
+    "neighbors": [
+      {
+        "id": "reference-035",
+        "label": "card_arrival",
+        "similarity": 0.8898219845649771,
+        "text": "When did you send me my new card?"
+      },
+      {
+        "id": "reference-042",
+        "label": "card_arrival",
+        "similarity": 0.8865452522125211,
+        "text": "Could you send me and up date on the arrival of my card?"
+      },
+      {
+        "id": "reference-023",
+        "label": "card_arrival",
+        "similarity": 0.8765242661820272,
+        "text": "I have been waiting over a week. Is the card still coming?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-040",
+    "neighbors": [
+      {
+        "id": "reference-023",
+        "label": "card_arrival",
+        "similarity": 0.9298578646723781,
+        "text": "I have been waiting over a week. Is the card still coming?"
+      },
+      {
+        "id": "reference-036",
+        "label": "card_arrival",
+        "similarity": 0.9221737671330132,
+        "text": "I haven't received my card."
+      },
+      {
+        "id": "reference-021",
+        "label": "card_arrival",
+        "similarity": 0.9111558863547974,
+        "text": "My card was supposed to arrive, but hasn't?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-041",
+    "neighbors": [
+      {
+        "id": "reference-353",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8859420373008714,
+        "text": "I made an ATM withdrawal over the holiday and then later realized I was charged an exorbitant fee!  I never would've made this withdrawal if I'd known I'd be charged so much."
+      },
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8531809809278343,
+        "text": "I used an ATM and there was an extra charge."
+      },
+      {
+        "id": "reference-147",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8159881100739054,
+        "text": "extra fees on a cash withdrawal, not cool."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-042",
+    "neighbors": [
+      {
+        "id": "reference-305",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9185625190239811,
+        "text": "I tried withdrawing but my cash is not showing up?"
+      },
+      {
+        "id": "reference-261",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9160080805913327,
+        "text": "i withdrew cash and dont see it reflected on the balance"
+      },
+      {
+        "id": "reference-263",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9033755483580275,
+        "text": "my cash withdrawal is pending, why?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-043",
+    "neighbors": [
+      {
+        "id": "reference-339",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9733389031413594,
+        "text": "The ATM gave me less cash than requested"
+      },
+      {
+        "id": "reference-342",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9599406881390373,
+        "text": "I didn't get the all the cash i wanted from the atm"
+      },
+      {
+        "id": "reference-332",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9589993002340222,
+        "text": "The ATM did not give me as much cash as I requested."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-044",
+    "neighbors": [
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9329357453802443,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      },
+      {
+        "id": "reference-219",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9313505027217797,
+        "text": "My cash withdrawal was declined.  Why?"
+      },
+      {
+        "id": "reference-234",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9056212760130166,
+        "text": "My ATM withdrawal was declined."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-045",
+    "neighbors": [
+      {
+        "id": "reference-257",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9354997173124955,
+        "text": "What does it mean if my cash withdrawal is pending?"
+      },
+      {
+        "id": "reference-295",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9354792057248953,
+        "text": "Is there any reason my cash withdrawal still shows as pending?"
+      },
+      {
+        "id": "reference-254",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9313304155167944,
+        "text": "What is a pending cash withdrawal?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-046",
+    "neighbors": [
+      {
+        "id": "reference-080",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8851603985289677,
+        "text": "I just made an order and noticed an extra fee. Why have you charged me this without informing me?"
+      },
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8780618876793264,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8628014529480065,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-047",
+    "neighbors": [
+      {
+        "id": "reference-193",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9574205671730787,
+        "text": "In the app, I see a withdrawal I didn't make."
+      },
+      {
+        "id": "reference-181",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.951193470840261,
+        "text": "The app shows a withdrawal that I did not make or authorize."
+      },
+      {
+        "id": "reference-160",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9492997725169009,
+        "text": "The app says I made a cash withdrawal that I didn't make"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-048",
+    "neighbors": [
+      {
+        "id": "reference-152",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9540098829028382,
+        "text": "There is a cash withdrawal in my account that isn't mine."
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.949570516413793,
+        "text": "A cash withdrawal has been done that I didn't do."
+      },
+      {
+        "id": "reference-155",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9423202748135701,
+        "text": "There's a cash withdrawal I didn't make"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-049",
+    "neighbors": [
+      {
+        "id": "reference-370",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9744550194296632,
+        "text": "I think the exchange rate for the cash I withdrew wasn't correct."
+      },
+      {
+        "id": "reference-358",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9686798735947395,
+        "text": "I withdrew cash and I think the exchange rate is wrong."
+      },
+      {
+        "id": "reference-374",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.96062028291776,
+        "text": "I withdrew some cash and the exchange rate seems to be wrong."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-050",
+    "neighbors": [
+      {
+        "id": "reference-181",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9435500117928508,
+        "text": "The app shows a withdrawal that I did not make or authorize."
+      },
+      {
+        "id": "reference-160",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9364904920957408,
+        "text": "The app says I made a cash withdrawal that I didn't make"
+      },
+      {
+        "id": "reference-191",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9262955067764383,
+        "text": "I am seeing inside the App a some cash withdrawal that is not mine"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-051",
+    "neighbors": [
+      {
+        "id": "reference-230",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9566440158208728,
+        "text": "How come I can't get money at the ATM"
+      },
+      {
+        "id": "reference-224",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9457015437083839,
+        "text": "Can you please tell me why I cant get money from the ATM?"
+      },
+      {
+        "id": "reference-217",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.942303969355881,
+        "text": "I cannot withdraw money from the ATM"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-052",
+    "neighbors": [
+      {
+        "id": "reference-056",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9261748646472824,
+        "text": "I bought something with my card and I was charged a fee"
+      },
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9184493698061945,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      },
+      {
+        "id": "reference-098",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.917689550855082,
+        "text": "Why was there a fee for paying by card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-053",
+    "neighbors": [
+      {
+        "id": "reference-195",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8750841968200844,
+        "text": "I do not know what this cash withdrawal is"
+      },
+      {
+        "id": "reference-261",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8716524069056805,
+        "text": "i withdrew cash and dont see it reflected on the balance"
+      },
+      {
+        "id": "reference-297",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8688493308905149,
+        "text": "My account says I have money but I withdrew it in cash."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-054",
+    "neighbors": [
+      {
+        "id": "reference-068",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9635470556988909,
+        "text": "I was charged a fee when buying stuff with my card."
+      },
+      {
+        "id": "reference-076",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9245391413962661,
+        "text": "I was spending cash with my card and got a fee."
+      },
+      {
+        "id": "reference-089",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9225408379396178,
+        "text": "I got a fee when paying with my card"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-055",
+    "neighbors": [
+      {
+        "id": "reference-347",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9326691406294649,
+        "text": "I am at the ATM and tried to withdraw 30 pounds and it only gave me 10 pounds, what do I do?"
+      },
+      {
+        "id": "reference-316",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9019187201271657,
+        "text": "I tried to withdraw 50 pounds but it only gave me 30. Where is the rest of my money?"
+      },
+      {
+        "id": "reference-303",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.884476818977338,
+        "text": "I visited the ATM but got less money than what I requested. Why?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-056",
+    "neighbors": [
+      {
+        "id": "reference-118",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.961505243159757,
+        "text": "Is there a reason I was charged an extra fee for using the ATM?"
+      },
+      {
+        "id": "reference-103",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9509757254076893,
+        "text": "Why is it I am charged an extra fee when I use the ATM?"
+      },
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9297360282998606,
+        "text": "I used an ATM and there was an extra charge."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-057",
+    "neighbors": [
+      {
+        "id": "reference-206",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9733691409625665,
+        "text": "Why can't I get cash from the ATM?"
+      },
+      {
+        "id": "reference-247",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9689028183382177,
+        "text": "Why was I not able to take cash from the ATM?"
+      },
+      {
+        "id": "reference-226",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9645345744997008,
+        "text": "Why am I not able to get cash from the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-058",
+    "neighbors": [
+      {
+        "id": "reference-317",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9303515986243325,
+        "text": "I was only given $20 after trying to withdraw $100"
+      },
+      {
+        "id": "reference-310",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9222088070777055,
+        "text": "I withdrew $100 but only received $20"
+      },
+      {
+        "id": "reference-316",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9086992671869863,
+        "text": "I tried to withdraw 50 pounds but it only gave me 30. Where is the rest of my money?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-059",
+    "neighbors": [
+      {
+        "id": "reference-347",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9119222622970408,
+        "text": "I am at the ATM and tried to withdraw 30 pounds and it only gave me 10 pounds, what do I do?"
+      },
+      {
+        "id": "reference-316",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8723790945192055,
+        "text": "I tried to withdraw 50 pounds but it only gave me 30. Where is the rest of my money?"
+      },
+      {
+        "id": "reference-327",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8570721485637268,
+        "text": "If the ATM only gave me 10 pounds instead of the 30 I requested, what do I do?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-060",
+    "neighbors": [
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.9465096931883149,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-009",
+        "label": "card_arrival",
+        "similarity": 0.9261914391580249,
+        "text": "How do I track the card you sent me?"
+      },
+      {
+        "id": "reference-020",
+        "label": "card_arrival",
+        "similarity": 0.9259103048134989,
+        "text": "How do I track the card you sent to me?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-061",
+    "neighbors": [
+      {
+        "id": "reference-302",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9021360754030853,
+        "text": "I got $20 when I should've gotten $100"
+      },
+      {
+        "id": "reference-321",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9002604004985048,
+        "text": "I was only given $20 when I tried to get $100"
+      },
+      {
+        "id": "reference-329",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8454856621665532,
+        "text": "Why did I only get $20 when I asked for $100?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-062",
+    "neighbors": [
+      {
+        "id": "reference-206",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9927783390377609,
+        "text": "Why can't I get cash from the ATM?"
+      },
+      {
+        "id": "reference-226",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9871528256814871,
+        "text": "Why am I not able to get cash from the ATM?"
+      },
+      {
+        "id": "reference-210",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9646638932881374,
+        "text": "Why can't I take cash out of the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-063",
+    "neighbors": [
+      {
+        "id": "reference-259",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8786200329034252,
+        "text": "Why does my account show as pending a cash withdrawal from the ATM that I have already made?"
+      },
+      {
+        "id": "reference-284",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8748720788359435,
+        "text": "I Withdrew cash from an ATM earlier but it shows up as pending in the app. How can this still be pending, I received the cash already?"
+      },
+      {
+        "id": "reference-285",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8698462856401624,
+        "text": "So earlier I went to an ATM and got cash. But when I checked the app, it states that the withdrawal is pending. How can that be when I have the cash on me?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-064",
+    "neighbors": [
+      {
+        "id": "reference-175",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8925160244756882,
+        "text": "The app says that I got cash in an ATM and I didn't"
+      },
+      {
+        "id": "reference-160",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8827497337147568,
+        "text": "The app says I made a cash withdrawal that I didn't make"
+      },
+      {
+        "id": "reference-183",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8703045770449535,
+        "text": "My app says I withdraw funds from my account through an ATM."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-065",
+    "neighbors": [
+      {
+        "id": "reference-116",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9279565017789972,
+        "text": "So, I was just charged for my recent ATM withdrawal and any withdrawal prior to this has been free. What is the issue here?"
+      },
+      {
+        "id": "reference-113",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8963945466772754,
+        "text": "Why are you charging me for ATM withdrawal? It has always been free before."
+      },
+      {
+        "id": "reference-102",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8890733656073186,
+        "text": "I was under the impression ATM cash withdrawals were free. Why was I suddenly charged for my most recent ATM transaction?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-066",
+    "neighbors": [
+      {
+        "id": "reference-051",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9071499711171029,
+        "text": "I was charged an additional amount of money for making a purchase with my card"
+      },
+      {
+        "id": "reference-070",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8791748885466342,
+        "text": "There was an extra charge when I used my card"
+      },
+      {
+        "id": "reference-096",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8701586434844159,
+        "text": "I see I was charged extra when I used the card.  I am not sure why, please tell me why."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-067",
+    "neighbors": [
+      {
+        "id": "reference-335",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8870899208692068,
+        "text": "I attempted to withdraw some money from an ATM this morning and received the wrong amount. Your app says I have enough money available in the account. Can someone tell me what's wrong?"
+      },
+      {
+        "id": "reference-349",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8793611517077117,
+        "text": "I normally don't use ATMs, but I was in a rush today and had to withdraw some cash. The ATM gave me the wrong amount of money and now my app is not showing the same amount as it should. What do I do?"
+      },
+      {
+        "id": "reference-325",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8686846472366443,
+        "text": "I received incorrect amount of cash from an ATM today. It was more than I wanted. What do I do now?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-068",
+    "neighbors": [
+      {
+        "id": "reference-070",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9062633505386164,
+        "text": "There was an extra charge when I used my card"
+      },
+      {
+        "id": "reference-067",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9037231959246299,
+        "text": "Can you explain why I was charged extra when I used the card?"
+      },
+      {
+        "id": "reference-096",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8898159114772722,
+        "text": "I see I was charged extra when I used the card.  I am not sure why, please tell me why."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-069",
+    "neighbors": [
+      {
+        "id": "reference-122",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9271199129969687,
+        "text": "Why did I get charged a fee, I thought it was free?"
+      },
+      {
+        "id": "reference-064",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8899340078811073,
+        "text": "Why is there a fee when I thought there would be no fees?"
+      },
+      {
+        "id": "reference-094",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8605357378864511,
+        "text": "I have a fee and I don't know why"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-070",
+    "neighbors": [
+      {
+        "id": "reference-116",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9374290110214565,
+        "text": "So, I was just charged for my recent ATM withdrawal and any withdrawal prior to this has been free. What is the issue here?"
+      },
+      {
+        "id": "reference-102",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9362624297694676,
+        "text": "I was under the impression ATM cash withdrawals were free. Why was I suddenly charged for my most recent ATM transaction?"
+      },
+      {
+        "id": "reference-113",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.919767592165826,
+        "text": "Why are you charging me for ATM withdrawal? It has always been free before."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-071",
+    "neighbors": [
+      {
+        "id": "reference-295",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9902115769035235,
+        "text": "Is there any reason my cash withdrawal still shows as pending?"
+      },
+      {
+        "id": "reference-296",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9619663823989394,
+        "text": "Why would a cash withdrawal be pending?"
+      },
+      {
+        "id": "reference-264",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9588763401087933,
+        "text": "Why is the cash withdrawal under pending?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-072",
+    "neighbors": [
+      {
+        "id": "reference-230",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9592135359460624,
+        "text": "How come I can't get money at the ATM"
+      },
+      {
+        "id": "reference-221",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9559518607842564,
+        "text": "The ATM wouldn't allow me to withdraw money"
+      },
+      {
+        "id": "reference-206",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9503432252780715,
+        "text": "Why can't I get cash from the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-073",
+    "neighbors": [
+      {
+        "id": "reference-190",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.87867346020283,
+        "text": "My app shows cash I didn't get."
+      },
+      {
+        "id": "reference-160",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8594219427593217,
+        "text": "The app says I made a cash withdrawal that I didn't make"
+      },
+      {
+        "id": "reference-193",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8541020228367718,
+        "text": "In the app, I see a withdrawal I didn't make."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-074",
+    "neighbors": [
+      {
+        "id": "reference-064",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8668529461201846,
+        "text": "Why is there a fee when I thought there would be no fees?"
+      },
+      {
+        "id": "reference-063",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8664654859587103,
+        "text": "Let me know when you charge for payments. I just checked the app and saw a fee that I wasn't warned about."
+      },
+      {
+        "id": "reference-094",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8580804599213112,
+        "text": "I have a fee and I don't know why"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-075",
+    "neighbors": [
+      {
+        "id": "reference-152",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9152815845368065,
+        "text": "There is a cash withdrawal in my account that isn't mine."
+      },
+      {
+        "id": "reference-193",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9141519367607238,
+        "text": "In the app, I see a withdrawal I didn't make."
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9141348127019644,
+        "text": "A cash withdrawal has been done that I didn't do."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-076",
+    "neighbors": [
+      {
+        "id": "reference-002",
+        "label": "card_arrival",
+        "similarity": 0.9341682593828248,
+        "text": "I was expecting my new card by now."
+      },
+      {
+        "id": "reference-012",
+        "label": "card_arrival",
+        "similarity": 0.8996046735365963,
+        "text": "Can you tell me why I haven't received my new card?"
+      },
+      {
+        "id": "reference-023",
+        "label": "card_arrival",
+        "similarity": 0.8813094483503128,
+        "text": "I have been waiting over a week. Is the card still coming?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-077",
+    "neighbors": [
+      {
+        "id": "reference-060",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9197453295542591,
+        "text": "I got charged for with a fee for paying with my card."
+      },
+      {
+        "id": "reference-089",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9144475797701411,
+        "text": "I got a fee when paying with my card"
+      },
+      {
+        "id": "reference-098",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9131898263899701,
+        "text": "Why was there a fee for paying by card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-078",
+    "neighbors": [
+      {
+        "id": "reference-160",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9517753282851442,
+        "text": "The app says I made a cash withdrawal that I didn't make"
+      },
+      {
+        "id": "reference-181",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9515399798139678,
+        "text": "The app shows a withdrawal that I did not make or authorize."
+      },
+      {
+        "id": "reference-186",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9417473531040144,
+        "text": "I am seeing in the App a some cash withdrawal that does not belong to me"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-079",
+    "neighbors": [
+      {
+        "id": "reference-221",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9171166300703708,
+        "text": "The ATM wouldn't allow me to withdraw money"
+      },
+      {
+        "id": "reference-242",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9117620535868327,
+        "text": "The ATM wouldn't let me withdraw cash."
+      },
+      {
+        "id": "reference-241",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9096283979734993,
+        "text": "why wouldnt the atm give me money"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-080",
+    "neighbors": [
+      {
+        "id": "reference-253",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8961249291456178,
+        "text": "I tried to get some with-drawls but the machine didn't work. The transaction still seems in progress.Seems like  something is wrong,I don't want to be charged for Transaction i did not make."
+      },
+      {
+        "id": "reference-290",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8662714758901277,
+        "text": "The machine didn't work earlier when I went to get money out and now my account says transaction in progress.Why?"
+      },
+      {
+        "id": "reference-245",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8187369417421506,
+        "text": "I was getting some cash out of the ATM but it cancelled on me without warning."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-081",
+    "neighbors": [
+      {
+        "id": "reference-248",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.900453056406426,
+        "text": "The ATM keeps declining my card! I tried two different ATMs already can you please check if everything is alright with my account??"
+      },
+      {
+        "id": "reference-218",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8751186375332918,
+        "text": "Hi, I am unable to use my card in ATM. I had tried my card in two ATMs but both ATMs declined it. Could you please check my account?"
+      },
+      {
+        "id": "reference-215",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8487930987944717,
+        "text": "Every ATM I visit is rejecting my card and I don't know why. There should be money on it. Can you check it to see if something is wrong or if I'm doing something wrong?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-082",
+    "neighbors": [
+      {
+        "id": "reference-368",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9037254471481774,
+        "text": "I had trouble with an incorrect rate being applied when using the ATM with foreign currency."
+      },
+      {
+        "id": "reference-384",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9001699216083014,
+        "text": "Rates were applied wrong while using foreign currency at an ATM."
+      },
+      {
+        "id": "reference-379",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8919612570129664,
+        "text": "The rate applied to my foreign currency at an ATM was incorrect."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-083",
+    "neighbors": [
+      {
+        "id": "reference-303",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9674195912868998,
+        "text": "I visited the ATM but got less money than what I requested. Why?"
+      },
+      {
+        "id": "reference-315",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.965695754273946,
+        "text": "Why did I get less cash than what I asked in the ATM?"
+      },
+      {
+        "id": "reference-309",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9595427747222373,
+        "text": "I got less cash at the ATM than I asked for. Why?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-084",
+    "neighbors": [
+      {
+        "id": "reference-006",
+        "label": "card_arrival",
+        "similarity": 0.9563096164255446,
+        "text": "Can you please tell me where my card is? I ordered it 2 weeks ago!"
+      },
+      {
+        "id": "reference-044",
+        "label": "card_arrival",
+        "similarity": 0.9211436293570515,
+        "text": "2 weeks ago I ordered my new card.  It isn't here.  What should I do?"
+      },
+      {
+        "id": "reference-021",
+        "label": "card_arrival",
+        "similarity": 0.9206376302637543,
+        "text": "My card was supposed to arrive, but hasn't?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-085",
+    "neighbors": [
+      {
+        "id": "reference-376",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9428394474498882,
+        "text": "I got cash abroad and the exchange rate applied is wrong"
+      },
+      {
+        "id": "reference-389",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9218476639764022,
+        "text": "I had the wrong exchange rate applied to some cash I got abroad."
+      },
+      {
+        "id": "reference-386",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9210555213083844,
+        "text": "When I got cash the exchange rate was wrong"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-086",
+    "neighbors": [
+      {
+        "id": "reference-038",
+        "label": "card_arrival",
+        "similarity": 0.9641831538993219,
+        "text": "Does the card you sent have a tracking number?"
+      },
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.9402968703571337,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-020",
+        "label": "card_arrival",
+        "similarity": 0.9080327232832385,
+        "text": "How do I track the card you sent to me?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-087",
+    "neighbors": [
+      {
+        "id": "reference-136",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8758928654933812,
+        "text": "I thought it was free to make a withdrawal. So how much does it cost now?"
+      },
+      {
+        "id": "reference-106",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8711599110342804,
+        "text": "Why did you charge a fee when I withdrew from an ATM?"
+      },
+      {
+        "id": "reference-111",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8677178674179401,
+        "text": "Why do I see extra charges for withdrawing my money?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-088",
+    "neighbors": [
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9090490267525444,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      },
+      {
+        "id": "reference-219",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9026725327582983,
+        "text": "My cash withdrawal was declined.  Why?"
+      },
+      {
+        "id": "reference-234",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8937203789928772,
+        "text": "My ATM withdrawal was declined."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-089",
+    "neighbors": [
+      {
+        "id": "reference-147",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7895633245909134,
+        "text": "extra fees on a cash withdrawal, not cool."
+      },
+      {
+        "id": "reference-140",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7790914422113304,
+        "text": "i withdraw cash from the ATM and was charged a fee"
+      },
+      {
+        "id": "reference-120",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7779622800251107,
+        "text": "What was the extra charge for withdrawing money?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-090",
+    "neighbors": [
+      {
+        "id": "reference-158",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8901014580553369,
+        "text": "Someone stole my wallet a couple of hours ago now and they have taken money from my account. Is there any way that you can help so I won't lose any more of my money."
+      },
+      {
+        "id": "reference-170",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8511202357120894,
+        "text": "I hope you can help me. Someone has stolen my wallet and now I have noticed that they have been taking money from my account."
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8416204308425437,
+        "text": "A cash withdrawal has been done that I didn't do."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-091",
+    "neighbors": [
+      {
+        "id": "reference-173",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8999540315782096,
+        "text": "I want my card frozen right away. Money was taken out in an odd location I have never heard of."
+      },
+      {
+        "id": "reference-200",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.854991643828647,
+        "text": "Help! I just realised someone has apparently withdrawn money using my card! It's from some odd remote town where I definitely haven't been. Please freeze it immediately!"
+      },
+      {
+        "id": "reference-197",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8469908806608232,
+        "text": "I need my card frozen cause it was used without my consent to take money out. It was in an odd place."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-092",
+    "neighbors": [
+      {
+        "id": "reference-379",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9463950860767111,
+        "text": "The rate applied to my foreign currency at an ATM was incorrect."
+      },
+      {
+        "id": "reference-384",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9304941020742842,
+        "text": "Rates were applied wrong while using foreign currency at an ATM."
+      },
+      {
+        "id": "reference-368",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9263286524804778,
+        "text": "I had trouble with an incorrect rate being applied when using the ATM with foreign currency."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-093",
+    "neighbors": [
+      {
+        "id": "reference-137",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8154642593899781,
+        "text": "Is there a fee when I get cash from an ATM? Is there a limit I can take out? If there is a fee, what is it?"
+      },
+      {
+        "id": "reference-125",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7783328811930228,
+        "text": "I got charged fees for withdrawing cash!"
+      },
+      {
+        "id": "reference-136",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7748334886524765,
+        "text": "I thought it was free to make a withdrawal. So how much does it cost now?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-094",
+    "neighbors": [
+      {
+        "id": "reference-052",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9158899339802654,
+        "text": "What is the charge for paying with my card?"
+      },
+      {
+        "id": "reference-098",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8592368991201157,
+        "text": "Why was there a fee for paying by card?"
+      },
+      {
+        "id": "reference-089",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8536713115922175,
+        "text": "I got a fee when paying with my card"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-095",
+    "neighbors": [
+      {
+        "id": "reference-399",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.83780875558441,
+        "text": "How did you arrive at the rate of exchange? I thought that I would get more cash."
+      },
+      {
+        "id": "reference-366",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8094168605913553,
+        "text": "Why did my exchange rate change?"
+      },
+      {
+        "id": "reference-361",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.80427563874785,
+        "text": "I got less cash because of the exchange rate."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-096",
+    "neighbors": [
+      {
+        "id": "reference-160",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9562330221739862,
+        "text": "The app says I made a cash withdrawal that I didn't make"
+      },
+      {
+        "id": "reference-193",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9502210745099511,
+        "text": "In the app, I see a withdrawal I didn't make."
+      },
+      {
+        "id": "reference-181",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9499717840546903,
+        "text": "The app shows a withdrawal that I did not make or authorize."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-097",
+    "neighbors": [
+      {
+        "id": "reference-254",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9837246546855549,
+        "text": "What is a pending cash withdrawal?"
+      },
+      {
+        "id": "reference-257",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9627028949964822,
+        "text": "What does it mean if my cash withdrawal is pending?"
+      },
+      {
+        "id": "reference-296",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9387418418289932,
+        "text": "Why would a cash withdrawal be pending?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-098",
+    "neighbors": [
+      {
+        "id": "reference-233",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9515281803595788,
+        "text": "I have tried using my card for the first time at the ATM of Notting Hill to withdrawal cash but it didn't work. Does this mean my card isn't working?"
+      },
+      {
+        "id": "reference-236",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9299098465066218,
+        "text": "I tried to get money out of the Notting Hill ATM earlier, but wasn't able to. Is my card working okay? It's the first time I tried using it."
+      },
+      {
+        "id": "reference-247",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8106052951182144,
+        "text": "Why was I not able to take cash from the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-099",
+    "neighbors": [
+      {
+        "id": "reference-190",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9534081640395468,
+        "text": "My app shows cash I didn't get."
+      },
+      {
+        "id": "reference-185",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9103930875514047,
+        "text": "There are funds in my app that I did not receive."
+      },
+      {
+        "id": "reference-166",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8893478956951997,
+        "text": "I see non-received cash in my app."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-100",
+    "neighbors": [
+      {
+        "id": "reference-331",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9467092036041251,
+        "text": "I did not get the right amount of cash from the ATM."
+      },
+      {
+        "id": "reference-308",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.940318020714419,
+        "text": "I didn't get the correct amount of money from the ATM machine"
+      },
+      {
+        "id": "reference-345",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9341282629110763,
+        "text": "I didn't receive the correct amount of cash"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-101",
+    "neighbors": [
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9162885760313703,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      },
+      {
+        "id": "reference-222",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9051195011643857,
+        "text": "I tried to get cash but it was declined!"
+      },
+      {
+        "id": "reference-203",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9003041955818021,
+        "text": "When I went to get cash, it was declined!"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-102",
+    "neighbors": [
+      {
+        "id": "reference-190",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8860366214516192,
+        "text": "My app shows cash I didn't get."
+      },
+      {
+        "id": "reference-166",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8525239130502089,
+        "text": "I see non-received cash in my app."
+      },
+      {
+        "id": "reference-185",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8503097203536744,
+        "text": "There are funds in my app that I did not receive."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-103",
+    "neighbors": [
+      {
+        "id": "reference-375",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9570228777614267,
+        "text": "When I got cash I believe that the exchange rate was wrong"
+      },
+      {
+        "id": "reference-373",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9474106663658,
+        "text": "I noticed my exchange rate was incorrect when I got cash."
+      },
+      {
+        "id": "reference-355",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9459271727115637,
+        "text": "When I got my cash, the amount was not what it should have been, based on the exchange rate."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-104",
+    "neighbors": [
+      {
+        "id": "reference-109",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8987022643383239,
+        "text": "Is there a charge for cash withdrawals? I always thought it was free."
+      },
+      {
+        "id": "reference-141",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8725158823901132,
+        "text": "Since when were there charges for taking out cash from my account? It's always been free for me to do this before.  How much are the charges going to be?"
+      },
+      {
+        "id": "reference-136",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8473396736518922,
+        "text": "I thought it was free to make a withdrawal. So how much does it cost now?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-105",
+    "neighbors": [
+      {
+        "id": "reference-151",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9700366833451431,
+        "text": "There is a cash withdrawal on my statement that I don't recognize"
+      },
+      {
+        "id": "reference-155",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9483293156501039,
+        "text": "There's a cash withdrawal I didn't make"
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9419825121344678,
+        "text": "A cash withdrawal has been done that I didn't do."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-106",
+    "neighbors": [
+      {
+        "id": "reference-091",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9453157783498497,
+        "text": "Why was the price higher when I paid with my card?"
+      },
+      {
+        "id": "reference-088",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9042653478696154,
+        "text": "Why did I have to pay an additional amount when using my card to pay?"
+      },
+      {
+        "id": "reference-098",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8970650323826201,
+        "text": "Why was there a fee for paying by card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-107",
+    "neighbors": [
+      {
+        "id": "reference-060",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9713521476272237,
+        "text": "I got charged for with a fee for paying with my card."
+      },
+      {
+        "id": "reference-089",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9609663996763843,
+        "text": "I got a fee when paying with my card"
+      },
+      {
+        "id": "reference-056",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9518596009717145,
+        "text": "I bought something with my card and I was charged a fee"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-108",
+    "neighbors": [
+      {
+        "id": "reference-037",
+        "label": "card_arrival",
+        "similarity": 0.9635357464557177,
+        "text": "Is there a way to track my card?"
+      },
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.8978828069539366,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-009",
+        "label": "card_arrival",
+        "similarity": 0.8737317935625694,
+        "text": "How do I track the card you sent me?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-109",
+    "neighbors": [
+      {
+        "id": "reference-217",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9466080250926597,
+        "text": "I cannot withdraw money from the ATM"
+      },
+      {
+        "id": "reference-221",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9281667787249819,
+        "text": "The ATM wouldn't allow me to withdraw money"
+      },
+      {
+        "id": "reference-210",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.924203555479342,
+        "text": "Why can't I take cash out of the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-110",
+    "neighbors": [
+      {
+        "id": "reference-295",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9745306398297683,
+        "text": "Is there any reason my cash withdrawal still shows as pending?"
+      },
+      {
+        "id": "reference-263",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9697768316444364,
+        "text": "my cash withdrawal is pending, why?"
+      },
+      {
+        "id": "reference-276",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9646118965209106,
+        "text": "Cash withdrawal has been pending, why is it so?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-111",
+    "neighbors": [
+      {
+        "id": "reference-150",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9441620923574652,
+        "text": "Do I get charged for withdrawals?"
+      },
+      {
+        "id": "reference-109",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9436939954345416,
+        "text": "Is there a charge for cash withdrawals? I always thought it was free."
+      },
+      {
+        "id": "reference-138",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9322459527051442,
+        "text": "to cash withdrawals charge me?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-112",
+    "neighbors": [
+      {
+        "id": "reference-385",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9433562496249198,
+        "text": "I think the exchange rate was incorrect."
+      },
+      {
+        "id": "reference-386",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9401352167331026,
+        "text": "When I got cash the exchange rate was wrong"
+      },
+      {
+        "id": "reference-375",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.930653370194231,
+        "text": "When I got cash I believe that the exchange rate was wrong"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-113",
+    "neighbors": [
+      {
+        "id": "reference-067",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9163475814174923,
+        "text": "Can you explain why I was charged extra when I used the card?"
+      },
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9158935074700459,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-070",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8980521701764507,
+        "text": "There was an extra charge when I used my card"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-114",
+    "neighbors": [
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.8849749530707074,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-037",
+        "label": "card_arrival",
+        "similarity": 0.8679428817404699,
+        "text": "Is there a way to track my card?"
+      },
+      {
+        "id": "reference-038",
+        "label": "card_arrival",
+        "similarity": 0.8671970210118073,
+        "text": "Does the card you sent have a tracking number?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-115",
+    "neighbors": [
+      {
+        "id": "reference-257",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9877629749462911,
+        "text": "What does it mean if my cash withdrawal is pending?"
+      },
+      {
+        "id": "reference-296",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.970380193471158,
+        "text": "Why would a cash withdrawal be pending?"
+      },
+      {
+        "id": "reference-254",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9659915437513262,
+        "text": "What is a pending cash withdrawal?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-116",
+    "neighbors": [
+      {
+        "id": "reference-295",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.958080659989044,
+        "text": "Is there any reason my cash withdrawal still shows as pending?"
+      },
+      {
+        "id": "reference-266",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9565829496959409,
+        "text": "Can you let me know why my cash withdrawal is still pending?"
+      },
+      {
+        "id": "reference-276",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9518640165270964,
+        "text": "Cash withdrawal has been pending, why is it so?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-117",
+    "neighbors": [
+      {
+        "id": "reference-345",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9860648576513854,
+        "text": "I didn't receive the correct amount of cash"
+      },
+      {
+        "id": "reference-308",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9388771385509735,
+        "text": "I didn't get the correct amount of money from the ATM machine"
+      },
+      {
+        "id": "reference-331",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9370690109654101,
+        "text": "I did not get the right amount of cash from the ATM."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-118",
+    "neighbors": [
+      {
+        "id": "reference-020",
+        "label": "card_arrival",
+        "similarity": 0.9447162898463599,
+        "text": "How do I track the card you sent to me?"
+      },
+      {
+        "id": "reference-009",
+        "label": "card_arrival",
+        "similarity": 0.9430817729599499,
+        "text": "How do I track the card you sent me?"
+      },
+      {
+        "id": "reference-031",
+        "label": "card_arrival",
+        "similarity": 0.9402599766700613,
+        "text": "Am I able to track a card that has already been sent?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-119",
+    "neighbors": [
+      {
+        "id": "reference-332",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9761653418825502,
+        "text": "The ATM did not give me as much cash as I requested."
+      },
+      {
+        "id": "reference-339",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9707477220166911,
+        "text": "The ATM gave me less cash than requested"
+      },
+      {
+        "id": "reference-330",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9669891544963313,
+        "text": "I got less cash than what I specified at the ATM."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-120",
+    "neighbors": [
+      {
+        "id": "reference-345",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8828840123900034,
+        "text": "I didn't receive the correct amount of cash"
+      },
+      {
+        "id": "reference-326",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8773512916049627,
+        "text": "I did not get enough cash"
+      },
+      {
+        "id": "reference-306",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8655088663772159,
+        "text": "HELP! I tried to get cash and it gave me some, but not the right amount!"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-121",
+    "neighbors": [
+      {
+        "id": "reference-074",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9450722163792534,
+        "text": "Why am I getting a fee on a card payment?"
+      },
+      {
+        "id": "reference-095",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9334226067550383,
+        "text": "On a card payment, why is there a fee?"
+      },
+      {
+        "id": "reference-098",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.922380811966943,
+        "text": "Why was there a fee for paying by card?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-122",
+    "neighbors": [
+      {
+        "id": "reference-324",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9302765461719927,
+        "text": "I received the wrong amount of cash from the ATM. Can you help?"
+      },
+      {
+        "id": "reference-331",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8898864943151863,
+        "text": "I did not get the right amount of cash from the ATM."
+      },
+      {
+        "id": "reference-307",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8887635710670392,
+        "text": "Cash withdrawal was incorrect at ATM."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-123",
+    "neighbors": [
+      {
+        "id": "reference-345",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.983638844562024,
+        "text": "I didn't receive the correct amount of cash"
+      },
+      {
+        "id": "reference-331",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9520030913260759,
+        "text": "I did not get the right amount of cash from the ATM."
+      },
+      {
+        "id": "reference-324",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9353568744917441,
+        "text": "I received the wrong amount of cash from the ATM. Can you help?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-124",
+    "neighbors": [
+      {
+        "id": "reference-319",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9267127653332001,
+        "text": "ATM is broken. It did not give me the full amount (30 pounds.)  I'm standing here with only 10 pounds and it's telling me it gave me 30 pounds. I need assistance now!"
+      },
+      {
+        "id": "reference-347",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8865701400453229,
+        "text": "I am at the ATM and tried to withdraw 30 pounds and it only gave me 10 pounds, what do I do?"
+      },
+      {
+        "id": "reference-327",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8782094073659279,
+        "text": "If the ATM only gave me 10 pounds instead of the 30 I requested, what do I do?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-125",
+    "neighbors": [
+      {
+        "id": "reference-381",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.931301980142376,
+        "text": "Can I get money in my home currency at some ATM? I'm on holiday and am a bit concerned because I don't have any cash with me, it is possible to withdraw here already without any additional cost?"
+      },
+      {
+        "id": "reference-395",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8200453352430306,
+        "text": "I have a question about ATM transactions. Can I take money out of an ATM when I'm traveling abroad? And, can I get the money in my home currancy?"
+      },
+      {
+        "id": "reference-396",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.6789364373499117,
+        "text": "Why is the exchange rate wrong for my cash withdrawal?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-126",
+    "neighbors": [
+      {
+        "id": "reference-158",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8267182941178328,
+        "text": "Someone stole my wallet a couple of hours ago now and they have taken money from my account. Is there any way that you can help so I won't lose any more of my money."
+      },
+      {
+        "id": "reference-162",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.7772024999981317,
+        "text": "I noticed that there is a withdrawal in the app that is not mine."
+      },
+      {
+        "id": "reference-152",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.7732668410119531,
+        "text": "There is a cash withdrawal in my account that isn't mine."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-127",
+    "neighbors": [
+      {
+        "id": "reference-373",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9184483206347756,
+        "text": "I noticed my exchange rate was incorrect when I got cash."
+      },
+      {
+        "id": "reference-367",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.910786046788175,
+        "text": "The exchange rate was different when I got cash"
+      },
+      {
+        "id": "reference-386",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9083712820472222,
+        "text": "When I got cash the exchange rate was wrong"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-128",
+    "neighbors": [
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8584542773156506,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      },
+      {
+        "id": "reference-080",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8574687673620424,
+        "text": "I just made an order and noticed an extra fee. Why have you charged me this without informing me?"
+      },
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.857200195447486,
+        "text": "Why was I charged an extra fee when using the card?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-129",
+    "neighbors": [
+      {
+        "id": "reference-269",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9087750627894448,
+        "text": "Hello. I looked at my account and see that a transaction I tried to do is pending, but I did not complete that transaction. When I was at the ATM, the machine declined my card. Can you make sure that transaction does not go through because I definitely did not receive the money."
+      },
+      {
+        "id": "reference-282",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8882554227937949,
+        "text": "My card was declined and I did not receive money from the ATM earlier, yet it show on my account that it is pending."
+      },
+      {
+        "id": "reference-291",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8730331527839598,
+        "text": "When I used one of the ATMs in the city centre today, I tried to take out some money, but for whatever reason, the machine declined my card. Just checked it out in my account and that amount is still showing as pending! Is there any way that you can cancel this transaction, because I did not receive any money whatsoever from the ATM"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-130",
+    "neighbors": [
+      {
+        "id": "reference-008",
+        "label": "card_arrival",
+        "similarity": 0.8999692897815446,
+        "text": "I want to find out what happened to my new card?"
+      },
+      {
+        "id": "reference-033",
+        "label": "card_arrival",
+        "similarity": 0.8909573841831612,
+        "text": "Is there a way to track the new card you sent me?"
+      },
+      {
+        "id": "reference-014",
+        "label": "card_arrival",
+        "similarity": 0.8608989297831657,
+        "text": "How can I periodically check the delivery of the card you sent?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-131",
+    "neighbors": [
+      {
+        "id": "reference-050",
+        "label": "card_arrival",
+        "similarity": 0.9355230149684801,
+        "text": "What can I do if my card still hasn't arrived after 2 weeks?"
+      },
+      {
+        "id": "reference-005",
+        "label": "card_arrival",
+        "similarity": 0.9283711917342637,
+        "text": "It's been a week since you issued me a card and I still didn't get it. Should I keep waiting?"
+      },
+      {
+        "id": "reference-026",
+        "label": "card_arrival",
+        "similarity": 0.9281919501448149,
+        "text": "I don't have my card after 1 week. What are my next steps?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-132",
+    "neighbors": [
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9319773877089106,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-071",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9293441366989242,
+        "text": "Why is there a fee for using my card?"
+      },
+      {
+        "id": "reference-082",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9291806038218191,
+        "text": "What is the extra fee that was added when I used the card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-133",
+    "neighbors": [
+      {
+        "id": "reference-111",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8647924609952594,
+        "text": "Why do I see extra charges for withdrawing my money?"
+      },
+      {
+        "id": "reference-125",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8598421603724438,
+        "text": "I got charged fees for withdrawing cash!"
+      },
+      {
+        "id": "reference-144",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8424823992381172,
+        "text": "Why is there a charge when I took out money?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-134",
+    "neighbors": [
+      {
+        "id": "reference-041",
+        "label": "card_arrival",
+        "similarity": 0.9394399222402864,
+        "text": "how to track the card you sent"
+      },
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.9287649433703493,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-020",
+        "label": "card_arrival",
+        "similarity": 0.925733273995141,
+        "text": "How do I track the card you sent to me?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-135",
+    "neighbors": [
+      {
+        "id": "reference-155",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.977564266234841,
+        "text": "There's a cash withdrawal I didn't make"
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9506061650308688,
+        "text": "A cash withdrawal has been done that I didn't do."
+      },
+      {
+        "id": "reference-176",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9346803453927155,
+        "text": "Help!  There is a cash withdrawl on the account that I didn't make!"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-136",
+    "neighbors": [
+      {
+        "id": "reference-018",
+        "label": "card_arrival",
+        "similarity": 0.9815586441751023,
+        "text": "why have i not got my new card?"
+      },
+      {
+        "id": "reference-012",
+        "label": "card_arrival",
+        "similarity": 0.9564239464620381,
+        "text": "Can you tell me why I haven't received my new card?"
+      },
+      {
+        "id": "reference-017",
+        "label": "card_arrival",
+        "similarity": 0.9239758969635496,
+        "text": "What's go on, where is my new card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-137",
+    "neighbors": [
+      {
+        "id": "reference-231",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9234843106714139,
+        "text": "I think there may be something wrong with my card. I have never had issues with withdraws before, but this morning on the way to work it was suddenly declined."
+      },
+      {
+        "id": "reference-246",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9173250567852408,
+        "text": "Hi, In morning, i was trying to withdraw money from my card, but it got declined. So far it was working fine. Could you please check my card."
+      },
+      {
+        "id": "reference-234",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9027099502537971,
+        "text": "My ATM withdrawal was declined."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-138",
+    "neighbors": [
+      {
+        "id": "reference-164",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9215147127729749,
+        "text": "I think someone might have a copy of my card because a 500 dollar withdrawal was made, and it wasn't me. Can you please help?"
+      },
+      {
+        "id": "reference-168",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9104631769491444,
+        "text": "Someone has a copy of my card !! I definitely still have it here but someone just made a 500\u00a3 cash withdrawal, HELP!"
+      },
+      {
+        "id": "reference-154",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9080348160322699,
+        "text": "A cash withdrawal that I didn't authorize is shown on my account - can you please cancel my card as soon as possible?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-139",
+    "neighbors": [
+      {
+        "id": "reference-337",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9520186310666402,
+        "text": "How can I request cash back? The ATM gave me the wrong amount that I've been charged though..."
+      },
+      {
+        "id": "reference-306",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9228943254687613,
+        "text": "HELP! I tried to get cash and it gave me some, but not the right amount!"
+      },
+      {
+        "id": "reference-336",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9138686750051418,
+        "text": "I was just giving the wrong amount by the ATM. How do I request cash back at this point? The app is showing the amount that I actually requested even though that's not what I got."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-140",
+    "neighbors": [
+      {
+        "id": "reference-104",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9660900742755055,
+        "text": "Can you tell me why I was charged to withdraw cash?"
+      },
+      {
+        "id": "reference-148",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9522814124406984,
+        "text": "Why did I get charged for a withdrawal?"
+      },
+      {
+        "id": "reference-125",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9326687629631657,
+        "text": "I got charged fees for withdrawing cash!"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-141",
+    "neighbors": [
+      {
+        "id": "reference-295",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9364105182870484,
+        "text": "Is there any reason my cash withdrawal still shows as pending?"
+      },
+      {
+        "id": "reference-266",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9209672686074235,
+        "text": "Can you let me know why my cash withdrawal is still pending?"
+      },
+      {
+        "id": "reference-292",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9205984946251532,
+        "text": "Can you please tell me why my cash withdrawal is still pending?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-142",
+    "neighbors": [
+      {
+        "id": "reference-140",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9299969050506101,
+        "text": "i withdraw cash from the ATM and was charged a fee"
+      },
+      {
+        "id": "reference-139",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9271415758791708,
+        "text": "Why did I get a fee for getting cash?"
+      },
+      {
+        "id": "reference-076",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9253496100071349,
+        "text": "I was spending cash with my card and got a fee."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-143",
+    "neighbors": [
+      {
+        "id": "reference-007",
+        "label": "card_arrival",
+        "similarity": 0.9555346638751886,
+        "text": "My card hasn't came in the mail yet?"
+      },
+      {
+        "id": "reference-046",
+        "label": "card_arrival",
+        "similarity": 0.9481040121506287,
+        "text": "I haven't gotten my credit card in the mail."
+      },
+      {
+        "id": "reference-004",
+        "label": "card_arrival",
+        "similarity": 0.9345510764447815,
+        "text": "My card hasn't arrived."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-144",
+    "neighbors": [
+      {
+        "id": "reference-388",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9704718169013994,
+        "text": "I did not get the right exchange rate while getting my cash out."
+      },
+      {
+        "id": "reference-386",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9703554025815528,
+        "text": "When I got cash the exchange rate was wrong"
+      },
+      {
+        "id": "reference-397",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9625908998257316,
+        "text": "I believe I got a wrong exchange rate when I got cash."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-145",
+    "neighbors": [
+      {
+        "id": "reference-055",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9402187911815975,
+        "text": "Why was I charged an extra fee when paying with card?"
+      },
+      {
+        "id": "reference-077",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9333039234173697,
+        "text": "Why was I charged an additional fee when paying with card?"
+      },
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9216608371216778,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-146",
+    "neighbors": [
+      {
+        "id": "reference-111",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9402970156443252,
+        "text": "Why do I see extra charges for withdrawing my money?"
+      },
+      {
+        "id": "reference-120",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9364570910747527,
+        "text": "What was the extra charge for withdrawing money?"
+      },
+      {
+        "id": "reference-114",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9364389550715541,
+        "text": "Why am I being charged extra when I withdrew money?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-147",
+    "neighbors": [
+      {
+        "id": "reference-104",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9437532138508473,
+        "text": "Can you tell me why I was charged to withdraw cash?"
+      },
+      {
+        "id": "reference-139",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9379216612934465,
+        "text": "Why did I get a fee for getting cash?"
+      },
+      {
+        "id": "reference-106",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9348608624362857,
+        "text": "Why did you charge a fee when I withdrew from an ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-148",
+    "neighbors": [
+      {
+        "id": "reference-151",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8870489827310019,
+        "text": "There is a cash withdrawal on my statement that I don't recognize"
+      },
+      {
+        "id": "reference-195",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8749149407064332,
+        "text": "I do not know what this cash withdrawal is"
+      },
+      {
+        "id": "reference-174",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8606554744682229,
+        "text": "Why is there a cash withdrawal I didn't make?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-149",
+    "neighbors": [
+      {
+        "id": "reference-316",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9050561497988462,
+        "text": "I tried to withdraw 50 pounds but it only gave me 30. Where is the rest of my money?"
+      },
+      {
+        "id": "reference-330",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9039392448117802,
+        "text": "I got less cash than what I specified at the ATM."
+      },
+      {
+        "id": "reference-347",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9028751390089789,
+        "text": "I am at the ATM and tried to withdraw 30 pounds and it only gave me 10 pounds, what do I do?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-150",
+    "neighbors": [
+      {
+        "id": "reference-168",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.916407015478368,
+        "text": "Someone has a copy of my card !! I definitely still have it here but someone just made a 500\u00a3 cash withdrawal, HELP!"
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8983471199405971,
+        "text": "A cash withdrawal has been done that I didn't do."
+      },
+      {
+        "id": "reference-155",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8882722287771017,
+        "text": "There's a cash withdrawal I didn't make"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-151",
+    "neighbors": [
+      {
+        "id": "reference-144",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9758105770976099,
+        "text": "Why is there a charge when I took out money?"
+      },
+      {
+        "id": "reference-114",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9168443802125045,
+        "text": "Why am I being charged extra when I withdrew money?"
+      },
+      {
+        "id": "reference-104",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9112481663606287,
+        "text": "Can you tell me why I was charged to withdraw cash?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-152",
+    "neighbors": [
+      {
+        "id": "reference-333",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8604209413985894,
+        "text": "I requested $100 but only got $20"
+      },
+      {
+        "id": "reference-343",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8245086301442673,
+        "text": "I didn't get all the money I asked for"
+      },
+      {
+        "id": "reference-326",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8098973739004725,
+        "text": "I did not get enough cash"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-153",
+    "neighbors": [
+      {
+        "id": "reference-348",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9241112756932378,
+        "text": "Please help me with the amount that i have withdrawn from the ATM today, the ATM has given me wrong sum of amount, and i could see that the app is displaying the greater amount than taken out."
+      },
+      {
+        "id": "reference-324",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8843495684521169,
+        "text": "I received the wrong amount of cash from the ATM. Can you help?"
+      },
+      {
+        "id": "reference-335",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8820219039570817,
+        "text": "I attempted to withdraw some money from an ATM this morning and received the wrong amount. Your app says I have enough money available in the account. Can someone tell me what's wrong?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-154",
+    "neighbors": [
+      {
+        "id": "reference-353",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8900789875219585,
+        "text": "I made an ATM withdrawal over the holiday and then later realized I was charged an exorbitant fee!  I never would've made this withdrawal if I'd known I'd be charged so much."
+      },
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8230784998861657,
+        "text": "I used an ATM and there was an extra charge."
+      },
+      {
+        "id": "reference-105",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.790069975118032,
+        "text": "I saw I was charged extra for money I withdrew?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-155",
+    "neighbors": [
+      {
+        "id": "reference-376",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9757241327284143,
+        "text": "I got cash abroad and the exchange rate applied is wrong"
+      },
+      {
+        "id": "reference-372",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9661822090911506,
+        "text": "The applied exchange rate is wrong for the cash I got abroad."
+      },
+      {
+        "id": "reference-389",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9598067072172181,
+        "text": "I had the wrong exchange rate applied to some cash I got abroad."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-156",
+    "neighbors": [
+      {
+        "id": "reference-165",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8927611886636175,
+        "text": "Someone withdrew money from my account, and it wasn't me."
+      },
+      {
+        "id": "reference-162",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8911548895413683,
+        "text": "I noticed that there is a withdrawal in the app that is not mine."
+      },
+      {
+        "id": "reference-152",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8711605836530267,
+        "text": "There is a cash withdrawal in my account that isn't mine."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-157",
+    "neighbors": [
+      {
+        "id": "reference-288",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9311772116867396,
+        "text": "How long does it take for a cash withdrawal to show?"
+      },
+      {
+        "id": "reference-265",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9175215554685292,
+        "text": "When will a cash withdrawal show up?"
+      },
+      {
+        "id": "reference-293",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9010899022603828,
+        "text": "how long until a cash withdrawal will show on my account"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-158",
+    "neighbors": [
+      {
+        "id": "reference-185",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8412094443456839,
+        "text": "There are funds in my app that I did not receive."
+      },
+      {
+        "id": "reference-175",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8267990450724465,
+        "text": "The app says that I got cash in an ATM and I didn't"
+      },
+      {
+        "id": "reference-186",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.815448137506769,
+        "text": "I am seeing in the App a some cash withdrawal that does not belong to me"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-159",
+    "neighbors": [
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9531522064859481,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-067",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9488752085784294,
+        "text": "Can you explain why I was charged extra when I used the card?"
+      },
+      {
+        "id": "reference-082",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9355518015740703,
+        "text": "What is the extra fee that was added when I used the card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-160",
+    "neighbors": [
+      {
+        "id": "reference-222",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9118436885311056,
+        "text": "I tried to get cash but it was declined!"
+      },
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8956650881682376,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      },
+      {
+        "id": "reference-219",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8838555429294925,
+        "text": "My cash withdrawal was declined.  Why?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-161",
+    "neighbors": [
+      {
+        "id": "reference-336",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9538273504806228,
+        "text": "I was just giving the wrong amount by the ATM. How do I request cash back at this point? The app is showing the amount that I actually requested even though that's not what I got."
+      },
+      {
+        "id": "reference-337",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9398789524232934,
+        "text": "How can I request cash back? The ATM gave me the wrong amount that I've been charged though..."
+      },
+      {
+        "id": "reference-318",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.889453741770474,
+        "text": "Hi, Please help me to request cash back. As i have been withdrawn money from ATM, but i got wrong amount. in Application its showing the amount i have been charged through."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-162",
+    "neighbors": [
+      {
+        "id": "reference-400",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8760647599321709,
+        "text": "I got cash abroad and need to check the exchange rate"
+      },
+      {
+        "id": "reference-398",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8655483547025976,
+        "text": "Using international ATMs messes up the exchange rate."
+      },
+      {
+        "id": "reference-391",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8617788382601116,
+        "text": "what are the exchange rates for getting cash"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-163",
+    "neighbors": [
+      {
+        "id": "reference-037",
+        "label": "card_arrival",
+        "similarity": 0.9271706389621832,
+        "text": "Is there a way to track my card?"
+      },
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.9141182600879673,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-031",
+        "label": "card_arrival",
+        "similarity": 0.8779130216386082,
+        "text": "Am I able to track a card that has already been sent?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-164",
+    "neighbors": [
+      {
+        "id": "reference-148",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9440247535345815,
+        "text": "Why did I get charged for a withdrawal?"
+      },
+      {
+        "id": "reference-111",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9309214991122643,
+        "text": "Why do I see extra charges for withdrawing my money?"
+      },
+      {
+        "id": "reference-106",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9229339034515037,
+        "text": "Why did you charge a fee when I withdrew from an ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-165",
+    "neighbors": [
+      {
+        "id": "reference-248",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8286121532491203,
+        "text": "The ATM keeps declining my card! I tried two different ATMs already can you please check if everything is alright with my account??"
+      },
+      {
+        "id": "reference-282",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8003494289982336,
+        "text": "My card was declined and I did not receive money from the ATM earlier, yet it show on my account that it is pending."
+      },
+      {
+        "id": "reference-234",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.7984987883742946,
+        "text": "My ATM withdrawal was declined."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-166",
+    "neighbors": [
+      {
+        "id": "reference-295",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9595048825250799,
+        "text": "Is there any reason my cash withdrawal still shows as pending?"
+      },
+      {
+        "id": "reference-266",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9564124998944006,
+        "text": "Can you let me know why my cash withdrawal is still pending?"
+      },
+      {
+        "id": "reference-263",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9562243004785542,
+        "text": "my cash withdrawal is pending, why?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-167",
+    "neighbors": [
+      {
+        "id": "reference-271",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.873689505416193,
+        "text": "I tried to get cash at some ATM in the city centre earlier but the machine declined my card. I've seen it still shows up as pending in my account. Please cancel it immediately as I definitely have not received that money!"
+      },
+      {
+        "id": "reference-274",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8703200800644673,
+        "text": "I tried to withdraw cash at an ATM in the city center but my card was declined. The transaction is still showing up as pending - please cancel it!"
+      },
+      {
+        "id": "reference-299",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8502745112940368,
+        "text": "I tried to take out some money from an ATM earlier today and it was declined. Looking on my screen now, I still see that it's pending for that amount. I didn't actually get that money, so I don't want it processed on my account."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-168",
+    "neighbors": [
+      {
+        "id": "reference-169",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9172941528001056,
+        "text": "A 500 pound cash withdrawal was just made from my account, but I didn't make it. I am pretty sure my card has been compromised - can you help me?"
+      },
+      {
+        "id": "reference-176",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8831545314172486,
+        "text": "Help!  There is a cash withdrawl on the account that I didn't make!"
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.8614098774620851,
+        "text": "A cash withdrawal has been done that I didn't do."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-169",
+    "neighbors": [
+      {
+        "id": "reference-270",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8926272958904503,
+        "text": "Hey, I tried to withdraw some cash earlier and it's saying it's pending? Will I be charged for this?"
+      },
+      {
+        "id": "reference-300",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8914647182637224,
+        "text": "In my account I noticed my ATM withdrawal is still pending"
+      },
+      {
+        "id": "reference-295",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.887996860581466,
+        "text": "Is there any reason my cash withdrawal still shows as pending?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-170",
+    "neighbors": [
+      {
+        "id": "reference-280",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9069530625238521,
+        "text": "I went to an ATM to get cash, but the app says the withdrawal is still pending. How is that possible when I already have the cash with me?"
+      },
+      {
+        "id": "reference-300",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9058311949830253,
+        "text": "In my account I noticed my ATM withdrawal is still pending"
+      },
+      {
+        "id": "reference-257",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9035625696683156,
+        "text": "What does it mean if my cash withdrawal is pending?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-171",
+    "neighbors": [
+      {
+        "id": "reference-272",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8839543069809531,
+        "text": "how long will my cash withdrawal be pending for?"
+      },
+      {
+        "id": "reference-263",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8672397689585526,
+        "text": "my cash withdrawal is pending, why?"
+      },
+      {
+        "id": "reference-293",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8584292843292672,
+        "text": "how long until a cash withdrawal will show on my account"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-172",
+    "neighbors": [
+      {
+        "id": "reference-222",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9574789740876538,
+        "text": "I tried to get cash but it was declined!"
+      },
+      {
+        "id": "reference-203",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9141262277614834,
+        "text": "When I went to get cash, it was declined!"
+      },
+      {
+        "id": "reference-238",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9084850760732136,
+        "text": "I tried to withdraw cash and got declined, why is that?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-173",
+    "neighbors": [
+      {
+        "id": "reference-005",
+        "label": "card_arrival",
+        "similarity": 0.9342194482254635,
+        "text": "It's been a week since you issued me a card and I still didn't get it. Should I keep waiting?"
+      },
+      {
+        "id": "reference-026",
+        "label": "card_arrival",
+        "similarity": 0.924957868666457,
+        "text": "I don't have my card after 1 week. What are my next steps?"
+      },
+      {
+        "id": "reference-039",
+        "label": "card_arrival",
+        "similarity": 0.9127054713257854,
+        "text": "I was issued a card about a week ago. why hasn't it come in yet?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-174",
+    "neighbors": [
+      {
+        "id": "reference-339",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9738747184476512,
+        "text": "The ATM gave me less cash than requested"
+      },
+      {
+        "id": "reference-308",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9696949593811588,
+        "text": "I didn't get the correct amount of money from the ATM machine"
+      },
+      {
+        "id": "reference-331",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.9682664871945341,
+        "text": "I did not get the right amount of cash from the ATM."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-175",
+    "neighbors": [
+      {
+        "id": "reference-104",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9199422930046406,
+        "text": "Can you tell me why I was charged to withdraw cash?"
+      },
+      {
+        "id": "reference-143",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9102653870126998,
+        "text": "When I withdrew my money, why was there an extra charge?"
+      },
+      {
+        "id": "reference-129",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9079575296173469,
+        "text": "Why did you charge me extra when I withdrew cash?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-176",
+    "neighbors": [
+      {
+        "id": "reference-353",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8789908582544297,
+        "text": "I made an ATM withdrawal over the holiday and then later realized I was charged an exorbitant fee!  I never would've made this withdrawal if I'd known I'd be charged so much."
+      },
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8699790340292775,
+        "text": "I used an ATM and there was an extra charge."
+      },
+      {
+        "id": "reference-118",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8401748051946011,
+        "text": "Is there a reason I was charged an extra fee for using the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-177",
+    "neighbors": [
+      {
+        "id": "reference-230",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9548267367957651,
+        "text": "How come I can't get money at the ATM"
+      },
+      {
+        "id": "reference-224",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9379320926237665,
+        "text": "Can you please tell me why I cant get money from the ATM?"
+      },
+      {
+        "id": "reference-206",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9368471039050252,
+        "text": "Why can't I get cash from the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-178",
+    "neighbors": [
+      {
+        "id": "reference-152",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9537347545665523,
+        "text": "There is a cash withdrawal in my account that isn't mine."
+      },
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9424794821337841,
+        "text": "A cash withdrawal has been done that I didn't do."
+      },
+      {
+        "id": "reference-155",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9402879099390348,
+        "text": "There's a cash withdrawal I didn't make"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-179",
+    "neighbors": [
+      {
+        "id": "reference-265",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8983581019777883,
+        "text": "When will a cash withdrawal show up?"
+      },
+      {
+        "id": "reference-305",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8899582309315424,
+        "text": "I tried withdrawing but my cash is not showing up?"
+      },
+      {
+        "id": "reference-288",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.881764972996884,
+        "text": "How long does it take for a cash withdrawal to show?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-180",
+    "neighbors": [
+      {
+        "id": "reference-037",
+        "label": "card_arrival",
+        "similarity": 0.9686289022796861,
+        "text": "Is there a way to track my card?"
+      },
+      {
+        "id": "reference-040",
+        "label": "card_arrival",
+        "similarity": 0.9068125046918765,
+        "text": "What's the tracking on the card you sent?"
+      },
+      {
+        "id": "reference-009",
+        "label": "card_arrival",
+        "similarity": 0.883022778937761,
+        "text": "How do I track the card you sent me?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-181",
+    "neighbors": [
+      {
+        "id": "reference-249",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9316780823046801,
+        "text": "Why couldn't I make a withdrawal from the ATM?"
+      },
+      {
+        "id": "reference-206",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9296123208816597,
+        "text": "Why can't I get cash from the ATM?"
+      },
+      {
+        "id": "reference-226",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9269452302032912,
+        "text": "Why am I not able to get cash from the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-182",
+    "neighbors": [
+      {
+        "id": "reference-374",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.965401872261821,
+        "text": "I withdrew some cash and the exchange rate seems to be wrong."
+      },
+      {
+        "id": "reference-358",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9610652130929086,
+        "text": "I withdrew cash and I think the exchange rate is wrong."
+      },
+      {
+        "id": "reference-376",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9609284469223279,
+        "text": "I got cash abroad and the exchange rate applied is wrong"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-183",
+    "neighbors": [
+      {
+        "id": "reference-352",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8665376044610215,
+        "text": "I believe my exchange rate is incorrect"
+      },
+      {
+        "id": "reference-364",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8566294647960848,
+        "text": "The exchange rate was messed up from the ATM"
+      },
+      {
+        "id": "reference-374",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8549754401106608,
+        "text": "I withdrew some cash and the exchange rate seems to be wrong."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-184",
+    "neighbors": [
+      {
+        "id": "reference-231",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8759355280884502,
+        "text": "I think there may be something wrong with my card. I have never had issues with withdraws before, but this morning on the way to work it was suddenly declined."
+      },
+      {
+        "id": "reference-246",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8733285241460762,
+        "text": "Hi, In morning, i was trying to withdraw money from my card, but it got declined. So far it was working fine. Could you please check my card."
+      },
+      {
+        "id": "reference-248",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.8032318872677022,
+        "text": "The ATM keeps declining my card! I tried two different ATMs already can you please check if everything is alright with my account??"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-185",
+    "neighbors": [
+      {
+        "id": "reference-254",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9854282266695594,
+        "text": "What is a pending cash withdrawal?"
+      },
+      {
+        "id": "reference-257",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9654030917635739,
+        "text": "What does it mean if my cash withdrawal is pending?"
+      },
+      {
+        "id": "reference-296",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9387233674229144,
+        "text": "Why would a cash withdrawal be pending?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-186",
+    "neighbors": [
+      {
+        "id": "reference-146",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8541372843427844,
+        "text": "I just saw a charge for a cash withdrawal that I made! ATM withdrawals have always been free in the past, so why is there suddenly a charge? What is it going to cost me now?"
+      },
+      {
+        "id": "reference-104",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8522307551964817,
+        "text": "Can you tell me why I was charged to withdraw cash?"
+      },
+      {
+        "id": "reference-102",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8504823867993848,
+        "text": "I was under the impression ATM cash withdrawals were free. Why was I suddenly charged for my most recent ATM transaction?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-187",
+    "neighbors": [
+      {
+        "id": "reference-381",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9661192190869292,
+        "text": "Can I get money in my home currency at some ATM? I'm on holiday and am a bit concerned because I don't have any cash with me, it is possible to withdraw here already without any additional cost?"
+      },
+      {
+        "id": "reference-395",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8369947953790359,
+        "text": "I have a question about ATM transactions. Can I take money out of an ATM when I'm traveling abroad? And, can I get the money in my home currancy?"
+      },
+      {
+        "id": "reference-109",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.6885281945434656,
+        "text": "Is there a charge for cash withdrawals? I always thought it was free."
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-188",
+    "neighbors": [
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8313826146979214,
+        "text": "I used an ATM and there was an extra charge."
+      },
+      {
+        "id": "reference-353",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.8180639530776885,
+        "text": "I made an ATM withdrawal over the holiday and then later realized I was charged an exorbitant fee!  I never would've made this withdrawal if I'd known I'd be charged so much."
+      },
+      {
+        "id": "reference-124",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8116943843788422,
+        "text": "I should not have been charged a fee for cash withdrawal."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-189",
+    "neighbors": [
+      {
+        "id": "reference-121",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9045649593763773,
+        "text": "Why did I get a fee from the ATM?"
+      },
+      {
+        "id": "reference-106",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9001114302191694,
+        "text": "Why did you charge a fee when I withdrew from an ATM?"
+      },
+      {
+        "id": "reference-104",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.8848174653277618,
+        "text": "Can you tell me why I was charged to withdraw cash?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-190",
+    "neighbors": [
+      {
+        "id": "reference-373",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.970857411364406,
+        "text": "I noticed my exchange rate was incorrect when I got cash."
+      },
+      {
+        "id": "reference-374",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9556405737143709,
+        "text": "I withdrew some cash and the exchange rate seems to be wrong."
+      },
+      {
+        "id": "reference-397",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9540548875632323,
+        "text": "I believe I got a wrong exchange rate when I got cash."
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-191",
+    "neighbors": [
+      {
+        "id": "reference-321",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8778566626954255,
+        "text": "I was only given $20 when I tried to get $100"
+      },
+      {
+        "id": "reference-302",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8694890723657857,
+        "text": "I got $20 when I should've gotten $100"
+      },
+      {
+        "id": "reference-333",
+        "label": "wrong_amount_of_cash_received",
+        "similarity": 0.8320918632613755,
+        "text": "I requested $100 but only got $20"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-192",
+    "neighbors": [
+      {
+        "id": "reference-104",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.94792125019115,
+        "text": "Can you tell me why I was charged to withdraw cash?"
+      },
+      {
+        "id": "reference-148",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9220684237118496,
+        "text": "Why did I get charged for a withdrawal?"
+      },
+      {
+        "id": "reference-125",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.9197878250260819,
+        "text": "I got charged fees for withdrawing cash!"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-193",
+    "neighbors": [
+      {
+        "id": "reference-172",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9150380705250725,
+        "text": "A cash withdrawal has been done that I didn't do."
+      },
+      {
+        "id": "reference-155",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9126204640775609,
+        "text": "There's a cash withdrawal I didn't make"
+      },
+      {
+        "id": "reference-169",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9054386290344953,
+        "text": "A 500 pound cash withdrawal was just made from my account, but I didn't make it. I am pretty sure my card has been compromised - can you help me?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-194",
+    "neighbors": [
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8890472319618539,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8801029472699787,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      },
+      {
+        "id": "reference-082",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.8736088738278817,
+        "text": "What is the extra fee that was added when I used the card?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": true,
+    "id": "audit-195",
+    "neighbors": [
+      {
+        "id": "reference-058",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9510643147778299,
+        "text": "I was charged an extra fee for a card payment. I was unaware of these fees beforehand."
+      },
+      {
+        "id": "reference-061",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9284165485313158,
+        "text": "Why was I charged an extra fee when using the card?"
+      },
+      {
+        "id": "reference-084",
+        "label": "card_payment_fee_charged",
+        "similarity": 0.9184481005653167,
+        "text": "There was an extra fee when I paid with my card, why was i charged this extra fee?"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-196",
+    "neighbors": [
+      {
+        "id": "reference-162",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9428855295170055,
+        "text": "I noticed that there is a withdrawal in the app that is not mine."
+      },
+      {
+        "id": "reference-191",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.942762726705909,
+        "text": "I am seeing inside the App a some cash withdrawal that is not mine"
+      },
+      {
+        "id": "reference-186",
+        "label": "cash_withdrawal_not_recognised",
+        "similarity": 0.9349745889845245,
+        "text": "I am seeing in the App a some cash withdrawal that does not belong to me"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-197",
+    "neighbors": [
+      {
+        "id": "reference-299",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.9067609751645404,
+        "text": "I tried to take out some money from an ATM earlier today and it was declined. Looking on my screen now, I still see that it's pending for that amount. I didn't actually get that money, so I don't want it processed on my account."
+      },
+      {
+        "id": "reference-271",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8911079691843676,
+        "text": "I tried to get cash at some ATM in the city centre earlier but the machine declined my card. I've seen it still shows up as pending in my account. Please cancel it immediately as I definitely have not received that money!"
+      },
+      {
+        "id": "reference-274",
+        "label": "pending_cash_withdrawal",
+        "similarity": 0.8629520701575342,
+        "text": "I tried to withdraw cash at an ATM in the city center but my card was declined. The transaction is still showing up as pending - please cancel it!"
+      }
+    ]
+  },
+  {
+    "contradiction": false,
+    "format_error": false,
+    "id": "audit-198",
+    "neighbors": [
+      {
+        "id": "reference-353",
+        "label": "wrong_exchange_rate_for_cash_withdrawal",
+        "similarity": 0.9232109160992027,
+        "text": "I made an ATM withdrawal over the holiday and then later realized I was charged an exorbitant fee!  I never would've made this withdrawal if I'd known I'd be charged so much."
+      },
+      {
+        "id": "reference-101",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7751809293031118,
+        "text": "I used an ATM and there was an extra charge."
+      },
+      {
+        "id": "reference-118",
+        "label": "cash_withdrawal_charge",
+        "similarity": 0.7724282671768128,
+        "text": "Is there a reason I was charged an extra fee for using the ATM?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-199",
+    "neighbors": [
+      {
+        "id": "reference-012",
+        "label": "card_arrival",
+        "similarity": 0.9800764563292883,
+        "text": "Can you tell me why I haven't received my new card?"
+      },
+      {
+        "id": "reference-018",
+        "label": "card_arrival",
+        "similarity": 0.9175078246774734,
+        "text": "why have i not got my new card?"
+      },
+      {
+        "id": "reference-032",
+        "label": "card_arrival",
+        "similarity": 0.9043059478348021,
+        "text": "I still haven't gotten my new card.  When will it get here?"
+      }
+    ]
+  },
+  {
+    "contradiction": true,
+    "format_error": false,
+    "id": "audit-200",
+    "neighbors": [
+      {
+        "id": "reference-217",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9663665979760812,
+        "text": "I cannot withdraw money from the ATM"
+      },
+      {
+        "id": "reference-221",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9520173028975456,
+        "text": "The ATM wouldn't allow me to withdraw money"
+      },
+      {
+        "id": "reference-230",
+        "label": "declined_cash_withdrawal",
+        "similarity": 0.9356756430201728,
+        "text": "How come I can't get money at the ATM"
+      }
+    ]
+  }
+]

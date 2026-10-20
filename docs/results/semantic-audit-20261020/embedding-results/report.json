@@ -1,0 +1,205 @@
+{
+  "amendment_sha256": "78a9fc6700801f6a83a4567ea1c325df6b168b0386998791a8fda0615dc30c49",
+  "metrics": {
+    "nvidia-local": {
+      "contradiction": {
+        "accuracy": 0.96,
+        "examples": 200,
+        "fn": 2,
+        "fp": 6,
+        "precision": 0.8888888888888888,
+        "recall": 0.96,
+        "tn": 144,
+        "tp": 48
+      },
+      "format_error": {
+        "accuracy": 1.0,
+        "examples": 200,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 150,
+        "tp": 50
+      }
+    },
+    "nvidia-local-cleanlab": {
+      "contradiction": {
+        "accuracy": 0.975,
+        "examples": 200,
+        "fn": 4,
+        "fp": 1,
+        "precision": 0.9787234042553191,
+        "recall": 0.92,
+        "tn": 149,
+        "tp": 46
+      },
+      "format_error": {
+        "accuracy": 1.0,
+        "examples": 200,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 150,
+        "tp": 50
+      }
+    },
+    "qwen-local": {
+      "contradiction": {
+        "accuracy": 0.93,
+        "examples": 200,
+        "fn": 6,
+        "fp": 8,
+        "precision": 0.8461538461538461,
+        "recall": 0.88,
+        "tn": 142,
+        "tp": 44
+      },
+      "format_error": {
+        "accuracy": 1.0,
+        "examples": 200,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 150,
+        "tp": 50
+      }
+    },
+    "qwen-local-cleanlab": {
+      "contradiction": {
+        "accuracy": 0.96,
+        "examples": 200,
+        "fn": 4,
+        "fp": 4,
+        "precision": 0.92,
+        "recall": 0.92,
+        "tn": 146,
+        "tp": 46
+      },
+      "format_error": {
+        "accuracy": 1.0,
+        "examples": 200,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 150,
+        "tp": 50
+      }
+    },
+    "qwen-provider": {
+      "contradiction": {
+        "accuracy": 0.985,
+        "examples": 200,
+        "fn": 2,
+        "fp": 1,
+        "precision": 0.9795918367346939,
+        "recall": 0.96,
+        "tn": 149,
+        "tp": 48
+      },
+      "format_error": {
+        "accuracy": 1.0,
+        "examples": 200,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 150,
+        "tp": 50
+      }
+    },
+    "qwen-provider-cleanlab": {
+      "contradiction": {
+        "accuracy": 0.975,
+        "examples": 200,
+        "fn": 4,
+        "fp": 1,
+        "precision": 0.9787234042553191,
+        "recall": 0.92,
+        "tn": 149,
+        "tp": 46
+      },
+      "format_error": {
+        "accuracy": 1.0,
+        "examples": 200,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 150,
+        "tp": 50
+      }
+    }
+  },
+  "outcome_agreement": {
+    "nvidia-local__qwen-provider": {
+      "contradiction": 0.965,
+      "disagreement_ids": [
+        "audit-011",
+        "audit-026",
+        "audit-042",
+        "audit-053",
+        "audit-148",
+        "audit-158",
+        "audit-198"
+      ],
+      "format_error": 1.0
+    },
+    "qwen-local__nvidia-local": {
+      "contradiction": 0.95,
+      "disagreement_ids": [
+        "audit-008",
+        "audit-011",
+        "audit-064",
+        "audit-094",
+        "audit-100",
+        "audit-148",
+        "audit-152",
+        "audit-158",
+        "audit-165",
+        "audit-168"
+      ],
+      "format_error": 1.0
+    },
+    "qwen-local__qwen-provider": {
+      "contradiction": 0.945,
+      "disagreement_ids": [
+        "audit-008",
+        "audit-026",
+        "audit-042",
+        "audit-053",
+        "audit-064",
+        "audit-094",
+        "audit-100",
+        "audit-152",
+        "audit-165",
+        "audit-168",
+        "audit-198"
+      ],
+      "format_error": 1.0
+    }
+  },
+  "protocol_sha256": "85be161f9f3547dfe9046ecce41bb7d62a136c2cb2a90600206a034ab5f390f6",
+  "scope": "Automatic constructed audit reference; 200 selected BANKING77 training examples, no human adjudication or deployment calibration.",
+  "source_sha256": "5f364ac39a1745e2db479e7e712846e71fbb805db50eb49b30155c0875c686e8",
+  "sources": {
+    "nvidia-local": {
+      "dimensions": 2048,
+      "execution_sha256": "f27c6cd4cf3b40aa40671de36d84eebce02204a73ede46843588c1bc4fe84678",
+      "model": "nvidia/Nemotron-3-Embed-1B-BF16"
+    },
+    "qwen-local": {
+      "dimensions": 1024,
+      "execution_sha256": "84a77a2f62d22c206f591ca6c033bf2688ba71c42784744fc89a2e5e78da0614",
+      "model": "Qwen/Qwen3-Embedding-0.6B"
+    },
+    "qwen-provider": {
+      "dimensions": 4096,
+      "execution_sha256": "5768ec60df5248619a32acdf77419ab8c8e46a1c9c917291bbe3aedae372bccb",
+      "model": "Qwen/Qwen3-Embedding-8B"
+    }
+  }
+}
