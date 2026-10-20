@@ -3,8 +3,9 @@
 [Open Next Experiment](https://maxkharlan.github.io/next-experiment/).
 
 $15 is allocated to additional live investigations. Testing is free and requires no
-API key. Public live access is being connected; it is not available yet. The
-prepared live interface shows the remaining budget before starting. Recorded
+API key. Choose **Run with Nemotron**, or open the
+[hosted investigation form](https://next.46-17-103-231.sslip.io/) directly. It shows
+the remaining budget before starting. Recorded
 investigations and local label checks do not spend it.
 
 ## Run an investigation

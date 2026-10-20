@@ -7,10 +7,12 @@ entry page. This service has its own upload contract and does not expose the
 self-hosted API's path-based inputs, code execution or investigation listing.
 
 The deployment uses an existing VPS with a separate Compose project. Its hard
-limits are 4 GiB memory, no swap, 1.5 CPU and 128 processes. CPU shares are 256.
+limits are 4.5 GiB memory, no swap, 1.5 CPU and 128 processes. CPU shares are 256.
 The API has no Docker socket or access to the other application's volumes. Caddy
 and this API share a dedicated proxy network. Training and Nemotron inference
-use Token Factory. Adapters are evaluated sequentially on CPU.
+use Token Factory. Adapters are evaluated sequentially on CPU, each in a child process that releases
+its model memory before the next starts. The same container limit covers the API
+and every child process.
 
 `deploy/judge/Dockerfile` installs a CPU-only PyTorch wheel. The source package
 must include `core`, `apps`, `bench/faults` and `jobs/sandbox`: the latter two are

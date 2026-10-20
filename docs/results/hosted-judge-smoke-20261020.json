@@ -45,7 +45,7 @@
   "cost_basis": "Inference usage plus conservative training token estimates; not provider billing",
   "initial_allocation_usd": 15,
   "local_tests": {
-    "passed": 1016,
+    "passed": 1017,
     "skipped": 8
   }
 }
