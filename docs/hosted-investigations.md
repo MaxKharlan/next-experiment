@@ -97,34 +97,3 @@ changed between snapshots. Provider billing for this run is therefore not yet
 reconciled; the recorded cost includes a conservative training estimate. The
 12 service and balance-guard tests passed, and the neighboring application's
 health endpoint remained healthy during CPU evaluation.
-
-
-## Private budget availability
-
-The current allocation is $20. The initial integration smoke and its $15
-authorization remain in the historical receipt. The amendment preserves its
-recorded spend and all unresolved holds.
-
-A protected billing-session file supplies read-only access to Token Factory's
-console balance endpoint. It is not an inference API key. Account identifiers,
-cookies and the account balance stay on the server; public responses contain
-only the effective demo allowance and a generic availability state. The displayed
-remaining amount is the lower of the unused allocation and the checked account
-balance after unresolved demo holds. A check may be cached for at most 30 seconds;
-admission and every paid reservation require a fresh check. A missing or expired
-session, network error or invalid response disables new spending. No stale
-positive balance is used after a failed check. A provider payment-required
-response also persists a block across restarts.
-
-This is a balance availability guard, not per-job invoice reconciliation. Other
-work on the same account can reduce availability. The public exhaustion message
-does not attribute all spending to judges. Provider balance reporting may lag;
-the app cannot guarantee instantaneous knowledge of external spending.
-
-For setup, save the console's `getBalance` request using **Copy as cURL (bash)**
-from the billing account attached to the inference API key. Import the local file
-with `python -m scripts.configure_judge_billing --capture <file> --out <private-json>`.
-The importer parses the request as data and never executes its shell text. Transfer
-that JSON to `/opt/next-experiment/data/billing-session.json`, owned by UID 1000
-with mode 0600. Do not add it to Git, image layers or reports. If the login session
-expires, replace this file with a fresh capture; checks fail closed meanwhile.
