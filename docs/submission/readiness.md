@@ -15,7 +15,7 @@ establish residence. Submission accepts binding terms and has not been performed
 
 | Material | State |
 | --- | --- |
-| English description | [Prepared](description.md); refresh pending-study outcomes before submission |
+| English description | [Prepared](description.md), including verified results for both Qwen models and the completed REST study |
 | Source and license | Public GitHub repository, Apache-2.0 |
 | Demo URL | Public saved replay; not advertised as a public paid endpoint |
 | Dataset | [MakHH/FT-Fail](https://huggingface.co/datasets/MakHH/FT-Fail), published and verified |

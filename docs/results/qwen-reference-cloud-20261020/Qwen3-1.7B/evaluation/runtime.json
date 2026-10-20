@@ -1,0 +1,21 @@
+{
+  "gpu": "NVIDIA L40S",
+  "cuda": "13.0",
+  "packages": {
+    "jinja2": "3.1.6",
+    "peft": "0.21.2",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.23.3",
+    "torch": "2.14.1",
+    "transformers": "5.19.0",
+    "pydantic": "2.14.1",
+    "numpy": "2.4.6",
+    "huggingface_hub": "1.33.0",
+    "accelerate": "1.15.0"
+  },
+  "precision": "IEEE float32; math SDPA; no TF32",
+  "model": "Qwen/Qwen3-1.7B",
+  "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "protocol_sha256": "088ce04ece1fd4fef77f5c4a5874d50c57de2e30119a8fd1ed5c4e591942f991",
+  "original_protocol_sha256": "ccdfef1a6578e2c6bf58db057cd38488c1cf3f6be5799b85b36e433d29fcea65"
+}

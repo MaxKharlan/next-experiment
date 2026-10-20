@@ -8,16 +8,25 @@ predictions or reading historical final-test data.
 
 | Task | Qwen3-0.6B | Qwen3-1.7B | Llama-3.2-1B-Instruct |
 | --- | --- | --- | --- |
-| BANKING77 | Historical reference 0.535 and separate answer-cut comparisons; fresh comparable row missing | Full quality row missing | Full quality row missing |
-| JSON extraction | Format/content development series rejected; fresh comparable row missing | Full quality row missing | Full quality row missing |
-| Function calling | Dataset and evaluator ready; full quality row missing | Full quality row missing | Full quality row missing |
+| BANKING77 | New clean reference: base 0/154, selected 104/154 | New clean reference: base 1/154, selected 115/154 | Full quality row missing |
+| JSON extraction | New clean reference: base 0/102, selected 102/102 | New clean reference: base and selected 102/102 | Full quality row missing |
+| Function calling | New clean reference: base 0/102, selected 100/102 | New clean reference: base and selected 102/102 | Full quality row missing |
+
+The new [Qwen reference package](qwen-reference-quality-20261020.md) verifies
+5,012 predictions and validation selection. The structured tasks are previously
+inspected development splits; every 0.6B base answer has a Markdown fence and
+fails the strict JSON contract. The 1.7B base already reaches 100% on those
+tasks. Damaged/fixed/control comparisons and B10 noise measurements remain
+missing from these six cells.
 
 Sources: [historical benchmark](benchmark.md), [answer-cut studies](answer-cut.md),
 [structured tasks](structured-tasks.md), [rejected development series](format-content-development-20261019.md),
 [cost-fit scope](model-cost-validation.md). Scores on different datasets or
 splits must not be combined into one baseline/healthy/damaged/fixed row.
-The [machine-readable inventory](results/matrix-plan-20261020/plan.json) therefore
-keeps fresh metrics null instead of filling gaps with unrelated measurements.
+The [original machine-readable inventory](results/matrix-plan-20261020/plan.json)
+is preserved as the prospective planning snapshot. Its null metrics describe
+that earlier state; the linked Qwen package supplies the new clean-reference
+measurements without filling unrelated fault-comparison gaps.
 
 ## Required evidence for each cell
 
