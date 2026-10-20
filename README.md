@@ -57,6 +57,12 @@ Step 4 on the demo case: the fix and the control train two jobs each, and the ef
 
 ## Results
 
+[FT-Fail on Hugging Face](https://huggingface.co/datasets/MakHH/FT-Fail) packages
+the 13 completed historical cases, 52 method score rows and a separate automatic
+semantic audit (200 queries with 400 references). It includes source licenses,
+injection manifests and negative results. The historical held-out cases are now
+public; the release contains no pending experiment's final split.
+
 The benchmark compares four methods on 13 Token Factory jobs with a known cause: 9 with a learning rate that is too low, in recipes of 3, 6 and 12 epochs at rank 8 or 16, and 4 healthy ones. The thresholds were set on the 5 dev cases; the 8 held-out cases ran once, after that.
 
 | method | top-1 | false alarms | wrong confirmations | fix success | $ per case | jobs per case |

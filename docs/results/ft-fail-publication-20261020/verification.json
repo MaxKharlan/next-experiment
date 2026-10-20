@@ -1,0 +1,21 @@
+{
+  "status": "published_and_verified",
+  "revision": "135112f7d09a0e8e779eb3db961c5bbcfd1db7e8",
+  "verified_files": 35,
+  "configs": {
+    "cases": {
+      "dev": 5,
+      "historical_heldout": 8
+    },
+    "methods": {
+      "dev": 20,
+      "historical_heldout": 32
+    },
+    "semantic_audit": {
+      "dev": 200
+    },
+    "semantic_reference": {
+      "dev": 400
+    }
+  }
+}
