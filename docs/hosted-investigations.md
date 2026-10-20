@@ -81,6 +81,24 @@ Its diagnosis was inconclusive. Estimated usage was $0.0401286 from the shared
 $15 allocation. This is a service check, not a benchmark result or an invoice.
 
 
+The [browser integration test](results/hosted-judge-browser-e2e-20261020.json)
+completed through the public GitHub Pages entry page in Chrome. The downloaded
+example was uploaded through all four file controls. The page showed Nemotron's
+hypotheses, training steps, four completed adapter evaluations and the final
+report; refreshing reconnected to the same run. The final JSON downloaded from
+the page matched the saved server result exactly. Each adapter scored 4/4 on the
+check split, so the diagnosis was inconclusive.
+
+The $1 reservation became $0.0409245 in recorded estimated usage, releasing
+$0.9590755. The displayed allowance moved from $19.95 before the run to $18.95
+while reserved, then $19.91 after completion. Prior run records were unchanged.
+A fresh private provider-balance check passed, but its reported balance had not
+changed between snapshots. Provider billing for this run is therefore not yet
+reconciled; the recorded cost includes a conservative training estimate. The
+12 service and balance-guard tests passed, and the neighboring application's
+health endpoint remained healthy during CPU evaluation.
+
+
 ## Private budget availability
 
 The current allocation is $20. The initial integration smoke and its $15
