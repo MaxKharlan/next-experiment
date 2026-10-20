@@ -62,3 +62,28 @@ four-arm study with 13 scored models. Direct serialization reaches 100% for ever
 trained model, but the choice task saturates and two required effect gaps are too
 small. Present this as a rejected development design. It does not supply the
 fresh complete API trace or final-test evidence still required by O2.
+
+## Published desktop check, 20 October
+
+Verified the public GitHub Pages URL in Safari after #100. Selected the 18-epoch
+seed-0 trace, replayed it and expanded **All 18 epochs**. The chart showed epochs
+1, 9 and 18; the accessibility table contained all 18 rows. The chart and table
+stayed in the case column, separate from the experiment log. The completed trace
+said **Cause remains unconfirmed**, with its recorded ablation stop.
+
+Switched to **Answer cuts on Token Factory — measured experiment**. The previous
+chart, hypotheses and log cleared before replay. The completed replay displayed
+92.6% healthy, 68.1% damaged, 85.9% target and 66.2% control on 770 check examples,
+with the two-seed permutation limitation and partial-recovery text. No model or
+training request was made. This was a desktop Safari check; the earlier local
+390/320 px checks are not a new mobile deployment check.
+
+![Published long-history replay](media/published-long-history-20261020.png)
+
+![Published answer-cut replay](media/published-answer-cut-20261020.png)
+
+For the next recording, show those two transitions, then the existing historical
+agent workflow. Explain the rejected format/content design and that the new
+ledger protocol is offline preparation. A submission video must not present this
+as a fresh complete answer-cut API investigation. The full live trace and final
+test still depend on admission and explicit paid authorization.

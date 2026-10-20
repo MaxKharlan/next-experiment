@@ -1,0 +1,20 @@
+{
+  "observed_date": "2026-10-20",
+  "source": "Authenticated Token Factory Usage, Safari accessibility and visible header",
+  "period_ui": "2026-09-20 through 2026-10-20",
+  "last_updated_ui": "07:30 UTC",
+  "display_mode": "rounded",
+  "displayed_subtotal_usd": "9.54",
+  "displayed_vat_usd": "0.86",
+  "displayed_total_usd": "10.40",
+  "displayed_qwen06_million_tokens": "21.57",
+  "displayed_qwen06_cost_usd": "8.63",
+  "expected_qwen06_tokens_from_saved_receipts": 21565714,
+  "expected_qwen06_cost_usd": "8.6262856",
+  "comparison": "Consistent at displayed rounding only. Full-number quantities and period-matched invoice/transaction records were not captured.",
+  "new_series_exact_aggregate_reconciled": false,
+  "cancelled_holds_released": false,
+  "invoice_reconciled": false,
+  "cancellation_evidence": "No job-level billing evidence was obtained; historical holds retained.",
+  "service_spend_usd": 0
+}

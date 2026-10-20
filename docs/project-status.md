@@ -33,7 +33,7 @@ are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 | B12 | #85: development-fitted temperature worsens heldout NLL/Brier/ECE; T=1 remains default | New independent calibration evidence before deployment; track B |
 | B17 | #85: SQLite reservations, REST/UI paid-step approval/resume; [recipe retrain reservations and persistent Tavily credits](paid-operation-recovery.md) | [SQLite worker ownership and duplicate-payment guards](sqlite-investigations.md) implemented; [provider training usage reconciled](provider-cost-reconciliation-20261019.md); new calls persist [provider request references](persisted-llm-usage.md), while invoices and per-call matching remain open; track B |
 | B24 | Four fault injections, label audits and 60 synthetic CPU runs | Pretrained-LLM quality and complete mode-B investigation; track B |
-| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Deploy and verify the long-history layout fix; fresh trace still pending; this chat |
+| Public UI | Replay selection clears prior results and ignores stale loads; long loss histories use three axis labels and an expandable complete table; 36 saved reports | Published desktop Safari long-history and replay-switch checks passed on 20 October; fresh trace/video still pending; this chat |
 | Cause claims | README, verdict-v3 and versioned comparison metadata distinguish intervention benefit, unique cause and full recovery | New competing-cause evaluation; tracks A/B |
 | O2 demo | [Walkthrough](demo-walkthrough.md) covers measured experiments and historical agent replay | Fresh full trace, public video and submission package; submission owner |
 
@@ -47,6 +47,11 @@ The [ticket-ledger preparation](ticket-ledger-development-20261020.md) now freez
 504 fresh histories, complete-object endpoints and new development gates.
 Two offline oracles agree; tokenizer context checks pass. Model admission remains
 `not_measured`; no new paid series is authorized.
+
+The [3×3 matrix plan](reference-matrix-plan-20261020.md) records all nine cells,
+missing comparable metrics and a separate prospective budget scenario.
+The [scope reconciliation](remaining-scope-20261020.md) distinguishes original
+A19/A30/A31 requirements from optional extensions and lists remaining offline work.
 
 ## Next work, in order
 

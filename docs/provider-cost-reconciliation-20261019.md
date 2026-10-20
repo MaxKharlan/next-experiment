@@ -106,3 +106,17 @@ differences, missing bindings, invalid amounts/currency, incomplete pagination,
 cutoff boundaries, ambiguous failures and a byte-unchanged SQLite snapshot.
 The full suite passed: 889 tests, eight skipped. This audit incurred no new
 provider charges.
+
+## Later rounded observation, 20 October
+
+A new read-only Safari observation showed Usage updated at 07:30 UTC, with a
+20 September–20 October period. The header displayed $9.54 subtotal, $0.86 VAT
+and $10.40 total. Qwen3-0.6B training displayed 21.57 million tokens and $8.63.
+The saved old receipts plus the 12 replacements predict 21,565,714 tokens and
+$8.6262856 for that product, consistent with those rounded values.
+
+The [redacted observation](results/usage-observation-20261020/observation.json)
+records this limited comparison. Full-number rows and period-matched invoice/
+transaction evidence were not captured. It does not establish exact aggregate
+reconciliation or settle individual cancelled jobs. All historical holds remain;
+invoice/per-call matching and the earlier one-cent difference are still open.
