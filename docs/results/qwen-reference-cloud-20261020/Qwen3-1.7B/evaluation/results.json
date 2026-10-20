@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "pairs": {
+    "Qwen3-1.7B-banking77": {
+      "protocol_sha256": "088ce04ece1fd4fef77f5c4a5874d50c57de2e30119a8fd1ed5c4e591942f991",
+      "base": {
+        "validation": 0.006493506493506494,
+        "check": 0.006493506493506494
+      },
+      "validation": {
+        "Qwen3-1.7B-banking77-g0": 0.6103896103896104,
+        "Qwen3-1.7B-banking77-g1": 0.6688311688311688,
+        "Qwen3-1.7B-banking77-g2": 0.7142857142857143,
+        "Qwen3-1.7B-banking77-g3": 0.7272727272727273
+      },
+      "selected": "Qwen3-1.7B-banking77-g3",
+      "selection_rule": "Evaluate all four final recipe checkpoints on validation exact match. Select highest score, ties by grid index. Evaluate only the selected checkpoint once on check. Record base quality separately before selection. No final test.",
+      "selected_check_exact_match": 0.7467532467532467
+    },
+    "Qwen3-1.7B-function_calling": {
+      "protocol_sha256": "088ce04ece1fd4fef77f5c4a5874d50c57de2e30119a8fd1ed5c4e591942f991",
+      "base": {
+        "validation": 1.0,
+        "check": 1.0
+      },
+      "validation": {
+        "Qwen3-1.7B-function_calling-g0": 1.0,
+        "Qwen3-1.7B-function_calling-g1": 1.0,
+        "Qwen3-1.7B-function_calling-g2": 1.0,
+        "Qwen3-1.7B-function_calling-g3": 1.0
+      },
+      "selected": "Qwen3-1.7B-function_calling-g0",
+      "selection_rule": "Evaluate all four final recipe checkpoints on validation exact match. Select highest score, ties by grid index. Evaluate only the selected checkpoint once on check. Record base quality separately before selection. No final test.",
+      "selected_check_exact_match": 1.0
+    },
+    "Qwen3-1.7B-json_extraction": {
+      "protocol_sha256": "088ce04ece1fd4fef77f5c4a5874d50c57de2e30119a8fd1ed5c4e591942f991",
+      "base": {
+        "validation": 1.0,
+        "check": 1.0
+      },
+      "validation": {
+        "Qwen3-1.7B-json_extraction-g0": 1.0,
+        "Qwen3-1.7B-json_extraction-g1": 1.0,
+        "Qwen3-1.7B-json_extraction-g2": 1.0,
+        "Qwen3-1.7B-json_extraction-g3": 1.0
+      },
+      "selected": "Qwen3-1.7B-json_extraction-g0",
+      "selection_rule": "Evaluate all four final recipe checkpoints on validation exact match. Select highest score, ties by grid index. Evaluate only the selected checkpoint once on check. Record base quality separately before selection. No final test.",
+      "selected_check_exact_match": 1.0
+    }
+  },
+  "scope": "Development references for existing structured integration tasks and a new 77-intent subset. Existing structured splits have already been inspected. No independent final-test or broad recovery claim."
+}

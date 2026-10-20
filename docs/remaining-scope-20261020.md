@@ -1,7 +1,7 @@
 # Remaining scope reconciled to the original plan
 
 This reconciliation uses the project document dated 16 October 2026, pages
-30–34 (A1–A32 and B1–B26), and repository main through #115 plus the terminal data and ledger results, with ongoing studies tracked in
+30–34 (A1–A32 and B1–B26), and the verified terminal data, ledger, REST and Qwen results, with execution tracked in
 [the execution queue](remaining-queue-execution-20261020.md). The document's
 checkboxes are planning history. Implementations, measurements and publication
 are separate acceptance conditions.
@@ -31,8 +31,9 @@ semantic-detection accuracy or deployment likelihood has been established.
 
 ## Research and transfer
 
-The [3×3 inventory and budget](reference-matrix-plan-20261020.md) now exposes
-missing quality cells and B10 coverage. Measurements remain open. The
+The [3×3 inventory and budget](reference-matrix-plan-20261020.md) separates the
+new Qwen clean-reference measurements from missing Llama, damaged/fixed/control
+and B10 noise coverage. The
 [ticket-ledger bundle](ticket-ledger-development-20261020.md) prepares a new
 candidate; [all twelve adapters have now been evaluated](ticket-ledger-outcome-20261020.md).
 
@@ -62,8 +63,10 @@ Record synthetic mechanism reproductions separately from original-case
 reproductions and downstream quality evidence.
 
 B24's four injections, audits and 60 synthetic runs are implemented and measured.
-[Fifteen pretrained CUDA comparisons](pretrained-code-quality-20261020.md) are verified;
-a complete REST mode-B investigation is running. Arbitrary user-code repair is an unvalidated extension; it is not the
+[Fifteen pretrained CUDA comparisons](pretrained-code-quality-20261020.md) and
+the [REST mode-B investigation](rest-code-trace-20261020.md) are complete.
+The REST diagnosis is inconclusive; its eight adapter scores, six SSE events,
+restart recovery and idempotent POST are verified. Arbitrary user-code repair is an unvalidated extension; it is not the
 original B24 acceptance condition, which names four injections and code checks.
 
 ## Product, evidence and external dependencies
@@ -79,9 +82,9 @@ with all 35 package files verified from the pinned Hub revision. B26 classifier
 publication remains a distinct deliverable with unmet transfer validation.
 
 The long-history fix was verified on the published desktop demo on 20 October;
-see [the walkthrough](demo-walkthrough.md). A silent video and its text PDF are saved in Downloads. Fresh full API evidence,
-video publication and submission remain open. A saved replay does not prove restart recovery during
-a new live paid investigation. Cloud Sandbox activation remains an external
+see [the walkthrough](demo-walkthrough.md). A silent video and its text PDF are saved in Downloads.
+Fresh REST evidence is published; video publication and submission remain open.
+Cloud Sandbox activation remains an external
 dependency; the local Docker path is available.
 
 Billing needs newer provider Usage/invoice records, cancellation charge evidence
@@ -94,11 +97,21 @@ The owner confirmed eligibility, registration and authority to submit on
 20 October. Final submission has not been performed; the remaining materials
 are tracked in [submission readiness](submission/readiness.md).
 
-## Work still possible offline
+## Remaining work after the current measurements
 
-The queue continues with fault-quality and code-quality experiments, the ledger
-admission study, a fresh REST trace and runtime comparisons. A19/A30/A31, semantic
-controls and the first A29 measurements are already published. Model-quality
-experiments, invoice closure and final submission retain their explicit
-dependencies. Custom weights beta is optional: downloading adapters for local
-or qualified cloud evaluation supplies the current execution path.
+The code cohort, terminal partial data cohort, ledger evaluation, fresh REST trace,
+runtime comparison and automatic semantic audit are published. Qwen reference
+results are tracked in the [quality report](qwen-reference-quality-20261020.md).
+Their completion does not fill the seven missing Cloud cells or the original
+matrix's damaged/fixed/control and noise studies.
+
+Further research needs a separately frozen protocol and budget: broader fault
+strengths, missing model/task comparisons, size/seed noise measurements, independent
+calibration and transfer. Missing original reproduction setups also remain open.
+Do not repeat completed trainings or spend unresolved holds on those extensions.
+
+External dependencies are a matching Llama evaluation route, independent
+provider-compatible transfer data and later billing evidence. The owner still
+needs to publish the video, send the local feedback, select the submission track
+and complete Devpost submission. Custom weights beta is optional: downloaded
+adapters evaluated locally or on Cloud supply the current Qwen path.

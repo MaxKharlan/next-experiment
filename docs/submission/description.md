@@ -34,7 +34,7 @@ The historical benchmark contains 13 cases and four methods. On its nine low-lea
 
 FT-Fail is published on Hugging Face with the 13 cases, 52 saved method results, 200 automatic audit examples and 400 reference examples. The package includes hashes, provenance and source licenses.
 
-A separate Qwen3-0.6B reference study verified 2,506 saved answers on AI Cloud. Adapters selected on validation scored 104/154 on Banking77, 100/102 on function calling and 102/102 on JSON extraction. These are development results on previously inspected structured splits. All base structured answers used Markdown fences and failed the strict JSON contract, so the comparison includes format compliance. Qwen3-1.7B evaluation is still running.
+A separate Qwen reference study verified 5,012 saved answers on AI Cloud. Adapters selected on validation scored 104/154 for 0.6B and 115/154 for 1.7B on Banking77; 100/102 and 102/102 on function calling; and 102/102 for both on JSON extraction. These are development results on previously inspected structured splits. The 0.6B base structured answers used Markdown fences and failed the strict JSON contract. The 1.7B base already scored 100% on both structured tasks, with no improvement from its selected adapters.
 
 ## What we learned
 
@@ -42,7 +42,7 @@ A strong model can often name a likely cause without an experiment. Experiments 
 
 ## What's next
 
-Finish the Qwen task references and calibrate diagnostic probabilities on independently sampled failures. The Cloud study completed all fifteen code comparisons and 29 of 36 data comparisons before its frozen timeout; seven cells remain unmeasured. Broader deployment needs evidence beyond the existing development tasks.
+Extend the completed Qwen clean references to missing model/fault comparisons and calibrate diagnostic probabilities on independently sampled failures. The Cloud study completed all fifteen code comparisons and 29 of 36 data comparisons before its frozen timeout; seven cells remain unmeasured. Broader deployment needs evidence beyond the existing development tasks.
 
 ## Links and track
 

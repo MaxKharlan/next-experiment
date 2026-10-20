@@ -7,10 +7,11 @@ execution. The owner authorized separate
 $25 additional Token Factory and $30 AI Cloud limits and confirmed submission
 eligibility, registration and representation. All 24 reference training jobs are
 verified, and both [bounded Cloud evaluation jobs](reference-evaluation-acceleration-20261020.md)
-have been submitted. [Qwen3-0.6B completed all 2,506 evaluation records](qwen-reference-quality-20261020.md);
-Qwen3-1.7B is running. The 0.6B selected check scores are 104/154 for Banking77,
-100/102 for function calling and 102/102 for JSON extraction. The base model's
-structured answers all used Markdown fences, which the frozen strict metrics reject.
+have completed. [All 5,012 Qwen evaluation records are verified](qwen-reference-quality-20261020.md).
+Selected check scores for 0.6B/1.7B are 104/154 and 115/154 for Banking77,
+100/102 and 102/102 for function calling, and 102/102 for both on JSON extraction.
+The 0.6B base structured answers all used Markdown fences, which the frozen
+strict metrics reject. The 1.7B base already scores 100% on both structured tasks.
 The [REST study](rest-code-trace-20261020.md) completed with saved events and
 verified restart/idempotency behavior; its diagnosis is inconclusive. The
 [fifteen-cell CUDA code cohort](pretrained-code-quality-20261020.md) is complete
@@ -107,7 +108,9 @@ four false positives and four missed paraphrases; it has no live fault signature
    match inference calls when provider records permit. New calls now retain provider
    request/response IDs and their reservation IDs for that matching. SQLite worker ownership,
    recipe reservations and persistent Tavily credits are implemented.
-5. Finish the running reference grid. The faults 2–5 quality cohort stopped at
+5. The Qwen clean-reference grid is complete. Llama references, damaged/fixed/control
+   comparisons and size/seed noise studies remain outside the completed evidence.
+   The faults 2–5 quality cohort stopped at
    its frozen timeout with 29/36 completed cells; missing cells remain unmeasured.
    Semantic
    controls, the automatic Nano/embedding/cleanlab audit and logit probes are

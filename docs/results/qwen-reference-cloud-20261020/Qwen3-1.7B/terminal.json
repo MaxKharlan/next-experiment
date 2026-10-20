@@ -1,0 +1,8 @@
+{
+  "job_id": "aijob-e00vvqte6xzjfmrz5w",
+  "job_name": "next-experiment-qwen-17b-eval-20261020",
+  "created_at": "2026-10-20T16:47:43.808293Z",
+  "state": "COMPLETED",
+  "started_at": "2026-10-20T17:20:35.970013868Z",
+  "finished_at": "2026-10-20T18:07:04.479912219Z"
+}

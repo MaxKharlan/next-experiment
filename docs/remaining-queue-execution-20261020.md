@@ -22,11 +22,19 @@ The waiting MPS scorer was stopped before generation; all training completed und
 its original protocol. Current acceleration receipts are under
 `artifacts/remaining-queue-20261020/qwen-acceleration`.
 
+Both Qwen jobs and the collector have now finished. The currently dispatched
+queue has no remaining training or evaluation process. Completed packages are
+verified and published; the original research plan still has the gaps listed
+below and in the [scope reconciliation](remaining-scope-20261020.md).
+Further experiments require their own prospective protocol and budget.
+The completion monitor can pause after publication while external evidence and
+owner submission steps remain outstanding.
+
 | Work | Current state | Next evidence |
 | --- | --- | --- |
 | Ticket-ledger evaluation | [All twelve adapters and 2,160 records verified](ticket-ledger-outcome-20261020.md) | Evaluation complete |
 | Initial ledger execution | Twelve unintended Full SFT jobs cancelled; $2.3597568 reserve retained | Provider cancellation billing; invalid adapters excluded |
-| A13/B5/B10 | [All 24 Qwen trainings verified, 24 distinct adapter hashes](results/clean-reference-grid-20261020/training-verification.json); [all 2,506 Qwen3-0.6B answers and selection verified](qwen-reference-quality-20261020.md); Qwen3-1.7B running | Qwen3-1.7B results; Llama inference route and noise study |
+| A13/B5/B10 | [All 24 Qwen trainings verified, 24 distinct adapter hashes](results/clean-reference-grid-20261020/training-verification.json); [all 5,012 answers and selection results verified for both Qwen models](qwen-reference-quality-20261020.md) | Llama inference route; separately scoped damaged/fixed/control comparisons and noise study |
 | Faults 2–5 | [29/36 CUDA cells verified](data-fault-quality-20261020.md); frozen data timeout reached; all seven healthy-adapter validation evaluations completed for three seeds | Seven seed-6103 cells remain missing; no automatic retry or additional Cloud launch |
 | A10/A12 | Semantic overlap and distribution controls measured in #106 | Downstream quality and independent validation remain distinct |
 | A19/A30/A31 | Automatic 200-example comparison complete in #105 | User replaced human review; failures and API errors retained |
@@ -36,7 +44,7 @@ its original protocol. Current acceleration receipts are under
 | A32 | FT-Fail published and verified; #107 merged, publication receipts in #108 | Complete for historical cases and automatic audit package |
 | B21/B25/B26 | Published partial reproduction and negative transfer results retained | Missing original setups and independent provider-compatible transfer data |
 | Billing | October billing export contains Object Storage usage through 12:00 UTC; GPU charges are absent | Later provider billing; no release of unresolved reserves |
-| Submission | English description prepared; owner confirmed eligibility/registration/representation; silent captioned video and text PDF saved in Downloads; updated feedback stays local for owner submission | Qwen results, public YouTube link and final submission |
+| Submission | English description updated with verified Qwen results; owner confirmed eligibility/registration/representation; silent captioned video and text PDF saved in Downloads; updated feedback stays local for owner submission | Public YouTube link, owner feedback delivery, track selection and final submission |
 
 The original CUDA qualification failed at maximum NLL difference 0.003365 versus
 its 0.0001 limit. A subsequent engineering diagnostic explicitly disabled TF32

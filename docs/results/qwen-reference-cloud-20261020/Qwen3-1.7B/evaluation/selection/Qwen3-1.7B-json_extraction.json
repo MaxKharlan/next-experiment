@@ -1,0 +1,15 @@
+{
+  "protocol_sha256": "088ce04ece1fd4fef77f5c4a5874d50c57de2e30119a8fd1ed5c4e591942f991",
+  "base": {
+    "validation": 1.0,
+    "check": 1.0
+  },
+  "validation": {
+    "Qwen3-1.7B-json_extraction-g0": 1.0,
+    "Qwen3-1.7B-json_extraction-g1": 1.0,
+    "Qwen3-1.7B-json_extraction-g2": 1.0,
+    "Qwen3-1.7B-json_extraction-g3": 1.0
+  },
+  "selected": "Qwen3-1.7B-json_extraction-g0",
+  "selection_rule": "Evaluate all four final recipe checkpoints on validation exact match. Select highest score, ties by grid index. Evaluate only the selected checkpoint once on check. Record base quality separately before selection. No final test."
+}

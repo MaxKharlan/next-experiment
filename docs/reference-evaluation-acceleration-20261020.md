@@ -46,5 +46,5 @@ See the [training verification](results/clean-reference-grid-20261020/training-v
 Both Cloud evaluation jobs were submitted once. Their
 [submission receipts](results/qwen-reference-cloud-20261020/submissions.json)
 bind each job to its separate CUDA protocol and uploaded payload hash.
-Qwen3-0.6B has completed: [all 2,506 answers and selection results are verified](qwen-reference-quality-20261020.md).
-Qwen3-1.7B has started generation and remains in progress.
+Both models have completed: [all 5,012 answers and selection results are verified](qwen-reference-quality-20261020.md).
+No evaluation or training remains active in this reference queue.
