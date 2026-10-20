@@ -1,0 +1,95 @@
+{
+  "admission": "not_measured",
+  "arms": [
+    "format",
+    "healthy",
+    "cut",
+    "wrong"
+  ],
+  "controls": "Format-only arm serializes explicit answers and has shorter inputs; it is a learning diagnostic, not a compute-matched causal repair control.",
+  "corruption": "Exactly half of train histories within each family, same indices for cut and wrong. Cut retains first half of characters; wrong cycles product/priority with valid JSON. Anchors stay clean.",
+  "data_seed": 2026102007,
+  "deployment": "T=1; classifiers offline.",
+  "execution_authorized": false,
+  "execution_dependencies": [
+    "Freeze tokenizer/model revisions, runtime and executor source digests before any model measurement.",
+    "Count rendered tokens locally and reject any over-context row; do not truncate.",
+    "Review data limitations and obtain an explicit new paid budget approval.",
+    "Reconcile or retain previous ledger holds; this bundle neither copies nor changes a spending ledger.",
+    "Create per-attempt reservations and immutable receipts before an authorized submission."
+  ],
+  "files_sha256": {
+    "audit.json": "7d80bc180b51094b3d59de72688c4b64d1f262bf41eecf6a40c6d036cf3c863b",
+    "check.jsonl": "f3d9bc1f6f6fdbd459df4f52a3ab6a8197c6ee720c1299c64422f9e3900f98c6",
+    "cut-train.jsonl": "601be689a6e490d6154a2c6be02ff6cd21020e335d0f11a951a6ef4f6f5009dd",
+    "format-train.jsonl": "307f812a4809a293632099cc332e154c9dbe6cc94430260fb654e3d6b3d63ad5",
+    "healthy-train.jsonl": "704bd8fcb6b19dfd5eb15a6509434b524040422430c2430925453f28f3aa5927",
+    "injection.json": "29ebf35a07ba6f644dceb79bd15ecbd7930ad5145d0f9ec97d7bacb69f925c9e",
+    "validation.jsonl": "193adce066104305ff1834cc8d216d0bc2ea26e3d4d76baad523b3d02f7ed99c",
+    "wrong-train.jsonl": "0efa4dda5532bfc0663cdc8526c0b78cdb6b10abed510ab510a8bcbbe985dd7f"
+  },
+  "gate_aggregation": "Arithmetic mean of three prespecified seeds per arm; family floor uses seed mean within each family. All gates must pass together. No rounding before comparison.",
+  "gates": {
+    "distinct_weight_digests_per_arm": 3,
+    "format_and_healthy_anchor_exact_min": 0.9,
+    "healthy_each_family_exact_min": 0.25,
+    "healthy_history_exact_max": 0.95,
+    "healthy_history_exact_min": 0.4,
+    "healthy_minus_format_history_exact_min": 0.15,
+    "healthy_minus_wrong_history_exact_min": 0.1
+  },
+  "generation": {
+    "do_sample": false,
+    "enable_thinking": false,
+    "max_new_tokens": 192
+  },
+  "id": "ticket-ledger-development-20261020-v2",
+  "metrics": {
+    "format": "Strict object exact on all direct check anchors.",
+    "primary": "Strict full-object exact on every check history; invalid, missing and limit-hit answers score zero.",
+    "secondary": "Schema validity; all-denominator field accuracy; per-family strict exact; EOS/limit hits.",
+    "unit": "Training seed. Paired arms share data, order seed and check rows. Rows are not independent training replicates."
+  },
+  "model": "Qwen/Qwen3-0.6B",
+  "model_measurements": null,
+  "order_seeds": [
+    2401,
+    2402,
+    2403
+  ],
+  "phase": "development_preparation",
+  "power": "Not selected or computed here. Only after all admission gates pass may a separately frozen noise/power plan be prepared. Nonzero observed SD alone is insufficient.",
+  "preregistration_scope": "Prospective data/endpoint/recipe lock before model measurements. No empirical admission result. Synthetic grammar shared across splits; no final-test data generated or read.",
+  "recipe": {
+    "batch_size": 8,
+    "context_length": 8192,
+    "learning_rate": 0.0001,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lora_rank": 16,
+    "n_epochs": 2,
+    "packing": false
+  },
+  "sizes": {
+    "check": [
+      36,
+      144
+    ],
+    "train": [
+      72,
+      288
+    ],
+    "validation": [
+      24,
+      72
+    ]
+  },
+  "source_sha256": {
+    "bench/tasks/ticket_ledger.py": "e37d336a2748d220281c402b52c2ddf9242fc2ddf75a5957fcf7b577bbe72f9e",
+    "core/eval/structured.py": "eac671f1c4f537c5ad928f7aa0245cd008e889e3690c1f17a1b45e195186ad28",
+    "core/eval/ticket_ledger.py": "892f0774d7b4e0f711267a9e752e002faf625db3d211e31ce9eb3b333ffa9004",
+    "scripts/prepare_ticket_ledger.py": "fd552a560ef9909dad667bf3e76eb62e0d0f59fbc80a76f5249655da4fd7b40a"
+  },
+  "stopping": "Any failed gate terminates this design. No extra seeds, altered thresholds, endpoint substitution or infrastructure retry without a separately reviewed authorization. Missing jobs/scores are incomplete, never passes.",
+  "validation": "Common clean validation for every arm. Fixed epochs; no recipe selection or early stopping on check."
+}
