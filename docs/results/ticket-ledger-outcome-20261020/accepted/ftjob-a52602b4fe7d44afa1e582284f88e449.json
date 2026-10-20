@@ -1,0 +1,28 @@
+{
+  "created_at": 1792500233,
+  "error": null,
+  "fine_tuned_model": null,
+  "finished_at": null,
+  "hyperparameters": {
+    "batch_size": 8,
+    "context_length": 8192,
+    "learning_rate": 0.0001,
+    "learning_rate_multiplier": null,
+    "lora": true,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lora_r": 16,
+    "max_grad_norm": 1.0,
+    "n_epochs": 2,
+    "packing": false,
+    "warmup_ratio": 0.0,
+    "weight_decay": 0.0
+  },
+  "id": "ftjob-a52602b4fe7d44afa1e582284f88e449",
+  "model": "Qwen/Qwen3-0.6B",
+  "seed": 2402,
+  "status": "running",
+  "trained_tokens": 0,
+  "training_file": "file-01a15947-bd25-7af6-85f6-9cee040ca467",
+  "validation_file": "file-01a15947-1b3d-7c30-b956-c2422efd3c59"
+}

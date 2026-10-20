@@ -1,0 +1,165 @@
+{
+  "at": "2026-10-20T16:04:13.183272+00:00",
+  "provider_state": "FAILED",
+  "reason": "Data subprocess reached the frozen 3600-second timeout; no retry",
+  "overall_status": "partial_or_failed",
+  "code_completed": 15,
+  "data_completed": 29,
+  "data_planned": 36,
+  "data_missing": [
+    "labels-50-s6103",
+    "labels-control-s6103",
+    "labels-repair-s6103",
+    "shift-control-s6103",
+    "shift-mild-s6103",
+    "shift-repair-s6103",
+    "shift-strong-s6103"
+  ],
+  "raw_data_status": "The data worker last wrote running; the parent result and terminal provider status establish the timeout. Raw artifacts are preserved.",
+  "verified_artifact_count": 535,
+  "validation_sets": {
+    "data/validation.jsonl": {
+      "examples": 64,
+      "n": 3,
+      "values": [
+        0.90625,
+        0.921875,
+        0.921875
+      ],
+      "mean": 0.9166666666666666,
+      "sample_sd": 0.009021097956087902
+    },
+    "data/overlap-validation-25.jsonl": {
+      "examples": 64,
+      "n": 3,
+      "values": [
+        0.921875,
+        0.921875,
+        0.9375
+      ],
+      "mean": 0.9270833333333334,
+      "sample_sd": 0.009021097956087902
+    },
+    "data/overlap-validation-25-dedup.jsonl": {
+      "examples": 48,
+      "n": 3,
+      "values": [
+        0.8958333333333334,
+        0.8958333333333334,
+        0.9166666666666666
+      ],
+      "mean": 0.9027777777777778,
+      "sample_sd": 0.01202813060811716
+    },
+    "data/overlap-validation-25-control.jsonl": {
+      "examples": 48,
+      "n": 3,
+      "values": [
+        0.9375,
+        0.9375,
+        0.9583333333333334
+      ],
+      "mean": 0.9444444444444444,
+      "sample_sd": 0.012028130608117225
+    },
+    "data/overlap-validation-50.jsonl": {
+      "examples": 64,
+      "n": 3,
+      "values": [
+        0.96875,
+        0.96875,
+        0.953125
+      ],
+      "mean": 0.9635416666666666,
+      "sample_sd": 0.009021097956087902
+    },
+    "data/overlap-validation-50-dedup.jsonl": {
+      "examples": 32,
+      "n": 3,
+      "values": [
+        0.9375,
+        0.9375,
+        0.90625
+      ],
+      "mean": 0.9270833333333334,
+      "sample_sd": 0.018042195912175804
+    },
+    "data/overlap-validation-50-control.jsonl": {
+      "examples": 32,
+      "n": 3,
+      "values": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mean": 1.0,
+      "sample_sd": 0.0
+    }
+  },
+  "validation_differences": {
+    "overlap-25-minus-validation": {
+      "n": 3,
+      "values": [
+        0.015625,
+        0.0,
+        0.015625
+      ],
+      "mean": 0.010416666666666666,
+      "sample_sd": 0.009021097956087902
+    },
+    "overlap-25-minus-overlap-validation-25-dedup": {
+      "n": 3,
+      "values": [
+        0.02604166666666663,
+        0.02604166666666663,
+        0.02083333333333337
+      ],
+      "mean": 0.024305555555555542,
+      "sample_sd": 0.003007032652029258
+    },
+    "overlap-25-minus-overlap-validation-25-control": {
+      "n": 3,
+      "values": [
+        -0.015625,
+        -0.015625,
+        -0.02083333333333337
+      ],
+      "mean": -0.017361111111111122,
+      "sample_sd": 0.0030070326520293222
+    },
+    "overlap-50-minus-validation": {
+      "n": 3,
+      "values": [
+        0.0625,
+        0.046875,
+        0.03125
+      ],
+      "mean": 0.046875,
+      "sample_sd": 0.015625
+    },
+    "overlap-50-minus-overlap-validation-50-dedup": {
+      "n": 3,
+      "values": [
+        0.03125,
+        0.03125,
+        0.046875
+      ],
+      "mean": 0.036458333333333336,
+      "sample_sd": 0.009021097956087902
+    },
+    "overlap-50-minus-overlap-validation-50-control": {
+      "n": 3,
+      "values": [
+        -0.03125,
+        -0.03125,
+        -0.046875
+      ],
+      "mean": -0.036458333333333336,
+      "sample_sd": 0.009021097956087902
+    }
+  },
+  "cloud_reservations_usd": 30,
+  "billing": "All unresolved holds retained; no new cloud launch",
+  "source_collection_sha256": "a624cbb05a574ed8543ea6dc20b87211f24ea2febe743d46fb414c766829636a",
+  "source_analysis_sha256": "66ce0915896bcd15a43b31ae284376b95bdeee3251aeb05cfb88d8c5336d522c"
+}

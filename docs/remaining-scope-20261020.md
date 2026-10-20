@@ -1,7 +1,7 @@
 # Remaining scope reconciled to the original plan
 
 This reconciliation uses the project document dated 16 October 2026, pages
-30–34 (A1–A32 and B1–B26), and repository main through #108, with ongoing studies tracked in
+30–34 (A1–A32 and B1–B26), and repository main through #115 plus the terminal data and ledger results, with ongoing studies tracked in
 [the execution queue](remaining-queue-execution-20261020.md). The document's
 checkboxes are planning history. Implementations, measurements and publication
 are separate acceptance conditions.
@@ -11,13 +11,13 @@ are separate acceptance conditions.
 | Requirement | Supported now | Remaining acceptance condition |
 | --- | --- | --- |
 | A4 message validation | Roles, nonempty text, user prompts, structured contracts | Semantic duplicate detection belongs to A10; it does not block A4's stated format contract |
-| Fault 2 / A5,A7,A9 | Catalog hypothesis and tokenizer/template fingerprinting | Deterministic mismatch injection, observed template comparison, repair and matched control, measured quality effect |
-| Fault 3 / A5,A7,A11 | Catalog hypothesis | Equivalent-intent labels and valid-ambiguity controls; neighboring examples plus Nano review; observed-data repair/control pair |
-| Fault 4 / A5,A7,A10 | [Lexical near-duplicate audit](lexical-overlap-audit-20261020.md) and 22 constructed controls (4 false positives, 4 missed paraphrases) | Independent semantic validation, measured validation optimism versus clean check, deduplication/control pair |
-| Fault 5 / A5,A7,A12 | Catalog hypothesis | Declared target distribution, label distribution and embedding classifier AUC checks, quality effect and matched repair |
-| A18 sensitivity | Answer-cut evidence for one task/model | Faults 2–5 and justified strength curves; a planted setting alone is not a harmful fault |
+| Fault 2 / A5,A7,A9 | Declared-wrapper injection, reconstruction and matched control measured on three seeds; no consistent harm in this setting | Other model/task coverage and broader strength curves |
+| Fault 3 / A5,A7,A11 | Semantic audit and observed-label repair/control measured; two completed repair seeds | Missing seed 6103, broader ambiguity and task/model coverage |
+| Fault 4 / A5,A7,A10 | Lexical/semantic controls and three-seed validation-optimism measurements with deduplication/random-removal controls | Independent semantic validation and broader task/model coverage |
+| Fault 5 / A5,A7,A12 | Declared target distribution and embedding checks; two seeds of shift/repair/control quality, with no improvement over the damaged baseline | Missing seed 6103 and broader strength/task/model coverage |
+| A18 sensitivity | Answer-cut evidence and [partial two-strength data-fault measurements](data-fault-quality-20261020.md) | Missing cells and justified broader strength curves; a planted setting alone is not a harmful fault |
 | A19 Nano audit | [200-example automatic comparison](semantic-audit-20261020.md); manual review replaced by user instruction | Complete under revised acceptance; preserve Nano failure and Super HTTP errors |
-| A29 logit probes | Teacher-forced prompt/answer/template NLL and EOS measured on twelve references; neutral live likelihoods | Additional adapter measurements and independent calibration |
+| A29 logit probes | Teacher-forced NLL/EOS on base references plus fifteen code and 29 data adapters; neutral live likelihoods | Independent calibration |
 | A30 embeddings | [Local Qwen, NVIDIA and provider Qwen measured](semantic-audit-20261020.md), licenses and outcome agreement recorded | Complete for the frozen development cases |
 | A31 cleanlab | [Five-fold logistic regression + cleanlab comparison](semantic-audit-20261020.md), including Nano union | Complete on the revised automatic reference |
 
@@ -34,7 +34,7 @@ semantic-detection accuracy or deployment likelihood has been established.
 The [3×3 inventory and budget](reference-matrix-plan-20261020.md) now exposes
 missing quality cells and B10 coverage. Measurements remain open. The
 [ticket-ledger bundle](ticket-ledger-development-20261020.md) prepares a new
-candidate; it has not passed empirical admission.
+candidate; [all twelve adapters were evaluated and admission stopped](ticket-ledger-outcome-20261020.md) at the healthy/cut gap.
 
 Answer-cut's 35 synthetic controls already show clean-prefix false alarms and
 alternative malformed-JSON causes. Independent likelihood calibration requires
@@ -62,8 +62,8 @@ Record synthetic mechanism reproductions separately from original-case
 reproductions and downstream quality evidence.
 
 B24's four injections, audits and 60 synthetic runs are implemented and measured.
-Pretrained downstream comparisons and a complete REST mode-B investigation remain
-open. Arbitrary user-code repair is an unvalidated extension; it is not the
+[Fifteen pretrained CUDA comparisons](pretrained-code-quality-20261020.md) are verified;
+a complete REST mode-B investigation is running. Arbitrary user-code repair is an unvalidated extension; it is not the
 original B24 acceptance condition, which names four injections and code checks.
 
 ## Product, evidence and external dependencies
@@ -79,8 +79,8 @@ with all 35 package files verified from the pinned Hub revision. B26 classifier
 publication remains a distinct deliverable with unmet transfer validation.
 
 The long-history fix was verified on the published desktop demo on 20 October;
-see [the walkthrough](demo-walkthrough.md). Fresh full API evidence, video and
-submission remain open. A saved replay does not prove restart recovery during
+see [the walkthrough](demo-walkthrough.md). A silent video and its text PDF are saved in Downloads. Fresh full API evidence,
+video publication and submission remain open. A saved replay does not prove restart recovery during
 a new live paid investigation. Cloud Sandbox activation remains an external
 dependency; the local Docker path is available.
 

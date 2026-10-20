@@ -1,0 +1,77 @@
+{
+  "failed_gates": [
+    "healthy_minus_cut"
+  ],
+  "means": {
+    "cut": {
+      "conditional": 0.38888888888888884,
+      "copy": 0.2986111111111111,
+      "history": 0.3703703703703704,
+      "restore": 0.4236111111111111,
+      "serialization": 1.0
+    },
+    "format": {
+      "conditional": 0.0,
+      "copy": 0.0,
+      "history": 0.0,
+      "restore": 0.0,
+      "serialization": 1.0
+    },
+    "healthy": {
+      "conditional": 0.4236111111111111,
+      "copy": 0.40277777777777773,
+      "history": 0.41898148148148145,
+      "restore": 0.4305555555555556,
+      "serialization": 1.0
+    },
+    "wrong": {
+      "conditional": 0.20833333333333334,
+      "copy": 0.08333333333333333,
+      "history": 0.15972222222222224,
+      "restore": 0.1875,
+      "serialization": 1.0
+    }
+  },
+  "protocol_sha256": "a7f5d3d64940ba04f473f70f79d9ab0a7be20e9ff98d65234e4fff10a85a3d5e",
+  "scope": "Development admission only; no final test or causal confirmation.",
+  "status": "stopped",
+  "source_decision_sha256": "eba5400d738a114b98d861bb25fb3217d4fd62fc691e80957871839b614044f2",
+  "verification": {
+    "records": 2160,
+    "adapters": 12,
+    "checked_data_identity_and_metrics": true,
+    "checked_adapter_digests": true,
+    "checked_lora_acceptance": true
+  },
+  "spending": {
+    "scope": "This completed study only; historical reservations stay in their original ledger",
+    "lora_token_cost_estimate_usd": 1.5297503999999997,
+    "lora_budget_charge_usd": 1.83570048,
+    "cancelled_full_sft_holds_usd": 2.3597568,
+    "provider_invoice_reconciled": false
+  },
+  "history_values": {
+    "healthy": [
+      0.4444444444444444,
+      0.4305555555555556,
+      0.3819444444444444
+    ],
+    "cut": [
+      0.3472222222222222,
+      0.3680555555555556,
+      0.3958333333333333
+    ],
+    "format": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "wrong": [
+      0.1111111111111111,
+      0.16666666666666666,
+      0.2013888888888889
+    ]
+  },
+  "healthy_minus_cut": 0.04861111111111105,
+  "required_healthy_minus_cut": 0.08
+}

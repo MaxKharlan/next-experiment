@@ -1,0 +1,16 @@
+{
+  "status": "partial_or_failed",
+  "studies": {
+    "code": {
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_total_seconds": 797.4388276970001
+    },
+    "data": {
+      "returncode": null,
+      "timed_out": true,
+      "elapsed_total_seconds": 4397.769843195
+    }
+  },
+  "protocol_sha256": "04b690b51a8c6fac3b37c9b388e7264bbd0d345f488792e832ae83c89b9efc7e"
+}

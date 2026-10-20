@@ -1,0 +1,12 @@
+{
+  "adapter/README.md": "c840d3bfe11f36af7d7ffaa1d9a09514e0c86ad71637cc14afc68979e82b2b4b",
+  "adapter/adapter_config.json": "48881fbb149ca833eea57589d6c19ebefe39ddd4457949b11fdda3e4be3d7587",
+  "adapter/adapter_model.safetensors": "ba8004bf7dcd222b8b6a376b2069f03d4ea2b317afb44b4bdb16dd606e72901b",
+  "evaluation.json": "8e91de304d3aab1ef2ff944ecd72229e1ac67b8194cba774982a5f4b2c1541e5",
+  "gradient-audit.json": "b26917eafea52630597350f1cda2703ec7879fb4a2866c5322b781dc0145e60f",
+  "logit-rows.json": "6e8d9b8ef1724f46be9e0546ba76f8f694cc195f7245e67242827aa809ef25fd",
+  "metrics.jsonl": "05b6df1ca76f63446f2af1fffa12bdcd119dce6eda87b84d7f16482a1b2eb19c",
+  "parameter-audit.json": "f13ff7df6ca2acef087a618fd7e82857242c848ff74ff67291b52a4483547548",
+  "predictions.json": "ae333be20d2121841ae27472de7b3da7c51f2b6e393c8e728f3fcda2ee049299",
+  "summary.json": "bb4ec91f3d151cbcd88fdff8c20f2b23044d3f77d040b5dbed243f1eef79b5c6"
+}

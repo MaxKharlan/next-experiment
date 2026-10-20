@@ -1,0 +1,66 @@
+{
+  "examples": 128,
+  "exact_match": 0.8984375,
+  "eos_share": 1.0,
+  "limit_share": 0.0,
+  "by_source": {
+    "card_arrival": {
+      "examples": 16,
+      "exact_match": 0.875
+    },
+    "card_payment_fee_charged": {
+      "examples": 16,
+      "exact_match": 0.9375
+    },
+    "cash_withdrawal_charge": {
+      "examples": 16,
+      "exact_match": 1.0
+    },
+    "cash_withdrawal_not_recognised": {
+      "examples": 16,
+      "exact_match": 0.9375
+    },
+    "declined_cash_withdrawal": {
+      "examples": 16,
+      "exact_match": 1.0
+    },
+    "pending_cash_withdrawal": {
+      "examples": 16,
+      "exact_match": 0.6875
+    },
+    "wrong_amount_of_cash_received": {
+      "examples": 16,
+      "exact_match": 0.9375
+    },
+    "wrong_exchange_rate_for_cash_withdrawal": {
+      "examples": 16,
+      "exact_match": 0.8125
+    }
+  },
+  "logit_summary": {
+    "prompt": {
+      "tokens": 1548,
+      "total_nll": 7099.163540425285,
+      "mean_nll": 4.586022958931062,
+      "perplexity": 98.10349167262905,
+      "perplexity_overflow": false
+    },
+    "answer": {
+      "tokens": 90,
+      "total_nll": 0.7484731644479723,
+      "mean_nll": 0.008316368493866359,
+      "perplexity": 1.0083510455487275,
+      "perplexity_overflow": false
+    },
+    "template_special": {
+      "tokens": 80,
+      "total_nll": 543.7736290797193,
+      "mean_nll": 6.797170363496491,
+      "perplexity": 895.3103012524799,
+      "perplexity_overflow": false
+    },
+    "examples": 16,
+    "mean_eos_probability_after_reference": 0.9999704658985138,
+    "scope": "Teacher-forced references; special-template tokens only. No generated-EOS frequency or calibrated fault likelihood."
+  }
+}
