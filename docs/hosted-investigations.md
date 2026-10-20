@@ -64,3 +64,18 @@ The test split stays out of diagnosis and scoring. A full retrain remains an
 exported proposal. Generated code, arbitrary filesystem paths and model URLs
 cannot be supplied through this endpoint. The browser renders model text as text.
 Reports are private and require the access key; there is no public report list.
+
+## Deployment verification
+
+The [VPS preflight](results/hosted-judge-vps-preflight-20261020.json) completed
+with the API and an inference child in the same 4.5 GiB cgroup. Peak usage was
+3.93 GiB, no OOM events occurred, and the existing application's health checks
+passed throughout. Host available memory stayed above 3.06 GiB. This checks one
+long synthetic prompt with rank-64 LoRA; it does not guarantee every uploaded
+case will complete. Two earlier checks stopped before generation because their
+host-swap guard was too sensitive; those outcomes are retained in the receipt.
+
+The [integration smoke](results/hosted-judge-smoke-20261020.json) completed two
+Nemotron calls, four Token Factory training jobs and four adapter evaluations.
+Its diagnosis was inconclusive. Estimated usage was $0.0401286 from the shared
+$15 allocation. This is a service check, not a benchmark result or an invoice.
