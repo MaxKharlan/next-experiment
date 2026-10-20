@@ -2,13 +2,14 @@
 
 import copy
 import json
+import math
 import shutil
 from pathlib import Path
 
 import pytest
 
 from bench.tasks.structured import sha
-from scripts.report_format_content import accounting, verify_export
+from scripts.report_format_content import accounting, same_accounting, verify_export
 
 BUNDLE = (
     Path(__file__).resolve().parents[1]
@@ -112,6 +113,26 @@ def test_publication_verifies_without_models_or_provider(capsys):
         "insufficient_choice_gap_wrong",
         "insufficient_cut_sensitivity",
     ]
+
+
+def test_accounting_summary_allows_only_summation_roundoff():
+    computed = accounting(*inputs(), allow_cancelled_holds=True)
+    saved = copy.deepcopy(computed)
+    saved["retained_holds_usd"] = math.nextafter(saved["retained_holds_usd"], math.inf)
+    assert same_accounting(saved, computed)
+    for value in (
+        0,
+        True,
+        float("nan"),
+        float("inf"),
+        computed["retained_holds_usd"] + 1e-8,
+    ):
+        saved["retained_holds_usd"] = value
+        assert not same_accounting(saved, computed)
+    saved = {**computed, "invoice_reconciled": True}
+    assert not same_accounting(saved, computed)
+    saved = {**computed, "pending_operation_ids": []}
+    assert not same_accounting(saved, computed)
 
 
 @pytest.mark.parametrize(

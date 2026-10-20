@@ -1,6 +1,6 @@
 # Project status — 20 October 2026
 
-Repository baseline: main `c521180`, including merged PRs through #99. PR #92
+Repository baseline: main `4ef01eb`, including merged PRs through #100. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -42,6 +42,11 @@ reapply its earlier package. Its local sweep used no provider service. The B12
 package separately records eight Super calls costing $0.0135807; that package is
 outside this continuation's explicitly inherited $5 ledger. B9 confirmed MPS was
 free before this follow-up; local evaluations run one process at a time.
+
+The [ticket-ledger preparation](ticket-ledger-development-20261020.md) now freezes
+504 fresh histories, complete-object endpoints and new development gates.
+Two offline oracles agree; tokenizer context checks pass. Model admission remains
+`not_measured`; no new paid series is authorized.
 
 ## Next work, in order
 

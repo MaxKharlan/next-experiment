@@ -1,0 +1,73 @@
+{
+  "counts": {
+    "check": {
+      "anchors": 36,
+      "conditional": 48,
+      "copy": 48,
+      "restore": 48
+    },
+    "healthy-train": {
+      "anchors": 72,
+      "conditional": 96,
+      "copy": 96,
+      "restore": 96
+    },
+    "validation": {
+      "anchors": 24,
+      "conditional": 24,
+      "copy": 24,
+      "restore": 24
+    }
+  },
+  "limitations": "Shortcut scores describe three deterministic mistakes, not model accuracy or causal specificity. Entity-disjoint splits share grammar; serialization anchors can share normalized field combinations. No historical final test was read.",
+  "model_admission": "not_measured",
+  "review": "Forward event oracle versus backwards text-only field resolver; one author, no independent human annotation.",
+  "service_spend_usd": 0,
+  "shortcut_exact_counts": {
+    "check": {
+      "conditional": {
+        "correct": 7,
+        "total": 48
+      },
+      "copy": {
+        "correct": 8,
+        "total": 48
+      },
+      "restore": {
+        "correct": 2,
+        "total": 48
+      }
+    },
+    "healthy-train": {
+      "conditional": {
+        "correct": 16,
+        "total": 96
+      },
+      "copy": {
+        "correct": 11,
+        "total": 96
+      },
+      "restore": {
+        "correct": 3,
+        "total": 96
+      }
+    },
+    "validation": {
+      "conditional": {
+        "correct": 4,
+        "total": 24
+      },
+      "copy": {
+        "correct": 5,
+        "total": 24
+      },
+      "restore": {
+        "correct": 0,
+        "total": 24
+      }
+    }
+  },
+  "status": "offline_checks_passed",
+  "unique_entities": 2148,
+  "unique_normalized_histories": 504
+}

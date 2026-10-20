@@ -194,6 +194,25 @@ def model_summary(record):
     return result
 
 
+def same_accounting(saved, computed):
+    """Ignore only float summation roundoff, never lineage or retained holds."""
+    if saved.keys() != computed.keys():
+        return False
+    for key, expected in computed.items():
+        value = saved[key]
+        if key.endswith("_usd"):
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (float, int))
+                or not math.isfinite(value)
+                or not math.isclose(value, expected, rel_tol=0, abs_tol=1e-12)
+            ):
+                return False
+        elif value != expected:
+            return False
+    return True
+
+
 def export(root, output, allow_cancelled_holds=False):
     plan, state, digest = load(root)
     decision = json.loads((root / "decision.json").read_text())
@@ -352,7 +371,9 @@ def verify_export(output):
         digest,
         allow_cancelled_holds=True,
     )
-    if json.loads((output / "accounting.json").read_text()) != account:
+    if not same_accounting(
+        json.loads((output / "accounting.json").read_text()), account
+    ):
         raise ValueError("Accounting summary mismatch")
     report = json.loads((output / "summary.json").read_text())
     if (
