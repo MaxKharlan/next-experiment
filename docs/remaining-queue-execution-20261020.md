@@ -23,13 +23,13 @@ See the timestamped progress JSON for current committed amounts.
 | Faults 2–5 | Injection/control helpers, 256-example data preparation and observed-label repair prepared | 36-cell CUDA cohort follows the code cohort in the combined cloud job |
 | A10/A12 | Semantic overlap and distribution controls measured in #106 | Downstream quality and independent validation remain distinct |
 | A19/A30/A31 | Automatic 200-example comparison complete in #105 | User replaced human review; failures and API errors retained |
-| A29 | Twelve-reference teacher-forced diagnostic complete in #106 | Adapter diagnostics prepared in CUDA cohorts; live likelihoods remain unfitted |
+| A29 | Base diagnostic in #106 and sixteen-reference measurements for fifteen CUDA adapters complete | Data-cohort diagnostics and independent calibration; live likelihoods remain unfitted |
 | A15/A20 | Serverless creation and S3 retrieval work; explicit FP32/math SDPA passed the numerical gate | Kaggle generation notebook queued; full generation comparison remains open |
-| B24 | Two supplemental MPS adapters measured; REST route implemented and tested; fifteen CUDA code cells completed | Verified cloud collection follows job completion; REST study waits for MPS and then runs once |
+| B24 | Two supplemental MPS adapters and [all fifteen CUDA code cells](pretrained-code-quality-20261020.md) verified; REST route implemented and tested | REST study waits for MPS and then runs once |
 | A32 | FT-Fail published and verified; #107 merged, publication receipts in #108 | Complete for historical cases and automatic audit package |
 | B21/B25/B26 | Published partial reproduction and negative transfer results retained | Missing original setups and independent provider-compatible transfer data |
 | Billing | October billing export contains Object Storage usage through 12:00 UTC; GPU charges are absent | Later provider billing; no release of unresolved reserves |
-| Submission | English description prepared; owner confirmed eligibility/registration/representation; silent captioned video and text PDF saved in Downloads | Fresh trace, public YouTube link and final submission |
+| Submission | English description prepared; owner confirmed eligibility/registration/representation; silent captioned video and text PDF saved in Downloads; updated feedback stays local for owner submission | Fresh trace, public YouTube link and final submission |
 
 The original CUDA qualification failed at maximum NLL difference 0.003365 versus
 its 0.0001 limit. A subsequent engineering diagnostic explicitly disabled TF32
