@@ -1,0 +1,154 @@
+{
+  "status": "planning_only",
+  "source_plan": "Project document 16 October 2026, pages 30-34, A13/B5/B10",
+  "cells": [
+    {
+      "task": "banking77",
+      "model": "Qwen/Qwen3-0.6B",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": [
+        "docs/benchmark.md",
+        "docs/answer-cut.md",
+        "docs/b10-noise-floor.md",
+        "docs/b9-final-sweep.md"
+      ]
+    },
+    {
+      "task": "banking77",
+      "model": "Qwen/Qwen3-1.7B",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": []
+    },
+    {
+      "task": "banking77",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": []
+    },
+    {
+      "task": "json_extraction",
+      "model": "Qwen/Qwen3-0.6B",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": [
+        "docs/format-content-development-20261019.md"
+      ]
+    },
+    {
+      "task": "json_extraction",
+      "model": "Qwen/Qwen3-1.7B",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": []
+    },
+    {
+      "task": "json_extraction",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": []
+    },
+    {
+      "task": "function_calling",
+      "model": "Qwen/Qwen3-0.6B",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": []
+    },
+    {
+      "task": "function_calling",
+      "model": "Qwen/Qwen3-1.7B",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": []
+    },
+    {
+      "task": "function_calling",
+      "model": "meta-llama/Llama-3.2-1B-Instruct",
+      "status": "fresh_comparable_matrix_missing",
+      "baseline": null,
+      "healthy": null,
+      "damaged": null,
+      "fixed": null,
+      "matched_control": null,
+      "historical_evidence": []
+    }
+  ],
+  "budget": {
+    "rows_per_task_scenario": 390,
+    "max_rendered_tokens_per_row_scenario": 8192,
+    "historical_usd_per_million": 0.4,
+    "current_quote_verified": false,
+    "reference_grid": {
+      "jobs_per_cell": 4,
+      "epoch_sum_per_cell": 18,
+      "nine_cell_training_ceiling_usd": 207.02822399999997
+    },
+    "comparison": {
+      "arms": [
+        "healthy",
+        "damaged",
+        "fixed",
+        "matched_control"
+      ],
+      "seeds_per_arm_scenario": 3,
+      "epochs_per_job_scenario": 6,
+      "jobs_per_cell": 12,
+      "nine_cell_training_ceiling_usd": 828.1128959999999
+    },
+    "training_total_ceiling_usd": 1035.14112,
+    "additional_b10_sizes": {
+      "rows": [
+        50,
+        200
+      ],
+      "arms": 2,
+      "seeds_per_arm_scenario": 3,
+      "epochs_per_job_scenario": 6,
+      "jobs_total": 108,
+      "training_ceiling_usd": 265.42080000000004
+    },
+    "includes": "Training only at historical 0.40/M; assumes every rendered row fits 8192. Six epochs bounds a selected 3/6-epoch reference recipe.",
+    "excludes": "Tax, inference, retries, contingency, historical estimates and holds.",
+    "paid_authorization_usd": 0,
+    "execution": "No submission. Replace context ceilings with per-model rendered token counts and get explicit approval before any paid work. Three seeds are an illustrative planning count, not a powered confirmation recommendation."
+  },
+  "confirmation_sample_size": null,
+  "power": null,
+  "final_test": "No historical test may be reused; a new final evaluation requires an admitted design and frozen intervention decision."
+}
