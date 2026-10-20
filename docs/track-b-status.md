@@ -1,7 +1,7 @@
 # Track B reconciliation
 
-Compared the original project plan with `main` through PR #98
-(`2988961`) and the repository implementation on October 19, 2026.
+Compared the original project plan with `main` through PR #99
+(`c521180`) and the repository implementation on October 20, 2026.
 Checkboxes in the original plan do not establish that every acceptance condition
 has measured evidence.
 
@@ -13,9 +13,13 @@ which also completed with a rejected candidate and $0 additional provider spend.
 clean-prefix false alarms and alternative causes of broken JSON; they do not
 calibrate deployment likelihoods.
 
-The format/content development series
-has 12 submitted trainings awaiting completion and sequential local evaluation.
-Its frozen gates will determine whether a new confirmation study is justified.
+The [format/content development series](format-content-development-20261019.md)
+is complete: 12 models after one infrastructure retry, plus the base evaluation.
+Healthy history exact is 100%, cut 94.44% and wrong 76.39%; all trained models have
+100% direct exact. The healthy-choice ceiling, 6.94 pp healthy/wrong choice gap and
+5.56 pp healthy/cut strict gap fail three frozen gates. No confirmation sample size
+is selected. B5 remains incomplete beyond this task/model, and B10's 5.58 pp
+strict-score SD is descriptive. T=1 and offline classifiers remain unchanged.
 The current operational changes add provider request/response IDs linked to
 spending reservations and contain long-history replay charts within their cards.
 
@@ -28,7 +32,7 @@ spending reservations and contain long-history replay charts within their cards.
 | B7 | Sensitivity curves now cover both strengths of faults 6–8 across three seeds. Low learning rate degrades quality; rank and epoch changes do not show substantial consistent degradation here. Pre-intervention top-1 recovery is 3/3 at each strength, but all healthy provider cases also rank the epoch fault first; no 80% population guarantee is established. See `recipe-sensitivity.md`. |
 | B8 | Target/control recipe builders and cost matching exist. |
 | B9 | The simulation study is complete: 210 local LoRA runs cover seven healthy/fault-strength recipes at 30 seeds. Seed-grouped, recipe-strength and frozen Token Factory transfer evaluations are saved in `b9-final-sweep.md`. The only measured quality failure is low learning rate. The strongest local classifier reaches 96.7% balanced accuracy but falls to 25.0% on historical heldout Token Factory cases, so it is rejected for live use. |
-| B10 | Noise measurements and a decision-power audit exist (PR #68). Empirical coverage across task/model/sample-size combinations remains incomplete. |
+| B10 | Noise measurements and a decision-power audit exist (PR #68). The format/content series adds a 5.58 pp descriptive strict-score SD but fails admission before power selection. Empirical coverage across task/model/sample-size combinations remains incomplete. |
 | B11 | Causal statistics and decision rules are implemented; small-sample limitations are documented in the power audit. |
 | B12 | The calibration task is complete with a negative deployment decision. Temperature fitting, reliability plots and ECE/Brier audits exist; a development-fitted temperature worsens all three heldout measures. The live default remains T=1. |
 | B13–B15 | Versioned prompts, hypothesis sampling and sourced known-issue search are implemented. One-versus-three sampling results are saved. |

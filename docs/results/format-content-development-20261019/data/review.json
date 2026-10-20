@@ -1,0 +1,79 @@
+{
+  "arms": [
+    "format",
+    "healthy",
+    "cut",
+    "wrong"
+  ],
+  "corruption": "50% of content rows per family (1/3 of total training rows); same selected rows for cut and wrong; shared format anchors are clean.",
+  "data": {
+    "check_content": {
+      "examples": 48,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/check-content.jsonl",
+      "sha256": "e59b58976c99866ec63a3f7c500cbcc533e36609a35c190e0fecc1eff39ca033"
+    },
+    "check_format": {
+      "examples": 24,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/check-format.jsonl",
+      "sha256": "b57395b709963eec3356fa30e02e61b02cef9d6d314a7d64a8feed9c13083ec4"
+    },
+    "cut_train": {
+      "examples": 216,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/cut-train.jsonl",
+      "sha256": "45895d6bd028c7771c983112bc6c681f0705dedb9675a8d5ce06f4173cb7707e"
+    },
+    "cut_validation": {
+      "examples": 36,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/cut-validation.jsonl",
+      "sha256": "243e73068c46289fbdabec16bace0efda225ed06cda479b7d2c632fd16de6887"
+    },
+    "format_train": {
+      "examples": 216,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/format-train.jsonl",
+      "sha256": "3948e04e4a1ad7e29889b73f8d7e408694a3343e2b44c50e2867c976606abcae"
+    },
+    "format_validation": {
+      "examples": 36,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/format-validation.jsonl",
+      "sha256": "01f4f7bfc8e3eddadb14f8eb857f713bbb735bcdea422cc2b113cb705cf14cf0"
+    },
+    "healthy_train": {
+      "examples": 216,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/healthy-train.jsonl",
+      "sha256": "433de608dd884e5bf2dd6ea388525bc9bbe28de07684f981959e343538cb8e98"
+    },
+    "healthy_validation": {
+      "examples": 36,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/healthy-validation.jsonl",
+      "sha256": "278a4c723ffa7cee6a4414c43a5edd3cea3a7e56b6cae2111632b119a5815e53"
+    },
+    "wrong_train": {
+      "examples": 216,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/wrong-train.jsonl",
+      "sha256": "f0e46283431c717723f945c61cfbd1ae8899dd527d2f7f0d36d4cb62ef6e66b5"
+    },
+    "wrong_validation": {
+      "examples": 36,
+      "path": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/data/wrong-validation.jsonl",
+      "sha256": "6c6cd002118470cf5610d99e7408a820f7bca7f0365013a372c797647f4cff44"
+    }
+  },
+  "reference_review": "All clean histories checked by text-only replay parser; direct anchors checked against their explicit field values. One author; no independent human review.",
+  "scope": "New development train/validation/check only, no final test. Grammar shared across splits. Format-only arm has different input lengths; not a compute-matched causal control.",
+  "sizes": {
+    "check": [
+      24,
+      48
+    ],
+    "train": [
+      72,
+      144
+    ],
+    "validation": [
+      12,
+      24
+    ]
+  },
+  "unique_entities": 648,
+  "unique_normalized_histories": 324
+}

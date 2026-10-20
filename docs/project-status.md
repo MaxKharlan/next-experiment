@@ -1,6 +1,6 @@
-# Project status — 19 October 2026
+# Project status — 20 October 2026
 
-Repository baseline: main `2988961`, including merged PRs through #98. PR #92
+Repository baseline: main `c521180`, including merged PRs through #99. PR #92
 records the terminal `zero_sd` development stop; its CI passed. All six historical
 development adapters scored 102/102. No fresh reference jobs, full persisted API
 investigation or fresh final-test evaluation followed. The old protocol and its
@@ -10,16 +10,17 @@ The [development sensitivity follow-up](development-sensitivity-20261019.md)
 audits the ceiling and rejects a separately frozen candidate: healthy mean
 26.85%, damaged mean 39.81% on new histories. Its paid pilot stopped before
 submission at the strict base gate. Additional provider spend is $0; the $5
-budget retains its $0.2710464 historical charge estimate. Comparison evidence and mode
+budget retained its $0.2710464 historical charge estimate at that stop. Comparison evidence and mode
 boundaries remain in the [fault review](fault-evidence-review.md).
 
-A new format/content development design
-separates clean format anchors from history content. Four arms (format, healthy,
-cut and schema-valid wrong values) use three shuffled seeds each. At this
-operational update, all 12 existing jobs remain running; the collector waits for
-them, then evaluates adapters sequentially and applies the frozen gates. The
-series reserves $1.1311488 within the inherited $5 ledger. Results and final-test
-evidence remain pending; no additional jobs are needed to finish this series.
+The [format/content development series](format-content-development-20261019.md)
+completed twelve replacements after twelve original jobs were cancelled. All 13
+models (including base), 936 answers and 624 choice decisions are exported and verified.
+Mean history exact is 12.50% format, 100% healthy, 94.44% cut and 76.39% wrong. Three
+frozen gates fail: healthy choice ceiling, insufficient healthy/wrong choice gap,
+and insufficient healthy/cut strict gap. This is a terminal development stop;
+no confirmation seeds or fresh final test are selected. New training token estimates
+are $0.8469312, with $1.1311488 cancelled-job holds retained pending billing.
 
 | Area | Evidence and current state | Remaining acceptance condition / owner |
 |---|---|---|
@@ -44,11 +45,10 @@ free before this follow-up; local evaluations run one process at a time.
 
 ## Next work, in order
 
-1. Collect and evaluate the 12 already submitted format/content development jobs,
-   apply the frozen admission/noise gates, then export and independently verify
-   their results. Do not duplicate training or relax gates after seeing outcomes.
-   Previous development stopping decisions remain terminal; their viewed checks
-   are not final tests.
+1. The format/content series is complete and rejected for confirmation. Use its
+   exported diagnostics for a separately preregistered development data design
+   that tests harder, fresh histories before any new paid series. Do not adapt
+   this cohort's thresholds or repeat seeds. Its viewed checks are not final tests.
 2. Only after a suitable new development design passes its noise/power gates,
    freeze a new confirmation protocol: fresh reference/control comparisons,
    persisted API trace with paid approvals and restart recovery, then final test
@@ -60,7 +60,8 @@ free before this follow-up; local evaluations run one process at a time.
    Keep T=1 and both experimental B9 classifiers out of live diagnosis.
 4. Complete the remaining [billing reconciliation](provider-cost-reconciliation-20261019.md):
    224 completed training jobs match aggregate Usage ($8.0379272 before tax);
-   six current-ledger costs match job receipts and 12 reservations remain pending.
+   the new series adds $0.8469312 in token estimates, while 12 cancelled originals
+   retain $1.1311488 in holds. Their newer aggregate Usage match remains open.
    Obtain invoice evidence, resolve the $0.01 displayed-total difference and
    match inference calls when provider records permit. New calls now retain provider
    request/response IDs and their reservation IDs for that matching. SQLite worker ownership,
@@ -72,6 +73,5 @@ free before this follow-up; local evaluations run one process at a time.
    video and submit the package. The repository cannot establish those facts.
 
 Historical heldout cases have been viewed and reused; their metrics remain
-exploratory evidence. The current development continuation has a periodic completion
-check; its handoff record is in the ignored cohort artifacts. It must be disabled
-after results are published.
+exploratory evidence. Local MPS evaluation is complete. The periodic completion
+check was disabled after publication in PR #100.

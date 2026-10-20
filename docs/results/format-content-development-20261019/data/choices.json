@@ -1,0 +1,482 @@
+[
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920048\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920048\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920048\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920048\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920050\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920050\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920050\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920050\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920052\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920052\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920052\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920052\"}"
+    ],
+    "correct_index": 2,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920054\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920054\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920054\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920054\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920056\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920056\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920056\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920056\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920058\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920058\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920058\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920058\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920060\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920060\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920060\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920060\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920062\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920062\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920062\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920062\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920064\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920064\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920064\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920064\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920066\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920066\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920066\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920066\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920068\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920068\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920068\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920068\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920070\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920070\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920070\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920070\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920072\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920072\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920072\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920072\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920074\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920074\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920074\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920074\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920076\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920076\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920076\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920076\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920078\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920078\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920078\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920078\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920080\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920080\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920080\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920080\"}"
+    ],
+    "correct_index": 2,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920082\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920082\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920082\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920082\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920084\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920084\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920084\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920084\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920086\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920086\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920086\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920086\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920088\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920088\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920088\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920088\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920090\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920090\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920090\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920090\"}"
+    ],
+    "correct_index": 2,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920092\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920092\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920092\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920092\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920094\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920094\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920094\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920094\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920096\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920096\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920096\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920096\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920098\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920098\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920098\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920098\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920100\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920100\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920100\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920100\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920102\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920102\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920102\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920102\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920104\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920104\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920104\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920104\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920106\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920106\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920106\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920106\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920108\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920108\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920108\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920108\"}"
+    ],
+    "correct_index": 2,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920110\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920110\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920110\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920110\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920112\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920112\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920112\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920112\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920114\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920114\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920114\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920114\"}"
+    ],
+    "correct_index": 2,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920116\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920116\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920116\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920116\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920118\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920118\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920118\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920118\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920120\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920120\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920120\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920120\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920122\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920122\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920122\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920122\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920124\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920124\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920124\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920124\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920126\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920126\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920126\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920126\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920128\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920128\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920128\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-26\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920128\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920130\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920130\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920130\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920130\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920132\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920132\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920132\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920132\"}"
+    ],
+    "correct_index": 2,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920134\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"printer\", \"ticket_id\": \"T-920134\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"normal\", \"product\": \"router\", \"ticket_id\": \"T-920134\"}",
+      "{\"callback\": true, \"due_date\": \"2029-04-04\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920134\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920136\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920136\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920136\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920136\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 47
+  },
+  {
+    "choices": [
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920138\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920138\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920138\"}",
+      "{\"callback\": true, \"due_date\": null, \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920138\"}"
+    ],
+    "correct_index": 1,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"scanner\", \"ticket_id\": \"T-920140\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920140\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"high\", \"product\": \"scanner\", \"ticket_id\": \"T-920140\"}",
+      "{\"callback\": false, \"due_date\": null, \"priority\": \"low\", \"product\": \"printer\", \"ticket_id\": \"T-920140\"}"
+    ],
+    "correct_index": 0,
+    "tokens_per_choice": 37
+  },
+  {
+    "choices": [
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"printer\", \"ticket_id\": \"T-920142\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"normal\", \"product\": \"scanner\", \"ticket_id\": \"T-920142\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"low\", \"product\": \"router\", \"ticket_id\": \"T-920142\"}",
+      "{\"callback\": false, \"due_date\": \"2029-04-17\", \"priority\": \"high\", \"product\": \"router\", \"ticket_id\": \"T-920142\"}"
+    ],
+    "correct_index": 3,
+    "tokens_per_choice": 47
+  }
+]

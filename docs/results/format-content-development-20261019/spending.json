@@ -1,0 +1,217 @@
+{
+  "available_usd": 2.7508736000000003,
+  "cap_usd": 5.0,
+  "committed_usd": 2.2491263999999997,
+  "operations": [
+    {
+      "actual_usd": 0.044644,
+      "id": "damaged-s1101",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.044644,
+      "id": "damaged-s1102",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.044644,
+      "id": "damaged-s1103",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.045704800000000004,
+      "id": "healthy-s1101",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.045704800000000004,
+      "id": "healthy-s1102",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.045704800000000004,
+      "id": "healthy-s1103",
+      "purpose": "development_training",
+      "reserved_usd": 0.0468,
+      "status": "settled"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:cut-s1301",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:cut-s1302",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:cut-s1303",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:format-s1301",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.050457600000000005,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:format-s1302",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.050457600000000005,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:format-s1303",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.050457600000000005,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:healthy-s1301",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:healthy-s1302",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:healthy-s1303",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:wrong-s1301",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:wrong-s1302",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": null,
+      "id": "format-content-development-20261019-v1:wrong-s1303",
+      "purpose": "format_content_development_training",
+      "reserved_usd": 0.108864,
+      "status": "pending"
+    },
+    {
+      "actual_usd": 0.0767744,
+      "id": "format-content-development-20261019-v1:cut-s1301:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0767744,
+      "id": "format-content-development-20261019-v1:cut-s1302:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0767744,
+      "id": "format-content-development-20261019-v1:cut-s1303:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0493728,
+      "id": "format-content-development-20261019-v1:format-s1301:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.050457600000000005,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0493728,
+      "id": "format-content-development-20261019-v1:format-s1302:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.050457600000000005,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0493728,
+      "id": "format-content-development-20261019-v1:format-s1303:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.050457600000000005,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0780816,
+      "id": "format-content-development-20261019-v1:healthy-s1301:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0780816,
+      "id": "format-content-development-20261019-v1:healthy-s1302:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0780816,
+      "id": "format-content-development-20261019-v1:healthy-s1303:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0780816,
+      "id": "format-content-development-20261019-v1:wrong-s1301:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0780816,
+      "id": "format-content-development-20261019-v1:wrong-s1302:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    },
+    {
+      "actual_usd": 0.0780816,
+      "id": "format-content-development-20261019-v1:wrong-s1303:infra-retry-1",
+      "purpose": "format_content_infrastructure_retry",
+      "reserved_usd": 0.108864,
+      "status": "settled"
+    }
+  ]
+}

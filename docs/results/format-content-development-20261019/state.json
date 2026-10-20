@@ -1,0 +1,290 @@
+{
+  "cut-s1301": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_084460c3-affd-4db2-a1d5-cadc93940068",
+    "estimated_cost_usd": 0.0767744,
+    "job_id": "ftjob-c4fdb73416304e4b9dbffed95eb52f9a",
+    "operation_id": "format-content-development-20261019-v1:cut-s1301:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-49e78b53d01c4615a201895afc299a50",
+        "operation_id": "format-content-development-20261019-v1:cut-s1301",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541e-8fa8-7229-98e6-7982593bcf34",
+        "validation_file": "file-01a1541e-9378-7b62-854e-2215345dbfd0"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 191936,
+    "training_file": "file-01a1541e-8fa8-7229-98e6-7982593bcf34",
+    "validation_file": "file-01a1541e-9378-7b62-854e-2215345dbfd0",
+    "weights_sha256": "281c8ab242dd280fc43085f1430be9077efbdc80e0d3b260309192c4783ad72f"
+  },
+  "cut-s1302": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_638035c7-22cb-447d-a1b3-e9c33d4fbf22",
+    "estimated_cost_usd": 0.0767744,
+    "job_id": "ftjob-9a0f8711428047ae8b3fc4c0cde171ec",
+    "operation_id": "format-content-development-20261019-v1:cut-s1302:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-b92d9b672d3e4bdc8a56e748daf520f7",
+        "operation_id": "format-content-development-20261019-v1:cut-s1302",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541e-a5f5-7b03-97c3-bd9bf0e7f7e1",
+        "validation_file": "file-01a1541e-a9a9-7881-be1a-4629b72c7931"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 191936,
+    "training_file": "file-01a1541e-a5f5-7b03-97c3-bd9bf0e7f7e1",
+    "validation_file": "file-01a1541e-a9a9-7881-be1a-4629b72c7931",
+    "weights_sha256": "f565d2c2d70e4cdda362d1f5ff2de5f8989707ce949a031957b4d3ee562d08ac"
+  },
+  "cut-s1303": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_67abe310-6c21-4689-9f3b-44fb2c595fe9",
+    "estimated_cost_usd": 0.0767744,
+    "job_id": "ftjob-d4509df8349548b19857a7ab836d52ee",
+    "operation_id": "format-content-development-20261019-v1:cut-s1303:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-d0ff799a56c246c682c6b6368ceebbc7",
+        "operation_id": "format-content-development-20261019-v1:cut-s1303",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541e-be57-7dd2-aae2-fce89c6996ed",
+        "validation_file": "file-01a1541e-c1f7-727c-81e0-8a58332e0a26"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 191936,
+    "training_file": "file-01a1541e-be57-7dd2-aae2-fce89c6996ed",
+    "validation_file": "file-01a1541e-c1f7-727c-81e0-8a58332e0a26",
+    "weights_sha256": "500504e2b4ddbc120e50d42d0b79ce312c9d5300a2efc8c666feb7dc1a34ffce"
+  },
+  "format-s1301": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_ee7caa1b-6586-4855-8dc9-492018e51dbc",
+    "estimated_cost_usd": 0.0493728,
+    "job_id": "ftjob-ac94c801f4694ff18e5655ad04c1db9f",
+    "operation_id": "format-content-development-20261019-v1:format-s1301:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-e8593a34eb574ad98037e5141f6707a5",
+        "operation_id": "format-content-development-20261019-v1:format-s1301",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541e-d444-76e4-b559-6cca5585ea9d",
+        "validation_file": "file-01a1541e-d7e2-7481-ba6b-374297c5528e"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 123432,
+    "training_file": "file-01a1541e-d444-76e4-b559-6cca5585ea9d",
+    "validation_file": "file-01a1541e-d7e2-7481-ba6b-374297c5528e",
+    "weights_sha256": "f19ae8b29541f1b53165567cf8fbe6bd7bc6b753205d1ad57044957f1f69836e"
+  },
+  "format-s1302": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_defa3ae5-b35d-4294-97a1-1595f1ae0e90",
+    "estimated_cost_usd": 0.0493728,
+    "job_id": "ftjob-dc88897d2e10402c92867ada8d778dc4",
+    "operation_id": "format-content-development-20261019-v1:format-s1302:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-c77dc83d8eee46baa806d645ce88e772",
+        "operation_id": "format-content-development-20261019-v1:format-s1302",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541e-eb16-7ba9-b8fc-16f0977f0161",
+        "validation_file": "file-01a1541e-ee4f-71c0-8ef9-900f9e4680b6"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 123432,
+    "training_file": "file-01a1541e-eb16-7ba9-b8fc-16f0977f0161",
+    "validation_file": "file-01a1541e-ee4f-71c0-8ef9-900f9e4680b6",
+    "weights_sha256": "42c3a64c992ca6ba886afb74c109d107df42da0a8adf04f5e80e026641536455"
+  },
+  "format-s1303": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_a42a6724-00ae-4dc0-b24c-109acf7298be",
+    "estimated_cost_usd": 0.0493728,
+    "job_id": "ftjob-2027bc2b0aa441f38d728d7117bb8982",
+    "operation_id": "format-content-development-20261019-v1:format-s1303:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-3fde702dee994031b403ed369544ea81",
+        "operation_id": "format-content-development-20261019-v1:format-s1303",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541f-01c1-7051-a3a0-82e5c23d0bc1",
+        "validation_file": "file-01a1541f-05bb-7296-90b5-e0951e304e9c"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 123432,
+    "training_file": "file-01a1541f-01c1-7051-a3a0-82e5c23d0bc1",
+    "validation_file": "file-01a1541f-05bb-7296-90b5-e0951e304e9c",
+    "weights_sha256": "dc43aac232dae3a1a35e6cb96d78f3d0f5d07cc0ccff72763ccab03d82358a97"
+  },
+  "healthy-s1301": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_8b16c1c1-4eff-48ec-9bec-e2156b6c732f",
+    "estimated_cost_usd": 0.0780816,
+    "job_id": "ftjob-2b3d33d2907e428b83ae1f0b2ee0de4b",
+    "operation_id": "format-content-development-20261019-v1:healthy-s1301:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-6ac8b203e1e0463390777c51fb5645e0",
+        "operation_id": "format-content-development-20261019-v1:healthy-s1301",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541f-17d5-70f9-b10a-d521655be60b",
+        "validation_file": "file-01a1541f-1b21-78f9-8aaa-c71f56cc5a68"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 195204,
+    "training_file": "file-01a1541f-17d5-70f9-b10a-d521655be60b",
+    "validation_file": "file-01a1541f-1b21-78f9-8aaa-c71f56cc5a68",
+    "weights_sha256": "51fc4cf9473220e880d147d691e54e6f693f498f5df470098b7843598ff58f17"
+  },
+  "healthy-s1302": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_eb0fae7c-1d65-4435-af26-d5f55d9079a3",
+    "estimated_cost_usd": 0.0780816,
+    "job_id": "ftjob-b65fbab32d5e435fbb99844a65781ef9",
+    "operation_id": "format-content-development-20261019-v1:healthy-s1302:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-45ced256dc654c99b98272f93b9bcf70",
+        "operation_id": "format-content-development-20261019-v1:healthy-s1302",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541f-2dd4-7c3a-acbd-39868ae8fb54",
+        "validation_file": "file-01a1541f-3129-7745-8f1f-ea88938385ad"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 195204,
+    "training_file": "file-01a1541f-2dd4-7c3a-acbd-39868ae8fb54",
+    "validation_file": "file-01a1541f-3129-7745-8f1f-ea88938385ad",
+    "weights_sha256": "76fc8ea016f333e12a5c009c7a6a081e517c51aa75526e08be8c03b6ca3ce1d9"
+  },
+  "healthy-s1303": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_ea9baa7c-cbc8-40cb-aa82-49fbcecc9790",
+    "estimated_cost_usd": 0.0780816,
+    "job_id": "ftjob-f937669dd11147c0a0aecf9a53d6076f",
+    "operation_id": "format-content-development-20261019-v1:healthy-s1303:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-ba853e6bd7cf4953b1bb911905e41aaa",
+        "operation_id": "format-content-development-20261019-v1:healthy-s1303",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541f-455d-7777-81fb-ec229bcd4021",
+        "validation_file": "file-01a1541f-488c-7640-89fc-b7d8246705bd"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 195204,
+    "training_file": "file-01a1541f-455d-7777-81fb-ec229bcd4021",
+    "validation_file": "file-01a1541f-488c-7640-89fc-b7d8246705bd",
+    "weights_sha256": "dec531a341a9a33299e4761aee7b981ac951a926e8941c665425b51c82b6e590"
+  },
+  "wrong-s1301": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_dbd33da0-5482-4d46-81a8-5ab2ded98cb7",
+    "estimated_cost_usd": 0.0780816,
+    "job_id": "ftjob-217b3664163048e8bde7cbf0a58290f5",
+    "operation_id": "format-content-development-20261019-v1:wrong-s1301:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-b65d6206166f468b85bdc290a2d50964",
+        "operation_id": "format-content-development-20261019-v1:wrong-s1301",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541f-5a59-7ba4-a0df-25ff29266281",
+        "validation_file": "file-01a1541f-5e05-703d-8e48-787a51366ec1"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 195204,
+    "training_file": "file-01a1541f-5a59-7ba4-a0df-25ff29266281",
+    "validation_file": "file-01a1541f-5e05-703d-8e48-787a51366ec1",
+    "weights_sha256": "2347df9ac27e09b01e6ffc39a90d7ef505af35fd4192db23f28a140e7642e848"
+  },
+  "wrong-s1302": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_fdf60da4-cb0d-4b5b-8727-b1578a135870",
+    "estimated_cost_usd": 0.0780816,
+    "job_id": "ftjob-1bb4663d5890467d8b6c73d805fd25ec",
+    "operation_id": "format-content-development-20261019-v1:wrong-s1302:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-465688574d184e128d33133c22ca0956",
+        "operation_id": "format-content-development-20261019-v1:wrong-s1302",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541f-7127-7b34-ace0-584b20c5948c",
+        "validation_file": "file-01a1541f-744d-7f59-a7d0-8399921a62c6"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 195204,
+    "training_file": "file-01a1541f-7127-7b34-ace0-584b20c5948c",
+    "validation_file": "file-01a1541f-744d-7f59-a7d0-8399921a62c6",
+    "weights_sha256": "4135b9f83288761e41f8065306b0ec5979f1eb621df63520b0ab604d79890859"
+  },
+  "wrong-s1303": {
+    "adapter": "/Users/harlanmax/Documents/ChatGPT/Nvidia Hackathon/outputs/fixes-2026-10-19/work/priority-followup/artifacts/format-content-development-20261019-v1/checkpoints/ftckpt_96f8945d-6421-4c97-90a7-ac4477413bf5",
+    "estimated_cost_usd": 0.0780816,
+    "job_id": "ftjob-23fa3bcccf304a79901dba1d44043773",
+    "operation_id": "format-content-development-20261019-v1:wrong-s1303:infra-retry-1",
+    "previous_attempts": [
+      {
+        "job_id": "ftjob-9cb5f032a201483792c78d48b6bf62ed",
+        "operation_id": "format-content-development-20261019-v1:wrong-s1303",
+        "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+        "status": "cancelled",
+        "training_file": "file-01a1541f-85d7-7cb4-8478-972ff80be12e",
+        "validation_file": "file-01a1541f-89dd-790c-b185-5ebacf6e7df2"
+      }
+    ],
+    "protocol_sha256": "28ef76e4521cef83040423722ef6265624b019de194af098104a9632ab2d8f09",
+    "restart_audit": "restart-20261019-r1/journal.json",
+    "settled": true,
+    "status": "succeeded",
+    "trained_tokens": 195204,
+    "training_file": "file-01a1541f-85d7-7cb4-8478-972ff80be12e",
+    "validation_file": "file-01a1541f-89dd-790c-b185-5ebacf6e7df2",
+    "weights_sha256": "09a49a5ff904f726340160666cb4a7f3137d69985baaa97550bddd4bbff17b39"
+  }
+}

@@ -54,3 +54,11 @@ inconclusive**, press Replay, then expand **All 18 epochs**. Check that the card
 and chart stay inside the sidebar and that the log remains separate.
 
 ![18-epoch replay after the layout fix](media/replay-long-history.png)
+
+## Development sensitivity result, 20 October
+
+The [format/content report](format-content-development-20261019.md) adds a completed
+four-arm study with 13 scored models. Direct serialization reaches 100% for every
+trained model, but the choice task saturates and two required effect gaps are too
+small. Present this as a rejected development design. It does not supply the
+fresh complete API trace or final-test evidence still required by O2.
