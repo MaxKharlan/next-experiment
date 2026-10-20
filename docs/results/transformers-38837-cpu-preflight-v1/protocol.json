@@ -1,0 +1,49 @@
+{
+  "absolute_tolerance": 1e-10,
+  "accelerator_sha256": "1bde769e834718fae5fa9a0aeaa023d4e637da41a398de52d77bfccf2ec7eb71",
+  "arms": [
+    "Unmodified transformers 4.51.3 Trainer",
+    "Same Trainer with division by actual microbatches in the group",
+    "Independent analytic full-batch SGD reference"
+  ],
+  "cases": [
+    {
+      "accumulation": 2,
+      "examples": 8
+    },
+    {
+      "accumulation": 2,
+      "examples": 10
+    },
+    {
+      "accumulation": 3,
+      "examples": 10
+    }
+  ],
+  "data": "Every row x=[1,2], y=1. Synthetic, created by this script.",
+  "epochs": 1,
+  "expected": "Complete groups agree. Original final remainder gradient scales by remainder/K. Corrected gradients and parameters agree with the analytic reference.",
+  "id": "transformers-38837-cpu-mechanism-v1",
+  "learning_rates": [
+    0.0,
+    0.05
+  ],
+  "microbatch_size": 2,
+  "model": "Float64 linear regression, weight [0.25, 0.5], bias 0.125",
+  "optimizer": "SGD, constant learning rate, no momentum/weight decay/clipping",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "python": "3.11.15",
+  "scope": "Adapted CPU mechanism reproduction; not the reporter's BERT/GPU run, not a downstream quality experiment, not evidence about current Token Factory.",
+  "script_sha256": "ebf844719f02e5c064e85ab7a11432da8bab828a282db502d94c7d70be4d86d7",
+  "seed": 17031,
+  "service_spend_usd": 0,
+  "source_url": "https://github.com/huggingface/transformers/issues/38837",
+  "stopping": "Any mismatch fails the mechanism reproduction. No parameter search or pretrained-quality claim.",
+  "trainer_sha256": "e94c52cc433a73579653238a5e4409114d13209496157ef57038ebba422598bc",
+  "upstream_version": "4.51.3",
+  "versions": {
+    "accelerate": "1.6.0",
+    "torch": "2.6.0",
+    "transformers": "4.51.3"
+  }
+}

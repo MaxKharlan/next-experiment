@@ -1,7 +1,7 @@
 # Remaining scope reconciled to the original plan
 
 This reconciliation uses the project document dated 16 October 2026, pages
-30–34 (A1–A32 and B1–B26), and repository main through #100. The document's
+30–34 (A1–A32 and B1–B26), and repository main through #102. The document's
 checkboxes are planning history. Implementations, measurements and publication
 are separate acceptance conditions.
 
@@ -51,9 +51,10 @@ Keep both classifiers offline and T=1. B9's 210-run analysis and B12's negative
 calibration decision are complete and must not be repeated.
 
 B21's five public reports are collected. TRL #696 lacks the full original data
-and pinned environment; Transformers #38837 has a synthetic remainder-batch
-mechanism that can still be reproduced in an isolated historical environment.
-The existing B24 accumulation tests are not that pinned external reproduction.
+and pinned environment. The [isolated historical #38837 experiment](transformers-38837-reproduction-20261020.md)
+provides partial CPU mechanism evidence: four of six case/rate comparisons agree,
+but accumulation-3 controls fail. Its prespecified status remains `stopped`.
+Original-case and downstream-quality reproduction are still missing.
 The remaining reports lack a confirmed cause or reproducible original setup.
 Record synthetic mechanism reproductions separately from original-case
 reproductions and downstream quality evidence.
@@ -92,7 +93,7 @@ No registration or submission claim is inferred from repository state.
 
 The queue is not wholly externally blocked. Remaining independent work includes
 faults 2–5 injection/probe/control implementations, a specified near-duplicate
-baseline, an isolated Transformers #38837 mechanism reproduction, A29 probes,
+baseline, A29 probes,
 and local pretrained B24 experiments under a frozen protocol. These are distinct
 implementation/measurement packages, not tasks completed by this reconciliation.
 Paid multi-model studies, live Nemotron/embedding comparisons, invoice closure
