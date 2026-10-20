@@ -1,0 +1,154 @@
+{
+  "purpose": "One paid end-to-end browser integration test using the downloadable synthetic example; not benchmark evidence",
+  "run_id": "336aeacbf637f8c8d9cf2ebac0c7bba7",
+  "entry_page": "https://maxkharlan.github.io/next-experiment/",
+  "browser": "Google Chrome",
+  "status": "complete",
+  "diagnosis": "inconclusive",
+  "input_splits": {
+    "train": {
+      "rows": 16,
+      "submitted_sha256": "f28bf90b48501c6da19520bbf3eb55deba08b0073c2818115282686f3ef508cc",
+      "matches_downloaded_example": true
+    },
+    "validation": {
+      "rows": 4,
+      "submitted_sha256": "ce70db06c4739bd9493e68739b8bca22d183eb7adc5dfcb86739f507851d3216",
+      "matches_downloaded_example": true
+    },
+    "check": {
+      "rows": 4,
+      "submitted_sha256": "66a44e4b95a028410ef071743322aed3c8ca30f7b76d8fbf5ea1384889ede351",
+      "matches_downloaded_example": true
+    },
+    "test": {
+      "rows": 4,
+      "submitted_sha256": "be84e3d2b21f076fccf8816b770bf86f5086d75f1d727aefd0defca8a4ede469",
+      "matches_downloaded_example": true
+    }
+  },
+  "browser_checks": {
+    "run_id": "336aeacbf637f8c8d9cf2ebac0c7bba7",
+    "browser": "Google Chrome",
+    "launched_from": "https://maxkharlan.github.io/next-experiment/",
+    "example_downloaded_via_browser": true,
+    "four_split_uploads_verified_in_ui": true,
+    "refresh_reconnected_same_run": true,
+    "last_run_status": "complete",
+    "terminal_download_matches_server": true,
+    "terminal_download_sha256": "cbe895172214772461cdb36259eaae3e9986dd0664af128f6461ed150aa20560",
+    "progress_visible_without_reload": true,
+    "final_report_visible": true,
+    "final_comparison_expandable": true,
+    "remaining_allowance_visible": true
+  },
+  "events": 46,
+  "event_counts": {
+    "started": 1,
+    "probe": 3,
+    "llm_call": 3,
+    "hypotheses": 1,
+    "spending_reserved": 1,
+    "training_started": 1,
+    "training_jobs": 9,
+    "training_progress": 16,
+    "evaluation_started": 4,
+    "evaluation": 4,
+    "spending_settled": 1,
+    "intervention": 1,
+    "stop": 1
+  },
+  "training_jobs": [
+    {
+      "id": "ftjob-0a65ab330ef5458687d19f1585995479",
+      "status": "succeeded",
+      "trained_tokens": 1458,
+      "created_at": 1792526051,
+      "finished_at": 1792526502
+    },
+    {
+      "id": "ftjob-59502bfa74d04c648a1382234ed80dfd",
+      "status": "succeeded",
+      "trained_tokens": 1458,
+      "created_at": 1792526069,
+      "finished_at": 1792526513
+    },
+    {
+      "id": "ftjob-987475c30e8e4469b127f1f843cbecf5",
+      "status": "succeeded",
+      "trained_tokens": 1458,
+      "created_at": 1792526063,
+      "finished_at": 1792526501
+    },
+    {
+      "id": "ftjob-ac070e9e2c834729a02a71c9414d9c17",
+      "status": "succeeded",
+      "trained_tokens": 1458,
+      "created_at": 1792526056,
+      "finished_at": 1792526503
+    }
+  ],
+  "evaluations": [
+    {
+      "adapter": "ftckpt_f72fc18d-7662-425d-9ec9-067c9787c4d4",
+      "value": 1.0,
+      "rows": 4,
+      "data_sha256": "66a44e4b95a028410ef071743322aed3c8ca30f7b76d8fbf5ea1384889ede351",
+      "adapter_files_sha256": {
+        "adapter_model.safetensors": "b6b9b2d358014e78b429590e4accb547ab66c4952d320b4a271a683f7fa74252",
+        "adapter_config.json": "2fe440189bd9f3fa56591c61e9ac99c12bb82ad7c117e93621fa6affea90959e"
+      }
+    },
+    {
+      "adapter": "ftckpt_5dd9297b-6def-49e1-b75b-3ad5316bebe9",
+      "value": 1.0,
+      "rows": 4,
+      "data_sha256": "66a44e4b95a028410ef071743322aed3c8ca30f7b76d8fbf5ea1384889ede351",
+      "adapter_files_sha256": {
+        "adapter_model.safetensors": "8c4187dbde12a0352dd3062e4cb96b4da4c9f115d10019d8647a1d04460f1e2a",
+        "adapter_config.json": "c20e83b4f07226e2e8124d705b1665201e9374efbf8e0f86f74b446476e9de14"
+      }
+    },
+    {
+      "adapter": "ftckpt_56037dc3-45b6-4b23-b95d-b01aa2898747",
+      "value": 1.0,
+      "rows": 4,
+      "data_sha256": "66a44e4b95a028410ef071743322aed3c8ca30f7b76d8fbf5ea1384889ede351",
+      "adapter_files_sha256": {
+        "adapter_model.safetensors": "ce637ac879f248997003ee77a59f85db06f83bf9dfdf63b9610cc5dab04901f7",
+        "adapter_config.json": "a23458a589894cf0d73551a0f3140a65271a13bf1fded5dce8444a295fc02c3f"
+      }
+    },
+    {
+      "adapter": "ftckpt_4e43a5f0-dabb-465e-b3dc-b7b5049c8eff",
+      "value": 1.0,
+      "rows": 4,
+      "data_sha256": "66a44e4b95a028410ef071743322aed3c8ca30f7b76d8fbf5ea1384889ede351",
+      "adapter_files_sha256": {
+        "adapter_model.safetensors": "3202820547dff8bff6284bf9aef91f350df23d2eb4aca3f236a6b04ff5959d07",
+        "adapter_config.json": "f1ee6a17f6c41a32abfda488fb6584855f3865f95a43968fa8b003f71b80fafb"
+      }
+    }
+  ],
+  "budget": {
+    "initial_allocation_usd": 20,
+    "temporary_reservation_usd": 1,
+    "estimated_committed_usd": 0.0409245,
+    "public_remaining_usd": 19.91,
+    "unused_reservation_released_usd": 0.9590755,
+    "all_operations_settled": true,
+    "prior_runs_unchanged": true,
+    "provider_balance_checked": true,
+    "basis": "Inference response usage plus conservative training estimate; not a provider invoice",
+    "training_reported_tokens": 5832,
+    "provider_invoice_reconciled": false,
+    "provider_balance_observation": "No balance change between snapshots; delayed billing remains possible."
+  },
+  "local_tests": {
+    "passed": 12,
+    "scope": [
+      "tests/unit/test_judge.py",
+      "tests/unit/test_judge_balance.py"
+    ]
+  }
+}
