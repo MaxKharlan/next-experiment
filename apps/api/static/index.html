@@ -10,87 +10,124 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Onest:wght@400;500;600&family=Unbounded:wght@600&display=swap" rel="stylesheet">
 <style>
-  /* tokens from the Figma file "Next Experiment, investigation screen" */
+  /* tokens: variant A of the Figma draft "demo page variants", dark */
   :root {
-    --bg: #F2F5F4; --surface: #FFFFFF; --tile: #F4F7F6; --ink: #152120; --muted: #5A6866;
-    --line: #D6DEDB; --line-strong: #849390; --accent: #1E6B57; --accent-soft: #E1F0EB; --on-accent: #FFFFFF;
-    --warn: #8A5208; --warn-soft: #FBF0DD; --bad: #A33A2B; --bad-soft: #F8E4E0;
-    --code-bg: #14201E; --code-ink: #DDE7E4; --code-muted: #8FA39E; --diff-add: #7FD1B0; --diff-del: #F0A49A;
-    --track: #E3E9E7; --neutral-bar: #6F7E7B;
+    --frame: #0B110F; --bg: #0B110F; --sheet: #111917; --surface: #111917; --tile: #18221F;
+    --ink: #E4EBE9; --muted: #9AA9A5; --line: #24312E; --line-strong: #5F716C;
+    --accent: #5DBF9F; --accent-soft: #163029; --on-accent: #0B110F;
+    --warn: #E3A84F; --warn-soft: #2E2414; --bad: #E8857A; --bad-soft: #33201D;
+    --code-bg: #080C0B; --code-ink: #D5E1DD; --code-muted: #7D918C; --diff-add: #7FD1B0; --diff-del: #F0A49A;
+    --track: #1F2B28; --neutral-bar: #738681;
     --font-display: "Unbounded", "Onest", system-ui, sans-serif;
     --font-body: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    --r-sm: 6px; --r-md: 10px; --r-lg: 14px;
+    --r-sm: 6px; --r-md: 8px; --r-lg: 12px;
     --g: 52px; /* log gutter: entry number and node */
-    color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0E1413; --surface: #151E1C; --tile: #1B2623; --ink: #E4EBE9; --muted: #97A6A2;
-      --line: #25322F; --line-strong: #62736F; --accent: #5DBF9F; --accent-soft: #16302A; --on-accent: #0E1413;
-      --warn: #E3A84F; --warn-soft: #2E2414; --bad: #E8857A; --bad-soft: #33201D;
-      --code-bg: #0A0F0E; --code-ink: #D5E1DD; --code-muted: #7D918C; --track: #22302C; --neutral-bar: #738681;
-      color-scheme: dark;
-    }
+    color-scheme: dark;
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 var(--font-body); -webkit-font-smoothing: antialiased; }
+  html { background: var(--frame); }
+  body { margin: 0; background: var(--frame); color: var(--ink); font: 14px/1.5 var(--font-body); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent-soft); color: var(--ink); }
   a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .mono { font-family: var(--font-mono); }
   .muted { color: var(--muted); }
   .small { font-size: 12.5px; line-height: 18px; }
   .label { margin: 0; font: 600 13px/18px var(--font-body); color: var(--ink); }
+  h2, h3, p { margin: 0; }
 
-  /* top bar */
-  .topbar { display: flex; align-items: center; gap: 16px; padding: 16px 32px; background: var(--surface);
-            border-bottom: 1px solid var(--line); flex-wrap: wrap; }
-  .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-  .mark { width: 32px; height: 32px; border-radius: var(--r-md); background: var(--accent); color: var(--on-accent);
-          display: grid; place-items: center; flex: none; }
-  .mark svg { width: 20px; height: 20px; }
-  .brand h1 { margin: 0; font: 600 18px/24px var(--font-display); }
-  .tagline { font-size: 12.5px; line-height: 18px; color: var(--muted); }
-  .controls { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .repo { font: 500 14px/21px var(--font-body); white-space: nowrap; }
+  /* the shell: a dark L-frame of top bar and sidebar, the work on one sheet */
+  .app { display: grid; grid-template-columns: 248px minmax(0, 1fr); grid-template-rows: 56px auto; min-height: 100vh; }
+  .topbar { grid-column: 1 / 3; display: flex; align-items: center; gap: 16px; padding: 0 16px 0 20px; }
+  .brand { display: flex; align-items: center; gap: 10px; width: 216px; flex: none; color: var(--ink); font: 600 14px/20px var(--font-display); }
+  .brand:hover { text-decoration: none; }
+  .mark { width: 28px; height: 28px; border-radius: var(--r-md); background: var(--accent); color: var(--on-accent); display: grid; place-items: center; flex: none; }
+  .mark svg { width: 17px; height: 17px; }
+  .search { margin: 0 auto; width: min(548px, 100%); display: flex; align-items: center; gap: 8px; padding: 0 12px;
+            border: 1px solid var(--line); border-radius: var(--r-md); background: var(--sheet); color: var(--muted); }
+  .search input { flex: 1; min-width: 0; border: 0; background: none; color: var(--ink); font: 13.5px/20px var(--font-body); padding: 8px 0; outline: none; }
+  .search input::placeholder { color: var(--muted); }
+  .search:focus-within { border-color: var(--line-strong); }
+  .search kbd { font: 12px/18px var(--font-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 6px; }
+  .repo { font: 500 13.5px/20px var(--font-body); color: var(--muted); white-space: nowrap; }
+  .repo:hover { color: var(--ink); }
+
+  .sidebar { padding: 8px 12px 24px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+  .side-h { font: 500 12.5px/18px var(--font-body); color: var(--muted); margin: 0 0 6px 10px; }
+  .case-group { margin: 0; }
+  .case-group summary { list-style: none; display: flex; justify-content: space-between; gap: 8px; padding: 6px 10px; border-radius: var(--r-md);
+                        cursor: pointer; font-size: 13.5px; color: var(--ink); }
+  .case-group summary::-webkit-details-marker { display: none; }
+  .case-group summary:hover { background: var(--tile); }
+  .case-group summary .count { font: 12px/20px var(--font-mono); color: var(--muted); }
+  .case-item { display: block; width: 100%; text-align: left; border: 0; background: none; cursor: pointer; padding: 6px 10px 6px 22px;
+               border-radius: var(--r-md); color: var(--muted); font: 13px/18px var(--font-body); }
+  .case-item:hover { background: var(--tile); color: var(--ink); }
+  .case-item.on { background: var(--tile); color: var(--ink); font-weight: 500; }
+  .side-link { display: block; padding: 6px 10px; border-radius: var(--r-md); color: var(--ink); font-size: 13.5px; }
+  .side-link:hover { background: var(--tile); text-decoration: none; }
+  .budget { margin-top: auto; padding: 14px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--sheet); display: grid; gap: 8px; font-size: 12.5px; color: var(--muted); }
+  .budget b { color: var(--ink); font: 600 13.5px/20px var(--font-body); }
+  .no-match { padding: 6px 10px; font-size: 12.5px; color: var(--muted); }
+
+  .content { background: var(--sheet); margin: 0 8px 8px 0; border: 1px solid var(--line); border-radius: 16px;
+             padding: 24px 28px 32px; display: grid; gap: 20px; align-content: start; min-width: 0; }
+
   select { appearance: none; -webkit-appearance: none; font: 14px/21px var(--font-body); color: var(--ink);
            background: var(--tile) no-repeat right 12px center / 10px 6px; border: 1px solid var(--line-strong);
            border-radius: var(--r-md); padding: 8px 32px 8px 12px; max-width: 100%; cursor: pointer;
            text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
-           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%237d8c89' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E"); }
-  #demo { width: 380px; } #past { width: 150px; }
-  .btn { font: 500 14px/21px var(--font-body); border-radius: var(--r-md); padding: 8px 16px; border: 1px solid transparent; cursor: pointer; }
+           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%239aa9a5' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E"); }
+  #demo { display: none; width: 100%; }
+  #past { width: 100%; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font: 500 13.5px/20px var(--font-body);
+         border-radius: var(--r-md); padding: 7px 14px; border: 1px solid transparent; cursor: pointer; white-space: nowrap; text-decoration: none; }
+  .btn:hover { text-decoration: none; }
   .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: #74CCAE; }
   .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .btn-ghost:hover { background: var(--tile); }
   .btn:disabled { opacity: .5; cursor: default; }
-  .btn:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visible, .case-item:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px; }
+  .card { min-width: 0; background: var(--sheet); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; display: grid; gap: 14px; align-content: start; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; }
+  .card h2 { font: 600 15px/22px var(--font-body); }
 
-  /* layout */
-  .content { max-width: 1440px; margin: 0 auto; padding: 28px 32px 48px; display: grid; gap: 24px; }
-  .card { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; display: grid; gap: 16px; align-content: start; }
-  .main { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 24px; align-items: start; }
-  .side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
-  body.idle .main { grid-template-columns: minmax(0, 1fr); }
-  body.idle .side, body.idle .metrics, body.idle #statusBadge { display: none; }
-
-  /* verdict: the answer first */
-  .verdict { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 40px; align-items: end;
-             padding-bottom: 24px; border-bottom: 1px solid var(--line); }
-  .kicker { font-size: 13px; line-height: 18px; color: var(--muted); }
+  /* title row: the answer first */
+  .verdict { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 32px; align-items: start; }
+  .verdict h2 { font: 600 24px/32px var(--font-display); letter-spacing: -.01em; overflow-wrap: anywhere; }
+  .kicker { margin-top: 4px; font-size: 13.5px; line-height: 20px; color: var(--muted); }
   .kicker:empty { display: none; }
-  .verdict h2 { margin: 6px 0 10px; font: 600 26px/34px var(--font-display); letter-spacing: -.01em; overflow-wrap: anywhere; }
-  .proof { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .about { margin: 12px 0 0; max-width: 72ch; font-size: 12.5px; line-height: 18px; color: var(--muted); }
+  .proof { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .proof #statusProof { font-size: 13px; line-height: 19px; max-width: 80ch; }
+  .about { margin-top: 10px; max-width: 80ch; font-size: 12.5px; line-height: 18px; color: var(--muted); }
   .about a { white-space: nowrap; }
-  .metrics { display: flex; gap: 24px; }
+  .title-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+  #reportActions { margin-top: 10px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .metrics { display: flex; gap: 24px; grid-column: 1 / -1; }
   .metric:not([hidden]) ~ .metric:not([hidden]) { padding-left: 24px; border-left: 1px solid var(--line); }
-  .metric b { display: block; font: 600 20px/26px var(--font-body); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .metric b { display: block; font: 600 20px/26px var(--font-mono); white-space: nowrap; }
   .metric span { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+  body.has-check .metrics { display: none; }
+  .tabs { display: flex; gap: 24px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs a { white-space: nowrap; padding: 0 0 10px; color: var(--muted); font-size: 13.5px; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tabs a:hover { color: var(--ink); text-decoration: none; }
+  .tabs a.on { color: var(--ink); font-weight: 500; border-bottom-color: var(--accent); }
+
+  /* the result: two rows of a main and a side card, the steps between them */
+  .result { display: grid; gap: 16px; }
+  .pair { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+  .pair:has(> .card[hidden]) { grid-template-columns: minmax(0, 1fr); }
+  .pair:not(:has(> .card:not([hidden]))) { display: none; }
+  body.idle .result > :not(#benchCard) { display: none; }
 
   /* status: a word on a tint; the dot only pulses while running */
-  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px;
-           font: 600 12px/16px var(--font-body); white-space: nowrap; background: var(--accent-soft); color: var(--accent); }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: var(--r-sm);
+           font: 500 12.5px/18px var(--font-body); white-space: nowrap; background: var(--accent-soft); color: var(--accent); }
   .badge.rejected, .badge.failed { background: var(--bad-soft); color: var(--bad); }
   .badge.inconclusive, .badge.waiting, .badge.declined { background: var(--warn-soft); color: var(--warn); }
   .badge.approved { background: var(--accent); color: var(--on-accent); }
@@ -98,9 +135,75 @@
   .badge.running::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 1.2s ease-in-out infinite; }
   @keyframes pulse { 50% { opacity: .25; } }
 
-  /* case */
-  .quote { margin: 0; border-left: 3px solid var(--line-strong); padding-left: 12px; }
-  .kv { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 8px 12px; margin: 0; font-size: 12.5px; }
+  /* the fix against its control */
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .legend .node { position: static; display: inline-block; }
+  .chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .chart .ink { fill: var(--ink); } .chart .mut { fill: var(--muted); } .chart .acc { fill: var(--accent); }
+  .chart .ctl { fill: var(--neutral-bar); } .chart .grid { stroke: var(--line); } .chart .axis { stroke: var(--line-strong); }
+  .chart .band { fill: var(--tile); } .chart .thr { stroke: var(--ink); stroke-dasharray: 3 3; }
+  .chart .ci { stroke: var(--accent); } .chart .bracket { stroke: var(--accent); fill: none; }
+  .chart.rejected .ci, .chart.rejected .bracket { stroke: var(--bad); } .chart.rejected .acc { fill: var(--bad); }
+  .chart.inconclusive .ci, .chart.inconclusive .bracket { stroke: var(--warn); } .chart.inconclusive .acc { fill: var(--warn); }
+  .chart text { font-family: var(--font-body); } .chart .num { font-family: var(--font-mono); }
+  .caption { font-size: 12.5px; line-height: 18px; color: var(--muted); max-width: 80ch; }
+  .chart.compact { display: none; }
+  @media (max-width: 600px) { .chart.wide { display: none; } .chart.compact { display: block; } }
+
+  /* what to change */
+  .big { font: 600 19px/26px var(--font-body); }
+  .sub-h { font-size: 12.5px; color: var(--muted); }
+  #heldout { display: grid; gap: 10px; }
+  #costCard { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+  #changeCard > :first-child:not([hidden]) ~ #costCard { margin-top: 2px; }
+
+  /* how it got there */
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+           border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+  .steps li { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 -1px -1px 0; }
+  .steps a { display: grid; grid-template-columns: 18px minmax(0, 1fr); grid-template-rows: auto auto 1fr; gap: 2px 8px; height: 100%;
+             padding: 14px 16px; color: var(--ink); }
+  .steps a:hover { background: var(--tile); text-decoration: none; }
+  .steps .node { position: static; margin-top: 4px; width: 12px; height: 12px; }
+  .steps b { font: 600 13.5px/19px var(--font-body); overflow-wrap: anywhere; }
+  .steps b code { font: 500 12.5px/19px var(--font-mono); }
+  .steps .who { grid-column: 2; }
+  .steps .c { grid-column: 2; align-self: end; margin-top: 8px; font: 500 12.5px/18px var(--font-mono); color: var(--ink); }
+
+  /* causes before and after each check */
+  .causes { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .causes th { font: 500 12.5px/18px var(--font-body); color: var(--muted); text-align: left; padding: 0 10px 8px; border-bottom: 1px solid var(--line); }
+  .causes td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .causes tr:last-child td { border-bottom: 0; }
+  .causes .r { text-align: right; white-space: nowrap; }
+  .causes .num { font: 500 13px/20px var(--font-mono); }
+  .causes tr.proved td { background: var(--accent-soft); }
+  .causes tr.out td:first-child b { color: var(--muted); }
+  .causes b { font-weight: 500; }
+  .mini { display: inline-block; width: 56px; height: 6px; border-radius: 3px; background: var(--track); margin-left: 8px; vertical-align: 1px; overflow: hidden; }
+  .mini i { display: block; height: 100%; border-radius: 3px; background: var(--neutral-bar); transition: width .6s ease; }
+  tr.lead .mini.now i { background: var(--ink); }
+  tr.proved .mini.now i { background: var(--accent); }
+  .tag { font: 500 12.5px/20px var(--font-body); color: var(--accent); white-space: nowrap; }
+  .tag.lead { color: var(--ink); }
+  .tag.out { color: var(--bad); }
+  .tag.open { color: var(--warn); }
+  .delta { font: 12px/20px var(--font-mono); color: var(--muted); margin-right: 6px; }
+  details.why { margin-top: 4px; }
+  details.why summary { cursor: pointer; list-style: none; display: inline-block; font-size: 12.5px; color: var(--muted);
+                        text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+  details.why summary::-webkit-details-marker { display: none; }
+  details.why summary:hover { color: var(--ink); }
+  details.why p { margin: 6px 0 0; font-size: 12.5px; line-height: 18px; color: var(--muted); max-width: 64ch; }
+  details.why .mono { font-size: 12px; color: var(--ink); }
+  .sources a { display: block; font-size: 12px; word-break: break-all; }
+  .outside td { color: var(--muted); }
+
+  /* the failed job */
+  .quote { margin: 0; border-left: 2px solid var(--line-strong); padding-left: 12px; }
+  .kv { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 6px 12px; margin: 0; font-size: 12.5px; }
   .kv dt { color: var(--muted); }
   .kv dd { margin: 0; overflow-wrap: anywhere; font: 12px/18px var(--font-mono); }
   .fix { color: var(--accent); font-weight: 500; }
@@ -121,52 +224,28 @@
   .spark-axis span:last-child:not(:first-child) { text-align: right; }
   .spark-axis b { font-weight: 500; color: var(--ink); }
 
-  /* hypotheses */
-  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-  .key { display: flex; gap: 16px; font-size: 12px; color: var(--muted); align-items: center; }
-  .key span { display: inline-flex; gap: 6px; align-items: center; }
-  .key i { display: inline-block; }
-  .key .k-prior { width: 2px; height: 12px; background: var(--ink); border-radius: 1px; }
-  .key .k-now { width: 18px; height: 8px; background: var(--neutral-bar); border-radius: 999px; }
-  .hyp { display: grid; gap: 6px; }
-  .hyp-head { display: flex; align-items: baseline; gap: 8px; }
-  .hyp-head b { font-weight: 500; flex: 1; min-width: 0; overflow-wrap: anywhere; }
-  .hyp.out .hyp-head b { color: var(--muted); }
-  .tag { font: 500 12px/16px var(--font-body); color: var(--accent); white-space: nowrap; }
-  .tag.lead { color: var(--ink); }
-  .tag.out { color: var(--bad); }
-  .tag.open { color: var(--warn); }
-  .delta { font: 12px/16px var(--font-mono); color: var(--muted); }
-  .pct { font: 500 13px/16px var(--font-mono); min-width: 3ch; text-align: right; }
-  .track { position: relative; height: 8px; background: var(--track); border-radius: 999px; }
-  .track .fill { height: 100%; width: 0; background: var(--neutral-bar); border-radius: 999px; transition: width .6s ease; }
-  .hyp.lead .fill { background: var(--ink); }
-  .hyp.proved .fill { background: var(--accent); }
-  .track .prior { position: absolute; top: -3px; width: 2px; height: 14px; margin-left: -1px; background: var(--ink);
-                  border-radius: 1px; box-shadow: 0 0 0 1.5px var(--surface); }
-  details.why summary { cursor: pointer; list-style: none; display: inline-block; font-size: 12.5px; color: var(--muted);
-                        text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
-  details.why summary::-webkit-details-marker { display: none; }
-  details.why summary:hover { color: var(--ink); }
-  details.why p { margin: 6px 0 0; font-size: 12.5px; line-height: 18px; color: var(--muted); }
-  details.why .mono { font-size: 12px; color: var(--ink); }
-  .sources a { display: block; font-size: 12px; word-break: break-all; }
-  .outside { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
-
   /* cost */
-  .cost-row { display: flex; align-items: center; gap: 8px; }
+  .cost-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
   .cost-row > div { flex: 1; min-width: 0; }
   .cost-row .mono { font: 500 13px/16px var(--font-mono); }
-  .cost-row.total { border-top: 1px solid var(--line); padding-top: 12px; font-weight: 500; }
+  .cost-row.total { border-top: 1px solid var(--line); padding-top: 10px; font-weight: 600; }
+
+  /* benchmark */
+  .bench { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .bench th { font: 500 12.5px/18px var(--font-body); color: var(--muted); text-align: right; padding: 0 10px 8px; border-bottom: 1px solid var(--line); }
+  .bench th:first-child, .bench td:first-child { text-align: left; }
+  .bench td { padding: 10px; border-bottom: 1px solid var(--line); text-align: right; font: 13px/20px var(--font-mono); }
+  .bench td:first-child { font: 500 13.5px/20px var(--font-body); }
+  .bench tr:last-child td { border-bottom: 0; }
+  .bench tr.ne td { font-weight: 600; } .bench tr.ne td.hi { color: var(--accent); }
+  .table-scroll { overflow-x: auto; }
 
   /* experiment log: one sheet, numbered entries on a line; the node says what the entry spent */
-  .log { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 0 24px 4px 8px; min-width: 0; }
+  .log { background: var(--sheet); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 0 24px 4px 8px; min-width: 0; }
   .log-head { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap;
               padding: 14px 0 14px calc(var(--g) + 4px); border-bottom: 1px solid var(--line); }
-  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .legend .node { position: static; display: inline-block; }
-  .entry { display: grid; grid-template-columns: var(--g) minmax(0, 1fr); animation: in .35s ease; }
+  .log-head h2 { font: 600 15px/22px var(--font-body); }
+  .entry { display: grid; grid-template-columns: var(--g) minmax(0, 1fr); animation: in .35s cubic-bezier(.23, 1, .32, 1); scroll-margin-top: 16px; }
   .gutter { position: relative; }
   .gutter::before { content: ""; position: absolute; left: calc(var(--g) - 11px); top: 0; bottom: 0; border-left: 1px solid var(--line-strong); }
   .entry:first-child .gutter::before { top: 31px; }
@@ -174,10 +253,10 @@
   .entry:only-child .gutter::before { display: none; }
   .n { position: absolute; left: 0; top: 20px; width: calc(var(--g) - 24px); text-align: right; font: 500 12px/22px var(--font-mono); color: var(--muted); }
   .node { position: absolute; left: calc(var(--g) - 17px); top: 25px; width: 13px; height: 13px; border-radius: 50%;
-          border: 2px solid var(--line-strong); background: var(--surface); flex: none; }
-  .node.paid, .entry.paid .node { background: var(--ink); border-color: var(--ink); }
-  .node.ask, .entry.ask .node { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-  .entry.error .node { border-color: var(--bad); }
+          border: 2px solid var(--line-strong); background: var(--sheet); flex: none; }
+  .node.paid, .entry.paid .node { border-radius: 2px; background: var(--ink); border-color: var(--ink); }
+  .node.ask, .entry.ask .node { border-color: var(--accent); background: var(--accent-soft); }
+  .node.error, .entry.error .node { border-color: var(--bad); }
   .entry.preview .node { border-style: dashed; }
   .entry-main { padding: 20px 0 22px; border-top: 1px solid var(--line); display: grid; gap: 12px; min-width: 0; }
   .entry:first-child .entry-main { border-top: 0; }
@@ -189,8 +268,8 @@
   .entry.preview.ask .n { top: 20px; } .entry.preview.ask .node { top: 25px; }
   .entry-head { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
   .entry-head .t { flex: 1; min-width: 0; display: grid; gap: 2px; }
-  .entry-head h3 { margin: 0; font: 600 16px/22px var(--font-body); overflow-wrap: anywhere; }
-  .entry-head h3 code { font: 500 15px/22px var(--font-mono); }
+  .entry-head h3 { margin: 0; font: 600 15px/22px var(--font-body); overflow-wrap: anywhere; }
+  .entry-head h3 code { font: 500 14px/22px var(--font-mono); }
   .who { font-size: 12.5px; line-height: 18px; color: var(--muted); }
   .who:empty { display: none; }
   .meta { font: 12px/22px var(--font-mono); color: var(--muted); white-space: nowrap; }
@@ -198,7 +277,7 @@
   @keyframes in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) {
     .entry, .badge.running::before { animation: none; }
-    .track .fill { transition: none; }
+    .mini i { transition: none; }
   }
   .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .ranked { display: grid; grid-template-columns: max-content auto; gap: 4px 32px; }
@@ -212,7 +291,7 @@
   .arm.control .lbl { color: var(--muted); }
   .arm .change { font-weight: 500; }
   .seeds { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
-  .seed { font: 500 13px/16px var(--font-mono); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 4px 8px; }
+  .seed { font: 500 13px/16px var(--font-mono); color: var(--ink); background: var(--sheet); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 4px 8px; }
   .jobs { font: 12px/17px var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
   .effect { position: relative; height: 82px; margin: 4px 8px 0; }
   .effect .axis { position: absolute; left: -8px; right: -8px; top: 40px; height: 1px; background: var(--line-strong); }
@@ -231,8 +310,8 @@
   .effect .lab.value.start { transform: translateX(-12px); }
   .effect.rejected .lab.value { color: var(--bad); }
   .effect.inconclusive .lab.value { color: var(--warn); }
-  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); border-radius: var(--r-md); padding: 12px 16px;
-        font: 12px/17px var(--font-mono); overflow-x: auto; }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); border-radius: var(--r-md); padding: 12px 14px;
+        font: 12px/18px var(--font-mono); overflow-x: auto; }
   pre .add { color: var(--diff-add); } pre .del { color: var(--diff-del); } pre .hdr { color: var(--code-muted); }
   .changes { background: var(--tile); border-radius: var(--r-md); padding: 10px 14px; display: grid; gap: 6px; }
   .change-row { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; font: 13px/18px var(--font-mono); }
@@ -241,35 +320,60 @@
   .fact span { font-size: 12.5px; color: var(--muted); }
   .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .model { display: grid; gap: 4px; }
-  .model .hyp-head b { font-weight: 500; }
-  .model .track { height: 10px; overflow: hidden; }
+  .hyp-head { display: flex; align-items: baseline; gap: 8px; }
+  .hyp-head b { font-weight: 500; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .pct { font: 500 13px/16px var(--font-mono); min-width: 3ch; text-align: right; }
+  .track { position: relative; height: 8px; background: var(--track); border-radius: 999px; overflow: hidden; }
+  .track .fill { height: 100%; width: 0; background: var(--neutral-bar); border-radius: 999px; }
   .model .track .fill { background: var(--accent); }
   .model.base .track .fill { background: var(--neutral-bar); }
   .model.failed .track .fill { background: var(--bad); }
-  .gain { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; padding-top: 4px; }
-  .gain b { font: 600 20px/26px var(--font-body); color: var(--accent); font-variant-numeric: tabular-nums; }
+  .gain { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .gain b { font: 600 15px/22px var(--font-mono); color: var(--accent); }
+  .experiment-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 4px 0; }
+  .experiment-table th, .experiment-table td { text-align: left; padding: 9px; border-bottom: 1px solid var(--line); }
+
+  /* free checks and the live form */
+  .case-start { gap: 12px; }
+  .case-start > summary { cursor: pointer; font: 600 15px/22px var(--font-body); list-style: none; }
+  .case-start > summary::-webkit-details-marker { display: none; }
+  .case-start > summary::after { content: "Show"; float: right; font: 500 12.5px/22px var(--font-body); color: var(--muted); }
+  .case-start[open] > summary::after { content: "Hide"; }
+  .case-start > * { margin: 0; }
+  .case-start textarea { display: block; width: 100%; min-height: 180px; padding: 12px; color: inherit; background: var(--frame);
+                         border: 1px solid var(--line); border-radius: var(--r-md); font: 12px/18px var(--font-mono); }
+  .case-start .controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .case-start pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .case-start label { font-size: 12.5px; color: var(--muted); }
+  #labelPayload { min-height: 300px; }
+  #labelExample { width: auto; }
+  #freeTesting .actions { margin-top: 2px; }
+  #liveFrame { width: 100%; height: 2450px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--frame); color-scheme: dark; }
 
   @media (max-width: 1100px) {
-    .verdict { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    .verdict { grid-template-columns: minmax(0, 1fr); }
+    .title-actions { justify-content: flex-start; }
+    .pair { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 900px) {
     :root { --g: 40px; }
-    .topbar { padding: 12px 16px; }
-    .tagline { display: none; }
-    .repo { order: 1; margin-left: auto; }
-    .repo .wide { display: none; }
-    .controls { order: 2; }
-    .controls { margin-left: 0; width: 100%; }
-    #demo { flex: 1 1 0; width: auto; min-width: 0; }
-    #past { flex: 1 1 100%; width: auto; min-width: 0; }
-    .content { padding: 20px 16px 32px; gap: 16px; }
-    .verdict { padding-bottom: 20px; }
-    .verdict h2 { font-size: 21px; line-height: 28px; }
+    .app { grid-template-columns: minmax(0, 1fr); grid-template-rows: 52px auto; }
+    .topbar { grid-column: 1; padding: 0 12px; gap: 10px; }
+    .brand { width: auto; font-size: 13px; }
+    .search, .repo { display: none; }
+    #topLive { margin-left: auto; padding: 7px 12px; }
+    .sidebar { display: none; }
+    #demo { display: block; }
+    .content { margin: 0; border-radius: 0; border-width: 1px 0 0; padding: 16px 16px 28px; gap: 16px; }
+    .verdict h2 { font-size: 19px; line-height: 26px; }
     .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
     .metrics .metric:not([hidden]) ~ .metric:not([hidden]) { padding: 0; border: 0; }
-    .main { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .side { display: contents; }
-    #hypCard { order: 1; } .log { order: 2; } #caseCard { order: 3; } #costCard { order: 4; }
+    .card { padding: 16px; }
+    .steps { grid-template-columns: minmax(0, 1fr); }
+    .steps a { padding: 10px 12px; grid-template-columns: 18px minmax(0, 1fr) auto; grid-template-rows: auto auto; }
+    .steps .c { grid-row: 1; grid-column: 3; margin: 0; align-self: start; }
+    .causes th:nth-child(2), .causes td:nth-child(2) { display: none; }
+    .mini { display: none; }
     .log { padding: 0 16px 4px 0; }
     .log-head { padding-left: 16px; }
     .n { font-size: 11px; }
@@ -279,51 +383,126 @@
     .entry.ask:last-child .gutter::before { height: 38px; }
     .entry-head { flex-direction: column; gap: 2px; }
     .entry-head .meta { white-space: normal; line-height: 18px; }
+    .tabs { gap: 18px; }
   }
-  .case-start { margin-bottom: 24px; }
-  .case-start summary { cursor: pointer; font-weight: 500; }
-  .case-start textarea { display: block; width: 100%; box-sizing: border-box; min-height: 180px; margin: 12px 0; padding: 12px; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; font-family: var(--font-mono); }
-  .case-start .controls { flex-wrap: wrap; }
-  .case-start pre { white-space: pre-wrap; overflow-wrap: anywhere; }
-  #freeTesting { gap: 12px; }
-  #freeTesting > * { margin: 0; }
-  #freeTesting .btn { justify-self: start; }
-  #labelTestControls .controls { margin: 8px 0; }
-  #labelPayload { min-height: 300px; }
-.experiment-table { width:100%; border-collapse:collapse; font-size:13px; margin:16px 0; }
-.experiment-table th, .experiment-table td { text-align:left; padding:9px; border-bottom:1px solid var(--line, #34413d); }
 </style>
 </head>
 <body class="idle">
+<div class="app">
 <header class="topbar">
-  <div class="brand">
-    <div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.6a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4l-5.1-10.2a2 2 0 0 1-.2-.9V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg></div>
-    <div>
-      <h1>Next Experiment</h1>
-      <div class="tagline">Investigates fine-tune failures and tests proposed fixes against controls</div>
-    </div>
-  </div>
-  <div class="controls">
-    <select id="demo" aria-label="Saved investigation"></select>
-    <button id="start" class="btn btn-primary">Replay</button>
-    <select id="past" aria-label="Past investigations"><option value="">Past runs</option></select>
-  </div>
-  <a class="repo" id="repo" href="https://github.com/MaxKharlan/next-experiment" hidden><span class="wide">Code on </span>GitHub</a>
+  <a class="brand" href="./" aria-label="Next Experiment, start page">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.5a2 2 0 0 1-.2.9L4.7 20.6a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4l-5.1-10.2a2 2 0 0 1-.2-.9V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg></span>
+    Next Experiment
+  </a>
+  <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="caseSearch" type="search" placeholder="Find a saved investigation" aria-label="Find a saved investigation" autocomplete="off"><kbd aria-hidden="true">/</kbd></label>
+  <a class="repo" id="repo" href="https://github.com/MaxKharlan/next-experiment" hidden>Code on GitHub</a>
+  <a class="btn btn-primary" id="topLive" href="#freeTesting" hidden>Run with Nemotron</a>
 </header>
 
+<nav class="sidebar" aria-label="Saved investigations">
+  <div><h2 class="side-h">Saved investigations</h2><div id="caseList"></div></div>
+  <div id="pastBox" hidden><h2 class="side-h">Past runs</h2><select id="past" aria-label="Past investigations"><option value="">Past runs</option></select></div>
+  <div id="freeChecks" hidden><h2 class="side-h">Free checks</h2><a class="side-link" href="#labelAudit">Inspect training labels</a></div>
+  <div class="budget" id="budgetNote" hidden><b>Live runs with Nemotron</b>
+    <span>A shared $20 allowance pays for runs on your data; the form shows what is left before you start. Each run reserves $1 and trains 4 adapters on Token Factory.</span></div>
+</nav>
+
 <main class="content">
+  <select id="demo" aria-label="Saved investigation"></select>
+  <section class="verdict" aria-live="polite">
+    <div>
+      <h2 id="statusTitle">Pick a saved investigation and press Replay</h2>
+      <p class="kicker" id="statusEyebrow"></p>
+      <div class="proof"><span class="badge idle" id="statusBadge">idle</span><span id="statusProof" class="muted"></span></div>
+      <p class="about" id="about" hidden></p>
+      <p id="reportActions" hidden>
+        <a id="reportDownload" class="btn btn-ghost" download>Download report (JSON)</a>
+        <span class="muted small" id="reportNote">Includes progress recorded so far.</span>
+      </p>
+    </div>
+    <div class="title-actions">
+      <button id="start" class="btn btn-ghost" type="button">Replay step by step</button>
+      <a id="savedReport" class="btn btn-ghost" hidden download>Download report</a>
+    </div>
+    <div class="metrics">
+      <div class="metric" hidden><b id="mEffect"></b><span>effect of the fix</span></div>
+      <div class="metric" hidden><b id="mHeldout"></b><span>held-out exact match</span></div>
+      <div class="metric" hidden><b id="mJobs"></b><span>Post-training jobs</span></div>
+      <div class="metric" hidden><b id="mCost"></b><span>total cost</span></div>
+    </div>
+  </section>
+  <nav class="tabs" aria-label="On this page">
+    <a href="#result" class="on">Result</a><a href="#log">Experiment log</a>
+    <a href="#freeTesting" id="tabLive" hidden>Run on your data</a><a href="#labelAudit" id="tabLabels" hidden>Training labels</a>
+  </nav>
+
+  <div class="result" id="result">
+    <div class="pair">
+      <section class="card" id="checkCard" hidden>
+        <div class="card-head"><h2 id="checkTitle">The fix against its control</h2>
+          <div class="legend"><span><i class="sw" style="background:var(--neutral-bar)"></i>control, per seed</span><span><i class="sw" style="background:var(--accent)"></i>fix, per seed</span></div></div>
+        <div id="checkChart"></div>
+        <p class="caption" id="checkNote"></p>
+      </section>
+      <section class="card" id="changeCard" hidden>
+        <div id="changeFix" hidden style="display:grid;gap:12px">
+          <h2>What to change</h2>
+          <p class="big" id="changeTitle"></p>
+          <div id="changeDiff"></div>
+        </div>
+        <div id="heldout" hidden><p class="sub-h" id="heldoutTitle"></p><div id="heldoutBars" style="display:grid;gap:10px"></div></div>
+        <div id="costCard" hidden><h2 class="label">Cost</h2><div id="costbody"></div></div>
+      </section>
+    </div>
+    <section class="card" id="trailCard" hidden>
+      <div class="card-head"><h2>How it got there</h2>
+        <div class="legend"><span><i class="node"></i>no training cost</span><span><i class="node paid"></i>Token Factory jobs</span><span><i class="node ask"></i>needs your yes</span></div></div>
+      <ol class="steps" id="trail"></ol>
+    </section>
+    <div class="pair">
+      <section class="card" id="hypCard">
+        <div class="card-head"><h2>Causes, before and after each check</h2><span class="muted small" id="checks"></span></div>
+        <div id="board"></div>
+      </section>
+      <section class="card" id="caseCard"></section>
+    </div>
+    <section class="card" id="benchCard">
+      <div class="card-head"><h2>Benchmark on 13 Token Factory jobs with a known cause</h2><span class="muted small">9 with a learning rate that is too low, 4 healthy</span></div>
+      <div class="table-scroll"><table class="bench">
+        <thead><tr><th scope="col">Method</th><th scope="col">Cause ranked first</th><th scope="col">False alarms</th><th scope="col">Wrong confirmations</th><th scope="col">Fix success</th><th scope="col">Per case</th><th scope="col">Jobs per case</th></tr></thead>
+        <tbody>
+          <tr><td>Single Ultra call</td><td>6/9</td><td>0/4</td><td>0</td><td>0/9</td><td>$0.009</td><td>0.0</td></tr>
+          <tr><td>ReAct on Super</td><td>9/9</td><td>0/4</td><td>0</td><td>6/9</td><td>$0.205</td><td>4.9</td></tr>
+          <tr><td>Checklist, every check</td><td>9/9</td><td>0/4</td><td>6</td><td>6/9</td><td>$0.417</td><td>12.0</td></tr>
+          <tr class="ne"><td>Next Experiment</td><td>9/9</td><td>0/4</td><td>0</td><td>6/9</td><td class="hi">$0.144</td><td>3.7</td></tr>
+        </tbody></table></div>
+      <p class="caption">Thresholds were set on 5 dev cases; the 8 held-out cases ran once. Every fault case has the same cause, so this covers one failure family. <a href="https://github.com/MaxKharlan/next-experiment/blob/main/docs/benchmark.md">Case by case</a></p>
+    </section>
+  </div>
+
+  <section class="log" id="log" aria-label="Experiment log">
+    <div class="log-head">
+      <h2 id="logTitle">How a run goes</h2>
+      <div class="legend">
+        <span><i class="node"></i>no training cost</span>
+        <span><i class="node paid"></i>Token Factory jobs</span>
+        <span><i class="node ask"></i>needs you</span>
+      </div>
+    </div>
+    <div id="feed" aria-live="polite"></div>
+  </section>
+
   <section class="card case-start" id="freeTesting" hidden>
-    <h2>Test Next Experiment for free</h2>
-    <p>Run training-label checks on your own inputs below. Results are computed in your browser: no account, API key, upload or payment. Start with an example, change its labels, and rerun to see the result change.</p>
-    <p><strong>$20 is allocated to additional live investigations.</strong> Upload your data to follow Nemotron’s hypotheses, evidence from checks, and targeted/control training results. Testing is free and requires no API key. Live runs use the remaining shared budget; availability is shown before starting.</p>
-    <button class="btn btn-primary" id="openLive" type="button">Run with Nemotron</button>
-    <a class="btn btn-ghost" href="https://next.46-17-103-231.sslip.io/" target="_blank" rel="noopener">Open live access in a new tab</a>
-    <div id="livePanel" hidden style="margin-top:20px"><iframe id="liveFrame" title="Live Nemotron investigation" style="width:100%;height:2450px;border:1px solid var(--line);border-radius:8px" sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups allow-popups-to-escape-sandbox"></iframe></div>
-    <p class="muted small">Replay above and the local checks below remain available without using the live-run budget.</p>
-    <a class="btn btn-ghost" href="#labelAudit">Try an editable example</a>
+    <h2>Investigate your own data with Nemotron</h2>
+    <p>Upload four chat JSONL splits and follow Nemotron's hypotheses, the free checks and a fix trained against a control on Token Factory. Testing is free and needs no API key. Live runs share a $20 allowance, and the form shows what is left before you start.</p>
+    <div class="actions"><button class="btn btn-primary" id="openLive" type="button">Open the form here</button>
+      <a class="btn btn-ghost" href="https://next.46-17-103-231.sslip.io/" target="_blank" rel="noopener">Open it in a new tab</a></div>
+    <div id="livePanel" hidden><iframe id="liveFrame" title="Live Nemotron investigation" sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups allow-popups-to-escape-sandbox"></iframe></div>
+    <p class="muted small">Replays and the label check below never spend the live allowance.</p>
   </section>
   <details class="card case-start" id="labelAudit" hidden>
-    <summary>Inspect local training labels · free</summary>
+    <summary>Inspect local training labels</summary>
     <p class="muted small">Paste reference and observed unpadded token rows. The reference must use correct answer-only labels. This checks prompt loss, EOS masking and label alignment. It does not train a model or confirm a cause.</p>
     <div id="labelTestControls" hidden>
       <label for="labelExample">Start from an example</label>
@@ -339,7 +518,7 @@
     </div>
     <label for="labelPayload">Label audit request (JSON)</label>
     <textarea id="labelPayload" spellcheck="false">{"training_labels":{"reference":[{"input_ids":[1,2,3],"labels":[-100,2,3]}],"observed":[{"input_ids":[1,2,3],"labels":[-100,2,-100]}],"eos_token_id":3}}</textarea>
-    <button id="runLabelAudit" class="btn btn-primary" type="button">Save label audit</button>
+    <div class="controls"><button id="runLabelAudit" class="btn btn-primary" type="button">Save label audit</button></div>
     <p class="muted small">On this static site, pasted data stays in your browser. Supply unpadded rows: reference -100 positions must be prompt tokens only. Position 0 is excluded from causal loss. The reference is yours; this audit cannot judge its semantic correctness or prove a cause of model behavior.</p>
     <p class="muted small">Limits: 1–1024 rows per side, 32768 positions per row, 131072 positions across both sides. Token IDs are nonnegative integers; labels may also be -100. Both sides must describe identical token sequences. Optional eos_token_id must be a nonnegative integer or null.</p>
     <pre id="labelFeedback" role="status" aria-live="polite"></pre>
@@ -358,54 +537,14 @@
     <label for="caseRequest">Case and experiment</label>
     <textarea id="caseRequest" spellcheck="false" placeholder='{"case": {...}, "experiment": {...}}'></textarea>
     <div class="controls">
-      <button id="auditCase" class="btn btn-ghost" type="button">Audit dataset · free</button>
+      <button id="auditCase" class="btn btn-ghost" type="button">Audit dataset, free</button>
       <button id="validateCase" class="btn btn-ghost" type="button">Validate without training</button>
       <button id="launchCase" class="btn btn-primary" type="button" disabled>Start paid investigation</button>
     </div>
     <pre id="caseFeedback" class="muted small" role="status" aria-live="polite"></pre>
   </details>
-  <section class="verdict" aria-live="polite">
-    <div>
-      <div class="kicker" id="statusEyebrow"></div>
-      <h2 id="statusTitle">Pick a saved investigation and press Replay</h2>
-      <div class="proof"><span class="badge idle" id="statusBadge">idle</span><span id="statusProof" class="muted"></span></div>
-      <p class="about" id="about" hidden></p>
-      <p id="reportActions" hidden>
-        <a id="reportDownload" class="btn btn-ghost" download>Download report (JSON)</a>
-        <span class="muted small" id="reportNote">Includes progress recorded so far.</span>
-      </p>
-    </div>
-    <div class="metrics">
-      <div class="metric" hidden><b id="mEffect"></b><span>effect of the fix</span></div>
-      <div class="metric" hidden><b id="mHeldout"></b><span>held-out exact match</span></div>
-      <div class="metric" hidden><b id="mJobs"></b><span>Post-training jobs</span></div>
-      <div class="metric" hidden><b id="mCost"></b><span>total cost</span></div>
-    </div>
-  </section>
-
-  <div class="main">
-    <div class="side">
-      <section class="card" id="caseCard"></section>
-      <section class="card" id="hypCard">
-        <div class="card-head"><h2 class="label">Hypotheses</h2><span class="muted small" id="checks"></span></div>
-        <div class="key"><span><i class="k-prior"></i>before any check</span><span><i class="k-now"></i>now</span></div>
-        <div id="board"></div>
-      </section>
-      <section class="card" id="costCard" hidden><h2 class="label">Cost</h2><div id="costbody"></div></section>
-    </div>
-    <section class="log" aria-label="Experiment log">
-      <div class="log-head">
-        <h2 class="label" id="logTitle">How a run goes</h2>
-        <div class="legend">
-          <span><i class="node"></i>no training cost</span>
-          <span><i class="node paid"></i>Token Factory jobs</span>
-          <span><i class="node ask"></i>needs you</span>
-        </div>
-      </div>
-      <div id="feed" aria-live="polite"></div>
-    </section>
-  </div>
 </main>
+</div>
 
 <script>
 const $ = (id) => document.getElementById(id);
@@ -436,6 +575,7 @@ let hyps = {}, probs = {}, prevProbs = {}, priors = {}, out = new Set(), proved 
 let source = null, current = null, entries = 0, stepOf = {}, lastCheck = null, verdictStep = null, caseHp = {}, replayOf = "";
 let trainingUsd = 0, jobs = 0, checks = 0, llmUsd = 0, model = "", proof = null;
 let recordedCalls = new Map();
+let trail = [], savedCases = [], caseQuery = "", checkShown = null, selectCase = () => {};
 
 /* GitHub Pages has no server; scripts/build_pages.py switches the page to static mode there */
 const STATIC = document.documentElement.dataset.mode === "static";
@@ -449,14 +589,27 @@ async function init() {
   $("labelAudit").open = true;
   $("runLabelAudit").textContent = "Run audit in this browser";
   initLabelExamples();
+  for (const id of ["topLive", "budgetNote", "freeChecks", "tabLive", "tabLabels", "savedReport"]) $(id).hidden = false;
   }
   const cases = await (await fetch(STATIC ? "demo-cases.json" : "/api/demo-cases")).json();
-  const catalogs = {};
-  for (const c of cases) (catalogs[c.category || "Saved reports"] ||= []).push(c);
-  $("demo").innerHTML = Object.entries(catalogs).map(([label, items]) =>
-    `<optgroup label="${esc(label)}">${items.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(c.title)}</option>`).join("")}</optgroup>`).join("");
+  savedCases = cases;
+  $("demo").innerHTML = byGroup(cases).map(([label, items]) =>
+    `<optgroup label="${esc(label)}">${items.map(c => `<option value="${esc(c.name)}" title="${esc(c.note)}">${esc(shortTitle(c.title))}</option>`).join("")}</optgroup>`).join("");
   if (cases.some(c => c.name === "fault6-tf")) $("demo").value = "fault6-tf";
-  if (STATIC) return staticMode(cases);
+  renderCaseList();
+  $("caseList").onclick = (e) => {
+    const item = e.target.closest("[data-case]");
+    if (!item) return;
+    $("demo").value = item.dataset.case;
+    $("demo").onchange();
+  };
+  if (STATIC) {
+    staticMode(cases);
+    $("demo").onchange = () => showSaved($("demo").value);
+    return showSaved($("demo").value);
+  }
+  $("pastBox").hidden = false;
+  $("demo").onchange = () => renderCaseList();
   try {
     const response = await fetch("/api/capabilities");
     if (response.ok) {
@@ -674,8 +827,14 @@ function reset() {
   document.body.classList.remove("idle");
   $("logTitle").textContent = "Experiment log";
   $("feed").innerHTML = ""; $("board").innerHTML = '<div class="muted small">No hypotheses yet.</div>'; $("checks").textContent = "";
-  $("caseCard").innerHTML = '<h2 class="label">Case</h2><div class="muted small" id="case">Loading the case.</div>';
+  $("caseCard").innerHTML = '<h2>The job</h2><div class="muted small" id="case">Loading the case.</div>';
   $("costCard").hidden = true;
+  trail = []; checkShown = null;
+  $("trail").innerHTML = ""; $("trailCard").hidden = true;
+  $("checkCard").hidden = true; $("checkChart").innerHTML = ""; $("checkNote").textContent = "";
+  $("changeFix").hidden = true; $("changeTitle").textContent = ""; $("changeDiff").innerHTML = "";
+  $("heldout").hidden = true; $("heldoutBars").innerHTML = ""; $("changeCard").hidden = true;
+  document.body.classList.remove("has-check");
   $("hypCard").hidden = false;
   $("reportActions").hidden = true;
   $("reportDownload").removeAttribute("href");
@@ -729,10 +888,12 @@ function watch(id) {
   $("reportDownload").href = `/api/investigations/${encodeURIComponent(id)}/report?download=true`;
   $("reportActions").hidden = false;
   source = new EventSource(`/api/investigations/${encodeURIComponent(id)}/events`);
-  for (const [type, handle] of Object.entries(HANDLERS)) source.addEventListener(type, e => handle(JSON.parse(e.data), Number(e.lastEventId)));
+  for (const type of Object.keys(HANDLERS)) source.addEventListener(type, e => handle(type, JSON.parse(e.data), Number(e.lastEventId)));
 }
 function stop() { replayVersion += 1; if (source) source.close(); source = null; clearTimeout(timer); queue = []; }
-function done() { stop(); $("start").disabled = false; $("start").textContent = "Replay"; }
+function done() { stop(); $("start").disabled = false; $("start").textContent = "Replay step by step"; }
+/* every event, then the cards that summarise it */
+function handle(type, data, seq) { HANDLERS[type](data, seq); layout(); }
 
 /* static mode: the saved run plays in the browser with the pauses of the server replay */
 let queue = [], timer = 0, quiet = false, replayVersion = 0;
@@ -743,16 +904,19 @@ function staticMode(cases) {
     const c = cases.find(x => x.name === $("demo").value) || {};
     $("about").innerHTML = `${c.note ? `${esc(c.note)} ` : ""}This page plays it back in your browser: nothing trains and no model is called.
       <a href="demo/${encodeURIComponent(c.name)}.json">Saved report, JSON</a>`;
+    $("savedReport").href = `demo/${encodeURIComponent(c.name)}.json`;
   };
-  $("demo").onchange = () => {
+  selectCase = () => {
     stop();
     reset();
     about();
+    renderCaseList();
     $("start").disabled = false;
-    $("start").textContent = "Replay";
+    $("start").textContent = "Replay step by step";
     $("case").textContent = "Press Replay to load the selected case.";
     setStatus("Saved example selected", "Ready to replay", "waiting", "not started");
   };
+  $("demo").onchange = selectCase;
   about();
 }
 async function play(name) {
@@ -775,16 +939,22 @@ async function play(name) {
   $("start").textContent = "Skip to the end"; $("start").disabled = false;
   next();
 }
+/* the saved case, played to its end at once; "Replay step by step" plays it again with its pauses */
+async function showSaved(name) {
+  selectCase();
+  await play(name);
+  skip();
+}
 function next() {
   const e = queue.shift();
   if (!e) return;
-  HANDLERS[e.type](e.data);
+  handle(e.type, e.data);
   if (queue.length) timer = setTimeout(next, queue[0].after_s * 1000);
 }
 function skip() {
   clearTimeout(timer);
   quiet = true;
-  while (queue.length) { const e = queue.shift(); HANDLERS[e.type](e.data); }
+  while (queue.length) { const e = queue.shift(); handle(e.type, e.data); }
   quiet = false;
 }
 
@@ -910,16 +1080,15 @@ function drawBoard() {
       ? `<details class="why"><summary>Why it was suggested</summary>
            ${x.location ? `<p>Where to look: <span class="mono">${esc(x.location)}</span></p>` : ""}
            ${x.rationale ? `<p>${esc(x.rationale)}</p>` : ""}${src ? `<p class="sources">${src}</p>` : ""}</details>` : "";
-    return `<div class="hyp ${h === lead ? "lead" : ""} ${proved[h] ? "proved" : ""} ${out.has(h) ? "out" : ""}">
-      <div class="hyp-head"><b title="${esc(x.fault_class)}">${esc(cause(x.fault_class))}</b>${tag}
-        ${d ? `<span class="delta">${d > 0 ? "+" : "−"}${Math.abs(d)}</span>` : ""}<span class="pct">${pct(probs[h])}</span></div>
-      <div class="track" role="img" aria-label="${esc(cause(x.fault_class))}: ${pct(prior)} before any check, ${pct(probs[h])} now">
-        <div class="fill" style="width:${pct(probs[h])}"></div><i class="prior" style="left:${pct(prior)}"></i></div>
-      ${why}</div>`;
+    return `<tr class="${h === lead ? "lead" : ""} ${proved[h] ? "proved" : ""} ${out.has(h) ? "out" : ""}">
+      <td><b title="${esc(x.fault_class)}">${esc(cause(x.fault_class))}</b>${why}</td>
+      <td class="r"><span class="num">${pct(prior)}</span><span class="mini" aria-hidden="true"><i style="width:${pct(prior)}"></i></span></td>
+      <td class="r">${d ? `<span class="delta">${d > 0 ? "+" : "−"}${Math.abs(d)}</span>` : ""}<span class="num">${pct(probs[h])}</span><span class="mini now" aria-hidden="true"><i style="width:${pct(probs[h])}"></i></span></td>
+      <td>${tag}</td></tr>`;
   });
-  if ((probs.unlisted || 0) > 0) rows.push(`<div class="outside"><span>causes outside the list</span><span class="mono">${pct(probs.unlisted)}</span></div>`);
-  $("board").style.cssText = "display:grid;gap:18px";
-  $("board").innerHTML = rows.join("");
+  if ((probs.unlisted || 0) > 0) rows.push(`<tr class="outside"><td>Causes outside the list</td><td class="r"><span class="num">${pct(priors.unlisted ?? probs.unlisted)}</span></td><td class="r"><span class="num">${pct(probs.unlisted)}</span></td><td></td></tr>`);
+  $("board").innerHTML = ids.length ? `<div class="table-scroll"><table class="causes"><thead><tr><th scope="col">Cause</th><th scope="col" class="r">Before any check</th><th scope="col" class="r">Now</th><th scope="col">Checks</th></tr></thead>
+    <tbody>${rows.join("")}</tbody></table></div>` : '<div class="muted small">No hypotheses yet.</div>';
   $("checks").textContent = checks ? `after ${plural(checks, "check")}` : "before any check";
 }
 function setProbs(next) {
@@ -933,13 +1102,19 @@ function step(title, who, meta, body, node = "") {
   entries += 1;
   const el = document.createElement("article");
   el.className = `entry ${node}`;
+  el.id = `step-${entries}`;
+  trail.push({n: entries, title: title.replace(/\?$/, ""), who, meta, node});
+  renderTrail();
   el.innerHTML = `<div class="gutter"><span class="n">${entries}</span><span class="node"></span></div>
     <div class="entry-main">
       <div class="entry-head"><div class="t"><h3>${title}</h3><div class="who">${esc(who)}</div></div>${meta ? `<div class="meta">${esc(meta)}</div>` : ""}</div>
       ${body}
     </div>`;
   $("feed").appendChild(el);
-  if (!quiet) el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest"});
+  // follow the log only while the reader is at it; the cards above carry the summary
+  const log = $("log").getBoundingClientRect?.();
+  if (!quiet && (!log || log.top < (globalThis.innerHeight ?? Infinity)))
+    el.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest"});
   return entries;
 }
 const badge = (status, text) => `<span class="badge ${esc(status)}">${esc(text || status)}</span>`;
@@ -1036,8 +1211,9 @@ function showStep(s) {
          onTF ? "paid" : "");
     stepOf[`intervention:${s.hypothesis}`] = entry; lastCheck = entry;
     untangle($("feed").lastElementChild.querySelector(".effect"));
+    if (!checkShown || r.status === "confirmed" || checkShown.status !== "confirmed") renderCheck(s, name);
     if (r.status === "confirmed") {
-      proved[s.hypothesis] = entry; proof = {...r, comparison_evidence: s.comparison_evidence};
+      proved[s.hypothesis] = entry; proof = {...r, comparison_evidence: s.comparison_evidence, target: t};
       metric("mEffect", signed(r.effect));
       showFix(t.patch);
     } else if (r.status === "rejected") { ruled[s.hypothesis] = entry; out.add(s.hypothesis); }
@@ -1046,6 +1222,7 @@ function showStep(s) {
   } else if (s.kind === "verdict") {
     const name = hyps[s.hypothesis_id] ? hyps[s.hypothesis_id].fault_class : "";
     if (s.status === "confirmed" && proof) {
+      showChange(proof.target, s.patch);
       setStatus(null, `Fix supported: ${cause(name)}`, "confirmed", "confirmed");
       $("statusProof").textContent = `${signed(proof.effect)} exact match over the specified control, 95% interval ${fx(proof.ci_low)} to ${fx(proof.ci_high)}. ${comparisonNote(proof.comparison_evidence)}`;
     }
@@ -1087,6 +1264,10 @@ function showStep(s) {
         <div class="track"><div class="fill" style="width:${Math.max(0.6, m.score * 100)}%"></div></div>
         <div class="jobs">${esc(m.job_id || m.label)}</div></div>`).join("");
     const gain = (s.gain * 100).toFixed(1);
+    $("heldoutTitle").textContent = `Exact match on ${s.heldout_examples} held-out queries`;
+    $("heldoutBars").innerHTML = bars.replace(/<div class="jobs">[\s\S]*?<\/div>/g, "")
+      + `<div class="gain"><b>${s.gain >= 0 ? "+" : "−"}${Math.abs(gain)} points</b><span class="muted">over the failed job</span></div>`;
+    $("heldout").hidden = false;
     step(`Exact match on ${s.heldout_examples} held-out queries`, "", "",
          `${bars}<div class="gain"><b>${s.gain >= 0 ? "+" : "−"}${Math.abs(gain)} points</b><span class="muted">over the failed job</span></div>
           ${s.heldout_note ? `<p class="muted small">${esc(s.heldout_note)}</p>` : ""}`);
@@ -1171,6 +1352,109 @@ function setApproval(text) {
   entry.classList.remove("ask");
   entry.querySelector(".who").textContent = `${text} ${replayOf ? "in the saved run" : "by you"}`;
   const h3 = entry.querySelector("h3"); h3.textContent = h3.textContent.replace(/\?$/, "");
+  const asked = trail.findLast(s => s.node === "ask");
+  if (asked) { asked.node = ""; asked.meta = ""; asked.who = `${text} ${replayOf ? "in the saved run" : "by you"}`; asked.title = asked.title.replace(/\?$/, ""); renderTrail(); }
+}
+
+const shortTitle = (title) => String(title || "").split(" — ")[0];
+const GROUPS = ["Agent investigations", "Measured experiments", "Local audits", "Unconfirmed traces"];
+const byGroup = (cases) => {
+  const groups = {};
+  for (const label of GROUPS) groups[label] = [];
+  for (const c of cases) (groups[c.category || "Saved reports"] ||= []).push(c);
+  return Object.entries(groups).filter(([, items]) => items.length);
+};
+function renderCaseList() {
+  const q = caseQuery.trim().toLowerCase(), groups = {};
+  for (const label of GROUPS) groups[label] = [];
+  for (const c of savedCases) {
+    if (q && !`${c.title} ${c.category || ""} ${c.note || ""}`.toLowerCase().includes(q)) continue;
+    (groups[c.category || "Saved reports"] ||= []).push(c);
+  }
+  const active = $("demo").value;
+  $("caseList").innerHTML = Object.entries(groups).filter(([, items]) => items.length).map(([label, items]) =>
+    `<details class="case-group"${q || items.some(c => c.name === active) ? " open" : ""}><summary><span>${esc(label)}</span><span class="count">${items.length}</span></summary>
+      ${items.map(c => `<button type="button" class="case-item${c.name === active ? " on" : ""}" data-case="${esc(c.name)}" title="${esc(c.note || "")}"${c.name === active ? ' aria-current="true"' : ""}>${esc(shortTitle(c.title))}</button>`).join("")}</details>`).join("")
+    || (savedCases.length ? '<p class="no-match">No saved investigation matches.</p>' : "");
+}
+function renderTrail() {
+  $("trail").innerHTML = trail.map(s => `<li><a href="#step-${s.n}"><span class="node ${esc(s.node)}"></span><b>${s.title}</b><span class="who">${esc(s.who)}</span>${s.meta ? `<span class="c">${esc(s.meta)}</span>` : ""}</a></li>`).join("");
+  $("trailCard").hidden = !trail.length;
+}
+/* the cards show what exists: a cost card only once something was spent or recorded */
+function layout() {
+  if (!(llmUsd + trainingUsd) && !recordedCalls.size) $("costCard").hidden = true;
+  $("changeCard").hidden = $("changeFix").hidden && $("heldout").hidden && $("costCard").hidden;
+  $("hypCard").hidden = !Object.keys(probs).length;
+}
+const HP = {learning_rate: "the learning rate", n_epochs: "the number of epochs", lora_r: "the LoRA rank", lora_alpha: "LoRA alpha",
+            batch_size: "the batch size", warmup_ratio: "the warmup ratio", weight_decay: "weight decay"};
+function fixTitle(target) {
+  const parts = Object.entries(target?.patch || {}).map(([k, v]) => {
+    const was = Number(caseHp[k]), now = Number(v);
+    const verb = Number.isFinite(was) && Number.isFinite(now) && was !== now ? (now > was ? "Raise" : "Lower") : "Set";
+    return `${verb} ${HP[k] || k.replace(/_/g, " ")} to ${v}`;
+  });
+  const what = target?.description || "";
+  return parts.join("; ") || (what ? what[0].toUpperCase() + what.slice(1) : "Apply the patch below");
+}
+function showChange(target, diff) {
+  $("changeTitle").textContent = fixTitle(target);
+  $("changeDiff").innerHTML = diff ? `<pre>${diffHtml(diff)}</pre>` : "";
+  $("changeFix").hidden = false;
+}
+function renderCheck(s, name) {
+  const r = s.result, fix = (s.target.metrics || []).map(Number), ctl = (s.control.metrics || []).map(Number);
+  checkShown = r;
+  document.body.classList.add("has-check");
+  $("checkTitle").textContent = `${cause(name)}: the fix against its control`;
+  $("checkChart").innerHTML = checkSvg(fix, ctl, r, false) + checkSvg(fix, ctl, r, true);
+  const skipped = s.comparison_evidence?.permutation?.gate === "skipped_unattainable"
+    ? " With this few seeds the permutation test cannot reach p 0.05, so the interval and the minimum effect decide." : "";
+  $("checkNote").textContent = `Exact match on the check set for each job. Fix: ${changeText(s.target)}. Control: ${s.control.description || "the failed recipe again"}. `
+    + `Effect ${signed(r.effect)}, 95% interval ${fx(r.ci_low)} to ${fx(r.ci_high)}, minimum useful effect ${r.min_effect}.${skipped}`;
+  $("checkCard").hidden = false;
+}
+/* bars for each seed of both arms; on wide screens also the effect against the minimum effect */
+function checkSvg(fix, ctl, r, compact) {
+  const W = compact ? 340 : 700, H = compact ? 240 : 340, left = 36, top = 24, bottom = 46;
+  const split = compact ? W : Math.round(W * 0.52);
+  const ymax = Math.min(1, Math.ceil((Math.max(0.15, ...fix, ...ctl) + 0.05) * 5) / 5);
+  const y = (v) => (top + (H - top - bottom) * (1 - v / ymax)).toFixed(1);
+  const mean = (a) => a.reduce((s, v) => s + v, 0) / (a.length || 1);
+  const out = [];
+  for (let k = 0; k <= Math.round(ymax / 0.2); k++) {
+    const v = k * 0.2;
+    out.push(`<line class="grid" x1="${left}" x2="${split - 12}" y1="${y(v)}" y2="${y(v)}"/><text class="mut num" x="${left - 8}" y="${Number(y(v)) + 4}" text-anchor="end" font-size="11">${v.toFixed(1)}</text>`);
+  }
+  const span = split - left, bw = compact ? 24 : 32, gap = compact ? 6 : 10;
+  [["Control", ctl, "ctl"], ["Fix", fix, "acc"]].forEach(([label, vals, cls], gi) => {
+    const cx = left + span * (0.27 + 0.46 * gi), w = vals.length * bw + Math.max(0, vals.length - 1) * gap, x0 = cx - w / 2;
+    vals.forEach((v, i) => out.push(`<rect class="${cls}" x="${(x0 + i * (bw + gap)).toFixed(1)}" y="${y(v)}" width="${bw}" height="${Math.max(0.5, y(0) - y(v)).toFixed(1)}"/>`));
+    const same = vals.length && vals.every(v => v === vals[0]);
+    out.push(`<text class="ink num" x="${cx.toFixed(1)}" y="${Number(y(Math.max(0, ...vals))) - 8}" text-anchor="middle" font-size="12">${vals.length ? (same ? vals[0].toFixed(2) : `mean ${mean(vals).toFixed(2)}`) : ""}</text>`);
+    out.push(`<text class="ink" x="${cx.toFixed(1)}" y="${Number(y(0)) + 20}" text-anchor="middle" font-size="13" font-weight="600">${label}</text>`);
+  });
+  const bx = left + span * 0.5, a = y(mean(ctl)), b = y(mean(fix));
+  out.push(`<path class="bracket" stroke-width="1.5" d="M${bx - 5} ${a}H${bx + 5}M${bx} ${a}V${b}M${bx - 5} ${b}H${bx + 5}"/>`);
+  out.push(`<text class="acc num" x="${bx - 9}" y="${((Number(a) + Number(b)) / 2 + 4).toFixed(1)}" text-anchor="end" font-size="13" font-weight="600">${signed(r.effect)}</text>`);
+  if (!compact) {
+    const lo = Math.floor(Math.min(0, r.ci_low - 0.02) * 10) / 10, hi = Math.ceil((Math.max(r.ci_high, r.min_effect) + 0.04) * 10) / 10;
+    const ex0 = split + 24, ex1 = W - 16, ex = (v) => (ex0 + (ex1 - ex0) * (v - lo) / (hi - lo)).toFixed(1), ay = top + (H - top - bottom) * 0.55;
+    const step = hi - lo > 0.6 ? 0.2 : 0.1;
+    out.push(`<text class="ink" x="${ex0}" y="${top + 4}" font-size="12.5" font-weight="600">Effect of the fix over the control</text>`);
+    out.push(`<rect class="band" x="${ex(Math.min(0, r.min_effect))}" y="${ay - 34}" width="${Math.abs(ex(r.min_effect) - ex(0)).toFixed(1)}" height="68"/>`);
+    out.push(`<line class="axis" x1="${ex0}" x2="${ex1}" y1="${ay + 34}" y2="${ay + 34}"/>`);
+    for (let v = lo; v <= hi + 1e-9; v += step) {
+      out.push(`<line class="axis" x1="${ex(v)}" x2="${ex(v)}" y1="${ay + 34}" y2="${ay + 39}"/><text class="mut num" x="${ex(v)}" y="${ay + 54}" text-anchor="middle" font-size="11">${fx(Math.round(v * 10) / 10, 1)}</text>`);
+    }
+    out.push(`<line class="thr" x1="${ex(r.min_effect)}" x2="${ex(r.min_effect)}" y1="${ay - 34}" y2="${ay + 34}"/>`);
+    out.push(`<text class="mut" x="${Number(ex(r.min_effect)) + 6}" y="${ay - 22}" font-size="11.5">minimum effect ${esc(r.min_effect)}</text>`);
+    out.push(`<line class="ci" stroke-width="3" x1="${ex(r.ci_low)}" x2="${ex(r.ci_high)}" y1="${ay}" y2="${ay}"/><circle class="acc" cx="${ex(r.effect)}" cy="${ay}" r="6"/>`);
+    out.push(`<text class="acc num" x="${ex(r.effect)}" y="${ay - 14}" text-anchor="middle" font-size="13" font-weight="600">${signed(r.effect)}</text>`);
+    out.push(`<text class="mut" x="${ex(r.effect)}" y="${ay + 22}" text-anchor="middle" font-size="11.5">95% interval ${fx(r.ci_low)} to ${fx(r.ci_high)}</text>`);
+  }
+  return `<svg class="chart ${esc(r.status)} ${compact ? "compact" : "wide"}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Exact match per seed: control ${ctl.map(v => v.toFixed(2)).join(", ")}; fix ${fix.map(v => v.toFixed(2)).join(", ")}; effect ${signed(r.effect)}, 95% interval ${fx(r.ci_low)} to ${fx(r.ci_high)}">${out.join("")}</svg>`;
 }
 
 function recordCall(call) {
@@ -1215,7 +1499,18 @@ document.getElementById('openLive').addEventListener('click', () => {
   const frame = document.getElementById('liveFrame');
   if (!frame.src) frame.src = 'https://next.46-17-103-231.sslip.io/';
   document.getElementById('livePanel').hidden = false;
-  frame.scrollIntoView({behavior: 'smooth', block: 'start'});
+  frame.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
+});
+document.getElementById('topLive').addEventListener('click', event => {
+  event.preventDefault();
+  document.getElementById('openLive').click();
+});
+document.getElementById('caseSearch').addEventListener('input', event => { caseQuery = event.target.value; renderCaseList(); });
+addEventListener('keydown', event => {
+  if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return;
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName) || document.activeElement?.isContentEditable) return;
+  event.preventDefault();
+  document.getElementById('caseSearch').focus();
 });
 window.addEventListener('message', event => {
   const frame = document.getElementById('liveFrame');
